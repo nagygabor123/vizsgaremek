@@ -6,3 +6,6 @@ név ötletek:
 - csemege
 - nyamnyam
 - resztli !!!
+
+szlogen: 
+- ételünk és életünk
