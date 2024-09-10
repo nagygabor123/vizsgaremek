@@ -11,3 +11,20 @@ szlogen:
 - ételünk és életünk
 
 
+Ez a projekt nemcsak fenntarthatóságra és élelmiszerpazarlás csökkentésére épül, hanem közösségi értéket is képvisel. Íme néhány ötlet, amivel tovább növelhetitek a felhasználói élményt:
+
+1. **Hűségprogram**: Hozzatok létre egy pontgyűjtő rendszert, ahol a felhasználók minden vásárlás után pontokat gyűjthetnek. Ezeket a pontokat később le tudják vásárolni vagy extra kedvezményekre válthatják be.
+
+2. **Táplálkozási információk**: Ételek feltöltésekor automatikusan megjeleníthetnétek az étel tápanyagadatait (kalória, tápanyagok), ami különösen hasznos lehet egészségtudatos felhasználók számára.
+
+3. **Értesítési rendszer**: Építsetek be egy értesítési rendszert, amely értesíti a felhasználókat, ha egy általuk kedvelt étterem új ételeket tölt fel, vagy ha egy korábban megtekintett étel ára csökken.
+
+4. **Adományozási opció**: Felajánlhatnátok a lehetőséget, hogy a felhasználók adományozzák a vásárolt ételeket rászorulóknak, ha úgy döntenek, ezzel tovább növelve a közösségi értéket.
+
+5. **Környezetvédelmi hatás nyomon követése**: Készítsetek egy modult, ahol a felhasználók láthatják, hogy vásárlásaikkal mekkora mennyiségű élelmiszerhulladékot előztek meg, ezzel még motiváltabbá téve őket a vásárlásra.
+
+6. **Véleményezési lehetőség**: Adjátok meg a lehetőséget a felhasználóknak, hogy értékeljék az ételt és az éttermet, ezzel segítve a közösség többi tagját a döntéshozatalban.
+
+7. **Napi ajánlatok**: Készítsetek egy „Napi ajánlat” funkciót, ahol különleges ajánlatokat vagy extra kedvezményeket kínáltok bizonyos időszakokban.
+
+Ezek az ötletek nemcsak javíthatják a felhasználói élményt, hanem növelhetik az oldal iránti elköteleződést és hűséget is.
