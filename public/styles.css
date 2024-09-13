@@ -1,0 +1,25 @@
+#map {
+    height: 500px;
+    width: 50%;
+    border-radius: 20px; /* Lekerekített sarkok */
+    margin: auto;
+}
+#slider-container {
+    width: 50%;
+    
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
+    border: 1px, black, solid;
+    border-radius: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+#range-value {
+    font-size: 20px;
+    margin-left: 10px;
+}
+label {
+    font-size: x-large;
+    margin-right: 20px;
+}
