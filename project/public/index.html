@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resztli</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Resztli</h1>
+        </div>
+    </header>
+
+    <main>
+        <section id="map-container">
+            <div id="map"></div>
+        </section>
+
+        <section id="slider-container">
+            <label for="radius-slider">Körzet (km):</label>
+            <input type="range" id="radius-slider" min="1" max="20" value="5" step="1">
+            <span id="range-value">5 km</span>
+        </section>
+    </main>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
