@@ -1,0 +1,118 @@
+
+Íme egy részletesebb magyar nyelvű dokumentáció a telefonos RFID szekrény rendszer projekthez
+
+Projekt Neve Diák RFID Telefon Tároló Rendszer
+Tartalomjegyzék
+Bevezetés
+Projekt Célok
+Rendszer Áttekintés
+Komponensek
+Szekrények
+RFID Kártyák
+Zármechanizmus
+Szoftver Platform
+Adminisztrációs Hozzáférés és Jogosultságok
+Rendszer Működése
+Napi Használat (Diákok és Tanárok Interakciója)
+Adminisztratív Hozzáférés
+Technikai Specifikációk
+Szekrények
+RFID Rendszer
+Kommunikációs Protokollok
+Biztonsági Funkciók
+Szoftver Specifikációk
+Áramellátás és Kapcsolódás
+Telepítési Folyamat
+Fizikai Szekrény Telepítés
+Kábelezés és Elektromos Telepítés
+RFID Beállítás
+Szoftver Telepítés
+Felhasználói Kézikönyv
+Diákok Számára
+Tanárok és Adminisztrátorok Számára
+Karbantartás és Támogatás
+Következtetés
+1. Bevezetés
+A Diák RFID Telefon Tároló Rendszer célja, hogy iskoláknak biztosítson egy biztonságos és automatizált módot a diákok telefonjainak tárolására a tanítási idő alatt. Minden diák egy személyre szabott RFID kártyát kap, amivel hozzáférhet egy kis szekrényhez, ahol reggel elhelyezheti a telefonját, majd az utolsó óra után visszakaphatja azt. Tanárok és adminisztrátorok külön engedélyezhetik a hozzáférést a szekrényekhez napközben, ha szükséges.
+
+2. Projekt Célok
+Biztonságos és szervezett rendszer létrehozása, amely biztosítja, hogy a diákok a tanítási idő alatt ne férjenek hozzá telefonjaikhoz, ezáltal elősegítve a koncentrációt és a fegyelmet.
+Az iskola adminisztrátorainak biztosítani a telefonhasználat feletti irányítást, miközben lehetőséget adni a rugalmas hozzáférésre szükség esetén.
+Komplett megoldás biztosítása, amely tartalmazza a hardvert (szekrények és zármechanizmusok), RFID kártyákat, valamint egy szoftver platformot a hozzáférés kezelésére.
+3. Rendszer Áttekintés
+A rendszer fizikai szekrényekből áll, amelyek beépített RFID-kompatibilis zármechanizmussal rendelkeznek. A diákok egy RFID kártyával nyithatják ki a hozzájuk rendelt szekrényt, és ott tárolhatják a telefonjaikat. Egy központosított szoftver platform irányítja a hozzáférést, amely lehetővé teszi a tanárok és az iskola adminisztrátorai számára, hogy szükség esetén kezeljék a hozzáféréseket és figyelemmel kísérjék a szekrények használatát.
+
+4. Komponensek
+Szekrények
+Méret Kicsi, csak akkora, hogy egy szabványos okostelefon beleférjen.
+Anyag Strapabíró, vandálbiztos anyagból készült, egyedi rekeszekkel minden diáknak.
+RFID Kártyák
+Típus Passzív RFID kártyák.
+Funkció Minden diák kap egy kártyát, amely a szekrényhez van rendelve a rendszerben.
+Zármechanizmus
+RFID-kompatibilis elektromos zárak, amelyek csak akkor nyílnak ki, ha a megfelelő kártyát lehúzzák.
+Szoftver Platform
+Központi vezérlőrendszer a szekrények kezelésére, lehetővé téve az adminisztrátori jogosultságokat és a felhasználási naplózást.
+Adminisztrációs Hozzáférés és Jogosultságok
+A tanárok és adminisztrátorok hozzáférhetnek a rendszerhez, hogy ideiglenes hozzáférést biztosítsanak, felügyeljék a szekrények használatát, és kezeljék a kivételeket.
+5. Rendszer Működése
+Napi Használat
+Reggel
+
+A diákok az első óra előtt lehúzzák RFID kártyájukat a szekrényük kinyitásához, és elhelyezik benne telefonjukat.
+A szekrény automatikusan lezár, miután a diák elhelyezte a telefont.
+A nap folyamán
+
+A szekrények zárva maradnak, kivéve, ha egy tanár vagy adminisztrátor engedélyezi az ideiglenes hozzáférést.
+A nap végén
+
+Az utolsó óra után a diákok ismét lehúzzák RFID kártyájukat a szekrény kinyitásához, és visszakapják telefonjaikat.
+Adminisztratív Hozzáférés
+A tanárok vagy adminisztrátorok felülbírálhatják a rendszert, hogy engedélyezzék vagy megtagadják a szekrények hozzáférését, korai kivételeket engedélyezzenek, vagy vészhelyzet esetén kinyissák a szekrényeket.
+6. Technikai Specifikációk
+Szekrények
+Méretek [Pontos méretek].
+Anyagok FémMűanyag (a projekt csapata által választott anyagok).
+RFID Rendszer
+Kártya Típusa Passzív RFID címkék.
+Hatótáv Rövid hatótávú (legfeljebb 10 cm).
+Frekvencia 13.56 MHz.
+Kommunikációs Protokollok
+A szekrények és a szoftver közötti kommunikációt [Protokoll Wi-Fi, Ethernet stb.] kezeli.
+Biztonsági Funkciók
+Titkosított RFID kommunikáció.
+Biztonságos szoftveres hozzáférés jelszóval védett adminisztrátori fiókokkal.
+Szoftver Specifikációk
+Web alapú platform.
+Adminisztrációs portál, amely lehetővé teszi a szekrények kezelését.
+Valós idejű frissítések a szekrények használati állapotáról.
+Áramellátás és Kapcsolódás
+A szekrények központi áramforráshoz csatlakoznak.
+A kommunikáció vezetékes vagy vezeték nélküli hálózaton keresztül történik.
+7. Telepítési Folyamat
+Fizikai Szekrény Telepítés
+A szekrényeket az iskola kijelölt területeire telepítik.
+Minden szekrény elektromos áramforráshoz kapcsolódik, és összeköttetésben áll az RFID zár rendszerrel.
+Kábelezés és Elektromos Telepítés
+A szekrények kábelezése biztosítja, hogy minden egység megfelelően kapcsolódjon és kommunikáljon a szoftver rendszerrel.
+RFID Beállítás
+Minden diákhoz egy RFID kártya van rendelve, amely a rendszerben összekapcsolódik az adott szekrénnyel.
+Szoftver Telepítés
+A web-alapú adminisztrációs portált az iskolai szerverekre vagy egy felhőplatformra telepítik, hozzáférést biztosítva a tanároknak és adminisztrátoroknak.
+8. Felhasználói Kézikönyv
+Diákok Számára
+Hogyan használhatják az RFID kártyát a szekrényük zárására és nyitására.
+Útmutató arról, hogy mikor férhetnek hozzá a telefonjukhoz.
+Tanárok és Adminisztrátorok Számára
+Hogyan érhetik el az adminisztrációs portált a hozzáférések engedélyezésére vagy megtagadására.
+Hogyan nyithatják ki a szekrényeket vészhelyzet esetén.
+9. Karbantartás és Támogatás
+Rendszeres karbantartás szükséges a szekrények, zárak és RFID olvasók ellenőrzésére.
+A szoftver frissítései és támogatása a projekt csapata által biztosított.
+10. Következtetés
+A Diák RFID Telefon Tároló Rendszer biztonságos és hatékony módot nyújt az iskoláknak a telefonhasználat kezelésére. A modern RFID technológia és a felhasználóbarát szoftver segítségével a rendszer biztosítja, hogy a diákok a tanulásra koncentrálhassanak a tanítási idő alatt, miközben a tanárok és adminisztrátorok teljes irányítást kapnak a hozzáférés felett.
+
+Backend Technikai Leírás (Node.js)
+A backend rész Node.js-ben készül, Express.js keretrendszerrel. A rendszer REST API-t biztosít, amely lehetővé teszi a szekrények és hozzáférési pontok kezelését. Az adminisztrátorok és tanárok API végpontokon keresztül férhetnek hozzá a jogosultságkezeléshez, míg a diákok RFID kártyás azonosítással nyitják és zárják a szekrényeket.
+
+A rendszer különös figyelmet fordít a biztonságra, titkosított adatátvitellel és jelszóval védett adminisztrációs hozzáférésekkel.
