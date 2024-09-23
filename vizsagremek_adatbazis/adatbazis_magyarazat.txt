@@ -91,7 +91,7 @@ Rendszer működése:
     
     Backend: 
         - nodeJs
-        - python
+        - Python
 
     Frontend:
         - HTML,CSS
