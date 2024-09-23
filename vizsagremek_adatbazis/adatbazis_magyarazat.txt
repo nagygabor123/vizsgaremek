@@ -93,5 +93,6 @@ Rendszer működése:
         - python
 
     Frontend:
-        - javaScript
-        - HTML,CSS  
+        - HTML,CSS
+        - JS 
+        - Bootstrap 
