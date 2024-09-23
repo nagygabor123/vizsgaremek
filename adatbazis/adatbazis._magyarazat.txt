@@ -47,24 +47,24 @@ Táblák részletes magyarázata:
     
     
 Rendszer működése:
-    A diákok minden reggel beolvastatják az RFID tag-jüket. Ez a rendszer lekérdezi a locker_relationships táblából, hogy melyik szekrényhez tartoznak, majd a lockers táblában ellenőrzi, hogy a szekrény nyitható-e.
+    A diákok minden reggel beolvastatják az RFID tag-jüket. Ez a rendszer lekérdezi a "locker_relationships" táblából, hogy melyik szekrényhez tartoznak, majd a "lockers" táblában ellenőrzi, hogy a szekrény nyitható-e.
     Ha a szekrény nyitásához tanári jóváhagyás szükséges, a rendszer ellenőrzi a locker_access_history táblát, és rögzíti, hogy ki hagyta jóvá a nyitást.
-    Az adminisztrátorok (tanárok vagy dolgozók) a admins táblában vannak nyilvántartva, és ők hagyhatják jóvá a hozzáférést egy adott szekrényhez.
+    Az adminisztrátorok (tanárok vagy dolgozók) az "admins" táblában vannak nyilvántartva, és ők hagyhatják jóvá a hozzáférést egy adott szekrényhez.
     A rendszer minden szekrényhez és diákhoz külön kapcsolódási naplót vezet, biztosítva a hozzáférések nyomon követhetőségét és ellenőrizhetőségét.
 
 
 1. Kapcsolat az RFID tag és a szekrény között:
-    Minden RFID tag-et hozzárendelsz egy adott szekrényhez az adatbázisban. Ez a kapcsolat a locker_relationships táblában történik.
+    Minden RFID tag-et hozzárendelsz egy adott szekrényhez az adatbázisban. Ez a kapcsolat a "locker_relationships" táblában történik.
     Az RFID tag egyedi azonosítót kap, amelyet összekapcsolsz a megfelelő szekrénnyel.
 
 2. Adatbázis logika:
-    A locker_relationships táblában minden egyes RFID tag egy adott szekrényhez van hozzárendelve. Amikor egy diák beolvastatja az RFID tag-et, az adatbázisból lekérdezed, hogy az adott tag melyik szekrényt nyithatja ki.
+    A "locker_relationships" táblában minden egyes RFID tag egy adott szekrényhez van hozzárendelve. Amikor egy diák beolvassa az RFID tag-et, az adatbázisból lekérdezed, hogy az adott tag melyik szekrényt nyithatja ki.
 
 3. RFID beolvasás logika:
     A beolvasott RFID tag azonosítóját elküldöd a szervernek, amely lekérdezi az adatbázisból a megfelelő szekrény azonosítóját (locker_id).
     Ezután ellenőrzöd, hogy az adott szekrény nyitható-e (can_be_opened mező), és ha igen, akkor a szerver jelzést küld a szekrény zárjának, hogy nyissa ki.
-    Példa adatbázis-lekérdezés:
-    Amikor egy diák beolvastatja az RFID tag-et, például egy ilyen SQL lekérdezést futtathatsz:
+    Példa az adatbázis-lekérdezésre:
+    Amikor egy diák beolvassaa az RFID tag-et, például egy ilyen SQL lekérdezést futtathatsz:
 
     sql
         SELECT lockers.locker_id, lockers.can_be_opened
@@ -75,10 +75,10 @@ Rendszer működése:
     Ez a lekérdezés megadja az RFID tag-hez kapcsolódó szekrény azonosítóját és azt is, hogy nyitható-e a szekrény.
 
 4. Zár vezérlése:
-    Ha a szekrény nyitható, akkor a szerver küld egy nyitási parancsot a szekrény zárjának, amely kinyitja a szekrényt. Ez történhet valamilyen kommunikációs protokoll (pl. I2C, RS-485) vagy Wi-Fi/Bluetooth segítségével, attól függően, milyen zárakat használtok.
+    Ha a szekrény nyitható, akkor küld egy nyitási parancsot a szekrény zárjának, amely kinyitja a szekrényt. 
     
     Folyamat lépései:
-        - Diák beolvastatja az RFID tag-et.
+        - Diák beolvassa az RFID tag-et.
         - A rendszer lekérdezi az adatbázisból a tag-hez tartozó szekrényt.
         - Ellenőrzi, hogy a szekrény nyitható-e.
         - Ha igen, a zárnyitási parancsot kiadja a megfelelő szekrénynek.
