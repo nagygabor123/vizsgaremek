@@ -59,5 +59,5 @@ CREATE TABLE timetables (
 CREATE TABLE admins (
     admin_id INT PRIMARY KEY AUTO_INCREMENT,
     full_name VARCHAR(255) NOT NULL,
-    position VARCHAR(255) NOT NULL -- Pl. Rendszergazda, Igazgatóheléyettes
+    position VARCHAR(255) NOT NULL -- Pl. Rendszergazda, Igazgatóhelyettes, Portás
 );

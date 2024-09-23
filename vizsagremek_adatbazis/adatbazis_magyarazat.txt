@@ -1,48 +1,49 @@
 Táblák részletes magyarázata:
     
-    lockers (Szekrények tábla):
-        locker_id: Egyedi azonosító minden szekrény számára.
-        status: Jelzi a szekrény aktuális állapotát, ami lehet "open" (nyitott) vagy "closed" (zárt).
-        can_be_opened: Logikai mező, amely jelzi, hogy a szekrény nyitható-e. Alapértelmezésben hamis, tehát tanári jóváhagyás szükséges a nyitáshoz.
+    lockers
+        locker_id
+        status: Jelzi a szekrény aktuális állapotát, ami lehet "nyitott" vagy "zart".
+        can_be_opened: Ez a mező jelzi, hogy a szekrény nyitható-e. Alapértelmezésben hamis, tehát tanári/adminisztrátori jóváhagyás szükséges a nyitáshoz.
     
-    students (Diákok tábla):
-        student_id: Egyedi azonosító minden diák számára.
+    students 
+        student_id
         full_name: A diák teljes neve.
         class: A diák osztálya.
         birth_place: A diák születési helye.
         birth_date: A diák születési dátuma.
         rfid_tag: A diák RFID azonosítója, amely egyedi és összekapcsolódik a szekrényével.
 
-    locker_access_history (Szekrény hozzáférési napló tábla):
-        access_id: Egyedi azonosító a hozzáférési események számára.
+    locker_access_history
+        access_id
         rfid_tag: Az RFID tag, amely a diákhoz van rendelve. Kapcsolódik a students táblához.
         locker_id: A szekrény azonosítója, amelyet a diák ki akar nyitni. Kapcsolódik a lockers táblához.
         access_time: A hozzáférés időpontját rögzíti.
-        approved_by: Annak az adminisztrátornak az azonosítója, aki jóváhagyta a hozzáférést (tanár vagy adminisztrátor). NULL lehet, ha nem szükséges jóváhagyás.
+        approved_by: Annak az adminisztrátornak, tanárnak az azonosítója, aki jóváhagyta a hozzáférést. NULL lehet, ha nem szükséges jóváhagyás.
 
-    locker_relationships (Szekrény-diák kapcsolatok tábla):
-        relationship_id: Egyedi azonosító a kapcsolatok számára.
-        rfid_tag: A diák RFID tag-je. Kapcsolódik a students táblához.
-        locker_id: A diákhoz rendelt szekrény azonosítója. Kapcsolódik a lockers táblához.
+    locker_relationships 
+        relationship_id
+        rfid_tag: A diák RFID tag-je. Kapcsolódik a "students" táblához.
+        locker_id: A diákhoz rendelt szekrény azonosítója. Kapcsolódik a "lockers" táblához.
+
         Ez a tábla biztosítja, hogy minden diák csak a saját szekrényét tudja kinyitni.
 
-    subjects (Tantárgyak tábla):
-        subject_id: Egyedi azonosító minden tantárgy számára.
+    subjects
+        subject_id
         subject_name: A tantárgy neve.
         teacher_name: A tantárgyat tanító tanár neve.
 
-    timetables (Órarend tábla):
-        timetable_id: Egyedi azonosító minden órarendi bejegyzés számára.
-        student_id: A diák azonosítója, amely a students táblához kapcsolódik.
-        subject_id: A tantárgy azonosítója, amely a subjects táblához kapcsolódik.
+    timetables 
+        timetable_id
+        student_id: A diák azonosítója, amely a "students" táblához kapcsolódik.
+        subject_id: A tantárgy azonosítója, amely a "subjects" táblához kapcsolódik.
         day_of_week: Az adott nap az órarendben (hétfő-péntek).
-        start_time: Az óra kezdési ideje.
-        end_time: Az óra befejezési ideje.
+        start_time: Az óra kezdetének időpontja.
+        end_time: Az óra végének időpontja.
 
-    admins (Adminisztrátorok tábla):
+    admins
         admin_id: Egyedi azonosító minden adminisztrátor (tanár vagy dolgozó) számára.
         full_name: Az adminisztrátor teljes neve.
-        position: Az adminisztrátor pozíciója, például "Tanár" vagy "Adminisztrátor".
+        position: Az adminisztrátor pozíciója, például "igazgatóhelyettes", "Rendszergazda", "Portás".
     
     
     
