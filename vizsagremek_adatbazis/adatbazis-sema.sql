@@ -2,7 +2,7 @@
 CREATE TABLE lockers (
     locker_id INT PRIMARY KEY AUTO_INCREMENT,
     status ENUM('nyitva', 'zarva') NOT NULL,
-    can_be_opened BOOLEAN DEFAULT FALSE -- Jelzi, hogy nyitható-e a szekrény, tanári jóváhagyást igényel
+    can_be_opened BOOLEAN DEFAULT TRUE -- Jelzi, hogy nyitható-e a szekrény, ha FALSE akkor tanári jóváhagyást igényel
 );
 
 
