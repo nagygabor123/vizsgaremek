@@ -1,46 +1,89 @@
-1. Lockers (Szekrények)
+Táblák részletes magyarázata:
+    
+    lockers (Szekrények tábla):
+        locker_id: Egyedi azonosító minden szekrény számára.
+        status: Jelzi a szekrény aktuális állapotát, ami lehet "open" (nyitott) vagy "closed" (zárt).
+        can_be_opened: Logikai mező, amely jelzi, hogy a szekrény nyitható-e. Alapértelmezésben hamis, tehát tanári jóváhagyás szükséges a nyitáshoz.
+    
+    students (Diákok tábla):
+        student_id: Egyedi azonosító minden diák számára.
+        full_name: A diák teljes neve.
+        class: A diák osztálya.
+        birth_place: A diák születési helye.
+        birth_date: A diák születési dátuma.
+        rfid_tag: A diák RFID azonosítója, amely egyedi és összekapcsolódik a szekrényével.
 
-    locker_id: A szekrények egyedi azonosítója.
-    status: A szekrény státusza, lehet nyitott (open) vagy zárt (closed).
-    status_changed_at: Az utolsó állapotváltozás időpontja.
+    locker_access_history (Szekrény hozzáférési napló tábla):
+        access_id: Egyedi azonosító a hozzáférési események számára.
+        rfid_tag: Az RFID tag, amely a diákhoz van rendelve. Kapcsolódik a students táblához.
+        locker_id: A szekrény azonosítója, amelyet a diák ki akar nyitni. Kapcsolódik a lockers táblához.
+        access_time: A hozzáférés időpontját rögzíti.
+        approved_by: Annak az adminisztrátornak az azonosítója, aki jóváhagyta a hozzáférést (tanár vagy adminisztrátor). NULL lehet, ha nem szükséges jóváhagyás.
 
-2. Students (Diákok)
+    locker_relationships (Szekrény-diák kapcsolatok tábla):
+        relationship_id: Egyedi azonosító a kapcsolatok számára.
+        rfid_tag: A diák RFID tag-je. Kapcsolódik a students táblához.
+        locker_id: A diákhoz rendelt szekrény azonosítója. Kapcsolódik a lockers táblához.
+        Ez a tábla biztosítja, hogy minden diák csak a saját szekrényét tudja kinyitni.
 
-    student_id: A diákok egyedi azonosítója (OM azonosító).
-    full_name: A diák teljes neve.
-    class: A diák osztálya.
-    birth_place: A diák születési helye.
-    birth_date: A diák születési dátuma.
-    rfid_tag: A diákhoz rendelt RFID azonosító.
+    subjects (Tantárgyak tábla):
+        subject_id: Egyedi azonosító minden tantárgy számára.
+        subject_name: A tantárgy neve.
+        teacher_name: A tantárgyat tanító tanár neve.
 
-3. Locker Relationships (Szekrénykapcsolatok)
+    timetables (Órarend tábla):
+        timetable_id: Egyedi azonosító minden órarendi bejegyzés számára.
+        student_id: A diák azonosítója, amely a students táblához kapcsolódik.
+        subject_id: A tantárgy azonosítója, amely a subjects táblához kapcsolódik.
+        day_of_week: Az adott nap az órarendben (hétfő-péntek).
+        start_time: Az óra kezdési ideje.
+        end_time: Az óra befejezési ideje.
 
-    relationship_id: A szekrény és diák közötti kapcsolat egyedi azonosítója.
-    rfid_tag: A diák RFID azonosítója (kapcsolat a Students táblához).
-    locker_id: A szekrény azonosítója (kapcsolat a Lockers táblához).
+    admins (Adminisztrátorok tábla):
+        admin_id: Egyedi azonosító minden adminisztrátor (tanár vagy dolgozó) számára.
+        full_name: Az adminisztrátor teljes neve.
+        position: Az adminisztrátor pozíciója, például "Tanár" vagy "Adminisztrátor".
+    
+    
+    
+Rendszer működése:
+    A diákok minden reggel beolvastatják az RFID tag-jüket. Ez a rendszer lekérdezi a locker_relationships táblából, hogy melyik szekrényhez tartoznak, majd a lockers táblában ellenőrzi, hogy a szekrény nyitható-e.
+    Ha a szekrény nyitásához tanári jóváhagyás szükséges, a rendszer ellenőrzi a locker_access_history táblát, és rögzíti, hogy ki hagyta jóvá a nyitást.
+    Az adminisztrátorok (tanárok vagy dolgozók) a admins táblában vannak nyilvántartva, és ők hagyhatják jóvá a hozzáférést egy adott szekrényhez.
+    A rendszer minden szekrényhez és diákhoz külön kapcsolódási naplót vezet, biztosítva a hozzáférések nyomon követhetőségét és ellenőrizhetőségét.
 
-4. Subjects (Tantárgyak)
 
-    subject_id: A tantárgy egyedi azonosítója.
-    subject_name: A tantárgy neve.
-    teacher_name: A tantárgyat oktató tanár neve.
+1. Kapcsolat az RFID tag és a szekrény között:
+    Minden RFID tag-et hozzárendelsz egy adott szekrényhez az adatbázisban. Ez a kapcsolat a locker_relationships táblában történik.
+    Az RFID tag egyedi azonosítót kap, amelyet összekapcsolsz a megfelelő szekrénnyel.
 
-5. Timetables (Órarend)
+2. Adatbázis logika:
+    A locker_relationships táblában minden egyes RFID tag egy adott szekrényhez van hozzárendelve. Amikor egy diák beolvastatja az RFID tag-et, az adatbázisból lekérdezed, hogy az adott tag melyik szekrényt nyithatja ki.
 
-    timetable_id: Az órarendi bejegyzés egyedi azonosítója.
-    student_id: A diák azonosítója (kapcsolat a Students táblához).
-    subject_id: A tantárgy azonosítója (kapcsolat a Subjects táblához).
-    day_of_week: Az óra napja (hétfő-péntek).
-    start_time: Az óra kezdete.
-    end_time: Az óra vége.
+3. RFID beolvasás logika:
+    A beolvasott RFID tag azonosítóját elküldöd a szervernek, amely lekérdezi az adatbázisból a megfelelő szekrény azonosítóját (locker_id).
+    Ezután ellenőrzöd, hogy az adott szekrény nyitható-e (can_be_opened mező), és ha igen, akkor a szerver jelzést küld a szekrény zárjának, hogy nyissa ki.
+    Példa adatbázis-lekérdezés:
+    Amikor egy diák beolvastatja az RFID tag-et, például egy ilyen SQL lekérdezést futtathatsz:
 
-Kapcsolatok:
+    sql
+        SELECT lockers.locker_id, lockers.can_be_opened
+        FROM locker_relationships
+        INNER JOIN lockers ON locker_relationships.locker_id = lockers.locker_id
+        WHERE locker_relationships.rfid_tag = '1234567890';
+        
+    Ez a lekérdezés megadja az RFID tag-hez kapcsolódó szekrény azonosítóját és azt is, hogy nyitható-e a szekrény.
 
-    A Lockers és Locker Relationships táblák között egy 1
-    kapcsolat van, ahol egy szekrényhez több RFID kapcsolat rendelhető, de egy RFID kapcsolat csak egy szekrényhez tartozhat.
-    A Students és Locker Relationships táblák között szintén 1
-    kapcsolat van, ahol egy diákhoz (RFID azonosítón keresztül) több szekrény kapcsolat tartozhat.
-    A Students és Timetables táblák között 1
-    kapcsolat van, ahol egy diákhoz több órarendi bejegyzés tartozhat.
-    A Subjects és Timetables táblák között 1
-    kapcsolat van, ahol egy tantárgyhoz több órarendi bejegyzés tartozhat.
+4. Zár vezérlése:
+    Ha a szekrény nyitható, akkor a szerver küld egy nyitási parancsot a szekrény zárjának, amely kinyitja a szekrényt. Ez történhet valamilyen kommunikációs protokoll (pl. I2C, RS-485) vagy Wi-Fi/Bluetooth segítségével, attól függően, milyen zárakat használtok.
+    
+    Folyamat lépései:
+        - Diák beolvastatja az RFID tag-et.
+        - A rendszer lekérdezi az adatbázisból a tag-hez tartozó szekrényt.
+        - Ellenőrzi, hogy a szekrény nyitható-e.
+        - Ha igen, a zárnyitási parancsot kiadja a megfelelő szekrénynek.
+
+    Hardveres megvalósítás:
+        - Raspberry Pi, ezen futna a szoftver amely kezli a szekrényeket
+        - RFID tag, a diákok a tag-ekket letudják csippantani az RFID leolvasonál
+        - RFID leolvasó, beolvassa az RFID tag-eket, és a hozzá rendelt szekrényt kinyitja    
