@@ -88,3 +88,12 @@ Rendszer működése:
         - Raspberry Pi, ezen futna a szoftver amely kezli a szekrényeket
         - RFID tag, a diákok a tag-ekket letudják csippantani az RFID leolvasonál
         - RFID leolvasó, beolvassa az RFID tag-eket, és a hozzá rendelt szekrényt kinyitja    
+    
+    Backend: 
+        - nodeJs
+        - python
+
+    Frontend:
+        - HTML,CSS
+        - JS 
+        - Bootstrap 
