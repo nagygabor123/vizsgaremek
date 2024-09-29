@@ -21,3 +21,12 @@ delivery locker boxes
 https://www.youtube.com/watch?v=Hu9hXhJ-9gA
 https://www.youtube.com/watch?v=h68RFw49ja8
 https://www.youtube.com/watch?v=e1FVSpkw6q4
+
+
+
+
+mysql rfid system
+
+https://github.com/abobija/yt-tutorials/tree/master/wiattend
+
+https://github.com/abobija/wiattend
