@@ -30,3 +30,5 @@ mysql rfid system
 https://github.com/abobija/yt-tutorials/tree/master/wiattend
 
 https://github.com/abobija/wiattend
+
+https://www.youtube.com/watch?v=C83kAKaQs6Q
