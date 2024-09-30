@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RFID Diákok</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .student-box {
+            margin: 10px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            display: inline-block;
+            width: 150px;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+        .present {
+            background-color: #6DBE45; /* Zöld szín */
+        }
+    </style>
+</head>
+<body>
+    <h1>Diákok</h1>
+    <div id="students-container"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        socket.on('students', (students) => {
+            const container = document.getElementById('students-container');
+            container.innerHTML = ''; // Ürítse ki a tárolót
+            students.forEach(student => {
+                const box = document.createElement('div');
+                box.className = 'student-box';
+                box.id = student.rfid_azon;
+                box.innerText = student.nev;
+                if (student.statusz === 'be') {
+                    box.classList.add('present'); // Zöld szín
+                }
+                container.appendChild(box);
+            });
+        });
+
+        socket.on('statusUpdate', ({ rfidTag, status, name }) => {
+            const box = document.getElementById(rfidTag);
+            if (box) {
+                box.classList.toggle('present'); // Váltás zöldre vagy vissza
+            }
+        });
+    </script>
+</body>
+</html>
