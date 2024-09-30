@@ -32,6 +32,9 @@ const portName = 'COM3'; // Cseréld ki a számítógépedhez csatlakozó Arduin
 const serialPort = new SerialPort({ path: portName, baudRate: 9600 });
 const parser = serialPort.pipe(new ReadlineParser({ delimiter: '\n' }));
 
+// Eredeti státuszok tárolására szolgáló objektum
+let originalStatuses = {};
+
 // Figyelj a bejövő adatokra az Arduinótól
 parser.on('data', (data) => {
   console.log(`Megkapott RFID azonosító: ${data}`);
@@ -44,7 +47,7 @@ parser.on('data', (data) => {
   updateStudentStatus(rfidTag);
 });
 
-// RFID olvasás loggolása a "logs" táblába
+// RFID olvasás loggolása a "logs" táblába (csak az RFID címkét logoljuk)
 function logRfidTag(rfidTag) {
   const logQuery = 'INSERT INTO logs (rfid_tag) VALUES (?)';
   db.query(logQuery, [rfidTag], (err, result) => {
@@ -53,13 +56,21 @@ function logRfidTag(rfidTag) {
   });
 }
 
-// Diák státuszának frissítése
+// Diák státuszának frissítése a "student" táblában
 function updateStudentStatus(rfidTag) {
   const query = 'SELECT * FROM student WHERE rfid_azon = ?';
   db.query(query, [rfidTag], (err, results) => {
     if (err) throw err;
     if (results.length > 0) {
       const student = results[0];
+
+      // Ha a diák státusza "zarva", akkor ne csináljunk semmit
+      if (student.statusz === 'zarva') {
+        console.log(`Zárva van, nem lehet frissíteni: ${student.nev}`);
+        return;
+      }
+
+      // Státusz váltás
       const newStatus = student.statusz === 'ki' ? 'be' : 'ki';
       const updateQuery = 'UPDATE student SET statusz = ? WHERE rfid_azon = ?';
 
@@ -72,6 +83,46 @@ function updateStudentStatus(rfidTag) {
     }
   });
 }
+
+// Záró funkció a diákok lezárásához és feloldásához
+let locked = false;
+
+app.post('/toggle-lock', (req, res) => {
+  locked = !locked;
+
+  if (locked) {
+    // Eredeti státuszok mentése, mielőtt zárva lesznek
+    const query = 'SELECT rfid_azon, statusz FROM student';
+    db.query(query, (err, results) => {
+      if (err) throw err;
+
+      results.forEach(student => {
+        originalStatuses[student.rfid_azon] = student.statusz; // Eredeti státusz mentése
+      });
+
+      // Minden diák státusza zárva lesz
+      const updateQuery = 'UPDATE student SET statusz = "zarva"';
+      db.query(updateQuery, (err) => {
+        if (err) throw err;
+        console.log('Minden diák státusza zárolva');
+        io.emit('statusUpdate', { status: 'zarva' }); // Kliens értesítése
+        res.send('Minden diák státusza zárolva');
+      });
+    });
+  } else {
+    // Státuszok visszaállítása az eredeti állapotra
+    for (const rfidTag in originalStatuses) {
+      const originalStatus = originalStatuses[rfidTag];
+      const updateQuery = 'UPDATE student SET statusz = ? WHERE rfid_azon = ?';
+      db.query(updateQuery, [originalStatus, rfidTag], (err) => {
+        if (err) throw err;
+        console.log(`Státusz visszaállítva: ${rfidTag}, státusz: ${originalStatus}`);
+      });
+    }
+    io.emit('statusUpdate', { status: 'ki' }); // Kliens értesítése a feloldásról
+    res.send('Minden diák státusza visszaállítva az eredeti állapotba');
+  }
+});
 
 // A szerver indítása
 const server = app.listen(port, () => {
