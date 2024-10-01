@@ -117,16 +117,17 @@ CREATE TABLE `student` (
   `id` int(11) NOT NULL,
   `nev` varchar(255) NOT NULL,
   `rfid_azon` varchar(255) NOT NULL,
-  `statusz` enum('be','ki','zarva') DEFAULT 'ki'
+  `statusz` enum('be','ki','zarva') DEFAULT 'ki',
+  `pin` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `student`
 --
 
-INSERT INTO `student` (`id`, `nev`, `rfid_azon`, `statusz`) VALUES
-(1, 'Szalkai-Szabó Ádám', 'DA6BD581', 'ki'),
-(2, 'Nagy Gábor', '030FC70A', 'ki');
+INSERT INTO `student` (`id`, `nev`, `rfid_azon`, `statusz`,`pin`) VALUES
+(1, 'Szalkai-Szabó Ádám', 'DA6BD581', 'ki',4),
+(2, 'Nagy Gábor', '030FC70A', 'ki',6);
 
 --
 -- Indexek a kiírt táblákhoz
