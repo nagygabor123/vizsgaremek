@@ -67,7 +67,7 @@ function updateStudentStatus(rfidTag) {
       // Ha a diák státusza "zarva", akkor ne csináljunk semmit
       if (student.statusz === 'zarva') {
         console.log(`Zárva van, nem lehet frissíteni: ${student.nev}`);
-        return;
+        return; // Visszatérés, ha a státusz "zarva"
       }
 
       // Státusz váltás
@@ -88,40 +88,64 @@ function updateStudentStatus(rfidTag) {
 let locked = false;
 
 app.post('/toggle-lock', (req, res) => {
-  locked = !locked;
-
-  if (locked) {
-    // Eredeti státuszok mentése, mielőtt zárva lesznek
-    const query = 'SELECT rfid_azon, statusz FROM student';
-    db.query(query, (err, results) => {
-      if (err) throw err;
-
-      results.forEach(student => {
-        originalStatuses[student.rfid_azon] = student.statusz; // Eredeti státusz mentése
-      });
-
-      // Minden diák státusza zárva lesz
-      const updateQuery = 'UPDATE student SET statusz = "zarva"';
-      db.query(updateQuery, (err) => {
-        if (err) throw err;
-        console.log('Minden diák státusza zárolva');
-        io.emit('statusUpdate', { status: 'zarva' }); // Kliens értesítése
-        res.send('Minden diák státusza zárolva');
-      });
-    });
-  } else {
-    // Státuszok visszaállítása az eredeti állapotra
-    for (const rfidTag in originalStatuses) {
-      const originalStatus = originalStatuses[rfidTag];
-      const updateQuery = 'UPDATE student SET statusz = ? WHERE rfid_azon = ?';
-      db.query(updateQuery, [originalStatus, rfidTag], (err) => {
-        if (err) throw err;
-        console.log(`Státusz visszaállítva: ${rfidTag}, státusz: ${originalStatus}`);
-      });
+  locked = !locked; // Az állapot váltása (zárva/nyitva)
+  
+  serialPort.write('TOGGLE_LED\n', (err) => {
+    if (err) {
+      return res.status(500).send('Hiba a LED vezérlés során'); // Hiba kezelés
     }
-    io.emit('statusUpdate', { status: 'ki' }); // Kliens értesítése a feloldásról
-    res.send('Minden diák státusza visszaállítva az eredeti állapotba');
-  }
+
+    if (locked) {
+      // Eredeti státuszok mentése, mielőtt zárva lesznek
+      const query = 'SELECT rfid_azon, statusz FROM student';
+      db.query(query, (err, results) => {
+        if (err) throw err;
+
+        results.forEach(student => {
+          originalStatuses[student.rfid_azon] = student.statusz; // Eredeti státusz mentése
+        });
+
+        // Minden diák státusza zárva lesz
+        const updateQuery = 'UPDATE student SET statusz = "zarva"';
+        db.query(updateQuery, (err) => {
+          if (err) throw err;
+          console.log('Minden diák státusza zárolva');
+          io.emit('statusUpdate', { status: 'zarva' }); // Kliens értesítése
+          res.send('Minden diák státusza zárolva'); // Válasz küldése
+        });
+      });
+    } else {
+      // Státuszok visszaállítása az eredeti állapotra
+      const updatePromises = []; // Tömb a promessek tárolására
+
+      for (const rfidTag in originalStatuses) {
+        const originalStatus = originalStatuses[rfidTag];
+        const updateQuery = 'UPDATE student SET statusz = ? WHERE rfid_azon = ?';
+        
+        // Aszinkron frissítések kezelése
+        const promise = new Promise((resolve, reject) => {
+          db.query(updateQuery, [originalStatus, rfidTag], (err) => {
+            if (err) return reject(err); // Hibakezelés
+            console.log(`Státusz visszaállítva: ${rfidTag}, státusz: ${originalStatus}`);
+            resolve();
+          });
+        });
+
+        updatePromises.push(promise); // A promise hozzáadása a tömbhöz
+      }
+
+      // Várakozás az összes frissítés befejezésére
+      Promise.all(updatePromises)
+        .then(() => {
+          io.emit('statusUpdate', { status: 'ki' }); // Kliens értesítése a feloldásról
+          res.send('Minden diák státusza visszaállítva az eredeti állapotba'); // Válasz küldése
+        })
+        .catch(err => {
+          console.error(err);
+          res.status(500).send('Hiba történt a státusz visszaállítása során'); // Hiba kezelés
+        });
+    }
+  });
 });
 
 // A szerver indítása
@@ -137,6 +161,6 @@ io.on('connection', (socket) => {
   // Diákok lekérdezése és elküldése a kliensnek
   db.query('SELECT * FROM student', (err, results) => {
     if (err) throw err;
-    socket.emit('students', results);
+    socket.emit('students', results); // Diákok küldése
   });
 });
