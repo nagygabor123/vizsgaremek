@@ -39,7 +39,7 @@ let originalStatuses = {};
 parser.on('data', (data) => {
   console.log(`Megkapott RFID azonosító: ${data}`);
   const rfidTag = data.trim();
-  
+
   // Loggoljuk az RFID olvasást
   logRfidTag(rfidTag);
 
@@ -61,25 +61,58 @@ function updateStudentStatus(rfidTag) {
   const query = 'SELECT * FROM student WHERE rfid_azon = ?';
   db.query(query, [rfidTag], (err, results) => {
     if (err) throw err;
+
+    // Ellenőrizzük, hogy a diák létezik-e
+    if (results.length === 0) {
+      console.log(`Téves RFID azonosító: ${rfidTag}`); // Téves azonosító kiírása
+      io.emit('statusUpdate', { rfidTag, status: 'téves', name: null });
+      return; // Ha nem létezik, kilépünk
+    }
+
+    const student = results[0];
+
+    // Ha a diák státusza "zarva", akkor ne csináljunk semmit
+    if (student.statusz === 'zarva') {
+      console.log(`Zárva van, nem lehet frissíteni: ${student.nev}`);
+      return; // Visszatérés, ha a státusz "zarva"
+    }
+
+    // Státusz váltás
+    const newStatus = student.statusz === 'ki' ? 'be' : 'ki';
+    const updateQuery = 'UPDATE student SET statusz = ? WHERE rfid_azon = ?';
+
+    db.query(updateQuery, [newStatus, rfidTag], (err) => {
+      if (err) throw err;
+      console.log(`Frissítve: ${student.nev} státusz: ${newStatus}`);
+
+      // LED vezérlés
+      controlLed(rfidTag);
+
+      // Üzenet küldése a kliensnek a státusz változásról
+      io.emit('statusUpdate', { rfidTag, status: newStatus, name: student.nev });
+    });
+  });
+}
+
+// LED vezérlés
+function controlLed(rfidTag) {
+  // Lekérdezzük a pin-t az adatbázisból
+  const pinQuery = 'SELECT pin FROM student WHERE rfid_azon = ?';
+  db.query(pinQuery, [rfidTag], (err, results) => {
+    if (err) throw err;
+
     if (results.length > 0) {
-      const student = results[0];
-
-      // Ha a diák státusza "zarva", akkor ne csináljunk semmit
-      if (student.statusz === 'zarva') {
-        console.log(`Zárva van, nem lehet frissíteni: ${student.nev}`);
-        return; // Visszatérés, ha a státusz "zarva"
-      }
-
-      // Státusz váltás
-      const newStatus = student.statusz === 'ki' ? 'be' : 'ki';
-      const updateQuery = 'UPDATE student SET statusz = ? WHERE rfid_azon = ?';
-
-      db.query(updateQuery, [newStatus, rfidTag], (err) => {
-        if (err) throw err;
-        console.log(`Frissítve: ${student.nev} státusz: ${newStatus}`);
-        // Üzenet küldése a kliensnek a státusz változásról
-        io.emit('statusUpdate', { rfidTag, status: newStatus, name: student.nev });
+      const pin = results[0].pin;
+      // Küldjük el az Arduino-nak a pin kódot
+      serialPort.write(`PIN:${pin}\n`, (err) => {
+        if (err) {
+          console.error('Hiba a pin küldésekor:', err);
+        } else {
+          console.log(`Pin elküldve az Arduinónak: ${pin}`);
+        }
       });
+    } else {
+      console.log('Nincs pin az RFID-hoz:', rfidTag);
     }
   });
 }

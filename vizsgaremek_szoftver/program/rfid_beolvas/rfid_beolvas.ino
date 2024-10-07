@@ -1,9 +1,13 @@
 #include <SPI.h>
 #include <MFRC522.h>
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd(0x27, 16, 2); // Initialize the LCD with the I2C address 0x27
+//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 
 #define RST_PIN 9
 #define SS_PIN 10
-#define RED_LED_PIN 2  // A piros LED a 4-es pinhez kötve
+#define RED_LED_PIN 2  // A piros LED a 2-es pinhez kötve
 
 MFRC522 rfid(SS_PIN, RST_PIN);
 bool ledState = false;  // Alapértelmezett állapot: kikapcsolt LED
@@ -24,6 +28,18 @@ void setup() {
   rfid.PCD_Init();     // RFID olvasó inicializálása
   pinMode(RED_LED_PIN, OUTPUT);  // A LED pin kimenetre állítása
   digitalWrite(RED_LED_PIN, LOW);  // Kezdetben a LED ki van kapcsolva
+  pinMode(2, OUTPUT);  // A LED pin kimenetre állítása
+  digitalWrite(2, LOW);  // Kezdetben a LED ki van kapcsolva
+   pinMode(4,OUTPUT);  // A LED pin kimenetre állítása
+  digitalWrite(4, LOW);  // Kezdetben a LED ki van kapcsolva
+   pinMode(6, OUTPUT);  // A LED pin kimenetre állítása
+  digitalWrite(6, LOW);  // Kezdetben a LED ki van kapcsolva
+  lcd.begin(); // Only call begin() without parameters
+  lcd.backlight();
+  lcd.setCursor(0, 0);
+  lcd.print("Olvasd be");
+  lcd.setCursor(0, 1);
+  lcd.print("a kartyad");
 }
 
 void loop() {
@@ -36,6 +52,22 @@ void loop() {
     if (command == "TOGGLE_LED") {
       ledState = !ledState;  // Váltás: ha be van kapcsolva, akkor kikapcsol, ha ki van kapcsolva, akkor bekapcsol
       digitalWrite(RED_LED_PIN, ledState ? HIGH : LOW);  // Az új állapot alkalmazása
+    }
+    
+    // Ha PIN-kódot kapunk, azt is kezeljük
+    if (command.startsWith("PIN:")) {
+      String pin = command.substring(4); // Kinyerjük a PIN kódot
+      // Itt lehet egyéb PIN-kód alapú logikát is hozzáadni
+      uint8_t pinInt = pin[0] - '0';
+      Serial.print("Received PIN: ");
+      Serial.println(pin); // Kiírja a kapott PIN kódot
+      lcd.clear();
+      lcd.setCursor(0, 1);
+      lcd.print(pinInt);
+      // LED vezérlés (opcionális, ha a PIN azonosítással szeretnéd vezérelni a LED-et)
+      digitalWrite(pinInt, HIGH); // LED bekapcsolása
+      delay(500); // LED világít egy ideig
+      digitalWrite(pinInt, LOW); // LED lekapcsolása
     }
   }
 
