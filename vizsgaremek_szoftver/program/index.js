@@ -94,28 +94,34 @@ function updateStudentStatus(rfidTag) {
   });
 }
 
-// LED vezérlés
 function controlLed(rfidTag) {
   // Lekérdezzük a pin-t az adatbázisból
   const pinQuery = 'SELECT pin FROM student WHERE rfid_azon = ?';
   db.query(pinQuery, [rfidTag], (err, results) => {
     if (err) throw err;
 
-    if (results.length > 0) {
-      const pin = results[0].pin;
-      // Küldjük el az Arduino-nak a pin kódot
-      serialPort.write(`PIN:${pin}\n`, (err) => {
-        if (err) {
-          console.error('Hiba a pin küldésekor:', err);
-        } else {
-          console.log(`Pin elküldve az Arduinónak: ${pin}`);
-        }
-      });
+    let pin = '2'; // Alapértelmezett pin érték
+    if (results.length > 0 && results[0].pin) {
+      pin = results[0].pin; // Ha létezik pin az adatbázisban, akkor azt használjuk
     } else {
-      console.log('Nincs pin az RFID-hoz:', rfidTag);
+      console.log('Nincs érvényes pin az RFID-hoz:', rfidTag, ', a pin értéke 2 lesz.');
     }
+
+    // Küldjük el az Arduino-nak a pin kódot
+    const command = `PIN:${pin}\n`; // Parancs formázása
+    serialPort.write(command, (err) => {
+      if (err) {
+        console.error('Hiba a pin küldésekor:', err);
+      } else {
+        console.log(`Pin elküldve az Arduinónak: ${command}`);
+      }
+    });
   });
 }
+
+
+
+
 
 // Záró funkció a diákok lezárásához és feloldásához
 let locked = false;

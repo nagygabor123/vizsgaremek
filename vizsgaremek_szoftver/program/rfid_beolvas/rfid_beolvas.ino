@@ -7,10 +7,8 @@ LiquidCrystal_I2C lcd(0x27, 16, 2); // Initialize the LCD with the I2C address 0
 
 #define RST_PIN 9
 #define SS_PIN 10
-#define RED_LED_PIN 2  // A piros LED a 2-es pinhez kötve
-
 MFRC522 rfid(SS_PIN, RST_PIN);
-bool ledState = false;  // Alapértelmezett állapot: kikapcsolt LED
+bool isSystemLocked  = false;  // Alapértelmezett állapot: kikapcsolt LED
 
 // Segédfunkció a hexadecimális kód kiegészítéséhez
 String toHexString(byte value) {
@@ -26,13 +24,11 @@ void setup() {
   Serial.begin(9600);  // Soros kommunikáció
   SPI.begin();         // SPI indítása
   rfid.PCD_Init();     // RFID olvasó inicializálása
-  pinMode(RED_LED_PIN, OUTPUT);  // A LED pin kimenetre állítása
-  digitalWrite(RED_LED_PIN, LOW);  // Kezdetben a LED ki van kapcsolva
   pinMode(2, OUTPUT);  // A LED pin kimenetre állítása
   digitalWrite(2, LOW);  // Kezdetben a LED ki van kapcsolva
-   pinMode(4,OUTPUT);  // A LED pin kimenetre állítása
+  pinMode(4,OUTPUT);  // A LED pin kimenetre állítása
   digitalWrite(4, LOW);  // Kezdetben a LED ki van kapcsolva
-   pinMode(6, OUTPUT);  // A LED pin kimenetre állítása
+  pinMode(6, OUTPUT);  // A LED pin kimenetre állítása
   digitalWrite(6, LOW);  // Kezdetben a LED ki van kapcsolva
   lcd.begin(); // Only call begin() without parameters
   lcd.backlight();
@@ -48,10 +44,20 @@ void loop() {
     String command = Serial.readStringUntil('\n');  // Olvasunk egy sor adatot a soros porton
     command.trim();  // Eltávolítjuk az esetleges felesleges whitespace karaktereket
     
-    // Ha a "TOGGLE_LED" üzenetet kapjuk, váltjuk a LED állapotát
+    // Ha a "TOGGLE_LED" üzenetet kapjuk, váltjuk a rendszer állapotát
     if (command == "TOGGLE_LED") {
-      ledState = !ledState;  // Váltás: ha be van kapcsolva, akkor kikapcsol, ha ki van kapcsolva, akkor bekapcsol
-      digitalWrite(RED_LED_PIN, ledState ? HIGH : LOW);  // Az új állapot alkalmazása
+      isSystemLocked = !isSystemLocked;  // A rendszer állapotának váltása
+      // Kijelzőn az új állapot megjelenítése
+      lcd.clear();
+      if (isSystemLocked) {
+        lcd.setCursor(0, 0);
+        lcd.print("Rendszer zarva");
+      } else {
+        lcd.setCursor(0, 0);
+        lcd.print("Olvasd be");
+        lcd.setCursor(0, 1);
+        lcd.print("a kartyad");
+      }
     }
     
     // Ha PIN-kódot kapunk, azt is kezeljük
@@ -59,15 +65,39 @@ void loop() {
       String pin = command.substring(4); // Kinyerjük a PIN kódot
       // Itt lehet egyéb PIN-kód alapú logikát is hozzáadni
       uint8_t pinInt = pin[0] - '0';
-      Serial.print("Received PIN: ");
-      Serial.println(pin); // Kiírja a kapott PIN kódot
-      lcd.clear();
-      lcd.setCursor(0, 1);
-      lcd.print(pinInt);
-      // LED vezérlés (opcionális, ha a PIN azonosítással szeretnéd vezérelni a LED-et)
-      digitalWrite(pinInt, HIGH); // LED bekapcsolása
-      delay(500); // LED világít egy ideig
-      digitalWrite(pinInt, LOW); // LED lekapcsolása
+      if (pinInt == 4 || pinInt == 6) {
+        // LED vezérlés (opcionális, ha a PIN azonosítással szeretnéd vezérelni a LED-et)
+        digitalWrite(pinInt, HIGH); // LED bekapcsolása
+        delay(500); // LED világít egy ideig
+        digitalWrite(pinInt, LOW); // LED lekapcsolása
+        Serial.print("Received PIN: ");
+        Serial.println(pin); // Kiírja a kapott PIN kódot
+        lcd.clear();
+        lcd.setCursor(0, 0);
+        lcd.print("Elfogadva");
+        lcd.setCursor(0, 1);
+        lcd.print(pinInt);
+        delay(2000);
+        lcd.clear();
+        lcd.setCursor(0, 0);
+        lcd.print("Olvasd be");
+        lcd.setCursor(0, 1);
+        lcd.print("a kartyad");
+      } else {
+        // Ha a PIN hossza nem megfelelő, akkor elutasítjuk
+        lcd.clear();
+        lcd.setCursor(0, 0);
+        lcd.print("Elutasítva");
+        lcd.setCursor(0, 1);
+        lcd.print(pinInt);
+        delay(2000);
+        lcd.clear();
+        lcd.setCursor(0, 0);
+        lcd.print("Olvasd be");
+        lcd.setCursor(0, 1);
+        lcd.print("a kartyad");
+      }
+      
     }
   }
 
