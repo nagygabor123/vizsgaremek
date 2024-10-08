@@ -24,13 +24,11 @@ void setup() {
   Serial.begin(9600);  // Soros kommunikáció
   SPI.begin();         // SPI indítása
   rfid.PCD_Init();     // RFID olvasó inicializálása
-  pinMode(2, OUTPUT);  // A LED pin kimenetre állítása
-  digitalWrite(2, LOW);  // Kezdetben a LED ki van kapcsolva
   pinMode(4,OUTPUT);  // A LED pin kimenetre állítása
   digitalWrite(4, LOW);  // Kezdetben a LED ki van kapcsolva
   pinMode(6, OUTPUT);  // A LED pin kimenetre állítása
   digitalWrite(6, LOW);  // Kezdetben a LED ki van kapcsolva
-  lcd.begin(16, 2);  // Initialize LCD with 16 columns and 2 rows
+  lcd.begin();  // Initialize LCD with 16 columns and 2 rows
   lcd.backlight();
   lcd.setCursor(0, 0);
   lcd.print("Olvasd be");
@@ -58,6 +56,18 @@ void loop() {
         lcd.setCursor(0, 1);
         lcd.print("a kartyad");
       }
+    }
+    
+    if (command == "invalid_rfid_azon") { // Handle RFID rejection
+      lcd.clear();
+      lcd.setCursor(0, 0);
+      lcd.print("Elutasítva"); // Display rejection message
+      delay(2000); // Show for 2 seconds
+      lcd.clear();
+      lcd.setCursor(0, 0);
+      lcd.print("Olvasd be");
+      lcd.setCursor(0, 1);
+      lcd.print("a kartyad");
     }
     
     // Ha PIN-kódot kapunk, azt is kezeljük

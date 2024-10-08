@@ -37,14 +37,25 @@ let originalStatuses = {};
 
 // Figyelj a bejövő adatokra az Arduinótól
 parser.on('data', (data) => {
-  console.log(`Megkapott RFID azonosító: ${data}`);
-  const rfidTag = data.trim();
+  const receivedData = data.trim(); // Kapott adat
+  console.log(`Megkapott adat: ${receivedData}`);
 
-  // Loggoljuk az RFID olvasást
-  logRfidTag(rfidTag);
+  // Ellenőrizzük, hogy PIN vagy RFID érkezett
+  if (receivedData.startsWith('PIN:')) {
+    const pin = receivedData.split(': ')[1]; // Kinyerjük a PIN-t
+    console.log(`Pin elküldve az Arduinónak: ${receivedData}`);
+    return; // Kilépés, ha PIN érkezett
+  }
 
-  // Diák státuszának frissítése
-  updateStudentStatus(rfidTag);
+  // Ha RFID azonosító érkezett
+  if (!receivedData.startsWith('Received PIN:')) {
+    const rfidTag = receivedData; // Az RFID azonosító
+    logRfidTag(rfidTag); // Loggoljuk az RFID olvasást
+    updateStudentStatus(rfidTag); // Diák státuszának frissítése
+  } else {
+    // Ha a bejövő adat PIN, akkor logoljuk, de ne RFID-ként
+    console.log(`PIN érkezett: ${receivedData}`);
+  }
 });
 
 // RFID olvasás loggolása a "logs" táblába (csak az RFID címkét logoljuk)
@@ -64,10 +75,26 @@ function updateStudentStatus(rfidTag) {
 
     // Ellenőrizzük, hogy a diák létezik-e
     if (results.length === 0) {
-      console.log(`Téves RFID azonosító: ${rfidTag}`); // Téves azonosító kiírása
+      // Csak itt írd ki, ha nem található a diák
+      console.log(`Téves RFID azonosító: ${rfidTag}`);
+      
+      // Ellenőrizzük, hogy a rendszer zárva van-e
+      if (!locked) { // Ha nem zárva
+        // Üzenet küldése az Arduinónak az érvénytelen RFID azonosítóról
+        const invalidRfidMessage = 'invalid_rfid_azon\n';
+        serialPort.write(invalidRfidMessage, (err) => {
+          if (err) {
+            console.error('Hiba az érvénytelen RFID üzenet küldésekor:', err);
+          } else {
+            console.log(`Érvénytelen RFID üzenet elküldve az Arduinónak: ${invalidRfidMessage}`);
+          }
+        });
+      }
+
+      // Üzenet küldése a kliensnek a státusz frissítéséről
       io.emit('statusUpdate', { rfidTag, status: 'téves', name: null });
       return; // Ha nem létezik, kilépünk
-    }
+    } 
 
     const student = results[0];
 
@@ -94,6 +121,8 @@ function updateStudentStatus(rfidTag) {
   });
 }
 
+
+
 function controlLed(rfidTag) {
   // Lekérdezzük a pin-t az adatbázisból
   const pinQuery = 'SELECT pin FROM student WHERE rfid_azon = ?';
@@ -118,10 +147,6 @@ function controlLed(rfidTag) {
     });
   });
 }
-
-
-
-
 
 // Záró funkció a diákok lezárásához és feloldásához
 let locked = false;
@@ -176,30 +201,39 @@ app.post('/toggle-lock', (req, res) => {
       // Várakozás az összes frissítés befejezésére
       Promise.all(updatePromises)
         .then(() => {
-          io.emit('statusUpdate', { status: 'ki' }); // Kliens értesítése a feloldásról
-          res.send('Minden diák státusza visszaállítva az eredeti állapotba'); // Válasz küldése
+          io.emit('statusUpdate', { status: 'ki' }); // Kliens értesítése
+          res.send('Minden diák státusza visszaállítva'); // Válasz küldése
         })
         .catch(err => {
-          console.error(err);
-          res.status(500).send('Hiba történt a státusz visszaállítása során'); // Hiba kezelés
+          console.error('Hiba a státusz visszaállításakor:', err);
+          res.status(500).send('Hiba a státusz visszaállításakor'); // Hiba válasz
         });
     }
   });
 });
 
-// A szerver indítása
-const server = app.listen(port, () => {
-  console.log(`Szerver fut a következő címen: http://localhost:${port}`);
-});
+// WebSocket inicializálása
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 
-// WebSocket beállítása
-const io = require('socket.io')(server);
+// WebSocket események kezelése
 io.on('connection', (socket) => {
-  console.log('Új kapcsolat');
+  console.log('Új kliens csatlakozott:', socket.id);
 
-  // Diákok lekérdezése és elküldése a kliensnek
+  // Diákok lekérdezése és küldése
   db.query('SELECT * FROM student', (err, results) => {
     if (err) throw err;
     socket.emit('students', results); // Diákok küldése
   });
+
+  // Ha diák státusza frissül, értesítés küldése
+  socket.on('statusUpdate', (data) => {
+    // Esetleg itt is kezelheted a státusz frissítéseket, ha szükséges
+  });
+});
+
+
+// Szerver indítása
+http.listen(port, () => {
+  console.log(`Szerver fut: http://localhost:${port}`);
 });
