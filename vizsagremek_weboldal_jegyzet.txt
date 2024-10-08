@@ -1,0 +1,10 @@
+Jogosultságok (3 szint):
+1.: ide tartoznak a sima tanárok (kezelik az órarend szerinti osztályokat)
+2.: ide tartoznak az osztályfőnökök (saját osztályukhoz van egy kis hozzáférésük, és kezelik az órarend szerinti osztályokat)	
+3.: ide tartozik az igazgató és az igazgatóhelyettese (mindenhez van hozzáférésük, beállításokhoz is)
+
+
+Menük:
+- Áttekintés/Összegző (iskola, tanulók, szekrény, fontos dolgok): csak 3-as szint
+- Tanórák (kezelő felület az órát tartó tanárnak): 1,2-es szint, 3-as csak abban az esetben, ha tanítanak!!
+S
