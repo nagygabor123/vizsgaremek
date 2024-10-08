@@ -7,4 +7,12 @@ Jogosultságok (3 szint):
 Menük:
 - Áttekintés/Összegző (iskola, tanulók, szekrény, fontos dolgok): csak 3-as szint
 - Tanórák (kezelő felület az órát tartó tanárnak): 1,2-es szint, 3-as csak abban az esetben, ha tanítanak!!
-S
+- Osztályok
+   - (Diákok)
+- Saját osztály
+
+
+MŰVELETEK:
+Az összes emberrel/oaztállyal iskolával mit lehet
+Egy osztállyal mit lehet csinálni:
+Egy emberrel mit lehet csinálni:
