@@ -70,16 +70,7 @@ const server = net.createServer((socket) => {
     });
 });
 
+// TCP szerver beállítása a 4000-es porton
 server.listen(4000, '0.0.0.0', () => {
     console.log('TCP szerver fut a 4000-es porton');
 });
-
-
-/*CREATE DATABASE rfid_system;
-USE rfid_system;
-
-CREATE TABLE rfid_logs (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    rfid_tag VARCHAR(255) NOT NULL,
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);*/
