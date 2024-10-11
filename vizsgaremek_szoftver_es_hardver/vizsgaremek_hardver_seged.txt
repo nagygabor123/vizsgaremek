@@ -1,4 +1,4 @@
-https://europe1.discourse-cdn.com/arduino/optimized/3X/8/8/8803af4db282c4f2a23e3ea83653af296c9a831d_2_690x375.PNG
+-----------------------------------------------------------------------------------
 
 https://youtu.be/aW7bewAq9Ak?si=SeaCrasKt7lwEy96&t=30 - LCD bekötése
 
@@ -6,6 +6,4 @@ https://youtu.be/h68RFw49ja8?si=i7i1jzGm6pssChMb&t=30 - RFID modul bekötése
 
 https://www.youtube.com/watch?v=e1FVSpkw6q4 - LED bekötése
 
-
-
-https://www.youtube.com/watch?v=9ovMEo1bTps - pin panels
+-----------------------------------------------------------------------------------
