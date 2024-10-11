@@ -29,7 +29,7 @@ void setup() {
   digitalWrite(4, LOW);  // Kezdetben a LED ki van kapcsolva
   pinMode(6, OUTPUT);  // A LED pin kimenetre állítása
   digitalWrite(6, LOW);  // Kezdetben a LED ki van kapcsolva
-  lcd.begin();  // lcd.init()
+  lcd.init();  // lcd.begin()
   lcd.backlight();
   lcd.setCursor(0, 0);
   lcd.print("Olvasd be");
