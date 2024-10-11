@@ -1,5 +1,5 @@
 ---
-https://www.figma.com/design/cY45onu9uGacwp69nk01Tq/vizsagremek_vezerlopult_dizajn?node-id=0-1&t=KnhICyAzGBogdaKw-1
+https://www.figma.com/design/GQAkT96bgfir36wGWcyPwV/vizsgaremek_web_app?node-id=3-2&t=kZghZ8SYhCV2u82z-1
 ---
 
 Jogosultságok (3 szint):
