@@ -1,8 +1,9 @@
 const express = require('express');
 const mysql = require('mysql');
+const WebSocket = require('ws');
 const net = require('net');
 
-// MySQL adatbázis csatlakozás
+// MySQL kapcsolat beállítása
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -12,57 +13,73 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
     if (err) throw err;
-    console.log('MySQL connected.');
+    console.log('MySQL adatbázis csatlakoztatva.');
 });
 
-// Express szerver
+// Express szerver beállítása
 const app = express();
-app.use(express.json());
+app.use(express.static('public')); // A HTML fájlok kiszolgálása a "public" mappából
 
-// RFID adatok mentése
-app.post('/rfid', (req, res) => {
-    const { rfid } = req.body;
-    let query = `INSERT INTO rfid_logs (rfid_tag) VALUES (?)`;
-    
-    db.query(query, [rfid], (err, result) => {
-        if (err) throw err;
-        console.log('RFID tag mentve: ' + rfid);
-        res.send('Data received');
+app.listen(3000, () => {
+    console.log('Express szerver fut a 3000-es porton');
+});
+
+// WebSocket szerver indítása
+const wss = new WebSocket.Server({ port: 3001 });
+
+wss.on('connection', (ws) => {
+    console.log('Új WebSocket kapcsolat.');
+
+    ws.on('close', () => {
+        console.log('WebSocket kapcsolat bontva.');
     });
 });
 
-app.listen(3000, () => {
-    console.log('Express server running on port 3000');
-});
-
-// Ethernet kapcsolat kezelése az Arduino-val
+// Ethernet kapcsolat az Arduino-val (TCP)
 const server = net.createServer((socket) => {
-    console.log('Arduino csatlakozott');
+    console.log('Arduino csatlakozott.');
 
     socket.on('data', (data) => {
         const rfidData = data.toString().trim();
         console.log('Kapott RFID adat: ' + rfidData);
 
-        // Mentés az adatbázisba
+        // RFID adat mentése az adatbázisba
         let query = `INSERT INTO rfid_logs (rfid_tag) VALUES (?)`;
         db.query(query, [rfidData], (err, result) => {
             if (err) throw err;
-            console.log('RFID tag adatbázisba mentve: ' + rfidData);
-        });
 
-        // LED vezérlés: válasz "ON" vagy "OFF"
-        if (rfidData.includes('RFID')) {
-            socket.write('ON\n');  // Válaszként "ON" küldése az Arduino-nak
-        } else {
-            socket.write('OFF\n');
-        }
+            // RFID adatok elküldése WebSocket-en keresztül az összes kapcsolódott kliensnek
+            let newData = {
+                id: result.insertId,  // Az új rekord azonosítója
+                rfid_tag: rfidData,
+                timestamp: new Date().toISOString()  // Az aktuális időbélyeg
+            };
+
+            wss.clients.forEach((client) => {
+                if (client.readyState === WebSocket.OPEN) {
+                    client.send(JSON.stringify(newData));  // JSON formátumban küldjük az adatokat
+                }
+            });
+
+            console.log('Adat mentve és elküldve WebSocketen.');
+        });
     });
 
     socket.on('close', () => {
-        console.log('Arduino lecsatlakozott');
+        console.log('Arduino lecsatlakozott.');
     });
 });
 
-server.listen(3000, '0.0.0.0', () => {
-    console.log('TCP szerver fut a 3000-es porton');
+server.listen(4000, '0.0.0.0', () => {
+    console.log('TCP szerver fut a 4000-es porton');
 });
+
+
+/*CREATE DATABASE rfid_system;
+USE rfid_system;
+
+CREATE TABLE rfid_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    rfid_tag VARCHAR(255) NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);*/
