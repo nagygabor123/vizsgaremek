@@ -10,7 +10,13 @@ https://maker.wiznet.io/josephsr/projects/access-to-mysql-database-with-arduino-
 
 https://www.slideshare.net/slideshow/arduino-interface-with-mysql-for-storing-rfid-access-details/70398528#3 -||-
 
-https://www.hackster.io/deligence-technologies/arduino-interface-with-mysql-for-storing-rfid-access-details-a5b337
+https://www.hackster.io/deligence-technologies/arduino-interface-with-mysql-for-storing-rfid-access-details-a5b337 -||-
 
+https://github.com/fhmunna/arduino_rfid_ethernet_mysql -||-
 
+https://forum.arduino.cc/t/how-to-send-data-rfid-from-arduino-to-database-mysql-server/609306/11 -||-
+
+https://www.youtube.com/watch?v=4uKT-VDvr4g -||-
+
+https://www.youtube.com/watch?v=4R2ohWrXhMA -||-
 -----------------------------------------------------------------------------------
