@@ -6,4 +6,10 @@ https://youtu.be/h68RFw49ja8?si=i7i1jzGm6pssChMb&t=30 - RFID modul bekötése
 
 https://www.youtube.com/watch?v=e1FVSpkw6q4 - LED bekötése
 
+https://maker.wiznet.io/josephsr/projects/access-to-mysql-database-with-arduino-ethernet-shield-rfid/ - arduino ethernet
+
+https://www.slideshare.net/slideshow/arduino-interface-with-mysql-for-storing-rfid-access-details/70398528#3 -||-
+
+https://www.hackster.io/deligence-technologies/arduino-interface-with-mysql-for-storing-rfid-access-details-a5b337
+
 -----------------------------------------------------------------------------------
