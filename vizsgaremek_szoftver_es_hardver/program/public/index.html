@@ -3,40 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/index.css">
+    
     <title>RFID Diákok</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .student-box {
-            margin: 10px;
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px solid #ccc;
-            display: inline-block;
-            width: 150px;
-            text-align: center;
-            background-color: #f9f9f9;
-        }
-        .present {
-            background-color: #a6d190e8; /* Zöld szín */
-            border-color: #6DBE45;
-        }
-        button {
-            padding: 10px 15px;
-            font-size: 16px;
-            margin: 10px;
-            cursor: pointer;
-            background-color: #2e98df;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-    </style>
 </head>
 <body>
     <h1>Diákok <button id="toggle-status">Zárás / Nyitás</button></h1>
+    
+    <div id="usernameDisplay" style="cursor: pointer;"></div>
+    
     <div id="students-container"></div>
+
+    <!-- Felugró ablak -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <button id="logout-button">Kijelentkezés</button>
+            <button>Gomb 2</button>
+            <button>Gomb 3</button>
+            <button>Gomb 4</button>
+            <button>Gomb 5</button>
+        </div>
+    </div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="script.js"></script>

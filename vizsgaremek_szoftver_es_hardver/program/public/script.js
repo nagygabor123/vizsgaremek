@@ -1,6 +1,10 @@
 const rfidList = document.getElementById('rfid-list');
 const studentsContainer = document.getElementById('students-container');
 const toggleStatusButton = document.getElementById('toggle-status');
+const usernameDisplay = document.getElementById('usernameDisplay');
+const modal = document.getElementById('modal');
+const closeModal = document.getElementsByClassName("close")[0];
+const logoutButton = document.getElementById('logout-button');
 
 const socket = io();
 let isLocked = false; // Alapértelmezett állapot
@@ -46,6 +50,22 @@ toggleStatusButton.addEventListener('click', () => {
     });
 });
 
+// Felhasználónév kattintásának kezelése
+usernameDisplay.addEventListener('click', () => {
+    modal.style.display = "block"; // Felugró ablak megjelenítése
+});
+
+// Felugró ablak bezárása
+closeModal.onclick = function() {
+    modal.style.display = "none"; // Felugró ablak eltüntetése
+}
+
+// Kijelentkezés gomb esemény figyelése
+logoutButton.addEventListener('click', () => {
+    localStorage.removeItem('username'); // Felhasználónév eltávolítása a localStorage-ból
+    window.location.href = '/login.html'; // Átirányítás a bejelentkező oldalra
+});
+
 // Képzeljük el, hogy a szerver az RFID azonosítókat WebSocket-en keresztül küldi
 const webSocket = new WebSocket('ws://localhost:3000'); // Cseréld ki, ha szükséges
 
@@ -55,3 +75,37 @@ webSocket.onmessage = function(event) {
     listItem.textContent = `Megkapott RFID azonosító: ${rfidTag}`;
     rfidList.prepend(listItem); // Az új bejegyzéseket a lista elejére tesszük
 };
+
+// Felhasználónév megjelenítése az index oldalon
+const username = localStorage.getItem('username');
+if (username) {
+    usernameDisplay.textContent = `${username}`;
+} else {
+    window.location.href = '/login.html'; // Ha nincs bejelentkezve, visszairányítjuk a login oldalra
+}
+
+// Bejelentkezés kezelése a login.html oldalon
+function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    fetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            localStorage.setItem('username', username); // Felhasználónév mentése a localStorage-ba
+            window.location.href = '/index.html'; // Átirányítás az index oldalra
+        } else {
+            alert('Ilyen felhasználó nem létezik!');
+        }
+    })
+    .catch(error => {
+        console.error('Hiba történt:', error);
+    });
+}

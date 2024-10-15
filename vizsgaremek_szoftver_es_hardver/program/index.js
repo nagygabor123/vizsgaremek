@@ -1,8 +1,8 @@
 const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
-const { SerialPort } = require('serialport');
-const { ReadlineParser } = require('@serialport/parser-readline');
+//const { SerialPort } = require('serialport');
+//const { ReadlineParser } = require('@serialport/parser-readline');
 const path = require('path');
 
 const app = express();
@@ -28,14 +28,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public'))); // Statikus fájlok kiszolgálása
 
 // Soros port beállítása
-const portName = 'COM3'; // Cseréld ki a számítógépedhez csatlakozó Arduino portjára
-const serialPort = new SerialPort({ path: portName, baudRate: 9600 });
-const parser = serialPort.pipe(new ReadlineParser({ delimiter: '\n' }));
+// const portName = 'COM3'; // Cseréld ki a számítógépedhez csatlakozó Arduino portjára
+// const serialPort = new SerialPort({ path: portName, baudRate: 9600 });
+// const parser = serialPort.pipe(new ReadlineParser({ delimiter: '\n' }));
 
 // Eredeti státuszok tárolására szolgáló objektum
 let originalStatuses = {};
 
 // Figyelj a bejövő adatokra az Arduinótól
+/*
 parser.on('data', (data) => {
   const receivedData = data.trim(); // Kapott adat
   console.log(`Megkapott adat: ${receivedData}`);
@@ -56,7 +57,7 @@ parser.on('data', (data) => {
     // Ha a bejövő adat PIN, akkor logoljuk, de ne RFID-ként
     console.log(`PIN érkezett: ${receivedData}`);
   }
-});
+});*/
 
 // RFID olvasás loggolása a "logs" táblába (csak az RFID címkét logoljuk)
 function logRfidTag(rfidTag) {
@@ -79,6 +80,7 @@ function updateStudentStatus(rfidTag) {
       console.log(`Téves RFID azonosító: ${rfidTag}`);
       
       // Ellenőrizzük, hogy a rendszer zárva van-e
+      /*
       if (!locked) { // Ha nem zárva
         // Üzenet küldése az Arduinónak az érvénytelen RFID azonosítóról
         const invalidRfidMessage = 'invalid_rfid_azon\n';
@@ -89,7 +91,7 @@ function updateStudentStatus(rfidTag) {
             console.log(`Érvénytelen RFID üzenet elküldve az Arduinónak: ${invalidRfidMessage}`);
           }
         });
-      }
+      }*/
 
       // Üzenet küldése a kliensnek a státusz frissítéséről
       io.emit('statusUpdate', { rfidTag, status: 'téves', name: null });
@@ -113,7 +115,7 @@ function updateStudentStatus(rfidTag) {
       console.log(`Frissítve: ${student.nev} státusz: ${newStatus}`);
 
       // LED vezérlés
-      controlLed(rfidTag);
+      //controlLed(rfidTag);
 
       // Üzenet küldése a kliensnek a státusz változásról
       io.emit('statusUpdate', { rfidTag, status: newStatus, name: student.nev });
@@ -122,7 +124,7 @@ function updateStudentStatus(rfidTag) {
 }
 
 
-
+/*
 function controlLed(rfidTag) {
   // Lekérdezzük a pin-t az adatbázisból
   const pinQuery = 'SELECT pin FROM student WHERE rfid_azon = ?';
@@ -146,14 +148,14 @@ function controlLed(rfidTag) {
       }
     });
   });
-}
+}*/
 
 // Záró funkció a diákok lezárásához és feloldásához
 let locked = false;
 
 app.post('/toggle-lock', (req, res) => {
   locked = !locked; // Az állapot váltása (zárva/nyitva)
-  
+  /*
   serialPort.write('TOGGLE_LED\n', (err) => {
     if (err) {
       return res.status(500).send('Hiba a LED vezérlés során'); // Hiba kezelés
@@ -209,8 +211,29 @@ app.post('/toggle-lock', (req, res) => {
           res.status(500).send('Hiba a státusz visszaállításakor'); // Hiba válasz
         });
     }
+  });*/
+});
+
+// Bejelentkezési útvonal
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+
+  // Felhasználónév és jelszó keresése az adatbázisban
+  const query = 'SELECT * FROM admins WHERE username = ? AND password = ?';
+  db.query(query, [username, password], (err, results) => {
+      if (err) {
+          console.error('Hiba történt:', err);
+          res.status(500).json({ success: false });
+      }
+
+      if (results.length > 0) {
+          res.json({ success: true }); // Sikeres bejelentkezés
+      } else {
+          res.json({ success: false }); // Sikertelen bejelentkezés
+      }
   });
 });
+
 
 // WebSocket inicializálása
 const http = require('http').createServer(app);
