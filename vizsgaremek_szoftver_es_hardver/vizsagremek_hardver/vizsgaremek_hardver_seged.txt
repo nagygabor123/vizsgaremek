@@ -19,4 +19,6 @@ https://forum.arduino.cc/t/how-to-send-data-rfid-from-arduino-to-database-mysql-
 https://www.youtube.com/watch?v=4uKT-VDvr4g -||-
 
 https://www.youtube.com/watch?v=4R2ohWrXhMA -||-
+
+https://github.com/sergiomajluf/node-session -||-
 -----------------------------------------------------------------------------------
