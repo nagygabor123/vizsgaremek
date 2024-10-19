@@ -19,16 +19,8 @@ const db = mysql.createConnection({
   database: 'rfid_log' // Database name
 });
 
-// Store messages
-let messages = [];
-
 // Serve static files
 app.use(express.static('public'));
-
-// REST API: List messages
-app.get('/api/messages', (req, res) => {
-  res.json(messages);
-});
 
 // WebSocket connection handling
 wss.on('connection', (ws) => {
@@ -104,7 +96,6 @@ const tcpServer = net.createServer((socket) => {
     console.error('Error:', err);
   });
 });
-
 
 tcpServer.on('error', (err) => {
   console.error('Server error:', err);
