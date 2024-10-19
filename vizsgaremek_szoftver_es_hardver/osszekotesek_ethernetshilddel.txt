@@ -1,0 +1,21 @@
+eszköz -> arduino
+
+LCD:
+ GND -> GND
+ VCC -> 5V
+ SDA -> A4
+ SCL -> A5
+
+LED-ek:
+ ELSO -> PIN 2
+ MASODIK -> PIN 6
+ GND -> GND
+
+RFID (RC522)
+ SDA -> PIN 4
+ SCK -> PIN 13
+ MOSI -> PIN 11
+ MISO -> PIN 12
+ GND -> GND
+ RST -> PIN 9
+ 3.3V -> 3.3V
