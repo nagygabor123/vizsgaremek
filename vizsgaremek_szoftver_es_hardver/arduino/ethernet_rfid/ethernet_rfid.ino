@@ -57,12 +57,12 @@ void loop() {
       
     }
     Serial.println(rfidID);
-    Serial.println();
-
+    
     // RFID azonosító küldése a Node.js szervernek
     if (client.connected()) {
       client.println(rfidID); // RFID adat elküldése
       Serial.println("RFID adat elküldve");
+      Serial.println();
     } else {
       Serial.println("A kapcsolat megszakadt, újra csatlakozom...");
       client.stop();

@@ -3,41 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Üzenetek</title>
+    <title>Diákok Státusza</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
             background-color: #f4f4f4;
+            color: #333;
+            margin: 10px;
+            padding: 0;
         }
         h1 {
             color: #333;
         }
-        #messages {
-            margin-top: 20px;
-            background: #fff;
-            padding: 10px;
-            border: 1px solid #ccc;
-            max-height: 400px;
-            overflow-y: auto;
+        #students {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px; /* Rublika közötti távolság */
+        }
+        .student-box {
+            margin: 10px;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #ccc;
+            display: inline-block;
+            width: 150px;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+        .present {
+            background-color: #a6d190e8; /* Zöld szín */
+            border-color: #6DBE45; /* Zöld szegély */
+        }
+        .absent {
+            background-color: white; /* Fehér háttér */
+            border-color: transparent; /* Nincs szegély */
         }
     </style>
 </head>
 <body>
-    <h1>Kapott Üzenetek</h1>
-    <div id="messages"></div>
+    <h1>Diákok Státusza</h1>
+    <div id="students"></div>
     
     <script>
-        const messagesDiv = document.getElementById('messages');
-        const ws = new WebSocket('ws://localhost:3000'); // WebSocket kapcsolat a szerverhez
+        const studentsDiv = document.getElementById('students');
+        const ws = new WebSocket('ws://localhost:3000');
+
+        ws.onopen = function() {
+            console.log('WebSocket kapcsolat létrejött.');
+        };
 
         ws.onmessage = function(event) {
-            const message = event.data;
-            const messageElement = document.createElement('div');
-            messageElement.textContent = message;
-            messagesDiv.appendChild(messageElement);
-            messagesDiv.scrollTop = messagesDiv.scrollHeight; // Görgetés az új üzenethez
+            const students = JSON.parse(event.data);
+            studentsDiv.innerHTML = ''; // Üresítse ki a diákok div-jét
+
+            students.forEach(student => {
+                const studentBox = document.createElement('div');
+                studentBox.className = 'student-box';
+                studentBox.textContent = student.nev;
+
+                // Állítsa be az osztályt a státusz alapján
+                if (student.statusz === 'be') {
+                    studentBox.classList.add('present');
+                } else {
+                    studentBox.classList.add('absent');
+                }
+
+                studentsDiv.appendChild(studentBox);
+            });
+        };
+
+        ws.onerror = function(event) {
+            console.error('WebSocket hiba:', event);
+        };
+
+        ws.onclose = function() {
+            console.log('WebSocket kapcsolat lezárult.');
         };
     </script>
 </body>
