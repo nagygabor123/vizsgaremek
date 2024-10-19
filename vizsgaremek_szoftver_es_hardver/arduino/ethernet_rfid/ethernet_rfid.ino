@@ -13,13 +13,12 @@ EthernetClient client;
 #define SS_PIN 4   // Slave Select pin az RFID-hoz
 MFRC522 rfid(SS_PIN, RST_PIN); // RFID olvasó példányosítása
 
-// Segédfunkció a hexadecimális kód kiegészítéséhez
 String toHexString(byte value) {
   String hexString = String(value, HEX);
   if (hexString.length() < 2) {
     hexString = "0" + hexString; // Kiegészítjük 0-val, ha szükséges
   }
-  hexString.toUpperCase(); // Nagybetűs formátumban, de nem ad vissza értéket
+  hexString.toUpperCase();
   return hexString; // Visszaadjuk a hexadecimális kódot
 }
 
@@ -27,7 +26,6 @@ void setup() {
   Serial.begin(9600);
   delay(1000); // Késleltetés az Arduino inicializálására
 
-  // SPI inicializálás
   SPI.begin();
   rfid.PCD_Init(); // RFID olvasó inicializálása
   Serial.println("RFID olvasó inicializálva.");
@@ -38,7 +36,6 @@ void setup() {
     while (true) delay(1);
   }
 
-  // Csatlakozás a Node.js szerverhez
   if (client.connect(server, serverPort)) {
     Serial.println("Kapcsolódás sikeres");
   } else {
@@ -49,27 +46,23 @@ void setup() {
 void loop() {
   // RFID olvasás
   if (rfid.PICC_IsNewCardPresent() && rfid.PICC_ReadCardSerial()) {
-    // RFID azonosító kiírása
-    Serial.print("RFID azonosító: ");
     String rfidID = "";
     for (byte i = 0; i < rfid.uid.size; i++) {
       rfidID += toHexString(rfid.uid.uidByte[i]); // Használjuk a segédfunkciót
-      
     }
+    
+    Serial.print("RFID azonosító: ");
     Serial.println(rfidID);
     
-    // RFID azonosító küldése a Node.js szervernek
     if (client.connected()) {
       client.println(rfidID); // RFID adat elküldése
       Serial.println("RFID adat elküldve");
-      Serial.println();
     } else {
       Serial.println("A kapcsolat megszakadt, újra csatlakozom...");
       client.stop();
-      delay(1000); // Várakozás az új próbálkozás előtt
+      delay(1000);
       if (client.connect(server, serverPort)) {
         Serial.println("Újra kapcsolódás sikeres");
-        // Újra elküldjük az RFID adatot
         client.println(rfidID); // RFID adat elküldése
       } else {
         Serial.println("Újra kapcsolódási hiba");
@@ -77,9 +70,16 @@ void loop() {
     }
 
     // Válasz fogadása a szervertől
+    String response = ""; // Válasz tárolása
     while (client.available()) {
       char c = client.read();
-      Serial.print(c);
+      response += c; // Válasz összegyűjtése
+    }
+
+    // Válasz kiírása
+    if (response.length() > 0) {
+      Serial.print("Válasz a szervertől: ");
+      Serial.println(response); // Válasz kiírása
     }
 
     rfid.PICC_HaltA(); // Állítsuk le az aktuális kártyaolvasást

@@ -2,59 +2,59 @@ const express = require('express');
 const http = require('http');
 const net = require('net');
 const WebSocket = require('ws');
-const mysql = require('mysql'); // MySQL könyvtár importálása
+const mysql = require('mysql'); // MySQL library import
 
 const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
-// Middleware a JSON adatok feldolgozásához
+// Middleware for processing JSON data
 app.use(express.json());
 
-// MySQL kapcsolat létrehozása
+// Create MySQL connection
 const db = mysql.createConnection({
   host: 'localhost',
-  user: 'root', // Használja a megfelelő felhasználónevet
-  password: '', // Használja a megfelelő jelszót
-  database: 'rfid_log' // Az adatbázis neve
+  user: 'root', // Use the appropriate username
+  password: '', // Use the appropriate password
+  database: 'rfid_log' // Database name
 });
 
-// Üzenetek tárolása
+// Store messages
 let messages = [];
 
-// Statikus fájlok kiszolgálása
+// Serve static files
 app.use(express.static('public'));
 
-// REST API: Üzenetek listázása
+// REST API: List messages
 app.get('/api/messages', (req, res) => {
   res.json(messages);
 });
 
-// WebSocket kapcsolat kezelése
+// WebSocket connection handling
 wss.on('connection', (ws) => {
-  console.log('WebSocket kliens kapcsolódott');
+  console.log('WebSocket csatlakozott');
 
-  // Diákok adatait lekérdezni, amikor egy kliens csatlakozik
+  // Query student data when a client connects
   db.query('SELECT * FROM student', (error, results) => {
     if (error) throw error;
-    ws.send(JSON.stringify(results)); // Küldje el a diákok adatait a kliensnek
+    ws.send(JSON.stringify(results)); // Send student data to the client
   });
 
   ws.on('close', () => {
-    console.log('WebSocket kliens levált');
+    console.log('WebSocket lecsatlakozott');
   });
 });
 
-// TCP szerver
+// TCP server
 const tcpServer = net.createServer((socket) => {
-  console.log('Kapcsolódott egy kliens');
+  console.log('Client connected');
 
   socket.on('data', (data) => {
     const rfidTag = data.toString().trim();
     if (rfidTag) {
-      console.log('Kapott RFID:', rfidTag);
+      console.log('Received RFID:', rfidTag);
 
-      // Diák státuszának frissítése
+      // Update student status and log to the database
       db.query('SELECT * FROM student WHERE rfid_azon = ?', [rfidTag], (error, results) => {
         if (error) throw error;
 
@@ -62,44 +62,60 @@ const tcpServer = net.createServer((socket) => {
           const student = results[0];
           const newStatus = student.statusz === 'ki' ? 'be' : 'ki';
 
-          // Státusz frissítése az adatbázisban
+          // Update the status in the database
           db.query('UPDATE student SET statusz = ? WHERE rfid_azon = ?', [newStatus, rfidTag], (updateError) => {
             if (updateError) throw updateError;
 
-            // Frissítse az összes WebSocket klienst
-            wss.clients.forEach((client) => {
-              if (client.readyState === WebSocket.OPEN) {
-                db.query('SELECT * FROM student', (queryError, results) => {
-                  if (queryError) throw queryError;
-                  client.send(JSON.stringify(results)); // Küldje el az összes diák adatait
-                });
+            // Log the RFID read in the logs table
+            db.query('INSERT INTO logs (rfid_tag) VALUES (?)', [rfidTag], (logError) => {
+              if (logError) throw logError;
+
+              // Send updated student data to all WebSocket clients
+              wss.clients.forEach((client) => {
+                if (client.readyState === WebSocket.OPEN) {
+                  db.query('SELECT * FROM student', (queryError, results) => {
+                    if (queryError) throw queryError;
+                    client.send(JSON.stringify(results)); // Send all student data
+                  });
+                }
+              });
+
+              // Output status to console
+              if (newStatus === 'be') {
+                console.log(`Diák neve: ${student.nev}, státusz: be`);
+              } else {
+                console.log(`Diák neve: ${student.nev}, státusz: ki`);
               }
             });
           });
+        } else {
+          // Log an error message if the RFID tag is not found
+          console.log('Téves RFID azonosító:', rfidTag);
         }
       });
     }
   });
 
   socket.on('end', () => {
-    console.log('Kliens levált');
+    console.log('Client disconnected');
   });
 
   socket.on('error', (err) => {
-    console.error('Hiba:', err);
+    console.error('Error:', err);
   });
 });
 
+
 tcpServer.on('error', (err) => {
-  console.error('Szerver hiba:', err);
+  console.error('Server error:', err);
 });
 
-// TCP szerver indítása
+// Start TCP server
 tcpServer.listen(8080, () => {
-  console.log('TCP szerver fut az 8080-as porton');
+  console.log('TCP server running on port 8080');
 });
 
-// HTTP szerver indítása
+// Start HTTP server
 server.listen(3000, () => {
-  console.log('HTTP szerver fut a 3000-es porton');
+  console.log('HTTP server running on port 3000');
 });
