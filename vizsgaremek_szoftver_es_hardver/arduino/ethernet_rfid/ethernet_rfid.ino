@@ -83,9 +83,15 @@ void loop() {
 
     // Válasz fogadása a szervertől
     String response = ""; // Válasz tárolása
-    while (client.available()) {
-      char c = client.read();
-      response += c; // Válasz összegyűjtése
+    unsigned long startTime = millis();
+    while (millis() - startTime < 1000) { // Várj legfeljebb 1 másodpercig
+      while (client.available()) {
+        char c = client.read();
+        response += c; // Válasz összegyűjtése
+      }
+      if (response.length() > 0) {
+        break; // Ha van válasz, lépj ki a ciklusból
+      }
     }
 
     // Válasz feldolgozása
