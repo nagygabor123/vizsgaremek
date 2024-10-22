@@ -2,7 +2,7 @@ const express = require('express');
 const http = require('http');
 const net = require('net');
 const WebSocket = require('ws');
-const mysql = require('mysql'); // MySQL library import
+const mysql = require('mysql');
 
 const app = express();
 const server = http.createServer(app);
@@ -14,9 +14,9 @@ app.use(express.json());
 // Create MySQL connection
 const db = mysql.createConnection({
   host: 'localhost',
-  user: 'root', // Use the appropriate username
-  password: '', // Use the appropriate password
-  database: 'rfid_log' // Database name
+  user: 'root',
+  password: '',
+  database: 'rfid_log'
 });
 
 // Serve static files
@@ -25,12 +25,6 @@ app.use(express.static('public'));
 // WebSocket connection handling
 wss.on('connection', (ws) => {
   console.log('WebSocket csatlakozott');
-
-  // Query student data when a client connects
-  db.query('SELECT * FROM student', (error, results) => {
-    if (error) throw error;
-    ws.send(JSON.stringify(results)); // Send student data to the client
-  });
 
   ws.on('close', () => {
     console.log('WebSocket lecsatlakozott');
@@ -45,46 +39,7 @@ const tcpServer = net.createServer((socket) => {
     const rfidTag = data.toString().trim();
     if (rfidTag) {
       console.log('Received RFID:', rfidTag);
-
-      // Update student status and log to the database
-      db.query('SELECT * FROM student WHERE rfid_azon = ?', [rfidTag], (error, results) => {
-        if (error) throw error;
-
-        if (results.length > 0) {
-          const student = results[0];
-          const newStatus = student.statusz === 'ki' ? 'be' : 'ki';
-
-          // Update the status in the database
-          db.query('UPDATE student SET statusz = ? WHERE rfid_azon = ?', [newStatus, rfidTag], (updateError) => {
-            if (updateError) throw updateError;
-
-            // Log the RFID read in the logs table
-            db.query('INSERT INTO logs (rfid_tag) VALUES (?)', [rfidTag], (logError) => {
-              if (logError) throw logError;
-
-              // Send updated student data to all WebSocket clients
-              wss.clients.forEach((client) => {
-                if (client.readyState === WebSocket.OPEN) {
-                  db.query('SELECT * FROM student', (queryError, results) => {
-                    if (queryError) throw queryError;
-                    client.send(JSON.stringify(results)); // Send all student data
-                  });
-                }
-              });
-
-              // Output status to console
-              if (newStatus === 'be') {
-                console.log(`Diák neve: ${student.nev}, státusz: be`);
-              } else {
-                console.log(`Diák neve: ${student.nev}, státusz: ki`);
-              }
-            });
-          });
-        } else {
-          // Log an error message if the RFID tag is not found
-          console.log('Téves RFID azonosító:', rfidTag);
-        }
-      });
+      processRfidTag(rfidTag, socket);
     }
   });
 
@@ -100,6 +55,85 @@ const tcpServer = net.createServer((socket) => {
 tcpServer.on('error', (err) => {
   console.error('Server error:', err);
 });
+
+function processRfidTag(rfidTag, socket) {
+  db.query('SELECT * FROM student WHERE rfid_azon = ?', [rfidTag], (error, results) => {
+    if (error) throw error;
+
+    if (results.length > 0) {
+      const student = results[0];
+      const newStatus = student.statusz === 'ki' ? 'be' : 'ki';
+
+      // Update student status
+      updateStudentStatus(rfidTag, newStatus, student.nev);
+
+      // Send the PIN to Arduino
+      controlLed(rfidTag, socket);
+    } else {
+      console.log('Hibás RFID azonosító:', rfidTag);
+      // Send invalid message to Arduino
+      socket.write('INVALID\n');
+    }
+  });
+}
+
+
+
+
+// Function to update student status
+function updateStudentStatus(rfidTag, newStatus, studentName) {
+  db.query('UPDATE student SET statusz = ? WHERE rfid_azon = ?', [newStatus, rfidTag], (updateError) => {
+    if (updateError) throw updateError;
+
+    // Log az RFID beolvasásról
+    logRfidTag(rfidTag);
+
+    // WebSocket kliensek értesítése friss adatokkal
+    wss.clients.forEach((client) => {
+      if (client.readyState === WebSocket.OPEN) {
+        db.query('SELECT * FROM student', (queryError, results) => {
+          if (queryError) throw queryError;
+          client.send(JSON.stringify(results)); // Minden diák adat küldése
+        });
+      }
+    });
+
+    console.log(`Diák neve: ${studentName}, új státusz: ${newStatus}`);
+  });
+}
+
+// Function to log RFID reading
+function logRfidTag(rfidTag) {
+  db.query('INSERT INTO logs (rfid_tag) VALUES (?)', [rfidTag], (logError) => {
+    if (logError) throw logError;
+    console.log(`Loggolva az RFID: ${rfidTag}`);
+  });
+}
+
+function controlLed(rfidTag, socket) {
+  // Lekérdezzük a pin-t az adatbázisból
+  const pinQuery = 'SELECT pin FROM student WHERE rfid_azon = ?';
+  db.query(pinQuery, [rfidTag], (err, results) => {
+    if (err) throw err;
+
+    let pin = '2'; // Alapértelmezett pin érték
+    if (results.length > 0 && results[0].pin) {
+      pin = results[0].pin; // Ha létezik pin az adatbázisban, akkor azt használjuk
+    } else {
+      console.log('Nincs érvényes pin az RFID-hoz:', rfidTag, ', a pin értéke 2 lesz.');
+    }
+
+    // Küldjük el az Arduino-nak a pin kódot a socket.write használatával
+    const command = `PIN:${pin}\n`; // Parancs formázása
+    socket.write(command, (err) => {
+      if (err) {
+        console.error('Hiba a pin küldésekor:', err);
+      } else {
+        console.log(`Pin elküldve az Arduinónak: ${command}`);
+      }
+    });
+  });
+}
 
 // Start TCP server
 tcpServer.listen(8080, () => {

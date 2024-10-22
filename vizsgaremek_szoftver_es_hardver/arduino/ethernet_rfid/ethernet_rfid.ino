@@ -1,7 +1,9 @@
 #include <SPI.h>
 #include <Ethernet.h>
 #include <MFRC522.h>
+#include <LiquidCrystal_I2C.h>
 
+LiquidCrystal_I2C lcd(0x27, 16, 2); // Initialize the LCD with the I2C address 0x27
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 IPAddress ip(192, 168, 1, 141); // Arduino IP
 IPAddress server(192, 168, 1, 49); // Node.js szerver IP
@@ -29,6 +31,16 @@ void setup() {
   SPI.begin();
   rfid.PCD_Init(); // RFID olvasó inicializálása
   Serial.println("RFID olvasó inicializálva.");
+  pinMode(2,OUTPUT);  // A LED pin kimenetre állítása
+  digitalWrite(2, LOW);  // Kezdetben a LED ki van kapcsolva
+  pinMode(6, OUTPUT);  // A LED pin kimenetre állítása
+  digitalWrite(6, LOW);
+  lcd.begin();  // lcd.begin()
+  lcd.backlight();
+  lcd.setCursor(0, 0);
+  lcd.print("Olvasd be");
+  lcd.setCursor(0, 1);
+  lcd.print("a kartyad");
 
   Ethernet.begin(mac, ip);
   if (Ethernet.hardwareStatus() == EthernetNoHardware) {
@@ -76,10 +88,62 @@ void loop() {
       response += c; // Válasz összegyűjtése
     }
 
-    // Válasz kiírása
+    // Válasz feldolgozása
     if (response.length() > 0) {
       Serial.print("Válasz a szervertől: ");
       Serial.println(response); // Válasz kiírása
+
+      if (response.startsWith("PIN:")) {
+        String pin = response.substring(4); // Kinyerjük a PIN kódot
+        uint8_t pinInt = pin[0] - '0'; // Konvertálás számmá
+        Serial.print("PIN kód: ");
+        Serial.println(pinInt);
+        if (pinInt == 2 || pinInt == 6) {
+          // LED vezérlés (opcionális, ha a PIN azonosítással szeretnéd vezérelni a LED-et)
+          digitalWrite(pinInt, HIGH); // LED bekapcsolása
+          delay(500); // LED világít egy ideig
+          digitalWrite(pinInt, LOW); // LED lekapcsolása
+          Serial.print("Received PIN: ");
+          Serial.println(pin); // Kiírja a kapott PIN kódot
+          lcd.clear();
+          lcd.setCursor(0, 0);
+          lcd.print("Elfogadva");
+          lcd.setCursor(0, 1);
+          lcd.print(pinInt);
+          delay(2000);
+          lcd.clear();
+          lcd.setCursor(0, 0);
+          lcd.print("Olvasd be");
+          lcd.setCursor(0, 1);
+          lcd.print("a kartyad");
+        } else {
+          // Ha a PIN hossza nem megfelelő, akkor elutasítjuk
+          lcd.clear();
+          lcd.setCursor(0, 0);
+          lcd.print("Elutasítva");
+          lcd.setCursor(0, 1);
+          lcd.print(pinInt);
+          delay(2000);
+          lcd.clear();
+          lcd.setCursor(0, 0);
+          lcd.print("Olvasd be");
+          lcd.setCursor(0, 1);
+          lcd.print("a kartyad");
+        } 
+      }
+
+      if (response.startsWith("INVALID")) {
+        // Handle invalid RFID response
+        lcd.clear();
+        lcd.setCursor(0, 0);
+        lcd.print("Elutasitva"); // Display rejection message
+        delay(2000); // Wait for 2 seconds
+        lcd.clear();
+        lcd.setCursor(0, 0);
+        lcd.print("Olvasd be");
+        lcd.setCursor(0, 1);
+        lcd.print("a kartyad");
+      }
     }
 
     rfid.PICC_HaltA(); // Állítsuk le az aktuális kártyaolvasást
