@@ -30,6 +30,10 @@
             text-align: center;
             margin: 20px;
         }
+        .form-container {
+            text-align: center;
+            margin: 20px;
+        }
     </style>
 </head>
 <body>
@@ -59,52 +63,87 @@
     </tbody>
 </table>
 
+<div class="form-container">
+    <h3>Új bejegyzés hozzáadása</h3>
+    <label for="description">Leírás:</label>
+    <input type="text" id="description" placeholder="Add meg a leírást">
+    <br><br>
+    <label for="dateSelect">Nap kiválasztása:</label>
+    <select id="dateSelect">
+        <!-- Itt fognak megjelenni a napok és dátumok -->
+    </select>
+    <br><br>
+    <label for="startTime">Kezdő időpont:</label>
+    <select id="startTime">
+        <option value="7">7:00</option>
+        <option value="8">8:00</option>
+        <option value="9">9:00</option>
+        <option value="10">10:00</option>
+        <option value="11">11:00</option>
+        <option value="12">12:00</option>
+        <option value="13">13:00</option>
+        <option value="14">14:00</option>
+        <option value="15">15:00</option>
+        <option value="16">16:00</option>
+    </select>
+    <br><br>
+    <label for="endTime">Befejező időpont:</label>
+    <select id="endTime">
+        <option value="8">8:00</option>
+        <option value="9">9:00</option>
+        <option value="10">10:00</option>
+        <option value="11">11:00</option>
+        <option value="12">12:00</option>
+        <option value="13">13:00</option>
+        <option value="14">14:00</option>
+        <option value="15">15:00</option>
+        <option value="16">16:00</option>
+        <option value="17">17:00</option>
+    </select>
+    <br><br>
+    <button id="addEntryBtn">Bejegyzés hozzáadása</button>
+</div>
+
 <script>
     let currentWeekOffset = 0;
 
     function getCurrentWeekDates(weekOffset) {
         const today = new Date();
-        const dayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, etc.
+        const dayOfWeek = today.getDay();
 
-        // Hétfő első nap a weekOffset figyelembevételével
         const mondayOfCurrentWeek = new Date(today);
         mondayOfCurrentWeek.setDate(today.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1) + weekOffset * 7);
 
-        // Hét napjainak dátumai (vasárnap legyen a következő hét vasárnapja)
         const weekDates = [];
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 7; i++) {
             const date = new Date(mondayOfCurrentWeek);
             date.setDate(mondayOfCurrentWeek.getDate() + i);
-            weekDates.push(`${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`);
+            weekDates.push({
+                day: date.toLocaleString('hu-HU', { weekday: 'long' }),
+                date: `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
+            });
         }
-
-        // Jövő vasárnap dátuma (pontos számítás a következő hét vasárnapra)
-        const nextSunday = new Date(mondayOfCurrentWeek);
-        nextSunday.setDate(mondayOfCurrentWeek.getDate() + 6); // A következő hét vasárnapja
-        weekDates.push(`${nextSunday.getFullYear()}-${(nextSunday.getMonth() + 1).toString().padStart(2, '0')}-${nextSunday.getDate().toString().padStart(2, '0')}`);
 
         return weekDates;
     }
 
     function createScheduleTable() {
         const hours = [];
-        for (let i = 7; i <= 17; i++) {  // Csak 7:00-tól 17:00-ig
+        for (let i = 7; i <= 17; i++) {
             hours.push(`${i}:00`);
         }
 
         const scheduleBody = document.getElementById('scheduleBody');
-        scheduleBody.innerHTML = '';  // Töröljük a táblázat tartalmát újraépítéskor
+        scheduleBody.innerHTML = '';
 
         hours.forEach(hour => {
             const row = document.createElement('tr');
 
-            // Első cella: Időpont
             const timeCell = document.createElement('td');
             timeCell.classList.add('time-column');
             timeCell.innerText = hour;
             row.appendChild(timeCell);
 
-            // A napok cellái (üres cellák, amiket később feltölthetünk)
             for (let i = 0; i < 7; i++) {
                 const dayCell = document.createElement('td');
                 dayCell.classList.add('day-column');
@@ -117,15 +156,75 @@
 
     function updateSchedule(weekOffset) {
         const weekDates = getCurrentWeekDates(weekOffset);
+        
+        document.getElementById('mondayHeader').innerText = `Hétfő (${weekDates[0].date})`;
+        document.getElementById('tuesdayHeader').innerText = `Kedd (${weekDates[1].date})`;
+        document.getElementById('wednesdayHeader').innerText = `Szerda (${weekDates[2].date})`;
+        document.getElementById('thursdayHeader').innerText = `Csütörtök (${weekDates[3].date})`;
+        document.getElementById('fridayHeader').innerText = `Péntek (${weekDates[4].date})`;
+        document.getElementById('saturdayHeader').innerText = `Szombat (${weekDates[5].date})`;
+        document.getElementById('sundayHeader').innerText = `Vasárnap (${weekDates[6].date})`;
 
-        // A fejlécben megjelenítjük a napokat és dátumokat
-        document.getElementById('mondayHeader').innerText = `Hétfő (${weekDates[0]})`;
-        document.getElementById('tuesdayHeader').innerText = `Kedd (${weekDates[1]})`;
-        document.getElementById('wednesdayHeader').innerText = `Szerda (${weekDates[2]})`;
-        document.getElementById('thursdayHeader').innerText = `Csütörtök (${weekDates[3]})`;
-        document.getElementById('fridayHeader').innerText = `Péntek (${weekDates[4]})`;
-        document.getElementById('saturdayHeader').innerText = `Szombat (${weekDates[5]})`;
-        document.getElementById('sundayHeader').innerText = `Vasárnap (${weekDates[6]})`;
+        const dateSelect = document.getElementById('dateSelect');
+        dateSelect.innerHTML = '';
+
+        weekDates.forEach((day, index) => {
+            const option = document.createElement('option');
+            option.value = index;
+            option.innerText = `${day.day} (${day.date})`;
+            dateSelect.appendChild(option);
+        });
+
+        loadSchedule(weekDates);
+    }
+
+    function addEntry() {
+        const description = document.getElementById('description').value;
+        const dayIndex = document.getElementById('dateSelect').value;
+        const startTime = parseInt(document.getElementById('startTime').value);
+        const endTime = parseInt(document.getElementById('endTime').value);
+
+        if (!description || startTime >= endTime) {
+            alert('Kérlek, adj meg érvényes leírást és időintervallumot!');
+            return;
+        }
+
+        const weekDates = getCurrentWeekDates(currentWeekOffset);
+        const dateKey = weekDates[dayIndex].date;
+
+        let schedule = JSON.parse(localStorage.getItem('schedule')) || {};
+        schedule[dateKey] = schedule[dateKey] || [];
+        schedule[dateKey].push({ description, startTime, endTime });
+        localStorage.setItem('schedule', JSON.stringify(schedule));
+
+        updateTable();
+    }
+
+    function loadSchedule(weekDates) {
+        const schedule = JSON.parse(localStorage.getItem('schedule')) || {};
+
+        // Töröljük a táblázat tartalmát
+        const scheduleBody = document.getElementById('scheduleBody');
+        for (let i = 0; i < scheduleBody.rows.length; i++) {
+            for (let j = 1; j < scheduleBody.rows[i].cells.length; j++) {
+                scheduleBody.rows[i].cells[j].innerHTML = '';
+                scheduleBody.rows[i].cells[j].style.backgroundColor = '';
+            }
+        }
+
+        weekDates.forEach((day, index) => {
+            const dateKey = day.date;
+            const entries = schedule[dateKey] || [];
+
+            entries.forEach(entry => {
+                for (let i = entry.startTime - 7; i < entry.endTime - 7; i++) {
+                    const row = scheduleBody.rows[i];
+                    const dayCell = row.cells[index + 1];
+                    dayCell.innerHTML = entry.description;
+                    dayCell.style.backgroundColor = '#d3f8d3';
+                }
+            });
+        });
     }
 
     document.getElementById('prevWeekBtn').addEventListener('click', function() {
@@ -137,6 +236,8 @@
         currentWeekOffset++;
         updateSchedule(currentWeekOffset);
     });
+
+    document.getElementById('addEntryBtn').addEventListener('click', addEntry);
 
     window.onload = function() {
         createScheduleTable();
