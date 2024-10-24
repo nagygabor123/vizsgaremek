@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Órarend/Naptár</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .time-column {
+            width: 10%;
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+        .day-column {
+            width: 15%;
+        }
+    </style>
+</head>
+<body>
+
+<h2 style="text-align: center;">Órarend - Heti beosztás</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Időpont</th>
+            <th id="mondayHeader">Hétfő</th>
+            <th id="tuesdayHeader">Kedd</th>
+            <th id="wednesdayHeader">Szerda</th>
+            <th id="thursdayHeader">Csütörtök</th>
+            <th id="fridayHeader">Péntek</th>
+            <th id="saturdayHeader">Szombat</th>
+            <th id="sundayHeader">Vasárnap</th>
+        </tr>
+    </thead>
+    <tbody id="scheduleBody">
+        <!-- Ide kerülnek a sorok az órákkal -->
+    </tbody>
+</table>
+
+<script>
+    function getCurrentWeekDates() {
+        const today = new Date();
+        const dayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, etc.
+
+        // Hétfő első nap
+        const mondayOfCurrentWeek = new Date(today);
+        mondayOfCurrentWeek.setDate(today.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1));
+
+        // Hét napjainak dátumai (vasárnap legyen a következő hét vasárnapja)
+        const weekDates = [];
+        for (let i = 0; i < 6; i++) {
+            const date = new Date(mondayOfCurrentWeek);
+            date.setDate(mondayOfCurrentWeek.getDate() + i);
+            weekDates.push(`${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`);
+        }
+
+        // Jövő vasárnap dátuma (pontos számítás a következő hét vasárnapra)
+        const nextSunday = new Date(mondayOfCurrentWeek);
+        nextSunday.setDate(mondayOfCurrentWeek.getDate() + 6); // A következő hét vasárnapja (nem hétfő)
+        weekDates.push(`${nextSunday.getFullYear()}-${(nextSunday.getMonth() + 1).toString().padStart(2, '0')}-${nextSunday.getDate().toString().padStart(2, '0')}`);
+
+        return weekDates;
+    }
+
+    function createScheduleTable() {
+        const hours = [];
+        for (let i = 7; i <= 20; i++) {
+            hours.push(`${i}:00 - ${i + 1}:00`);
+        }
+
+        const scheduleBody = document.getElementById('scheduleBody');
+
+        hours.forEach(hour => {
+            const row = document.createElement('tr');
+
+            // Első cella: Időpont
+            const timeCell = document.createElement('td');
+            timeCell.classList.add('time-column');
+            timeCell.innerText = hour;
+            row.appendChild(timeCell);
+
+            // A napok cellái
+            for (let i = 0; i < 7; i++) {
+                const dayCell = document.createElement('td');
+                dayCell.classList.add('day-column');
+                row.appendChild(dayCell);
+            }
+
+            scheduleBody.appendChild(row);
+        });
+    }
+
+    function updateSchedule() {
+        const weekDates = getCurrentWeekDates();
+
+        // A fejlécben megjelenítjük a napokat és dátumokat
+        document.getElementById('mondayHeader').innerText = `Hétfő (${weekDates[0]})`;
+        document.getElementById('tuesdayHeader').innerText = `Kedd (${weekDates[1]})`;
+        document.getElementById('wednesdayHeader').innerText = `Szerda (${weekDates[2]})`;
+        document.getElementById('thursdayHeader').innerText = `Csütörtök (${weekDates[3]})`;
+        document.getElementById('fridayHeader').innerText = `Péntek (${weekDates[4]})`;
+        document.getElementById('saturdayHeader').innerText = `Szombat (${weekDates[5]})`;
+        document.getElementById('sundayHeader').innerText = `Vasárnap (${weekDates[6]})`;
+    }
+
+    window.onload = function() {
+        createScheduleTable();
+        updateSchedule();
+    };
+</script>
+
+</body>
+</html>
