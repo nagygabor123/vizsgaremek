@@ -32,10 +32,14 @@
             margin: 2px 0;
             padding: 5px;
             border-radius: 3px;
-            text-align: left;
+            text-align: center; /* Leírás középre igazítása */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
         }
         .entry-highlight {
-            background-color: #ffeb3b;
+            background-color: #fffaa0;
         }
         .navigation {
             text-align: center;
@@ -183,6 +187,16 @@
             dateSelect.appendChild(option);
         });
 
+        for (let i = 0; i < 4; i++) {
+            const futureWeekDates = getCurrentWeekDates(weekOffset + i + 1);
+            futureWeekDates.forEach(day => {
+                const option = document.createElement('option');
+                option.value = day.date;
+                option.innerText = `${day.day} (${day.date})`;
+                dateSelect.appendChild(option);
+            });
+        }
+
         loadSchedule(weekDates);
     }
 
@@ -209,42 +223,41 @@
         const schedule = JSON.parse(localStorage.getItem('schedule')) || {};
         const scheduleBody = document.getElementById('scheduleBody');
 
-        // Minden cella törlése és a korábbi kiemelés eltávolítása
         for (let i = 0; i < scheduleBody.rows.length; i++) {
-            const row = scheduleBody.rows[i];
-            for (let j = 1; j < row.cells.length; j++) {
-                const cell = row.cells[j];
-                cell.innerHTML = '';
-                cell.classList.remove('entry-highlight');
-                
-                const dayDate = weekDates[j - 1].date;
-
-                if (schedule[dayDate]) {
-                    schedule[dayDate].forEach(entry => {
-                        const cellHour = 7 + i;
-                        if (cellHour >= entry.startTime && cellHour < entry.endTime) {
-                            const isFirst = cellHour === entry.startTime;
-                            if (isFirst) {
-                                const entryDiv = document.createElement('div');
-                                entryDiv.classList.add('entry');
-                                entryDiv.innerText = entry.description;
-                                cell.appendChild(entryDiv);
-                            }
-                            cell.classList.add('entry-highlight');
-                        }
-                    });
-                }
+            for (let j = 1; j <= 7; j++) {
+                scheduleBody.rows[i].cells[j].innerHTML = '';
+                scheduleBody.rows[i].cells[j].removeAttribute('rowspan');
             }
         }
+
+        weekDates.forEach((weekDay, dayIndex) => {
+            const dayEntries = schedule[weekDay.date] || [];
+
+            dayEntries.forEach(entry => {
+                const startRowIndex = entry.startTime - 7;
+                const endRowIndex = entry.endTime - 7;
+                const rowSpan = endRowIndex - startRowIndex;
+
+                const cell = scheduleBody.rows[startRowIndex].cells[dayIndex + 1];
+                cell.innerHTML = `<div class="entry">${entry.description}</div>`;
+                cell.setAttribute('rowspan', rowSpan);
+
+                for (let i = startRowIndex + 1; i < endRowIndex; i++) {
+                    scheduleBody.rows[i].cells[dayIndex + 1].style.display = 'none';
+                }
+            });
+        });
     }
 
     document.getElementById('addEntryBtn').addEventListener('click', addEntry);
     document.getElementById('prevWeekBtn').addEventListener('click', () => {
         currentWeekOffset--;
+        createScheduleTable();
         updateSchedule(currentWeekOffset);
     });
     document.getElementById('nextWeekBtn').addEventListener('click', () => {
         currentWeekOffset++;
+        createScheduleTable();
         updateSchedule(currentWeekOffset);
     });
 
