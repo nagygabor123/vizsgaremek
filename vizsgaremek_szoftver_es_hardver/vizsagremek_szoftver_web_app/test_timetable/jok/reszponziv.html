@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Órarend/Naptár</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
         table {
             width: 100%;
             border-collapse: collapse;
@@ -34,9 +38,6 @@
             border-radius: 3px;
             text-align: left;
         }
-        .entry-highlight {
-            background-color: #ffeb3b;
-        }
         .navigation {
             text-align: center;
             margin: 20px;
@@ -44,6 +45,44 @@
         .form-container {
             text-align: center;
             margin: 20px;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            th, td {
+                font-size: 14px;
+                padding: 5px;
+            }
+            .time-column {
+                width: 20%;
+            }
+            .day-column {
+                width: 12%;
+            }
+            .entry {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            th, td {
+                font-size: 12px;
+                padding: 4px;
+            }
+            .time-column {
+                width: 25%;
+            }
+            .day-column {
+                width: 25%;
+            }
+            .entry {
+                font-size: 10px;
+                padding: 3px;
+            }
+            .form-container input,
+            .form-container select {
+                width: 90%;
+            }
         }
     </style>
 </head>
@@ -176,12 +215,24 @@
         const dateSelect = document.getElementById('dateSelect');
         dateSelect.innerHTML = '';
 
+        // Hozzáadjuk a jelenlegi hét napjait
         weekDates.forEach(day => {
             const option = document.createElement('option');
             option.value = day.date;
             option.innerText = `${day.day} (${day.date})`;
             dateSelect.appendChild(option);
         });
+
+        // Hozzáadunk napokat a következő 4 hétből
+        for (let i = 0; i < 4; i++) {
+            const futureWeekDates = getCurrentWeekDates(weekOffset + i + 1);
+            futureWeekDates.forEach(day => {
+                const option = document.createElement('option');
+                option.value = day.date;
+                option.innerText = `${day.day} (${day.date})`;
+                dateSelect.appendChild(option);
+            });
+        }
 
         loadSchedule(weekDates);
     }
@@ -209,47 +260,43 @@
         const schedule = JSON.parse(localStorage.getItem('schedule')) || {};
         const scheduleBody = document.getElementById('scheduleBody');
 
-        // Minden cella törlése és a korábbi kiemelés eltávolítása
+        // Töröljük a táblázat tartalmát
         for (let i = 0; i < scheduleBody.rows.length; i++) {
-            const row = scheduleBody.rows[i];
-            for (let j = 1; j < row.cells.length; j++) {
-                const cell = row.cells[j];
-                cell.innerHTML = '';
-                cell.classList.remove('entry-highlight');
-                
-                const dayDate = weekDates[j - 1].date;
-
-                if (schedule[dayDate]) {
-                    schedule[dayDate].forEach(entry => {
-                        const cellHour = 7 + i;
-                        if (cellHour >= entry.startTime && cellHour < entry.endTime) {
-                            const isFirst = cellHour === entry.startTime;
-                            if (isFirst) {
-                                const entryDiv = document.createElement('div');
-                                entryDiv.classList.add('entry');
-                                entryDiv.innerText = entry.description;
-                                cell.appendChild(entryDiv);
-                            }
-                            cell.classList.add('entry-highlight');
-                        }
-                    });
-                }
+            for (let j = 1; j < scheduleBody.rows[i].cells.length; j++) {
+                scheduleBody.rows[i].cells[j].innerHTML = '';
             }
         }
+
+        weekDates.forEach((day, index) => {
+            const dateKey = day.date;
+            const entries = schedule[dateKey] || [];
+
+            entries.forEach(entry => {
+                for (let i = entry.startTime - 7; i < entry.endTime - 7; i++) {
+                    const row = scheduleBody.rows[i];
+                    const dayCell = row.cells[index + 1];
+                    dayCell.innerHTML += `<div class="entry">${entry.description}</div>`;
+                }
+            });
+        });
     }
 
-    document.getElementById('addEntryBtn').addEventListener('click', addEntry);
-    document.getElementById('prevWeekBtn').addEventListener('click', () => {
+    document.getElementById('prevWeekBtn').addEventListener('click', function() {
         currentWeekOffset--;
         updateSchedule(currentWeekOffset);
     });
-    document.getElementById('nextWeekBtn').addEventListener('click', () => {
+
+    document.getElementById('nextWeekBtn').addEventListener('click', function() {
         currentWeekOffset++;
         updateSchedule(currentWeekOffset);
     });
 
-    createScheduleTable();
-    updateSchedule(currentWeekOffset);
+    document.getElementById('addEntryBtn').addEventListener('click', addEntry);
+
+    window.onload = function() {
+        createScheduleTable();
+        updateSchedule(currentWeekOffset);
+    };
 </script>
 
 </body>
