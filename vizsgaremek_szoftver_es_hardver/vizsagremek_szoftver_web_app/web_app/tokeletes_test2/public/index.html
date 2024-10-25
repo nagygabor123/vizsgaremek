@@ -283,8 +283,64 @@
             alert('Hiba történt a bejegyzés hozzáadása során.');
         }
     }
-
+    
     async function loadSchedule() {
+    const response = await fetch('/load-schedule');
+    const schedule = await response.json();
+    const scheduleBody = document.getElementById('scheduleBody');
+    
+    // Mai dátum és jelenlegi óra megszerzése
+    const todayDate = new Date().toISOString().split('T')[0];
+    const currentHour = new Date().getHours();
+
+    // Alapértelmezett cellák törlése
+    for (let i = 0; i < scheduleBody.rows.length; i++) {
+        for (let j = 1; j <= 7; j++) {
+            scheduleBody.rows[i].cells[j].innerHTML = '';
+            scheduleBody.rows[i].cells[j].style.display = ''; // Alapértelmezett megjelenés visszaállítása
+            scheduleBody.rows[i].cells[j].removeAttribute('rowspan');
+        }
+    }
+
+    const weekDates = getCurrentWeekDates(currentWeekOffset);
+    weekDates.forEach((weekDay, dayIndex) => {
+        const dayEntries = schedule[weekDay.date] || [];
+        dayEntries.forEach(entry => {
+            const startRowIndex = entry.startTime - 7;
+            const endRowIndex = entry.endTime - 7;
+            const rowSpan = endRowIndex - startRowIndex;
+
+            const cell = scheduleBody.rows[startRowIndex].cells[dayIndex + 1];
+            
+            // Ellenőrzés, hogy a mai napon és a jelenlegi időben van-e
+            const isCurrentEntry = weekDay.date === todayDate && currentHour >= entry.startTime && currentHour < entry.endTime;
+            const entryClass = isCurrentEntry ? 'entry entry-highlight' : 'entry';
+
+            // Csak a mai és jelenlegi időpontokra eső bejegyzéseknél engedélyezünk kattinthatóságot
+            cell.innerHTML = `<div class="${entryClass}" data-description="${entry.description}" data-start="${entry.startTime}" data-end="${entry.endTime}" style="height: ${rowSpan * 40}px;" ${isCurrentEntry ? 'onclick="showEntryDetails(this)"' : ''}>${entry.description}</div>`;
+            cell.setAttribute('rowspan', rowSpan);
+
+            for (let i = startRowIndex + 1; i < endRowIndex; i++) {
+                scheduleBody.rows[i].cells[dayIndex + 1].style.display = 'none';
+            }
+        });
+    });
+}
+
+// Bejegyzés részleteinek megjelenítése
+function showEntryDetails(element) {
+    const description = element.getAttribute('data-description');
+    const start = element.getAttribute('data-start');
+    const end = element.getAttribute('data-end');
+    document.getElementById('entryDetails').innerText = `Leírás: ${description}\nKezdő időpont: ${start}:00\nBefejező időpont: ${end}:00`;
+    document.getElementById('dialog').style.display = 'flex';
+}
+
+document.getElementById('closeDialogBtn').addEventListener('click', function() {
+    document.getElementById('dialog').style.display = 'none';
+});
+
+    /*async function loadSchedule() {
     const response = await fetch('/load-schedule');
     const schedule = await response.json();
     const scheduleBody = document.getElementById('scheduleBody');
@@ -336,50 +392,7 @@
         });
     });
 }
-
-    /*async function loadSchedule() {
-        const response = await fetch('/load-schedule');
-        const schedule = await response.json();
-        const scheduleBody = document.getElementById('scheduleBody');
-
-        // Reset cell contents
-        for (let i = 0; i < scheduleBody.rows.length; i++) {
-            for (let j = 1; j <= 7; j++) {
-                scheduleBody.rows[i].cells[j].innerHTML = '';
-                scheduleBody.rows[i].cells[j].style.display = ''; // Reset display property
-                scheduleBody.rows[i].cells[j].removeAttribute('rowspan');
-            }
-        }
-
-        const weekDates = getCurrentWeekDates(currentWeekOffset);
-        weekDates.forEach((weekDay, dayIndex) => {
-            const dayEntries = schedule[weekDay.date] || [];
-            dayEntries.forEach(entry => {
-                const startRowIndex = entry.startTime - 7;
-                const endRowIndex = entry.endTime - 7;
-                const rowSpan = endRowIndex - startRowIndex;
-
-                const cell = scheduleBody.rows[startRowIndex].cells[dayIndex + 1];
-                cell.innerHTML = `<div class="entry" data-description="${entry.description}" data-start="${entry.startTime}" data-end="${entry.endTime}" style="height: ${rowSpan * 40}px;">${entry.description}</div>`;
-                cell.setAttribute('rowspan', rowSpan);
-
-                for (let i = startRowIndex + 1; i < endRowIndex; i++) {
-                    scheduleBody.rows[i].cells[dayIndex + 1].style.display = 'none';
-                }
-            });
-        });
-
-        // Add click event listeners to each entry
-        document.querySelectorAll('.entry').forEach(entry => {
-            entry.addEventListener('click', function() {
-                const description = this.getAttribute('data-description');
-                const start = this.getAttribute('data-start');
-                const end = this.getAttribute('data-end');
-                document.getElementById('entryDetails').innerText = `Leírás: ${description}\nKezdő időpont: ${start}:00\nBefejező időpont: ${end}:00`;
-                document.getElementById('dialog').style.display = 'flex';
-            });
-        });
-    }*/
+*/
 
     document.getElementById('closeDialogBtn').addEventListener('click', function() {
         document.getElementById('dialog').style.display = 'none';
