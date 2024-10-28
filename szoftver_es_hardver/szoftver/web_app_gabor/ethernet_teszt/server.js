@@ -21,6 +21,8 @@ const db = mysql.createConnection({
 
 // Serve static files
 app.use(express.static('public'));
+let system = false; // Default value is false
+let arduinoSocket = null; // Variable to store the Arduino socket
 
 // WebSocket connection handling
 wss.on('connection', (ws) => {
@@ -42,10 +44,10 @@ wss.on('connection', (ws) => {
   });
 });
 
-
 // TCP server
 const tcpServer = net.createServer((socket) => {
   console.log('Client connected');
+  arduinoSocket = socket; // Store the Arduino socket reference
 
   socket.on('data', (data) => {
     const rfidTag = data.toString().trim();
@@ -57,6 +59,7 @@ const tcpServer = net.createServer((socket) => {
 
   socket.on('end', () => {
     console.log('Client disconnected');
+    arduinoSocket = null; // Clear the reference when disconnected
   });
 
   socket.on('error', (err) => {
@@ -84,13 +87,10 @@ function processRfidTag(rfidTag, socket) {
     } else {
       console.log('Hibás RFID azonosító:', rfidTag);
       socket.write('INVALID\n');
-      logRfidTag(rfidTag)
+      logRfidTag(rfidTag);
     }
   });
 }
-
-
-
 
 // Function to update student status
 function updateStudentStatus(rfidTag, newStatus, studentName) {
@@ -146,6 +146,22 @@ function controlLed(rfidTag, socket) {
     });
   });
 }
+
+// Endpoint to toggle the system variable
+app.post('/toggle', (req, res) => {
+  system = !system; // Toggle the system variable
+  console.log(`System is now: ${system}`);
+  const command = `TOGGLE_LED\n`;
+    socket.write(command, (err) => {
+      if (err) {
+        console.error('Hiba az üzenet küldésekor:', err);
+      } else {
+        console.log(`Toggle command sent to Arduino`);
+      }
+    });
+  
+  res.json({ status: system });
+});
 
 // Start TCP server
 tcpServer.listen(8080, () => {

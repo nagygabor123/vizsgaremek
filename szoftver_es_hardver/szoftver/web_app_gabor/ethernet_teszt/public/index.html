@@ -38,15 +38,27 @@
             background-color: white; /* Fehér háttér */
             border-color: #a19d9d; /* Nincs szegély */
         }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: #2e98df;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
-    <h1>Diákok Státusza</h1>
+    <h1>Diákok Státusza <button id="toggle-status">Zárás</button></h1>
     <div id="students"></div>
     
     <script>
         const studentsDiv = document.getElementById('students');
         const ws = new WebSocket('ws://localhost:3000');
+        
+
 
         ws.onopen = function() {
             console.log('WebSocket kapcsolat létrejött.');
@@ -79,6 +91,29 @@
         ws.onclose = function() {
             console.log('WebSocket kapcsolat lezárult.');
         };
+        const toggleButton = document.getElementById('toggle-status');
+
+        toggleButton.addEventListener('click', () => {
+            const currentStatus = toggleButton.innerText === 'Nyitás' ? 'Zárás' : 'Nyitás';
+            toggleButton.innerText = currentStatus;
+
+            // Send the toggle request to the server
+            fetch('/toggle', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('System status:', data.status);
+                // You can update the button text or perform other actions based on the new state if needed
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+
     </script>
 </body>
 </html>

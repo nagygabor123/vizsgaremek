@@ -14,6 +14,7 @@ EthernetClient client;
 #define RST_PIN 9 // Reset pin az RFID-hoz
 #define SS_PIN 4   // Slave Select pin az RFID-hoz
 MFRC522 rfid(SS_PIN, RST_PIN); // RFID olvasó példányosítása
+bool isSystemLocked = false; // Initialize the system lock state
 
 String toHexString(byte value) {
   String hexString = String(value, HEX);
@@ -146,6 +147,21 @@ void loop() {
         lcd.print("Olvasd be");
         lcd.setCursor(0, 1);
         lcd.print("a kartyad");
+      }
+
+      if (response.startsWith("TOGGLE_LED")) {
+        // Handle invalid RFID response
+        //isSystemLocked = !isSystemLocked;  // A rendszer állapotának váltása
+        lcd.clear();
+        if (isSystemLocked) {
+          lcd.setCursor(0, 0);
+          lcd.print("Rendszer zarva");
+        } else {
+          lcd.setCursor(0, 0);
+          lcd.print("Olvasd be");
+          lcd.setCursor(0, 1);
+          lcd.print("a kartyad");
+        }
       }
     }
 
