@@ -96,21 +96,18 @@ void loop() {
 
     // Válasz feldolgozása
     if (response.length() > 0) {
-      Serial.print("Válasz a szervertől: ");
-      Serial.println(response); // Válasz kiírása
 
       if (response.startsWith("PIN:")) {
         String pin = response.substring(4); // Kinyerjük a PIN kódot
         uint8_t pinInt = pin[0] - '0'; // Konvertálás számmá
-        Serial.print("PIN kód: ");
+        Serial.print("Válasz a szervertől (pin): ");
         Serial.println(pinInt);
+        Serial.print("\n");
         if (pinInt == 2 || pinInt == 6) {
           // LED vezérlés (opcionális, ha a PIN azonosítással szeretnéd vezérelni a LED-et)
           digitalWrite(pinInt, HIGH); // LED bekapcsolása
           delay(500); // LED világít egy ideig
           digitalWrite(pinInt, LOW); // LED lekapcsolása
-          Serial.print("Received PIN: ");
-          Serial.println(pin); // Kiírja a kapott PIN kódot
           lcd.clear();
           lcd.setCursor(0, 0);
           lcd.print("Elfogadva");

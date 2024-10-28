@@ -25,11 +25,23 @@ app.use(express.static('public'));
 // WebSocket connection handling
 wss.on('connection', (ws) => {
   console.log('WebSocket csatlakozott');
+  
+  // Query the current list of students and send to the connected client
+  db.query('SELECT * FROM student', (error, results) => {
+    if (error) {
+      console.error('Hiba a diákok lekérdezésénél:', error);
+      return;
+    }
+
+    // Send the initial list of students to the WebSocket client
+    ws.send(JSON.stringify(results));
+  });
 
   ws.on('close', () => {
     console.log('WebSocket lecsatlakozott');
   });
 });
+
 
 // TCP server
 const tcpServer = net.createServer((socket) => {
@@ -71,8 +83,8 @@ function processRfidTag(rfidTag, socket) {
       controlLed(rfidTag, socket);
     } else {
       console.log('Hibás RFID azonosító:', rfidTag);
-      // Send invalid message to Arduino
       socket.write('INVALID\n');
+      logRfidTag(rfidTag)
     }
   });
 }
@@ -106,7 +118,7 @@ function updateStudentStatus(rfidTag, newStatus, studentName) {
 function logRfidTag(rfidTag) {
   db.query('INSERT INTO logs (rfid_tag) VALUES (?)', [rfidTag], (logError) => {
     if (logError) throw logError;
-    console.log(`Loggolva az RFID: ${rfidTag}`);
+    console.log(`Loggolva az RFID: ${rfidTag}\n`);
   });
 }
 
@@ -129,7 +141,7 @@ function controlLed(rfidTag, socket) {
       if (err) {
         console.error('Hiba a pin küldésekor:', err);
       } else {
-        console.log(`Pin elküldve az Arduinónak: ${command}`);
+        console.log(`Pin elküldve az Arduinónak: ${pin}`);
       }
     });
   });
