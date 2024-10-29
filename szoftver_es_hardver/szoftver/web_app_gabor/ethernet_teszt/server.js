@@ -3,8 +3,6 @@ const http = require('http');
 const net = require('net');
 const WebSocket = require('ws');
 const mysql = require('mysql');
-const { Socket } = require('dgram');
-
 const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
@@ -22,8 +20,10 @@ const db = mysql.createConnection({
 
 // Serve static files
 app.use(express.static('public'));
-let originalStatuses = {};
 
+// Define arduinoSocket in a broader scope
+let arduinoSocket = null; // Store the Arduino socket reference
+let systemLocked = false; // Variable to track system status
 
 // WebSocket connection handling
 wss.on('connection', (ws) => {
@@ -35,9 +35,14 @@ wss.on('connection', (ws) => {
       console.error('Hiba a diákok lekérdezésénél:', error);
       return;
     }
+    ws.send(JSON.stringify(results)); // Send the initial list of students to the WebSocket client
+  });
 
-    // Send the initial list of students to the WebSocket client
-    ws.send(JSON.stringify(results));
+  ws.on('message', (message) => {
+    const data = JSON.parse(message);
+    if (data.action === 'toggleStatus') {
+      toggleSystem();
+    }
   });
 
   ws.on('close', () => {
@@ -72,6 +77,25 @@ tcpServer.on('error', (err) => {
   console.error('Server error:', err);
 });
 
+// Modify the toggleSystem function
+function toggleSystem() {
+  systemLocked = !systemLocked; // Toggle the lock status
+  const statusMessage = systemLocked ? 'Rendszer zárva' : 'Rendszer feloldva';
+  console.log(statusMessage);
+
+  // Send command to Arduino if it's connected
+  if (arduinoSocket) {
+    const command = systemLocked ? 'LOCK\n' : 'UNLOCK\n'; // Use appropriate command for Arduino
+    arduinoSocket.write(command, (err) => {
+      if (err) {
+        console.error('Hiba a pin küldésekor:', err);
+      } else {
+        console.log(`Pin elküldve az Arduinónak: ${command.trim()}`);
+      }
+    });
+  }
+}
+
 function processRfidTag(rfidTag, socket) {
   db.query('SELECT * FROM student WHERE rfid_azon = ?', [rfidTag], (error, results) => {
     if (error) throw error;
@@ -82,7 +106,6 @@ function processRfidTag(rfidTag, socket) {
 
       // Update student status
       updateStudentStatus(rfidTag, newStatus, student.nev);
-
       // Send the PIN to Arduino
       controlLed(rfidTag, socket);
     } else {
@@ -93,7 +116,6 @@ function processRfidTag(rfidTag, socket) {
   });
 }
 
-// Function to update student status
 function updateStudentStatus(rfidTag, newStatus, studentName) {
   db.query('UPDATE student SET statusz = ? WHERE rfid_azon = ?', [newStatus, rfidTag], (updateError) => {
     if (updateError) throw updateError;
@@ -115,7 +137,6 @@ function updateStudentStatus(rfidTag, newStatus, studentName) {
   });
 }
 
-// Function to log RFID reading
 function logRfidTag(rfidTag) {
   db.query('INSERT INTO logs (rfid_tag) VALUES (?)', [rfidTag], (logError) => {
     if (logError) throw logError;
@@ -124,20 +145,18 @@ function logRfidTag(rfidTag) {
 }
 
 function controlLed(rfidTag, socket) {
-  // Lekérdezzük a pin-t az adatbázisból
   const pinQuery = 'SELECT pin FROM student WHERE rfid_azon = ?';
   db.query(pinQuery, [rfidTag], (err, results) => {
     if (err) throw err;
 
-    let pin = '2'; // Alapértelmezett pin érték
+    let pin = '2'; // Default pin value
     if (results.length > 0 && results[0].pin) {
-      pin = results[0].pin; // Ha létezik pin az adatbázisban, akkor azt használjuk
+      pin = results[0].pin; // Use the pin from the database if available
     } else {
       console.log('Nincs érvényes pin az RFID-hoz:', rfidTag, ', a pin értéke 2 lesz.');
     }
 
-    // Küldjük el az Arduino-nak a pin kódot a socket.write használatával
-    const command = `PIN:${pin}\n`; // Parancs formázása
+    const command = `PIN:${pin}\n`; // Format the command
     socket.write(command, (err) => {
       if (err) {
         console.error('Hiba a pin küldésekor:', err);
@@ -147,73 +166,6 @@ function controlLed(rfidTag, socket) {
     });
   });
 }
-
-
-// Záró funkció a diákok lezárásához és feloldásához
-let locked = false;
-
-app.post('/toggle-lock', (req, res) => {
-  locked = !locked; // Az állapot váltása (zárva/nyitva)
-  const command = `TOGGLE_LED\n`;
-  arduinoSocket.write(command, (err) => {
-    if (err) {
-      return res.status(500).send('Hiba a zarva/nyitva gomb'); // Hiba kezelés
-    }
-
-    if (locked) {
-      // Eredeti státuszok mentése, mielőtt zárva lesznek
-      const query = 'SELECT rfid_azon, statusz FROM student';
-      db.query(query, (err, results) => {
-        if (err) throw err;
-
-        results.forEach(student => {
-          originalStatuses[student.rfid_azon] = student.statusz; // Eredeti státusz mentése
-        });
-
-        // Minden diák státusza zárva lesz
-        const updateQuery = 'UPDATE student SET statusz = "zarva"';
-        db.query(updateQuery, (err) => {
-          if (err) throw err;
-          console.log('Minden diák státusza zárolva');
-          io.emit('statusUpdate', { status: 'zarva' }); // Kliens értesítése
-          res.send('Minden diák státusza zárolva'); // Válasz küldése
-        });
-      });
-    } else {
-      // Státuszok visszaállítása az eredeti állapotra
-      const updatePromises = []; // Tömb a promessek tárolására
-
-      for (const rfidTag in originalStatuses) {
-        const originalStatus = originalStatuses[rfidTag];
-        const updateQuery = 'UPDATE student SET statusz = ? WHERE rfid_azon = ?';
-        
-        // Aszinkron frissítések kezelése
-        const promise = new Promise((resolve, reject) => {
-          db.query(updateQuery, [originalStatus, rfidTag], (err) => {
-            if (err) return reject(err); // Hibakezelés
-            console.log(`Státusz visszaállítva: ${rfidTag}, státusz: ${originalStatus}`);
-            resolve();
-          });
-        });
-
-        updatePromises.push(promise); // A promise hozzáadása a tömbhöz
-      }
-
-      // Várakozás az összes frissítés befejezésére
-      Promise.all(updatePromises)
-        .then(() => {
-          io.emit('statusUpdate', { status: 'ki' }); // Kliens értesítése
-          res.send('Minden diák státusza visszaállítva'); // Válasz küldése
-        })
-        .catch(err => {
-          console.error('Hiba a státusz visszaállításakor:', err);
-          res.status(500).send('Hiba a státusz visszaállításakor'); // Hiba válasz
-        });
-    }
-  });
-});
-
-
 
 // Start TCP server
 tcpServer.listen(8080, () => {

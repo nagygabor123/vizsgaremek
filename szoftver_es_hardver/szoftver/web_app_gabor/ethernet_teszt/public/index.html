@@ -39,7 +39,9 @@
             border-color: #a19d9d; /* Nincs szegély */
         }
         button {
-            padding: 10px 15px;
+            width: 100px; /* Fix szélesség */
+            height: 40px; /* Fix magasság */
+            padding: 10px 0; /* Függőleges kitöltés */
             font-size: 16px;
             margin: 10px;
             cursor: pointer;
@@ -47,6 +49,7 @@
             color: white;
             border: none;
             border-radius: 5px;
+            text-align: center; /* Középre igazítás */
         }
     </style>
 </head>
@@ -56,8 +59,8 @@
     
     <script>
         const studentsDiv = document.getElementById('students');
+        const toggleButton = document.getElementById('toggle-status');
         const ws = new WebSocket('ws://localhost:3000');
-        const toggleStatusButton = document.getElementById('toggle-status');
 
         ws.onopen = function() {
             console.log('WebSocket kapcsolat létrejött.');
@@ -83,24 +86,6 @@
             });
         };
         
-        // Gomb esemény figyelése a státusz zárására / nyitására
-        toggleStatusButton.addEventListener('click', () => {
-            isLocked = !isLocked;
-            fetch('/toggle-lock', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(response => response.text())
-            .then(message => {
-                alert(message); // Üzenet megjelenítése a felhasználónak
-            })
-            .catch(error => {
-                console.error('Hiba a státuszváltásban:', error);
-            });
-        });
-
         ws.onerror = function(event) {
             console.error('WebSocket hiba:', event);
         };
@@ -108,8 +93,18 @@
         ws.onclose = function() {
             console.log('WebSocket kapcsolat lezárult.');
         };
-        
 
+        // Gomb eseménykezelő
+        toggleButton.addEventListener('click', () => {
+            // Küldjön üzenetet a Node.js-nek
+            ws.send(JSON.stringify({ action: 'toggleStatus' }));
+            
+            if (toggleButton.textContent === 'Zárás') {
+                toggleButton.textContent = 'Feloldás'; // Változtassa meg a szöveget
+            } else {
+                toggleButton.textContent = 'Zárás'; // Változtassa vissza az eredeti szöveget
+            }
+        });
     </script>
 </body>
 </html>
