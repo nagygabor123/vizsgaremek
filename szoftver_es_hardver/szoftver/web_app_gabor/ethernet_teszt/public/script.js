@@ -51,3 +51,4 @@ toggleButton.addEventListener('click', () => {
     // Send lock status to server
     ws.send(JSON.stringify({ action: 'toggleStatus', isLocked }));
 });
+
