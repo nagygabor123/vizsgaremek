@@ -62,6 +62,11 @@
         const toggleButton = document.getElementById('toggle-status');
         const ws = new WebSocket('ws://localhost:3000');
 
+        // Check localStorage for the lock status and set the button text accordingly
+        if (localStorage.getItem('isLocked') === 'true') {
+            toggleButton.textContent = 'Feloldás';
+        }
+
         ws.onopen = function() {
             console.log('WebSocket kapcsolat létrejött.');
         };
@@ -96,14 +101,15 @@
 
         // Gomb eseménykezelő
         toggleButton.addEventListener('click', () => {
-            // Küldjön üzenetet a Node.js-nek
-            ws.send(JSON.stringify({ action: 'toggleStatus' }));
+            // Toggle lock status and update button text
+            const isLocked = toggleButton.textContent === 'Zárás';
+            toggleButton.textContent = isLocked ? 'Feloldás' : 'Zárás';
             
-            if (toggleButton.textContent === 'Zárás') {
-                toggleButton.textContent = 'Feloldás'; // Változtassa meg a szöveget
-            } else {
-                toggleButton.textContent = 'Zárás'; // Változtassa vissza az eredeti szöveget
-            }
+            // Store the lock status in localStorage
+            localStorage.setItem('isLocked', isLocked);
+
+            // Send lock status to server
+            ws.send(JSON.stringify({ action: 'toggleStatus', isLocked }));
         });
     </script>
 </body>

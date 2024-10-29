@@ -112,7 +112,6 @@ void loop() {
 }
 
 void processResponse(String response) {
-  Serial.println("Válasz a szervertől: " + response);
   response.trim(); // Levágjuk a fölösleges szóközöket
 
   if (response.startsWith("LOCK")) {
@@ -121,7 +120,7 @@ void processResponse(String response) {
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Rendszer zarva");
-    Serial.println("A rendszer zárva lett.");
+    Serial.println("Rendszer: ZARVA");
   } else if (response.startsWith("UNLOCK")) {
     // Rendszer nyitása
     isLocked = false; 
@@ -134,7 +133,7 @@ void processResponse(String response) {
     lcd.print("Olvasd be");
     lcd.setCursor(0, 1);
     lcd.print("a kartyad");
-    Serial.println("A rendszer kinyitva lett.");
+    Serial.println("Rendszer: NYITVA");
   } else if (response.startsWith("PIN:")) {
     String pin = response.substring(4); // Kinyerjük a PIN kódot
     uint8_t pinInt = pin[0] - '0'; // Konvertálás számmá
