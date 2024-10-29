@@ -57,8 +57,7 @@
     <script>
         const studentsDiv = document.getElementById('students');
         const ws = new WebSocket('ws://localhost:3000');
-        
-
+        const toggleStatusButton = document.getElementById('toggle-status');
 
         ws.onopen = function() {
             console.log('WebSocket kapcsolat létrejött.');
@@ -83,6 +82,24 @@
                 studentsDiv.appendChild(studentBox);
             });
         };
+        
+        // Gomb esemény figyelése a státusz zárására / nyitására
+        toggleStatusButton.addEventListener('click', () => {
+            isLocked = !isLocked;
+            fetch('/toggle-lock', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.text())
+            .then(message => {
+                alert(message); // Üzenet megjelenítése a felhasználónak
+            })
+            .catch(error => {
+                console.error('Hiba a státuszváltásban:', error);
+            });
+        });
 
         ws.onerror = function(event) {
             console.error('WebSocket hiba:', event);
@@ -91,28 +108,7 @@
         ws.onclose = function() {
             console.log('WebSocket kapcsolat lezárult.');
         };
-        const toggleButton = document.getElementById('toggle-status');
-
-        toggleButton.addEventListener('click', () => {
-            const currentStatus = toggleButton.innerText === 'Nyitás' ? 'Zárás' : 'Nyitás';
-            toggleButton.innerText = currentStatus;
-
-            // Send the toggle request to the server
-            fetch('/toggle', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('System status:', data.status);
-                // You can update the button text or perform other actions based on the new state if needed
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        });
+        
 
     </script>
 </body>

@@ -3,6 +3,7 @@ const http = require('http');
 const net = require('net');
 const WebSocket = require('ws');
 const mysql = require('mysql');
+const { Socket } = require('dgram');
 
 const app = express();
 const server = http.createServer(app);
@@ -21,8 +22,8 @@ const db = mysql.createConnection({
 
 // Serve static files
 app.use(express.static('public'));
-let system = false; // Default value is false
-let arduinoSocket = null; // Variable to store the Arduino socket
+let originalStatuses = {};
+
 
 // WebSocket connection handling
 wss.on('connection', (ws) => {
@@ -147,21 +148,72 @@ function controlLed(rfidTag, socket) {
   });
 }
 
-// Endpoint to toggle the system variable
-app.post('/toggle', (req, res) => {
-  system = !system; // Toggle the system variable
-  console.log(`System is now: ${system}`);
+
+// Záró funkció a diákok lezárásához és feloldásához
+let locked = false;
+
+app.post('/toggle-lock', (req, res) => {
+  locked = !locked; // Az állapot váltása (zárva/nyitva)
   const command = `TOGGLE_LED\n`;
-    socket.write(command, (err) => {
-      if (err) {
-        console.error('Hiba az üzenet küldésekor:', err);
-      } else {
-        console.log(`Toggle command sent to Arduino`);
+  arduinoSocket.write(command, (err) => {
+    if (err) {
+      return res.status(500).send('Hiba a zarva/nyitva gomb'); // Hiba kezelés
+    }
+
+    if (locked) {
+      // Eredeti státuszok mentése, mielőtt zárva lesznek
+      const query = 'SELECT rfid_azon, statusz FROM student';
+      db.query(query, (err, results) => {
+        if (err) throw err;
+
+        results.forEach(student => {
+          originalStatuses[student.rfid_azon] = student.statusz; // Eredeti státusz mentése
+        });
+
+        // Minden diák státusza zárva lesz
+        const updateQuery = 'UPDATE student SET statusz = "zarva"';
+        db.query(updateQuery, (err) => {
+          if (err) throw err;
+          console.log('Minden diák státusza zárolva');
+          io.emit('statusUpdate', { status: 'zarva' }); // Kliens értesítése
+          res.send('Minden diák státusza zárolva'); // Válasz küldése
+        });
+      });
+    } else {
+      // Státuszok visszaállítása az eredeti állapotra
+      const updatePromises = []; // Tömb a promessek tárolására
+
+      for (const rfidTag in originalStatuses) {
+        const originalStatus = originalStatuses[rfidTag];
+        const updateQuery = 'UPDATE student SET statusz = ? WHERE rfid_azon = ?';
+        
+        // Aszinkron frissítések kezelése
+        const promise = new Promise((resolve, reject) => {
+          db.query(updateQuery, [originalStatus, rfidTag], (err) => {
+            if (err) return reject(err); // Hibakezelés
+            console.log(`Státusz visszaállítva: ${rfidTag}, státusz: ${originalStatus}`);
+            resolve();
+          });
+        });
+
+        updatePromises.push(promise); // A promise hozzáadása a tömbhöz
       }
-    });
-  
-  res.json({ status: system });
+
+      // Várakozás az összes frissítés befejezésére
+      Promise.all(updatePromises)
+        .then(() => {
+          io.emit('statusUpdate', { status: 'ki' }); // Kliens értesítése
+          res.send('Minden diák státusza visszaállítva'); // Válasz küldése
+        })
+        .catch(err => {
+          console.error('Hiba a státusz visszaállításakor:', err);
+          res.status(500).send('Hiba a státusz visszaállításakor'); // Hiba válasz
+        });
+    }
+  });
 });
+
+
 
 // Start TCP server
 tcpServer.listen(8080, () => {

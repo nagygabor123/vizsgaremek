@@ -151,7 +151,7 @@ void loop() {
 
       if (response.startsWith("TOGGLE_LED")) {
         // Handle invalid RFID response
-        //isSystemLocked = !isSystemLocked;  // A rendszer állapotának váltása
+        isSystemLocked = !isSystemLocked;  // A rendszer állapotának váltása
         lcd.clear();
         if (isSystemLocked) {
           lcd.setCursor(0, 0);
