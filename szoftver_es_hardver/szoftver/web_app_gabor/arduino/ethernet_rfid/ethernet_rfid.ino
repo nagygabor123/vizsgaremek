@@ -24,6 +24,8 @@ String toHexString(byte value) {
   return hexString; // Visszaadjuk a hexadecimális kódot
 }
 
+bool isLocked = false; // Globális változó a zár állapotának nyomon követésére
+
 void setup() {
   Serial.begin(9600);
   delay(1000); // Késleltetés az Arduino inicializálására
@@ -35,7 +37,7 @@ void setup() {
   digitalWrite(2, LOW);  // Kezdetben a LED ki van kapcsolva
   pinMode(6, OUTPUT);  // A LED pin kimenetre állítása
   digitalWrite(6, LOW);
-  lcd.begin();  // lcd.init();
+  lcd.begin();  
   lcd.backlight();
   lcd.setCursor(0, 0);
   lcd.print("Olvasd be");
@@ -80,10 +82,10 @@ void loop() {
     for (byte i = 0; i < rfid.uid.size; i++) {
       rfidID += toHexString(rfid.uid.uidByte[i]); // Használjuk a segédfunkciót
     }
-    
+
     Serial.print("RFID azonosító: ");
     Serial.println(rfidID);
-    
+
     if (client.connected()) {
       client.println(rfidID); // RFID adat elküldése
       Serial.println("RFID adat elküldve");
@@ -93,31 +95,35 @@ void loop() {
     processResponse(response);
     rfid.PICC_HaltA(); // Állítsuk le az aktuális kártyaolvasást
     delay(1000); // Várakozás 1 másodpercig az új RFID beolvasáshoz
-  } else {
-    // Ha nem történt RFID olvasás, de van válasz
-    if (response.length() > 0) {
-      processResponse(response);
-    }
+  } 
+
+  // Ha nem történt RFID olvasás, de van válasz
+  if (response.length() > 0) {
+    processResponse(response);
+  }
+
+  // Ha a rendszer zárva van, csak a válaszokat figyeljük, és nem próbálunk RFID-t olvasni
+  if (isLocked) {
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Rendszer zarva");
+    delay(1000); // Várjunk egy kicsit, hogy ne villódzon a kijelző
   }
 }
 
 void processResponse(String response) {
+  Serial.println("Válasz a szervertől: " + response); // Debug üzenet
+  response.trim(); // Levágjuk a fölösleges szóközöket
   if (response.length() > 0) {
     if (response.startsWith("LOCK")) {
       // Rendszer zárása
-      lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("Rendszer zarva");
-      delay(2000);
-      lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("Olvasd be");
-      lcd.setCursor(0, 1);
-      lcd.print("a kartyad");
+      isLocked = true; // Beállítjuk, hogy a rendszer zárva van
+      Serial.println("A rendszer zárva lett.");
     }
 
     if (response.startsWith("UNLOCK")) {
       // Rendszer nyitása
+      isLocked = false; // Beállítjuk, hogy a rendszer nyitva van
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print("Rendszer nyitva");
@@ -127,6 +133,7 @@ void processResponse(String response) {
       lcd.print("Olvasd be");
       lcd.setCursor(0, 1);
       lcd.print("a kartyad");
+      Serial.println("A rendszer kinyitva lett.");
     }
 
     if (response.startsWith("PIN:")) {
@@ -136,7 +143,6 @@ void processResponse(String response) {
       Serial.println(pinInt);
       Serial.print("\n");
       if (pinInt == 2 || pinInt == 6) {
-        // LED vezérlés (opcionális, ha a PIN azonosítással szeretnéd vezérelni a LED-et)
         digitalWrite(pinInt, HIGH); // LED bekapcsolása
         delay(500); // LED világít egy ideig
         digitalWrite(pinInt, LOW); // LED lekapcsolása
@@ -152,7 +158,6 @@ void processResponse(String response) {
         lcd.setCursor(0, 1);
         lcd.print("a kartyad");
       } else {
-        // Ha a PIN hossza nem megfelelő, akkor elutasítjuk
         lcd.clear();
         lcd.setCursor(0, 0);
         lcd.print("Elutasítva");
