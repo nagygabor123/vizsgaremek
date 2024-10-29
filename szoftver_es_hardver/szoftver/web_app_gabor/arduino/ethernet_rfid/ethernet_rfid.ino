@@ -76,8 +76,14 @@ void loop() {
     }
   }
 
-  // RFID olvasás
-  if (rfid.PICC_IsNewCardPresent() && rfid.PICC_ReadCardSerial()) {
+  // Ha van válasz, feldolgozzuk azt
+  if (response.length() > 0) {
+    processResponse(response); // Feldolgozzuk a bejövő választ
+    response = ""; // Válasz változó törlése a következő körre
+  }
+
+  // RFID olvasás, ha a rendszer nyitva van
+  if (!isLocked && rfid.PICC_IsNewCardPresent() && rfid.PICC_ReadCardSerial()) {
     String rfidID = "";
     for (byte i = 0; i < rfid.uid.size; i++) {
       rfidID += toHexString(rfid.uid.uidByte[i]); // Használjuk a segédfunkciót
@@ -90,99 +96,85 @@ void loop() {
       client.println(rfidID); // RFID adat elküldése
       Serial.println("RFID adat elküldve");
     }
-
-    // Válasz feldolgozása
-    processResponse(response);
-    rfid.PICC_HaltA(); // Állítsuk le az aktuális kártyaolvasást
-    delay(1000); // Várakozás 1 másodpercig az új RFID beolvasáshoz
-  } 
-
-  // Ha nem történt RFID olvasás, de van válasz
-  if (response.length() > 0) {
-    processResponse(response);
+    
+    // Kártya olvasás befejezése
+    rfid.PICC_HaltA();
+    delay(1000);
   }
 
-  // Ha a rendszer zárva van, csak a válaszokat figyeljük, és nem próbálunk RFID-t olvasni
+  // Ha a rendszer zárva van, jelezzük az LCD-n
   if (isLocked) {
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Rendszer zarva");
-    delay(1000); // Várjunk egy kicsit, hogy ne villódzon a kijelző
+    delay(1000); // Késleltetés a kijelző villódzásának elkerülésére
   }
 }
 
 void processResponse(String response) {
-  Serial.println("Válasz a szervertől: " + response); // Debug üzenet
+  Serial.println("Válasz a szervertől: " + response);
   response.trim(); // Levágjuk a fölösleges szóközöket
-  if (response.length() > 0) {
-    if (response.startsWith("LOCK")) {
-      // Rendszer zárása
-      isLocked = true; // Beállítjuk, hogy a rendszer zárva van
-      Serial.println("A rendszer zárva lett.");
-    }
 
-    if (response.startsWith("UNLOCK")) {
-      // Rendszer nyitása
-      isLocked = false; // Beállítjuk, hogy a rendszer nyitva van
+  if (response.startsWith("LOCK")) {
+    // Rendszer zárása
+    isLocked = true; 
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Rendszer zarva");
+    Serial.println("A rendszer zárva lett.");
+  } else if (response.startsWith("UNLOCK")) {
+    // Rendszer nyitása
+    isLocked = false; 
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Rendszer nyitva");
+    delay(2000);
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Olvasd be");
+    lcd.setCursor(0, 1);
+    lcd.print("a kartyad");
+    Serial.println("A rendszer kinyitva lett.");
+  } else if (response.startsWith("PIN:")) {
+    String pin = response.substring(4); // Kinyerjük a PIN kódot
+    uint8_t pinInt = pin[0] - '0'; // Konvertálás számmá
+    if (pinInt == 2 || pinInt == 6) {
+      digitalWrite(pinInt, HIGH); // LED bekapcsolása
+      delay(500); // LED világít egy ideig
+      digitalWrite(pinInt, LOW); // LED lekapcsolása
       lcd.clear();
       lcd.setCursor(0, 0);
-      lcd.print("Rendszer nyitva");
+      lcd.print("Elfogadva");
+      lcd.setCursor(0, 1);
+      lcd.print(pinInt);
       delay(2000);
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print("Olvasd be");
       lcd.setCursor(0, 1);
       lcd.print("a kartyad");
-      Serial.println("A rendszer kinyitva lett.");
-    }
-
-    if (response.startsWith("PIN:")) {
-      String pin = response.substring(4); // Kinyerjük a PIN kódot
-      uint8_t pinInt = pin[0] - '0'; // Konvertálás számmá
-      Serial.print("Válasz a szervertől (pin): ");
-      Serial.println(pinInt);
-      Serial.print("\n");
-      if (pinInt == 2 || pinInt == 6) {
-        digitalWrite(pinInt, HIGH); // LED bekapcsolása
-        delay(500); // LED világít egy ideig
-        digitalWrite(pinInt, LOW); // LED lekapcsolása
-        lcd.clear();
-        lcd.setCursor(0, 0);
-        lcd.print("Elfogadva");
-        lcd.setCursor(0, 1);
-        lcd.print(pinInt);
-        delay(2000);
-        lcd.clear();
-        lcd.setCursor(0, 0);
-        lcd.print("Olvasd be");
-        lcd.setCursor(0, 1);
-        lcd.print("a kartyad");
-      } else {
-        lcd.clear();
-        lcd.setCursor(0, 0);
-        lcd.print("Elutasítva");
-        lcd.setCursor(0, 1);
-        lcd.print(pinInt);
-        delay(2000);
-        lcd.clear();
-        lcd.setCursor(0, 0);
-        lcd.print("Olvasd be");
-        lcd.setCursor(0, 1);
-        lcd.print("a kartyad");
-      } 
-    }
-
-    if (response.startsWith("INVALID")) {
-      // Érvénytelen RFID válasz kezelése
+    } else {
       lcd.clear();
       lcd.setCursor(0, 0);
-      lcd.print("Elutasitva"); // Elutasítás üzenet megjelenítése
-      delay(2000); // 2 másodperces várakozás
+      lcd.print("Elutasítva");
+      lcd.setCursor(0, 1);
+      lcd.print(pinInt);
+      delay(2000);
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print("Olvasd be");
       lcd.setCursor(0, 1);
       lcd.print("a kartyad");
     }
+  } else if (response.startsWith("INVALID")) {
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Elutasitva");
+    delay(2000);
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Olvasd be");
+    lcd.setCursor(0, 1);
+    lcd.print("a kartyad");
   }
 }
