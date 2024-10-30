@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Órarend/Naptár</title>
+    <style>
+        /* Stílusok a táblázat formázásához */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .time-column {
+            width: 10%;
+            background-color: #f9f9f9;
+        }
+        .day-column {
+            width: 12.85%;
+        }
+        .form-container {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Órarend/Naptár</h1>
+
+    <div class="form-container">
+        <h3>Új bejegyzés hozzáadása</h3>
+        <label for="description">Leírás:</label>
+        <input type="text" id="description" placeholder="Add meg a leírást">
+        <br><br>
+        <label for="dateSelect">Nap kiválasztása:</label>
+        <select id="dateSelect"></select>
+        <br><br>
+        <label for="startTime">Kezdő időpont:</label>
+        <select id="startTime"></select>
+        <br><br>
+        <label for="endTime">Befejező időpont:</label>
+        <select id="endTime"></select>
+        <br><br>
+        <button id="addEntryBtn">Bejegyzés hozzáadása</button>
+    </div>
+
+    <!-- Naptár táblázat -->
+    <table>
+        <thead>
+            <tr>
+                <th>Idő</th>
+                <th>Hétfő</th>
+                <th>Kedd</th>
+                <th>Szerda</th>
+                <th>Csütörtök</th>
+                <th>Péntek</th>
+                <th>Szombat</th>
+                <th>Vasárnap</th>
+            </tr>
+        </thead>
+        <tbody id="scheduleBody"></tbody>
+    </table>
+
+    <script>
+        // Dátumok hozzáadása a következő négy hétre
+        function populateDateOptions() {
+            const dateSelect = document.getElementById('dateSelect');
+            dateSelect.innerHTML = '';
+            const today = new Date();
+
+            for (let i = 0; i < 28; i++) {
+                const dateOption = new Date(today);
+                dateOption.setDate(today.getDate() + i);
+                const option = document.createElement('option');
+                option.value = dateOption.toISOString().split('T')[0];
+                option.textContent = dateOption.toLocaleDateString('hu-HU', { weekday: 'long', year: 'numeric', month: '2-digit', day: '2-digit' });
+                dateSelect.appendChild(option);
+            }
+        }
+
+        // Időopciók ötpercenkénti intervallumokkal
+        function populateTimeOptions(selectElement) {
+            selectElement.innerHTML = '';
+            for (let hour = 7; hour < 18; hour++) {
+                for (let minutes = 0; minutes < 60; minutes += 5) {
+                    const timeValue = hour * 100 + minutes;
+                    const timeText = `${hour}:${minutes.toString().padStart(2, '0')}`;
+                    const option = document.createElement('option');
+                    option.value = timeValue;
+                    option.textContent = timeText;
+                    selectElement.appendChild(option);
+                }
+            }
+        }
+
+        // Táblázat létrehozása ötpercenkénti intervallumokkal
+        function createScheduleTable() {
+            const scheduleBody = document.getElementById('scheduleBody');
+            scheduleBody.innerHTML = '';
+
+            for (let hour = 7; hour < 18; hour++) {
+                for (let minutes = 0; minutes < 60; minutes += 5) {
+                    const row = document.createElement('tr');
+                    const timeCell = document.createElement('td');
+                    timeCell.classList.add('time-column');
+                    timeCell.innerText = `${hour}:${minutes.toString().padStart(2, '0')}`;
+                    row.appendChild(timeCell);
+
+                    for (let i = 0; i < 7; i++) {
+                        const dayCell = document.createElement('td');
+                        dayCell.classList.add('day-column');
+                        row.appendChild(dayCell);
+                    }
+
+                    scheduleBody.appendChild(row);
+                }
+            }
+        }
+
+        // Bejegyzés hozzáadása
+        function addEntry() {
+            const description = document.getElementById('description').value;
+            const selectedDate = document.getElementById('dateSelect').value;
+            const startTime = document.getElementById('startTime').value;
+            const endTime = document.getElementById('endTime').value;
+
+            if (!description || !selectedDate || !startTime || !endTime) {
+                alert("Kérlek tölts ki minden mezőt!");
+                return;
+            }
+
+            alert("Bejegyzés hozzáadva!");
+        }
+
+        // Dátum- és időopciók, táblázat feltöltése
+        document.getElementById('addEntryBtn').addEventListener('click', addEntry);
+        populateDateOptions();
+        populateTimeOptions(document.getElementById('startTime'));
+        populateTimeOptions(document.getElementById('endTime'));
+        createScheduleTable();
+    </script>
+</body>
+</html>
