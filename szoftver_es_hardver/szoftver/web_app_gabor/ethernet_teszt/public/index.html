@@ -7,9 +7,20 @@
     <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
-    <h1>Diákok Státusza <button id="toggle-status">Zárás</button></h1>
+    <h1>Diákok Státusza <button class="toggle-status" id="toggle-status">Zárás</button></h1>
+    <div id="usernameDisplay" style="cursor: pointer;"></div>
     <div id="students"></div>
-
+    <!-- Felugró ablak -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <button class="modal_button" id="logout-button">Kijelentkezés</button>
+            <button class="modal_button">Gomb 2</button>
+            <button class="modal_button">Gomb 3</button>
+            <button class="modal_button">Gomb 4</button>
+            <button class="modal_button">Gomb 5</button>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

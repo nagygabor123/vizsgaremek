@@ -3,14 +3,15 @@ const http = require('http');
 const net = require('net');
 const WebSocket = require('ws');
 const mysql = require('mysql');
+const path = require('path');
 const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
-// Middleware for processing JSON data
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Create MySQL connection
+// MySQL adatbázis csatlakozás
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -18,12 +19,41 @@ const db = mysql.createConnection({
   database: 'rfid_log'
 });
 
-// Serve static files
-app.use(express.static('public'));
+// bejelentkezés ellenőrzése
+app.get('/', (req, res) => {
+  // Ellenőrizzük, hogy van-e tárolt felhasználónév
+  const username = req.query.username; // A felhasználónév lekérdezési paraméterként
+  if (username) {
+    // Ha van felhasználónév, irányítsuk át az index.html-re
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  } else {
+    // Ellenkező esetben a login.html-t töltjük be
+    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+  }
+});
 
-// Define arduinoSocket in a broader scope
-let arduinoSocket = null; // Store the Arduino socket reference
-let systemLocked = false; // Variable to track system status
+// Login útvonal a hitelesítéshez
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    // Adatbázis-lekérdezés a bejelentkezési adatok ellenőrzésére
+    const query = 'SELECT * FROM admins WHERE username = ? AND password = ?';
+    db.query(query, [username, password], (error, results) => {
+        if (error) {
+            console.error('Hiba az adatbázis-lekérdezés során:', error);
+            return res.status(500).json({ success: false, message: 'Szerver hiba.' });
+        }
+
+        if (results.length > 0) {
+            res.json({ success: true, message: 'Sikeres bejelentkezés!' });
+        } else {
+            res.json({ success: false, message: 'Hibás felhasználónév vagy jelszó!' });
+        }
+    });
+});
+
+let arduinoSocket = null;
+let systemLocked = false; 
 
 // WebSocket connection handling
 wss.on('connection', (ws) => {

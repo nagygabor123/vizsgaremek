@@ -1,6 +1,10 @@
 const studentsDiv = document.getElementById('students');
 const toggleButton = document.getElementById('toggle-status');
 const ws = new WebSocket('ws://localhost:3000');
+const usernameDisplay = document.getElementById('usernameDisplay');
+const modal = document.getElementById('modal');
+const closeModal = document.getElementsByClassName("close")[0];
+const logoutButton = document.getElementById('logout-button');
 
 // Check localStorage for the lock status and set the button text accordingly
 if (localStorage.getItem('isLocked') === 'true') {
@@ -52,3 +56,52 @@ toggleButton.addEventListener('click', () => {
     ws.send(JSON.stringify({ action: 'toggleStatus', isLocked }));
 });
 
+// Felhasználónév kattintásának kezelése
+usernameDisplay.addEventListener('click', () => {
+    modal.style.display = "block"; // Felugró ablak megjelenítése
+});
+
+// Felugró ablak bezárása
+closeModal.onclick = function() {
+    modal.style.display = "none"; // Felugró ablak eltüntetése
+}
+
+// Kijelentkezés gomb esemény figyelése
+logoutButton.addEventListener('click', () => {
+    localStorage.removeItem('username'); // Felhasználónév eltávolítása a localStorage-ból
+    window.location.href = '/login.html'; // Átirányítás a bejelentkező oldalra
+});
+
+// Felhasználónév megjelenítése az index oldalon
+const username = localStorage.getItem('username');
+if (username) {
+    usernameDisplay.textContent = `${username}`;
+} else {
+    window.location.href = '/login.html'; // Ha nincs bejelentkezve, visszairányítjuk a login oldalra
+}
+
+// Login function for login.html
+function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    fetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            localStorage.setItem('username', username); // Felhasználónév mentése a localStorage-ba
+            window.location.href = '/index.html'; // Redirect to main page
+        } else {
+            alert('Hibás felhasználónév vagy jelszó!');
+        }
+    })
+    .catch(error => {
+        console.error('Hiba történt a bejelentkezés során:', error);
+    });
+}
