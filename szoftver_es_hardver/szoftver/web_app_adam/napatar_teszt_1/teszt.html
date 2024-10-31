@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Táblázat különálló dobozokkal</title>
+    <style>
+        /* Táblázat stílus */
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Dobozok stílusa */
+        .box-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .box {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        .box1 {
+            background-color: #4CAF50; /* Zöld */
+        }
+        .box2 {
+            background-color: #FF5722; /* Narancssárga */
+        }
+    </style>
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>Cella 1</th>
+        <th>Cella 2</th>
+    </tr>
+    <tr>
+        <td>Normál cella</td>
+        <td>
+            <div class="box-container">
+                <div class="box box1"></div>
+                <div class="box box2"></div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
