@@ -4,43 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* .table { 
-            color: #2b4450;
-            border-collapse: separate;
-            border-spacing: 0;
-            border: 1px solid #497285;
-            border-radius: 15px;
-            background-color: #fff;
-        }
-    
-        .table thead th {
-            padding: .5em .6em;
-            border-bottom: 1px solid #497285;
-            border-left: 1px solid #497285;
-            
+
+        body{
+            padding: 30px;
         }
 
-        .table thead td:first-child {
-            border-left: none;
-}
-
-        .table tbody tr td {
-            padding: .5em .9em;
-        }
-     
-        .table tbody tr td + td {
-            border-left: 1px solid #497285;
-        }
-        
-        .table tbody tr + tr td {
-            border-top: 1px solid #497285;
-        }
-
- */
-
- body {
-	 padding: 30px;
-}
  table {
 	 border: 1px solid #aaa;
 	 border-collapse: separate;
@@ -48,10 +16,17 @@
 	 border-spacing: 0;
 	 border-radius: 10px;
 	 text-align: center;
-	 border: 1px solid #aaa;
 }
+
+table thead th {
+  /* padding: 1.1em 1.1em;   */
+  width: 14.28%;
+  padding: 15px;
+}
+
  table th, table td {
-	 padding: 0.6em 3em;
+	 /* padding: 0.6em 3em; */
+    
 	 vertical-align: middle;
 	 border-right: 1px solid #aaa;
 	 border-bottom: 1px solid #aaa;
@@ -59,45 +34,25 @@
  table th:last-child, table td:last-child {
 	 border-right: none;
 }
- table th {
-	 background: #ddd;
-}
- table td {
-	 background: #fff;
-}
+
  table tbody tr:last-child th, table tbody tr:last-child td {
 	 border-bottom: none;
 }
  
-    
-        /* table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px auto;
-            border: none;
+/*td:hover {
+            background-color: #e0f7fa; 
+            cursor: pointer;
         }*/
 
-        /*th, td {
-            border: none;
-            padding: 10px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }*/
+
         .today {
-            background-color: #a8ccff;
-           
-        }
-       /* .day-column {
-            width: 15%;
-            position: relative; 
-        }
-        .time-column {
-            width: 10%;
-            background-color: #f9f9f9;
-            font-weight: bold;
-        }*/
+    background-color: #edf4ff;
+    font-weight: bold;
+}
+
+
+
+
         .entry {
             background-color: #d3f8d3;
             margin: 0;
@@ -143,17 +98,16 @@
 </head>
 <body>
 
-<h2 style="text-align: center;">Órarend - Heti beosztás</h2>
 
 <div class="navigation">
     <button id="prevWeekBtn">Előző hét</button>
     <button id="nextWeekBtn">Következő hét</button>
 </div>
 
-<table class="table">
+<table>
     <thead>
         <tr>
-            <th>GMT</th>
+            <th>Időpont</th>
             <th id="mondayHeader">Hétfő</th>
             <th id="tuesdayHeader">Kedd</th>
             <th id="wednesdayHeader">Szerda</th>
@@ -349,116 +303,50 @@
             alert('Hiba történt a bejegyzés hozzáadása során.');
         }
     }
-    
+
     async function loadSchedule() {
-    const response = await fetch('/load-schedule');
-    const schedule = await response.json();
-    const scheduleBody = document.getElementById('scheduleBody');
-    
-    // Mai dátum és jelenlegi óra megszerzése
-    const todayDate = new Date().toISOString().split('T')[0];
-    const currentHour = new Date().getHours();
+        const response = await fetch('/load-schedule');
+        const schedule = await response.json();
+        const scheduleBody = document.getElementById('scheduleBody');
 
-    // Alapértelmezett cellák törlése
-    for (let i = 0; i < scheduleBody.rows.length; i++) {
-        for (let j = 1; j <= 7; j++) {
-            scheduleBody.rows[i].cells[j].innerHTML = '';
-            scheduleBody.rows[i].cells[j].style.display = ''; // Alapértelmezett megjelenés visszaállítása
-            scheduleBody.rows[i].cells[j].removeAttribute('rowspan');
-        }
-    }
-
-    const weekDates = getCurrentWeekDates(currentWeekOffset);
-    weekDates.forEach((weekDay, dayIndex) => {
-        const dayEntries = schedule[weekDay.date] || [];
-        dayEntries.forEach(entry => {
-            const startRowIndex = entry.startTime - 7;
-            const endRowIndex = entry.endTime - 7;
-            const rowSpan = endRowIndex - startRowIndex;
-
-            const cell = scheduleBody.rows[startRowIndex].cells[dayIndex + 1];
-            
-            // Ellenőrzés, hogy a mai napon és a jelenlegi időben van-e
-            const isCurrentEntry = weekDay.date === todayDate && currentHour >= entry.startTime && currentHour < entry.endTime;
-            const entryClass = isCurrentEntry ? 'entry entry-highlight' : 'entry';
-
-            // Csak a mai és jelenlegi időpontokra eső bejegyzéseknél engedélyezünk kattinthatóságot
-            cell.innerHTML = `<div class="${entryClass}" data-description="${entry.description}" data-start="${entry.startTime}" data-end="${entry.endTime}" style="height: ${rowSpan * 40}px;" ${isCurrentEntry ? 'onclick="showEntryDetails(this)"' : ''}>${entry.description}</div>`;
-            cell.setAttribute('rowspan', rowSpan);
-
-            for (let i = startRowIndex + 1; i < endRowIndex; i++) {
-                scheduleBody.rows[i].cells[dayIndex + 1].style.display = 'none';
+        // Reset cell contents
+        for (let i = 0; i < scheduleBody.rows.length; i++) {
+            for (let j = 1; j <= 7; j++) {
+                scheduleBody.rows[i].cells[j].innerHTML = '';
+                scheduleBody.rows[i].cells[j].style.display = ''; // Reset display property
+                scheduleBody.rows[i].cells[j].removeAttribute('rowspan');
             }
-        });
-    });
-}
-
-// Bejegyzés részleteinek megjelenítése
-function showEntryDetails(element) {
-    const description = element.getAttribute('data-description');
-    const start = element.getAttribute('data-start');
-    const end = element.getAttribute('data-end');
-    document.getElementById('entryDetails').innerText = `Leírás: ${description}\nKezdő időpont: ${start}:00\nBefejező időpont: ${end}:00`;
-    document.getElementById('dialog').style.display = 'flex';
-}
-
-document.getElementById('closeDialogBtn').addEventListener('click', function() {
-    document.getElementById('dialog').style.display = 'none';
-});
-
-    /*async function loadSchedule() {
-    const response = await fetch('/load-schedule');
-    const schedule = await response.json();
-    const scheduleBody = document.getElementById('scheduleBody');
-    
-    // Mai dátum és jelenlegi óra megszerzése
-    const todayDate = new Date().toISOString().split('T')[0];
-    const currentHour = new Date().getHours();
-
-    // Alapértelmezett cellák törlése
-    for (let i = 0; i < scheduleBody.rows.length; i++) {
-        for (let j = 1; j <= 7; j++) {
-            scheduleBody.rows[i].cells[j].innerHTML = '';
-            scheduleBody.rows[i].cells[j].style.display = ''; // Alapértelmezett megjelenés visszaállítása
-            scheduleBody.rows[i].cells[j].removeAttribute('rowspan');
         }
+
+        const weekDates = getCurrentWeekDates(currentWeekOffset);
+        weekDates.forEach((weekDay, dayIndex) => {
+            const dayEntries = schedule[weekDay.date] || [];
+            dayEntries.forEach(entry => {
+                const startRowIndex = entry.startTime - 7;
+                const endRowIndex = entry.endTime - 7;
+                const rowSpan = endRowIndex - startRowIndex;
+
+                const cell = scheduleBody.rows[startRowIndex].cells[dayIndex + 1];
+                cell.innerHTML = `<div class="entry" data-description="${entry.description}" data-start="${entry.startTime}" data-end="${entry.endTime}" style="height: ${rowSpan * 40}px;">${entry.description}</div>`;
+                cell.setAttribute('rowspan', rowSpan);
+
+                for (let i = startRowIndex + 1; i < endRowIndex; i++) {
+                    scheduleBody.rows[i].cells[dayIndex + 1].style.display = 'none';
+                }
+            });
+        });
+
+        // Add click event listeners to each entry
+        document.querySelectorAll('.entry').forEach(entry => {
+            entry.addEventListener('click', function() {
+                const description = this.getAttribute('data-description');
+                const start = this.getAttribute('data-start');
+                const end = this.getAttribute('data-end');
+                document.getElementById('entryDetails').innerText = `Leírás: ${description}\nKezdő időpont: ${start}:00\nBefejező időpont: ${end}:00`;
+                document.getElementById('dialog').style.display = 'flex';
+            });
+        });
     }
-
-    const weekDates = getCurrentWeekDates(currentWeekOffset);
-    weekDates.forEach((weekDay, dayIndex) => {
-        const dayEntries = schedule[weekDay.date] || [];
-        dayEntries.forEach(entry => {
-            const startRowIndex = entry.startTime - 7;
-            const endRowIndex = entry.endTime - 7;
-            const rowSpan = endRowIndex - startRowIndex;
-
-            const cell = scheduleBody.rows[startRowIndex].cells[dayIndex + 1];
-            
-            // Ha a mai nap van, és a jelenlegi idő benne van a bejegyzés intervallumában, akkor `entry-highlight` osztályt is hozzáadunk
-            const isCurrentEntry = weekDay.date === todayDate && currentHour >= entry.startTime && currentHour < entry.endTime;
-            const entryClass = isCurrentEntry ? 'entry entry-highlight' : 'entry';
-
-            cell.innerHTML = `<div class="${entryClass}" data-description="${entry.description}" data-start="${entry.startTime}" data-end="${entry.endTime}" style="height: ${rowSpan * 40}px;">${entry.description}</div>`;
-            cell.setAttribute('rowspan', rowSpan);
-
-            for (let i = startRowIndex + 1; i < endRowIndex; i++) {
-                scheduleBody.rows[i].cells[dayIndex + 1].style.display = 'none';
-            }
-        });
-    });
-
-    // Click események hozzáadása az egyes bejegyzésekhez
-    document.querySelectorAll('.entry').forEach(entry => {
-        entry.addEventListener('click', function() {
-            const description = this.getAttribute('data-description');
-            const start = this.getAttribute('data-start');
-            const end = this.getAttribute('data-end');
-            document.getElementById('entryDetails').innerText = `Leírás: ${description}\nKezdő időpont: ${start}:00\nBefejező időpont: ${end}:00`;
-            document.getElementById('dialog').style.display = 'flex';
-        });
-    });
-}
-*/
 
     document.getElementById('closeDialogBtn').addEventListener('click', function() {
         document.getElementById('dialog').style.display = 'none';
