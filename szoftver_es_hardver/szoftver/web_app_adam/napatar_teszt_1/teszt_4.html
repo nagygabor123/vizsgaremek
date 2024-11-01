@@ -7,21 +7,23 @@
     <style>
         /* Táblázat stílus */
         table {
-         
+            border-collapse: collapse;
             width: 50%;
             margin: 20px auto;
         }
         th, td {
             border: 1px solid #ddd;
             text-align: center;
-            padding: 0; /* Nincs padding, mert a doboznak lesz saját margója */
+            padding: 5px; /* Kis térköz a cella szélei és a doboz között */
+            height: 250px; /* Fix magasság a cellához */
+            vertical-align: middle;
+            box-sizing: border-box; /* Fontos, hogy a padding ne tolja el a cella méreteit */
         }
 
         /* Doboz stílusa közvetlenül a cellában */
         .box {
-            width: calc(100% - 10px); /* Hogy a margó mellett is kitöltse a cellát */
-            height: 60px;
-            margin: 5px; /* Kis térköz a cella szélei és a doboz között */
+            width: 100%; /* Kitölti a cella belső területét */
+            height: 100%;
             border-radius: 10px;
             background-color: #4CAF50; /* Zöld szín */
         }

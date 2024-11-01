@@ -14,60 +14,60 @@
 	 border-spacing: 0;
 	 border-radius: 10px;
 
-     width: 50%;
-     margin: 20px auto;
+
   
+      width: 50%; 
+            margin: 20px auto;
 }
 
 table thead th {
-  
+  padding: 25px;
 }
 
- table th, table td {
-  
-            text-align: center;
-            padding: 0; 
-	 border-right: 1px solid #aaa;
-	 border-bottom: 1px solid #aaa;
+.time-column {
+   /* padding-top: 25px; */ 
+   padding-left: 25px;
+   padding-right: 25px;
 }
- table th:last-child, table td:last-child {
-	 border-right: none;
+
+table th, table td {
+    padding: 5px; /* Kis térköz a cella szélei és a doboz között */
+            height: 250px; /* Fix magasság a cellához */
+            vertical-align: middle;
+    border-right: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+}
+
+
+table th:last-child, table td:last-child {
+	border-right: none;
      
 }
 
- table tbody tr:last-child th, table tbody tr:last-child td {
-	 border-bottom: none;
+table tbody tr:last-child th, table tbody tr:last-child td {
+	border-bottom: none;
 }
  
-/*td:hover {
-            background-color: #e0f7fa; 
-            cursor: pointer;
-        }*/
+/*.entry:hover {
+    background-color: #e85744; 
+    cursor: pointer;
+}*/
 
-
-        .today {
+.today {
     background-color: #edf4ff;
     font-weight: bold;
 }
 
-.day-column {
-   
-    position: relative; 
-}
 
-.time-column {
-   
-    background-color: #f9f9f9;
-    font-weight: bold;
-}
+
 
 
         .entry {
-            width: calc(100% - 10px); /* Hogy a margó mellett is kitöltse a cellát */
-            height: 60px;
-            margin: 5px; /* Kis térköz a cella szélei és a doboz között */
+            width: 100%; /* Kitölti a cella belső területét */
+            height: 100%;
             border-radius: 10px;
             background-color: #4CAF50; /* Zöld szín */
+            text-align: center;
         }
         .entry-highlight {
             background-color: #fffaa0;
@@ -330,7 +330,7 @@ table thead th {
                 const rowSpan = endRowIndex - startRowIndex;
 
                 const cell = scheduleBody.rows[startRowIndex].cells[dayIndex + 1];
-                cell.innerHTML = `<div class="entry" data-description="${entry.description}" data-start="${entry.startTime}" data-end="${entry.endTime}" style="height: ${rowSpan * 40}px;">${entry.description}</div>`;
+                cell.innerHTML = `<div class="entry" data-description="${entry.description}" data-start="${entry.startTime}" data-end="${entry.endTime}" >${entry.description}</div>`; /*style="height: ${rowSpan * 40}px;"*/
                 cell.setAttribute('rowspan', rowSpan);
 
                 for (let i = startRowIndex + 1; i < endRowIndex; i++) {
