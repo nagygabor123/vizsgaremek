@@ -7,39 +7,39 @@
 
     
 
- table {
-	 border: 1px solid #aaa;
-	 border-collapse: separate;
-	 overflow: hidden;
-	 border-spacing: 0;
-	 border-radius: 10px;
-float: right;
+table {
+    border: 1px solid #aaa;
+    border-collapse: separate;
+    overflow: hidden;
+    border-spacing: 0;
+    border-radius: 10px;
+    float: right;
+    width: 80%;
+    margin: 20px auto;
+    /* Egyenlő oszlopszélesség */
+ table-layout: fixed;
 
- 
-      width: 80%;  
-            margin: 20px auto;
 }
 
-/* .time-column {
-   
-   padding-left: 25px;
-   padding-right: 25px;
-} */
 
 .time-column {
-   /* padding-top: 25px; */ 
-   padding-left: 25px;
-   padding-right: 25px;
-}
+   text-align: center;
+
+} 
+
+
 
 table th, table td {
     padding: 5px; /* Kis térköz a cella szélei és a doboz között */
-            height: 50px; /* Fix magasság a cellához */
+            height: 55px; /* Fix magasság a cellához */
             vertical-align: middle;
     border-right: 1px solid #aaa;
     border-bottom: 1px solid #aaa;
 }
 
+th:first-child {
+    width: 90px; /* Állítsd be az első fejléc cella szélességét */
+}
 
 table th:last-child, table td:last-child {
 	border-right: none;
@@ -240,9 +240,12 @@ table tbody tr:last-child th, table tbody tr:last-child td {
 
     days.forEach((dayId, index) => {
         const header = document.getElementById(dayId);
-        header.innerText = `${weekDates[index].day} (${weekDates[index].date})`;
+        
+        // Nap és a nap dátuma a formátumban "Péntek 18"
+        const dayNumber = new Date(weekDates[index].date).getDate();
+        header.innerText = `${weekDates[index].day} ${dayNumber}`;
 
-        // Ellenőrizze, hogy a mai nap-e, és alkalmazza a `today` osztályt
+        // Ellenőrzi, hogy a mai nap-e, és alkalmazza a `today` osztályt
         if (weekDates[index].date === todayDate) {
             header.classList.add('today');
         } else {
@@ -262,30 +265,6 @@ table tbody tr:last-child th, table tbody tr:last-child td {
 
     loadSchedule();
 }
-
-    /*function updateSchedule(weekOffset) {
-        const weekDates = getCurrentWeekDates(weekOffset);
-        
-        document.getElementById('mondayHeader').innerText = `Hétfő (${weekDates[0].date})`;
-        document.getElementById('tuesdayHeader').innerText = `Kedd (${weekDates[1].date})`;
-        document.getElementById('wednesdayHeader').innerText = `Szerda (${weekDates[2].date})`;
-        document.getElementById('thursdayHeader').innerText = `Csütörtök (${weekDates[3].date})`;
-        document.getElementById('fridayHeader').innerText = `Péntek (${weekDates[4].date})`;
-        document.getElementById('saturdayHeader').innerText = `Szombat (${weekDates[5].date})`;
-        document.getElementById('sundayHeader').innerText = `Vasárnap (${weekDates[6].date})`;
-
-        const dateSelect = document.getElementById('dateSelect');
-        dateSelect.innerHTML = '';
-
-        weekDates.forEach(day => {
-            const option = document.createElement('option');
-            option.value = day.date;
-            option.innerText = `${day.day} (${day.date})`;
-            dateSelect.appendChild(option);
-        });
-
-        loadSchedule();
-    }*/
 
     async function addEntry() {
         const description = document.getElementById('description').value;
