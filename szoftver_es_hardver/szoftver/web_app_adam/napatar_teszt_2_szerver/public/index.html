@@ -3,27 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Órarend/Naptár</title>
     <style>
-        table {
+        /* .table { 
+            color: #2b4450;
+            border-collapse: separate;
+            border-spacing: 0;
+            border: 1px solid #497285;
+            border-radius: 15px;
+            background-color: #fff;
+        }
+    
+        .table thead th {
+            padding: .5em .6em;
+            border-bottom: 1px solid #497285;
+            border-left: 1px solid #497285;
+            
+        }
+
+        .table thead td:first-child {
+            border-left: none;
+}
+
+        .table tbody tr td {
+            padding: .5em .9em;
+        }
+     
+        .table tbody tr td + td {
+            border-left: 1px solid #497285;
+        }
+        
+        .table tbody tr + tr td {
+            border-top: 1px solid #497285;
+        }
+
+ */
+
+ body {
+	 padding: 30px;
+}
+ table {
+	 border: 1px solid #aaa;
+	 border-collapse: separate;
+	 overflow: hidden;
+	 border-spacing: 0;
+	 border-radius: 10px;
+	 text-align: center;
+	 border: 1px solid #aaa;
+}
+ table th, table td {
+	 padding: 0.6em 3em;
+	 vertical-align: middle;
+	 border-right: 1px solid #aaa;
+	 border-bottom: 1px solid #aaa;
+}
+ table th:last-child, table td:last-child {
+	 border-right: none;
+}
+ table th {
+	 background: #ddd;
+}
+ table td {
+	 background: #fff;
+}
+ table tbody tr:last-child th, table tbody tr:last-child td {
+	 border-bottom: none;
+}
+ 
+    
+        /* table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px auto;
             border: none;
-        }
-        th, td {
+        }*/
+
+        /*th, td {
             border: none;
             padding: 10px;
             text-align: center;
         }
         th {
             background-color: #f2f2f2;
-        }
+        }*/
         .today {
-    background-color: #ffeb3b;
-    font-weight: bold;
-}
-        .day-column {
+            background-color: #a8ccff;
+           
+        }
+       /* .day-column {
             width: 15%;
             position: relative; 
         }
@@ -31,7 +97,7 @@
             width: 10%;
             background-color: #f9f9f9;
             font-weight: bold;
-        }
+        }*/
         .entry {
             background-color: #d3f8d3;
             margin: 0;
@@ -84,10 +150,10 @@
     <button id="nextWeekBtn">Következő hét</button>
 </div>
 
-<table>
+<table class="table">
     <thead>
         <tr>
-            <th>Időpont</th>
+            <th>GMT</th>
             <th id="mondayHeader">Hétfő</th>
             <th id="tuesdayHeader">Kedd</th>
             <th id="wednesdayHeader">Szerda</th>
