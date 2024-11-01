@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Táblázat dobozzal</title>
+    <style>
+        /* Táblázat stílus */
+        table {
+         
+            width: 50%;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 0; /* Nincs padding, mert a doboznak lesz saját margója */
+        }
+
+        /* Doboz stílusa közvetlenül a cellában */
+        .box {
+            width: calc(100% - 10px); /* Hogy a margó mellett is kitöltse a cellát */
+            height: 60px;
+            margin: 5px; /* Kis térköz a cella szélei és a doboz között */
+            border-radius: 10px;
+            background-color: #4CAF50; /* Zöld szín */
+        }
+    </style>
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>Cella 1</th>
+        <th>Cella 2</th>
+    </tr>
+    <tr>
+        <td>Normál cella</td>
+        <td>
+            <div class="box"></div>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

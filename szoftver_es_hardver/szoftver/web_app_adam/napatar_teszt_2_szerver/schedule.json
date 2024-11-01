@@ -1,72 +1,31 @@
 {
   "2024-10-28": [
     {
-      "description": "Testnevelés",
+      "description": "asd",
       "startTime": 7,
       "endTime": 8
     },
     {
-      "description": "Matematika",
+      "description": "asd2",
       "startTime": 8,
       "endTime": 9
     },
     {
-      "description": "Ofő",
+      "description": "asd3",
       "startTime": 9,
       "endTime": 10
-    },
-    {
-      "description": "Nyelvtan",
-      "startTime": 10,
-      "endTime": 11
-    },
-    {
-      "description": "Irodalom",
-      "startTime": 10,
-      "endTime": 11
-    },
-    {
-      "description": "Irodalom",
-      "startTime": 11,
-      "endTime": 12
-    },
-    {
-      "description": "Nyelvtan",
-      "startTime": 12,
-      "endTime": 13
     }
   ],
   "2024-10-29": [
     {
-      "description": "Nyelvtan",
-      "startTime": 12,
-      "endTime": 13
-    }
-  ],
-  "2024-10-30": [
-    {
-      "description": "Nyelvtan",
-      "startTime": 12,
-      "endTime": 13
-    }
-  ],
-  "2024-10-31": [
-    {
-      "description": "Nyelvtan",
-      "startTime": 12,
-      "endTime": 13
+      "description": "asd4",
+      "startTime": 7,
+      "endTime": 8
     },
     {
-      "description": "Nyelvtan",
-      "startTime": 13,
-      "endTime": 14
-    }
-  ],
-  "2024-11-01": [
-    {
-      "description": "asd",
+      "description": "asd5",
       "startTime": 8,
-      "endTime": 13
+      "endTime": 9
     }
   ]
 }

@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
 
-        body{
-            padding: 30px;
-        }
+    
 
  table {
 	 border: 1px solid #aaa;
@@ -15,24 +13,26 @@
 	 overflow: hidden;
 	 border-spacing: 0;
 	 border-radius: 10px;
-	 text-align: center;
+
+     width: 50%;
+     margin: 20px auto;
+  
 }
 
 table thead th {
-  /* padding: 1.1em 1.1em;   */
-  width: 14.28%;
-  padding: 15px;
+  
 }
 
  table th, table td {
-	 /* padding: 0.6em 3em; */
-    
-	 vertical-align: middle;
+  
+            text-align: center;
+            padding: 0; 
 	 border-right: 1px solid #aaa;
 	 border-bottom: 1px solid #aaa;
 }
  table th:last-child, table td:last-child {
 	 border-right: none;
+     
 }
 
  table tbody tr:last-child th, table tbody tr:last-child td {
@@ -50,21 +50,24 @@ table thead th {
     font-weight: bold;
 }
 
+.day-column {
+   
+    position: relative; 
+}
 
+.time-column {
+   
+    background-color: #f9f9f9;
+    font-weight: bold;
+}
 
 
         .entry {
-            background-color: #d3f8d3;
-            margin: 0;
-            padding: 10px;
+            width: calc(100% - 10px); /* Hogy a margó mellett is kitöltse a cellát */
+            height: 60px;
+            margin: 5px; /* Kis térköz a cella szélei és a doboz között */
             border-radius: 10px;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            cursor: pointer;
-            box-sizing: border-box;
+            background-color: #4CAF50; /* Zöld szín */
         }
         .entry-highlight {
             background-color: #fffaa0;
@@ -107,7 +110,7 @@ table thead th {
 <table>
     <thead>
         <tr>
-            <th>Időpont</th>
+            <th></th>
             <th id="mondayHeader">Hétfő</th>
             <th id="tuesdayHeader">Kedd</th>
             <th id="wednesdayHeader">Szerda</th>
