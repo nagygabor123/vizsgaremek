@@ -1,0 +1,1 @@
+Csak tanulói lista, mivel azon belül osztályokba lennének szedve a diákok, lenyíló gombok segítségével lehetne lenyitni és összecsukni az osztályokat. Lehetne szúrni, hogy mely bizonyos osztály tanulóit jelenítse meg.
