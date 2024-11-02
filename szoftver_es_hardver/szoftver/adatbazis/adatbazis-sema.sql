@@ -30,11 +30,6 @@ CREATE TABLE locker_relationships (
     FOREIGN KEY (locker_id) REFERENCES lockers(locker_id)
 );
 
-CREATE TABLE subjects (
-    subject_id INT PRIMARY KEY AUTO_INCREMENT,
-    teacher_name VARCHAR(255) NOT NULL
-);
-
 CREATE TABLE groups (
     group_id INT PRIMARY KEY AUTO_INCREMENT,
     group_name VARCHAR(255) NOT NULL
@@ -51,12 +46,12 @@ CREATE TABLE student_groups (
 CREATE TABLE timetables (
     timetable_id INT PRIMARY KEY AUTO_INCREMENT,
     group_id INT NOT NULL, -- Csoportazonosító, amely jelzi, hogy melyik csoporthoz tartozik az órarend
-    subject_id INT NOT NULL,
+    admin_id INT NOT NULL,
     day_of_week ENUM('Hetfo', 'Kedd', 'Szerda', 'Csutortok', 'Pentek') NOT NULL,
     start_time TIME NOT NULL,
     end_time TIME NOT NULL,
     FOREIGN KEY (group_id) REFERENCES groups(group_id),
-    FOREIGN KEY (subject_id) REFERENCES subjects(subject_id)
+    FOREIGN KEY (admin_id) REFERENCES admins(admin_id)
 );
 
 CREATE TABLE admins (
