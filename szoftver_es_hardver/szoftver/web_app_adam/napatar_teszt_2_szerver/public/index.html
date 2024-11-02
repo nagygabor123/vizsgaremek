@@ -27,6 +27,18 @@ table {
 
 } 
 
+.today-column {
+    background: repeating-linear-gradient(
+        -81deg,
+        #e0e0e0,
+        #e0e0e0 1px,
+        #ffffff 1px,
+        #ffffff 10px
+    );
+    /* Nagy méret a folytonos csíkozáshoz */
+    border-top: none; /* Cellahatárolók eltüntetése */
+    border-bottom: none;
+}
 
 
 table th, table td {
@@ -227,7 +239,7 @@ table tbody tr:last-child th, table tbody tr:last-child td {
 
     function updateSchedule(weekOffset) {
     const weekDates = getCurrentWeekDates(weekOffset);
-    const todayDate = new Date().toISOString().split('T')[0]; // Mai dátum
+    const todayDate = new Date().toISOString().split('T')[0];
 
     const days = [
         'mondayHeader', 
@@ -249,8 +261,14 @@ table tbody tr:last-child th, table tbody tr:last-child td {
         // Ellenőrzi, hogy a mai nap-e, és alkalmazza a `today` osztályt
         if (weekDates[index].date === todayDate) {
             header.classList.add('today');
+            document.querySelectorAll(`#scheduleBody td:nth-child(${index + 2})`).forEach(cell => {
+                cell.classList.add('today-column');
+            });
         } else {
             header.classList.remove('today');
+            document.querySelectorAll(`#scheduleBody td:nth-child(${index + 2})`).forEach(cell => {
+                cell.classList.remove('today-column');
+            });
         }
     });
 
@@ -266,6 +284,7 @@ table tbody tr:last-child th, table tbody tr:last-child td {
 
     loadSchedule();
 }
+
 
     async function addEntry() {
         const description = document.getElementById('description').value;
