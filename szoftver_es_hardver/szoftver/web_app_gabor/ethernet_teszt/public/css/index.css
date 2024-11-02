@@ -76,24 +76,16 @@ h1 {
     background-color: rgba(0, 0, 0, 0.4); /* Fekete háttér áttetsző */
 }
 
-.modal-content {
+.modal-content, .student-modal-content {
     background-color: #fefefe;
     margin: 15% auto; 
     padding: 20px;
     border: 1px solid #888;
     width: 300px; 
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
-.student-modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* Középre helyezés */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Szélesség */
-    border-radius: 10px; /* Lekerekített sarkok */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Árnyék */
-}
+
 
 .close {
     color: #aaa;

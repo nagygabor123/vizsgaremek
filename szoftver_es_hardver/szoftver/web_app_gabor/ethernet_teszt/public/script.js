@@ -22,7 +22,7 @@ ws.onmessage = function(event) {
             const studentBox = document.createElement('div');
             studentBox.className = 'student-box';
             studentBox.textContent = student.nev;
-            studentBox.setAttribute('data-rfid', student.rfid); // RFID azonosító
+            studentBox.setAttribute('data-rfid', student.rfid_azon); // RFID azonosító
             studentBox.setAttribute('data-pin', student.pin); // PIN
 
             // Státusz alapján osztály hozzáadása
