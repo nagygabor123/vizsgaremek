@@ -25,6 +25,7 @@ table {
     border-radius: 10px;
     float: right;
     width: 75%;
+    margin-right: 30px;
 
     /* Egyenlő oszlopszélesség */
  table-layout: fixed;
@@ -114,11 +115,14 @@ table tbody tr:last-child th, table tbody tr:last-child td {
 
 
         .entry {
-            width: 100%; /* Kitölti a cella belső területét */
-            height: 100%;
+            box-sizing: border-box; /* A padding ne befolyásolja a méretet */
+            padding: 8px; /* Belső margó */
+            width: 100%; /* A cella szélességét lefedő bejegyzés */
+            height: 100%; /* A cella magasságát lefedő bejegyzés */
+            overflow: hidden; /* Megakadályozza a szöveg kicsúszását */
             border-radius: 10px;
-            border: 1px solid rgb(226, 105, 240);
-            background-color: rgb(247, 84, 187); 
+            /* border: 1px solid rgb(226, 105, 240);
+            background-color: rgb(247, 84, 187);  */
             
         }
         .entry-highlight {
@@ -161,6 +165,7 @@ table tbody tr:last-child th, table tbody tr:last-child td {
     align-items: center;
     justify-content: flex-start;
     margin-bottom: 15px; /* Távolság a táblázattól */
+    margin-right: 30px;
 }
 
 /* A hónap és év stílusai */
