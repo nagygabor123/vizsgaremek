@@ -82,6 +82,13 @@
       "endTime": 5,
       "color": "#434e15",
       "borderColor": "#423823"
+    },
+    {
+      "description": "asdd",
+      "startTime": 1,
+      "endTime": 1,
+      "color": "#caef94",
+      "borderColor": "#818502"
     }
   ],
   "2024-11-01": [
@@ -91,6 +98,31 @@
       "endTime": 3,
       "color": "#165b96",
       "borderColor": "#e37d2c"
+    },
+    {
+      "description": "asdd",
+      "startTime": 1,
+      "endTime": 1,
+      "color": "#e65a26",
+      "borderColor": "#ea818f"
+    }
+  ],
+  "2024-10-29": [
+    {
+      "description": "asd",
+      "startTime": 1,
+      "endTime": 1,
+      "color": "#3b128b",
+      "borderColor": "#bb7219"
+    }
+  ],
+  "2024-10-31": [
+    {
+      "description": "asdd",
+      "startTime": 1,
+      "endTime": 1,
+      "color": "#bb295",
+      "borderColor": "#51be1f"
     }
   ]
 }
