@@ -21,14 +21,13 @@ app.get('/load-schedule', (req, res) => {
     });
 });
 
-// Add new entry to schedule
 app.post('/add-entry', (req, res) => {
-    const { description, selectedDate, startTime, endTime } = req.body;
-    if (!description || !selectedDate || !startTime || !endTime) {
+    const { description, selectedDate, startTime, endTime, color, borderColor } = req.body;
+    if (!description || !selectedDate || !startTime || !endTime || !color || !borderColor) {
         return res.status(400).send('Invalid input');
     }
 
-    const entry = { description, startTime: parseInt(startTime), endTime: parseInt(endTime) };
+    const entry = { description, startTime: parseInt(startTime), endTime: parseInt(endTime), color, borderColor };
     
     fs.readFile(FILE_PATH, 'utf8', (err, data) => {
         let schedule = {};
