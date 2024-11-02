@@ -29,6 +29,13 @@
       "endTime": 4,
       "color": "#e4e823",
       "borderColor": "#e606be"
+    },
+    {
+      "description": "k",
+      "startTime": 1,
+      "endTime": 1,
+      "color": "#3ff198",
+      "borderColor": "#d295aa"
     }
   ],
   "2024-10-30": [
