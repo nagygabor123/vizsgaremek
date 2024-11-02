@@ -55,23 +55,26 @@ app.post('/login', (req, res) => {
 let arduinoSocket = null;
 let systemLocked = false; 
 
-// WebSocket connection handling
+// WebSocket kapcsolat kezelése
 wss.on('connection', (ws) => {
   console.log('WebSocket csatlakozott');
   
-  // Query the current list of students and send to the connected client
+  // Küldje el az aktuális rendszer állapotot az újonnan csatlakozó kliensnek
+  ws.send(JSON.stringify({ action: 'systemStatus', isLocked: systemLocked }));
+
+  // A diákok listájának lekérdezése és elküldése a kliensnek
   db.query('SELECT * FROM student', (error, results) => {
     if (error) {
       console.error('Hiba a diákok lekérdezésénél:', error);
       return;
     }
-    ws.send(JSON.stringify(results)); // Send the initial list of students to the WebSocket client
+    ws.send(JSON.stringify(results)); // Diákok adatainak elküldése
   });
 
   ws.on('message', (message) => {
     const data = JSON.parse(message);
     if (data.action === 'toggleStatus') {
-      toggleSystem();
+      toggleSystem(); // Hívja meg a rendszer állapotának váltására szolgáló függvényt
     }
   });
 
@@ -107,15 +110,15 @@ tcpServer.on('error', (err) => {
   console.error('Server error:', err);
 });
 
-// Modify the toggleSystem function
+// Módosított toggleSystem függvény
 function toggleSystem() {
-  systemLocked = !systemLocked; // Toggle the lock status
+  systemLocked = !systemLocked; // Rendszer zárt állapotának váltása
   const statusMessage = systemLocked ? 'Rendszer zárva' : 'Rendszer feloldva';
   console.log(statusMessage);
 
-  // Send command to Arduino if it's connected
+  // Arduino-nak küldött parancs
   if (arduinoSocket) {
-    const command = systemLocked ? 'LOCK\n' : 'UNLOCK\n'; // Use appropriate command for Arduino
+    const command = systemLocked ? 'LOCK\n' : 'UNLOCK\n';
     arduinoSocket.write(command, (err) => {
       if (err) {
         console.error('Hiba a pin küldésekor:', err);
@@ -124,6 +127,13 @@ function toggleSystem() {
       }
     });
   }
+
+  // WebSocket kliensek értesítése a frissített rendszerállapotról
+  wss.clients.forEach((client) => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(JSON.stringify({ action: 'systemStatus', isLocked: systemLocked }));
+    }
+  });
 }
 
 function processRfidTag(rfidTag, socket) {
