@@ -20,6 +20,13 @@
       "endTime": 9,
       "color": "#c6e2e1",
       "borderColor": "#5001a2"
+    },
+    {
+      "description": "d",
+      "startTime": 1,
+      "endTime": 1,
+      "color": "#fda672",
+      "borderColor": "#cd91eb"
     }
   ],
   "2024-10-28": [
@@ -52,6 +59,13 @@
       "endTime": 7,
       "color": "#1d1343",
       "borderColor": "#1fdbc6"
+    },
+    {
+      "description": "d",
+      "startTime": 1,
+      "endTime": 1,
+      "color": "#e1431a",
+      "borderColor": "#dffd27"
     }
   ],
   "2024-11-03": [
