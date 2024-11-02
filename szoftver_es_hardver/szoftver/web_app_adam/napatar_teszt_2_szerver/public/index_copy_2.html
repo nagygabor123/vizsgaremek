@@ -132,9 +132,6 @@ table tbody tr:last-child th, table tbody tr:last-child td {
     <button id="nextWeekBtn">Következő hét</button>
 </div>
 
-<div id="monthYearDisplay" style="text-align: center; font-size: 24px; margin: 20px;"></div>
-
-
 <table>
     <thead>
         <tr>
@@ -282,56 +279,52 @@ function getCurrentWeekDates(weekOffset) {
 }
 
 function updateSchedule(weekOffset) {
-    const weekDates = getCurrentWeekDates(weekOffset);
-    const todayDate = new Date().toISOString().split('T')[0];
+const weekDates = getCurrentWeekDates(weekOffset);
+const todayDate = new Date().toISOString().split('T')[0];
 
-    const days = [
-        'mondayHeader', 
-        'tuesdayHeader', 
-        'wednesdayHeader', 
-        'thursdayHeader', 
-        'fridayHeader', 
-        'saturdayHeader', 
-        'sundayHeader'
-    ];
+const days = [
+    'mondayHeader', 
+    'tuesdayHeader', 
+    'wednesdayHeader', 
+    'thursdayHeader', 
+    'fridayHeader', 
+    'saturdayHeader', 
+    'sundayHeader'
+];
 
-    // Kiíratás az év és hónap számára
-    const monthYearDisplay = document.getElementById('monthYearDisplay');
-    const firstDateOfWeek = new Date(weekDates[0].date);
-    const options = { year: 'numeric', month: 'long' };
-    monthYearDisplay.innerText = firstDateOfWeek.toLocaleDateString('hu-HU', options);
+days.forEach((dayId, index) => {
+    const header = document.getElementById(dayId);
+    
+    // Nap és a nap dátuma a formátumban "Péntek 18"
+    const dayNumber = new Date(weekDates[index].date).getDate();
+    header.innerText = `${weekDates[index].day} ${dayNumber}`;
 
-    days.forEach((dayId, index) => {
-        const header = document.getElementById(dayId);
-        
-        const dayNumber = new Date(weekDates[index].date).getDate();
-        header.innerText = `${weekDates[index].day} ${dayNumber}`;
+    // Ellenőrzi, hogy a mai nap-e, és alkalmazza a `today` osztályt
+    if (weekDates[index].date === todayDate) {
+        header.classList.add('today');
+        document.querySelectorAll(`#scheduleBody td:nth-child(${index + 2})`).forEach(cell => {
+            cell.classList.add('today-column');
+        });
+    } else {
+        header.classList.remove('today');
+        document.querySelectorAll(`#scheduleBody td:nth-child(${index + 2})`).forEach(cell => {
+            cell.classList.remove('today-column');
+        });
+    }
+});
 
-        if (weekDates[index].date === todayDate) {
-            header.classList.add('today');
-            document.querySelectorAll(`#scheduleBody td:nth-child(${index + 2})`).forEach(cell => {
-                cell.classList.add('today-column');
-            });
-        } else {
-            header.classList.remove('today');
-            document.querySelectorAll(`#scheduleBody td:nth-child(${index + 2})`).forEach(cell => {
-                cell.classList.remove('today-column');
-            });
-        }
-    });
+// Frissíti a dátum kiválasztó mezőt
+const dateSelect = document.getElementById('dateSelect');
+dateSelect.innerHTML = '';
+weekDates.forEach(day => {
+    const option = document.createElement('option');
+    option.value = day.date;
+    option.innerText = `${day.day} (${day.date})`;
+    dateSelect.appendChild(option);
+});
 
-    const dateSelect = document.getElementById('dateSelect');
-    dateSelect.innerHTML = '';
-    weekDates.forEach(day => {
-        const option = document.createElement('option');
-        option.value = day.date;
-        option.innerText = `${day.day} (${day.date})`;
-        dateSelect.appendChild(option);
-    });
-
-    loadSchedule();
+loadSchedule();
 }
-
 
 async function addEntry() {
     const description = document.getElementById('description').value;
