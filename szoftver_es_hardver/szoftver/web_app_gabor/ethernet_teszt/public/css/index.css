@@ -83,6 +83,7 @@ h1 {
     border: 1px solid #888;
     width: 300px; 
     border-radius: 10px;
+    cursor: pointer;
 }
 
 
@@ -101,7 +102,7 @@ h1 {
     cursor: pointer;
 }
 
-.modal_button {
+.modal_button,.modal_button_student {
     display: block; /* Gombok egymás alatt */
     margin: 10px auto; /* Középre igazítva */
     padding: 10px;
@@ -111,4 +112,10 @@ h1 {
     border: none;
     border-radius: 5px;
     text-align: center; /* Középre igazítás */
+    cursor: pointer;
+}
+
+.modal_button_student:disabled {
+    background-color: #ccc; /* Szürke háttér */
+    cursor: not-allowed; /* Nem engedélyezett kurzor */
 }

@@ -2,9 +2,9 @@ const studentsDiv = document.getElementById('students');
 const toggleButton = document.getElementById('toggle-status');
 const ws = new WebSocket('ws://localhost:3000');
 const usernameDisplay = document.getElementById('usernameDisplay');
-const modal = document.getElementById('modal'); // Felhasználói modal
-const studentModal = document.getElementById('studentModal'); // Diák modal
-const closeButtons = document.getElementsByClassName("close"); // Az összes close gomb
+const modal = document.getElementById('modal'); 
+const studentModal = document.getElementById('studentModal'); 
+const closeButtons = document.getElementsByClassName("close"); 
 const logoutButton = document.getElementById('logout-button');
 
 ws.onopen = function() {
@@ -14,18 +14,16 @@ ws.onopen = function() {
 ws.onmessage = function(event) {
     const data = JSON.parse(event.data);
 
-    // Ha diák adatokat kaptunk
     if (Array.isArray(data)) {
-        studentsDiv.innerHTML = ''; // Üresítse ki a diákok div-jét
+        studentsDiv.innerHTML = '';
 
         data.forEach(student => {
             const studentBox = document.createElement('div');
             studentBox.className = 'student-box';
             studentBox.textContent = student.nev;
-            studentBox.setAttribute('data-rfid', student.rfid_azon); // RFID azonosító
-            studentBox.setAttribute('data-pin', student.pin); // PIN
+            studentBox.setAttribute('data-rfid', student.rfid_azon); 
+            studentBox.setAttribute('data-pin', student.pin); 
 
-            // Státusz alapján osztály hozzáadása
             if (student.statusz === 'be') {
                 studentBox.classList.add('present');
             } else {
@@ -35,8 +33,8 @@ ws.onmessage = function(event) {
             studentsDiv.appendChild(studentBox);
         });
     } else if (data.action === 'systemStatus') {
-        // Ha rendszerállapot adatot kaptunk
         toggleButton.textContent = data.isLocked ? 'Feloldás' : 'Zárás';
+        document.getElementById('student-unlocking').disabled = !data.isLocked; 
     }
 };
 
@@ -62,16 +60,12 @@ usernameDisplay.addEventListener('click', () => {
 // Diákok rublikáinak kattintás eseménykezelője
 studentsDiv.addEventListener('click', (event) => {
     if (event.target.classList.contains('student-box')) {
-        const studentName = event.target.textContent; // Diák neve
-        const studentRFID = event.target.getAttribute('data-rfid'); // RFID azonosító
-        const studentPIN = event.target.getAttribute('data-pin'); // PIN
-
-        // Kitöltjük a modal adatokat
+        const studentName = event.target.textContent;
+        const studentRFID = event.target.getAttribute('data-rfid');
+        const studentPIN = event.target.getAttribute('data-pin'); 
         document.getElementById('studentName').textContent = studentName;
         document.getElementById('studentRFID').textContent = studentRFID;
         document.getElementById('studentPIN').textContent = studentPIN;
-
-        // Megjelenítjük a diák modalt
         studentModal.style.display = "block";
     }
 });
@@ -83,6 +77,14 @@ Array.from(closeButtons).forEach(closeButton => {
         studentModal.style.display = "none";
     };
 });
+
+// Diák feloldása gomb eseménykezelője
+document.getElementById('student-unlocking').addEventListener('click', () => {
+    const studentRFID = document.getElementById('studentRFID').textContent;
+    ws.send(JSON.stringify({ action: 'unlockStudent', rfid: studentRFID }));
+    console.log(`Diák feloldása: ${studentRFID}`);
+});
+
 
 logoutButton.addEventListener('click', () => {
     localStorage.removeItem('username');

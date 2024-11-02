@@ -77,6 +77,16 @@ wss.on('connection', (ws) => {
     }
   });
 
+  ws.on('message', (message) => {
+    const data = JSON.parse(message);
+    
+    if (data.action === 'unlockStudent') {
+      const rfid = data.rfid;
+      unlockStudent(rfid);
+    }
+  });
+
+
   ws.on('close', () => {
     console.log('WebSocket lecsatlakozott');
   });
@@ -109,7 +119,11 @@ tcpServer.on('error', (err) => {
   console.error('Server error:', err);
 });
 
-// Módosított toggleSystem függvény
+
+function unlockStudent(rfid) {
+  console.log(`Feloldott RFID: ${rfid}`)
+}
+
 function toggleSystem() {
   systemLocked = !systemLocked; // Rendszer zárt állapotának váltása
   const statusMessage = systemLocked ? 'Rendszer zárva' : 'Rendszer feloldva';
