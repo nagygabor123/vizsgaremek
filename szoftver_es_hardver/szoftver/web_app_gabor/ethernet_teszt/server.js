@@ -21,7 +21,6 @@ const db = mysql.createConnection({
 
 // bejelentkezés ellenőrzése
 app.get('/', (req, res) => {
-  // Ellenőrizzük, hogy van-e tárolt felhasználónév
   const username = req.query.username; // A felhasználónév lekérdezési paraméterként
   if (username) {
     // Ha van felhasználónév, irányítsuk át az index.html-re
