@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=chevron_left,chevron_right" />
+        <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
@@ -124,10 +124,10 @@ table tbody tr:last-child th, table tbody tr:last-child td {
         .entry-highlight {
             box-shadow: rgba(0, 0, 0, 0.19) 0px 2px 3px, rgba(0, 0, 0, 0.317) 0px 2px 2px;
         }
-        .navigation, .form-container {
+        /* .navigation, .form-container {
             text-align: center;
             margin: 20px;
-        }
+        } */
         #dialog {
             display: none;
             position: fixed;
@@ -150,21 +150,74 @@ table tbody tr:last-child th, table tbody tr:last-child td {
             margin-top: 10px;
         }
 
-        #monthYearDisplay{
-          font-size: 35px;
-        }
+       
+
+
+/* A külső konténer stílusának beállítása */
+.container {
+    float: right;
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 15px; /* Távolság a táblázattól */
+}
+
+/* A hónap és év stílusai */
+#monthYearDisplay {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+
+    font-size: 30px;
+   
+    color: #000000;
+    margin: 0;
+    padding-left: 10px;
+    padding-right: 15px; /* Távolság a gomboktól */
+}
+
+/* A navigációs gombok stílusai */
+.navigation {
+    padding-left: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+#prevWeekBtn{
+   
+    color: #6e6e6e;
+}
+
+#prevWeekBtn:hover{
+    cursor: default;
+    color: #404040;
+}
+
+#nextWeekBtn{
+   
+   color: #6e6e6e;
+}
+
+#nextWeekBtn:hover{
+    cursor: default;
+   color: #404040;
+}
 
     </style>
 </head>
 <body>
 
 
-<div class="navigation">
-    <button id="prevWeekBtn">Előző hét</button>
-    <button id="nextWeekBtn">Következő hét</button>
+<div class="container">
+    <div id="monthYearDisplay"></div>
+    <button>Mai nap</button>
+    <div class="navigation">
+     
+        <i id="prevWeekBtn" class="material-symbols-outlined">chevron_left</i>
+        <i id="nextWeekBtn" class="material-symbols-outlined">chevron_right</i>
+       
+    </div>
 </div>
-
-<div id="monthYearDisplay" ></div>
 
 <table>
     <thead>
