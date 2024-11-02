@@ -4,6 +4,8 @@ body {
     color: #333;
     margin: 10px;
     padding: 0;
+    user-select: none; /* Lehetővé teszi a szöveg kijelölésének letiltását */
+
 }
 
 h1 {
@@ -25,6 +27,7 @@ h1 {
     width: 150px;
     text-align: center;
     background-color: #f9f9f9;
+    cursor: pointer; /* Mutatja, hogy az elem kattintható */
 }
 
 .present {
@@ -80,6 +83,16 @@ h1 {
     border: 1px solid #888;
     width: 300px; 
     border-radius: 5px;
+}
+
+.student-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* Középre helyezés */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Szélesség */
+    border-radius: 10px; /* Lekerekített sarkok */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Árnyék */
 }
 
 .close {
