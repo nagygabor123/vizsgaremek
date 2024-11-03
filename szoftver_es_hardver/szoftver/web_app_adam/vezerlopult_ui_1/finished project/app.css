@@ -267,14 +267,97 @@ body.sidebar-open #sidebar {
 	padding: 1.5rem;
 }
 
+
+
+
 #main-content__container {
-	border: var(--gray-tint-50) 1px dashed;
-	border-radius: 8px;
-	height: calc(100vh + 10rem);
+	/* border: var(--gray-tint-50) 1px dashed;
+	border-radius: 8px; */
+	height: calc(87vh);
 	display: grid;
-	place-content: center;
+	/* place-content: center;
+	padding: 0;  */
+}  
+
+/* Table styling */
+.responsive-table {
+	width: 100%; /* Ensure table spans full width */
+	border-collapse: collapse;
+	color: var(--gray-base);
+	background-color: var(--white-base);
 }
 
+.responsive-table th,
+.responsive-table td {
+	padding: 0.75em 1em;
+	border: 1px solid var(--gray-tint-50);
+	text-align: left;
+}
+
+.responsive-table th {
+	background-color: var(--gray-tint-80);
+	color: var(--gray-base);
+	font-weight: bold;
+}
+
+.responsive-table tr:nth-child(even) {
+	background-color: var(--gray-tint-90);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+	.responsive-table,
+	.responsive-table thead,
+	.responsive-table tbody,
+	.responsive-table th,
+	.responsive-table td,
+	.responsive-table tr {
+		display: block;
+		width: 100%;
+	}
+
+	.responsive-table thead tr {
+		position: absolute;
+		clip: rect(0, 0, 0, 0);
+	}
+
+	.responsive-table tr {
+		margin-bottom: 1em;
+		border: 1px solid var(--gray-tint-50);
+		border-radius: 8px;
+		background-color: var(--white-base);
+		padding: 1em;
+	}
+
+	.responsive-table td {
+		display: flex;
+		justify-content: space-between;
+		padding: 0.5em 0;
+		border: none;
+	}
+
+	.responsive-table td::before {
+		content: attr(data-label);
+		font-weight: bold;
+		color: var(--gray-tint-30);
+		margin-right: 1em;
+	}
+}
+
+/* Dark mode adjustments */
+:root[data-theme="dark"] .responsive-table {
+	background-color: var(--gray-shade-60);
+	color: var(--gray-tint-80);
+}
+
+:root[data-theme="dark"] .responsive-table th {
+	background-color: var(--gray-base);
+	color: var(--gray-tint-80);
+}
+
+:root[data-theme="dark"] .responsive-table tr:nth-child(even) {
+	background-color: var(--gray-shade-60);
+}
 
 
 /* ================================================= */
@@ -365,3 +448,4 @@ body.sidebar-open #sidebar {
 		transform: rotate(180deg);
 	}
 }
+
