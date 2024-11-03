@@ -4,29 +4,29 @@
       "description": "joooooooooo",
       "startTime": 7,
       "endTime": 7,
-      "color": "#db4507",
-      "borderColor": "#602fe8"
+      "color": "#fdf2ef",
+      "borderColor": "#ec643c"
     },
     {
       "description": "joooooooooo",
       "startTime": 8,
       "endTime": 8,
-      "color": "#2325cb",
-      "borderColor": "#322e86"
+      "color": "#fdf2ef",
+      "borderColor": "#ec643c"
     },
     {
       "description": "lé",
       "startTime": 9,
       "endTime": 9,
-      "color": "#c6e2e1",
-      "borderColor": "#5001a2"
+         "color": "#fdf2ef",
+      "borderColor": "#ec643c"
     },
     {
       "description": "d",
       "startTime": 1,
       "endTime": 1,
-      "color": "#fda672",
-      "borderColor": "#cd91eb"
+      "color": "#fdf2ef",
+      "borderColor": "#ec643c"
     }
   ],
   "2024-10-28": [
@@ -34,15 +34,15 @@
       "description": "k",
       "startTime": 4,
       "endTime": 4,
-      "color": "#e4e823",
-      "borderColor": "#e606be"
+      "color": "#fdf2ef",
+      "borderColor": "#ec643c"
     },
     {
       "description": "k",
       "startTime": 1,
       "endTime": 1,
-      "color": "#3ff198",
-      "borderColor": "#d295aa"
+      "color": "#fdf2ef",
+      "borderColor": "#ec643c"
     }
   ],
   "2024-10-30": [
@@ -50,22 +50,22 @@
       "description": "asd",
       "startTime": 3,
       "endTime": 3,
-      "color": "#f99cf2",
-      "borderColor": "#3e0f69"
+      "color": "#f7fff6",
+      "borderColor": "#7eb174"
     },
     {
       "description": "asd",
       "startTime": 5,
       "endTime": 7,
-      "color": "#1d1343",
-      "borderColor": "#1fdbc6"
+     "color": "#f7fff6",
+      "borderColor": "#7eb174"
     },
     {
       "description": "d",
       "startTime": 1,
       "endTime": 1,
-      "color": "#e1431a",
-      "borderColor": "#dffd27"
+    "color": "#f7fff6",
+      "borderColor": "#7eb174"
     }
   ],
   "2024-11-03": [
@@ -73,38 +73,37 @@
       "description": "lé",
       "startTime": 9,
       "endTime": 9,
-      "color": "#144930",
-      "borderColor": "#6b61bd"
+      "color": "#f5f0fe",
+      "borderColor": "#946be2"
     },
     {
       "description": "asd",
       "startTime": 5,
       "endTime": 5,
-      "color": "#434e15",
-      "borderColor": "#423823"
+        "color": "#f5f0fe",
+      "borderColor": "#946be2"
     },
     {
       "description": "asdd",
       "startTime": 1,
       "endTime": 1,
-      "color": "#caef94",
-      "borderColor": "#818502"
+      "color": "#f5f0fe",
+      "borderColor": "#946be2"
     }
   ],
   "2024-11-01": [
     {
       "description": "a",
       "startTime": 2,
-      "endTime": 3,
-      "color": "#165b96",
-      "borderColor": "#e37d2c"
+         "color": "#f5f0fe",
+      "borderColor": "#946be2"
     },
     {
       "description": "asdd",
       "startTime": 1,
       "endTime": 1,
-      "color": "#e65a26",
-      "borderColor": "#ea818f"
+      "color": "#f5f0fe",
+      "borderColor": "#946be2"
     }
   ],
   "2024-10-29": [
@@ -112,8 +111,8 @@
       "description": "asd",
       "startTime": 1,
       "endTime": 1,
-      "color": "#3b128b",
-      "borderColor": "#bb7219"
+           "color": "#f5f0fe",
+      "borderColor": "#946be2"
     }
   ],
   "2024-10-31": [
@@ -121,8 +120,8 @@
       "description": "asdd",
       "startTime": 1,
       "endTime": 1,
-      "color": "#bb295",
-      "borderColor": "#51be1f"
+           "color": "#f5f0fe",
+      "borderColor": "#946be2"
     }
   ]
 }

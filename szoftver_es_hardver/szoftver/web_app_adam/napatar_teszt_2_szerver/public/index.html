@@ -44,7 +44,11 @@ table {
 
 
 .time-column {
-   text-align: center;
+    text-align: center;
+   color: #6e6e6e;
+   line-height: 25px;
+   /* padding-right: 10px; */
+   font-size: 15px;
 
 } 
 
@@ -74,11 +78,21 @@ table th, table td {
 
 td{
    background-color: #fbfbfb;
+   font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+ 
+    font-size: 14px;
+
+  
 }
 
 
+
+
 th:first-child {
-    width: 90px; /* Állítsd be az első fejléc cella szélességét */
+    width: 60px; /* Állítsd be az első fejléc cella szélességét */
+
 }
 
 table th:last-child, table td:last-child {
@@ -334,7 +348,11 @@ function createScheduleTable() {
 
         const timeCell = document.createElement('td');
         timeCell.classList.add('time-column');
-        timeCell.innerText = `${period.label}\n${period.time}`;
+
+        const [start, end] = period.time.split("-");
+       
+
+        timeCell.innerText = `${start}\n${end}`; //${period.label}\n${period.time}
         row.appendChild(timeCell);
 
         for (let i = 0; i < 7; i++) {
