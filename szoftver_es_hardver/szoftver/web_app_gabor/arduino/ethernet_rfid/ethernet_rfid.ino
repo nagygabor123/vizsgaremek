@@ -33,9 +33,11 @@ void setup() {
   SPI.begin();
   rfid.PCD_Init(); // RFID olvasó inicializálása
   Serial.println("RFID olvasó inicializálva.");
-  pinMode(2, OUTPUT);  // A LED pin kimenetre állítása
-  digitalWrite(2, LOW);  // Kezdetben a LED ki van kapcsolva
-  pinMode(6, OUTPUT);  // A LED pin kimenetre állítása
+  pinMode(7, OUTPUT);  
+  digitalWrite(7, LOW);
+  pinMode(2, OUTPUT);  
+  digitalWrite(2, LOW);  
+  pinMode(6, OUTPUT);  
   digitalWrite(6, LOW);
   lcd.begin();  
   lcd.backlight();
@@ -137,7 +139,7 @@ void processResponse(String response) {
   } else if (response.startsWith("PIN:")) {
     String pin = response.substring(4); // Kinyerjük a PIN kódot
     uint8_t pinInt = pin[0] - '0'; // Konvertálás számmá
-    if (pinInt == 2 || pinInt == 6) {
+    if (pinInt == 2 || pinInt == 6 || pinInt == 7) {
       digitalWrite(pinInt, HIGH); // LED bekapcsolása
       delay(500); // LED világít egy ideig
       digitalWrite(pinInt, LOW); // LED lekapcsolása

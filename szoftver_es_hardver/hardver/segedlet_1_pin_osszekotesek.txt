@@ -9,6 +9,7 @@ LCD:
 LED-ek:
  ELSO -> PIN 2
  MASODIK -> PIN 6
+ HARMADIK -> PIN 7
  GND -> GND
 
 RFID (RC522)
