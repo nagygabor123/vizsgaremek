@@ -64,7 +64,7 @@ CREATE TABLE `student` (
 INSERT INTO `student` (`id`, `nev`, `rfid_azon`, `statusz`,`pin`) VALUES
 (1, 'Szalkai-Szabó Ádám', 'DA6BD581', 'ki',2),
 (2, 'Nagy Gábor', '030FC70A', 'ki',6),
-(3, 'Bodri Dévid', 'F7F59C7A', 'ki',7)
+(3, 'Bodri Dévid', 'F7F59C7A', 'ki',7),
 (4, 'Pál Edvin', '53D00E3E', 'ki',5);
 
 -- --------------------------------------------------------
