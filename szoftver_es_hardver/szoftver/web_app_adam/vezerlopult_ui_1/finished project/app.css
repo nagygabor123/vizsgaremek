@@ -273,7 +273,7 @@ body.sidebar-open #sidebar {
 #main-content__container {
 	/* border: var(--gray-tint-50) 1px dashed;
 	border-radius: 8px; */
-	height: calc(87vh); /*100vh + 10rem*/
+	height: calc(100vh + 10rem); /*100vh + 10rem*/ /*87vh*/
 	display: grid;
 	/* place-content: center;
 	padding: 0;  */
