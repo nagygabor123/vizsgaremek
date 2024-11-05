@@ -175,6 +175,13 @@
       "endTime": 2,
       "color": "#f7fff6",
       "borderColor": "#7eb174"
+    },
+    {
+      "description": "kedd kukija",
+      "startTime": 5,
+      "endTime": 5,
+      "color": "#8c9983",
+      "borderColor": "#aa625e"
     }
   ],
   "2024-11-07": [
