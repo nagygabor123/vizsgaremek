@@ -130,7 +130,10 @@ void processResponse(String response) {
     delay(2000);
     lcdstarttext();
     Serial.println("Rendszer: NYITVA");
-  } else if (response.startsWith("PIN:")) {
+  } else if (response.startsWith("ACCES")) {
+    isLocked = false; 
+    Serial.println("ACCES: RFID olvasás engedélyezve.");
+  }else if (response.startsWith("PIN:")) {
     String pin = response.substring(4); // Kinyerjük a PIN kódot
     uint8_t pinInt = pin[0] - '0'; // Konvertálás számmá
     handlePin(pinInt);
@@ -155,7 +158,12 @@ void handlePin(uint8_t pinInt) {
       lcd.setCursor(0, 1);
       lcd.print(pinInt);
       delay(2000);
-      lcdstarttext();
+      if (isLocked) {
+        lcdlock();
+      }else {
+        lcdstarttext();
+      }
+      
   } else {
       lcd.clear();
       lcd.setCursor(0, 0);
