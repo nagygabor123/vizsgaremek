@@ -290,7 +290,7 @@ body.sidebar-open #sidebar {
 /* Main content */
 /* ================================================= */
 #main-content {
-	padding: 0.5rem 0.5rem 0.5rem 0;
+	padding: 0.5rem 0.5rem 0.5rem 0.5rem;
 	height: 100%;
 	/*background-color: #358FE6;*/
 }
