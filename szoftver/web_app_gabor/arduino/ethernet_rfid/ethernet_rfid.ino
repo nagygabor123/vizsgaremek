@@ -5,8 +5,8 @@
 
 LiquidCrystal_I2C lcd(0x27, 16, 2); // I2C LCD inicializálása az 0x27 címmel
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-IPAddress ip(192, 168, 1, 141); // Arduino IP otthoni: 192, 168, 1, 141
-IPAddress server(192, 168, 1, 49); // Node.js szerver IP otthoni: 192, 168, 1, 49
+IPAddress ip(172,16,13,17); // Arduino IP otthoni: 192, 168, 1, 141
+IPAddress server(172,16,13,9); // Node.js szerver IP otthoni: 192, 168, 1, 49
 unsigned int serverPort = 8080; // Port
 
 EthernetClient client;
@@ -108,10 +108,8 @@ void loop() {
 
   // Ha a rendszer zárva van, jelezzük az LCD-n
   if (isLocked) {
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print("Rendszer zarva");
-    delay(1000); // Késleltetés a kijelző villódzásának elkerülésére
+    lcdlock();
+    delay(2000);
   }
 }
 
@@ -121,9 +119,7 @@ void processResponse(String response) {
   if (response.startsWith("LOCK")) {
     // Rendszer zárása
     isLocked = true; 
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print("Rendszer zarva");
+    lcdlock();
     Serial.println("Rendszer: ZARVA");
   } else if (response.startsWith("UNLOCK")) {
     // Rendszer nyitása
@@ -132,16 +128,24 @@ void processResponse(String response) {
     lcd.setCursor(0, 0);
     lcd.print("Rendszer nyitva");
     delay(2000);
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print("Olvasd be");
-    lcd.setCursor(0, 1);
-    lcd.print("a kartyad");
+    lcdstarttext();
     Serial.println("Rendszer: NYITVA");
   } else if (response.startsWith("PIN:")) {
     String pin = response.substring(4); // Kinyerjük a PIN kódot
     uint8_t pinInt = pin[0] - '0'; // Konvertálás számmá
-    if (pinInt == 2 || pinInt == 6 || pinInt == 7 || pinInt == 5) {
+    handlePin(pinInt);
+    
+  } else if (response.startsWith("INVALID")) {
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Elutasitva");
+    delay(2000);
+    lcdstarttext();
+  }
+}
+
+void handlePin(uint8_t pinInt) {
+  if (pinInt == 2 || pinInt == 6 || pinInt == 7 || pinInt == 5) {
       digitalWrite(pinInt, HIGH); // LED bekapcsolása
       delay(500); // LED világít egy ideig
       digitalWrite(pinInt, LOW); // LED lekapcsolása
@@ -151,33 +155,28 @@ void processResponse(String response) {
       lcd.setCursor(0, 1);
       lcd.print(pinInt);
       delay(2000);
-      lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("Olvasd be");
-      lcd.setCursor(0, 1);
-      lcd.print("a kartyad");
-    } else {
+      lcdstarttext();
+  } else {
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print("Elutasítva");
       lcd.setCursor(0, 1);
       lcd.print(pinInt);
       delay(2000);
-      lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("Olvasd be");
-      lcd.setCursor(0, 1);
-      lcd.print("a kartyad");
-    }
-  } else if (response.startsWith("INVALID")) {
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print("Elutasitva");
-    delay(2000);
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print("Olvasd be");
-    lcd.setCursor(0, 1);
-    lcd.print("a kartyad");
+      lcdstarttext();
   }
+}
+
+void lcdlock() {
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Rendszer zarva");
+}
+
+void lcdstarttext() {
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Olvasd be");
+  lcd.setCursor(0, 1);
+  lcd.print("a kartyad");
 }
