@@ -306,13 +306,36 @@ body.sidebar-open #sidebar {
 	height: 100%;
 	/*height: calc(100vh + 10rem)*//*calc(100vh + 10rem);*/ /*100vh + 10rem*/ /*87vh*/
 	display: grid;
-
+padding: 2rem;
 
 
 	
 	/* place-content: center;
 	padding: 0;  */
 }  
+
+#main-content__table {
+background-color: red;
+}  
+
+
+
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+  }
+  
+  td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+	background-color: #dddddd;
+  }
+
 
 /* Table styling */
 .responsive-table {
