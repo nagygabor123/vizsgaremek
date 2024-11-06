@@ -308,14 +308,12 @@ body.sidebar-open #sidebar {
 	/*height: calc(100vh + 10rem)*//*calc(100vh + 10rem);*/ /*100vh + 10rem*/ /*87vh*/
 	display: grid;
 
+
+
+
 	
 	/* place-content: center;
 	padding: 0;  */
-}  
-
-#inside-content {
-background-color: #358FE6;
-display: flex;
 }  
 
 
