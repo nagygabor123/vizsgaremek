@@ -182,7 +182,7 @@ function controlLed(rfidTag) {
   db.query(pinQuery, [rfidTag], (err, results) => {
     if (err) throw err;
 
-    let pin = '2'; // alap pin
+    let pin = '0'; // alap pin
     if (results.length > 0 && results[0].pin) {
       pin = results[0].pin;
     } else {
