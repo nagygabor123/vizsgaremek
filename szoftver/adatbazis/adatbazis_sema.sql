@@ -1,7 +1,6 @@
 CREATE TABLE lockers (
     locker_id INT PRIMARY KEY AUTO_INCREMENT,
-    status ENUM('nyitva', 'zarva') NOT NULL,
-    can_be_opened BOOLEAN DEFAULT TRUE -- Jelzi, hogy nyitható-e a szekrény, ha FALSE akkor tanári jóváhagyást igényel
+    status ENUM('be', 'ki') NOT NULL,
 );
 
 CREATE TABLE students (
@@ -57,5 +56,6 @@ CREATE TABLE timetables (
 CREATE TABLE admins (
     admin_id INT PRIMARY KEY AUTO_INCREMENT,
     full_name VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     position VARCHAR(255) NOT NULL -- Pl. Rendszergazda, Igazgatóhelyettes, Portás
 );
