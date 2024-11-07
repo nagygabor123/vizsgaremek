@@ -5,8 +5,8 @@
 
 LiquidCrystal_I2C lcd(0x27, 16, 2); // I2C LCD inicializálása az 0x27 címmel
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-IPAddress ip(172,16,13,17); // Arduino IP otthoni: 192, 168, 1, 141
-IPAddress server(172,16,13,9); // Node.js szerver IP otthoni: 192, 168, 1, 49
+IPAddress ip(172,16,13,17); // Arduino Ip
+IPAddress server(172,16,13,9); // Node.js szerver Ip
 unsigned int serverPort = 8080; // Port
 
 EthernetClient client;
@@ -29,7 +29,6 @@ bool isLocked = false; // Globális változó a zár állapotának nyomon követ
 void setup() {
   Serial.begin(9600);
   delay(1000); // Késleltetés az Arduino inicializálására
-
   SPI.begin();
   rfid.PCD_Init(); // RFID olvasó inicializálása
   Serial.println("RFID olvasó inicializálva.");
@@ -43,10 +42,7 @@ void setup() {
   digitalWrite(6, LOW);
   lcd.begin();  
   lcd.backlight();
-  lcd.setCursor(0, 0);
-  lcd.print("Olvasd be");
-  lcd.setCursor(0, 1);
-  lcd.print("a kartyad");
+  lcdstarttext();
 
   Ethernet.begin(mac, ip);
   if (Ethernet.hardwareStatus() == EthernetNoHardware) {
@@ -163,7 +159,6 @@ void handlePin(uint8_t pinInt) {
       }else {
         lcdstarttext();
       }
-      
   } else {
       lcd.clear();
       lcd.setCursor(0, 0);
