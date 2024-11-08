@@ -156,13 +156,13 @@ body.sidebar-open #toggle-icon-close {
 /* ================================================= */
 #sidebar {
 	background-color: #f9f9f9;/* var(--sidebar-bg);*/
-	padding: 1rem 0rem 0rem 0.5rem;
+	padding: 0.5rem 0rem 0rem 0.5rem;
 
 	position: absolute;
 	top: 0;
 	display: flex;
 	flex-direction: column;
-	gap: 4rem;
+	gap: 1rem;
 	min-height: 100%;
 	width: 15rem;
 	align-items: flex-start;
@@ -197,6 +197,20 @@ body.sidebar-open #toggle-icon-close {
 	color: #565656;/*var(--sidebar-link-color);*/
 	padding-right: 3rem;
 	transition: color .3s ease-in-out;
+}
+
+
+
+#account {
+	display: flex;
+	/*padding: 0.55rem .5rem ;*/
+	width: 14rem;
+	height: 3.5rem;
+	
+	background-color: white;
+	border-radius: 15px;
+	border: 1px solid #e9e9e9;
+	
 }
 
 #sidebar__nav ul a.active {
@@ -306,7 +320,8 @@ body.sidebar-open #sidebar {
 	height: 100%;
 	/*height: calc(100vh + 10rem)*//*calc(100vh + 10rem);*/ /*100vh + 10rem*/ /*87vh*/
 	display: grid;
-padding: 2rem;
+	
+padding: 0.5rem 1.4rem 0.5rem 1.4rem;
 
 
 	
@@ -316,25 +331,15 @@ padding: 2rem;
 
 #main-content__table {
 background-color: red;
+height: auto;
+width: auto;
 }  
 
-
-
-table {
-	font-family: arial, sans-serif;
-	border-collapse: collapse;
-	width: 100%;
-  }
-  
-  td, th {
-	border: 1px solid #dddddd;
-	text-align: left;
-	padding: 8px;
-  }
-  
-  tr:nth-child(even) {
-	background-color: #dddddd;
-  }
+#navig {
+    height: 50px; /* Állítsd be a kívánt magasságot */
+    width: auto;
+    background-color: blue;
+}
 
 
 /* Table styling */
