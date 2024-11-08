@@ -23,7 +23,7 @@ const sidebarCollapseTrigger = document.getElementById('sidebar__collapse')
 sidebarCollapseTrigger.addEventListener('click', sidebarCollapse)
 
 
-
+/*
 // Theme switcher function
 const switchTheme = () => {
 	// Get root element and data-theme value
@@ -42,3 +42,4 @@ const switchTheme = () => {
 
 // Add the event listener for the theme switcher
 document.querySelector('#sidebar__theme-switcher').addEventListener('click', switchTheme)
+*/
