@@ -2,6 +2,8 @@
 (arduino connect) https://github.com/pschatzmann/esp32_vue_example
 (arduino connect) https://github.com/kevsiraki/Arduino-Vue
 
+(raspberry pi connect) https://github.com/webtrackerxy/app-control-iot-ros2
+
 
 
 ----------------------- NEXT -----------------------
@@ -26,4 +28,10 @@
 
 
 ----------------------- REACT -----------------------
-(auth login, full dashboard) https://youtu.be/N_W7kcFmHlg?si=KE1Ck4Rk-ZgyXIGf
+(raspberry pi connect) https://github.com/webtrackerxy/app-control-iot-ros2
+
+(auth login, mysql, full dashboard) https://youtu.be/N_W7kcFmHlg?si=KE1Ck4Rk-ZgyXIGf
+(auth login, mongodb) https://youtu.be/HGgyd1bYWsE?si=odIllU0E036PuRWs
+
+(refine full app) https://github.com/refinedev/refine/tree/master/examples/app-crm
+
