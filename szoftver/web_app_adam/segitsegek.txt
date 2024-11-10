@@ -1,0 +1,15 @@
+----------------------- VUE ------------------------
+(arduino connect) https://github.com/pschatzmann/esp32_vue_example
+(arduino connect) https://github.com/kevsiraki/Arduino-Vue
+
+
+
+----------------------- NEXT -----------------------
+(shadcn form builder) https://shadcn-form-build.vercel.app/
+(shadcn/vercel ai) https://v0.dev/
+(shadcn buttons) https://enhanced-button.vercel.app/
+
+(arduino connect) https://www.youtube.com/watch?v=UO8jNP7JfSs 
+
+(auth login) https://github.com/Suamppa/nextjs-dashboard?tab=readme-ov-file
+(auth login) https://github.com/vercel-labs/app-router-auth?tab=readme-ov-file
