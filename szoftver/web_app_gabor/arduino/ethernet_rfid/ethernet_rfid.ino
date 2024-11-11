@@ -5,8 +5,8 @@
 
 LiquidCrystal_I2C lcd(0x27, 16, 2); // I2C LCD inicializálása az 0x27 címmel
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-IPAddress ip(192, 168, 1, 141); // Arduino Ip
-IPAddress server(192, 168, 1, 49); // Node.js szerver Ip
+IPAddress ip(172,16,13,17); // Arduino Ip
+IPAddress server(172,16,13,9); // Node.js szerver Ip
 unsigned int serverPort = 8080; // Port
 
 EthernetClient client;
