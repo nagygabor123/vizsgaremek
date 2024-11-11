@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
 const FILE_PATH = path.join(__dirname, 'schedule.json');
 
 app.use(bodyParser.json());
