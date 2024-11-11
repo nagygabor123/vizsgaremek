@@ -39,7 +39,7 @@ const data = {
   navMain: [
     {
       title: "Naptár",
-      url: "fasz",
+      url: "#",
       icon: Calendar,
       isActive: true,
    

@@ -145,20 +145,6 @@
       "endTime": 4,
       "color": "#f5f0fe",
       "borderColor": "#946be2"
-    },
-    {
-      "description": "asd",
-      "startTime": 3,
-      "endTime": 3,
-      "color": "#269a58",
-      "borderColor": "#969cb4"
-    },
-    {
-      "description": "dg",
-      "startTime": 6,
-      "endTime": 6,
-      "color": "#1c6c39",
-      "borderColor": "#b7bc5"
     }
   ],
   "2024-11-05": [
@@ -175,21 +161,8 @@
       "endTime": 2,
       "color": "#f7fff6",
       "borderColor": "#7eb174"
-    },
-    {
-      "description": "kedd kukija",
-      "startTime": 5,
-      "endTime": 5,
-      "color": "#8c9983",
-      "borderColor": "#aa625e"
-    },
-    {
-      "description": "gabcsi",
-      "startTime": 6,
-      "endTime": 6,
-      "color": "#980e41",
-      "borderColor": "#7e4069"
     }
+  
   ],
   "2024-11-07": [
     {
