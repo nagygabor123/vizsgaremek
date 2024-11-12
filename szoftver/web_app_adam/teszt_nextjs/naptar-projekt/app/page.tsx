@@ -5,6 +5,8 @@ import React, { useState, useEffect } from 'react';
 import { format, startOfWeek, addDays, subDays, addWeeks } from 'date-fns';
 import './globals.css';
 
+import { Button } from "@/components/ui/button"
+
 const testSchedule: { [date: string]: string[] } = {
   "2024-11-11": ["Matematika", "Történelem", "Angol", "Kémia", "Fizika", "Biológia", "Testnevelés", "Földrajz", "Ének"],
   "2024-11-12": ["Irodalom", "Matematika", "Informatika", "Történelem", "Angol", "Kémia", "Biológia", "Fizika", "Testnevelés"],
@@ -41,13 +43,13 @@ const Calendar: React.FC = () => {
   return (
     <div className="calendar-container">
       <div className="calendar-controls">
-        <button onClick={goToPrevious}>
+        <Button onClick={goToPrevious}>
           {isMobileView ? "Előző nap" : "Előző hét"}
-        </button>
+        </Button>
         <span>{format(currentDate, "yyyy MMMM d")}</span>
-        <button onClick={goToNext}>
+        <Button onClick={goToNext}>
           {isMobileView ? "Következő nap" : "Következő hét"}
-        </button>
+        </Button>
       </div>
 
       <div className="calendar-grid">
