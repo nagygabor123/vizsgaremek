@@ -1,11 +1,18 @@
-// app/page.tsx
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { format, startOfWeek, addDays, subDays, addWeeks } from 'date-fns';
-import './globals.css';
+import { format, startOfWeek, addDays, subDays, addWeeks, startOfMonth } from 'date-fns';
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 
-import { Button } from "@/components/ui/button"
+import './globals.css';
 
 const testSchedule: { [date: string]: string[] } = {
   "2024-11-11": ["Matematika", "Történelem", "Angol", "Kémia", "Fizika", "Biológia", "Testnevelés", "Földrajz", "Ének"],
@@ -39,6 +46,7 @@ const Calendar: React.FC = () => {
 
   const weekStart = startOfWeek(currentDate, { weekStartsOn: 1 });
   const daysOfWeek = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
+  const currentMonth = startOfMonth(currentDate);
 
   return (
     <div className="calendar-container">
@@ -46,25 +54,28 @@ const Calendar: React.FC = () => {
         <Button onClick={goToPrevious}>
           {isMobileView ? "Előző nap" : "Előző hét"}
         </Button>
-        <span>{format(currentDate, "yyyy MMMM d")}</span>
+        {/* Hónap neve a naptár jobb oldalán */}
+        <div className="calendar-month">
+          {format(currentMonth, "yyyy MMMM")}
+        </div>
         <Button onClick={goToNext}>
           {isMobileView ? "Következő nap" : "Következő hét"}
         </Button>
       </div>
 
-      <div className="calendar-grid">
+      <div className={`calendar-grid ${isMobileView ? 'mobile' : ''}`}>
         {isMobileView ? (
-          <div>
-            <div className="calendar-day">{format(currentDate, "EEEE")}</div>
+          <Card className="calendar-day">
+            <div className="day-name">{format(currentDate, "EEEE")}</div>
             {Array.from({ length: 9 }, (_, i) => (
               <div className="calendar-cell" key={i}>
-                {/* Ellenőrizzük, hogy létezik-e adat az adott dátumra */}
                 {testSchedule[format(currentDate, "yyyy-MM-dd")]?.[i] || "Nincs óra"}
               </div>
             ))}
-          </div>
+          </Card>
         ) : (
           <>
+            {/* A bal oldalon üres oszlop a napokhoz */}
             <div className="calendar-day"></div>
             {daysOfWeek.map((day, index) => (
               <div
@@ -74,12 +85,12 @@ const Calendar: React.FC = () => {
                 {format(day, "EEE d")}
               </div>
             ))}
+            {/* Órák */}
             {Array.from({ length: 9 }, (_, lessonIndex) => (
               <React.Fragment key={lessonIndex}>
                 <div className="lesson-number">{lessonIndex + 1}. óra</div>
                 {daysOfWeek.map((day, index) => (
                   <div className="calendar-cell" key={`${lessonIndex}-${index}`}>
-                    {/* Ellenőrizzük, hogy létezik-e adat az adott dátumra */}
                     {testSchedule[format(day, "yyyy-MM-dd")]?.[lessonIndex] || "Nincs óra"}
                   </div>
                 ))}
