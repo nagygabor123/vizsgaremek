@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { format, startOfWeek, addDays, subDays, addWeeks } from 'date-fns';
+import { hu } from 'date-fns/locale';  // Importáljuk a magyar lokalizációt
 import './globals.css';
 
 import { Button } from "@/components/ui/button"
@@ -46,7 +47,7 @@ const Calendar: React.FC = () => {
         <Button onClick={goToPrevious}>
           {isMobileView ? "Előző nap" : "Előző hét"}
         </Button>
-        <span>{format(currentDate, "yyyy MMMM d")}</span>
+        <span>{format(currentDate, "yyyy MMMM", { locale: hu })}</span> {/* Csak hónap és év */}
         <Button onClick={goToNext}>
           {isMobileView ? "Következő nap" : "Következő hét"}
         </Button>
@@ -55,7 +56,7 @@ const Calendar: React.FC = () => {
       <div className="calendar-grid">
         {isMobileView ? (
           <div>
-            <div className="calendar-day">{format(currentDate, "EEEE")}</div>
+            <div className="calendar-day">{format(currentDate, "eeee", { locale: hu })}</div> {/* Magyar nap név */}
             {Array.from({ length: 9 }, (_, i) => (
               <div className="calendar-cell" key={i}>
                 {/* Ellenőrizzük, hogy létezik-e adat az adott dátumra */}
@@ -71,7 +72,7 @@ const Calendar: React.FC = () => {
                 className={`calendar-day ${format(day, "yyyy-MM-dd") === format(new Date(), "yyyy-MM-dd") ? 'current-day' : ''}`}
                 key={index}
               >
-                {format(day, "EEE d")}
+                {format(day, "EEE d", { locale: hu })} {/* Magyar nap név röviden */}
               </div>
             ))}
             {Array.from({ length: 9 }, (_, lessonIndex) => (
