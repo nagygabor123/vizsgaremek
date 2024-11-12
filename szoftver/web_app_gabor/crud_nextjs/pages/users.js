@@ -7,7 +7,7 @@ export default function Users() {
 
   useEffect(() => {
     async function fetchUsers() {
-      const res = await fetch('/api/users');
+      const res = await fetch('/api/users/read');
       const data = await res.json();
       setUsers(data);
     }
@@ -16,13 +16,13 @@ export default function Users() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetch('/api/users', {
+    await fetch('/api/users/create', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
     });
     setForm({ name: '', email: '', age: '' });
-    const res = await fetch('/api/users');
+    const res = await fetch('/api/users/read');
     const data = await res.json();
     setUsers(data);
   };
@@ -32,7 +32,9 @@ export default function Users() {
       <h1>Users</h1>
       <ul>
         {users.map(user => (
-          <li key={user.id}>{user.name} - {user.email} - {user.age}</li>
+          <li key={user.id}>
+            {user.name} - {user.email} - {user.age}
+          </li>
         ))}
       </ul>
       <form onSubmit={handleSubmit}>
