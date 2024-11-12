@@ -1,57 +1,90 @@
-'use client';
+// app/page.tsx
+"use client";
 
-import React, { useEffect, useRef } from 'react';
-import { format, addDays, startOfWeek, addWeeks, isToday } from 'date-fns';
+import React, { useState, useEffect } from 'react';
+import { format, startOfWeek, addDays, subDays, addWeeks } from 'date-fns';
+import './globals.css';
+
+const testSchedule: { [date: string]: string[] } = {
+  "2024-11-11": ["Matematika", "Történelem", "Angol", "Kémia", "Fizika", "Biológia", "Testnevelés", "Földrajz", "Ének"],
+  "2024-11-12": ["Irodalom", "Matematika", "Informatika", "Történelem", "Angol", "Kémia", "Biológia", "Fizika", "Testnevelés"],
+  "2024-11-13": ["Angol", "Matematika", "Biológia", "Irodalom", "Kémia", "Földrajz", "Történelem", "Fizika", "Informatika"],
+  "2024-11-14": ["Testnevelés", "Ének", "Irodalom", "Angol", "Történelem", "Matematika", "Kémia", "Fizika", "Biológia"],
+  "2024-11-15": ["Informatika", "Földrajz", "Matematika", "Biológia", "Irodalom", "Angol", "Kémia", "Történelem", "Fizika"],
+};
 
 const Calendar: React.FC = () => {
-  const [currentDate, setCurrentDate] = React.useState(new Date());
-  const todayRef = useRef<HTMLDivElement | null>(null);
-
-  const startOfCalendarWeek = startOfWeek(currentDate, { weekStartsOn: 1 });
-
-  const handleNextWeek = () => setCurrentDate(addWeeks(currentDate, 1));
-  const handlePreviousWeek = () => setCurrentDate(addWeeks(currentDate, -1));
-
-  const weekDays = Array.from({ length: 7 }, (_, i) => addDays(startOfCalendarWeek, i));
-  const lessons = Array.from({ length: 9 }, (_, i) => i + 1);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [isMobileView, setIsMobileView] = useState(false);
 
   useEffect(() => {
-    todayRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const updateView = () => {
+      setIsMobileView(window.innerWidth <= 480);
+    };
+
+    updateView();
+    window.addEventListener("resize", updateView);
+    return () => window.removeEventListener("resize", updateView);
   }, []);
+
+  const goToPrevious = () => {
+    setCurrentDate(prevDate => isMobileView ? subDays(prevDate, 1) : addWeeks(prevDate, -1));
+  };
+
+  const goToNext = () => {
+    setCurrentDate(prevDate => isMobileView ? addDays(prevDate, 1) : addWeeks(prevDate, 1));
+  };
+
+  const weekStart = startOfWeek(currentDate, { weekStartsOn: 1 });
+  const daysOfWeek = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
 
   return (
     <div className="calendar-container">
-      <h1>Órarend</h1>
       <div className="calendar-controls">
-        <button onClick={handlePreviousWeek}>Előző hét</button>
-        <button onClick={handleNextWeek}>Következő hét</button>
+        <button onClick={goToPrevious}>
+          {isMobileView ? "Előző nap" : "Előző hét"}
+        </button>
+        <span>{format(currentDate, "yyyy MMMM d")}</span>
+        <button onClick={goToNext}>
+          {isMobileView ? "Következő nap" : "Következő hét"}
+        </button>
       </div>
 
       <div className="calendar-grid">
-        <div></div>
-        
-        {weekDays.map(day => {
-          const isCurrentDay = isToday(day);
-          return (
-            <div
-              key={format(day, 'yyyy-MM-dd')}
-              className={`calendar-day ${isCurrentDay ? 'current-day' : ''}`}
-              ref={isCurrentDay ? todayRef : null}
-            >
-              {format(day, 'EEEE')}<br />{format(day, 'MM-dd')}
-            </div>
-          );
-        })}
-
-        {lessons.map(lesson => (
-          <React.Fragment key={lesson}>
-            <div className="lesson-number">{lesson}. óra</div>
-            {weekDays.map(day => (
-              <div key={`${format(day, 'yyyy-MM-dd')}-${lesson}`} className="calendar-cell">
+        {isMobileView ? (
+          <div>
+            <div className="calendar-day">{format(currentDate, "EEEE")}</div>
+            {Array.from({ length: 9 }, (_, i) => (
+              <div className="calendar-cell" key={i}>
+                {/* Ellenőrizzük, hogy létezik-e adat az adott dátumra */}
+                {testSchedule[format(currentDate, "yyyy-MM-dd")]?.[i] || "Nincs óra"}
               </div>
             ))}
-          </React.Fragment>
-        ))}
+          </div>
+        ) : (
+          <>
+            <div className="calendar-day"></div>
+            {daysOfWeek.map((day, index) => (
+              <div
+                className={`calendar-day ${format(day, "yyyy-MM-dd") === format(new Date(), "yyyy-MM-dd") ? 'current-day' : ''}`}
+                key={index}
+              >
+                {format(day, "EEE d")}
+              </div>
+            ))}
+            {Array.from({ length: 9 }, (_, lessonIndex) => (
+              <React.Fragment key={lessonIndex}>
+                <div className="lesson-number">{lessonIndex + 1}. óra</div>
+                {daysOfWeek.map((day, index) => (
+                  <div className="calendar-cell" key={`${lessonIndex}-${index}`}>
+                    {/* Ellenőrizzük, hogy létezik-e adat az adott dátumra */}
+                    {testSchedule[format(day, "yyyy-MM-dd")]?.[lessonIndex] || "Nincs óra"}
+                  </div>
+                ))}
+              </React.Fragment>
+            ))}
+          </>
+        )}
       </div>
     </div>
   );

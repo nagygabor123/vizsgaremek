@@ -1,9 +1,15 @@
-/* Alapértelmezett táblázatos elrendezés */
+/* global.css */
+
+/* Alapértelmezett stílusok asztali nézethez */
 .calendar-container {
   padding: 20px;
 }
 
 .calendar-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
@@ -14,20 +20,13 @@
   margin-top: 20px;
 }
 
-.calendar-day {
+.calendar-day, .lesson-number {
   text-align: center;
   font-weight: bold;
 }
 
 .current-day {
   background-color: #ffeb3b;
-  padding: 5px;
-  font-weight: bold;
-  text-align: center;
-}
-
-.lesson-number {
-  text-align: center;
   font-weight: bold;
 }
 
@@ -37,59 +36,27 @@
   text-align: center;
 }
 
-/* Reszponzív beállítások kisebb képernyőkhöz */
-
-/* 768px alatti (tabletek és kisebb képernyők) */
-@media (max-width: 768px) {
-  .calendar-grid {
-    grid-template-columns: repeat(4, 1fr); /* 4 oszlopos elrendezés tableteken */
-  }
-
-  .calendar-day, .lesson-number {
-    font-size: 0.8rem;
-  }
-
-  .calendar-cell {
-    height: 40px;
-  }
-}
-
-/* 480px alatti (mobiltelefonok) */
+/* Reszponzív beállítások mobil nézethez */
 @media (max-width: 480px) {
-  /* Grid helyett listás elrendezés mobilon */
   .calendar-grid {
     display: flex;
     flex-direction: column;
   }
 
-  /* Napok listaként, táblázat helyett */
-  .calendar-day {
-    display: block;
-    padding: 10px;
+  .calendar-day, .lesson-number {
+    font-size: 1.2rem;
+    padding: 10px 0;
+  }
+
+  .calendar-controls button {
     font-size: 1rem;
-    font-weight: bold;
-    border-bottom: 1px solid #ddd;
-    text-align: left;
+    padding: 8px 12px;
   }
 
-  .lesson-number {
-    font-size: 0.9rem;
-    font-weight: bold;
-    padding: 5px 10px;
-  }
-
-  /* Órák celláinak beállítása */
   .calendar-cell {
-    padding: 8px 10px;
+    height: 40px;
     border: none;
     border-bottom: 1px solid #ddd;
-    height: auto;
-    text-align: left;
-  }
-
-  .current-day {
-    background-color: #ffeb3b;
-    padding: 5px;
-    font-weight: bold;
+    font-size: 1rem;
   }
 }
