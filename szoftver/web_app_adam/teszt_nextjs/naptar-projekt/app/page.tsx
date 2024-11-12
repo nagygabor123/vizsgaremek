@@ -1,40 +1,56 @@
 'use client';
 
-import React from 'react';
-import { format, startOfMonth, endOfMonth, eachDayOfInterval, startOfWeek, addMonths } from 'date-fns';
-import { enUS } from 'date-fns/locale'; // Importáljuk a helyi beállítást
+import React, { useEffect, useRef } from 'react';
+import { format, addDays, startOfWeek, addWeeks, isToday } from 'date-fns';
 
 const Calendar: React.FC = () => {
   const [currentDate, setCurrentDate] = React.useState(new Date());
+  const todayRef = useRef<HTMLDivElement | null>(null);
 
-  // Hétfőt állítjuk be a hét első napjának
-  const startOfCalendar = startOfWeek(startOfMonth(currentDate), { weekStartsOn: 1 }); // 1 a hétfőt jelenti
-  const endOfCalendar = endOfMonth(currentDate);
+  const startOfCalendarWeek = startOfWeek(currentDate, { weekStartsOn: 1 });
 
-  // Minden nap listája az adott hónapban, beleértve a hétnapok kitöltését is
-  const days = eachDayOfInterval({ start: startOfCalendar, end: endOfCalendar });
+  const handleNextWeek = () => setCurrentDate(addWeeks(currentDate, 1));
+  const handlePreviousWeek = () => setCurrentDate(addWeeks(currentDate, -1));
 
-  const handleNextMonth = () => setCurrentDate(addMonths(currentDate, 1));
-  const handlePreviousMonth = () => setCurrentDate(addMonths(currentDate, -1));
+  const weekDays = Array.from({ length: 7 }, (_, i) => addDays(startOfCalendarWeek, i));
+  const lessons = Array.from({ length: 9 }, (_, i) => i + 1);
+
+  useEffect(() => {
+    todayRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, []);
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>Naptár</h1>
-      <div>
-        <button onClick={handlePreviousMonth}>Előző hónap</button>
-        <span style={{ margin: '0 10px' }}>{format(currentDate, 'yyyy MMMM')}</span>
-        <button onClick={handleNextMonth}>Következő hónap</button>
+    <div className="calendar-container">
+      <h1>Órarend</h1>
+      <div className="calendar-controls">
+        <button onClick={handlePreviousWeek}>Előző hét</button>
+        <button onClick={handleNextWeek}>Következő hét</button>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '5px', marginTop: '10px' }}>
-        {['Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat', 'Vasárnap'].map(day => (
-          <div key={day} style={{ textAlign: 'center', fontWeight: 'bold' }}>{day}</div>
-        ))}
+      <div className="calendar-grid">
+        <div></div>
+        
+        {weekDays.map(day => {
+          const isCurrentDay = isToday(day);
+          return (
+            <div
+              key={format(day, 'yyyy-MM-dd')}
+              className={`calendar-day ${isCurrentDay ? 'current-day' : ''}`}
+              ref={isCurrentDay ? todayRef : null}
+            >
+              {format(day, 'EEEE')}<br />{format(day, 'MM-dd')}
+            </div>
+          );
+        })}
 
-        {days.map(day => (
-          <div key={format(day, 'yyyy-MM-dd')} style={{ padding: '10px', border: '1px solid #ddd', textAlign: 'center' }}>
-            {format(day, 'd')}
-          </div>
+        {lessons.map(lesson => (
+          <React.Fragment key={lesson}>
+            <div className="lesson-number">{lesson}. óra</div>
+            {weekDays.map(day => (
+              <div key={`${format(day, 'yyyy-MM-dd')}-${lesson}`} className="calendar-cell">
+              </div>
+            ))}
+          </React.Fragment>
         ))}
       </div>
     </div>
