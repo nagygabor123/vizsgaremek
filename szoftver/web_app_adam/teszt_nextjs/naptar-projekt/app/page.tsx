@@ -33,7 +33,7 @@ const Calendar: React.FC = () => {
 
   useEffect(() => {
     if (isMobileView) {
-      setCurrentDate(today);  // Visszaállítjuk a mai napra, amikor mobil nézetre váltunk
+      setCurrentDate(today);
     }
   }, [isMobileView]);
 
@@ -64,7 +64,7 @@ const Calendar: React.FC = () => {
         {isMobileView ? (
           <div>
             <div className={`calendar-day ${isSameDay(currentDate, today) ? 'current-day' : ''}`}>
-              {format(currentDate, "eeee", { locale: hu })}
+              {format(currentDate, "eeee d", { locale: hu })} {/* Nap neve és dátuma */}
             </div>
             {Array.from({ length: 9 }, (_, i) => (
               <div className="calendar-cell" key={i}>
