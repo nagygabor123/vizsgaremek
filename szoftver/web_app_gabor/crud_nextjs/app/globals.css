@@ -1,15 +1,21 @@
 /* styles/globals.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+form {
+  margin-bottom: 20px;
+}
 
-@layer base {
-  html {
-    font-size: 16px;
-  }
-  body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f9fafb;
-    color: #333;
-  }
+input {
+  margin: 5px;
+}
+
+button {
+  margin: 5px;
+  padding: 5px 10px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  margin: 10px 0;
 }

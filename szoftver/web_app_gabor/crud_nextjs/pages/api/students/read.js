@@ -1,4 +1,4 @@
-// pages/api/users/read.js
+// pages/api/students/read.js
 import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {
