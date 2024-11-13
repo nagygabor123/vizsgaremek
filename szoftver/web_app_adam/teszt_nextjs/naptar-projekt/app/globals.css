@@ -76,12 +76,14 @@
 }
 
 .current-day {
-  background-color: #ffeb3b;
+  color: blue;
+  border-bottom: 2px solid blue;
   font-weight: bold;
 }
 
 .calendar-cell {
   /* border: 1px solid #ddd; */
+  /* border-left: 1px solid #ddd; */
   height: 50px;
   text-align: center;
 }
