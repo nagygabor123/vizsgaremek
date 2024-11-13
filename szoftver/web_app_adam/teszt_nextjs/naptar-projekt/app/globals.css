@@ -74,13 +74,11 @@
 .calendar-day{
   text-align: center;
   font-weight: bold;
-  /* border-bottom: 1px solid #ddd; */
+  border-bottom: 1px solid #ddd;
+  border-left: 1px solid #ddd;
 }
  
-.calendar-day:last-child{
 
- background-color: aqua;
-}
 
 .lesson-number {
   text-align: center;
@@ -94,12 +92,13 @@
   color: blue;
   border-bottom: 2px solid blue;
   font-weight: bold;
+
 }
 
 .calendar-cell {
   /* border: 1px solid #ddd; */
   border-left: 1px solid #ddd;
-  border-top: 1px solid #ddd;
+  /* border-top: 1px solid #ddd; */
   height: 50px;
   text-align: center;
 }
