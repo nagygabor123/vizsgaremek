@@ -58,6 +58,7 @@ const Calendar: React.FC = () => {
         <Button onClick={goToPrevious}>
           {isMobileView ? "Előző nap" : "Előző hét"}
         </Button>
+        <span>{format(currentDate, "yyyy MMMM", { locale: hu })}</span> {/* Hónap és év megjelenítése */}
         <Button onClick={goToToday}>Mai nap</Button>
         <Button onClick={goToNext}>
           {isMobileView ? "Következő nap" : "Következő hét"}
@@ -68,7 +69,7 @@ const Calendar: React.FC = () => {
         {isMobileView ? (
           <div>
             <div className={`calendar-day ${isSameDay(currentDate, today) ? 'current-day' : ''}`}>
-              {format(currentDate, "eeee d", { locale: hu })}
+              {format(currentDate, "eeee d", { locale: hu })} {/* Magyar nap neve és dátuma */}
             </div>
             {Array.from({ length: 9 }, (_, i) => (
               <div className="calendar-cell" key={i}>
@@ -84,7 +85,7 @@ const Calendar: React.FC = () => {
                 className={`calendar-day ${isSameDay(day, today) ? 'current-day' : ''}`}
                 key={index}
               >
-                {format(day, "EEE d", { locale: hu })}
+                {format(day, "EEE d", { locale: hu })} {/* Magyar nap neve és dátuma rövidítve */}
               </div>
             ))}
             {Array.from({ length: 9 }, (_, lessonIndex) => (
