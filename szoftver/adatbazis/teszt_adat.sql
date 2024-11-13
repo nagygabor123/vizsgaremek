@@ -2,7 +2,7 @@ INSERT INTO `lockers` (`locker_id`, `status`) VALUES
 (2, 'ki'),-- Szalkai-Szabó Ádám
 (5, 'ki'),-- Pál Edvin
 (6, 'ki'),-- Nagy Gábor
-(7, 'ki'),-- Bodri Dévid
+(7, 'ki');-- Bodri Dévid
 
 
 INSERT INTO `students` (`student_id`, `full_name`, `class`, `rfid_tag`) VALUES

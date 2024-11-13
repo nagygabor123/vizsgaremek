@@ -1,6 +1,6 @@
 CREATE TABLE lockers (
     locker_id INT PRIMARY KEY AUTO_INCREMENT,
-    status ENUM('be', 'ki') NOT NULL,
+    status ENUM('be', 'ki') NOT NULL
 );
 
 CREATE TABLE students (
