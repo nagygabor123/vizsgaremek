@@ -6,7 +6,7 @@ import { format, startOfWeek, addDays, subDays, addWeeks, isSameDay } from 'date
 import { hu } from 'date-fns/locale';
 import './globals.css';
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 
 const testSchedule: { [date: string]: string[] } = {
   "2024-11-11": ["Matematika", "Történelem", "Angol", "Kémia", "Fizika", "Biológia", "Testnevelés", "Földrajz", "Ének"],
@@ -37,6 +37,10 @@ const Calendar: React.FC = () => {
     }
   }, [isMobileView]);
 
+  const goToToday = () => {
+    setCurrentDate(today);
+  };
+
   const goToPrevious = () => {
     setCurrentDate(prevDate => isMobileView ? subDays(prevDate, 1) : addWeeks(prevDate, -1));
   };
@@ -54,7 +58,7 @@ const Calendar: React.FC = () => {
         <Button onClick={goToPrevious}>
           {isMobileView ? "Előző nap" : "Előző hét"}
         </Button>
-        <span>{format(currentDate, "yyyy MMMM", { locale: hu })}</span>
+        <Button onClick={goToToday}>Mai nap</Button>
         <Button onClick={goToNext}>
           {isMobileView ? "Következő nap" : "Következő hét"}
         </Button>
@@ -64,7 +68,7 @@ const Calendar: React.FC = () => {
         {isMobileView ? (
           <div>
             <div className={`calendar-day ${isSameDay(currentDate, today) ? 'current-day' : ''}`}>
-              {format(currentDate, "eeee d", { locale: hu })} {/* Nap neve és dátuma */}
+              {format(currentDate, "eeee d", { locale: hu })}
             </div>
             {Array.from({ length: 9 }, (_, i) => (
               <div className="calendar-cell" key={i}>
