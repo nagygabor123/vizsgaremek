@@ -8,6 +8,7 @@
 
 .calendar-header {
   display: flex;
+  /* gap: 1rem; */
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
@@ -15,7 +16,7 @@
 }
 
 .calendar-date {
-  font-size: 1.25rem;
+  font-size: 2.25rem;
   font-weight: bold;
 }
 
@@ -70,10 +71,24 @@
   margin-top: 20px;
 }
 
-.calendar-day, .lesson-number {
+.calendar-day{
   text-align: center;
   font-weight: bold;
+  /* border-bottom: 1px solid #ddd; */
 }
+ 
+.calendar-day:last-child{
+
+ background-color: aqua;
+}
+
+.lesson-number {
+  text-align: center;
+  font-weight: bold;
+  
+}
+
+
 
 .current-day {
   color: blue;
@@ -83,10 +98,13 @@
 
 .calendar-cell {
   /* border: 1px solid #ddd; */
-  /* border-left: 1px solid #ddd; */
+  border-left: 1px solid #ddd;
+  border-top: 1px solid #ddd;
   height: 50px;
   text-align: center;
 }
+
+
 
 /* Reszponzív beállítások mobil nézethez */
 @media (max-width: 480px) {
