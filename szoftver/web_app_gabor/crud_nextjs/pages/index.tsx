@@ -1,15 +1,30 @@
-import { useState, useEffect } from 'react';
+import '../styles/style.css';  // Import the style.css file
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input"
+import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+
+// Diák típus
+interface Student {
+  student_id: string;
+  full_name: string;
+  class: string;
+  rfid_tag: string;
+}
+
+const SHEET_SIDES = ["top", "right", "bottom", "left"] as const
+ 
+type SheetSide = (typeof SHEET_SIDES)[number]
 
 export default function Home() {
-  const [students, setStudents] = useState([]);
-  const [formData, setFormData] = useState({
+  const [students, setStudents] = useState<Student[]>([]);
+  const [formData, setFormData] = useState<Student>({
     student_id: '',
     full_name: '',
     class: '',
     rfid_tag: '',
   });
-  const [editing, setEditing] = useState(false);
-  const [editStudentId, setEditStudentId] = useState(null);
+  const [editing, setEditing] = useState<boolean>(false);
+  const [editStudentId, setEditStudentId] = useState<string | null>(null);
 
   // Fetch students from the database
   const fetchStudents = async () => {
@@ -23,7 +38,8 @@ export default function Home() {
     fetchStudents();
   }, []);
 
-  const handleChange = (e) => {
+  // Handle form input changes
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -32,7 +48,7 @@ export default function Home() {
   };
 
   // Handle form submission for creating or updating students
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const method = editing ? 'PUT' : 'POST';
     const url = editing ? '/api/students/update' : '/api/students/create';
@@ -52,7 +68,7 @@ export default function Home() {
   };
 
   // Handle deleting a student
-  const handleDelete = async (student_id) => {
+  const handleDelete = async (student_id: string) => {
     const response = await fetch('/api/students/delete', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
@@ -65,7 +81,7 @@ export default function Home() {
   };
 
   // Handle editing a student
-  const handleEdit = (student) => {
+  const handleEdit = (student: Student) => {
     setFormData(student);
     setEditing(true);
     setEditStudentId(student.student_id);
@@ -75,35 +91,36 @@ export default function Home() {
     <div>
       <h1>Manage Students</h1>
       <form onSubmit={handleSubmit}>
-        <input
+        <Input 
           type="text"
           name="student_id"
           placeholder="Student ID"
           value={formData.student_id}
           onChange={handleChange}
         />
-        <input
+        <Input 
           type="text"
           name="full_name"
           placeholder="Full Name"
           value={formData.full_name}
           onChange={handleChange}
         />
-        <input
+        <Input 
           type="text"
           name="class"
           placeholder="Class"
           value={formData.class}
           onChange={handleChange}
         />
-        <input
+        <Input 
           type="text"
           name="rfid_tag"
           placeholder="RFID Tag"
           value={formData.rfid_tag}
           onChange={handleChange}
         />
-        <button type="submit">{editing ? 'Update' : 'Add'} Student</button>
+        
+        <Button variant="outline" type="submit">{editing ? 'Update' : 'Add'} Student</Button>
       </form>
 
       <h2>Student List</h2>
@@ -117,5 +134,6 @@ export default function Home() {
         ))}
       </ul>
     </div>
+    
   );
 }
