@@ -62,9 +62,11 @@
 }
 
 .calendar-grid {
+  border: 1px solid #ddd;
+  border-radius: 15px;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  gap: 5px;
+  /* gap: 5px; */
   margin-top: 20px;
 }
 
@@ -79,7 +81,7 @@
 }
 
 .calendar-cell {
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   height: 50px;
   text-align: center;
 }
