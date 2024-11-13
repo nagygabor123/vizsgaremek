@@ -5,6 +5,50 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap; /* Lehetővé teszi az elemek többsoros megjelenítését kis képernyőkön */
+}
+
+.calendar-date {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.calendar-controls {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .calendar-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .calendar-date {
+    font-size: 1rem;
+  }
+
+  .calendar-controls {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .calendar-controls button {
+    flex: 1;
+    max-width: 100%; /* Teljes szélesség, így jól illeszkedik a mobilos nézethez */
+  }
+}
+
+
+
 .calendar-container {
   padding: 20px;
 }

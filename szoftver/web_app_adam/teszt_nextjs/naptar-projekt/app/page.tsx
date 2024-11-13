@@ -54,15 +54,17 @@ const Calendar: React.FC = () => {
 
   return (
     <div className="calendar-container">
-      <div className="calendar-controls">
-        <Button onClick={goToPrevious}>
-          {isMobileView ? "Előző nap" : "Előző hét"}
-        </Button>
-        <span>{format(currentDate, "yyyy MMMM", { locale: hu })}</span> {/* Hónap és év megjelenítése */}
-        <Button onClick={goToToday}>Mai nap</Button>
-        <Button onClick={goToNext}>
-          {isMobileView ? "Következő nap" : "Következő hét"}
-        </Button>
+      <div className="calendar-header">
+        <span className="calendar-date">{format(currentDate, "yyyy MMMM", { locale: hu })}</span> {/* Hónap és év */}
+        <div className="calendar-controls">
+          <Button onClick={goToPrevious}>
+            {isMobileView ? "Előző nap" : "Előző hét"}
+          </Button>
+          <Button onClick={goToToday}>Mai nap</Button>
+          <Button onClick={goToNext}>
+            {isMobileView ? "Következő nap" : "Következő hét"}
+          </Button>
+        </div>
       </div>
 
       <div className="calendar-grid">
