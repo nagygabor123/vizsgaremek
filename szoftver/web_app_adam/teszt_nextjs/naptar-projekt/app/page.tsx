@@ -2,8 +2,8 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { format, startOfWeek, addDays, subDays, addWeeks } from 'date-fns';
-import { hu } from 'date-fns/locale';  // Importáljuk a magyar lokalizációt
+import { format, startOfWeek, addDays, subDays, addWeeks, isSameDay } from 'date-fns';
+import { hu } from 'date-fns/locale';
 import './globals.css';
 
 import { Button } from "@/components/ui/button"
@@ -19,6 +19,7 @@ const testSchedule: { [date: string]: string[] } = {
 const Calendar: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isMobileView, setIsMobileView] = useState(false);
+  const today = new Date();
 
   useEffect(() => {
     const updateView = () => {
@@ -29,6 +30,12 @@ const Calendar: React.FC = () => {
     window.addEventListener("resize", updateView);
     return () => window.removeEventListener("resize", updateView);
   }, []);
+
+  useEffect(() => {
+    if (isMobileView) {
+      setCurrentDate(today);  // Visszaállítjuk a mai napra, amikor mobil nézetre váltunk
+    }
+  }, [isMobileView]);
 
   const goToPrevious = () => {
     setCurrentDate(prevDate => isMobileView ? subDays(prevDate, 1) : addWeeks(prevDate, -1));
@@ -47,7 +54,7 @@ const Calendar: React.FC = () => {
         <Button onClick={goToPrevious}>
           {isMobileView ? "Előző nap" : "Előző hét"}
         </Button>
-        <span>{format(currentDate, "yyyy MMMM", { locale: hu })}</span> {/* Csak hónap és év */}
+        <span>{format(currentDate, "yyyy MMMM", { locale: hu })}</span>
         <Button onClick={goToNext}>
           {isMobileView ? "Következő nap" : "Következő hét"}
         </Button>
@@ -56,10 +63,11 @@ const Calendar: React.FC = () => {
       <div className="calendar-grid">
         {isMobileView ? (
           <div>
-            <div className="calendar-day">{format(currentDate, "eeee", { locale: hu })}</div> {/* Magyar nap név */}
+            <div className={`calendar-day ${isSameDay(currentDate, today) ? 'current-day' : ''}`}>
+              {format(currentDate, "eeee", { locale: hu })}
+            </div>
             {Array.from({ length: 9 }, (_, i) => (
               <div className="calendar-cell" key={i}>
-                {/* Ellenőrizzük, hogy létezik-e adat az adott dátumra */}
                 {testSchedule[format(currentDate, "yyyy-MM-dd")]?.[i] || "Nincs óra"}
               </div>
             ))}
@@ -69,10 +77,10 @@ const Calendar: React.FC = () => {
             <div className="calendar-day"></div>
             {daysOfWeek.map((day, index) => (
               <div
-                className={`calendar-day ${format(day, "yyyy-MM-dd") === format(new Date(), "yyyy-MM-dd") ? 'current-day' : ''}`}
+                className={`calendar-day ${isSameDay(day, today) ? 'current-day' : ''}`}
                 key={index}
               >
-                {format(day, "EEE d", { locale: hu })} {/* Magyar nap név röviden */}
+                {format(day, "EEE d", { locale: hu })}
               </div>
             ))}
             {Array.from({ length: 9 }, (_, lessonIndex) => (
@@ -80,7 +88,6 @@ const Calendar: React.FC = () => {
                 <div className="lesson-number">{lessonIndex + 1}. óra</div>
                 {daysOfWeek.map((day, index) => (
                   <div className="calendar-cell" key={`${lessonIndex}-${index}`}>
-                    {/* Ellenőrizzük, hogy létezik-e adat az adott dátumra */}
                     {testSchedule[format(day, "yyyy-MM-dd")]?.[lessonIndex] || "Nincs óra"}
                   </div>
                 ))}
