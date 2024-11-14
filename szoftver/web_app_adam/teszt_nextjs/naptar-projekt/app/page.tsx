@@ -138,7 +138,7 @@ const Calendar: React.FC = () => {
           <div className="modal-content">
             <h2>{modalInfo.lesson}</h2>
             <p>Időpont: {modalInfo.time}</p>
-            <button onClick={closeModal}>Bezárás</button>
+            <Button onClick={closeModal}>Bezárás</Button>
           </div>
         </div>
       )}
