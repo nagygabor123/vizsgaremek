@@ -6,6 +6,26 @@
 @tailwind utilities;
 
 
+.calendar-cell.lesson-card {
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #f0f0f5;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.calendar-cell.lesson-card:hover {
+  background-color: #e0e0eb;
+}
+
+.calendar-cell.current-lesson {
+  background-color: #ffe0b2;
+  font-weight: bold;
+}
+
+
+
+
 .calendar-header {
   display: flex;
   /* gap: 1rem; */
@@ -95,11 +115,45 @@
 
 }
 
+/* globals.css */
+
+/* Kártyákhoz */
 .calendar-cell {
-  /* border: 1px solid #ddd; */
-  border-left: 1px solid #ddd;
-  /* border-top: 1px solid #ddd; */
-  height: 50px;
+  background-color: #ffffff;
+  padding: 8px;
+  margin: 4px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.calendar-cell:hover {
+  background-color: #f0f0f0;
+}
+
+/* Modálhoz */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 300px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   text-align: center;
 }
 
