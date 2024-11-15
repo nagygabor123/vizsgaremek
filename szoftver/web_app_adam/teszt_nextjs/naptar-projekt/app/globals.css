@@ -13,7 +13,10 @@
 }*/
 
 .calendar-cell.current-lesson {
- background-color: #cedbff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ background-color: #dfe6ff;
+ border: 1px solid #91aeff;
+ color: #5b81eb;
   font-weight: bold;
 }
 
@@ -146,18 +149,25 @@
 
 /* Kártyákhoz */
 .calendar-cell {
-  background-color: #ffffff;
+  /*background-color: #dde6ff;
+  border: 1px solid #bdcefd;*/
+background-color: #fffbfb;
+  border: 1px solid #ececec;
+  color: rgb(85, 85, 85);
+  
   padding: 8px;
   margin: 4px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+
   text-align: center;
   font-size: 13px;
   cursor: pointer;
   transition: background-color 0.2s;
+  
 }
 .calendar-cell:hover {
-  background-color: #f0f0f0;
+  background-color: #f2f5ff;
 }
 
 /* Modálhoz */
