@@ -17,10 +17,10 @@ import {
 } from "@/components/ui/dialog";
 
 const testSchedule: { [date: string]: string[] } = {
-  "2024-11-11": ["Matematika", "Történelem", "Angol", "Kémia", "Fizika", "Biológia", "Testnevelés", "Földrajz", "Ének"],
-  "2024-11-12": ["Irodalom", "Matematika", "Informatika", "Történelem", "Angol", "Kémia", "Biológia", "Fizika", "Testnevelés"],
-  "2024-11-13": ["Angol", "Matematika és az meg Hogy szeretm", "Biológia", "Irodalom", "Kémia", "Földrajz", "Történelem", "Fizika", "Informatika"],
-  "2024-11-14": ["Testnevelés", "Ének", "Irodalom", "Angol", "Történelem", "Matematika", "Kémia", "Fizika", "Biológia"],
+  "2024-11-18": ["Matematika", "Történelem", "", "Fizika", "Biológia", "", "Földrajz", "Ének", ""],
+  "2024-11-19": ["Irodalom", "Matematika", "Informatika", "Történelem", "Angol", "Kémia", "Biológia", "Fizika", "Testnevelés"],
+  "2024-11-20": ["Angol", "Matematika és az meg Hogy szeretm", "", "Irodalom", "Földrajz", "Történelem", "Fizika", "Informatika", ""],
+  "2024-11-14": ["Testnevelés", "Ének", "Irodalom", "Angol", "Történelem", "", "", "Fizika", "Biológia"],
   "2024-11-15": ["Informatika és Távközlési alapok és az meg", "Földrajz", "Matematika", "Biológia", "Irodalom", "Angol", "Kémia", "Történelem", "Fizika"],
 };
 
@@ -102,25 +102,28 @@ const Calendar: React.FC = () => {
         {isMobileView ? (
           <div>
             <div className="calendar-day">{format(currentDate, "eeee d", { locale: hu })}</div>
-            {Array.from({ length: 9 }, (_, i) => (
-              <Dialog key={i}>
-                <DialogTrigger asChild>
-                  <div
-                    className={`calendar-cell lesson-card ${isCurrentLesson(i) ? 'current-lesson' : ''}`}
-                    onClick={() => openModal(testSchedule[format(currentDate, "yyyy-MM-dd")]?.[i] || "Nincs óra", `${lessonTimes[i].start} - ${lessonTimes[i].end}`)}
-                  >
-                    {testSchedule[format(currentDate, "yyyy-MM-dd")]?.[i] || "Nincs óra"}
-                  </div>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>{modalInfo?.lesson}</DialogTitle>
-                    <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
-                  </DialogHeader>
-        {/*<Button onClick={closeModal}>Bezárás</Button>*/}
-                </DialogContent>
-              </Dialog>
-            ))}
+            {Array.from({ length: 9 }, (_, i) => {
+  const lesson = testSchedule[format(currentDate, "yyyy-MM-dd")]?.[i];
+  if (!lesson) return null; // Ha nincs óra, ne jelenjen meg kártya
+  return (
+    <Dialog key={i}>
+      <DialogTrigger asChild>
+        <div
+          className={`calendar-cell lesson-card ${isCurrentLesson(i) ? "current-lesson" : ""}`}
+          onClick={() => openModal(lesson, `${lessonTimes[i].start} - ${lessonTimes[i].end}`)}
+        >
+          {lesson}
+        </div>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{modalInfo?.lesson}</DialogTitle>
+          <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+  );
+})}
             
           </div>
         ) : (
@@ -131,30 +134,35 @@ const Calendar: React.FC = () => {
                 {format(day, "EEE d", { locale: hu })}
               </div>
             ))}
-            {Array.from({ length: 9 }, (_, lessonIndex) => (
-              <React.Fragment key={lessonIndex}>
-                <div className="lesson-number">{lessonIndex + 1}. óra</div>
-                {daysOfWeek.map((day, index) => (
-                  <Dialog key={`${lessonIndex}-${index}`}>
-                    <DialogTrigger asChild>
-                      <div
-                        className={`calendar-cell lesson-card ${isToday(day) && isCurrentLesson(lessonIndex) ? 'current-lesson' : ''}`}
-                        onClick={() => openModal(testSchedule[format(day, "yyyy-MM-dd")]?.[lessonIndex] || "Nincs óra", `${lessonTimes[lessonIndex].start} - ${lessonTimes[lessonIndex].end}`)}
-                      >
-                        {testSchedule[format(day, "yyyy-MM-dd")]?.[lessonIndex] || "Nincs óra"}
-                      </div>
-                    </DialogTrigger>
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>{modalInfo?.lesson}</DialogTitle>
-                        <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
-                      </DialogHeader>
-                 {/*<Button onClick={closeModal}>Bezárás</Button>*/}
-                    </DialogContent>
-                  </Dialog>
-                ))}
-              </React.Fragment>
-            ))}
+         {Array.from({ length: 9 }, (_, lessonIndex) => (
+  <React.Fragment key={lessonIndex}>
+    <div className="lesson-number">{lessonIndex + 1}. óra</div>
+    {daysOfWeek.map((day, index) => {
+      const lesson = testSchedule[format(day, "yyyy-MM-dd")]?.[lessonIndex];
+      if (!lesson) return <div key={`${lessonIndex}-${index}`} className="calendar-cell"></div>; // Ha nincs óra, üres cellát jeleníts meg
+      return (
+        <Dialog key={`${lessonIndex}-${index}`}>
+          <DialogTrigger asChild>
+            <div
+              className={`calendar-cell lesson-card ${
+                isToday(day) && isCurrentLesson(lessonIndex) ? "current-lesson" : ""
+              }`}
+              onClick={() => openModal(lesson, `${lessonTimes[lessonIndex].start} - ${lessonTimes[lessonIndex].end}`)}
+            >
+              {lesson}
+            </div>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>{modalInfo?.lesson}</DialogTitle>
+              <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
+      );
+    })}
+  </React.Fragment>
+))}
           </>
         )}
       </div>
