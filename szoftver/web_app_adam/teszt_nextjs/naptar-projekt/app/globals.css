@@ -9,6 +9,7 @@
 .calendar-cell.lesson-card {
   border-radius: 8px;
   padding: 10px;
+  height: 5rem;
   background-color: #f0f0f5;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -68,11 +69,28 @@
   }
 }
 
-
-
 .calendar-container {
   padding: 20px;
+  max-width: 800px; /* Maximális szélesség, hogy ne nyúljon a képernyő széléig */
+  margin: 0 auto; /* Középre igazítás */
 }
+
+.calendar-grid {
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 2px;
+  margin-top: 10px;
+  max-width: 100%; /* A szülő konténerhez igazodik */
+}
+
+
+/*
+.calendar-container {
+  padding: 20px;
+
+}*/
 
 .calendar-controls {
   display: flex;
@@ -82,14 +100,15 @@
   margin-bottom: 20px;
 }
 
+/*
 .calendar-grid {
   border: 1px solid #ddd;
   border-radius: 15px;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  /* gap: 5px; */
+
   margin-top: 20px;
-}
+}*/
 
 .calendar-day{
   text-align: center;
@@ -125,7 +144,7 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
   transition: background-color 0.2s;
 }
@@ -177,7 +196,7 @@
   }
 
   .calendar-cell {
-    height: 40px;
+    /*height: 40px;*/
     border: none;
     border-bottom: 1px solid #ddd;
     font-size: 1rem;
