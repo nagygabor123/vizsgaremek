@@ -173,10 +173,16 @@ background-color: #fffbfb;
   transition: background-color 0.2s;
   
 }
+.calendar-cell.current-lesson:hover {
+  background-color: #e1e8fd;
+  border: 1px solid #0f4efc;
+  color: #0f4efc;
+}
+
 .calendar-cell:hover {
   background-color: #ebf0ff;
-  border: 1px solid #9fb8fd;
-  color: #6e91f3;
+  border: 1px solid #98b3ff;
+  color: #668aee;
 }
 
 /* Modálhoz */
