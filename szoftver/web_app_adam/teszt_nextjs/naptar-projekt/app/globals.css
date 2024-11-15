@@ -14,9 +14,16 @@
 
 .calendar-cell.current-lesson {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
- background-color: #dfe6ff;
+  background-color: #f2f5ff;
+  border: 1px solid #0f4efc;
+  color: #0f4efc;
+ 
+ /*
+  background-color: #dfe6ff;
  border: 1px solid #91aeff;
  color: #5b81eb;
+
+ */
   font-weight: bold;
 }
 
@@ -167,7 +174,9 @@ background-color: #fffbfb;
   
 }
 .calendar-cell:hover {
-  background-color: #f2f5ff;
+  background-color: #ebf0ff;
+  border: 1px solid #9fb8fd;
+  color: #6e91f3;
 }
 
 /* Modálhoz */
