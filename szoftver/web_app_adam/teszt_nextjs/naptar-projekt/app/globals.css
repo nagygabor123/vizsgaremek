@@ -92,6 +92,7 @@
 
 .calendar-container {
   padding: 20px;
+  max-width: 1000px;
    /* Maximális szélesség, hogy ne nyúljon a képernyő széléig */
   margin: 0 auto; /* Középre igazítás */
 }
