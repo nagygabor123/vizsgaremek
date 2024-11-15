@@ -11,9 +11,9 @@ import { Button } from "@/components/ui/button";
 const testSchedule: { [date: string]: string[] } = {
   "2024-11-11": ["Matematika", "Történelem", "Angol", "Kémia", "Fizika", "Biológia", "Testnevelés", "Földrajz", "Ének"],
   "2024-11-12": ["Irodalom", "Matematika", "Informatika", "Történelem", "Angol", "Kémia", "Biológia", "Fizika", "Testnevelés"],
-  "2024-11-13": ["Angol", "Matematika", "Biológia", "Irodalom", "Kémia", "Földrajz", "Történelem", "Fizika", "Informatika"],
+  "2024-11-13": ["Angol", "Matematika és az meg Hogy szeretm", "Biológia", "Irodalom", "Kémia", "Földrajz", "Történelem", "Fizika", "Informatika"],
   "2024-11-14": ["Testnevelés", "Ének", "Irodalom", "Angol", "Történelem", "Matematika", "Kémia", "Fizika", "Biológia"],
-  "2024-11-15": ["Informatika", "Földrajz", "Matematika", "Biológia", "Irodalom", "Angol", "Kémia", "Történelem", "Fizika"],
+  "2024-11-15": ["Informatika és Távközlési alapok és az meg", "Földrajz", "Matematika", "Biológia", "Irodalom", "Angol", "Kémia", "Történelem", "Fizika"],
 };
 
 const lessonTimes = [
