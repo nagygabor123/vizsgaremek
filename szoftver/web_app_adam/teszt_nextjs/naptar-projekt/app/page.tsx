@@ -7,6 +7,14 @@ import { hu } from 'date-fns/locale';
 import './globals.css';
 
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const testSchedule: { [date: string]: string[] } = {
   "2024-11-11": ["Matematika", "Történelem", "Angol", "Kémia", "Fizika", "Biológia", "Testnevelés", "Földrajz", "Ének"],
@@ -90,28 +98,36 @@ const Calendar: React.FC = () => {
         </div>
       </div>
 
-      <div className="calendar-grid">
+      <div className="calendar-grid">           
         {isMobileView ? (
           <div>
             <div className="calendar-day">{format(currentDate, "eeee d", { locale: hu })}</div>
             {Array.from({ length: 9 }, (_, i) => (
-              <div
-                className={`calendar-cell lesson-card ${isCurrentLesson(i) ? 'current-lesson' : ''}`}
-                key={i}
-                onClick={() => openModal(testSchedule[format(currentDate, "yyyy-MM-dd")]?.[i] || "Nincs óra", `${lessonTimes[i].start} - ${lessonTimes[i].end}`)}
-              >
-                {testSchedule[format(currentDate, "yyyy-MM-dd")]?.[i] || "Nincs óra"}
-              </div>
+              <Dialog key={i}>
+                <DialogTrigger asChild>
+                  <div
+                    className={`calendar-cell lesson-card ${isCurrentLesson(i) ? 'current-lesson' : ''}`}
+                    onClick={() => openModal(testSchedule[format(currentDate, "yyyy-MM-dd")]?.[i] || "Nincs óra", `${lessonTimes[i].start} - ${lessonTimes[i].end}`)}
+                  >
+                    {testSchedule[format(currentDate, "yyyy-MM-dd")]?.[i] || "Nincs óra"}
+                  </div>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>{modalInfo?.lesson}</DialogTitle>
+                    <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
+                  </DialogHeader>
+        {/*<Button onClick={closeModal}>Bezárás</Button>*/}
+                </DialogContent>
+              </Dialog>
             ))}
+            
           </div>
         ) : (
           <>
             <div className="calendar-day"></div>
             {daysOfWeek.map((day, index) => (
-              <div
-                className={`calendar-day ${isToday(day) ? 'current-day' : ''}`}
-                key={index}
-              >
+              <div className={`calendar-day ${isToday(day) ? 'current-day' : ''}`} key={index}>
                 {format(day, "EEE d", { locale: hu })}
               </div>
             ))}
@@ -119,29 +135,29 @@ const Calendar: React.FC = () => {
               <React.Fragment key={lessonIndex}>
                 <div className="lesson-number">{lessonIndex + 1}. óra</div>
                 {daysOfWeek.map((day, index) => (
-                  <div
-                    className={`calendar-cell lesson-card ${isToday(day) && isCurrentLesson(lessonIndex) ? 'current-lesson' : ''}`}
-                    key={`${lessonIndex}-${index}`}
-                    onClick={() => openModal(testSchedule[format(day, "yyyy-MM-dd")]?.[lessonIndex] || "Nincs óra", `${lessonTimes[lessonIndex].start} - ${lessonTimes[lessonIndex].end}`)}
-                  >
-                    {testSchedule[format(day, "yyyy-MM-dd")]?.[lessonIndex] || "Nincs óra"}
-                  </div>
+                  <Dialog key={`${lessonIndex}-${index}`}>
+                    <DialogTrigger asChild>
+                      <div
+                        className={`calendar-cell lesson-card ${isToday(day) && isCurrentLesson(lessonIndex) ? 'current-lesson' : ''}`}
+                        onClick={() => openModal(testSchedule[format(day, "yyyy-MM-dd")]?.[lessonIndex] || "Nincs óra", `${lessonTimes[lessonIndex].start} - ${lessonTimes[lessonIndex].end}`)}
+                      >
+                        {testSchedule[format(day, "yyyy-MM-dd")]?.[lessonIndex] || "Nincs óra"}
+                      </div>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>{modalInfo?.lesson}</DialogTitle>
+                        <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
+                      </DialogHeader>
+                 {/*<Button onClick={closeModal}>Bezárás</Button>*/}
+                    </DialogContent>
+                  </Dialog>
                 ))}
               </React.Fragment>
             ))}
           </>
         )}
       </div>
-
-      {modalInfo && (
-        <div className="modal">
-          <div className="modal-content">
-            <h2>{modalInfo.lesson}</h2>
-            <p>Időpont: {modalInfo.time}</p>
-            <Button onClick={closeModal}>Bezárás</Button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
