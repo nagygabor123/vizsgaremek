@@ -11,23 +11,58 @@
 .calendar-cell.lesson-card:hover {
   background-color: #e0e0eb;
 }*/
-
-
-
-.calendar-cell.lesson-card {
+.lesson-card {
+  position: relative;
+  padding: 8px;
   background-color: #fffbfb;
   border: 1px solid #ececec;
   color: rgb(85, 85, 85);
-  border-radius: 12px;
+  
+
+  overflow: hidden; /* Hosszú tartalom levágása */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.calendar-cell.lesson-card {
+
+
   padding: 10px;
   height: 5rem;
   /*background-color: #f0f0f5;*/
   cursor: pointer;
   transition: background-color 0.3s ease;
-  overflow: hidden; /* Eltünteti a szöveg túlcsordulását */
+ 
   text-overflow: ellipsis; /* Három pontot tesz a végére, ha túl hosszú */
   white-space: nowrap; /* Egy sorba igazítja a szöveget */
 }
+
+.lesson-index {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  font-size: 12px; /* Kis betűméret az óraszámhoz */
+  font-weight: bold;
+
+}
+
+
+
+.lesson-name {
+  margin-top: 16px; /* Kis távolság az óraszám és a név között */
+  font-size: 14px; /* Alap betűméret */
+  text-align: center; /* Szöveg középre igazítása */
+  white-space: nowrap; /* Egysoros szöveg */
+  overflow: hidden; /* Túlcsordulás levágása */
+  text-overflow: ellipsis; /* Szöveg végét pontokkal egészíti ki */
+}
+
+
+
+
+
 
 .calendar-cell.lesson-card .lesson-title {
   overflow-wrap: break-word; /* Szükség esetén sortörést alkalmaz */
