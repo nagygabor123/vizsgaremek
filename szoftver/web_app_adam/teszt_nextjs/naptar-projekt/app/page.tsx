@@ -112,7 +112,7 @@ const Calendar: React.FC = () => {
           className={`calendar-cell lesson-card ${isCurrentLesson(i) ? "current-lesson" : ""}`}
           onClick={() => openModal(lesson, `${lessonTimes[i].start} - ${lessonTimes[i].end}`)}
         >
-      <div className="lesson-index">{i + 1}.</div>
+      <div className="lesson-index">{i + 1}</div>
       <div className="lesson-name">{lesson}</div>
         </div>
       </DialogTrigger>
@@ -150,7 +150,7 @@ const Calendar: React.FC = () => {
               }`}
               onClick={() => openModal(lesson, `${lessonTimes[lessonIndex].start} - ${lessonTimes[lessonIndex].end}`)}
             >
-  <div className="lesson-index">{lessonIndex + 1}.</div>
+  <div className="lesson-index">{lessonIndex + 1}</div>
   <div className="lesson-name">{lesson}</div>
 
             </div>
