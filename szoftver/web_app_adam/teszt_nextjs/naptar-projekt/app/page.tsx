@@ -135,9 +135,14 @@ const Calendar: React.FC = () => {
                 {format(day, "EEE d", { locale: hu })}
               </div>
             ))}
-         {Array.from({ length: 9 }, (_, lessonIndex) => (
+
+
+{Array.from({ length: 9 }, (_, lessonIndex) => (
   <React.Fragment key={lessonIndex}>
-    <div className="lesson-number">{lessonIndex + 1}. óra</div>
+    <div className="lesson-time">
+      <span className="time-start">{lessonTimes[lessonIndex].start}</span>
+      <span className="time-end">{lessonTimes[lessonIndex].end}</span>
+    </div>
     {daysOfWeek.map((day, index) => {
       const lesson = testSchedule[format(day, "yyyy-MM-dd")]?.[lessonIndex];
       if (!lesson) return <div key={`${lessonIndex}-${index}`} className="calendar-cell"></div>; // Ha nincs óra, üres cellát jeleníts meg
@@ -150,9 +155,9 @@ const Calendar: React.FC = () => {
               }`}
               onClick={() => openModal(lesson, `${lessonTimes[lessonIndex].start} - ${lessonTimes[lessonIndex].end}`)}
             >
-  <div className="lesson-index">{lessonIndex + 1}</div>
-  <div className="lesson-name">{lesson}</div>
-
+             
+<div className="lesson-index">{lessonIndex + 1}</div>
+<div className="lesson-name">{lesson}</div>
             </div>
           </DialogTrigger>
           <DialogContent>
@@ -166,6 +171,9 @@ const Calendar: React.FC = () => {
     })}
   </React.Fragment>
 ))}
+
+
+
           </>
         )}
       </div>

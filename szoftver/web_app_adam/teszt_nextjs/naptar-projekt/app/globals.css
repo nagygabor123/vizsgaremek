@@ -6,14 +6,45 @@
 @tailwind utilities;
 
 
+
+.lesson-time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* Igazítsa a cella méretéhez */
+  font-size: 14px;
+ 
+}
+
+.time-start,
+.time-end {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+.time-start {
+  font-weight: bold;
+}
+
+.time-end {
+  color: #777; /* Halványabb szöveg */
+  margin-top: 2.5rem; /* Kis távolság a két sor között */
+}
+
+
+
+
 /*
+
 
 .calendar-cell.lesson-card:hover {
   background-color: #e0e0eb;
 }*/
 .lesson-card {
   position: relative;
-  padding: 8px;
+  /* padding: 8px; */
   background-color: #fffbfb;
   border: 1px solid #ececec;
   color: rgb(85, 85, 85);
@@ -29,7 +60,7 @@
 .calendar-cell.lesson-card {
 
 
-  padding: 10px;
+  /* padding: 10px; */
   height: 5rem;
   /*background-color: #f0f0f5;*/
   cursor: pointer;
@@ -41,9 +72,9 @@
 
 .lesson-index {
   position: absolute;
-  top: 4px;
-  left: 4px;
-  font-size: 12px; /* Kis betűméret az óraszámhoz */
+  top: 8px;
+  left: 8px;
+  font-size: 11px; /* Kis betűméret az óraszámhoz */
   font-weight: bold;
 
 }
@@ -51,9 +82,9 @@
 
 
 .lesson-name {
-  margin-top: 16px; /* Kis távolság az óraszám és a név között */
+  /* Kis távolság az óraszám és a név között */
   font-size: 14px; /* Alap betűméret */
-  text-align: center; /* Szöveg középre igazítása */
+  text-align: left;
   white-space: nowrap; /* Egysoros szöveg */
   overflow: hidden; /* Túlcsordulás levágása */
   text-overflow: ellipsis; /* Szöveg végét pontokkal egészíti ki */
@@ -210,7 +241,7 @@
  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
 
   text-align: center;
-  font-size: 13px;
+  
   cursor: pointer;
   transition: background-color 0.2s;
   
