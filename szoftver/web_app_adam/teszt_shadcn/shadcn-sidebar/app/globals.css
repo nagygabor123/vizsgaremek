@@ -92,3 +92,306 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+
+
+.lesson-time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* Igazítsa a cella méretéhez */
+  font-size: 14px;
+ 
+}
+
+.time-start,
+.time-end {
+  display: block;
+  text-align: center;
+  width: 100%;
+  
+}
+
+.time-start {
+  font-weight: bold;
+}
+
+.time-end {
+  color: #777; /* Halványabb szöveg */
+  margin-top: 3rem; /* Kis távolság a két sor között */
+}
+
+
+
+
+/*
+
+
+.calendar-cell.lesson-card:hover {
+  background-color: #e0e0eb;
+}*/
+.lesson-card {
+  position: relative;
+  /* padding: 8px; */
+  background-color: #fffbfb;
+  border: 1px solid #ececec;
+  color: rgb(85, 85, 85);
+  
+
+  overflow: hidden; /* Hosszú tartalom levágása */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.calendar-cell.lesson-card {
+
+
+  /* padding: 10px; */
+  height: 5.5rem;
+  /*background-color: #f0f0f5;*/
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+ 
+  text-overflow: ellipsis; /* Három pontot tesz a végére, ha túl hosszú */
+  white-space: nowrap; /* Egy sorba igazítja a szöveget */
+}
+
+.lesson-index {
+  text-align: left;
+  position: relative;
+  /* top: 8px;
+  left: 8px; */
+  font-size: 12px; /* Kis betűméret az óraszámhoz */
+  padding-bottom: 0.8rem;
+  /* font-weight: bold; */
+  /* line-height: 200%; */
+  
+  
+}
+
+
+
+.lesson-name {
+  /* Kis távolság az óraszám és a név között */
+  font-weight: bold;
+  font-size: 13px; /* Alap betűméret */
+  
+  text-align: left;
+  white-space: nowrap; /* Egysoros szöveg */
+  overflow: hidden; /* Túlcsordulás levágása */
+  text-overflow: ellipsis; /* Szöveg végét pontokkal egészíti ki */
+  /* line-height: 120%; */
+  
+}
+
+.lesson-test {
+ 
+  /* Kis távolság az óraszám és a név között */
+  /* font-weight: bold; */
+  font-size: 13px; /* Alap betűméret */
+  text-align: left;
+  white-space: nowrap; /* Egysoros szöveg */
+  overflow: hidden; /* Túlcsordulás levágása */
+  text-overflow: ellipsis; /* Szöveg végét pontokkal egészíti ki */
+  /* line-height: 120%; */
+}
+
+
+
+/* 
+.calendar-cell.lesson-card .lesson-title {
+  overflow-wrap: break-word; 
+} */
+
+.calendar-cell.current-lesson {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f2f5ff;
+  border: 1px solid #0f4efc;
+  color: #0f4efc;
+ 
+ /*
+  background-color: #dfe6ff;
+ border: 1px solid #91aeff;
+ color: #5b81eb;
+
+ */
+  font-weight: bold;
+}
+
+.calendar-header {
+  display: flex;
+  /* gap: 1rem; */
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap; /* Lehetővé teszi az elemek többsoros megjelenítését kis képernyőkön */
+}
+
+.calendar-date {
+  font-size: 2.25rem;
+  font-weight: bold;
+}
+
+.calendar-controls {
+  display: flex;
+  /*gap: 0.5rem;*/
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .calendar-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .calendar-date {
+    font-size: 1rem;
+  }
+
+  .calendar-controls {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .calendar-controls button {
+    flex: 1;
+    max-width: 100%; /* Teljes szélesség, így jól illeszkedik a mobilos nézethez */
+  }
+}
+
+.calendar-container {
+  padding: 20px;
+  /* max-width: 1000px; */
+   /* Maximális szélesség, hogy ne nyúljon a képernyő széléig */
+  margin: 0 auto; /* Középre igazítás */
+}
+
+.calendar-grid {
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: 7rem repeat(7, 1fr);
+  /*gap: 2px;*/
+  margin-top: 10px;
+  /*max-width: 100%;*/ /* A szülő konténerhez igazodik */
+}
+
+
+/*
+.calendar-container {
+  padding: 20px;
+
+}*/
+
+.calendar-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 20px;
+}
+
+/*
+.calendar-grid {
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+
+  margin-top: 20px;
+}*/
+
+.calendar-day{
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+ /* border-left: 1px solid #ddd;*/
+}
+ 
+/* .calendar-day:first-child{
+ width: 30px;
+} */
+
+.lesson-number {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+ /* width: 30px;*/
+}
+
+
+
+.current-day {
+  color: blue;
+  border-bottom: 2px solid blue;
+  font-weight: bold;
+
+}
+
+/* globals.css */
+
+/* Kártyákhoz */
+.calendar-cell {
+  /*background-color: #dde6ff;
+  border: 1px solid #bdcefd;*/
+/*background-color: #fffbfb;
+  border: 1px solid #ececec;
+  color: rgb(85, 85, 85);
+  */
+  padding: 10px;
+   /* padding: 0 8px 0 8px;  */
+  margin: 3px;
+  border-radius: 8px;
+ /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+
+  text-align: center;
+  
+  cursor: pointer;
+  transition: background-color 0.2s;
+  
+}
+.calendar-cell.current-lesson:hover {
+  background-color: #e1e8fd;
+  border: 1px solid #0f4efc;
+  color: #0f4efc;
+}
+
+.calendar-cell:hover {
+  background-color: #ebf0ff;
+  border: 1px solid #98b3ff;
+  color: #668aee;
+}
+
+
+
+
+/* Reszponzív beállítások mobil nézethez */
+@media (max-width: 480px) {
+  .calendar-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .calendar-day, .lesson-number {
+    font-size: 1.2rem;
+    padding: 10px 0;
+  }
+
+  .calendar-controls button {
+    font-size: 1rem;
+    padding: 8px 12px;
+  }
+
+  .calendar-cell {
+    /*height: 40px;*/
+    border: none;
+    border-bottom: 1px solid #ddd;
+    font-size: 1rem;
+  }
+}
+
