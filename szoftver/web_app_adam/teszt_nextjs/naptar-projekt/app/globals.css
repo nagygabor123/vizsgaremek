@@ -31,7 +31,7 @@
 
 .time-end {
   color: #777; /* Halványabb szöveg */
-  margin-top: 2.5rem; /* Kis távolság a két sor között */
+  margin-top: 3rem; /* Kis távolság a két sor között */
 }
 
 
@@ -62,7 +62,7 @@
 
 
   /* padding: 10px; */
-  height: 5rem;
+  height: 5.5rem;
   /*background-color: #f0f0f5;*/
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -72,9 +72,10 @@
 }
 
 .lesson-index {
-  position: absolute;
-  top: 8px;
-  left: 8px;
+  text-align: left;
+  position: relative;
+  /* top: 8px;
+  left: 8px; */
   font-size: 11px; /* Kis betűméret az óraszámhoz */
   font-weight: bold;
 

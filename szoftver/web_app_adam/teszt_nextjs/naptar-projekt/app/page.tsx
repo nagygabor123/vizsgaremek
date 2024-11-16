@@ -114,6 +114,7 @@ const Calendar: React.FC = () => {
         >
       <div className="lesson-index">{i + 1}</div>
       <div className="lesson-name">{lesson}</div>
+      <div className="lesson-name">10. A </div>
         </div>
       </DialogTrigger>
       <DialogContent>
@@ -158,6 +159,8 @@ const Calendar: React.FC = () => {
              
 <div className="lesson-index">{lessonIndex + 1}</div>
 <div className="lesson-name">{lesson}</div>
+<div className="lesson-name">10. A </div>
+
             </div>
           </DialogTrigger>
           <DialogContent>
