@@ -90,7 +90,7 @@
   /* Kis távolság az óraszám és a név között */
   font-weight: bold;
   font-size: 13px; /* Alap betűméret */
-  color: black;
+  
   text-align: left;
   white-space: nowrap; /* Egysoros szöveg */
   overflow: hidden; /* Túlcsordulás levágása */
