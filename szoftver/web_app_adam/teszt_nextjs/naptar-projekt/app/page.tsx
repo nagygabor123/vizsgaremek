@@ -22,8 +22,6 @@ const testSchedule: { [date: string]: string[] } = {
   "2024-11-20": ["Angol", "Matematika és az meg Hogy szeretm", "", "Irodalom", "Földrajz", "Történelem", "Fizika", "Informatika", ""],
   "2024-11-14": ["Testnevelés", "Ének", "Irodalom", "Angol", "Történelem", "", "", "Fizika", "Biológia"],
   "2024-11-15": ["Informatika és Távközlési alapok és az meg", "Földrajz", "Matematika", "Biológia", "Irodalom", "Angol", "Kémia", "Történelem", "Fizika"],
-  "2024-11-16": ["", "", "", "", "", "", "Kémia", "", ""],
-
 };
 
 const lessonTimes = [
@@ -114,8 +112,7 @@ const Calendar: React.FC = () => {
           className={`calendar-cell lesson-card ${isCurrentLesson(i) ? "current-lesson" : ""}`}
           onClick={() => openModal(lesson, `${lessonTimes[i].start} - ${lessonTimes[i].end}`)}
         >
-          <div className="lesson-number">{i + 1}. óra</div> {/* Óraszám megjelenítése */}
-          <div className="lesson-name">{lesson}</div>
+          {lesson}
         </div>
       </DialogTrigger>
       <DialogContent>
@@ -127,7 +124,6 @@ const Calendar: React.FC = () => {
     </Dialog>
   );
 })}
-
             
           </div>
         ) : (
@@ -138,7 +134,7 @@ const Calendar: React.FC = () => {
                 {format(day, "EEE d", { locale: hu })}
               </div>
             ))}
-{Array.from({ length: 9 }, (_, lessonIndex) => (
+         {Array.from({ length: 9 }, (_, lessonIndex) => (
   <React.Fragment key={lessonIndex}>
     <div className="lesson-number">{lessonIndex + 1}. óra</div>
     {daysOfWeek.map((day, index) => {
@@ -153,8 +149,7 @@ const Calendar: React.FC = () => {
               }`}
               onClick={() => openModal(lesson, `${lessonTimes[lessonIndex].start} - ${lessonTimes[lessonIndex].end}`)}
             >
-              <div className="lesson-number">{lessonIndex + 1}. óra</div> {/* Óraszám megjelenítése */}
-              <div className="lesson-name">{lesson}</div>
+              {lesson}
             </div>
           </DialogTrigger>
           <DialogContent>
@@ -168,7 +163,6 @@ const Calendar: React.FC = () => {
     })}
   </React.Fragment>
 ))}
-
           </>
         )}
       </div>
