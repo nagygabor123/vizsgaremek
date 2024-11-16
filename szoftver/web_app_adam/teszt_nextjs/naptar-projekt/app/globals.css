@@ -77,29 +77,32 @@
   /* top: 8px;
   left: 8px; */
   font-size: 11px; /* Kis betűméret az óraszámhoz */
+  padding-bottom: 1rem;
   font-weight: bold;
-
+  line-height: 200%;
 }
 
 
 
 .lesson-name {
   /* Kis távolság az óraszám és a név között */
+  /* font-weight: bold; */
   font-size: 14px; /* Alap betűméret */
   text-align: left;
   white-space: nowrap; /* Egysoros szöveg */
   overflow: hidden; /* Túlcsordulás levágása */
   text-overflow: ellipsis; /* Szöveg végét pontokkal egészíti ki */
+  line-height: 120%;
 }
 
 
 
 
 
-
+/* 
 .calendar-cell.lesson-card .lesson-title {
-  overflow-wrap: break-word; /* Szükség esetén sortörést alkalmaz */
-}
+  overflow-wrap: break-word; 
+} */
 
 .calendar-cell.current-lesson {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -237,7 +240,8 @@
   border: 1px solid #ececec;
   color: rgb(85, 85, 85);
   */
-  padding: 8px;
+  /* padding: 8px; */
+   padding: 0 8px 0 8px; 
   margin: 3px;
   border-radius: 8px;
  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
@@ -260,29 +264,6 @@
   color: #668aee;
 }
 
-/* Modálhoz */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: #fff;
-  padding: 20px;
-  border-radius: 15px;
-  max-width: 300px;
-  width: 100%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  text-align: center;
-}
 
 
 
