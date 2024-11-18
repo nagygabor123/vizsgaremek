@@ -1,0 +1,3 @@
+(How to Connect 12v Solenoids to a Raspberry Pi using a 5v Relay) : https://youtu.be/BYQF8h4IKTY?si=DiDeICNkOFjOrr3m
+(SolenoidControl for Six Solenoids. PCB w/parts. Control with Arduino) : https://youtu.be/AneqTX_BBIc?si=aJE-Hv-ZQenOunNo
+(Controlling 44 solenoids with arduino UNO & PWM shields) : https://youtu.be/cb5Oz0Iia-U?si=EnxilQzcvRhId9LX
