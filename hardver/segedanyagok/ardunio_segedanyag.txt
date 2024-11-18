@@ -3,3 +3,4 @@
 (Controlling 44 solenoids with arduino UNO & PWM shields) : https://youtu.be/cb5Oz0Iia-U?si=EnxilQzcvRhId9LX
 (How many relays can I connect to one Arduino?) : https://youtu.be/e5mT-tp_lYg?si=d8b0FmyW7VXC0f-7
 (64 x Relays + 8 x pcf8574 + 4 x Wire Bus (I²C) + 1 Arduino) : https://youtu.be/vxyqLM3YBMc?si=1G_fp6wIDmNo2r5N
+(HOW TO INTERFACE 5V 4 CHANNEL RELAY MODULE WITH ARDUINO) : https://youtu.be/sWiflR1LzV8?si=dkmQjOxZdIpJDEv1
