@@ -15,7 +15,7 @@ export default async function handler(req, res) {
 
     try {
       // Az 'acces' oszlopot frissítjük
-      await db.query('UPDATE students SET acces = ?', [newAccessState]);
+      await db.query('UPDATE students SET access = ?', [newAccessState]);
 
       return res.status(200).json({ message: `All students' access updated to ${newAccessState}` });
     } catch (error) {

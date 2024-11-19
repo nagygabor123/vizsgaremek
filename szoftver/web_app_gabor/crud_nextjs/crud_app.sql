@@ -103,7 +103,7 @@ CREATE TABLE `students` (
 -- A tábla adatainak kiíratása `students`
 --
 
-INSERT INTO `students` (`student_id`, `full_name`, `class`, `rfid_tag`) VALUES
+INSERT INTO `students` (`student_id`, `full_name`, `class`, `rfid_tag`,`access`) VALUES
 ('OM11111', 'Szalkai-Szabó Ádám', '13.I', 'DA6BD581', 'nyithato'),
 ('OM22222', 'Nagy Gábor', '13.I', '030FC70A', 'nyithato'),
 ('OM33333', 'Bodri Dévid', '12.I', 'F7F59C7A', 'nyithato'),

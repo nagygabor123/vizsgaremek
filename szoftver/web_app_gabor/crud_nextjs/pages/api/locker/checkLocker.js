@@ -14,7 +14,7 @@ export default async function handler(req, res) {
       const connection = await connectToDatabase();
 
       // Lekérdezés az RFID alapján
-      const [rows] = await connection.execute('SELECT acces FROM students WHERE rfid_tag = ?', [rfid]);
+      const [rows] = await connection.execute('SELECT access FROM students WHERE rfid_tag = ?', [rfid]);
 
       // Ellenőrizzük, hogy van-e találat
       if (rows.length > 0) {

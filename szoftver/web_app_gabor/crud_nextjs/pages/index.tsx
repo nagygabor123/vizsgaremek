@@ -11,9 +11,6 @@ interface Student {
   rfid_tag: string;
 }
 
-const SHEET_SIDES = ["top", "right", "bottom", "left"] as const
-type SheetSide = (typeof SHEET_SIDES)[number]
-
 export default function Home() {
   const [students, setStudents] = useState<Student[]>([]);
   const [formData, setFormData] = useState<Student>({

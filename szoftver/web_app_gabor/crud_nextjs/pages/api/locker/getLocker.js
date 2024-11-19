@@ -38,10 +38,7 @@ export default async function handler(req, res) {
       }
 
       // Visszaadjuk a szekrény státuszát
-      return res.status(200).json({
-        locker_id: locker[0].locker_id,
-        status: locker[0].status,
-      });
+      return res.status(200).send(locker[0].locker_id.toString());
 
     } catch (error) {
       console.error('Database error:', error);
