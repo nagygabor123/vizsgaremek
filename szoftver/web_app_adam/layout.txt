@@ -23,6 +23,13 @@ LAYOUT
     ((- localhost/dashboard/logs))
 
 
+JOGKÖRÖK
+
+- sima tanár
+- osztályfőnök
+- igazgató és -helyettes, admin
+
+anarchikus
 
 
 
