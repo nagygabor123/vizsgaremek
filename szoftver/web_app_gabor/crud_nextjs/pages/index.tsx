@@ -12,7 +12,6 @@ interface Student {
 }
 
 const SHEET_SIDES = ["top", "right", "bottom", "left"] as const
- 
 type SheetSide = (typeof SHEET_SIDES)[number]
 
 export default function Home() {
@@ -25,6 +24,9 @@ export default function Home() {
   });
   const [editing, setEditing] = useState<boolean>(false);
   const [editStudentId, setEditStudentId] = useState<string | null>(null);
+
+  // State for system closure
+  const [systemClose, setSystemClose] = useState<boolean>(false); // initial state is false
 
   // Fetch students from the database
   const fetchStudents = async () => {
@@ -87,6 +89,22 @@ export default function Home() {
     setEditStudentId(student.student_id);
   };
 
+  // Handle system close/unlock button click
+  const handleSystemClose = async () => {
+    const action = systemClose ? 'open' : 'close'; // Determine whether to send "open" or "close"
+    
+    // Send the action to the API
+    const response = await fetch('/api/system/closeOpen', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action }),
+    });
+
+    if (response.ok) {
+      setSystemClose((prevState) => !prevState); // Toggle the systemClose state
+    }
+  };
+
   return (
     <div>
       <h1>Manage Students</h1>
@@ -133,7 +151,10 @@ export default function Home() {
           </li>
         ))}
       </ul>
+
+      <Button variant="outline" onClick={handleSystemClose}>
+        {systemClose ? 'Feloldás' : 'Zárás'}
+      </Button>
     </div>
-    
   );
 }

@@ -95,7 +95,8 @@ CREATE TABLE `students` (
   `student_id` varchar(20) NOT NULL,
   `full_name` varchar(255) NOT NULL,
   `class` varchar(20) NOT NULL,
-  `rfid_tag` varchar(50) NOT NULL
+  `rfid_tag` varchar(50) NOT NULL,
+  `acces` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -103,10 +104,10 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`student_id`, `full_name`, `class`, `rfid_tag`) VALUES
-('OM11111', 'Szalkai-Szabó Ádám', '13.I', 'DA6BD581'),
-('OM22222', 'Nagy Gábor', '13.I', '030FC70A'),
-('OM33333', 'Bodri Dévid', '12.I', 'F7F59C7A'),
-('OM44444', 'Pál Edvin', '12.I', '53D00E3E');
+('OM11111', 'Szalkai-Szabó Ádám', '13.I', 'DA6BD581', 'nyithato'),
+('OM22222', 'Nagy Gábor', '13.I', '030FC70A', 'nyithato'),
+('OM33333', 'Bodri Dévid', '12.I', 'F7F59C7A', 'nyithato'),
+('OM44444', 'Pál Edvin', '12.I', '53D00E3E', 'zarva');
 
 --
 -- Indexek a kiírt táblákhoz
