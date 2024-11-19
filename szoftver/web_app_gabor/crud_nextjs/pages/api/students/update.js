@@ -10,7 +10,6 @@ export default async function handler(req, res) {
     }
 
     const db = await connectToDatabase();
-
     try {
       await db.execute(
         'UPDATE students SET full_name = ?, class = ?, rfid_tag = ? WHERE student_id = ?',
