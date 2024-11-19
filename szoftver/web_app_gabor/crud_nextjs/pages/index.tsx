@@ -102,6 +102,14 @@ export default function Home() {
     }
   };
 
+  const handleStudentOpen = async (student_id: string) => {
+    const response = await fetch('/api/locker/studentOpen', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ student_id }),
+    });
+  };
+
   return (
     <div>
       <h1>Manage Students</h1>
@@ -145,6 +153,7 @@ export default function Home() {
             {student.full_name} ({student.class})
             <button onClick={() => handleEdit(student)}>Edit</button>
             <button onClick={() => handleDelete(student.student_id)}>Delete</button>
+            <button onClick={() => handleStudentOpen(student.student_id)}>Feloldás</button>
           </li>
         ))}
       </ul>
