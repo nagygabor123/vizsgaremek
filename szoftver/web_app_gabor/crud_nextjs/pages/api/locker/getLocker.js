@@ -39,6 +39,7 @@ export default async function handler(req, res) {
 
       // Visszaadjuk a szekrény státuszát
       return res.status(200).send(locker[0].locker_id.toString());
+      //return res.status(200).send("AA");
 
     } catch (error) {
       console.error('Database error:', error);

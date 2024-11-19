@@ -24,6 +24,15 @@ String toHexString(byte value) {
   return hexString; // Visszaadjuk a hexadecimális kódot
 }
 
+// Ellenőrzi, hogy a string valid szám, és maximum két számjegyű
+bool isValidLockerId(String response) {
+  if (response.length() > 2) return false; // Ha több mint két karakter, nem valid
+  for (int i = 0; i < response.length(); i++) {
+    if (!isDigit(response[i])) return false; // Ha nem számjegy, nem valid
+  }
+  return true;
+}
+
 void setup() {
   Serial.begin(9600);
   delay(1000); 
@@ -71,7 +80,7 @@ void loop() {
 
   int lockerId = 0;
   // HTTP kérést küldünk az RFID-azonosítóval
- if (client.connect(server, 3000)) {
+  if (client.connect(server, 3000)) {
     Serial.println("Connected to server.");
     String url = "/api/locker/getLocker?rfid=" + rfidTag;
 
@@ -86,24 +95,28 @@ void loop() {
     while (client.connected() || client.available()) {
       if (client.available()) {
         String response = client.readStringUntil('\n');
-        lockerId = response.toInt();
-        if (lockerId == 3 || lockerId == 6 || lockerId == 7 || lockerId == 5) {
-          digitalWrite(lockerId, HIGH); 
-          delay(500); 
-          digitalWrite(lockerId, LOW); 
-          lcd.clear();
-          lcd.setCursor(0, 0);
-          lcd.print("Elfogadva");
-          lcd.setCursor(0, 1);
-          lcd.print(lockerId);
-          delay(2000);
-          lcd.clear();
-          lcd.setCursor(0, 0);
-          lcd.print("Olvasd be");
-          lcd.setCursor(0, 1);
-          lcd.print("a kartyad");
-          validLocker = true; // Beállítjuk, hogy érvényes locker ID-t találtunk
-          break; // Kilépünk a válasz feldolgozásából
+        // Ellenőrizzük, hogy valid szám-e, és maximum két számjegyű
+        if (isValidLockerId(response)) {          
+          Serial.println("Validated Locker ID: " + response);
+          lockerId = response.toInt();
+          if (lockerId == 3 || lockerId == 6 || lockerId == 7 || lockerId == 5) {
+            digitalWrite(lockerId, HIGH); 
+            delay(500); 
+            digitalWrite(lockerId, LOW); 
+            lcd.clear();
+            lcd.setCursor(0, 0);
+            lcd.print("Elfogadva");
+            lcd.setCursor(0, 1);
+            lcd.print(lockerId);
+            delay(2000);
+            lcd.clear();
+            lcd.setCursor(0, 0);
+            lcd.print("Olvasd be");
+            lcd.setCursor(0, 1);
+            lcd.print("a kartyad");
+            validLocker = true;
+            break;
+          }
         }
       }
     }
@@ -113,6 +126,8 @@ void loop() {
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print("Masik BOX");
+      lcd.setCursor(0, 1);
+      lcd.print(lockerId);
       delay(2000);
       lcd.clear();
       lcd.setCursor(0, 0);
@@ -123,10 +138,9 @@ void loop() {
 
     client.stop(); // Kapcsolat lezárása
     Serial.println("Disconnected from server.");
-} else {
+  } else {
     Serial.println("Failed to connect to server.");
-}
-
-
+  }
+  
   delay(1000); // Késleltetés a következő olvasás előtt
 }
