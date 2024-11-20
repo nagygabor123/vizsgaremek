@@ -109,6 +109,24 @@ INSERT INTO `students` (`student_id`, `full_name`, `class`, `rfid_tag`,`access`)
 ('OM33333', 'Bodri Dévid', '12.I', 'F7F59C7A', 'nyithato'),
 ('OM44444', 'Pál Edvin', '12.I', '53D00E3E', 'zarva');
 
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `system_status`
+--
+
+CREATE TABLE `system_status` (
+  `id` int(11) NOT NULL,
+  `status` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `system_status`
+--
+
+INSERT INTO `system_status` (`id`, `status`) VALUES
+(1, 'nyitva');
+
 --
 -- Indexek a kiírt táblákhoz
 --
@@ -141,6 +159,13 @@ ALTER TABLE `students`
   ADD UNIQUE KEY `rfid_tag` (`rfid_tag`);
 
 --
+-- A tábla indexei `system_status`
+--
+ALTER TABLE `system_status`
+  ADD PRIMARY KEY (`id`);
+
+
+--
 -- A kiírt táblák AUTO_INCREMENT értéke
 --
 
@@ -161,6 +186,13 @@ ALTER TABLE `lockers`
 --
 ALTER TABLE `locker_relationships`
   MODIFY `relationship_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT a táblához `system_status`
+--
+ALTER TABLE `system_status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT;
 
 --
 -- Megkötések a kiírt táblákhoz

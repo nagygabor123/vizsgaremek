@@ -1,0 +1,21 @@
+API_VEGPONTOK
+
+CREATE  http://localhost:3000/api/students/create  POST
+
+READ  http://localhost:3000/api/students/read  GET
+
+UPDATE  http://localhost:3000/api/students/update  PUT
+
+DELETE  http://localhost:3000/api/students/delete  DELETE
+
+
+
+RENDSZER STÁTUSZ  http://localhost:3000/api/system/status  GET
+
+RENDSZER|DIÁKOK ZARVA/NYITVA  http://localhost:3000/api/system/closeOpen  POST
+
+DIÁK ENGEDÉLYEZÉSE  http://localhost:3000/api/locker/studentOpen  POST
+
+DIÁK ENGEDÉLYÉNEK ELLENŐRZÉSE  http://localhost:3000/api/locker/checkLocker?rfid=F7F59C7A  GET
+
+REFID->SZEKRÉNY  http://localhost:3000/api/locker/checkLocker?rfid=F7F59C7A  GET
