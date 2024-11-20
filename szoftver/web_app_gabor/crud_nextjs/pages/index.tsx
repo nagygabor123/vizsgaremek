@@ -32,9 +32,20 @@ export default function Home() {
     setStudents(data);
   };
 
-  // Call fetchStudents on initial load
+  // Fetch system status from the database
+  const fetchSystemStatus = async () => {
+    const response = await fetch('http://localhost:3000/api/system/status');
+    if (response.ok) {
+      const data = await response.json();
+      // If the system status is "nyitva", set systemClose to false, else set it to true
+      setSystemClose(data.status === "nyitva" ? false : true);
+    }
+  };
+
+  // Call fetchStudents and fetchSystemStatus on initial load
   useEffect(() => {
     fetchStudents();
+    fetchSystemStatus();
   }, []);
 
   // Handle form input changes
@@ -153,7 +164,7 @@ export default function Home() {
             {student.full_name} ({student.class})
             <button onClick={() => handleEdit(student)}>Edit</button>
             <button onClick={() => handleDelete(student.student_id)}>Delete</button>
-            <button onClick={() => handleStudentOpen(student.student_id)}>Feloldás</button>
+            <button onClick={() => handleStudentOpen(student.student_id)} disabled={!systemClose}>Feloldás</button>
           </li>
         ))}
       </ul>

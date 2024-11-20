@@ -14,13 +14,16 @@ export default async function handler(req, res) {
     const newAccessState = action === 'close' ? 'zarva' : 'nyitva';
 
     try {
-      // Az 'acces' oszlopot frissítjük
+      // Az 'access' oszlopot frissítjük
       await db.query('UPDATE students SET access = ?', [newAccessState]);
 
-      return res.status(200).json({ message: `All students' access updated to ${newAccessState}` });
+      // A rendszer státuszának frissítése
+      await db.query('UPDATE system_status SET status = ? WHERE id = 1', [newAccessState]);
+
+      return res.status(200).json({ message: `All students' access updated to ${newAccessState} and system status updated` });
     } catch (error) {
       console.error("Error updating access state:", error);
-      return res.status(500).json({ message: "Failed to update access state" });
+      return res.status(500).json({ message: "Failed to update access state and system status" });
     }
   } else {
     // Ha nem POST metódust használunk, akkor 405-ös hibát küldünk
