@@ -1,0 +1,52 @@
+
+- sima tanár
+- osztályfőnök (mindenképpen tanár is egyben)
+- igazgató és -helyettes, admin (lehet tanár és osztályfőnök is)
+_________________________________________________________________
+
+- localhost 
+    - localhost/login
+    - localhost/dashboard
+
+   ( sima tanár )
+    - localhost/dashboard/timetable
+      . óra megtekintés {saját órák}
+      . box nyitás engedélyezes {adott osztály - adott órán} 
+
+   ( osztályfőnök layout ) 
+    - localhost/dashboard/class/timetable 
+      . óra megtekintés {saját osztály}
+      . box nyitás engedélyezes {saját osztály - adott órán} 
+
+    - localhost/dashboard/class/student-list
+       . tanuló megtekintés {saját osztály}
+       . box nyitás engedélyezes {saját osztály}
+
+
+   ( igazgató és -helyettes, admin )
+    - localhost/dashboard/student-list
+      . tanuló megtekintés {összes tanuló}
+      . box nyitás engedélyezes {összes tanuló}
+      . rfid hozzáadás 
+      . rfid módosítás
+
+    //localhost/dashboard/employee-list//
+
+    - localhost/dashboard/sub
+      . helyettesítés hozzáadás
+      . helyettesítés módosítás
+      . helyettesítés törlés
+
+    - localhost/dashboard/logs
+      . műveletek megtekintés
+
+    - localhost/dashboard/settings:
+      . órarend importálása
+      . munkaterv (tanév rendje, szünetek, stb..)
+        //- alkalmazottak//
+
+    
+
+
+
+
