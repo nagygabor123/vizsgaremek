@@ -1,0 +1,14 @@
+
+
+NextAuth.js login (username-password, vercel)
+- https://youtu.be/v6TPcU23wP8?si=ocPHwdAVpMxM6Aqp
+
+NextAuth.js roles (talán hasznos)
+- https://youtu.be/xJ6efexXJ7I?si=gxFhMN5mt3bMu4Ea
+
+NextAuth.js login (mongoose) and roles 
+- https://youtu.be/soprdrmpO3M?si=rAaBIxDXvGQ9RC5X
+https://youtu.be/soprdrmpO3M?si=TR519JI2OqWiT824
+
+NextAuth.js login (google-github, mongodb) and roles 
+- https://youtu.be/MNm1XhDjX1s?si=npDRtRhgT0ERLqD8

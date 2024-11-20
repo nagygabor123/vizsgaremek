@@ -15,12 +15,16 @@ LAYOUT
     - localhost/dashboard/class/student-list
 
    ( igazgató és -helyettes, admin )
+    - localhost/dashboard/student-list
+    //localhost/dashboard/employee-list//
+    - localhost/dashboard/sub
+    ((- localhost/dashboard/logs))
     - localhost/dashboard/settings:
         - órarend importálása
         - munkaterv (tanév rendje, szünetek, stb..)
-    - localhost/dashboard/student-list
-    - localhost/dashboard/employee-list
-    ((- localhost/dashboard/logs))
+        //- alkalmazottak//
+
+    
 
 
 JOGKÖRÖK
