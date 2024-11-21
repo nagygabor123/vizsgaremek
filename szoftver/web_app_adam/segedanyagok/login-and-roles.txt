@@ -8,7 +8,7 @@ NextAuth.js roles (talán hasznos)
 
 NextAuth.js login (mongoose) and roles 
 - https://youtu.be/soprdrmpO3M?si=rAaBIxDXvGQ9RC5X
-https://youtu.be/soprdrmpO3M?si=TR519JI2OqWiT824
+
 
 NextAuth.js login (google-github, mongodb) and roles 
 - https://youtu.be/MNm1XhDjX1s?si=npDRtRhgT0ERLqD8
