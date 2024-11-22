@@ -7,5 +7,5 @@
 (Relay Module + Solenoid Door lock How to control them with an Arduino) : https://youtu.be/wGU04jtHC9w?si=rwVYIUXpOmUFo4sI
 
 (16 channel servo controller with Arduino | PCA9685 16 channel PWM servo motor driver tutorial) : https://youtu.be/vvqUnWweFDs?si=scEcJwTzj33aExyG
-(PCA9685 16-Channel 12-Bit PWM Servo Motor Driver with Arduino.) : httxxps://youtu.be/_DgLt2Inr1E?si=Ok3085CSV19YGVMk
+(PCA9685 16-Channel 12-Bit PWM Servo Motor Driver with Arduino.) : https://youtu.be/_DgLt2Inr1E?si=Ok3085CSV19YGVMk
 
