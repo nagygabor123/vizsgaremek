@@ -10,6 +10,12 @@ DELETE  http://localhost:3000/api/students/delete  DELETE
 
 
 
+ÓRAREND  http://localhost:3000/dashboard/timetables  GET
+
+DIÁKOK LITÁJA  http://localhost:3000/dashboard/student-list  GET
+
+
+
 RENDSZER STÁTUSZ  http://localhost:3000/api/system/status  GET
 
 RENDSZER|DIÁKOK ZARVA/NYITVA  http://localhost:3000/api/system/closeOpen  POST
