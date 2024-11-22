@@ -27,16 +27,16 @@ import {
 } from "@/components/ui/dialog";
 
 const testSchedule = [
-  { day: "monday", subject: "Matematika", start: "07:15", end: "08:00" },
-  { day: "monday", subject: "Történelem", start: "08:10", end: "08:55" },
-  { day: "monday", subject: "Fizika", start: "10:00", end: "10:45" },
-  { day: "monday", subject: "Biológia", start: "10:55", end: "11:40" },
-  { day: "monday", subject: "Földrajz", start: "12:55", end: "13:40" },
-  { day: "monday", subject: "Ének", start: "13:45", end: "14:30" },
-  { day: "monday", subject: "Rajz", start: "14:35", end: "15:20" },
-  { day: "tuesday", subject: "Kémia", start: "07:15", end: "08:00" },
-  { day: "tuesday", subject: "Tesi", start: "08:10", end: "08:55" },
-  { day: "friday", subject: "Tesi", start: "09:05", end: "09:50" },
+  { day: "monday", subject: "Matematika", start: "07:15", end: "08:00", class: "9.I", teacher: "Pityu" },
+  { day: "monday", subject: "Történelem", start: "08:10", end: "08:55", class: "9.I", teacher: "Pityu" },
+  { day: "monday", subject: "Fizika", start: "10:00", end: "10:45", class: "9.I", teacher: "Pityu" },
+  { day: "monday", subject: "Biológia", start: "10:55", end: "11:40", class: "9.I", teacher: "Pityu" },
+  { day: "monday", subject: "Földrajz", start: "12:55", end: "13:40", class: "9.I", teacher: "Pityu" },
+  { day: "monday", subject: "Ének", start: "13:45", end: "14:30", class: "9.I", teacher: "Pityu" },
+  { day: "monday", subject: "Rajz", start: "14:35", end: "15:20", class: "9.I", teacher: "Pityu" },
+  { day: "tuesday", subject: "Kémia", start: "07:15", end: "08:00", class: "9.I", teacher: "Pityu" },
+  { day: "tuesday", subject: "Tesi", start: "08:10", end: "08:55", class: "9.I", teacher: "Pityu" },
+  { day: "friday", subject: "Tesi", start: "09:05", end: "09:50", class: "9.I", teacher: "Pityu" },
   // További órák...
 ];
 
@@ -147,6 +147,7 @@ const Calendar: React.FC = () => {
                     >
                       <div className="lesson-index">{lessonIndex + 1}</div>
                       <div className="lesson-name">{lesson.subject}</div>
+                      <div className="lesson-name">{lesson.class}</div>
                     </div>
                   </DialogTrigger>
                   <DialogContent>
@@ -194,6 +195,7 @@ const Calendar: React.FC = () => {
                         >
                           <div className="lesson-index">{lessonIndex + 1}</div>
                           <div className="lesson-name">{lesson.subject}</div>
+                          <div className="lesson-name">{lesson.class}</div>
                         </div>
                       </DialogTrigger>
                       <DialogContent>
