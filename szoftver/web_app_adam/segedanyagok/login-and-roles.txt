@@ -3,6 +3,9 @@
 NextAuth.js login (username-password, vercel)
 - https://youtu.be/v6TPcU23wP8?si=ocPHwdAVpMxM6Aqp
 
+NextAuth.js login (username-password, mongodb)
+- https://youtu.be/PEMfsqZ2-As?si=ws9SLrGDY7h_E1Bj
+
 NextAuth.js roles (talán hasznos)
 - https://youtu.be/xJ6efexXJ7I?si=gxFhMN5mt3bMu4Ea
 

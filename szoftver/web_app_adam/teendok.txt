@@ -1,0 +1,37 @@
+
+Login (nextauth, vercel) megcsinálása 
+
+Role-okra ránézni!!
+
+
+
+const testSchedule: { [date: string]: string[] } = {
+  "2024-11-18": ["Matematika", "Történelem", "", "Fizika", "Biológia", "", "Földrajz", "Ének", ""],
+  "2024-11-19": ["Irodalom", "Matematika", "Informatika", "Történelem", "Angol", "Kémia", "Biológia", "Fizika", "Testnevelés"],
+  "2024-11-20": ["Angol", "Matematika és az meg Hogy szeretm", "", "Irodalom", "Földrajz", "Történelem", "Fizika", "Informatika", ""],
+  "2024-11-14": ["Testnevelés", "Ének", "Irodalom", "Angol", "Történelem", "", "", "Fizika", "Biológia"],
+  "2024-11-15": ["Informatika és Távközlési alapok és az meg", "Földrajz", "Matematika", "Biológia", "Irodalom", "Angol", "Kémia", "Történelem", "Fizika"],
+};
+
+
+Ilyenre megcsinálni a felsőt, hogy egybe legyen az óra és a dátum, és az idő
+  I
+  V
+
+const lessonTimes = [
+  { start: '07:15', end: '08:00' },
+  { start: '08:10', end: '08:55' },
+  { start: '09:05', end: '09:50' },
+  { start: '10:00', end: '10:45' },
+  { start: '10:55', end: '11:40' },
+  { start: '11:50', end: '12:35' },
+  { start: '12:55', end: '13:40' },
+  { start: '13:45', end: '14:30' },
+  { start: '14:35', end: '15:20' },
+];
+
+tehát még egy ilyet csinálni talán csak kibővíteni!
+
+
+MEGCSINÁLNI HOGYHA 
+ugyanbban az órában és ugyanabban napon van óra ugyanannak az osztálynak akkor különszedje és kettő külön kártyába rakja őket ugyanabban a cellában. 
