@@ -16,12 +16,17 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const testSchedule: { [date: string]: string[] } = {
-  "2024-11-18": ["Matematika", "Történelem", "", "Fizika", "Biológia", "", "Földrajz", "Ének", ""],
-  "2024-11-19": ["Irodalom", "Matematika", "Informatika", "Történelem", "Angol", "Kémia", "Biológia", "Fizika", "Testnevelés"],
-  "2024-11-20": ["Angol", "Matematika és az meg Hogy szeretm", "", "Irodalom", "Földrajz", "Történelem", "Fizika", "Informatika", ""],
-  "2024-11-14": ["Testnevelés", "Ének", "Irodalom", "Angol", "Történelem", "", "", "Fizika", "Biológia"],
-  "2024-11-15": ["Informatika és Távközlési alapok és az meg", "Földrajz", "Matematika", "Biológia", "Irodalom", "Angol", "Kémia", "Történelem", "Fizika"],
+const testSchedule: { [date: string]: { subject: string; start: string; end: string }[] } = {
+  "2024-11-18": [
+    { subject: "Matematika", start: "07:15", end: "08:00" },
+    { subject: "Történelem", start: "08:10", end: "08:55" },
+    { subject: "Fizika", start: "10:00", end: "10:45" },
+    { subject: "Biológia", start: "10:55", end: "11:40" },
+    { subject: "Földrajz", start: "12:55", end: "13:40" },
+    { subject: "Ének", start: "13:45", end: "14:30" },
+    { subject: "fasz", start: "14:35", end: "15:20" },
+  ],
+  // További napok...
 };
 
 const lessonTimes = [
@@ -66,16 +71,17 @@ const Calendar: React.FC = () => {
   const weekStart = startOfWeek(currentDate, { weekStartsOn: 1 });
   const daysOfWeek = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
 
-  const isCurrentLesson = (lessonIndex: number) => {
+  const isCurrentLesson = (lesson: { start: string; end: string }) => {
     const now = new Date();
-    const [startHour, startMinute] = lessonTimes[lessonIndex].start.split(':').map(Number);
-    const [endHour, endMinute] = lessonTimes[lessonIndex].end.split(':').map(Number);
-
+    const [startHour, startMinute] = lesson.start.split(':').map(Number);
+    const [endHour, endMinute] = lesson.end.split(':').map(Number);
+  
     const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), startHour, startMinute);
     const end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), endHour, endMinute);
-
+  
     return isToday(currentDate) && isAfter(now, start) && isBefore(now, end);
   };
+  
 
   const openModal = (lesson: string, time: string) => {
     setModalInfo({ lesson, time });
@@ -99,68 +105,34 @@ const Calendar: React.FC = () => {
       </div>
 
       <div className="calendar-grid">           
-        {isMobileView ? (
-          <div>
-            <div className="calendar-day">{format(currentDate, "eeee d", { locale: hu })}</div>
-            {Array.from({ length: 9 }, (_, i) => {
-  const lesson = testSchedule[format(currentDate, "yyyy-MM-dd")]?.[i];
-  if (!lesson) return null; // Ha nincs óra, ne jelenjen meg kártya
-  return (
-    <Dialog key={i}>
-      <DialogTrigger asChild>
-        <div
-          className={`calendar-cell lesson-card ${isCurrentLesson(i) ? "current-lesson" : ""}`}
-          onClick={() => openModal(lesson, `${lessonTimes[i].start} - ${lessonTimes[i].end}`)}
-        >
-      <div className="lesson-index">{i + 1}</div>
-      <div className="lesson-name">{lesson}</div>
+{isMobileView ? (
+  <div>
+    {/* A jelenlegi nap neve és dátuma */}
+    <div className="calendar-day">{format(currentDate, "eeee d", { locale: hu })}</div>
 
-        </div>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>{modalInfo?.lesson}</DialogTitle>
-          <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
-        </DialogHeader>
-      </DialogContent>
-    </Dialog>
-  );
-})}
-            
-          </div>
-        ) : (
-          <>
-            <div className="calendar-day"></div>
-            {daysOfWeek.map((day, index) => (
-              <div className={`calendar-day ${isToday(day) ? 'current-day' : ''}`} key={index}>
-                {format(day, "EEE d", { locale: hu })}
-              </div>
-            ))}
+    {/* Az órák megjelenítése az adott nap alapján */}
+    {Array.from({ length: lessonTimes.length }, (_, lessonIndex) => {
+      const dailyLessons = testSchedule[format(currentDate, "yyyy-MM-dd")] || [];
+      const lesson = dailyLessons.find(
+        (l) =>
+          l.start === lessonTimes[lessonIndex].start &&
+          l.end === lessonTimes[lessonIndex].end
+      );
 
+      if (!lesson || !lesson.subject) return null; // Ha nincs óra, ne jelenjen meg semmi
 
-{Array.from({ length: 9 }, (_, lessonIndex) => (
-  <React.Fragment key={lessonIndex}>
-    <div className="lesson-time">
-      <span className="time-start">{lessonTimes[lessonIndex].start}</span>
-      <span className="time-end">{lessonTimes[lessonIndex].end}</span>
-    </div>
-    {daysOfWeek.map((day, index) => {
-      const lesson = testSchedule[format(day, "yyyy-MM-dd")]?.[lessonIndex];
-      if (!lesson) return <div key={`${lessonIndex}-${index}`} className="calendar-cell"></div>; // Ha nincs óra, üres cellát jeleníts meg
       return (
-        <Dialog key={`${lessonIndex}-${index}`}>
+        <Dialog key={lessonIndex}>
           <DialogTrigger asChild>
             <div
               className={`calendar-cell lesson-card ${
-                isToday(day) && isCurrentLesson(lessonIndex) ? "current-lesson" : ""
+                isToday(currentDate) && isCurrentLesson(lesson) ? "current-lesson" : ""
               }`}
-              onClick={() => openModal(lesson, `${lessonTimes[lessonIndex].start} - ${lessonTimes[lessonIndex].end}`)}
+              onClick={() => openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)}
             >
-             
-<div className="lesson-index">{lessonIndex + 1}</div>
-<div className="lesson-name">{lesson}</div>
-
-
+              <div className="lesson-index">{lessonIndex + 1}</div>
+              <div className="lesson-name">{lesson.subject}</div>
+              {/* <div className="lesson-time">{`${lesson.start} - ${lesson.end}`}</div> */}
             </div>
           </DialogTrigger>
           <DialogContent>
@@ -172,8 +144,60 @@ const Calendar: React.FC = () => {
         </Dialog>
       );
     })}
-  </React.Fragment>
-))}
+  </div>
+
+        ) : (
+          <>
+            <div className="calendar-day"></div>
+            {daysOfWeek.map((day, index) => (
+              <div className={`calendar-day ${isToday(day) ? 'current-day' : ''}`} key={index}>
+                {format(day, "EEE d", { locale: hu })}
+              </div>
+            ))}
+
+
+{Array.from({ length: lessonTimes.length }, (_, lessonIndex) => {
+  return (
+    <React.Fragment key={lessonIndex}>
+      <div className="lesson-time">
+        <span className="time-start">{lessonTimes[lessonIndex].start}</span>
+        <span className="time-end">{lessonTimes[lessonIndex].end}</span>
+      </div>
+      {daysOfWeek.map((day, index) => {
+        const dailyLessons = testSchedule[format(day, "yyyy-MM-dd")] || [];
+        const lesson = dailyLessons.find(
+          (l) =>
+            l.start === lessonTimes[lessonIndex].start &&
+            l.end === lessonTimes[lessonIndex].end
+        );
+
+        if (!lesson || !lesson.subject) return <div key={`${lessonIndex}-${index}`} className="calendar-cell"></div>;
+
+        return (
+          <Dialog key={`${lessonIndex}-${index}`}>
+            <DialogTrigger asChild>
+              <div
+                className={`calendar-cell lesson-card ${
+                  isToday(day) && isCurrentLesson(lesson) ? "current-lesson" : ""
+                }`}
+                onClick={() => openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)}
+              >
+                <div className="lesson-index">{lessonIndex + 1}</div>
+                <div className="lesson-name">{lesson.subject}</div>
+              </div>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>{modalInfo?.lesson}</DialogTitle>
+                <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
+        );
+      })}
+    </React.Fragment>
+  );
+})}
 
 
 
