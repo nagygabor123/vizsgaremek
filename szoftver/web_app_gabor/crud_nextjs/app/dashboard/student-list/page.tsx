@@ -1,8 +1,11 @@
-import '../app/globals.css'
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input"
-import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+// app/dashboard/student-list/page.tsx
 
+"use client";  // Add this line at the top
+
+import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import '../../globals.css';
 // Diák típus
 interface Student {
   student_id: string;
