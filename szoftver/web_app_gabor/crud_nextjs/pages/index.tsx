@@ -1,4 +1,4 @@
-import '../styles/style.css';  // Import the style.css file
+import '../app/globals.css'
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input"
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
@@ -162,9 +162,9 @@ export default function Home() {
         {students.map((student) => (
           <li key={student.student_id}>
             {student.full_name} ({student.class})
-            <button onClick={() => handleEdit(student)}>Edit</button>
-            <button onClick={() => handleDelete(student.student_id)}>Delete</button>
-            <button onClick={() => handleStudentOpen(student.student_id)} disabled={!systemClose}>Feloldás</button>
+            <Button onClick={() => handleEdit(student)}>Edit</Button>
+            <Button onClick={() => handleDelete(student.student_id)}>Delete</Button>
+            <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!systemClose}>Feloldás</Button>
           </li>
         ))}
       </ul>

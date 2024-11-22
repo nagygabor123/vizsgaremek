@@ -133,20 +133,21 @@ INSERT INTO `system_status` (`id`, `status`) VALUES
 -- Tábla szerkezet ehhez a táblához `groups`
 --
 
-CREATE TABLE `groups` (
-  `group_id` INT PRIMARY KEY AUTO_INCREMENT,
-  `group_name` VARCHAR(255) NOT NULL
+CREATE TABLE groups (
+    group_id INT PRIMARY KEY AUTO_INCREMENT,
+    group_name VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `groups`
 --
 
-INSERT INTO `groups` (`group_name`) VALUES
+INSERT INTO `groups` ( `group_name`) VALUES
 ('13.I Mathematics'),
 ('13.I Physics'),
 ('12.I Literature'),
 ('12.I Chemistry');
+
 
 -- --------------------------------------------------------
 
@@ -154,12 +155,12 @@ INSERT INTO `groups` (`group_name`) VALUES
 -- Tábla szerkezet ehhez a táblához `student_groups`
 --
 
-CREATE TABLE `student_groups` (
-  `student_group_id` INT PRIMARY KEY AUTO_INCREMENT,
-  `student_id` VARCHAR(20) NOT NULL,
-  `group_id` INT NOT NULL,
-  FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`),
-  FOREIGN KEY (`group_id`) REFERENCES `groups` (`group_id`)
+CREATE TABLE student_groups (
+    student_group_id INT PRIMARY KEY AUTO_INCREMENT,
+    student_id VARCHAR(20) NOT NULL,
+    group_id INT NOT NULL,
+    FOREIGN KEY (student_id) REFERENCES students(student_id),
+    FOREIGN KEY (group_id) REFERENCES groups(group_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -168,9 +169,17 @@ CREATE TABLE `student_groups` (
 
 INSERT INTO `student_groups` (`student_id`, `group_id`) VALUES
 ('OM11111', 1),
-('OM11111', 2),
 ('OM22222', 1),
+('OM33333', 1),
+('OM44444', 1),
+('OM11111', 2),
+('OM11111', 3),
+('OM11111', 4),
+('OM22222', 2),
+('OM22222', 3),
+('OM22222', 4),
 ('OM33333', 3),
+('OM33333', 4),
 ('OM44444', 4);
 
 -- --------------------------------------------------------
@@ -179,15 +188,15 @@ INSERT INTO `student_groups` (`student_id`, `group_id`) VALUES
 -- Tábla szerkezet ehhez a táblához `timetables`
 --
 
-CREATE TABLE `timetables` (
-  `timetable_id` INT PRIMARY KEY AUTO_INCREMENT,
-  `group_id` INT NOT NULL,
-  `admin_id` INT NOT NULL,
-  `day_of_week` ENUM('Hetfo', 'Kedd', 'Szerda', 'Csutortok', 'Pentek') NOT NULL,
-  `start_time` TIME NOT NULL,
-  `end_time` TIME NOT NULL,
-  FOREIGN KEY (`group_id`) REFERENCES `groups` (`group_id`),
-  FOREIGN KEY (`admin_id`) REFERENCES `admins` (`admin_id`)
+CREATE TABLE timetables (
+    timetable_id INT PRIMARY KEY AUTO_INCREMENT,
+    group_id INT NOT NULL, -- Csoportazonosító, amely jelzi, hogy melyik csoporthoz tartozik az órarend
+    admin_id INT NOT NULL,
+    day_of_week ENUM('Hetfo', 'Kedd', 'Szerda', 'Csutortok', 'Pentek') NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    FOREIGN KEY (group_id) REFERENCES groups(group_id),
+    FOREIGN KEY (admin_id) REFERENCES admins(admin_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -195,26 +204,39 @@ CREATE TABLE `timetables` (
 --
 
 INSERT INTO `timetables` (`group_id`, `admin_id`, `day_of_week`, `start_time`, `end_time`) VALUES
-(1, 2, 'Hetfo', '08:00:00', '09:30:00'),
-(2, 2, 'Hetfo', '10:00:00', '11:30:00'),
-(3, 1, 'Hetfo', '12:00:00', '13:30:00'),
-(4, 1, 'Hetfo', '14:00:00', '15:30:00'),
-(1, 2, 'Kedd', '08:00:00', '09:30:00'),
-(2, 2, 'Kedd', '10:00:00', '11:30:00'),
-(3, 1, 'Kedd', '12:00:00', '13:30:00'),
-(4, 1, 'Kedd', '14:00:00', '15:30:00'),
-(1, 2, 'Szerda', '08:00:00', '09:30:00'),
-(2, 2, 'Szerda', '10:00:00', '11:30:00'),
-(3, 1, 'Szerda', '12:00:00', '13:30:00'),
-(4, 1, 'Szerda', '14:00:00', '15:30:00'),
-(1, 2, 'Csutortok', '08:00:00', '09:30:00'),
-(2, 2, 'Csutortok', '10:00:00', '11:30:00'),
-(3, 1, 'Csutortok', '12:00:00', '13:30:00'),
-(4, 1, 'Csutortok', '14:00:00', '15:30:00'),
-(1, 2, 'Pentek', '08:00:00', '09:30:00'),
-(2, 2, 'Pentek', '10:00:00', '11:30:00'),
-(3, 1, 'Pentek', '12:00:00', '13:30:00'),
-(4, 1, 'Pentek', '14:00:00', '15:30:00');
+(2, 2, 'Hetfo', '07:15', '08:00'),
+(2, 2, 'Hetfo', '08:10', '08:55'),
+(1, 1, 'Hetfo', '09:05', '09:55'),
+(3, 2, 'Hetfo', '10:00', '10:45'),
+(4, 1, 'Hetfo', '10:55', '11:40'),
+(4, 1, 'Hetfo', '11:50', '12:35'),
+(2, 2, 'Kedd', '07:15', '08:00'),
+(2, 2, 'Kedd', '08:10', '08:55'),
+(1, 1, 'Kedd', '09:05', '09:55'),
+(1, 1, 'Kedd', '10:00', '10:45'),
+(4, 1, 'Kedd', '10:55', '11:40'),
+(4, 1, 'Kedd', '11:50', '12:35'),
+(2, 2, 'Szerda', '07:15', '08:00'),
+(2, 2, 'Szerda', '08:10', '08:55'),
+(3, 1, 'Szerda', '09:05', '09:55'),
+(3, 1, 'Szerda', '10:00', '10:45'),
+(1, 1, 'Szerda', '10:55', '11:40'),
+(4, 1, 'Szerda', '11:50', '12:35'),
+(2, 2, 'Csütörtök', '07:15', '08:00'),
+(1, 2, 'Csütörtök', '08:10', '08:55'),
+(1, 1, 'Csütörtök', '09:05', '09:55'),
+(1, 2, 'Csütörtök', '10:00', '10:45'),
+(1, 1, 'Csütörtök', '10:55', '11:40'),
+(4, 1, 'Csütörtök', '11:50', '12:35'),
+(2, 2, 'Péntek', '07:15', '08:00'),
+(2, 2, 'Péntek', '08:10', '08:55'),
+(2, 1, 'Péntek', '09:05', '09:55'),
+(2, 1, 'Péntek', '10:00', '10:45'),
+(2, 2, 'Péntek', '10:55', '11:40'),
+(4, 1, 'Péntek', '11:50', '12:35');
+
+
+
 
 -- --------------------------------------------------------
 
