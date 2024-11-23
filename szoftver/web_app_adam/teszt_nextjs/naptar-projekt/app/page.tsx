@@ -40,9 +40,6 @@ const testSchedule = [
   { day: "friday", subject: "Pif", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Matyi" },
   { day: "friday", subject: "Pif", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Matyi" },
   { day: "friday", subject: "Pif", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Matyi" },
-
-  { day: "saturday", subject: "Kuk", start: "11:50", end: "12:35", class: "9.I", group: "", teacher: "Matyi" },
-
   // További órák...
 ];
 
@@ -64,8 +61,8 @@ const getDayName = (date: Date): string => {
   return dayNames[getDay(date)];
 };
 const breakDates = [
-  { start: "2024-12-02", end: "2024-12-02" }, // Csak egy nap szünet
-  { start: "2024-11-27", end: "2024-11-30" }, // Több napos szünet
+  
+  { start: "2024-11-18", end: "2024-11-24" }, // Több napos szünet
 ];
 
 // Ellenőrzi, hogy egy adott dátum benne van-e a szünetnapok között
@@ -157,43 +154,46 @@ const Calendar: React.FC = () => {
           <div>
             <div className="calendar-day">{format(currentDate, "eeee d", { locale: hu })}</div>
             {isBreakDay(currentDate) ? (
-              <div className="no-lessons">Ma nincs tanítás!</div>
-            ) : (
-              lessonTimes.map((time, lessonIndex) => {
-                const lessonsAtSameTime = dailyLessons.filter(
-                  (lesson) => lesson.start === time.start && lesson.end === time.end
-                );
+  <div className="no-lessons">Ma nincs tanítás!</div>
+) : dailyLessons.length === 0 ? (
+  <div className="no-lessons">Ma nincs óra!</div>
+) : (
+  lessonTimes.map((time, lessonIndex) => {
+    const lessonsAtSameTime = dailyLessons.filter(
+      (lesson) => lesson.start === time.start && lesson.end === time.end
+    );
 
-                if (lessonsAtSameTime.length === 0) return null;
+    if (lessonsAtSameTime.length === 0) return null;
 
-                return (
-                  <div key={lessonIndex} className="calendar-cell">
-                    {lessonsAtSameTime.map((lesson, index) => (
-                      <Dialog key={index}>
-                        <DialogTrigger asChild>
-                          <div
-                            className={`lesson-card ${
-                              isToday(currentDate) && isCurrentLesson(lesson) ? "current-lesson" : ""
-                            }`}
-                            onClick={() => openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)}
-                          >
-                            <div className="lesson-index">{lessonIndex + 1}</div>
-                            <div className="lesson-name">{lesson.subject}</div>
-                            <div className="lesson-name">{lesson.class}</div>
-                          </div>
-                        </DialogTrigger>
-                        <DialogContent>
-                          <DialogHeader>
-                            <DialogTitle>{modalInfo?.lesson}</DialogTitle>
-                            <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
-                          </DialogHeader>
-                        </DialogContent>
-                      </Dialog>
-                    ))}
-                  </div>
-                );
-              })
-            )}
+    return (
+      <div key={lessonIndex} className="calendar-cell">
+        {lessonsAtSameTime.map((lesson, index) => (
+          <Dialog key={index}>
+            <DialogTrigger asChild>
+              <div
+                className={`lesson-card ${
+                  isToday(currentDate) && isCurrentLesson(lesson) ? "current-lesson" : ""
+                }`}
+                onClick={() => openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)}
+              >
+                <div className="lesson-index">{lessonIndex + 1}</div>
+                <div className="lesson-name">{lesson.subject}</div>
+                <div className="lesson-name">{lesson.class}</div>
+              </div>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>{modalInfo?.lesson}</DialogTitle>
+                <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
+        ))}
+      </div>
+    );
+  })
+)}
+
           </div>
         ) : (
           <>

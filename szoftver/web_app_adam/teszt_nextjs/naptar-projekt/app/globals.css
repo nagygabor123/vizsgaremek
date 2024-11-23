@@ -4,6 +4,14 @@
 
 /* -------------------------------------------------------------------------------------------------------------- */
 
+.no-lessons {
+  text-align: center;
+  font-size: 1rem;
+  color: #666;
+  margin: 20px 0;
+}
+
+
 .calendar-cell {
   min-height: 90px; /* Állítsd be a kívánt minimális magasságot */
   display: flex;
@@ -97,7 +105,7 @@
 
 .calendar-day.current-day {
   color: blue;
-  border-bottom: 2px solid blue;
+  border-bottom: 1px solid blue;
   font-weight: bold;
 }
 
@@ -166,7 +174,7 @@
 .calendar-day{
   text-align: center;
   font-weight: bold;
-  /* border-bottom: 1px solid #ddd; */
+   border-bottom: 1px solid #ddd;
  /* border-left: 1px solid #ddd;*/
 }
 

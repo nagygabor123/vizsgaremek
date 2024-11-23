@@ -2,7 +2,3 @@
 Login (nextauth, vercel) megcsinálása 
 
 Role-okra ránézni!!
-
-
-
-HOGYHA NINSC ÓRA a héten akkor AKKOR SE UGROJON ÖSSZE A TÁBLÁZAT MÉRETE
