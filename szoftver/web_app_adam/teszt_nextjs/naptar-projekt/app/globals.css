@@ -88,15 +88,6 @@
   font-weight: bold;
 }
 
-
-/* -------------------------------------------------------------------------------------------------------------- */
-
-
-
-
-
-
-
 .lesson-index {
   text-align: left;
   position: relative;
@@ -117,6 +108,18 @@
   text-overflow: ellipsis; 
   /* line-height: 120%; */
 }
+
+
+
+/* -------------------------------------------------------------------------------------------------------------- */
+
+
+
+
+
+
+
+
 
 .calendar-header {
   display: flex;
@@ -150,7 +153,7 @@
 .calendar-day{
   text-align: center;
   font-weight: bold;
-  border-bottom: 1px solid #ddd;
+  /* border-bottom: 1px solid #ddd; */
  /* border-left: 1px solid #ddd;*/
 }
 
