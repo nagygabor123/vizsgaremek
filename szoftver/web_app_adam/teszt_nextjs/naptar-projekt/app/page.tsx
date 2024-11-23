@@ -40,6 +40,7 @@ const testSchedule = [
   { day: "friday", subject: "Kuk", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Matyi" },
   { day: "friday", subject: "Kuk", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Matyi" },
   { day: "friday", subject: "Kuk", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Matyi" },
+  { day: "saturday", subject: "Kuk", start: "10:55", end: "11:40", class: "9.I", group: "", teacher: "Matyi" },
 
   // További órák...
 ];
@@ -68,7 +69,8 @@ const Calendar: React.FC = () => {
 
   useEffect(() => {
     const updateView = () => {
-      setIsMobileView(window.innerWidth <= 480);
+      // setIsMobileView(window.innerWidth <= 480);
+      setIsMobileView(window.innerWidth <= 920);
     };
 
     updateView();
