@@ -29,18 +29,10 @@ import {
 const testSchedule = [
   { day: "monday", subject: "Matematika", start: "07:15", end: "08:00", class: "9.I", group: "", teacher: "Pityu" },
   { day: "monday", subject: "Történelem", start: "08:10", end: "08:55", class: "9.I", group: "", teacher: "Pityu" },
-  { day: "monday", subject: "Fizika", start: "10:00", end: "10:45", class: "9.I", group: "", teacher: "Pityu" },
-  { day: "monday", subject: "Biológia", start: "10:55", end: "11:40", class: "9.I", group: "", teacher: "Pityu" },
-  { day: "monday", subject: "Földrajz", start: "12:55", end: "13:40", class: "9.I", group: "", teacher: "Pityu" },
-  { day: "monday", subject: "Ének", start: "13:45", end: "14:30", class: "9.I", group: "", teacher: "Pityu" },
-  { day: "monday", subject: "Rajz", start: "14:35", end: "15:20", class: "9.I", group: "", teacher: "Pityu" },
-  { day: "tuesday", subject: "Kémia", start: "07:15", end: "08:00", class: "9.I", group: "", teacher: "Pityu" },
-  { day: "tuesday", subject: "Tesi", start: "08:10", end: "08:55", class: "9.I", group: "", teacher: "Pityu" },
   { day: "friday", subject: "Tesi", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Pityu" },
   { day: "friday", subject: "Kuk", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Matyi" },
   // További órák...
 ];
-
 
 const lessonTimes = [
   { start: "07:15", end: "08:00" },
@@ -58,6 +50,7 @@ const getDayName = (date: Date): string => {
   const dayNames = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
   return dayNames[getDay(date)];
 };
+
 const Calendar: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isMobileView, setIsMobileView] = useState(false);
@@ -108,8 +101,6 @@ const Calendar: React.FC = () => {
   const daysOfWeek = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
 
   const currentDayName = getDayName(currentDate);
-
-  // Szűrjük ki az adott nap óráit
   const dailyLessons = testSchedule.filter((lesson) => lesson.day === currentDayName);
 
   return (
@@ -131,24 +122,29 @@ const Calendar: React.FC = () => {
             <div className="calendar-day">{format(currentDate, "eeee d", { locale: hu })}</div>
 
             {lessonTimes.map((time, lessonIndex) => {
-              const lesson = dailyLessons.find(
+              const lessonsAtTime = dailyLessons.filter(
                 (l) => l.start === time.start && l.end === time.end
               );
 
-              if (!lesson) return null;
+              if (lessonsAtTime.length === 0) return null;
 
               return (
                 <Dialog key={lessonIndex}>
                   <DialogTrigger asChild>
-                    <div
-                      className={`calendar-cell lesson-card ${
-                        isToday(currentDate) && isCurrentLesson(lesson) ? "current-lesson" : ""
-                      }`}
-                      onClick={() => openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)}
-                    >
-                      <div className="lesson-index">{lessonIndex + 1}</div>
-                      <div className="lesson-name">{lesson.subject}</div>
-                      <div className="lesson-name">{lesson.class}</div>
+                    <div className="calendar-cell">
+                      {lessonsAtTime.map((lesson, lessonSubIndex) => (
+                        <div
+                          key={`${lessonIndex}-${lessonSubIndex}`}
+                          className={`lesson-card ${
+                            isToday(currentDate) && isCurrentLesson(lesson) ? "current-lesson" : ""
+                          }`}
+                          onClick={() => openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)}
+                        >
+                          <div className="lesson-index">{lessonSubIndex + 1}</div>
+                          <div className="lesson-name">{lesson.subject}</div>
+                          <div className="lesson-class">{lesson.class}</div>
+                        </div>
+                      ))}
                     </div>
                   </DialogTrigger>
                   <DialogContent>
@@ -178,25 +174,29 @@ const Calendar: React.FC = () => {
                 </div>
                 {daysOfWeek.map((day, dayIndex) => {
                   const dayName = getDayName(day);
-                  const dailyLessons = testSchedule.filter((lesson) => lesson.day === dayName);
-                  const lesson = dailyLessons.find(
-                    (l) => l.start === time.start && l.end === time.end
+                  const lessonsAtTime = testSchedule.filter(
+                    (l) => l.day === dayName && l.start === time.start && l.end === time.end
                   );
 
-                  if (!lesson) return <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell"></div>;
+                  if (lessonsAtTime.length === 0) return <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell"></div>;
 
                   return (
                     <Dialog key={`${lessonIndex}-${dayIndex}`}>
                       <DialogTrigger asChild>
-                        <div
-                          className={`calendar-cell lesson-card ${
-                            isToday(day) && isCurrentLesson(lesson) ? "current-lesson" : ""
-                          }`}
-                          onClick={() => openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)}
-                        >
-                          <div className="lesson-index">{lessonIndex + 1}</div>
-                          <div className="lesson-name">{lesson.subject}</div>
-                          <div className="lesson-name">{lesson.class}</div>
+                        <div className="calendar-cell">
+                          {lessonsAtTime.map((lesson, lessonSubIndex) => (
+                            <div
+                              key={`${lessonIndex}-${lessonSubIndex}`}
+                              className={`lesson-card ${
+                                isToday(day) && isCurrentLesson(lesson) ? "current-lesson" : ""
+                              }`}
+                              onClick={() => openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)}
+                            >
+                              <div className="lesson-index">{lessonSubIndex + 1}</div>
+                              <div className="lesson-name">{lesson.subject}</div>
+                              <div className="lesson-class">{lesson.class}</div>
+                            </div>
+                          ))}
                         </div>
                       </DialogTrigger>
                       <DialogContent>
