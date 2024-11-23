@@ -5,9 +5,4 @@ Role-okra ránézni!!
 
 
 
-
-MEGCSINÁLNI HOGYHA 
-ugyanbban az órában és ugyanabban napon van óra ugyanannak az osztálynak akkor különszedje és kettő külön kártyába rakja őket ugyanabban a cellában. 
-
-
 HOGYHA NINSC ÓRA a héten akkor AKKOR SE UGROJON ÖSSZE A TÁBLÁZAT MÉRETE
