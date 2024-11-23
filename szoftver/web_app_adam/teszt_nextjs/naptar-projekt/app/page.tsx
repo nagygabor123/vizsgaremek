@@ -61,6 +61,29 @@ const getDayName = (date: Date): string => {
   const dayNames = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
   return dayNames[getDay(date)];
 };
+const breakDates = [
+  { start: "2024-12-02", end: "2024-12-02" }, // Csak egy nap szünet
+  { start: "2024-11-27", end: "2024-11-30" }, // Több napos szünet
+];
+
+// Ellenőrzi, hogy egy adott dátum benne van-e a szünetnapok között
+const isBreakDay = (date: Date) => {
+  // Csak az év, hónap és nap összehasonlításához alakítsuk át az összehasonlítandó dátumokat
+  const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+  return breakDates.some(({ start, end }) => {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+
+    // Csak az év, hónap és nap számít az összehasonlításban
+    const formattedStart = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+    const formattedEnd = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
+
+    return targetDate >= formattedStart && targetDate <= formattedEnd;
+  });
+};
+
+
 const Calendar: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isMobileView, setIsMobileView] = useState(false);
@@ -68,7 +91,6 @@ const Calendar: React.FC = () => {
 
   useEffect(() => {
     const updateView = () => {
-      // setIsMobileView(window.innerWidth <= 480);
       setIsMobileView(window.innerWidth <= 920);
     };
 
@@ -113,7 +135,6 @@ const Calendar: React.FC = () => {
 
   const currentDayName = getDayName(currentDate);
 
-  // Szűrjük ki az adott nap óráit
   const dailyLessons = testSchedule.filter((lesson) => lesson.day === currentDayName);
 
   return (
@@ -133,41 +154,44 @@ const Calendar: React.FC = () => {
         {isMobileView ? (
           <div>
             <div className="calendar-day">{format(currentDate, "eeee d", { locale: hu })}</div>
+            {isBreakDay(currentDate) ? (
+              <div className="no-lessons">Ma nincs tanítás!</div>
+            ) : (
+              lessonTimes.map((time, lessonIndex) => {
+                const lessonsAtSameTime = dailyLessons.filter(
+                  (lesson) => lesson.start === time.start && lesson.end === time.end
+                );
 
-            {lessonTimes.map((time, lessonIndex) => {
-              const lessonsAtSameTime = dailyLessons.filter(
-                (lesson) => lesson.start === time.start && lesson.end === time.end
-              );
+                if (lessonsAtSameTime.length === 0) return null;
 
-              if (lessonsAtSameTime.length === 0) return null;
-
-              return (
-                <div key={lessonIndex} className="calendar-cell">
-                  {lessonsAtSameTime.map((lesson, index) => (
-                    <Dialog key={index}>
-                      <DialogTrigger asChild>
-                        <div
-                          className={`lesson-card ${
-                            isToday(currentDate) && isCurrentLesson(lesson) ? "current-lesson" : ""
-                          }`}
-                          onClick={() => openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)}
-                        >
-                          <div className="lesson-index">{lessonIndex + 1}</div>
-                          <div className="lesson-name">{lesson.subject}</div>
-                          <div className="lesson-name">{lesson.class}</div>
-                        </div>
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogHeader>
-                          <DialogTitle>{modalInfo?.lesson}</DialogTitle>
-                          <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
-                        </DialogHeader>
-                      </DialogContent>
-                    </Dialog>
-                  ))}
-                </div>
-              );
-            })}
+                return (
+                  <div key={lessonIndex} className="calendar-cell">
+                    {lessonsAtSameTime.map((lesson, index) => (
+                      <Dialog key={index}>
+                        <DialogTrigger asChild>
+                          <div
+                            className={`lesson-card ${
+                              isToday(currentDate) && isCurrentLesson(lesson) ? "current-lesson" : ""
+                            }`}
+                            onClick={() => openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)}
+                          >
+                            <div className="lesson-index">{lessonIndex + 1}</div>
+                            <div className="lesson-name">{lesson.subject}</div>
+                            <div className="lesson-name">{lesson.class}</div>
+                          </div>
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>{modalInfo?.lesson}</DialogTitle>
+                            <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
+                          </DialogHeader>
+                        </DialogContent>
+                      </Dialog>
+                    ))}
+                  </div>
+                );
+              })
+            )}
           </div>
         ) : (
           <>
@@ -191,7 +215,9 @@ const Calendar: React.FC = () => {
                     (l) => l.start === time.start && l.end === time.end
                   );
 
-                  if (lessonsAtSameTime.length === 0) return <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell"></div>;
+                  if (isBreakDay(day) || lessonsAtSameTime.length === 0) {
+                    return <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell"></div>;
+                  }
 
                   return (
                     <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell">
@@ -228,6 +254,5 @@ const Calendar: React.FC = () => {
     </div>
   );
 };
-
 
 export default Calendar;
