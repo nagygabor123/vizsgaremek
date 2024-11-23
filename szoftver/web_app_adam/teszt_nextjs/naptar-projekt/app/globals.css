@@ -19,12 +19,20 @@
   transition: background-color 0.3s ease;
   flex: 1 1 calc(33% - 10px); 
   padding: 8px; 
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
+  background-color: #fffbfb;
+  border: 1px solid #ececec;
+  color: rgb(85, 85, 85);
   border-radius: 8px;
   margin: 0; 
   box-sizing: border-box; 
+  position: relative;
+  /* padding: 8px; */
+  overflow: hidden; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
 
 .lesson-card:hover {
   transition: background-color 0.3s ease;
@@ -86,29 +94,8 @@
 
 
 
-.lesson-card {
-  position: relative;
-  /* padding: 8px; */
-  background-color: #fffbfb;
-  border: 1px solid #ececec;
-  color: rgb(85, 85, 85);
-  overflow: hidden; 
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
 
 
-.calendar-cell.lesson-card {
-  /* padding: 10px; */
-  height: 5.5rem;
-  /*background-color: #f0f0f5;*/
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  text-overflow: ellipsis; 
-  white-space: nowrap; 
-}
 
 .lesson-index {
   text-align: left;
