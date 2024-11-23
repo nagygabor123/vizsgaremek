@@ -39,7 +39,7 @@ const testSchedule = [
   { day: "friday", subject: "Tesi", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Pityu" },
   { day: "friday", subject: "Pif", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Matyi" },
   { day: "friday", subject: "Pif", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Matyi" },
-  { day: "friday", subject: "Pif", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Matyi" },
+
   // További órák...
 ];
 
@@ -156,7 +156,7 @@ const Calendar: React.FC = () => {
             {isBreakDay(currentDate) ? (
   <div className="no-lessons">Ma nincs tanítás!</div>
 ) : dailyLessons.length === 0 ? (
-  <div className="no-lessons">Ma nincs óra!</div>
+  <div className="no-lessons">Ma nincs tanítás!</div>
 ) : (
   lessonTimes.map((time, lessonIndex) => {
     const lessonsAtSameTime = dailyLessons.filter(
