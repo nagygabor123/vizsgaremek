@@ -5,6 +5,26 @@
 @tailwind components;
 @tailwind utilities;
 
+.calendar-cell {
+  display: flex;
+  flex-wrap: wrap; /* Engedélyezi a soron belüli elemek áramlását */
+  gap: 5px; /* Csökkentett távolság a kártyák között */
+}
+
+.lesson-card {
+  flex: 1 1 calc(33% - 10px); /* A kártyák egymás mellett legyenek, 3 oszlopra osztva */
+  padding: 8px; /* Csökkentett padding */
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  margin: 0; /* Nincs extra margó */
+  box-sizing: border-box; /* A padding és border a teljes szélességet figyelembe véve számít */
+}
+
+.lesson-card.current-lesson {
+  background-color: #ffeb3b;
+  font-weight: bold;
+}
 
 
 .lesson-time {
