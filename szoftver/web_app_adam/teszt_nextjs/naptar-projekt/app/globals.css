@@ -5,6 +5,19 @@
 /* -------------------------------------------------------------------------------------------------------------- */
 
 .calendar-cell {
+  min-height: 90px; /* Állítsd be a kívánt minimális magasságot */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.calendar-cell.empty {
+  background-color: #fffbfb9e; /* opcionális: üres cellák kiemelése */
+}
+
+
+.calendar-cell {
   display: flex;
   flex-wrap: wrap;
   gap: 5px; 

@@ -38,6 +38,8 @@ const testSchedule = [
   { day: "tuesday", subject: "Tesi", start: "08:10", end: "08:55", class: "9.I", group: "", teacher: "Pityu" },
   { day: "friday", subject: "Tesi", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Pityu" },
   { day: "friday", subject: "Pif", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Matyi" },
+  { day: "friday", subject: "Pif", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Matyi" },
+  { day: "friday", subject: "Pif", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Matyi" },
 
   { day: "saturday", subject: "Kuk", start: "11:50", end: "12:35", class: "9.I", group: "", teacher: "Matyi" },
 
@@ -202,52 +204,58 @@ const Calendar: React.FC = () => {
               </div>
             ))}
 
-            {lessonTimes.map((time, lessonIndex) => (
-              <React.Fragment key={lessonIndex}>
-                <div className="lesson-time">
-                  <span className="time-start">{time.start}</span>
-                  <span className="time-end">{time.end}</span>
+{lessonTimes.map((time, lessonIndex) => (
+  <React.Fragment key={lessonIndex}>
+    <div className="lesson-time">
+      <span className="time-start">{time.start}</span>
+      <span className="time-end">{time.end}</span>
+    </div>
+    {daysOfWeek.map((day, dayIndex) => {
+      const dayName = getDayName(day);
+      const dailyLessons = testSchedule.filter((lesson) => lesson.day === dayName);
+      const lessonsAtSameTime = dailyLessons.filter(
+        (l) => l.start === time.start && l.end === time.end
+      );
+
+      const isBreak = isBreakDay(day); // Ellenőrizzük, hogy szünetnap van-e
+      if (lessonsAtSameTime.length === 0 || isBreak) {
+        return (
+          <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell empty">
+            {/* Üres cella helykitöltő */}
+          </div>
+        );
+      }
+
+      return (
+        <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell">
+          {lessonsAtSameTime.map((lesson, index) => (
+            <Dialog key={`${lessonIndex}-${dayIndex}-${index}`}>
+              <DialogTrigger asChild>
+                <div
+                  className={`lesson-card ${
+                    isToday(day) && isCurrentLesson(lesson) ? "current-lesson" : ""
+                  }`}
+                  onClick={() => openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)}
+                >
+                  <div className="lesson-index">{lessonIndex + 1}</div>
+                  <div className="lesson-name">{lesson.subject}</div>
+                  <div className="lesson-name">{lesson.class}</div>
                 </div>
-                {daysOfWeek.map((day, dayIndex) => {
-                  const dayName = getDayName(day);
-                  const dailyLessons = testSchedule.filter((lesson) => lesson.day === dayName);
-                  const lessonsAtSameTime = dailyLessons.filter(
-                    (l) => l.start === time.start && l.end === time.end
-                  );
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>{modalInfo?.lesson}</DialogTitle>
+                  <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
+          ))}
+        </div>
+      );
+    })}
+  </React.Fragment>
+))}
 
-                  if (isBreakDay(day) || lessonsAtSameTime.length === 0) {
-                    return <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell"></div>;
-                  }
-
-                  return (
-                    <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell">
-                      {lessonsAtSameTime.map((lesson, index) => (
-                        <Dialog key={`${lessonIndex}-${dayIndex}-${index}`}>
-                          <DialogTrigger asChild>
-                            <div
-                              className={`lesson-card ${
-                                isToday(day) && isCurrentLesson(lesson) ? "current-lesson" : ""
-                              }`}
-                              onClick={() => openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)}
-                            >
-                              <div className="lesson-index">{lessonIndex + 1}</div>
-                              <div className="lesson-name">{lesson.subject}</div>
-                              <div className="lesson-name">{lesson.class}</div>
-                            </div>
-                          </DialogTrigger>
-                          <DialogContent>
-                            <DialogHeader>
-                              <DialogTitle>{modalInfo?.lesson}</DialogTitle>
-                              <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
-                            </DialogHeader>
-                          </DialogContent>
-                        </Dialog>
-                      ))}
-                    </div>
-                  );
-                })}
-              </React.Fragment>
-            ))}
           </>
         )}
       </div>
