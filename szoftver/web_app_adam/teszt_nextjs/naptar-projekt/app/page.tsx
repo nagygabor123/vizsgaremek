@@ -31,6 +31,10 @@ const testSchedule = [
   { day: "monday", subject: "Történelem", start: "08:10", end: "08:55", class: "9.I", group: "", teacher: "Pityu" },
   { day: "friday", subject: "Tesi", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Pityu" },
   { day: "friday", subject: "Kuk", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Matyi" },
+  { day: "friday", subject: "Kuk", start: "07:15", end: "08:00", class: "9.I", group: "", teacher: "Matyi" },
+  { day: "saturday", subject: "Tesi", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Pityu" },
+  { day: "saturday", subject: "Kuk", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Matyi" },
+  
   // További órák...
 ];
 
@@ -82,12 +86,15 @@ const Calendar: React.FC = () => {
     const now = new Date();
     const [startHour, startMinute] = lesson.start.split(":").map(Number);
     const [endHour, endMinute] = lesson.end.split(":").map(Number);
-
-    const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), startHour, startMinute);
-    const end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), endHour, endMinute);
-
+  
+    // a start és end időpontokat a currentDate napjára állítjuk be
+    const start = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), startHour, startMinute);
+    const end = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), endHour, endMinute);
+  
+    // Ellenőrizzük, hogy a mai napon vagyunk-e, és hogy az aktuális időpont az óra időtartamán belül van-e
     return isToday(currentDate) && isAfter(now, start) && isBefore(now, end);
   };
+  
 
   const openModal = (lesson: string, time: string) => {
     setModalInfo({ lesson, time });
@@ -142,7 +149,7 @@ const Calendar: React.FC = () => {
                         >
                           <div className="lesson-index">{lessonSubIndex + 1}</div>
                           <div className="lesson-name">{lesson.subject}</div>
-                          <div className="lesson-class">{lesson.class}</div>
+                          <div className="lesson-name">{lesson.class}</div>
                         </div>
                       ))}
                     </div>
@@ -194,7 +201,7 @@ const Calendar: React.FC = () => {
                             >
                               <div className="lesson-index">{lessonSubIndex + 1}</div>
                               <div className="lesson-name">{lesson.subject}</div>
-                              <div className="lesson-class">{lesson.class}</div>
+                              <div className="lesson-name">{lesson.class}</div>
                             </div>
                           ))}
                         </div>
@@ -218,3 +225,4 @@ const Calendar: React.FC = () => {
 };
 
 export default Calendar;
+
