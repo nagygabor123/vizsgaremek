@@ -1,16 +1,8 @@
-/* global.css */
-
-/* Alapértelmezett stílusok asztali nézethez */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.current-day {
-  color: blue;
-  border-bottom: 2px solid blue;
-  font-weight: bold;
-}
-
+/* -------------------------------------------------------------------------------------------------------------- */
 
 .calendar-cell {
   display: flex;
@@ -18,28 +10,24 @@
   gap: 5px; 
   margin: 3px;
   border-radius: 8px;
-
   text-align: center;
-  
   /* cursor: pointer; */
   /* transition: background-color 0.2s; */
 }
 
 .lesson-card {
   transition: background-color 0.3s ease;
-
-  flex: 1 1 calc(33% - 10px); /* A kártyák egymás mellett legyenek, 3 oszlopra osztva */
-  padding: 8px; /* Csökkentett padding */
+  flex: 1 1 calc(33% - 10px); 
+  padding: 8px; 
   border: 1px solid #ccc;
   background-color: #f9f9f9;
   border-radius: 8px;
-  margin: 0; /* Nincs extra margó */
-  box-sizing: border-box; /* A padding és border a teljes szélességet figyelembe véve számít */
+  margin: 0; 
+  box-sizing: border-box; 
 }
 
 .lesson-card:hover {
   transition: background-color 0.3s ease;
-
   background-color: #ebf0ff;
   border: 1px solid #98b3ff;
   color: #668aee;
@@ -48,7 +36,6 @@
 
 .lesson-card.current-lesson {
   transition: background-color 0.3s ease;
-
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #f2f5ff;
   border: 1px solid #0f4efc;
@@ -59,7 +46,6 @@
 
 .lesson-card.current-lesson:hover {
   transition: background-color 0.3s ease;
-
   background-color: #e1e8fd;
   border: 1px solid #0f4efc;
   color: #0f4efc;
@@ -68,8 +54,8 @@
 .lesson-time {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Elemek távolságának beállítása */
-  height: 100%; /* Igazítsa a cella méretéhez */
+  justify-content: space-between; 
+  height: 100%; 
   font-size: 14px;
 }
 
@@ -85,9 +71,17 @@
 }
 
 .time-end {
-  color: #777; /* Halványabb szöveg */
+  color: #777; 
 }
 
+.calendar-day.current-day {
+  color: blue;
+  border-bottom: 2px solid blue;
+  font-weight: bold;
+}
+
+
+/* -------------------------------------------------------------------------------------------------------------- */
 
 
 
@@ -98,26 +92,22 @@
   background-color: #fffbfb;
   border: 1px solid #ececec;
   color: rgb(85, 85, 85);
-  
-
-  overflow: hidden; /* Hosszú tartalom levágása */
+  overflow: hidden; 
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
+
 .calendar-cell.lesson-card {
-
-
   /* padding: 10px; */
   height: 5.5rem;
   /*background-color: #f0f0f5;*/
   cursor: pointer;
   transition: background-color 0.3s ease;
- 
-  text-overflow: ellipsis; /* Három pontot tesz a végére, ha túl hosszú */
-  white-space: nowrap; /* Egy sorba igazítja a szöveget */
+  text-overflow: ellipsis; 
+  white-space: nowrap; 
 }
 
 .lesson-index {
@@ -125,44 +115,21 @@
   position: relative;
   /* top: 8px;
   left: 8px; */
-  font-size: 12px; /* Kis betűméret az óraszámhoz */
+  font-size: 12px; 
   padding-bottom: 0.8rem;
   /* font-weight: bold; */
   /* line-height: 200%; */
-  
-  
 }
-
-
 
 .lesson-name {
-  /* Kis távolság az óraszám és a név között */
   font-weight: bold;
-  font-size: 13px; /* Alap betűméret */
-  
+  font-size: 13px; 
   text-align: left;
-  white-space: nowrap; /* Egysoros szöveg */
-  overflow: hidden; /* Túlcsordulás levágása */
-  text-overflow: ellipsis; /* Szöveg végét pontokkal egészíti ki */
-  /* line-height: 120%; */
-  
-}
-
-.lesson-test {
- 
-  /* Kis távolság az óraszám és a név között */
-  /* font-weight: bold; */
-  font-size: 13px; /* Alap betűméret */
-  text-align: left;
-  white-space: nowrap; /* Egysoros szöveg */
-  overflow: hidden; /* Túlcsordulás levágása */
-  text-overflow: ellipsis; /* Szöveg végét pontokkal egészíti ki */
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
   /* line-height: 120%; */
 }
-
-
-
-
 
 .calendar-header {
   display: flex;
@@ -170,7 +137,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
-  flex-wrap: wrap; /* Lehetővé teszi az elemek többsoros megjelenítését kis képernyőkön */
+  flex-wrap: wrap; 
 }
 
 .calendar-date {
@@ -185,8 +152,72 @@
   margin-top: 0.5rem;
 }
 
+.calendar-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 20px;
+}
+
+.calendar-day{
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+ /* border-left: 1px solid #ddd;*/
+}
+
+.lesson-number {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+ /* width: 30px;*/
+}
+
+.calendar-container {
+  padding: 20px;
+  /* max-width: 1000px; */
+  margin: 0 auto; 
+}
+
+.calendar-grid {
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: 7rem repeat(7, 1fr);
+  /*gap: 2px;*/
+  margin-top: 10px;
+  /*max-width: 100%;*/ 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* @media (max-width: 480px) { */
 @media (max-width: 920px) {
+  .lesson-card.current-lesson {
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #f2f5ff;
+    border: 1px solid #0f4efc;
+    color: #0f4efc;
+    font-weight: bold;
+    cursor: pointer; 
+  }
+
   .calendar-header {
     flex-direction: column;
     align-items: flex-start;
@@ -203,75 +234,22 @@
 
   .calendar-controls button {
     flex: 1;
-    max-width: 100%; /* Teljes szélesség, így jól illeszkedik a mobilos nézethez */
+    max-width: 100%; 
   }
 }
 
-.calendar-container {
-  padding: 20px;
-  /* max-width: 1000px; */
-   /* Maximális szélesség, hogy ne nyúljon a képernyő széléig */
-  margin: 0 auto; /* Középre igazítás */
-}
-
-.calendar-grid {
-  border: 1px solid #ddd;
-  border-radius: 15px;
-  display: grid;
-  grid-template-columns: 7rem repeat(7, 1fr);
-  /*gap: 2px;*/
-  margin-top: 10px;
-  /*max-width: 100%;*/ /* A szülő konténerhez igazodik */
-}
-
-
-/*
-.calendar-container {
-  padding: 20px;
-
-}*/
-
-.calendar-controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 20px;
-}
-
-/*
-.calendar-grid {
-  border: 1px solid #ddd;
-  border-radius: 15px;
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-
-  margin-top: 20px;
-}*/
-
-.calendar-day{
-  text-align: center;
-  font-weight: bold;
-  border-bottom: 1px solid #ddd;
- /* border-left: 1px solid #ddd;*/
-}
- 
-/* .calendar-day:first-child{
- width: 30px;
-} */
-
-.lesson-number {
-  text-align: center;
-  font-weight: bold;
-  font-size: 1.1rem;
- /* width: 30px;*/
-}
-
-
-
-
 /* @media (max-width: 480px) { */
 @media (max-width: 920px) {
+  .lesson-card.current-lesson {
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #f2f5ff;
+    border: 1px solid #0f4efc;
+    color: #0f4efc;
+    font-weight: bold;
+    cursor: pointer; 
+  }
+
   .calendar-grid {
     display: flex;
     flex-direction: column;
@@ -294,19 +272,6 @@
     font-size: 1rem;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @layer base {
   :root {
