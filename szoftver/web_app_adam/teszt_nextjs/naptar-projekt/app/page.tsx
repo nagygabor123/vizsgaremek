@@ -36,9 +36,9 @@ const testSchedule = [
   { day: "monday", subject: "Rajz", start: "14:35", end: "15:20", class: "9.I", group: "", teacher: "Pityu" },
   { day: "tuesday", subject: "Kémia", start: "07:15", end: "08:00", class: "9.I", group: "", teacher: "Pityu" },
   { day: "tuesday", subject: "Tesi", start: "08:10", end: "08:55", class: "9.I", group: "", teacher: "Pityu" },
-  { day: "friday", subject: "Tesi", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Pityu" },
-  { day: "friday", subject: "Pif", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Matyi" },
-  { day: "friday", subject: "Pif", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Matyi" },
+  { day: "friday", subject: "Osztályfőnöki", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Pityu" },
+  { day: "friday", subject: "Testnevelés", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Matyi" },
+  { day: "friday", subject: "Magyar nyelv", start: "09:05", end: "09:50", class: "9.I", group: "", teacher: "Matyi" },
 
   // További órák...
 ];
