@@ -1,4 +1,9 @@
-
 - Login (nextauth, vercel) megcsinálása 
 - Roles jobban utánanézni 
 - Szombati tanítási napok: megadni a dátumot és megadni hogy a munkahét melyik napját jelenítse meg (az órákat)
+
+
+
+1. Login megcsinálása (adatbázis összekapcsolás elkezdése)
+2. Sidebar és az Oldalak megcsinálása 
+3. Adatbázissal teljes összekapcsolása és a Role-ok megcsinűlása
