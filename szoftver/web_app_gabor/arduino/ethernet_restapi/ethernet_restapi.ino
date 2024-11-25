@@ -6,7 +6,7 @@
 
 LiquidCrystal_I2C lcd(0x27, 16, 2); // I2C LCD inicializálása az 0x27 címmel
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; // Ethernet MAC-cím
-IPAddress server(172,16,13,9); // A localhost IP-címe
+IPAddress server(172,16,6,12); // A localhost IP-címe
 EthernetClient client;
 
 // RFID beállítások
