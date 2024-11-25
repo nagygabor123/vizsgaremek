@@ -27,9 +27,9 @@ import {
 } from "@/components/ui/dialog";
 
 const testSchedule = [
-  { day: "monday", subject: "Matematika", start: "07:15", end: "08:00", class: "9.I", group: "", teacher: "Pityu" },
-  { day: "monday", subject: "Történelem", start: "08:10", end: "08:55", class: "9.I", group: "", teacher: "Pityu" },
-  { day: "monday", subject: "Fizika", start: "10:00", end: "10:45", class: "9.I", group: "", teacher: "Pityu" },
+  { day: "monday", subject: "Matematika", start: "07:15", end: "08:00", class: "9.I", group: "", teacher: "Pityu", },
+  { day: "monday", subject: "Történelem", start: "08:10", end: "08:55", class: "9.I", group: "", teacher: "Pityu", },
+  { day: "monday", subject: "Fizika", start: "10:00", end: "10:45", class: "9.I", group: "", teacher: "Pityu", },
   { day: "monday", subject: "Biológia", start: "10:55", end: "11:40", class: "9.I", group: "", teacher: "Pityu" },
   { day: "monday", subject: "Földrajz", start: "12:55", end: "13:40", class: "9.I", group: "", teacher: "Pityu" },
   { day: "monday", subject: "Ének", start: "13:45", end: "14:30", class: "9.I", group: "", teacher: "Pityu" },
@@ -176,9 +176,9 @@ const Calendar: React.FC = () => {
                 }`}
                 onClick={() => openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)}
               >
-                <div className="lesson-index">{lessonIndex + 1}</div>
-                <div className="lesson-name">{lesson.subject}</div>
-                <div className="lesson-name">{lesson.class}</div>
+                             <div className="lesson-index">{lessonIndex + 1}</div>
+                  <div className="lesson-name">{lesson.subject}</div>
+                  <div className="lesson-class">{lesson.class}</div>
               </div>
             </DialogTrigger>
             <DialogContent>
@@ -239,7 +239,8 @@ const Calendar: React.FC = () => {
                 >
                   <div className="lesson-index">{lessonIndex + 1}</div>
                   <div className="lesson-name">{lesson.subject}</div>
-                  <div className="lesson-name">{lesson.class}</div>
+                  <div className="lesson-class">{lesson.class}</div>
+                 
                 </div>
               </DialogTrigger>
               <DialogContent>
