@@ -21,7 +21,7 @@
 }
 
 .calendar-cell.empty {
-  background-color: #fffbfb9e; /* opcionális: üres cellák kiemelése */
+  background-color: #fffbfba6; /* opcionális: üres cellák kiemelése */
 }
 
 
@@ -115,13 +115,22 @@
   /* top: 8px;
   left: 8px; */
   font-size: 12px; 
-  padding-bottom: 0.8rem;
+  padding-bottom: 0.5rem;
   /* font-weight: bold; */
   /* line-height: 200%; */
 }
 
 .lesson-name {
   font-weight: bold;
+  font-size: 15px; 
+  text-align: left;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  /* line-height: 120%; */
+}
+
+.lesson-class {
   font-size: 13px; 
   text-align: left;
   white-space: nowrap; 
