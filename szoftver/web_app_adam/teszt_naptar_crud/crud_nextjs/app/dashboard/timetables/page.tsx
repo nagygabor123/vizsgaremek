@@ -51,6 +51,10 @@ const breakDates = [
   { start: '2024-12-20', end: '2025-01-05' },
 ];
 
+const plusDates = [
+  { date: '2024-12-07', replaceDay: 'monday' },
+];
+
 const getDayName = (date: Date): string => {
   const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
   return dayNames[getDay(date)];
@@ -63,6 +67,12 @@ const isBreakDay = (date: Date) => {
     const endDate = new Date(end);
     return targetDate >= startDate && targetDate <= endDate;
   });
+};
+
+const getReplacedDayName = (date: Date): string => {
+  const formattedDate = format(date, 'yyyy-MM-dd');
+  const replacement = plusDates.find((entry) => entry.date === formattedDate);
+  return replacement ? replacement.replaceDay : getDayName(date);
 };
 
 const Calendar: React.FC = () => {
@@ -81,32 +91,29 @@ const Calendar: React.FC = () => {
     return () => window.removeEventListener('resize', updateView);
   }, []);
 
-
   useEffect(() => {
     async function fetchSchedule() {
       try {
         const response = await fetch('http://localhost:3000/api/timetable/admin'); // vagy az API végpontod
         const data = await response.json();
-        // Formázd az adatokat
         const formattedData = data.map((lesson: any) => ({
           day: lesson.day_of_week,
-          start: lesson.start_time.slice(0, 5), // "07:15:00" -> "07:15"
-          end: lesson.end_time.slice(0, 5), // "08:00:00" -> "08:00"
+          start: lesson.start_time.slice(0, 5),
+          end: lesson.end_time.slice(0, 5),
           subject: lesson.group_name,
           teacher: lesson.teacher_name,
-          class: lesson.class
+          class: lesson.class,
         }));
         setSchedule(formattedData);
       } catch (error) {
         console.error('Error fetching schedule:', error);
       }
     }
-  
+
     fetchSchedule();
   }, []);
-  
-  console.log('Schedule:', schedule);
 
+  console.log('Schedule:', schedule);
 
   const goToPrevious = () => {
     setCurrentDate((prevDate) => (isMobileView ? subDays(prevDate, 1) : addWeeks(prevDate, -1)));
@@ -142,8 +149,8 @@ const Calendar: React.FC = () => {
   const weekStart = startOfWeek(currentDate, { weekStartsOn: 1 });
   const daysOfWeek = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
 
-  const currentDayName = getDayName(currentDate);
-  const dailyLessons = schedule.filter((lesson) => lesson.day === getDayName(currentDate));
+  const replacedDayName = getReplacedDayName(currentDate);
+  const dailyLessons = schedule.filter((lesson) => lesson.day === replacedDayName);
 
   return (
     <div className="calendar-container">
@@ -161,10 +168,6 @@ const Calendar: React.FC = () => {
       <div className="calendar-grid">
         {isMobileView ? (
           <div>
-
-
-
-
             <div className="calendar-day">{format(currentDate, 'eeee d', { locale: hu })}</div>
             {isBreakDay(currentDate) ? (
               <div className="no-lessons">Ma nincs tanítás!</div>
@@ -189,11 +192,9 @@ const Calendar: React.FC = () => {
                             }`}
                             onClick={() => openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)}
                           >
-
-<div className="lesson-index">{lessonIndex + 1}</div>
-                  <div className="lesson-name">{lesson.subject}</div>
-                  <div className="lesson-class">{lesson.class}</div>
-
+                            <div className="lesson-index">{lessonIndex + 1}</div>
+                            <div className="lesson-name">{lesson.subject}</div>
+                            <div className="lesson-class">{lesson.class}</div>
                           </div>
                         </DialogTrigger>
                         <DialogContent>
@@ -225,10 +226,10 @@ const Calendar: React.FC = () => {
                   <span className="time-end">{time.end}</span>
                 </div>
                 {daysOfWeek.map((day, dayIndex) => {
-                  const dayName = getDayName(day);
+                  const dayName = getReplacedDayName(day);
                   const dailyLessons = schedule.filter((lesson) => lesson.day === dayName);
                   const lessonsAtSameTime = dailyLessons.filter(
-                    (l) => l.start === time.start && l.end === time.end,
+                    (l) => l.start === time.start && l.end === time.end
                   );
 
                   const isBreak = isBreakDay(day);
@@ -249,10 +250,9 @@ const Calendar: React.FC = () => {
                                 openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)
                               }
                             >
-                           <div className="lesson-index">{lessonIndex + 1}</div>
-                  <div className="lesson-name">{lesson.subject}</div>
-                  <div className="lesson-class">{lesson.class}</div>
-
+                              <div className="lesson-index">{lessonIndex + 1}</div>
+                              <div className="lesson-name">{lesson.subject}</div>
+                              <div className="lesson-class">{lesson.class}</div>
                             </div>
                           </DialogTrigger>
                           <DialogContent>
