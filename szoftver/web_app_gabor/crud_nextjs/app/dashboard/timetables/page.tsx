@@ -94,6 +94,7 @@ const Calendar: React.FC = () => {
           end: lesson.end_time.slice(0, 5), // "08:00:00" -> "08:00"
           subject: lesson.group_name,
           teacher: lesson.teacher_name,
+          class: lesson.class
         }));
         setSchedule(formattedData);
       } catch (error) {
@@ -184,8 +185,11 @@ const Calendar: React.FC = () => {
                             }`}
                             onClick={() => openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)}
                           >
-                            <div className="lesson-name">{lesson.subject}</div>
-                            <div className="lesson-class">{lesson.class}</div>
+
+<div className="lesson-index">{lessonIndex + 1}</div>
+                  <div className="lesson-name">{lesson.subject}</div>
+                  <div className="lesson-class">{lesson.class}</div>
+
                           </div>
                         </DialogTrigger>
                         <DialogContent>
@@ -241,8 +245,10 @@ const Calendar: React.FC = () => {
                                 openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)
                               }
                             >
-                              <div className="lesson-name">{lesson.subject}</div>
-                              <div className="lesson-class">{lesson.class}</div>
+                           <div className="lesson-index">{lessonIndex + 1}</div>
+                  <div className="lesson-name">{lesson.subject}</div>
+                  <div className="lesson-class">{lesson.class}</div>
+
                             </div>
                           </DialogTrigger>
                           <DialogContent>
