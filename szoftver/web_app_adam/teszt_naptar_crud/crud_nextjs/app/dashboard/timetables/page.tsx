@@ -48,7 +48,7 @@ const lessonTimes = [
 ];
 
 const breakDates = [
-  { start: '2024-12-10', end: '2024-12-24' },
+  { start: '2024-12-20', end: '2025-01-05' },
 ];
 
 const getDayName = (date: Date): string => {
@@ -161,6 +161,10 @@ const Calendar: React.FC = () => {
       <div className="calendar-grid">
         {isMobileView ? (
           <div>
+
+
+
+
             <div className="calendar-day">{format(currentDate, 'eeee d', { locale: hu })}</div>
             {isBreakDay(currentDate) ? (
               <div className="no-lessons">Ma nincs tanítás!</div>
