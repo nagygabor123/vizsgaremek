@@ -1,4 +1,5 @@
 // lib/db.js
+/*
 import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
 
@@ -18,12 +19,12 @@ const pool = mysql.createPool({
 export async function connectToDatabase() {
   const connection = await pool.getConnection();
   return connection;
-}
+}*/
 
 
 
 
-/* régi
+
 import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
 
@@ -37,4 +38,4 @@ export async function connectToDatabase() {
     database: process.env.DB_NAME,
   });
   return connection;
-}*/
+}

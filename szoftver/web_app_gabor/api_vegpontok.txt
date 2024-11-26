@@ -27,3 +27,5 @@ DIÁK ENGEDÉLYÉNEK ELLENŐRZÉSE  http://localhost:3000/api/locker/checkLocker
 REFID->SZEKRÉNY  http://localhost:3000/api/locker/getLocker?rfid=F7F59C7A  GET
 
 TANÁR ÓRAREND  http://localhost:3000/api/timetable/admin  GET
+
+DIÁK STÁTUSZÁNAK ÁLLÍTÁSA  http://localhost:3000/api/locker/setLockerStatus?id=2  PATCH

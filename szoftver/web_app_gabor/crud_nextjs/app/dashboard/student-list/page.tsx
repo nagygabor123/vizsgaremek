@@ -12,6 +12,7 @@ interface Student {
   full_name: string;
   class: string;
   rfid_tag: string;
+  status: string;
 }
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
     full_name: '',
     class: '',
     rfid_tag: '',
+    status: '',
   });
   const [editing, setEditing] = useState<boolean>(false);
   const [editStudentId, setEditStudentId] = useState<string | null>(null);
@@ -73,7 +75,7 @@ export default function Home() {
     });
 
     if (response.ok) {
-      setFormData({ student_id: '', full_name: '', class: '', rfid_tag: '' });
+      setFormData({ student_id: '', full_name: '', class: '', rfid_tag: '', status:'' });
       setEditing(false);
       setEditStudentId(null);
       fetchStudents();  // Refresh the student list after creating or updating
@@ -164,7 +166,7 @@ export default function Home() {
       <ul>
         {students.map((student) => (
           <li key={student.student_id}>
-            {student.full_name} ({student.class})
+            {student.full_name} ({student.class},{student.status})
             <Button onClick={() => handleEdit(student)}>Edit</Button>
             <Button onClick={() => handleDelete(student.student_id)}>Delete</Button>
             <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!systemClose}>Feloldás</Button>

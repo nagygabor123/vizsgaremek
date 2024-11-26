@@ -41,6 +41,7 @@ interface Student {
   class: string;
   rfid_tag: string;
   access: string;
+  status: string;
 }
 
 const lessonTimes = [
@@ -133,7 +134,7 @@ const Calendar: React.FC = () => {
       }
     }
   
-    async function fetchStudents() {
+    /*async function fetchStudents() {
       try {
         const response = await fetch('http://localhost:3000/api/students/read');
         const data = await response.json();
@@ -141,11 +142,10 @@ const Calendar: React.FC = () => {
       } catch (error) {
         console.error('Error fetching students:', error);
       }
-    }
+    }*/
 
-    fetchSystemStatus();
     fetchSchedule();
-    fetchStudents();
+    //fetchStudents();
   }, []);
   
   console.log('Schedule:', schedule);
@@ -203,6 +203,13 @@ const Calendar: React.FC = () => {
       body: JSON.stringify({ student_id }),
     });
   };
+
+  const fetchStudents = async () => {
+    const response = await fetch('/api/students/read');
+    const data = await response.json();
+    setStudents(data);
+  };
+
   const fetchSystemStatus = async () => {
     const response = await fetch('http://localhost:3000/api/system/status');
     if (response.ok) {
@@ -257,6 +264,7 @@ const Calendar: React.FC = () => {
                         className={`lesson-card ${isCurrent ? 'current-lesson' : ''}`}
                         onClick={() => {
                           openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
+                          fetchStudents();
                           fetchSystemStatus();
                         }}
                       >
@@ -285,7 +293,7 @@ const Calendar: React.FC = () => {
                           <h4>Diákok:</h4>
                           {getStudentsByClass(modalInfo?.className || '').map((student) => (
                             <div key={student.student_id} className="student-info">
-                              <p>{student.full_name} ({student.student_id})</p>
+                              <p>{student.full_name} ({student.status})</p>
                               <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!systemClose}>Feloldás</Button>
                             </div>
                           ))}
@@ -341,6 +349,7 @@ const Calendar: React.FC = () => {
         className={`lesson-card ${isCurrent ? 'current-lesson' : ''}`}
         onClick={() => {
           openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
+          fetchStudents();
           fetchSystemStatus(); // Fetch system status when an hour is clicked
         }}
       >
@@ -368,7 +377,7 @@ const Calendar: React.FC = () => {
           <h4>Diákok:</h4>
           {getStudentsByClass(modalInfo?.className || '').map((student) => (
             <div key={student.student_id} className="student-info">
-              <p>{student.full_name} ({student.student_id})</p>
+              <p>{student.full_name} ({student.status})</p>
               <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!systemClose}>Feloldás</Button>
             </div>
           ))}
