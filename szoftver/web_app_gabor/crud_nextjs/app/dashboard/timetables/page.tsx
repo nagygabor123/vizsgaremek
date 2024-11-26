@@ -222,78 +222,13 @@ const Calendar: React.FC = () => {
 
                 return (
                   <div key={lessonIndex} className="calendar-cell">
-                    {lessonsAtSameTime.map((lesson, index) => (
-                      <Dialog key={`${index}`}>
-                      <DialogTrigger asChild>
-                        <div
-                          className="lesson-card"
-                          onClick={() => {
-                            openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
-                            fetchSystemStatus(); // Fetch system status when an hour is clicked
-                          }}
-                        >
-                          <div className="lesson-index">{lessonIndex + 1}</div>
-                          <div className="lesson-name">{lesson.subject}</div>
-                          <div className="lesson-class">{lesson.class}</div>
-                        </div>
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogHeader>
-                          <DialogTitle>{modalInfo?.lesson}</DialogTitle>
-                          <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
-                          <h3>Osztály: {modalInfo?.className}</h3>
-                          <div>
-                            <h4>Diákok:</h4>
-                            {getStudentsByClass(modalInfo?.className || '').map((student) => (
-                              <div key={student.student_id} className="student-info">
-                                <p>{student.full_name} ({student.student_id})</p>
-                                <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!systemClose}>Feloldás</Button>
-                              </div>
-                            ))}
-                          </div>
-                        </DialogHeader>
-                      </DialogContent>
-                    </Dialog>
-                    ))}
-                  </div>
-                );
-              })
-            )}
-          </div>
-        ) : (
-          <>
-            <div className="calendar-day"></div>
-            {daysOfWeek.map((day, index) => (
-              <div className={`calendar-day ${isToday(day) ? 'current-day' : ''}`} key={index}>
-                {format(day, 'EEE d', { locale: hu })}
-              </div>
-            ))}
-
-            {lessonTimes.map((time, lessonIndex) => (
-              <React.Fragment key={lessonIndex}>
-                <div className="lesson-time">
-                  <span className="time-start">{time.start}</span>
-                  <span className="time-end">{time.end}</span>
-                </div>
-                {daysOfWeek.map((day, dayIndex) => {
-                  const dayName = getDayName(day);
-                  const dailyLessons = schedule.filter((lesson) => lesson.day === dayName);
-                  const lessonsAtSameTime = dailyLessons.filter(
-                    (l) => l.start === time.start && l.end === time.end,
-                  );
-
-                  const isBreak = isBreakDay(day);
-                  if (lessonsAtSameTime.length === 0 || isBreak) {
-                    return <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell empty" />;
-                  }
-
-                  return (
-                    <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell">
-                      {lessonsAtSameTime.map((lesson, index) => (
-                        <Dialog key={`${lessonIndex}-${dayIndex}-${index}`}>
+                    {lessonsAtSameTime.map((lesson, index) => {
+                      const isCurrent = isCurrentLesson(lesson);
+                      return (
+                        <Dialog key={`${index}`}>
                           <DialogTrigger asChild>
                             <div
-                              className="lesson-card"
+                              className={`lesson-card ${isCurrent ? 'current-lesson' : ''}`} // Ha éppen folyamatban van az óra, hozzáadjuk a 'current-lesson' osztályt
                               onClick={() => {
                                 openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
                                 fetchSystemStatus(); // Fetch system status when an hour is clicked
@@ -315,18 +250,91 @@ const Calendar: React.FC = () => {
                                   <div key={student.student_id} className="student-info">
                                     <p>{student.full_name} ({student.student_id})</p>
                                     <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!systemClose}>Feloldás</Button>
-                                    </div>
+                                  </div>
                                 ))}
                               </div>
                             </DialogHeader>
                           </DialogContent>
                         </Dialog>
+                      );
+                    })}
+                  </div>
+                );
+              })
+            )}
+          </div>
+        ) : (
+          <>
+            <div className="calendar-day"></div>
+            {daysOfWeek.map((day, index) => (
+              <div className={`calendar-day ${isToday(day) ? 'current-day' : ''}`} key={index}>
+                {format(day, 'EEE d', { locale: hu })}
+              </div>
+            ))}
+
+{lessonTimes.map((time, lessonIndex) => (
+  <React.Fragment key={lessonIndex}>
+    <div className="lesson-time">
+      <span className="time-start">{time.start}</span>
+      <span className="time-end">{time.end}</span>
+    </div>
+    {daysOfWeek.map((day, dayIndex) => {
+      const dayName = getDayName(day);
+      const dailyLessons = schedule.filter((lesson) => lesson.day === dayName);
+      const lessonsAtSameTime = dailyLessons.filter(
+        (l) => l.start === time.start && l.end === time.end,
+      );
+
+      const isBreak = isBreakDay(day);
+      if (lessonsAtSameTime.length === 0 || isBreak) {
+        return <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell empty" />;
+      }
+
+      return (
+        <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell">
+          {lessonsAtSameTime.map((lesson, index) => {
+            // Csak akkor alkalmazzuk az isCurrentLesson függvényt, ha a mai napra vonatkozik
+            const isCurrent = isToday(day) && isCurrentLesson(lesson);
+            return (
+              <Dialog key={`${lessonIndex}-${dayIndex}-${index}`}>
+                <DialogTrigger asChild>
+                  <div
+                    className={`lesson-card ${isCurrent ? 'current-lesson' : ''}`}
+                    onClick={() => {
+                      openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
+                      fetchSystemStatus(); // Fetch system status when an hour is clicked
+                    }}
+                  >
+                    <div className="lesson-index">{lessonIndex + 1}</div>
+                    <div className="lesson-name">{lesson.subject}</div>
+                    <div className="lesson-class">{lesson.class}</div>
+                  </div>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>{modalInfo?.lesson}</DialogTitle>
+                    <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
+                    <h3>Osztály: {modalInfo?.className}</h3>
+                    <div>
+                      <h4>Diákok:</h4>
+                      {getStudentsByClass(modalInfo?.className || '').map((student) => (
+                        <div key={student.student_id} className="student-info">
+                          <p>{student.full_name} ({student.student_id})</p>
+                          <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!systemClose}>Feloldás</Button>
+                        </div>
                       ))}
                     </div>
-                  );
-                })}
-              </React.Fragment>
-            ))}
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>
+            );
+          })}
+        </div>
+      );
+    })}
+  </React.Fragment>
+))}
+
           </>
         )}
       </div>

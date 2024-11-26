@@ -109,10 +109,10 @@ INSERT INTO `system_status` (`id`, `status`) VALUES
 
 
 INSERT INTO `groups` ( `group_name`) VALUES
-('13.I Mathematics'),
-('13.I Physics'),
-('12.I Literature'),
-('12.I Chemistry');
+('Matek'),
+('Programozás'),
+('Hálózatok'),
+('Hittan');
 
 
 INSERT INTO `student_groups` (`student_id`, `group_id`) VALUES
@@ -144,6 +144,13 @@ INSERT INTO `timetables` (`group_id`, `admin_id`, `day_of_week`, `start_time`, `
 (1, 1, 'tuesday', '10:00', '10:45'),
 (4, 1, 'tuesday', '10:55', '11:40'),
 (4, 1, 'tuesday', '11:50', '12:35'),
+(1, 2, 'tuesday', '10:00', '10:45'),
+(4, 2, 'tuesday', '10:55', '11:40'),
+(2, 2, 'tuesday', '11:50', '12:35'),
+(2, 2, 'tuesday', '12:55', '13:40'),
+(2, 2, 'tuesday', '11:50', '12:35'),
+(2, 2, 'tuesday', '13:45', '14:30'),
+(2, 2, 'tuesday', '14:35', '15:20'),
 (2, 2, 'wednesday', '07:15', '08:00'),
 (2, 2, 'wednesday', '08:10', '08:55'),
 (3, 1, 'wednesday', '09:05', '09:50'),
