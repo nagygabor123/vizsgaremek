@@ -56,7 +56,7 @@ const lessonTimes = [
 ];
 
 const breakDates = [
-  { start: '2024-12-10', end: '2024-12-24' },
+  { start: '2024-12-20', end: '2025-01-05' },
 ];
 
 const plusDates = [
