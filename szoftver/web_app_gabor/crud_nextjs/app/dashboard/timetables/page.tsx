@@ -227,65 +227,81 @@ const Calendar: React.FC = () => {
       </div>
 
       <div className="calendar-grid">
-        {isMobileView ? (
-          <div>
-            <div className="calendar-day">{format(currentDate, 'eeee d', { locale: hu })}</div>
-            {isBreakDay(currentDate) ? (
-              <div className="no-lessons">Ma nincs tanítás!</div>
-            ) : dailyLessons.length === 0 ? (
-              <div className="no-lessons">Ma nincs tanítás!</div>
-            ) : (
-              lessonTimes.map((time, lessonIndex) => {
-                const lessonsAtSameTime = dailyLessons.filter(
-                  (lesson) => lesson.start === time.start && lesson.end === time.end
-                );
+      {isMobileView ? (
+  <div>
+    <div className="calendar-day">
+      {format(currentDate, 'eeee d', { locale: hu })}
+    </div>
+    {isBreakDay(currentDate) ? (
+      <div className="no-lessons">Ma nincs tanítás!</div>
+    ) : dailyLessons.length === 0 ? (
+      <div className="no-lessons">Ma nincs tanítás!</div>
+    ) : (
+      lessonTimes.map((time, lessonIndex) => {
+        const lessonsAtSameTime = dailyLessons.filter(
+          (lesson) => lesson.start === time.start && lesson.end === time.end
+        );
 
-                if (lessonsAtSameTime.length === 0) return null;
+        if (lessonsAtSameTime.length === 0) return null;
 
-                return (
-                  <div key={lessonIndex} className="calendar-cell">
-                    {lessonsAtSameTime.map((lesson, index) => {
-                      const isCurrent = isCurrentLesson(lesson);
-                      return (
-                        <Dialog key={`${index}`}>
-                          <DialogTrigger asChild>
-                            <div
-                              className={`lesson-card ${isCurrent ? 'current-lesson' : ''}`} // Ha éppen folyamatban van az óra, hozzáadjuk a 'current-lesson' osztályt
-                              onClick={() => {
-                                openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
-                                fetchSystemStatus(); // Fetch system status when an hour is clicked
-                              }}
-                            >
-                              <div className="lesson-index">{lessonIndex + 1}</div>
-                              <div className="lesson-name">{lesson.subject}</div>
-                              <div className="lesson-class">{lesson.class}</div>
+        return (
+          <div key={lessonIndex} className="calendar-cell">
+            {lessonsAtSameTime.map((lesson, index) => {
+              const isCurrent = isCurrentLesson(lesson);
+
+              return (
+                <Dialog key={`${index}`}>
+                  <DialogTrigger asChild>
+                    {isToday(currentDate) && isCurrentLesson(lesson) ? ( // Csak akkor engedélyezett kattintás, ha ma van és az aktuális óra
+                      <div
+                        className={`lesson-card ${isCurrent ? 'current-lesson' : ''}`}
+                        onClick={() => {
+                          openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
+                          fetchSystemStatus();
+                        }}
+                      >
+                        <div className="lesson-index">{lessonIndex + 1}</div>
+                        <div className="lesson-name">{lesson.subject}</div>
+                        <div className="lesson-class">{lesson.class}</div>
+                      </div>
+                    ) : (
+                      <div
+                        className="lesson-card disabled-lesson" // Ha nem aktuális óra, akkor nem kattintható
+                      >
+                        <div className="lesson-index">{lessonIndex + 1}</div>
+                        <div className="lesson-name">{lesson.subject}</div>
+                        <div className="lesson-class">{lesson.class}</div>
+                      </div>
+                    )}
+                  </DialogTrigger>
+
+                  {isToday(currentDate) && isCurrentLesson(lesson) && ( // Csak akkor jelenik meg a dialog, ha a mai napon vagyunk és aktuális óra
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>{modalInfo?.lesson}</DialogTitle>
+                        <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
+                        <h3>Osztály: {modalInfo?.className}</h3>
+                        <div>
+                          <h4>Diákok:</h4>
+                          {getStudentsByClass(modalInfo?.className || '').map((student) => (
+                            <div key={student.student_id} className="student-info">
+                              <p>{student.full_name} ({student.student_id})</p>
+                              <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!systemClose}>Feloldás</Button>
                             </div>
-                          </DialogTrigger>
-                          <DialogContent>
-                            <DialogHeader>
-                              <DialogTitle>{modalInfo?.lesson}</DialogTitle>
-                              <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
-                              <h3>Osztály: {modalInfo?.className}</h3>
-                              <div>
-                                <h4>Diákok:</h4>
-                                {getStudentsByClass(modalInfo?.className || '').map((student) => (
-                                  <div key={student.student_id} className="student-info">
-                                    <p>{student.full_name} ({student.student_id})</p>
-                                    <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!systemClose}>Feloldás</Button>
-                                  </div>
-                                ))}
-                              </div>
-                            </DialogHeader>
-                          </DialogContent>
-                        </Dialog>
-                      );
-                    })}
-                  </div>
-                );
-              })
-            )}
+                          ))}
+                        </div>
+                      </DialogHeader>
+                    </DialogContent>
+                  )}
+                </Dialog>
+              );
+            })}
           </div>
-        ) : (
+        );
+      })
+    )}
+  </div>
+) : (
           <>
             <div className="calendar-day"></div>
             {daysOfWeek.map((day, index) => (
@@ -319,36 +335,49 @@ const Calendar: React.FC = () => {
             const isCurrent = isToday(day) && isCurrentLesson(lesson);
             return (
               <Dialog key={`${lessonIndex}-${dayIndex}-${index}`}>
-                <DialogTrigger asChild>
-                  <div
-                    className={`lesson-card ${isCurrent ? 'current-lesson' : ''}`}
-                    onClick={() => {
-                      openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
-                      fetchSystemStatus(); // Fetch system status when an hour is clicked
-                    }}
-                  >
-                    <div className="lesson-index">{lessonIndex + 1}</div>
-                    <div className="lesson-name">{lesson.subject}</div>
-                    <div className="lesson-class">{lesson.class}</div>
-                  </div>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>{modalInfo?.lesson}</DialogTitle>
-                    <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
-                    <h3>Osztály: {modalInfo?.className}</h3>
-                    <div>
-                      <h4>Diákok:</h4>
-                      {getStudentsByClass(modalInfo?.className || '').map((student) => (
-                        <div key={student.student_id} className="student-info">
-                          <p>{student.full_name} ({student.student_id})</p>
-                          <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!systemClose}>Feloldás</Button>
-                        </div>
-                      ))}
-                    </div>
-                  </DialogHeader>
-                </DialogContent>
-              </Dialog>
+  <DialogTrigger asChild>
+    {isToday(day) && isCurrentLesson(lesson) ? ( // Csak akkor jelenjen meg a kattintható elem, ha ma van és a jelenlegi óra
+      <div
+        className={`lesson-card ${isCurrent ? 'current-lesson' : ''}`}
+        onClick={() => {
+          openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
+          fetchSystemStatus(); // Fetch system status when an hour is clicked
+        }}
+      >
+        <div className="lesson-index">{lessonIndex + 1}</div>
+        <div className="lesson-name">{lesson.subject}</div>
+        <div className="lesson-class">{lesson.class}</div>
+      </div>
+    ) : (
+      <div
+        className="lesson-card disabled-lesson" // Egy másik stílus, ha a feltételek nem teljesülnek
+      >
+        <div className="lesson-index">{lessonIndex + 1}</div>
+        <div className="lesson-name">{lesson.subject}</div>
+        <div className="lesson-class">{lesson.class}</div>
+      </div>
+    )}
+  </DialogTrigger>
+  {isToday(day) && isCurrentLesson(lesson) && ( // Csak akkor jelenjen meg a DialogContent, ha ma van és az aktuális órára kattintunk
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>{modalInfo?.lesson}</DialogTitle>
+        <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
+        <h3>Osztály: {modalInfo?.className}</h3>
+        <div>
+          <h4>Diákok:</h4>
+          {getStudentsByClass(modalInfo?.className || '').map((student) => (
+            <div key={student.student_id} className="student-info">
+              <p>{student.full_name} ({student.student_id})</p>
+              <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!systemClose}>Feloldás</Button>
+            </div>
+          ))}
+        </div>
+      </DialogHeader>
+    </DialogContent>
+  )}
+</Dialog>
+
             );
           })}
         </div>
