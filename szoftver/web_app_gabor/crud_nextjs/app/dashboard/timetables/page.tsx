@@ -35,6 +35,14 @@ interface TimetableEntry {
   teacher: string;
 }
 
+interface Student {
+  student_id: string;
+  full_name: string;
+  class: string;
+  rfid_tag: string;
+  access: string;
+}
+
 const lessonTimes = [
   { start: '07:15', end: '08:00' },
   { start: '08:10', end: '08:55' },
@@ -66,10 +74,12 @@ const isBreakDay = (date: Date) => {
 };
 
 const Calendar: React.FC = () => {
+  const [systemClose, setSystemClose] = useState<boolean>(false); // initial state is false
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isMobileView, setIsMobileView] = useState(false);
   const [schedule, setSchedule] = useState<TimetableEntry[]>([]);
-  const [modalInfo, setModalInfo] = useState<{ lesson: string; time: string } | null>(null);
+  const [students, setStudents] = useState<Student[]>([]);
+  const [modalInfo, setModalInfo] = useState<{ lesson: string; time: string;className: string; } | null>(null);
 
   useEffect(() => {
     const updateView = () => {
@@ -83,6 +93,16 @@ const Calendar: React.FC = () => {
 
 
   useEffect(() => {
+    const fetchSystemStatus = async () => {
+      const response = await fetch('http://localhost:3000/api/system/status');
+      if (response.ok) {
+        const data = await response.json();
+        // If the system status is "nyitva", set systemClose to false, else set it to true
+        setSystemClose(data.status === "nyitva" ? false : true);
+        
+      }
+    };
+
     async function fetchSchedule() {
       try {
         const response = await fetch('http://localhost:3000/api/timetable/admin'); // vagy az API végpontod
@@ -102,10 +122,25 @@ const Calendar: React.FC = () => {
       }
     }
   
+    async function fetchStudents() {
+      try {
+        const response = await fetch('http://localhost:3000/api/students/read');
+        const data = await response.json();
+        setStudents(data);
+      } catch (error) {
+        console.error('Error fetching students:', error);
+      }
+    }
+
+    fetchSystemStatus();
     fetchSchedule();
+    fetchStudents();
   }, []);
   
   console.log('Schedule:', schedule);
+  console.log('Student:', students);
+  console.log('system:',systemClose )
+
 
 
   const goToPrevious = () => {
@@ -131,12 +166,16 @@ const Calendar: React.FC = () => {
     return isToday(currentDate) && isAfter(now, start) && isBefore(now, end);
   };
 
-  const openModal = (lesson: string, time: string) => {
-    setModalInfo({ lesson, time });
+  const openModal = (lesson: string, time: string, className: string) => {
+    setModalInfo({ lesson, time, className });
   };
 
   const closeModal = () => {
     setModalInfo(null);
+  };
+
+  const getStudentsByClass = (className: string) => {
+    return students.filter((student) => student.class === className);
   };
 
   const weekStart = startOfWeek(currentDate, { weekStartsOn: 1 });
@@ -144,6 +183,14 @@ const Calendar: React.FC = () => {
 
   const currentDayName = getDayName(currentDate);
   const dailyLessons = schedule.filter((lesson) => lesson.day === getDayName(currentDate));
+
+  const handleStudentOpen = async (student_id: string) => {
+    const response = await fetch('/api/locker/studentOpen', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ student_id }),
+    });
+  };
 
   return (
     <div className="calendar-container">
@@ -177,28 +224,36 @@ const Calendar: React.FC = () => {
                 return (
                   <div key={lessonIndex} className="calendar-cell">
                     {lessonsAtSameTime.map((lesson, index) => (
-                      <Dialog key={index}>
-                        <DialogTrigger asChild>
-                          <div
-                            className={`lesson-card ${
-                              isToday(currentDate) && isCurrentLesson(lesson) ? 'current-lesson' : ''
-                            }`}
-                            onClick={() => openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)}
-                          >
-
-<div className="lesson-index">{lessonIndex + 1}</div>
-                  <div className="lesson-name">{lesson.subject}</div>
-                  <div className="lesson-class">{lesson.class}</div>
-
+                      <Dialog key={`${index}`}>
+                      <DialogTrigger asChild>
+                        <div
+                          className="lesson-card"
+                          onClick={() =>
+                            openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class)
+                          }
+                        >
+                          <div className="lesson-index">{lessonIndex + 1}</div>
+                          <div className="lesson-name">{lesson.subject}</div>
+                          <div className="lesson-class">{lesson.class}</div>
+                        </div>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>{modalInfo?.lesson}</DialogTitle>
+                          <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
+                          <h3>Osztály: {modalInfo?.className}</h3>
+                          <div>
+                            <h4>Diákok:</h4>
+                            {getStudentsByClass(modalInfo?.className || '').map((student) => (
+                              <div key={student.student_id} className="student-info">
+                                <p>{student.full_name} ({student.student_id})</p>
+                                <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!systemClose}>Feloldás</Button>
+                              </div>
+                            ))}
                           </div>
-                        </DialogTrigger>
-                        <DialogContent>
-                          <DialogHeader>
-                            <DialogTitle>{modalInfo?.lesson}</DialogTitle>
-                            <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
-                          </DialogHeader>
-                        </DialogContent>
-                      </Dialog>
+                        </DialogHeader>
+                      </DialogContent>
+                    </Dialog>
                     ))}
                   </div>
                 );
@@ -238,23 +293,30 @@ const Calendar: React.FC = () => {
                         <Dialog key={`${lessonIndex}-${dayIndex}-${index}`}>
                           <DialogTrigger asChild>
                             <div
-                              className={`lesson-card ${
-                                isToday(day) && isCurrentLesson(lesson) ? 'current-lesson' : ''
-                              }`}
+                              className="lesson-card"
                               onClick={() =>
-                                openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)
+                                openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class)
                               }
                             >
-                           <div className="lesson-index">{lessonIndex + 1}</div>
-                  <div className="lesson-name">{lesson.subject}</div>
-                  <div className="lesson-class">{lesson.class}</div>
-
+                              <div className="lesson-index">{lessonIndex + 1}</div>
+                              <div className="lesson-name">{lesson.subject}</div>
+                              <div className="lesson-class">{lesson.class}</div>
                             </div>
                           </DialogTrigger>
                           <DialogContent>
                             <DialogHeader>
                               <DialogTitle>{modalInfo?.lesson}</DialogTitle>
                               <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
+                              <h3>Osztály: {modalInfo?.className}</h3>
+                              <div>
+                                <h4>Diákok:</h4>
+                                {getStudentsByClass(modalInfo?.className || '').map((student) => (
+                                  <div key={student.student_id} className="student-info">
+                                    <p>{student.full_name} ({student.student_id})</p>
+                                    <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!systemClose}>Feloldás</Button>
+                                    </div>
+                                ))}
+                              </div>
                             </DialogHeader>
                           </DialogContent>
                         </Dialog>
