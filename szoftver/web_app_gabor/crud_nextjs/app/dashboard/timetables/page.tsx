@@ -59,6 +59,12 @@ const breakDates = [
   { start: '2024-12-10', end: '2024-12-24' },
 ];
 
+const plusDates = [
+  { date: '2024-12-07', replaceDay: 'monday' },
+];
+
+
+
 const getDayName = (date: Date): string => {
   const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
   return dayNames[getDay(date)];
@@ -71,6 +77,12 @@ const isBreakDay = (date: Date) => {
     const endDate = new Date(end);
     return targetDate >= startDate && targetDate <= endDate;
   });
+};
+
+const getReplacedDayName = (date: Date): string => {
+  const formattedDate = format(date, 'yyyy-MM-dd');
+  const replacement = plusDates.find((entry) => entry.date === formattedDate);
+  return replacement ? replacement.replaceDay : getDayName(date);
 };
 
 const Calendar: React.FC = () => {
@@ -180,8 +192,9 @@ const Calendar: React.FC = () => {
   const weekStart = startOfWeek(currentDate, { weekStartsOn: 1 });
   const daysOfWeek = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
 
-  const currentDayName = getDayName(currentDate);
-  const dailyLessons = schedule.filter((lesson) => lesson.day === getDayName(currentDate));
+  const replacedDayName = getReplacedDayName(currentDate);
+  const dailyLessons = schedule.filter((lesson) => lesson.day === replacedDayName);
+
 
   const handleStudentOpen = async (student_id: string) => {
     const response = await fetch('/api/locker/studentOpen', {
@@ -288,7 +301,7 @@ const Calendar: React.FC = () => {
       <span className="time-end">{time.end}</span>
     </div>
     {daysOfWeek.map((day, dayIndex) => {
-      const dayName = getDayName(day);
+      const dayName = getReplacedDayName(day);
       const dailyLessons = schedule.filter((lesson) => lesson.day === dayName);
       const lessonsAtSameTime = dailyLessons.filter(
         (l) => l.start === time.start && l.end === time.end,
