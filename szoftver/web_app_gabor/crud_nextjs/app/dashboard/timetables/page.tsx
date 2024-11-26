@@ -93,16 +93,6 @@ const Calendar: React.FC = () => {
 
 
   useEffect(() => {
-    const fetchSystemStatus = async () => {
-      const response = await fetch('http://localhost:3000/api/system/status');
-      if (response.ok) {
-        const data = await response.json();
-        // If the system status is "nyitva", set systemClose to false, else set it to true
-        setSystemClose(data.status === "nyitva" ? false : true);
-        
-      }
-    };
-
     async function fetchSchedule() {
       try {
         const response = await fetch('http://localhost:3000/api/timetable/admin'); // vagy az API végpontod
@@ -191,6 +181,15 @@ const Calendar: React.FC = () => {
       body: JSON.stringify({ student_id }),
     });
   };
+  const fetchSystemStatus = async () => {
+    const response = await fetch('http://localhost:3000/api/system/status');
+    if (response.ok) {
+      const data = await response.json();
+      // If the system status is "nyitva", set systemClose to false, else set it to true
+      setSystemClose(data.status === "nyitva" ? false : true);
+      
+    }
+  };
 
   return (
     <div className="calendar-container">
@@ -228,9 +227,10 @@ const Calendar: React.FC = () => {
                       <DialogTrigger asChild>
                         <div
                           className="lesson-card"
-                          onClick={() =>
-                            openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class)
-                          }
+                          onClick={() => {
+                            openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
+                            fetchSystemStatus(); // Fetch system status when an hour is clicked
+                          }}
                         >
                           <div className="lesson-index">{lessonIndex + 1}</div>
                           <div className="lesson-name">{lesson.subject}</div>
@@ -294,9 +294,10 @@ const Calendar: React.FC = () => {
                           <DialogTrigger asChild>
                             <div
                               className="lesson-card"
-                              onClick={() =>
-                                openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class)
-                              }
+                              onClick={() => {
+                                openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
+                                fetchSystemStatus(); // Fetch system status when an hour is clicked
+                              }}
                             >
                               <div className="lesson-index">{lessonIndex + 1}</div>
                               <div className="lesson-name">{lesson.subject}</div>
