@@ -82,6 +82,15 @@ const Calendar: React.FC = () => {
   const [modalInfo, setModalInfo] = useState<{ lesson: string; time: string;className: string; } | null>(null);
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentDate(new Date()); // Frissíti a dátumot
+    }, 60000); // 60 másodpercenként
+  
+    return () => clearInterval(interval); // Tisztítja az interval-t, ha a komponens eltűnik
+  }, []);
+  
+
+  useEffect(() => {
     const updateView = () => {
       setIsMobileView(window.innerWidth <= 920);
     };
