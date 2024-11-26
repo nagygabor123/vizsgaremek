@@ -109,10 +109,10 @@ INSERT INTO `system_status` (`id`, `status`) VALUES
 
 
 INSERT INTO `groups` ( `group_name`) VALUES
-('13.I Mathematics'),
-('13.I Physics'),
-('12.I Literature'),
-('12.I Chemistry');
+('Matematika'),
+('Angol'),
+('Irodalom'),
+('Magyar nyelv');
 
 
 INSERT INTO `student_groups` (`student_id`, `group_id`) VALUES

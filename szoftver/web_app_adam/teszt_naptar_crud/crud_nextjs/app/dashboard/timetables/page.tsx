@@ -79,7 +79,16 @@ const Calendar: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isMobileView, setIsMobileView] = useState(false);
   const [schedule, setSchedule] = useState<TimetableEntry[]>([]);
-  const [modalInfo, setModalInfo] = useState<{ lesson: string; time: string } | null>(null);
+ /*const [modalInfo, setModalInfo] = useState<{ lesson: string; time: string } | null>(null);*/
+ const [modalInfo, setModalInfo] = useState<{
+  lesson: string;
+  time: string;
+  class: string;
+  lessonIndex: number;
+} | null>(null);
+
+
+
 
   useEffect(() => {
     const updateView = () => {
@@ -138,9 +147,13 @@ const Calendar: React.FC = () => {
     return isToday(currentDate) && isAfter(now, start) && isBefore(now, end);
   };
 
-  const openModal = (lesson: string, time: string) => {
+  /*const openModal = (lesson: string, time: string) => {
     setModalInfo({ lesson, time });
+  };*/
+  const openModal = (lesson: string, time: string, className: string, lessonIndex: number) => {
+    setModalInfo({ lesson, time, class: className, lessonIndex });
   };
+  
 
   const closeModal = () => {
     setModalInfo(null);
@@ -190,7 +203,11 @@ const Calendar: React.FC = () => {
                             className={`lesson-card ${
                               isToday(currentDate) && isCurrentLesson(lesson) ? 'current-lesson' : ''
                             }`}
-                            onClick={() => openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)}
+                            /*onClick={() => openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)}*/
+                            onClick={() =>
+                              openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class, lessonIndex + 1)
+                            }
+                            
                           >
                             <div className="lesson-index">{lessonIndex + 1}</div>
                             <div className="lesson-name">{lesson.subject}</div>
@@ -198,11 +215,20 @@ const Calendar: React.FC = () => {
                           </div>
                         </DialogTrigger>
                         <DialogContent>
-                          <DialogHeader>
-                            <DialogTitle>{modalInfo?.lesson}</DialogTitle>
-                            <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
-                          </DialogHeader>
-                        </DialogContent>
+  <DialogHeader>
+    <DialogTitle>{modalInfo?.lesson}</DialogTitle>
+    <DialogDescription>
+  <span>Időpont: {modalInfo?.time}</span>
+  <br />
+  <span>Osztály: {modalInfo?.class}</span>
+  <br />
+  <span>{modalInfo?.lessonIndex}. óra</span>
+</DialogDescription>
+
+
+  </DialogHeader>
+</DialogContent>
+
                       </Dialog>
                     ))}
                   </div>
@@ -246,9 +272,13 @@ const Calendar: React.FC = () => {
                               className={`lesson-card ${
                                 isToday(day) && isCurrentLesson(lesson) ? 'current-lesson' : ''
                               }`}
-                              onClick={() =>
+                              /*onClick={() =>
                                 openModal(lesson.subject, `${lesson.start} - ${lesson.end}`)
-                              }
+                              }*/
+                                onClick={() =>
+                                  openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class, lessonIndex + 1)
+                                }
+                                
                             >
                               <div className="lesson-index">{lessonIndex + 1}</div>
                               <div className="lesson-name">{lesson.subject}</div>
@@ -256,11 +286,20 @@ const Calendar: React.FC = () => {
                             </div>
                           </DialogTrigger>
                           <DialogContent>
-                            <DialogHeader>
-                              <DialogTitle>{modalInfo?.lesson}</DialogTitle>
-                              <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
-                            </DialogHeader>
-                          </DialogContent>
+  <DialogHeader>
+    <DialogTitle>{modalInfo?.lesson}</DialogTitle>
+    <DialogDescription>
+  <span>Időpont: {modalInfo?.time}</span>
+  <br />
+  <span>Osztály: {modalInfo?.class}</span>
+  <br />
+  <span>{modalInfo?.lessonIndex}. óra</span>
+</DialogDescription>
+
+
+  </DialogHeader>
+</DialogContent>
+
                         </Dialog>
                       ))}
                     </div>
