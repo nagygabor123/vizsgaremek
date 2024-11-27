@@ -1,8 +1,12 @@
 import Link from 'next/link';
-import './Sidebar.css'; // CSS a stílusokhoz
+// import './Sidebar.css'; // CSS a stílusokhoz
+import { Sidebar, SidebarContent } from "@/components/ui/sidebar"
 
-const Sidebar: React.FC = () => {
+
+
+const Sidebar2: React.FC = () => {
   return (
+    <Sidebar>
     <aside className="sidebar">
       <ul>
         <li>
@@ -16,7 +20,10 @@ const Sidebar: React.FC = () => {
         </li>
       </ul>
     </aside>
+    </Sidebar>
   );
 };
 
-export default Sidebar;
+export default Sidebar2;
+
+
