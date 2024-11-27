@@ -1,47 +1,28 @@
-"use client"
-
-import { ChevronRight, type LucideIcon } from "lucide-react"
-import Link from "next/link"; // Ha Next.js-t használsz
-
+import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import Link from 'next/link';
 
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible"
-import {
+  Sidebar,
+  SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
 
-export function NavMain({
-  items,
-}: {
-  items: {
-    title: string
-    url: string
-    icon: LucideIcon
-    isActive?: boolean
-    items?: {
-      title: string
-      url: string
-    }[]
-  }[]
-}) {
+
+export function AppSidebar() {
   return (
-    <SidebarGroup>
-    {/* <SidebarGroupLabel>Application</SidebarGroupLabel> */}
-    <SidebarGroupContent>
-      <SidebarMenu>
-      <SidebarMenuItem>
+    <Sidebar>
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              
+                <SidebarMenuItem>
                   <SidebarMenuButton>
                   <Link href="/dashboard">DASHBOARD</Link>
       
@@ -59,8 +40,10 @@ export function NavMain({
         <Link href="/dashboard/settings">Settings</Link>
         </SidebarMenuButton>
         </SidebarMenuItem>
-      </SidebarMenu>
-    </SidebarGroupContent>
-  </SidebarGroup>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+    </Sidebar>
   )
 }
