@@ -3,7 +3,7 @@
 import * as React from "react"
 
 
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import { Calendar, Home, Inbox, Search, Settings, School} from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
 // import { NavProjects } from "@/components/nav-projects"
@@ -21,34 +21,19 @@ import {
 
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
+    name: "Vincze Zsolt",
+    email: "vincze.zsolt@szbi-pg.hu",
     avatar: "/avatars/shadcn.jpg",
   },
   navMain: [
     {
-      title: "Home",
-      url: "#",
-      icon: Home,
-    },
-    {
-      title: "Inbox",
-      url: "#",
-      icon: Inbox,
-    },
-    {
       title: "Calendar",
-      url: "#",
+      url: "calendar",
       icon: Calendar,
     },
     {
-      title: "Search",
-      url: "#",
-      icon: Search,
-    },
-    {
       title: "Settings",
-      url: "#",
+      url: "settings",
       icon: Settings,
     },
   ]
@@ -61,13 +46,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
-                {/* <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <Command className="size-4" />
-                </div> */}
+              <a href="/dashboard">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                  <School className="size-4" />
+                </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Acme Inc</span>
-                  <span className="truncate text-xs">Enterprise</span>
+                  <span className="truncate font-semibold">Szent Benedek PG Technikum</span>
+                  {/* <span className="truncate text-xs">szbi-kiskunfelegyhaza</span> */}
                 </div>
               </a>
             </SidebarMenuButton>
