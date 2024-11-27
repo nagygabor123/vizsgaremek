@@ -1,6 +1,7 @@
 "use client"
 
-import { ChevronRight, type LucideIcon } from "lucide-react"
+import { Settings, Calendar1, LayoutDashboard, ChevronRight, type LucideIcon } from "lucide-react"
+
 import Link from "next/link"; // Ha Next.js-t használsz
 
 
@@ -21,6 +22,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
+import Calendar from "@/app/dashboard/calendar/page";
 
 export function NavMain({
   items,
@@ -43,19 +45,23 @@ export function NavMain({
       <SidebarMenu>
       <SidebarMenuItem>
                   <SidebarMenuButton>
-                  <Link href="/dashboard">DASHBOARD</Link>
+                  < LayoutDashboard />
+                  <Link href="/dashboard">Dashboard</Link>
       
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               
 
                 <SidebarMenuItem>
+               
                 <SidebarMenuButton>
+                <Calendar1 />
                 <Link href="/dashboard/calendar">Calendar</Link>
                 </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                 <SidebarMenuButton>
+                <Settings />
         <Link href="/dashboard/settings">Settings</Link>
         </SidebarMenuButton>
         </SidebarMenuItem>

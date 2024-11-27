@@ -24,17 +24,17 @@ export default function Settings() {
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">
-                    Building Your Application3
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching3</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
+            <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/dashboard/settings">Settings</BreadcrumbLink>
+    </BreadcrumbItem>
+    {/* <BreadcrumbSeparator>
+      <Slash />
+    </BreadcrumbSeparator>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/components">Components</BreadcrumbLink>
+    </BreadcrumbItem> */}
+  </BreadcrumbList>
             </Breadcrumb>
           </div>
         </header>
