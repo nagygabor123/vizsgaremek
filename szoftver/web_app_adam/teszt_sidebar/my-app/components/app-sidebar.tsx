@@ -52,7 +52,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">Szent Benedek PG Technikum</span>
-                  {/* <span className="truncate text-xs">szbi-kiskunfelegyhaza</span> */}
+                  <span className="truncate text-xs">szbi-kiskunfelegyhaza</span> 
                 </div>
               </a>
             </SidebarMenuButton>

@@ -44,26 +44,26 @@ export function NavMain({
     <SidebarGroupContent>
       <SidebarMenu>
       <SidebarMenuItem>
-                  <SidebarMenuButton>
-                  < LayoutDashboard />
-                  <Link href="/dashboard">Dashboard</Link>
-      
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              
+      <SidebarMenuButton asChild>
+  <Link href="/dashboard">
+    <LayoutDashboard />
+    <span>Dashboard</span>
+  </Link> 
+</SidebarMenuButton>
 
-                <SidebarMenuItem>
-               
-                <SidebarMenuButton>
-                <Calendar1 />
-                <Link href="/dashboard/calendar">Calendar</Link>
-                </SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                <SidebarMenuButton>
-                <Settings />
-        <Link href="/dashboard/settings">Settings</Link>
-        </SidebarMenuButton>
+<SidebarMenuButton asChild>
+  <Link href="/dashboard/calendar">
+    <Calendar1 />
+    <span>Calendar</span>
+  </Link>
+</SidebarMenuButton>
+
+<SidebarMenuButton asChild>
+  <Link href="/dashboard/settings">
+    <Settings />
+    <span>Seetings</span>
+  </Link>
+</SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroupContent>
