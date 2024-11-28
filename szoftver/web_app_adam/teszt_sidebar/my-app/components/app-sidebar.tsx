@@ -19,11 +19,18 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+
+
 const data = {
   user: {
     name: "Vincze Zsolt",
     email: "vincze.zsolt@szbi-pg.hu",
-    avatar: "/avatars/shadcn.jpg",
+    avatar: "icon.png",
   },
   navMain: [
     {
@@ -36,7 +43,7 @@ const data = {
       url: "settings",
       icon: Settings,
     },
-  ]
+  ],
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -47,9 +54,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <a href="/dashboard">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                {/* <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                   <School className="size-4" />
-                </div>
+                </div> */}
+                  <Avatar className="h-10 w-10 rounded-lg">
+                <AvatarImage src={data.user.avatar} />
+                <AvatarFallback className="rounded-lg">PG</AvatarFallback>
+              </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">Szent Benedek PG Technikum</span>
                   <span className="truncate text-xs">szbi-kiskunfelegyhaza</span> 
