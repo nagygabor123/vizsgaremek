@@ -81,9 +81,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
+        <Separator className="my-1" />
+        <span className="text-xs text-center">Powered by telock</span>
       </SidebarFooter>
-      <Separator className="my-2" />
-      <span className="text-xs text-center">Powered by telock</span>
           {/* <span className="text-xs text-center">Powered by telock</span> <span className="text-xs text-center">© 2024 telock.hu, Kft. v.0.1</span>   */}
     </Sidebar>
   )
