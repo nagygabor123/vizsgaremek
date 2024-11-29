@@ -7,3 +7,10 @@
 1. Login megcsinálása (adatbázis összekapcsolás elkezdése)
 2. Sidebar és az Oldalak megcsinálása 
 3. Adatbázissal teljes összekapcsolása és a Role-ok megcsinűlása
+
+
+
+
+https://dribbble.com/shots/15177091-Locker-Illustration
+
+https://dribbble.com/shots/4685781-Smart-access-lockers
