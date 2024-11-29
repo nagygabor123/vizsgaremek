@@ -118,7 +118,7 @@ export function NavUser({
                 <DropdownMenuTrigger asChild>
                   <SidebarMenuButton>
               
-              <div className="grid flex-1 text-left text-sm leading-tight">
+              <div className="grid flex-1 text-left text-xs leading-none">
                <span className="truncate font-semibold">{user.name}</span>
                <span className="truncate text-xs">{user.email}</span>
              </div>
