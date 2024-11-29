@@ -30,7 +30,7 @@ const data = {
   user: {
     name: "Vincze Zsolt",
     email: "vincze.zsolt@szbi-pg.hu",
-    avatar: "icon.png",
+    avatar: "",
   },
   navMain: [
     {
@@ -59,7 +59,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </div> */}
                   <Avatar className="h-10 w-10 rounded-lg">
                 <AvatarImage src={data.user.avatar} />
-                <AvatarFallback className="rounded-lg">PG</AvatarFallback>
+                <AvatarFallback className="rounded-xl">PG</AvatarFallback>
               </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">Szent Benedek PG Technikum</span>

@@ -31,6 +31,9 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 
+import { Separator } from "@/components/ui/separator"
+
+
 export function NavUser({
   user,
 }: {
@@ -121,9 +124,12 @@ export function NavUser({
                <span className="truncate font-semibold">{user.name}</span>
                <span className="truncate text-xs">{user.email}</span>
              </div>
+  
+
                     <ChevronUp className="ml-auto" />
                   </SidebarMenuButton>
                 </DropdownMenuTrigger>
+                
                 <DropdownMenuContent
                   side="top"
                   className="w-[--radix-popper-anchor-width]"
@@ -139,6 +145,7 @@ export function NavUser({
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
+            
             </SidebarMenuItem>
           </SidebarMenu>
   )
