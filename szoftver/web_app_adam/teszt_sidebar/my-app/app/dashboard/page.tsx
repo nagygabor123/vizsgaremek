@@ -28,7 +28,7 @@ export default function Page() {
             <Breadcrumb>
   <BreadcrumbList>
     <BreadcrumbItem>
-      <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
+      <BreadcrumbLink href="/dashboard">Kezdőlap</BreadcrumbLink>
     </BreadcrumbItem>
     {/* <BreadcrumbSeparator>
       <Slash />

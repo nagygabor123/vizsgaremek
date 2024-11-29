@@ -26,7 +26,7 @@ export default function Calendar() {
             <Breadcrumb>
             <BreadcrumbList>
     <BreadcrumbItem>
-      <BreadcrumbLink href="/dashboard/calendar">Calendar</BreadcrumbLink>
+      <BreadcrumbLink href="/dashboard/calendar">Tanórák</BreadcrumbLink>
     </BreadcrumbItem>
     {/* <BreadcrumbSeparator>
       <Slash />

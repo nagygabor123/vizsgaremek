@@ -26,7 +26,7 @@ export default function Settings() {
             <Breadcrumb>
             <BreadcrumbList>
     <BreadcrumbItem>
-      <BreadcrumbLink href="/dashboard/settings">Settings</BreadcrumbLink>
+      <BreadcrumbLink href="/dashboard/settings">Beállítások</BreadcrumbLink>
     </BreadcrumbItem>
     {/* <BreadcrumbSeparator>
       <Slash />

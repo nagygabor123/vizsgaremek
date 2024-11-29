@@ -3,7 +3,7 @@
 import * as React from "react"
 
 
-import { Calendar, Home, Inbox, Search, Settings, School} from "lucide-react"
+import { Calendar, Home, LifeBuoy, Inbox, Search, Settings, School} from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
 // import { NavProjects } from "@/components/nav-projects"
@@ -76,13 +76,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
+        {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
         {/* <NavProjects projects={data.projects} />
         <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
-        <Separator className="my-1" />
-        <span className="text-xs text-center">Powered by telock</span>
+        {/* <Separator className="my-1" />
+        <span className="text-xs text-center">Powered by telock</span> */}
       </SidebarFooter>
           {/* <span className="text-xs text-center">Powered by telock</span> <span className="text-xs text-center">© 2024 telock.hu, Kft. v.0.1</span>   */}
     </Sidebar>

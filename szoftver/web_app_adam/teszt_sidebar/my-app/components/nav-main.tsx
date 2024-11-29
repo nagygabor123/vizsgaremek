@@ -1,8 +1,10 @@
 "use client"
 
-import { Settings, Calendar1, LayoutDashboard, ChevronRight, type LucideIcon } from "lucide-react"
+import { Settings, Calendar1, LayoutDashboard, LifeBuoy, ChevronRight, type LucideIcon } from "lucide-react"
 
 import Link from "next/link"; // Ha Next.js-t használsz
+import { Separator } from "@/components/ui/separator"
+
 
 
 import {
@@ -44,26 +46,40 @@ export function NavMain({
     <SidebarGroupContent>
       <SidebarMenu>
       <SidebarMenuItem>
-      <SidebarMenuButton asChild>
-  <Link href="/dashboard">
-    <LayoutDashboard />
-    <span>Dashboard</span>
-  </Link> 
-</SidebarMenuButton>
+
+      <Separator className="my-1" />
 
 <SidebarMenuButton asChild>
   <Link href="/dashboard/calendar">
     <Calendar1 />
-    <span>Calendar</span>
+    <span>Tanórák</span>
   </Link>
 </SidebarMenuButton>
+
+
+{/* <SidebarMenuButton asChild>
+  <Link href="/dashboard">
+    <LayoutDashboard />
+    <span>Dashboard</span>
+  </Link> 
+</SidebarMenuButton> */}
 
 <SidebarMenuButton asChild>
   <Link href="/dashboard/settings">
     <Settings />
-    <span>Seetings</span>
+    <span>Beállítások</span>
   </Link>
 </SidebarMenuButton>
+
+<Separator className="my-1" />
+
+<SidebarMenuButton asChild>
+  <Link href="#">
+    <LifeBuoy />
+    <span>Súgó</span>
+  </Link>
+</SidebarMenuButton>
+
         </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroupContent>
