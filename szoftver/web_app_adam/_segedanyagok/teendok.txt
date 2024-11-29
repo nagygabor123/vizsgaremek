@@ -1,6 +1,5 @@
 - Login (nextauth, vercel) megcsinálása 
 - Roles jobban utánanézni 
-- Szombati tanítási napok: megadni a dátumot és megadni hogy a munkahét melyik napját jelenítse meg (az órákat)
 
 
 
