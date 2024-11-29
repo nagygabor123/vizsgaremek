@@ -14,7 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "TELOCK",
+  title: "telock",
   description: "Automatikus mobiltelefon tároló rendzer",
 
 };

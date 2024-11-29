@@ -19,6 +19,10 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
+import { Separator } from "@/components/ui/separator"
+
+
+
 import {
   Avatar,
   AvatarFallback,
@@ -78,6 +82,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarFooter>
         <NavUser user={data.user} />
       </SidebarFooter>
+      <Separator className="my-2" />
+      <span className="text-xs text-center">Powered by telock</span>
+          {/* <span className="text-xs text-center">Powered by telock</span> <span className="text-xs text-center">© 2024 telock.hu, Kft. v.0.1</span>   */}
     </Sidebar>
   )
 }
