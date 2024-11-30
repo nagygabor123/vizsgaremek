@@ -14,6 +14,14 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs"
+ 
+
 import { Slash } from "lucide-react"
 
 export default function Page() {
@@ -26,18 +34,18 @@ export default function Page() {
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
-  <BreadcrumbList>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/dashboard">Kezdőlap</BreadcrumbLink>
-    </BreadcrumbItem>
-    {/* <BreadcrumbSeparator>
-      <Slash />
-    </BreadcrumbSeparator>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/components">Components</BreadcrumbLink>
-    </BreadcrumbItem> */}
-  </BreadcrumbList>
-</Breadcrumb>
+              <BreadcrumbList>
+                {/* <BreadcrumbItem className="hidden md:block">
+                  <BreadcrumbLink href="#">
+                    Building Your Application
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator className="hidden md:block" /> */}
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Tanórák</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
           </div>
         </header>
         {/* <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
@@ -48,6 +56,7 @@ export default function Page() {
           </div>
           <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
         </div> */}
+        
       </SidebarInset>
     </SidebarProvider>
   )

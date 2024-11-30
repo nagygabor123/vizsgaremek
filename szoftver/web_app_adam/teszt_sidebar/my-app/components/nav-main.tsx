@@ -1,6 +1,6 @@
 "use client"
 
-import { Settings, Calendar1, LayoutDashboard, LifeBuoy, ChevronRight, type LucideIcon } from "lucide-react"
+import { Settings, CalendarRange, Users, ChevronDown, LayoutDashboard, LifeBuoy, ChevronRight, type LucideIcon } from "lucide-react"
 
 import Link from "next/link"; // Ha Next.js-t használsz
 import { Separator } from "@/components/ui/separator"
@@ -47,12 +47,11 @@ export function NavMain({
       <SidebarMenu>
       <SidebarMenuItem>
 
-      <Separator className="my-1" />
 
 <SidebarMenuButton asChild>
   <Link href="/dashboard/calendar">
-    <Calendar1 />
-    <span>Tanórák</span>
+    <CalendarRange />
+    <span>Órarend</span>
   </Link>
 </SidebarMenuButton>
 
@@ -64,14 +63,51 @@ export function NavMain({
   </Link> 
 </SidebarMenuButton> */}
 
+
+<SidebarMenu>
+  <Collapsible defaultOpen className="group/collapsible">
+    <SidebarMenuItem>
+    <CollapsibleTrigger asChild>
+    <SidebarMenuButton>
+    <Users />
+    <span>Saját osztály</span>
+    <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+</SidebarMenuButton>
+      </CollapsibleTrigger>
+      <CollapsibleContent>
+        <SidebarMenuSub>
+        <SidebarMenuSubItem>
+    <SidebarMenuButton asChild>
+  <Link href="#">
+    <span>Órarend</span>
+  </Link>
+</SidebarMenuButton>
+    </SidebarMenuSubItem>
+    <SidebarMenuSubItem>
+    <SidebarMenuButton asChild>
+  <Link href="#">
+    <span>Tanulók listája</span>
+  </Link>
+</SidebarMenuButton>
+    </SidebarMenuSubItem>
+        </SidebarMenuSub>
+      </CollapsibleContent>
+    </SidebarMenuItem>
+  </Collapsible>
+</SidebarMenu>
+
+
+
+
+
+
+
 <SidebarMenuButton asChild>
   <Link href="/dashboard/settings">
     <Settings />
     <span>Beállítások</span>
   </Link>
 </SidebarMenuButton>
-
-<Separator className="my-1" />
 
 <SidebarMenuButton asChild>
   <Link href="#">

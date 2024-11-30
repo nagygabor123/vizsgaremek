@@ -24,17 +24,17 @@ export default function Calendar() {
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
-            <BreadcrumbList>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/dashboard/calendar">Tanórák</BreadcrumbLink>
-    </BreadcrumbItem>
-    {/* <BreadcrumbSeparator>
-      <Slash />
-    </BreadcrumbSeparator>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/components">Components</BreadcrumbLink>
-    </BreadcrumbItem> */}
-  </BreadcrumbList>
+              <BreadcrumbList>
+                {/* <BreadcrumbItem className="hidden md:block">
+                  <BreadcrumbLink href="#">
+                    Building Your Application
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator className="hidden md:block" /> */}
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Tanórák</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
             </Breadcrumb>
           </div>
         </header>
