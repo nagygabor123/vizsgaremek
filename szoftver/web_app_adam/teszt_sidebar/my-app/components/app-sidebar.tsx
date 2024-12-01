@@ -7,7 +7,7 @@ import { Calendar, Home, LifeBuoy, Inbox, Search, Settings, School} from "lucide
 
 import { NavMain } from "@/components/nav-main"
 // import { NavProjects } from "@/components/nav-projects"
-// import { NavSecondary } from "@/components/nav-secondary"
+import { NavSecondary } from "@/components/nav-secondary"
 import { NavUser } from "@/components/nav-user"
 import {
   Sidebar,
@@ -48,6 +48,18 @@ const data = {
       icon: Settings,
     },
   ],
+  navSecondary: [
+    {
+      title: "Support",
+      url: "#",
+      icon: LifeBuoy,
+    },
+    {
+      title: "Súgó",
+      url: "#",
+      icon: LifeBuoy,
+    },
+  ],
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -61,10 +73,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 {/* <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                   <School className="size-4" />
                 </div> */}
-                  <Avatar className="h-10 w-10 rounded-lg">
+                  {/* <Avatar className="h-10 w-10 rounded-lg">
                 <AvatarImage src={data.user.avatar} />
                 <AvatarFallback className="rounded-xl">PG</AvatarFallback>
-              </Avatar>
+              </Avatar> */}
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">Szent Benedek PG Technikum</span>
                   <span className="truncate text-xs">szbi-kiskunfelegyhaza</span> 
@@ -76,11 +88,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
+       
         {/* <NavProjects projects={data.projects} />
         <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
       </SidebarContent>
+      <NavSecondary items={data.navSecondary} className="mt-auto" />
       <SidebarFooter>
+     
         <NavUser user={data.user} />
         {/* <Separator className="my-1" />
         <span className="text-xs text-center">Powered by telock</span> */}

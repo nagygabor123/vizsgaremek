@@ -1,0 +1,23 @@
+telobox vizsgaremek
+
+
+KONFIGURÁTUR, BEALLITAS
+
+1. csengetési rend import/manual
+2. órarend import/manual
+3. tanuló import/manual
+4. alkalmazott import/manual
+5. tanév rendje (szünetek, plusz napok, tanév kezdés és vége)
+
+
+
+
+ADMIN, IG, -HELYETTES
+
+- órarendek [naptár] (osztály, tanári órarendek)
+- tanulók [lista]
+- alkalmazottak [lista]
+-- csengetési rend --
+- tanév rendje [lista is!]
+- helyettesitesek [lista]
+- logs [lista] (egy heti adatok, valamilyen adatazerkezettel)

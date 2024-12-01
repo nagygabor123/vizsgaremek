@@ -42,7 +42,7 @@ export default function Page() {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" /> */}
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Tanórák</BreadcrumbPage>
+                  <BreadcrumbPage>Kezdőlap</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
