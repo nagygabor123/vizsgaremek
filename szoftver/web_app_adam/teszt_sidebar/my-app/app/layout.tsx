@@ -14,7 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "telock",
+  title: "teLock Adminisztrációs rendszer",
   description: "Automatikus mobiltelefon tároló rendzer",
 
 };
