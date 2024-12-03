@@ -1,6 +1,6 @@
 "use client"
 
-import { Calendar1, type LucideIcon } from "lucide-react"
+import { Calendar, type LucideIcon } from "lucide-react"
 
 import Link from "next/link";
 
@@ -21,27 +21,15 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
 
-export function NavTanar({
-  items,
-}: {
-  items: {
-    title: string
-    url: string
-    icon: LucideIcon
-    isActive?: boolean
-    items?: {
-      title: string
-      url: string
-    }[]
-  }[]
-}) {
+export function NavTanar()
+{
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Általános</SidebarGroupLabel>
+    {/*  <SidebarGroupLabel>Általános</SidebarGroupLabel>*/}
       <SidebarMenu>
       <SidebarMenuButton asChild>
   <Link href="/dashboard/calendar">
-    <Calendar1 />
+    <Calendar />
     <span>Tanóráim</span>
   </Link>
 </SidebarMenuButton>
