@@ -16,11 +16,16 @@ import {
   Users,
   CalendarSearch,
   BookUser,
+  UserCog,
+  CalendarCog,
   Backpack,
   GraduationCap,
+  BookType,
   CalendarSync,
-  
+  School,
   LogOut,
+  User,
+  UserSearch,
   CalendarHeart,
   Calendar
 } from "lucide-react"
@@ -228,7 +233,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 <SidebarMenuItem>
 <SidebarMenuButton asChild>
   <Link href="">
-  <Backpack/>
+  <Users/>
     <span>Tanulók</span>
   </Link>
 </SidebarMenuButton>
@@ -240,16 +245,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <SidebarGroup>
           <SidebarGroupLabel>Iskola</SidebarGroupLabel>
       <SidebarMenu>
-      <SidebarMenuItem>
-      <SidebarMenuButton asChild>
-  <Link href="">
-<CalendarSearch/>
-    <span>Órarendek</span>
-  </Link>
-</SidebarMenuButton>
-</SidebarMenuItem>
 
-<SidebarMenuItem>
+      <SidebarMenuItem>
 <SidebarMenuButton asChild>
   <Link href="">
 <CalendarSync/>
@@ -258,10 +255,21 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 </SidebarMenuButton>
 </SidebarMenuItem>
 
+      <SidebarMenuItem>
+      <SidebarMenuButton asChild>
+  <Link href="">
+<CalendarCog/>
+    <span>Órarendek</span>
+  </Link>
+</SidebarMenuButton>
+</SidebarMenuItem>
+
+
+
 <SidebarMenuItem>
 <SidebarMenuButton asChild>
   <Link href="">
-<Backpack/>
+<UserCog/>
     <span>Tanulók</span>
   </Link>
 </SidebarMenuButton>
@@ -269,7 +277,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 <SidebarMenuItem>
 <SidebarMenuButton asChild>
   <Link href="">
-  <Users/>
+  <School/>
     <span>Alkalmazottak</span>
   </Link>
 </SidebarMenuButton>
@@ -280,7 +288,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 <SidebarMenuItem>
 <SidebarMenuButton asChild>
   <Link href="">
-
+<BookType/>
     <span>Tanév rendje</span>
   </Link>
 </SidebarMenuButton>
