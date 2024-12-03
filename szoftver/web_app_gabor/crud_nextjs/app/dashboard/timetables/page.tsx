@@ -87,7 +87,7 @@ const getReplacedDayName = (date: Date): string => {
 };
 
 const Calendar: React.FC = () => {
-  const [systemClose, setSystemClose] = useState<boolean>(false); // initial state is false
+  const [systemClose, setSystemClose] = useState<boolean>(false); 
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isMobileView, setIsMobileView] = useState(false);
   const [schedule, setSchedule] = useState<TimetableEntry[]>([]);
@@ -96,10 +96,10 @@ const Calendar: React.FC = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentDate(new Date()); // Frissíti a dátumot
+      setCurrentDate(new Date()); 
     }, 60000); // 60 másodpercenként
   
-    return () => clearInterval(interval); // Tisztítja az interval-t, ha a komponens eltűnik
+    return () => clearInterval(interval); 
   }, []);
   
 
@@ -117,13 +117,13 @@ const Calendar: React.FC = () => {
   useEffect(() => {
     async function fetchSchedule() {
       try {
-        const response = await fetch('http://localhost:3000/api/timetable/admin'); // vagy az API végpontod
+        const response = await fetch('http://localhost:3000/api/timetable/admin'); 
         const data = await response.json();
         // Formázd az adatokat
         const formattedData = data.map((lesson: any) => ({
           day: lesson.day_of_week,
           start: lesson.start_time.slice(0, 5), // "07:15:00" -> "07:15"
-          end: lesson.end_time.slice(0, 5), // "08:00:00" -> "08:00"
+          end: lesson.end_time.slice(0, 5), 
           subject: lesson.group_name,
           teacher: lesson.teacher_name,
           class: lesson.class
@@ -133,19 +133,8 @@ const Calendar: React.FC = () => {
         console.error('Error fetching schedule:', error);
       }
     }
-  
-    /*async function fetchStudents() {
-      try {
-        const response = await fetch('http://localhost:3000/api/students/read');
-        const data = await response.json();
-        setStudents(data);
-      } catch (error) {
-        console.error('Error fetching students:', error);
-      }
-    }*/
 
     fetchSchedule();
-    //fetchStudents();
   }, []);
   
   console.log('Schedule:', schedule);
@@ -214,7 +203,6 @@ const Calendar: React.FC = () => {
     const response = await fetch('http://localhost:3000/api/system/status');
     if (response.ok) {
       const data = await response.json();
-      // If the system status is "nyitva", set systemClose to false, else set it to true
       setSystemClose(data.status === "nyitva" ? false : true);
       
     }
@@ -259,7 +247,7 @@ const Calendar: React.FC = () => {
               return (
                 <Dialog key={`${index}`}>
                   <DialogTrigger asChild>
-                    {isToday(currentDate) && isCurrentLesson(lesson) ? ( // Csak akkor engedélyezett kattintás, ha ma van és az aktuális óra
+                    {isToday(currentDate) && isCurrentLesson(lesson) ? ( 
                       <div
                         className={`lesson-card ${isCurrent ? 'current-lesson' : ''}`}
                         onClick={() => {
@@ -274,7 +262,7 @@ const Calendar: React.FC = () => {
                       </div>
                     ) : (
                       <div
-                        className="lesson-card disabled-lesson" // Ha nem aktuális óra, akkor nem kattintható
+                        className="lesson-card disabled-lesson" 
                       >
                         <div className="lesson-index">{lessonIndex + 1}</div>
                         <div className="lesson-name">{lesson.subject}</div>
@@ -283,7 +271,7 @@ const Calendar: React.FC = () => {
                     )}
                   </DialogTrigger>
 
-                  {isToday(currentDate) && isCurrentLesson(lesson) && ( // Csak akkor jelenik meg a dialog, ha a mai napon vagyunk és aktuális óra
+                  {isToday(currentDate) && isCurrentLesson(lesson) && ( 
                     <DialogContent>
                       <DialogHeader>
                         <DialogTitle>{modalInfo?.lesson}</DialogTitle>
@@ -339,18 +327,18 @@ const Calendar: React.FC = () => {
       return (
         <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell">
           {lessonsAtSameTime.map((lesson, index) => {
-            // Csak akkor alkalmazzuk az isCurrentLesson függvényt, ha a mai napra vonatkozik
+            
             const isCurrent = isToday(day) && isCurrentLesson(lesson);
             return (
               <Dialog key={`${lessonIndex}-${dayIndex}-${index}`}>
   <DialogTrigger asChild>
-    {isToday(day) && isCurrentLesson(lesson) ? ( // Csak akkor jelenjen meg a kattintható elem, ha ma van és a jelenlegi óra
+    {isToday(day) && isCurrentLesson(lesson) ? ( 
       <div
         className={`lesson-card ${isCurrent ? 'current-lesson' : ''}`}
         onClick={() => {
           openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
           fetchStudents();
-          fetchSystemStatus(); // Fetch system status when an hour is clicked
+          fetchSystemStatus(); 
         }}
       >
         <div className="lesson-index">{lessonIndex + 1}</div>
@@ -359,7 +347,7 @@ const Calendar: React.FC = () => {
       </div>
     ) : (
       <div
-        className="lesson-card disabled-lesson" // Egy másik stílus, ha a feltételek nem teljesülnek
+        className="lesson-card disabled-lesson" 
       >
         <div className="lesson-index">{lessonIndex + 1}</div>
         <div className="lesson-name">{lesson.subject}</div>
@@ -367,7 +355,7 @@ const Calendar: React.FC = () => {
       </div>
     )}
   </DialogTrigger>
-  {isToday(day) && isCurrentLesson(lesson) && ( // Csak akkor jelenjen meg a DialogContent, ha ma van és az aktuális órára kattintunk
+  {isToday(day) && isCurrentLesson(lesson) && ( 
     <DialogContent>
       <DialogHeader>
         <DialogTitle>{modalInfo?.lesson}</DialogTitle>
