@@ -27,13 +27,17 @@ export function NavTanar()
     <SidebarGroup>
     {/*  <SidebarGroupLabel>Általános</SidebarGroupLabel>*/}
       <SidebarMenu>
+      <SidebarMenuItem>
       <SidebarMenuButton asChild>
   <Link href="/dashboard/calendar">
     <Calendar />
     <span>Tanóráim</span>
   </Link>
 </SidebarMenuButton>
+</SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
+
+    
   )
 }
