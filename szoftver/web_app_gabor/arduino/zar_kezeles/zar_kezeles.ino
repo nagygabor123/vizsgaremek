@@ -7,7 +7,8 @@
 #define RST_PIN 9
 #define SS_PIN 10
 MFRC522 rfid(SS_PIN, RST_PIN);
-int relayPin = 2;   
+int relayPin = 7;
+int relayPin2 = 2;     
 int ii = 0;    // Relé vezérlése
 
 // Segédfunkció a hexadecimális kód kiegészítéséhez
@@ -25,6 +26,7 @@ void setup() {
   SPI.begin();         
   rfid.PCD_Init();    
   pinMode(relayPin, OUTPUT);
+  pinMode(relayPin2, OUTPUT);
   Serial.println("RFID rendszer készen áll.");
 }
 
@@ -45,8 +47,10 @@ void loop() {
 
   Serial.println("Szolenoid áram alatt");
   digitalWrite(relayPin, HIGH); 
+    digitalWrite(relayPin2, HIGH); 
   delay(1000);                 
   digitalWrite(relayPin, LOW);  
+    digitalWrite(relayPin2, LOW); 
   Serial.println("Solenoid áram elvéve");
   delay(1000);  
   rfid.PCD_Init();           
