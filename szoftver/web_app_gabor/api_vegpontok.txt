@@ -1,4 +1,7 @@
-API_VEGPONTOK
+RESTFUL_API_VEGPONTOK
+
+
+CRUD:
 
 CREATE  http://localhost:3000/api/students/create  POST
 
@@ -10,11 +13,21 @@ DELETE  http://localhost:3000/api/students/delete  DELETE
 
 
 
+
+
+
+FRONTEND:
+
 ÓRAREND  http://localhost:3000/dashboard/timetables  GET
 
 DIÁKOK LITÁJA  http://localhost:3000/dashboard/student-list  GET
 
 
+
+
+
+
+BACKEND:
 
 RENDSZER STÁTUSZ  http://localhost:3000/api/system/status  GET
 
