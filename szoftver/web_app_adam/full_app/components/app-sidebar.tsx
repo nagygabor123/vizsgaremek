@@ -14,14 +14,22 @@ import {
   SquareTerminal,
   GalleryVerticalEnd, 
   Users,
+  Eye,
   CalendarSearch,
+  BellElectric,
+  ChevronsUpDown,
   BookUser,
   UserCog,
+  MessageCircleQuestion,
+  CircleUser,
   CalendarCog,
   Backpack,
   GraduationCap,
   BookType,
   CalendarSync,
+  FileClock,
+  Shield,
+  BriefcaseBusiness,
   School,
   LogOut,
   User,
@@ -44,8 +52,20 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarGroupLabel,
+  useSidebar,
 
 } from "@/components/ui/sidebar"
+
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 import {
   Avatar,
@@ -55,7 +75,7 @@ import {
 
 import Link from "next/link";
 
-{/*
+
 const data = {
   user: {
     name: "shadcn",
@@ -179,9 +199,12 @@ const data = {
     },
   ],
 }
-*/}
+
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { isMobile } = useSidebar()
+
+
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
@@ -189,9 +212,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link href="/dashboard">
-              {/*<div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <GalleryVerticalEnd className="size-4" />
-                </div>*/}
+              {/* <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                  <School className="size-4" />
+                </div> */}
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">Kiskunfélegyházi Szent Benedek PG</span>
                   <span className="truncate text-xs">Két Tanítási Nyelvű Technikum és Kollégium</span>
@@ -258,7 +281,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarMenuItem>
       <SidebarMenuButton asChild>
   <Link href="">
-<CalendarCog/>
+<CalendarSearch/>
     <span>Órarendek</span>
   </Link>
 </SidebarMenuButton>
@@ -269,7 +292,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 <SidebarMenuItem>
 <SidebarMenuButton asChild>
   <Link href="">
-<UserCog/>
+<UserSearch/>
     <span>Tanulók</span>
   </Link>
 </SidebarMenuButton>
@@ -277,7 +300,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 <SidebarMenuItem>
 <SidebarMenuButton asChild>
   <Link href="">
-  <School/>
+  <BriefcaseBusiness/>
     <span>Alkalmazottak</span>
   </Link>
 </SidebarMenuButton>
@@ -288,7 +311,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 <SidebarMenuItem>
 <SidebarMenuButton asChild>
   <Link href="">
-<BookType/>
+<BellElectric/>
     <span>Tanév rendje</span>
   </Link>
 </SidebarMenuButton>
@@ -298,7 +321,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 <SidebarMenuItem>
 <SidebarMenuButton asChild>
   <Link href="">
-
+  <FileClock/>
     <span>Tevékenységi napló</span>
   </Link>
 </SidebarMenuButton>
@@ -310,19 +333,88 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
 
 
+    <SidebarGroup className="mt-auto" >
+      <SidebarMenu>
+      <SidebarMenuItem>
+      <SidebarMenuButton asChild size="sm">
+        
+  <Link href="">
+  <MessageCircleQuestion/>
+    <span>Súgó</span>
+    
+  </Link>
+ 
+</SidebarMenuButton>
+</SidebarMenuItem>
+
+<SidebarMenuItem>
+      <SidebarMenuButton asChild size="sm">
+        
+  <Link href="">
+  <Send/>
+    <span>Visszajelzés</span>
+    
+  </Link>
+ 
+</SidebarMenuButton>
+</SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarGroup>
+    
 
       </SidebarContent>
       <SidebarFooter>
-      <SidebarMenuButton size="lg" className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
-      {/*<Avatar className="h-8 w-8 rounded-lg">  
-                <AvatarFallback className="rounded-lg">VZ</AvatarFallback>
-              </Avatar>*/}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <SidebarMenuButton
+              size="lg"
+              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+            >
+            
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">Vincze Zsolt</span>
                 <span className="truncate text-xs">vincze.zsolt@szbi-pg.hu</span>
               </div>
-              <LogOut className="ml-auto size-4" />
-      </SidebarMenuButton>
+
+              <ChevronsUpDown className="ml-auto size-4" />
+         
+            </SidebarMenuButton>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+            side={ isMobile ? "bottom" : "right"}
+            align="end"
+            sideOffset={4}
+          >
+            <DropdownMenuLabel className="p-0 font-normal">
+              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+     
+              <div className="grid flex-1 text-left text-sm leading-tight">
+                <span className="truncate font-semibold">Vincze Zsolt</span>
+                <span className="truncate text-xs">vincze.zsolt@szbi-pg.hu</span>
+              </div>
+              </div>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuItem>
+              <CircleUser/>
+                Fiók
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+              <Settings2/>
+                Testreszabás
+              </DropdownMenuItem>
+    
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <LogOut />
+              Kijelentkezés
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
       </SidebarFooter>
     </Sidebar>
   )
