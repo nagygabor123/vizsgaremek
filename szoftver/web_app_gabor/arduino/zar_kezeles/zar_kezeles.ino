@@ -7,9 +7,9 @@
 #define RST_PIN 9
 #define SS_PIN 10
 MFRC522 rfid(SS_PIN, RST_PIN);
-int relayPin = 7;
-int relayPin2 = 2;     
-int ii = 0;    // Relé vezérlése
+int relayPin = 7; //feedback line: 3
+int relayPin2 = 6;  //feedback line: 2    
+int ii = 0;    // Relé vezérlése.  jobb szél a - földelés szürke,fehér és barna.      bal szél megy az arduinóba
 
 // Segédfunkció a hexadecimális kód kiegészítéséhez
 String toHexString(byte value) {
