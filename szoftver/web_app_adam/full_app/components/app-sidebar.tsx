@@ -23,9 +23,11 @@ import {
   Home,
   CalendarSearch,
   BellElectric,
+  ExternalLink,
   ChevronsUpDown,
   BookUser,
   UserCog,
+  SquarePen,
   MessageCircleQuestion,
   CircleUser,
   CalendarCog,
@@ -237,7 +239,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             >
        <Avatar className="h-9 w-9 rounded-lg ">
               
-                <AvatarFallback className="rounded-lg bg-yellow-300">VZ</AvatarFallback>
+                <AvatarFallback className="rounded-lg bg-lime-300">VZ</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">Vincze Zsolt</span>
@@ -258,7 +260,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
      
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate text-xs">tanári itt:</span>
+                <span className="truncate text-xs">itt tanít:</span>   
+                {/* tanár itt: */}
                 <span className="truncate font-semibold">Kiskunfélegyházi Szent Benedek PG Két Tanítási Nyelvű Technikum és Koll. </span>
               </div>
               </div>
@@ -269,10 +272,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <CircleUser/>
                 Fiók
               </DropdownMenuItem>
-              <DropdownMenuItem>
-              <Settings2/>
-                Testreszabás
-              </DropdownMenuItem>
+        
     
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
@@ -417,23 +417,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   <Link href="">
   <MessageCircleQuestion/>
     <span>Súgó</span>
-    
+   
   </Link>
  
 </SidebarMenuButton>
 </SidebarMenuItem>
 
-<SidebarMenuItem>
-      <SidebarMenuButton asChild size="sm">
-        
-  <Link href="">
-  <Send/>
-    <span>Visszajelzés</span>
-    
-  </Link>
- 
-</SidebarMenuButton>
-</SidebarMenuItem>
 
 <SidebarMenuItem>
       <SidebarMenuButton asChild size="sm">
@@ -446,6 +435,20 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
  
 </SidebarMenuButton>
 </SidebarMenuItem>
+
+<SidebarMenuItem>
+      <SidebarMenuButton asChild size="sm">
+        
+  <Link href="">
+  <SquarePen/>
+    <span>Visszajelzés</span>
+    
+  </Link>
+ 
+</SidebarMenuButton>
+</SidebarMenuItem>
+
+
       </SidebarMenu>
 
     
