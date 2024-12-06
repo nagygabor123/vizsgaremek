@@ -16,6 +16,7 @@ import {
   SquareTerminal,
   GalleryVerticalEnd, 
   Users,
+  SquareArrowOutUpRight,
   Eye,
   Settings,
   SlidersHorizontal,
@@ -269,15 +270,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-              <CircleUser/>
+        {/*      <CircleUser/>*/}
                 Fiók
               </DropdownMenuItem>
         
+              <DropdownMenuItem>
+        {/*      <CircleUser/>*/}
+                Beállítások
+              </DropdownMenuItem>
     
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <LogOut />
+               {/*      <LogOut />*/}
               Kijelentkezés
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -417,13 +422,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   <Link href="">
   <MessageCircleQuestion/>
     <span>Súgó</span>
-   
+   {/* <SquareArrowOutUpRight className="ml-auto" />*/}
   </Link>
  
 </SidebarMenuButton>
 </SidebarMenuItem>
 
-
+{/*
 <SidebarMenuItem>
       <SidebarMenuButton asChild size="sm">
         
@@ -434,7 +439,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   </Link>
  
 </SidebarMenuButton>
-</SidebarMenuItem>
+</SidebarMenuItem>*/}
 
 <SidebarMenuItem>
       <SidebarMenuButton asChild size="sm">
