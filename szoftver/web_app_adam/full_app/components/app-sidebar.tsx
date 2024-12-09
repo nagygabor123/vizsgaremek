@@ -57,6 +57,7 @@ import { NavSecondary } from "@/components/nav-secondary"
 import { NavUser } from "@/components/nav-user"
 import {
   Sidebar,
+  SidebarTrigger,
   SidebarInset,
   SidebarContent,
   SidebarFooter,
@@ -241,6 +242,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <span className="truncate font-semibold">Vincze Zsolt</span>
                 {/* <span className="truncate text-xs">Szent Benedek PG Két Tanítási Nyelvű Technikum és Koll.</span> */}
               </div>
+              {/* <SidebarTrigger className="-ml-1" /> */}
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
