@@ -247,7 +247,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             >
        <Avatar className="h-9 w-9 rounded-lg ">
               
-                <AvatarFallback className="rounded-lg bg-red-300">VZ</AvatarFallback>
+                <AvatarFallback className="rounded-lg bg-orange-400">VZ</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">Vincze Zsolt</span>
