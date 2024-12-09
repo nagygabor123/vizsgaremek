@@ -227,94 +227,65 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader>
       <SidebarMenu>
           <SidebarMenuItem>
-{/* 
-            <SidebarMenuButton size="lg" asChild>
-              <Link href="/dashboard" className="rounded-lg bg-white">
-              <div className="flex aspect-square size-9 items-center justify-center rounded-lg bg-blue-300  text-sidebar-primary-foreground">
-                  <School className="size-4" />
-                </div> 
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Kiskunfélegyházi Szent Benedek PG</span>
-                  <span className="truncate text-xs">Két Tanítási Nyelvű Technikum és Kollégium</span>
-                </div>
-              </Link>
-            </SidebarMenuButton> */}
-               <DropdownMenu>
+
+          <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-       <Avatar className="h-9 w-9 rounded-lg ">
-              
+              <Avatar className="h-7 w-7 rounded-lg">
                 <AvatarFallback className="rounded-lg bg-orange-400">VZ</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">Vincze Zsolt</span>
-                <span className="truncate text-xs">Szent Benedek PG Két Tanítási Nyelvű Technikum és Kollégium
-                </span>
+                {/* <span className="truncate text-xs">Szent Benedek PG Két Tanítási Nyelvű Technikum és Koll.</span> */}
               </div>
-
               <ChevronsUpDown className="ml-auto size-4" />
-         
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
             className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-            side={ isMobile ? "bottom" : "right"}
-            align="end"
+            side={isMobile ? "bottom" : "right"}
+            align="start"
             sideOffset={4}
           >
-              <DropdownMenuLabel>Saját fiók
-           {/* <span className="truncate text-xs">itt tanít:</span>    */}
-                {/* tanár itt: */}
-              {/* <div className="grid flex-1 text-left text-sm leading-tight">
-          
-                <div className="flex aspect-square size-5 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground">
-                <School className="size-3" />
+            <DropdownMenuLabel className="p-0 font-normal">
+              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                <Avatar className="h-8 w-8 rounded-lg">
+                  <AvatarFallback className="rounded-lg bg-orange-400">VZ</AvatarFallback>
+                </Avatar>
+                <div className="grid flex-1 text-left text-sm leading-tight">
+                <span className="truncate font-semibold">Vincze Zsolt</span>
+                  <span className="truncate text-xs">vincze.zsolt@szbi-pg.hu</span>
+                </div>
               </div>
-                <span className="truncate font-semibold">Kiskunfélegyházi Szent Benedek PG Két Tanítási Nyelvű Technikum és Koll. </span>
-              </div> */}
-
-              {/* <div className="flex aspect-square size-5 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground">
-                <School className="size-3" />
-              </div>
-              <span className="truncate font-semibold">Kiskunfélegyházi Szent Benedek PG Két Tanítási Nyelvű Technikum és Koll.</span>
-             */}
-
-            
             </DropdownMenuLabel>
-            {/* <DropdownMenuSeparator />
-            <DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            {/* <DropdownMenuGroup>
               <DropdownMenuItem>
-             <CircleUser/>
-                Fiók
+                <Sparkles />
+                Upgrade to Pro
               </DropdownMenuItem>
-        
-              <DropdownMenuItem>
-             <CircleUser/>
-                Beállítások
-              </DropdownMenuItem>
-    
             </DropdownMenuGroup>
             <DropdownMenuSeparator /> */}
-
-<DropdownMenuSeparator />
-            
-              <DropdownMenuItem>
-           
-              <div className="flex aspect-square size-5 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground">
-                <School className="size-3" />
-              </div>
-              <span className="truncate font-semibold">Kiskunfélegyházi Szent Benedek PG Két Tanítási Nyelvű Technikum és Koll.</span>
-
+            <DropdownMenuGroup>
+              {/* <DropdownMenuItem>
+                <BadgeCheck />
+                Account
               </DropdownMenuItem>
-
-
-              <DropdownMenuSeparator />
-
+              <DropdownMenuItem>
+                <CreditCard />
+                Billing
+              </DropdownMenuItem> */}
+              <DropdownMenuItem>
+                <Settings />
+                Beállítások
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
             <DropdownMenuItem>
-                    <LogOut />
+              <LogOut />
               Kijelentkezés
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -347,7 +318,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         
   <Link href="">
   <CalendarHeart/>
-    <span>Tanóráim</span>
+    <span>Saját óráim</span>
     
   </Link>
  
@@ -380,7 +351,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
  
 
     <SidebarGroup>
-          <SidebarGroupLabel>Iskola</SidebarGroupLabel>
+          <SidebarGroupLabel>Adminisztráció</SidebarGroupLabel>
       <SidebarMenu>
 
       <SidebarMenuItem>
@@ -422,7 +393,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
 
 
-<SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarGroup>
+ 
+
+    <SidebarGroup>
+          <SidebarGroupLabel>Rendszer</SidebarGroupLabel>
+      <SidebarMenu>
+
+
+      <SidebarMenuItem>
 <SidebarMenuButton asChild>
   <Link href="">
 <SlidersHorizontal/>
@@ -436,16 +416,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 <SidebarMenuButton asChild>
   <Link href="">
   <FileClock/>
-    <span>Tevékenységi naplók</span>
+    <span>Tevékenységnapló</span>
   </Link>
 </SidebarMenuButton>
 </SidebarMenuItem>
 
       </SidebarMenu>
     </SidebarGroup>
- 
-
-
 
       </SidebarContent>
       <SidebarFooter>
