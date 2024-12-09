@@ -223,7 +223,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   return (
     // variant="inset"
-    <Sidebar  className="border-r-0" {...props}>
+    <Sidebar variant="inset" className="border-r-0" {...props}>
       <SidebarHeader>
       <SidebarMenu>
           <SidebarMenuItem>
@@ -247,11 +247,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             >
        <Avatar className="h-9 w-9 rounded-lg ">
               
-                <AvatarFallback className="rounded-lg bg-lime-300">VZ</AvatarFallback>
+                <AvatarFallback className="rounded-lg bg-red-300">VZ</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">Vincze Zsolt</span>
-                <span className="truncate text-xs">vincze.zsolt@szbi-pg.hu</span>
+                <span className="truncate text-xs">Szent Benedek PG Két Tanítási Nyelvű Technikum és Kollégium
+                </span>
               </div>
 
               <ChevronsUpDown className="ml-auto size-4" />
