@@ -240,8 +240,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">Vincze Zsolt</span>
-                {/* <span className="truncate text-xs">Szent Benedek PG Két Tanítási Nyelvű Technikum és Koll.</span> */}
-              </div>
+
+                <span className="truncate text-xs">vincze.zsolt@szbi-pg.hu</span>
+                </div>
               {/* <SidebarTrigger className="-ml-1" /> */}
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -254,7 +255,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
+                <Avatar className="h-9 w-9 rounded-lg">
                   <AvatarFallback className="rounded-lg bg-orange-400">VZ</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
@@ -271,21 +272,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator /> */}
-            <DropdownMenuGroup>
-              {/* <DropdownMenuItem>
-                <BadgeCheck />
-                Account
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Billing
-              </DropdownMenuItem> */}
+            {/* <DropdownMenuGroup>
+     
               <DropdownMenuItem>
                 <Settings />
                 Beállítások
               </DropdownMenuItem>
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator /> */}
             <DropdownMenuItem>
               <LogOut />
               Kijelentkezés
@@ -472,7 +466,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 </SidebarMenuItem>
 
 
-{/* <SidebarMenuItem>
+<SidebarMenuItem>
       <SidebarMenuButton asChild size="sm">
         
   <Link href="">
@@ -482,7 +476,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   </Link>
  
 </SidebarMenuButton>
-</SidebarMenuItem> */}
+</SidebarMenuItem>
 
       </SidebarMenu>
 
