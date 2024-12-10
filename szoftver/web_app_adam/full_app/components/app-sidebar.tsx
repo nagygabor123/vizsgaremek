@@ -227,65 +227,18 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar variant="inset" className="border-r-0" {...props}>
       <SidebarHeader>
       <SidebarMenu>
-          <SidebarMenuItem>
-
-          <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            >
-              <Avatar className="h-7 w-7 rounded-lg">
-                <AvatarFallback className="rounded-lg bg-orange-400">VZ</AvatarFallback>
-              </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">Vincze Zsolt</span>
-
-                <span className="truncate text-xs">vincze.zsolt@szbi-pg.hu</span>
+      <SidebarMenuItem>
+            <SidebarMenuButton size="lg" asChild>
+              <a href="#">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                  <GalleryVerticalEnd className="size-4" />
                 </div>
-              {/* <SidebarTrigger className="-ml-1" /> */}
-              <ChevronsUpDown className="ml-auto size-4" />
+                <div className="flex flex-col gap-0.5 leading-none">
+                  <span className="font-semibold">Documentation</span>
+                  <span className="">v1.0.0</span>
+                </div>
+              </a>
             </SidebarMenuButton>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-            side={isMobile ? "bottom" : "right"}
-            align="start"
-            sideOffset={4}
-          >
-            <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-9 w-9 rounded-lg">
-                  <AvatarFallback className="rounded-lg bg-orange-400">VZ</AvatarFallback>
-                </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">Vincze Zsolt</span>
-                  <span className="truncate text-xs">vincze.zsolt@szbi-pg.hu</span>
-                </div>
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            {/* <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator /> */}
-            {/* <DropdownMenuGroup>
-     
-              <DropdownMenuItem>
-                <Settings />
-                Beállítások
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator /> */}
-            <DropdownMenuItem>
-              <LogOut />
-              Kijelentkezés
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
           </SidebarMenuItem>
         </SidebarMenu>
 

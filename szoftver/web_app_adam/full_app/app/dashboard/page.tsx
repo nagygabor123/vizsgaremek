@@ -1,5 +1,11 @@
 import { AppSidebar } from "@/components/app-sidebar"
 import {
+   ChevronDown,
+
+} from "lucide-react"
+
+
+import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
@@ -9,12 +15,42 @@ import {
 } from "@/components/ui/breadcrumb"
 import { Separator } from "@/components/ui/separator"
 import {
-  SidebarInset,
-  SidebarProvider,
+  Sidebar,
   SidebarTrigger,
+  SidebarInset,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarProvider,
+  SidebarGroup,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarGroupLabel,
+  useSidebar,
+
 } from "@/components/ui/sidebar"
 
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+
+
 export default function Page() {
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -35,12 +71,63 @@ export default function Page() {
           </div>
           <div className="ml-auto px-3">
             {/* <NavActions /> */}
-            <div className="flex items-center gap-2 text-sm">
-      <div className="hidden font-medium text-muted-foreground md:inline-block">
-        Edit Oct 08
-      </div>
+            
 
+<DropdownMenu>
+<DropdownMenuTrigger asChild>
+  <SidebarMenuButton
+    size="lg"
+    className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+  >
+  
+  <Avatar className="h-7 w-7 rounded-lg">
+      <AvatarFallback className="rounded-lg bg-orange-400">VZ</AvatarFallback>
+    </Avatar>
+    <div className="grid flex-1 text-left text-sm leading-tight">
+      <span className="truncate font-semibold">Vincze Zsolt</span>
+
+      <span className="truncate text-xs">vincze.zsolt@szbi-pg.hu</span>
+      </div>
+   
+    <ChevronDown className="ml-auto size-4" />
+  </SidebarMenuButton>
+</DropdownMenuTrigger>
+<DropdownMenuContent>
+  <DropdownMenuLabel className="p-0 font-normal">
+    <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+      <Avatar className="h-9 w-9 rounded-lg">
+        <AvatarFallback className="rounded-lg bg-orange-400">VZ</AvatarFallback>
+      </Avatar>
+      <div className="grid flex-1 text-left text-sm leading-tight">
+      <span className="truncate font-semibold">Vincze Zsolt</span>
+        <span className="truncate text-xs">vincze.zsolt@szbi-pg.hu</span>
+      </div>
     </div>
+  </DropdownMenuLabel>
+  <DropdownMenuSeparator />
+  {/* <DropdownMenuGroup>
+    <DropdownMenuItem>
+      <Sparkles />
+      Upgrade to Pro
+    </DropdownMenuItem>
+  </DropdownMenuGroup>
+  <DropdownMenuSeparator /> */}
+  {/* <DropdownMenuGroup>
+
+    <DropdownMenuItem>
+      <Settings />
+      Beállítások
+    </DropdownMenuItem>
+  </DropdownMenuGroup>
+  <DropdownMenuSeparator /> */}
+  <DropdownMenuItem>
+    {/* <LogOut /> */}
+    Kijelentkezés
+  </DropdownMenuItem>
+</DropdownMenuContent>
+</DropdownMenu>
+     
+  
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
