@@ -10,7 +10,7 @@ MFRC522 rfid(SS_PIN, RST_PIN);
 int relayPin = 7; //feedback line: 3
 int relayPin2 = 6;  //feedback line: 2    
 int ii = 0;    // Relé vezérlése.  jobb szél a - földelés szürke,fehér és barna.      bal szél megy az arduinóba
-
+String valami = "s";
 // Segédfunkció a hexadecimális kód kiegészítéséhez
 String toHexString(byte value) {
   String hexString = String(value, HEX);
@@ -44,15 +44,23 @@ void loop() {
 
   Serial.println("Beolvasott kártya: " + rfidTag);
   Serial.println("ok");
-
-  Serial.println("Szolenoid áram alatt");
-  digitalWrite(relayPin, HIGH); 
+  valami = rfidTag;
+  if (valami == "F7F59C7A") {
+    Serial.println("Szolenoid áram alatt");
+    digitalWrite(relayPin, HIGH); 
+    delay(1000);                 
+    digitalWrite(relayPin, LOW);  
+    Serial.println("Solenoid áram elvéve");
+    delay(1000);  
+  }
+    if (valami == "DA6BD581") {
+    Serial.println("Szolenoid áram alatt");
     digitalWrite(relayPin2, HIGH); 
-  delay(1000);                 
-  digitalWrite(relayPin, LOW);  
-    digitalWrite(relayPin2, LOW); 
-  Serial.println("Solenoid áram elvéve");
-  delay(1000);  
+    delay(1000);                 
+    digitalWrite(relayPin2, LOW);  
+    Serial.println("Solenoid áram elvéve");
+    delay(1000);  
+  }
   rfid.PCD_Init();           
 
 }
