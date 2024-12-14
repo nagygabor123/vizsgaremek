@@ -1,0 +1,13 @@
+
+KIJELZŐ TÍPUSOK
+ https://dribbble.com/shots/4685781-Smart-access-lockers
+
+KONFIGURÁTOR
+ 1. csengetési rend import/manual  / talán  \ 
+ 2. órarend import/manual          \ egyben /
+ 3. tanuló import/manual
+ 4. alkalmazott import/manual
+ 5. tanév rendje (szünetek, plusz napok, tanév kezdés és vége)
+
+KONFIGURÁTOR MINTA
+ https://dribbble.com/shots/24855426-Simple-Poll-Modal-Question-Answers

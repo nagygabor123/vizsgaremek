@@ -1,0 +1,12 @@
+SZEKRÉNY (kb. 1 cm falvastagsággal együtt)
+ hosszúság: 22cm
+  belső fal hosszúság: 19cm
+ szélesség: 16cm
+ magasság: 6cm
+  22 cm (X), 16 cm (Y), 7 cm (Z)
+
+ZÁR (kb.)
+ hosszúság: 5,4cm
+ szélesség: 1,3cm
+ magasság: 4,1cm
+  5,4 cm (X), 1,3 cm (Y), 4,1 cm (Z)
