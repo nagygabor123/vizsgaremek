@@ -39,13 +39,13 @@ void setup() {
   SPI.begin(); 
   rfid.PCD_Init(); 
   Serial.println("RFID olvasó inicializálva.");
-  pinMode(2, OUTPUT);  
-  digitalWrite(2, LOW); 
-  pinMode(5, OUTPUT);   
-  digitalWrite(5, LOW);
-  pinMode(6, OUTPUT);  
+  //pinMode(2, OUTPUT);  
+  //digitalWrite(2, LOW); 
+  //pinMode(5, OUTPUT);   
+  //digitalWrite(5, LOW);
+  pinMode(6, OUTPUT);
   digitalWrite(6, LOW);
-  pinMode(7, OUTPUT); 
+  pinMode(7, OUTPUT);
   digitalWrite(7, LOW);
   lcd.begin();  
   lcd.backlight();
@@ -114,7 +114,7 @@ void loop() {
           int lockerId = response.toInt();
           if (lockerId == 3 || lockerId == 6 || lockerId == 7 || lockerId == 5) {
             digitalWrite(lockerId, HIGH);
-            delay(500);
+            delay(1000);
             digitalWrite(lockerId, LOW);
             lcd.clear();
             lcd.setCursor(0, 0);
@@ -153,5 +153,6 @@ void loop() {
   }
 
   delay(1000);
+  rfid.PCD_Init();     
 }
 
