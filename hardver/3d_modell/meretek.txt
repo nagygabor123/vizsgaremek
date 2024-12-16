@@ -1,12 +1,15 @@
+
+4mm vastagság
+
 SZEKRÉNY
- hosszúság: 220mm
-  belső fal hosszúság: 195mm 
+ hosszúság: 240mm
+  belső fal hosszúság: 190mm 
  szélesség: 150mm 
- magasság: 41mm 
+ magasság: 49mm 
  
- 220mm (X), 150mm (Y), 41mm (Z)
 
 
+ 
 ZÁR (kb.)
  hosszúság: 53.81mm
  szélesség: 13.71mm
