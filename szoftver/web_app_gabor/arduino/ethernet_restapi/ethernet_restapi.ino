@@ -6,13 +6,15 @@
 
 LiquidCrystal_I2C lcd(0x27, 16, 2); // I2C LCD inicializálása az 0x27 címmel
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; // Ethernet MAC-cím
-IPAddress server(172,16,13,9); // A localhost IP-címe
+IPAddress server(172, 16, 13, 9); // A localhost IP-címe
 EthernetClient client;
 
 // RFID beállítások
 #define RST_PIN 9 // Reset pin az RFID-hoz
 #define SS_PIN 4  // Slave Select pin az RFID-hoz
 MFRC522 rfid(SS_PIN, RST_PIN); // RFID olvasó példányosítása
+
+unsigned long lastTime = 0; // Az időzítő segítváltozó
 
 // Hexadecimális kód alakítása stringgé
 String toHexString(byte value) {
@@ -32,6 +34,12 @@ bool isValidLockerId(String response) {
   return true;
 }
 
+void bounce(unsigned long waitTime) {
+  unsigned long start = millis();
+  while (millis() - start < waitTime) {
+    // Időzítés, nem blokkoló módon
+  }
+}
 
 void setup() {
   Serial.begin(9600);
@@ -41,10 +49,6 @@ void setup() {
   Serial.println("RFID olvasó inicializálva.");
   pinMode(2, INPUT_PULLUP); 
   pinMode(3, INPUT_PULLUP);
-  //pinMode(2, OUTPUT);  
-  //digitalWrite(2, LOW); 
-  //pinMode(5, OUTPUT);   
-  //digitalWrite(5, LOW);
   pinMode(6, OUTPUT);
   digitalWrite(6, LOW);
   pinMode(7, OUTPUT);
@@ -56,7 +60,7 @@ void setup() {
   lcd.print("Olvasd be");
   lcd.setCursor(0, 1);
   lcd.print("a kartyad");
-  
+
   // Ethernet inicializálás
   if (Ethernet.begin(mac) == 0) {
     Serial.println("Ethernet initialization failed.");
@@ -100,7 +104,7 @@ void loop() {
           lcd.print("Rendszer");
           lcd.setCursor(0, 1);
           lcd.print("ZARVA");
-          delay(2000);
+          bounce(2000); // Várás
           lcd.clear();
           lcd.setCursor(0, 0);
           lcd.print("Olvasd be");
@@ -116,21 +120,21 @@ void loop() {
           int lockerId = response.toInt();
           if (lockerId == 3 || lockerId == 6 || lockerId == 7 || lockerId == 5) {
             digitalWrite(lockerId, HIGH);
-            delay(1000);
+            bounce(1000); // Várás a zár nyitásához
             digitalWrite(lockerId, LOW);
             // Várunk, amíg a zárat vissza nem csukják
             while (digitalRead(2) == HIGH || digitalRead(3) == HIGH) {
               lcd.clear();
               lcd.setCursor(0, 0);
               lcd.print("Zarat vissza!");
-              delay(500);
+              bounce(500); // Időzítés a figyelmeztetéshez
             }
             lcd.clear();
             lcd.setCursor(0, 0);
             lcd.print("Elfogadva");
             lcd.setCursor(0, 1);
             lcd.print(lockerId);
-            delay(2000);
+            bounce(2000); // Várás az elfogadás megjelenítéséhez
             lcd.clear();
             lcd.setCursor(0, 0);
             lcd.print("Olvasd be");
@@ -147,7 +151,7 @@ void loop() {
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print("Masik BOX");
-      delay(2000);
+      bounce(2000); // Várás az üzenet megjelenítéséhez
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print("Olvasd be");
@@ -161,7 +165,6 @@ void loop() {
     Serial.println("Failed to connect to server.");
   }
 
-  delay(1000);
+  bounce(1000); // Időzítés a következő olvasáshoz
   rfid.PCD_Init();     
 }
-
