@@ -1,9 +1,10 @@
 SZEKRÉNY
- hosszúság: 23,5cm (with 0,5cm)
-  belső fal hosszúság: 20cm (with 0,5cm)
- szélesség: 15cm 
- magasság: 5cm (with 0.5 és 0.5)
-
+ hosszúság: 220mm
+  belső fal hosszúság: 195mm 
+ szélesség: 150mm 
+ magasság: 41mm 
+ 
+ 220mm (X), 150mm (Y), 41mm (Z)
 
 
 ZÁR (kb.)
