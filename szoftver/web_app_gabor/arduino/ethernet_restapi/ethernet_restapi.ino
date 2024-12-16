@@ -39,6 +39,8 @@ void setup() {
   SPI.begin(); 
   rfid.PCD_Init(); 
   Serial.println("RFID olvasó inicializálva.");
+  pinMode(2, INPUT_PULLUP); 
+  pinMode(3, INPUT_PULLUP);
   //pinMode(2, OUTPUT);  
   //digitalWrite(2, LOW); 
   //pinMode(5, OUTPUT);   
@@ -116,6 +118,13 @@ void loop() {
             digitalWrite(lockerId, HIGH);
             delay(1000);
             digitalWrite(lockerId, LOW);
+            // Várunk, amíg a zárat vissza nem csukják
+            while (digitalRead(2) == HIGH || digitalRead(3) == HIGH) {
+              lcd.clear();
+              lcd.setCursor(0, 0);
+              lcd.print("Zarat vissza!");
+              delay(500);
+            }
             lcd.clear();
             lcd.setCursor(0, 0);
             lcd.print("Elfogadva");
