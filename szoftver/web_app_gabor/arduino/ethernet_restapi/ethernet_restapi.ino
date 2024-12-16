@@ -6,7 +6,7 @@
 
 LiquidCrystal_I2C lcd(0x27, 16, 2); // I2C LCD inicializálása az 0x27 címmel
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; // Ethernet MAC-cím
-IPAddress server(172, 16, 13, 9); // A localhost IP-címe
+IPAddress server(172,16,6,12); // A localhost IP-címe
 EthernetClient client;
 
 // RFID beállítások
@@ -37,8 +37,15 @@ bool isValidLockerId(String response) {
 void bounce(unsigned long waitTime) {
   unsigned long start = millis();
   while (millis() - start < waitTime) {
-    // Időzítés, nem blokkoló módon
   }
+}
+
+bool areAllLocksClosed() {
+  if (digitalRead(2) == LOW && digitalRead(3) == LOW && digitalRead(8) == LOW) {
+    return true; 
+  }
+  Serial.println("ZARD VISSZA A SZEKRENYT");
+  return false; 
 }
 
 void setup() {
@@ -47,8 +54,11 @@ void setup() {
   SPI.begin(); 
   rfid.PCD_Init(); 
   Serial.println("RFID olvasó inicializálva.");
+  pinMode(8, INPUT_PULLUP); 
   pinMode(2, INPUT_PULLUP); 
   pinMode(3, INPUT_PULLUP);
+  pinMode(5, OUTPUT);
+  digitalWrite(5, LOW);
   pinMode(6, OUTPUT);
   digitalWrite(6, LOW);
   pinMode(7, OUTPUT);
@@ -72,6 +82,18 @@ void setup() {
 }
 
 void loop() {
+  // Először ellenőrizzük, hogy minden zár vissza van-e csukva
+  if (!areAllLocksClosed()) {
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Zarakat");
+    lcd.setCursor(0, 1);
+    lcd.print("vissza zart");
+    bounce(2000); // Várás 2 másodpercig
+    return; // Ha valamelyik zár nyitva van, ne folytassa az RFID olvasást
+  }
+
+  // RFID kártya olvasása
   if (!rfid.PICC_IsNewCardPresent() || !rfid.PICC_ReadCardSerial()) {
     return;
   }
@@ -111,7 +133,7 @@ void loop() {
           lcd.setCursor(0, 1);
           lcd.print("a kartyad");
           validLocker = true; // Megakadályozzuk, hogy a "Masik BOX" logika lefusson
-          break; // Kilépünk a válasz feldolgozásból
+          break; // Kilépünk a válasz feldolgozásából
         }
 
         // Ha valid szám, ellenőrizzük a locker ID-t
@@ -122,13 +144,6 @@ void loop() {
             digitalWrite(lockerId, HIGH);
             bounce(1000); // Várás a zár nyitásához
             digitalWrite(lockerId, LOW);
-            // Várunk, amíg a zárat vissza nem csukják
-            while (digitalRead(2) == HIGH || digitalRead(3) == HIGH) {
-              lcd.clear();
-              lcd.setCursor(0, 0);
-              lcd.print("Zarat vissza!");
-              bounce(500); // Időzítés a figyelmeztetéshez
-            }
             lcd.clear();
             lcd.setCursor(0, 0);
             lcd.print("Elfogadva");
