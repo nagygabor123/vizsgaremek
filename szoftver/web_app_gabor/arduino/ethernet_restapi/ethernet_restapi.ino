@@ -6,14 +6,14 @@
 
 LiquidCrystal_I2C lcd(0x27, 16, 2); // I2C LCD inicializálása az 0x27 címmel
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; // Ethernet MAC-cím
-IPAddress server(172,16,6,12); // A localhost IP-címe
+IPAddress server(172,16,13,9); // A localhost IP-címe
 EthernetClient client;
 
 // RFID beállítások
 #define RST_PIN 9 // Reset pin az RFID-hoz
 #define SS_PIN 4  // Slave Select pin az RFID-hoz
 MFRC522 rfid(SS_PIN, RST_PIN); // RFID olvasó példányosítása
-
+int lockerId = 0;
 unsigned long lastTime = 0; // Az időzítő segítváltozó
 
 // Hexadecimális kód alakítása stringgé
@@ -139,11 +139,11 @@ void loop() {
         // Ha valid szám, ellenőrizzük a locker ID-t
         if (isValidLockerId(response)) {
           Serial.println("Validated Locker ID: " + response);
-          int lockerId = response.toInt();
+          lockerId = response.toInt();
           if (lockerId == 3 || lockerId == 6 || lockerId == 7 || lockerId == 5) {
             digitalWrite(lockerId, HIGH);
-            bounce(1000); // Várás a zár nyitásához
-            digitalWrite(lockerId, LOW);
+            //bounce(1000); // Várás a zár nyitásához
+            //digitalWrite(lockerId, LOW);
             lcd.clear();
             lcd.setCursor(0, 0);
             lcd.print("Elfogadva");
@@ -175,6 +175,7 @@ void loop() {
     }
 
     client.stop();
+    digitalWrite(lockerId, LOW);
     Serial.println("Disconnected from server.");
   } else {
     Serial.println("Failed to connect to server.");
