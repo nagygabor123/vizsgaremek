@@ -31,9 +31,11 @@ ZÁR (kb.)
 --------------------------------------------------------------------------------  
 
 ARDUINO (kb.)
- hosszúság:
- szélesség:
- magasság:
+ hosszúság: 68.63mm
+ szélesség: 53.35mm
+ magasság: 31.83mm (tüskék nélkül)
+ magasság: 44.47mm (bedugott pinekkel)
+ pinek magassága: 18mm
   - lyukak:
 
 --------------------------------------------------------------------------------  
@@ -41,14 +43,14 @@ ARDUINO (kb.)
 RELÉ (kb.)
  hosszúság: 33.17mm
  szélesség: 26.08mm
- magasság: 17.05mm (forrasztás tüskék nélkül)
+ magasság: 17.05mm (tüskék nélkül)
 
 --------------------------------------------------------------------------------  
 
 RFID OLVASÓ (kb.)
  hosszúság: 59.56mm
  szélesség: 39.53mm
- magasság: mm
+ magasság: -
   - lyukak:
 
 --------------------------------------------------------------------------------  
