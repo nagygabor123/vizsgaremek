@@ -4,11 +4,14 @@ magasság (Z)
 
 --------------------------------------------------------------------------------  
 
-SZEKRÉNY = 4mm vastagság
+SZEKRÉNY = 
  hosszúság: 240mm
   belső fal hosszúság: 190mm 
  szélesség: 150mm 
- magasság: 49mm 
+
+ vastagság: 50mm
+ belső falvastagság: 2-3mm
+ beltér: 50mm 
  
 --------------------------------------------------------------------------------  
 
