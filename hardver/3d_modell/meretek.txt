@@ -1,22 +1,25 @@
+hosszúság (X)
+szélesség (Y)
+magasság (Z)
 
-4mm vastagság
+--------------------------------------------------------------------------------  
 
-SZEKRÉNY
+SZEKRÉNY = 4mm vastagság
  hosszúság: 240mm
   belső fal hosszúság: 190mm 
  szélesség: 150mm 
  magasság: 49mm 
  
- 
+--------------------------------------------------------------------------------  
+
 ZÁR (kb.)
- kb. 69mm teljes hossz fémkapoccsal együtt
+ kb. 67.20mm teljes hossz fémkapoccsal együtt
 
  hosszúság: 53.81mm
  szélesség: 13.71mm
  magasság: 40.70mm
  közepe: 2.00mm-nél
- 
- 53.81mm (X), 13.71mm (Y), 40.70mm (Z)
+ - lyukak:
 
   fém magasság: 34.61mm 
   fém szélesség: 19.95mm 
@@ -25,13 +28,32 @@ ZÁR (kb.)
    kapocs szélesség: 17.00mm
    kapocs vastagság: 3.00mm
 
+--------------------------------------------------------------------------------  
 
-RELÉ 
- hosszúság: mm
- szélesség: mm
- magasság: mm
+ARDUINO (kb.)
+ hosszúság:
+ szélesség:
+ magasság:
+  - lyukak:
 
-RFID OLVASÓ
- hosszúság: mm
- szélesség: mm
+--------------------------------------------------------------------------------  
+
+RELÉ (kb.)
+ hosszúság: 33.17mm
+ szélesség: 26.08mm
+ magasság: 17.05mm (forrasztás tüskék nélkül)
+
+--------------------------------------------------------------------------------  
+
+RFID OLVASÓ (kb.)
+ hosszúság: 59.56mm
+ szélesség: 39.53mm
  magasság: mm
+  - lyukak:
+
+--------------------------------------------------------------------------------  
+
+WIDEBOARD (kb.)
+  hosszúság: (kb.) 167 - 168mm
+  szélesség: 54.38mm
+  magasság: 9.55mm
