@@ -59,7 +59,11 @@ RFID OLVASÓ (kb.)
 
 --------------------------------------------------------------------------------  
 
-WIDEBOARD (kb.)
+BREADBOARD (kb.)
   hosszúság: (kb.) 167 - 168mm
   szélesség: 54.38mm
   magasság: 9.55mm
+BREADBOARD KICSI
+  hosszúság: 82mm
+  szélesség: 54mm
+  magasság: 9mm
