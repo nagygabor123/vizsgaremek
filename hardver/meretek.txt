@@ -9,7 +9,7 @@ SZEKRÉNY =
   belső fal hosszúság: 190mm 
  szélesség: 150mm 
 
- vastagság: 50mm
+ vastagság: 5mm
  belső falvastagság: 2-3mm
  beltér: 50mm 
  
@@ -47,6 +47,7 @@ RELÉ (kb.)
  hosszúság: 33.17mm
  szélesség: 26.08mm
  magasság: 17.05mm (tüskék nélkül)
+  - lyukak:
 
 --------------------------------------------------------------------------------  
 
