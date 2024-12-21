@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 
       // Ha nincs találat a students táblában
       if (student.length === 0) {
-        return res.status(404).json({ error: 'Student not found for this RFID' });
+        return res.status(200).send("nincs");      
       }
 
       const access = student[0].access;

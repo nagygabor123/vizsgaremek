@@ -201,6 +201,7 @@ void loop() {
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print("Masik BOX");
+      Serial.println("Masik BOX");
       bounce(2000); // Várás az üzenet megjelenítéséhez
       lcd.clear();
       lcd.setCursor(0, 0);
