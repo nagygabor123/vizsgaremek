@@ -4,29 +4,31 @@ magasság (Z)
 
 --------------------------------------------------------------------------------  
 
-SZEKRÉNY = 
+SZEKRÉNY 
  hosszúság: 240mm
   belső fal hosszúság: 190mm 
  szélesség: 150mm 
 
  vastagság: 5mm
- belső falvastagság: 2-3mm
+ belső falvastagság: 3mm
  beltér: 50mm 
+
+ ajtó bentebb: 2mm
  
 --------------------------------------------------------------------------------  
 
 ZÁR (kb.)
  kb. 67.20mm teljes hossz fémkapoccsal együtt
 
- hosszúság: 53.81mm
- szélesség: 13.71mm
+ hosszúság: 53.8mm
+ szélesség: 13.7mm
  magasság: 40.70mm
- közepe: 2.00mm-nél
+ közepe: 20.00mm-nél
  - lyukak:
 
-  fém magasság: 34.61mm 
-  fém szélesség: 19.95mm 
-  fém vastagság: 1.47mm  
+  fém magasság: 34.60mm 
+  fém szélesség: 19.90mm 
+  fém vastagság: 1.50mm  
    kapocs hosszúság: 25.30mm (fém vastagságával együtt)
    kapocs szélesség: 17.00mm
    kapocs vastagság: 3.00mm
@@ -34,26 +36,26 @@ ZÁR (kb.)
 --------------------------------------------------------------------------------  
 
 ARDUINO (kb.)
- hosszúság: 68.63mm
- szélesség: 53.35mm
- magasság: 31.83mm (tüskék nélkül)
- magasság: 44.47mm (bedugott pinekkel)
+ hosszúság: 68.60mm
+ szélesség: 53.30mm
+ magasság: 31.80mm (tüskék nélkül)
+ magasság: 44.50mm (bedugott pinekkel)
  pinek magassága: 18mm
   - lyukak:
 
 --------------------------------------------------------------------------------  
 
 RELÉ (kb.)
- hosszúság: 33.17mm
- szélesség: 26.08mm
- magasság: 17.05mm (tüskék nélkül)
+ hosszúság: 33.10mm
+ szélesség: 26.10mm
+ magasság: 17.00mm (tüskék nélkül)
   - lyukak:
 
 --------------------------------------------------------------------------------  
 
 RFID OLVASÓ (kb.)
- hosszúság: 59.56mm
- szélesség: 39.53mm
+ hosszúság: 59.60mm
+ szélesség: 39.50mm
  magasság: -
   - lyukak:
 
@@ -61,8 +63,8 @@ RFID OLVASÓ (kb.)
 
 BREADBOARD (kb.)
   hosszúság: (kb.) 167 - 168mm
-  szélesség: 54.38mm
-  magasság: 9.55mm
+  szélesség: 54.40mm
+  magasság: 9.50mm
 BREADBOARD KICSI
   hosszúság: 82mm
   szélesség: 54mm
