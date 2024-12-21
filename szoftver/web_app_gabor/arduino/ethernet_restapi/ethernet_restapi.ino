@@ -31,11 +31,52 @@ String toHexString(byte value) {
 }
 
 bool isValidLockerId(String response) {
-  if (response.length() > 2) return false; // Ha több mint két karakter, nem valid
+  if (response.length() > 2) 
+  {
+    handleResponse(response);
+    return false; 
+  }
   for (int i = 0; i < response.length(); i++) {
-    if (!isDigit(response[i])) return false; // Ha nem számjegy, nem valid
+    if (!isDigit(response[i])) 
+    {
+      handleResponse(response);
+      return false; 
+    }
   }
   return true;
+}
+
+bool handleResponse(String response) {
+  if (response == "zarva") {
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Rendszer");
+    lcd.setCursor(0, 1);
+    lcd.print("ZARVA");
+    Serial.println("Rendszer ZARVA");
+    bounce(2000); // Várás
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Olvasd be");
+    lcd.setCursor(0, 1);
+    lcd.print("a kartyad");
+    Serial.println("Olvasd be a kartyad");
+  }
+  if (response == "nincs") {
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("TEVES");
+    lcd.setCursor(0, 1);
+    lcd.print("AZON");
+    Serial.println("TEVES AZON");
+    bounce(2000); // Várás
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Olvasd be");
+    lcd.setCursor(0, 1);
+    lcd.print("a kartyad");
+    Serial.println("Olvasd be a kartyad");
+  }
 }
 
 void bounce(unsigned long waitTime) {
@@ -144,36 +185,15 @@ void loop() {
   if (client.connect(server, 3000)) {
     Serial.println("Connected to server.");
     String url = "/api/locker/getLocker?rfid=" + rfidTag;
-
     client.println("GET " + url + " HTTP/1.1");
     client.println("Host: localhost");
     client.println("Connection: close");
     client.println();
 
-    bool validLocker = false;
-
     while (client.connected() || client.available()) {
       if (client.available()) {
         String response = client.readStringUntil('\n');
 
-        // Ha a válasz "zarva", külön kezeljük
-        if (response == "zarva") {
-          lcd.clear();
-          lcd.setCursor(0, 0);
-          lcd.print("Rendszer");
-          lcd.setCursor(0, 1);
-          lcd.print("ZARVA");
-          bounce(2000); // Várás
-          lcd.clear();
-          lcd.setCursor(0, 0);
-          lcd.print("Olvasd be");
-          lcd.setCursor(0, 1);
-          lcd.print("a kartyad");
-          validLocker = true; // Megakadályozzuk, hogy a "Masik BOX" logika lefusson
-          break; // Kilépünk a válasz feldolgozásából
-        }
-
-        // Ha valid szám, ellenőrizzük a locker ID-t
         if (isValidLockerId(response)) {
           Serial.println("Validated Locker ID: " + response);
           lockerId = response.toInt();
@@ -190,24 +210,20 @@ void loop() {
             lcd.print("Olvasd be");
             lcd.setCursor(0, 1);
             lcd.print("a kartyad");
-            validLocker = true;
-            break;
+          } else {
+            lcd.clear();
+            lcd.setCursor(0, 0);
+            lcd.print("Masik BOX");
+            Serial.println("Masik BOX");
+            bounce(2000); // Várás az üzenet megjelenítéséhez
+            lcd.clear();
+            lcd.setCursor(0, 0);
+            lcd.print("Olvasd be");
+            lcd.setCursor(0, 1);
+            lcd.print("a kartyad");
           }
         }
       }
-    }
-
-    if (!validLocker) {
-      lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("Masik BOX");
-      Serial.println("Masik BOX");
-      bounce(2000); // Várás az üzenet megjelenítéséhez
-      lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("Olvasd be");
-      lcd.setCursor(0, 1);
-      lcd.print("a kartyad");
     }
 
     client.stop();
