@@ -17,6 +17,8 @@ MFRC522 rfid(SS_PIN, RST_PIN); // RFID olvasó példányosítása
 unsigned long lastTime = 0; // Az időzítő segítváltozó
 
 int lockerId = 0;
+bool previousLockState = true; // Az előző zárállapot
+bool lockerStatusUpdated = false; // Változó a státusz frissítésének ellenőrzésére
 
 // Hexadecimális kód alakítása stringgé
 String toHexString(byte value) {
@@ -41,8 +43,6 @@ void bounce(unsigned long waitTime) {
   while (millis() - start < waitTime) {
   }
 }
-
-bool lockerStatusUpdated = false; // Változó a státusz frissítésének ellenőrzésére
 
 void updateLockerStatus(int lockerId) {
   if (lockerId == 0) return; // Ha a lockerId 0, nem küldünk semmit
@@ -71,18 +71,19 @@ void updateLockerStatus(int lockerId) {
 }
 
 bool areAllLocksClosed(int lockerId) {
-  if (digitalRead(2) == LOW && digitalRead(3) == LOW && digitalRead(8) == LOW) {
-    if (!lockerStatusUpdated) { 
-      updateLockerStatus(lockerId); 
-      lockerStatusUpdated = true; 
-    }
-    return true;
-  }
-  lockerStatusUpdated = false; // Ha nincs minden zár vissza zárva, reseteljük
-  Serial.println("Zárak vissza a szekrényt");
-  return false;
-}
+  bool currentLockState = (digitalRead(2) == LOW && digitalRead(3) == LOW && digitalRead(8) == LOW);
 
+  if (currentLockState && !previousLockState) {
+    updateLockerStatus(lockerId);
+    lockerStatusUpdated = true;
+  } else if (!currentLockState) {
+    lockerStatusUpdated = false; 
+    Serial.println("Zárak vissza a szekrényt");
+  }
+
+  previousLockState = currentLockState; // Frissítjük az előző állapotot
+  return currentLockState;
+}
 
 void setup() {
   Serial.begin(9600);
@@ -178,8 +179,6 @@ void loop() {
           lockerId = response.toInt();
           if (lockerId == 3 || lockerId == 6 || lockerId == 7 || lockerId == 5) {
             digitalWrite(lockerId, HIGH);
-            //bounce(1000); // Várás a zár nyitásához
-            //digitalWrite(lockerId, LOW);
             lcd.clear();
             lcd.setCursor(0, 0);
             lcd.print("Elfogadva");
@@ -216,20 +215,6 @@ void loop() {
   } else {
     Serial.println("Failed to connect to server.");
   }
-  
-  bounce(1000); // Időzítés a következő olvasáshoz
+
   rfid.PCD_Init();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
