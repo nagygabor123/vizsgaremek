@@ -13,8 +13,10 @@ EthernetClient client;
 #define RST_PIN 9 // Reset pin az RFID-hoz
 #define SS_PIN 4  // Slave Select pin az RFID-hoz
 MFRC522 rfid(SS_PIN, RST_PIN); // RFID olvasó példányosítása
-int lockerId = 0;
+
 unsigned long lastTime = 0; // Az időzítő segítváltozó
+
+int lockerId = 0;
 
 // Hexadecimális kód alakítása stringgé
 String toHexString(byte value) {
@@ -40,13 +42,47 @@ void bounce(unsigned long waitTime) {
   }
 }
 
-bool areAllLocksClosed() {
-  if (digitalRead(2) == LOW && digitalRead(3) == LOW && digitalRead(8) == LOW) {
-    return true; 
+bool lockerStatusUpdated = false; // Változó a státusz frissítésének ellenőrzésére
+
+void updateLockerStatus(int lockerId) {
+  if (lockerId == 0) return; // Ha a lockerId 0, nem küldünk semmit
+
+  if (client.connect(server, 3000)) {
+    Serial.println("Connected to server for status update.");
+    String url = "/api/locker/setLockerStatus?id=" + String(lockerId);
+
+    client.println("PATCH " + url + " HTTP/1.1");
+    client.println("Host: localhost");
+    client.println("Connection: close");
+    client.println();
+
+    // Feldolgozzuk a válaszokat
+    while (client.connected() || client.available()) {
+      if (client.available()) {
+        String response = client.readStringUntil('\n');
+        Serial.println("Server response: " + response);
+      }
+    }
+    client.stop();
+    Serial.println("Disconnected from server after status update.");
+  } else {
+    Serial.println("Failed to connect to server for status update.");
   }
-  Serial.println("ZARD VISSZA A SZEKRENYT");
-  return false; 
 }
+
+bool areAllLocksClosed(int lockerId) {
+  if (digitalRead(2) == LOW && digitalRead(3) == LOW && digitalRead(8) == LOW) {
+    if (!lockerStatusUpdated) { 
+      updateLockerStatus(lockerId); 
+      lockerStatusUpdated = true; 
+    }
+    return true;
+  }
+  lockerStatusUpdated = false; // Ha nincs minden zár vissza zárva, reseteljük
+  Serial.println("Zárak vissza a szekrényt");
+  return false;
+}
+
 
 void setup() {
   Serial.begin(9600);
@@ -83,7 +119,7 @@ void setup() {
 
 void loop() {
   // Először ellenőrizzük, hogy minden zár vissza van-e csukva
-  if (!areAllLocksClosed()) {
+  if (!areAllLocksClosed(lockerId)) {
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Zarakat");
@@ -180,7 +216,20 @@ void loop() {
   } else {
     Serial.println("Failed to connect to server.");
   }
-
+  
   bounce(1000); // Időzítés a következő olvasáshoz
-  rfid.PCD_Init();     
+  rfid.PCD_Init();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

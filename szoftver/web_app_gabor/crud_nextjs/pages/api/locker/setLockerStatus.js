@@ -40,10 +40,7 @@ export default async function handler(req, res) {
       }
 
       // Return success response
-      res.status(200).json({ 
-        message: `Locker ${lockerId} status updated to '${newStatus}'`,
-        newStatus
-      });
+      res.status(200).json({ message: `Locker ${lockerId} status updated to '${newStatus}'`});
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Internal Server Error' });
