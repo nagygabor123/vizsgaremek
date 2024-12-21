@@ -2,9 +2,7 @@
 #include <MFRC522.h>
 #include <Ethernet.h>
 #include <EthernetClient.h>
-#include <LiquidCrystal_I2C.h>
 
-LiquidCrystal_I2C lcd(0x27, 16, 2); // I2C LCD inicializálása az 0x27 címmel
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; // Ethernet MAC-cím
 IPAddress server(192, 168, 1, 49); // A localhost IP-címe
 EthernetClient client;
@@ -48,33 +46,13 @@ bool isValidLockerId(String response) {
 
 bool handleResponse(String response) {
   if (response == "zarva") {
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print("Rendszer");
-    lcd.setCursor(0, 1);
-    lcd.print("ZARVA");
     Serial.println("Rendszer ZARVA");
-    bounce(2000); // Várás
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print("Olvasd be");
-    lcd.setCursor(0, 1);
-    lcd.print("a kartyad");
+    bounce(2000); 
     Serial.println("Olvasd be a kartyad");
   }
   if (response == "nincs") {
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print("TEVES");
-    lcd.setCursor(0, 1);
-    lcd.print("AZON");
     Serial.println("TEVES AZON");
-    bounce(2000); // Várás
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print("Olvasd be");
-    lcd.setCursor(0, 1);
-    lcd.print("a kartyad");
+    bounce(2000); 
     Serial.println("Olvasd be a kartyad");
   }
 }
@@ -91,13 +69,10 @@ void updateLockerStatus(int lockerId) {
   if (client.connect(server, 3000)) {
     Serial.println("Connected to server for status update.");
     String url = "/api/locker/setLockerStatus?id=" + String(lockerId);
-
     client.println("PATCH " + url + " HTTP/1.1");
     client.println("Host: localhost");
     client.println("Connection: close");
     client.println();
-
-    // Feldolgozzuk a válaszokat
     while (client.connected() || client.available()) {
       if (client.available()) {
         String response = client.readStringUntil('\n');
@@ -119,7 +94,6 @@ bool areAllLocksClosed(int lockerId) {
     lockerStatusUpdated = true;
   } else if (!currentLockState) {
     lockerStatusUpdated = false; 
-    Serial.println("Zárak vissza a szekrényt");
   }
 
   previousLockState = currentLockState; // Frissítjük az előző állapotot
@@ -141,13 +115,6 @@ void setup() {
   digitalWrite(6, LOW);
   pinMode(7, OUTPUT);
   digitalWrite(7, LOW);
-  lcd.begin();  
-  lcd.backlight();
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("Olvasd be");
-  lcd.setCursor(0, 1);
-  lcd.print("a kartyad");
 
   // Ethernet inicializálás
   if (Ethernet.begin(mac) == 0) {
@@ -162,11 +129,7 @@ void setup() {
 void loop() {
   // Először ellenőrizzük, hogy minden zár vissza van-e csukva
   if (!areAllLocksClosed(lockerId)) {
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print("Zarakat");
-    lcd.setCursor(0, 1);
-    lcd.print("vissza zart");
+    Serial.println("Zárak vissza a szekrényt");
     bounce(2000); // Várás 2 másodpercig
     return; // Ha valamelyik zár nyitva van, ne folytassa az RFID olvasást
   }
@@ -199,28 +162,12 @@ void loop() {
           lockerId = response.toInt();
           if (lockerId == 3 || lockerId == 6 || lockerId == 7 || lockerId == 5) {
             digitalWrite(lockerId, HIGH);
-            lcd.clear();
-            lcd.setCursor(0, 0);
-            lcd.print("Elfogadva");
-            lcd.setCursor(0, 1);
-            lcd.print(lockerId);
-            bounce(2000); // Várás az elfogadás megjelenítéséhez
-            lcd.clear();
-            lcd.setCursor(0, 0);
-            lcd.print("Olvasd be");
-            lcd.setCursor(0, 1);
-            lcd.print("a kartyad");
+            bounce(2000); 
+            Serial.println("Olvasd be a kartyad");
           } else {
-            lcd.clear();
-            lcd.setCursor(0, 0);
-            lcd.print("Masik BOX");
             Serial.println("Masik BOX");
-            bounce(2000); // Várás az üzenet megjelenítéséhez
-            lcd.clear();
-            lcd.setCursor(0, 0);
-            lcd.print("Olvasd be");
-            lcd.setCursor(0, 1);
-            lcd.print("a kartyad");
+            bounce(2000); 
+            Serial.println("Olvasd be a kartyad");
           }
         }
       }
