@@ -1,4 +1,3 @@
-// pages/api/students/create.js
 import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {
@@ -12,9 +11,14 @@ export default async function handler(req, res) {
     const db = await connectToDatabase();
 
     try {
-      await db.execute('INSERT INTO students (student_id, full_name, class, rfid_tag) VALUES (?, ?, ?, ?)', [student_id, full_name, studentClass, rfid_tag]);
+      // PostgreSQL lekérdezés paraméterekkel
+      await db.query(
+        'INSERT INTO students (student_id, full_name, class, rfid_tag, access) VALUES ($1, $2, $3, $4, $5)',
+        [student_id, full_name, studentClass, rfid_tag, 'nyitva']
+      );
       res.status(201).json({ message: 'Student created' });
     } catch (error) {
+      console.error('Error creating student:', error);
       res.status(500).json({ message: 'Error creating student' });
     }
   } else {

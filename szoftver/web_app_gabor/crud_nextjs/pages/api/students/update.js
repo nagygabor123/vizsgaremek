@@ -1,4 +1,3 @@
-// pages/api/students/update.js
 import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {
@@ -11,12 +10,20 @@ export default async function handler(req, res) {
 
     const db = await connectToDatabase();
     try {
-      await db.execute(
-        'UPDATE students SET full_name = ?, class = ?, rfid_tag = ? WHERE student_id = ?',
+      // SQL lekérdezés a diák adatainak frissítésére PostgreSQL-ben
+      const result = await db.query(
+        'UPDATE students SET full_name = $1, class = $2, rfid_tag = $3 WHERE student_id = $4',
         [full_name, studentClass, rfid_tag, student_id]
       );
-      res.status(200).json({ message: 'Student updated' });
+
+      // Ellenőrizzük, hogy történt-e módosítás
+      if (result.rowCount > 0) {
+        res.status(200).json({ message: 'Student updated' });
+      } else {
+        res.status(404).json({ message: 'Student not found' });
+      }
     } catch (error) {
+      console.error('Database error:', error);
       res.status(500).json({ message: 'Error updating student' });
     }
   } else {

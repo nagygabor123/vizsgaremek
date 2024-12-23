@@ -3,44 +3,47 @@ import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {
   if (req.method === 'PATCH') {
-    // Extract locker number from the URL
+    // Locker azonosító kinyerése az URL-ből
     const { id } = req.query;
 
-    // Validate the id (ensure it's a number and within 1-99 range)
+    // Azonosító validálása (ellenőrizzük, hogy szám-e és 1-99 között van-e)
     const lockerId = parseInt(id);
     if (isNaN(lockerId) || lockerId < 1 || lockerId > 99) {
       return res.status(400).json({ message: 'Invalid locker number' });
     }
 
     try {
-      // Connect to the database
-      const db = await connectToDatabase();
+      // Adatbázishoz való csatlakozás
+      const pool = await connectToDatabase();
 
-      // Get the current status of the locker
-      const [rows] = await db.execute('SELECT status FROM lockers WHERE locker_id = ?', [lockerId]);
+      // Jelenlegi státusz lekérdezése
+      const result = await pool.query(
+        'SELECT status FROM lockers WHERE locker_id = $1',
+        [lockerId]
+      );
 
-      // If no rows are returned, the locker doesn't exist
-      if (rows.length === 0) {
+      // Ha nincs találat, akkor a szekrény nem létezik
+      if (result.rows.length === 0) {
         return res.status(404).json({ message: 'Locker not found' });
       }
 
-      // Determine the new status
-      const currentStatus = rows[0].status;
+      // A jelenlegi státusz lekérése
+      const currentStatus = result.rows[0].status;
       const newStatus = currentStatus === 'be' ? 'ki' : 'be';
 
-      // Update the locker status
-      const [result] = await db.execute(
-        'UPDATE lockers SET status = ? WHERE locker_id = ?',
+      // A szekrény státuszának frissítése
+      const updateResult = await pool.query(
+        'UPDATE lockers SET status = $1 WHERE locker_id = $2',
         [newStatus, lockerId]
       );
 
-      // If no rows were affected, something went wrong
-      if (result.affectedRows === 0) {
+      // Ha nem történt frissítés, hiba történt
+      if (updateResult.rowCount === 0) {
         return res.status(500).json({ message: 'Failed to update locker status' });
       }
 
-      // Return success response
-      res.status(200).json({ message: `Locker ${lockerId} status updated to '${newStatus}'`});
+      // Sikeres válasz visszaküldése
+      res.status(200).json({ message: `Locker ${lockerId} status updated to '${newStatus}'` });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Internal Server Error' });

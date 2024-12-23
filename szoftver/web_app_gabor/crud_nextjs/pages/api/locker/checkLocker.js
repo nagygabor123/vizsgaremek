@@ -11,15 +11,18 @@ export default async function handler(req, res) {
 
     try {
       // Adatbázis kapcsolat létrehozása
-      const connection = await connectToDatabase();
+      const pool = await connectToDatabase();
 
       // Lekérdezés az RFID alapján
-      const [rows] = await connection.execute('SELECT access FROM students WHERE rfid_tag = ?', [rfid]);
+      const result = await pool.query(
+        'SELECT access FROM students WHERE rfid_tag = $1',
+        [rfid]
+      );
 
       // Ellenőrizzük, hogy van-e találat
-      if (rows.length > 0) {
-        const access = rows[0].access;
-        return res.status(200).json(rows );
+      if (result.rows.length > 0) {
+        const access = result.rows[0].access;
+        return res.status(200).json(result.rows);
       } else {
         return res.status(404).json({ error: 'RFID not found' });
       }

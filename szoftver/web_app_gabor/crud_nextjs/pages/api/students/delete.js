@@ -12,22 +12,23 @@ export default async function handler(req, res) {
 
     try {
       // Get RFID tag of the student
-      const [student] = await db.execute('SELECT rfid_tag FROM students WHERE student_id = ?', [student_id]);
+      const result = await db.query('SELECT rfid_tag FROM students WHERE student_id = $1', [student_id]);
 
-      if (student.length === 0) {
+      if (result.rowCount === 0) {
         return res.status(404).json({ message: 'Student not found' });
       }
 
-      const rfidTag = student[0].rfid_tag;
+      const rfidTag = result.rows[0].rfid_tag;
 
       // Delete related records in locker_relationships
-      await db.execute('DELETE FROM locker_relationships WHERE rfid_tag = ?', [rfidTag]);
+      await db.query('DELETE FROM locker_relationships WHERE rfid_tag = $1', [rfidTag]);
 
       // Delete the student
-      await db.execute('DELETE FROM students WHERE student_id = ?', [student_id]);
+      await db.query('DELETE FROM students WHERE student_id = $1', [student_id]);
 
       res.status(200).json({ message: 'Student deleted' });
     } catch (error) {
+      console.error('Error deleting student:', error);
       res.status(500).json({ message: 'Error deleting student', error });
     }
   } else {

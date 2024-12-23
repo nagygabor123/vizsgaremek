@@ -10,16 +10,16 @@ export default async function handler(req, res) {
 
     try {
       // Adatbázis kapcsolat létrehozása
-      const connection = await connectToDatabase();
+      const pool = await connectToDatabase();
 
       // Frissítés: az adott diák "access" mezőjének módosítása "nyitva" értékre
-      const [result] = await connection.execute(
-        'UPDATE students SET access = ? WHERE student_id = ?',
+      const result = await pool.query(
+        'UPDATE students SET access = $1 WHERE student_id = $2',
         ['nyitva', student_id]
       );
 
       // Ellenőrizzük, hogy történt-e változás
-      if (result.affectedRows > 0) {
+      if (result.rowCount > 0) {
         return res.status(200).json({ message: 'Locker opened successfully' });
       } else {
         return res.status(404).json({ error: 'Student not found' });

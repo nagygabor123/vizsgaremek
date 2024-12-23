@@ -1,24 +1,29 @@
-// pages/api/students/read.js
 import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     const db = await connectToDatabase();
 
-    // SQL query to join students, locker_relationships, and lockers tables
-    const [students] = await db.execute(`
-      SELECT 
-        students.*, 
-        lockers.status AS status
-      FROM 
-        students
-      LEFT JOIN 
-        locker_relationships ON students.rfid_tag = locker_relationships.rfid_tag
-      LEFT JOIN 
-        lockers ON locker_relationships.locker_id = lockers.locker_id
-    `);
+    try {
+      // SQL lekérdezés a students, locker_relationships és lockers táblák összevonására
+      const { rows: students } = await db.query(`
+        SELECT 
+          students.*, 
+          lockers.status AS status
+        FROM 
+          students
+        LEFT JOIN 
+          locker_relationships ON students.rfid_tag = locker_relationships.rfid_tag
+        LEFT JOIN 
+          lockers ON locker_relationships.locker_id = lockers.locker_id
+      `);
 
-    res.status(200).json(students);
+      // Válasz visszaküldése
+      res.status(200).json(students);
+    } catch (error) {
+      console.error('Database error:', error);
+      res.status(500).json({ message: 'Error fetching students data' });
+    }
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });
   }

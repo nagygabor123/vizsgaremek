@@ -9,16 +9,16 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: "Invalid action" });
     }
 
-    const db = await connectToDatabase();
+    const pool = await connectToDatabase();
     // Az access mezőt frissítjük mindenkinek a students táblában
     const newAccessState = action === 'close' ? 'zarva' : 'nyitva';
 
     try {
       // Az 'access' oszlopot frissítjük
-      await db.query('UPDATE students SET access = ?', [newAccessState]);
+      await pool.query('UPDATE students SET access = $1', [newAccessState]);
 
       // A rendszer státuszának frissítése
-      await db.query('UPDATE system_status SET status = ? WHERE id = 1', [newAccessState]);
+      await pool.query('UPDATE system_status SET status = $1 WHERE id = 1', [newAccessState]);
 
       return res.status(200).json({ message: `All students' access updated to ${newAccessState} and system status updated` });
     } catch (error) {
