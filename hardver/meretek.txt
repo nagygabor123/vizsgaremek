@@ -5,7 +5,7 @@ magasság (Z)
 --------------------------------------------------------------------------------  
 
 SZEKRÉNY 
- hosszúság: 240mm
+ hosszúság: 220mm
   belső fal hosszúság: 190mm 
  szélesség: 150mm 
 
