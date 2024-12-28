@@ -2,6 +2,10 @@
 KIJELZŐ TÍPUSOK
  https://dribbble.com/shots/4685781-Smart-access-lockers
 
+FŐ WEB DESIGN
+ https://dribbble.com/shots/23044530-NTUC-First-Campus-Website
+ https://dribbble.com/shots/24301924-NTUC-First-Campus-Responsive-Design
+
 KONFIGURÁTOR
  1. csengetési rend import/manual  / talán  \ 
  2. órarend import/manual          \ egyben /
