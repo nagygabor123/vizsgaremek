@@ -5,6 +5,7 @@ BREADBOARD :
 DEMULTIPLEXER : 
  cd74hc4067 
  CD74HC4067
+ https://www.aliexpress.com/item/1005006160631703.html?algo_pvid=1cfb7d69-3581-44db-b3b8-99f5ba7ca85a&algo_exp_id=1cfb7d69-3581-44db-b3b8-99f5ba7ca85a-0&pdp_npi=4@dis!HUF!1694.95!401.69!!!30.52!7.23!@211b612517353786030613705ed71f!12000037063905742!sea!HU!0!ABX&curPageLogUid=Q2ESOPbdYHsg&utparam-url=scene:search%7Cquery_from:
 
 
 ROUND SCREEN :
