@@ -1,6 +1,0 @@
-1x round display 1.28 inch
-2x demultiplexer (cd74hc4067)
-10x fiú-lány kábel a zárak hosszabbításához (30-40 cm)
-10x fiú-fiú kábel a zárak hosszabbításához (30-40 cm)
-
-1x kicsi breadboard 
