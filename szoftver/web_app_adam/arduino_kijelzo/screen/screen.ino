@@ -13,10 +13,10 @@ Adafruit_GC9A01A tft = Adafruit_GC9A01A(TFT_CS, TFT_DC, TFT_RST);
 void setup() {
   tft.begin();                 // Kijelző inicializálása
   tft.setRotation(0);          // Forgatás
-  tft.fillScreen(GC9A01A_YELLOW); // Törlés feketére
+  tft.fillScreen(GC9A01A_RED); // Törlés feketére
   
   // Rajzolj egy piros kört
-  tft.fillCircle(120, 120, 100, GC9A01A_BLACK);
+  tft.fillCircle(120, 120, 100, GC9A01A_BLUE);
 }
 
 void loop() {
