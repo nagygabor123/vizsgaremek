@@ -6,6 +6,15 @@ LCD:
  SDA -> A4
  SCL -> A5
 
+ROUND DISPLAY (+ ethernet SHILD):
+3.3V -> 3.3V
+GND -> GND
+SCL -> PIN 13
+SDA -> PIN 11
+DC -> PIN 9 (bármely szabad láb)
+CS -> PIN 8 (bármely szabad láb)
+RST -> PIN 7 (bármely szabad láb)
+
 LED-ek:
  ELSO -> PIN 2
  MASODIK -> PIN 6
