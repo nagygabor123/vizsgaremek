@@ -5,7 +5,7 @@ LCD:
  VCC -> 5V
  SDA -> A4
  SCL -> A5
-
+ 
 ROUND DISPLAY (+ ethernet SHILD):
 3.3V -> 3.3V
 GND -> GND
