@@ -25,3 +25,4 @@ https://dribbble.com/shots/20483900-File-Uploader-Modals-Tetrisly-Design-System
 
 
 https://github.com/ebulku/next-stepper !!!!!!!!
+!!!!!!!!!!! https://kodaschool.com/blog/build-a-multistep-form-in-next-js-powered-by-react-hook-form-and-zod 
