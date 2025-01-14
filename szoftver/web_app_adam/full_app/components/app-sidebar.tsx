@@ -306,6 +306,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarGroupLabel>Adminisztráció</SidebarGroupLabel>
       <SidebarMenu>
 
+{/*
       <SidebarMenuItem>
 <SidebarMenuButton asChild>
   <Link href="">
@@ -313,7 +314,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <span>Helyettesítések</span>
   </Link>
 </SidebarMenuButton>
-</SidebarMenuItem>
+</SidebarMenuItem>*/}
 
       <SidebarMenuItem>
       <SidebarMenuButton asChild>

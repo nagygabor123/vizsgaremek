@@ -1,6 +1,5 @@
 
-KIJELZŐ TÍPUSOK
- https://dribbble.com/shots/4685781-Smart-access-lockers
+
 
 LOGÓK
  https://dribbble.com/venos_studio
@@ -17,4 +16,8 @@ KONFIGURÁTOR
  5. tanév rendje (szünetek, plusz napok, tanév kezdés és vége)
 
 KONFIGURÁTOR MINTA
+https://dribbble.com/shots/20483900-File-Uploader-Modals-Tetrisly-Design-System
+
+
  https://dribbble.com/shots/24855426-Simple-Poll-Modal-Question-Answers
+ https://dribbble.com/shots/24494696-Sign-In-Page
