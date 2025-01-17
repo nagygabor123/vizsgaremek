@@ -4,12 +4,14 @@ import { useState, useEffect } from "react";
 
 export default function HomePage() {
   const [isOverlayVisible, setOverlayVisible] = useState(false);
-  const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
+  const [isButtonVisible, setButtonVisible] = useState(true);
 
   // Ellenőrizzük a localStorage-t a komponens betöltésekor
   useEffect(() => {
     const hasClickedBefore = localStorage.getItem("hasClickedOverlayButton");
-    setButtonVisible(hasClickedBefore !== "true");
+    if (hasClickedBefore === "true") {
+      setButtonVisible(false);
+    }
   }, []);
 
   // Gomb kattintás kezelése
@@ -18,11 +20,6 @@ export default function HomePage() {
     setButtonVisible(false);
     localStorage.setItem("hasClickedOverlayButton", "true");
   };
-
-  // Addig ne rendereljük a gombot, amíg nem töltöttük be az adatot
-  if (isButtonVisible === null) {
-    return null; // Várakozás a localStorage betöltésére
-  }
 
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-gray-100">
