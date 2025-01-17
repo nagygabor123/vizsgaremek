@@ -56,7 +56,19 @@ export default function handler(req, res) {
         }
 
         const accessValue = access || 'nyitva';
-        await pool.query(insertQuery, [student_id, full_name, studentClass, rfid_tag, accessValue]);
+
+        try {
+          await pool.query(insertQuery, [student_id, full_name, studentClass, rfid_tag, accessValue]);
+        } catch (dbError) {
+          if (dbError.code === 'ER_DUP_ENTRY') {
+            console.warn(`Duplicate entry: ${student_id}`);
+            return res.status(400).json({
+              message: `Duplicate entry found for student ID: ${student_id}. This record already exists.`,
+            });
+          } else {
+            throw dbError; // Más adatbázis hiba esetén dobjuk tovább
+          }
+        }
       }
 
       return res.status(200).json({ message: 'Students added successfully' });

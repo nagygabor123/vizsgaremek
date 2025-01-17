@@ -5,6 +5,7 @@ import { useState } from 'react';
 const Configuration = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [message, setMessage] = useState<string>('');
+  const [apiResponse, setApiResponse] = useState<any>(null); // Tárolja az API válasz teljes tartalmát
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -15,6 +16,7 @@ const Configuration = () => {
   const handleUpload = async () => {
     if (!selectedFile) {
       setMessage('Please select a CSV file first!');
+      setApiResponse(null);
       return;
     }
 
@@ -27,14 +29,17 @@ const Configuration = () => {
         body: formData,
       });
 
+      const responseData = await response.json();
+      setApiResponse(responseData); // Az API válasz teljes tartalmának tárolása
+
       if (response.ok) {
         setMessage('File uploaded successfully!');
       } else {
-        const errorData = await response.json();
-        setMessage(`Error: ${errorData.error || 'Something went wrong'}`);
+        setMessage('Error occurred during file upload.');
       }
     } catch (error: any) {
       setMessage(`Error: ${error.message}`);
+      setApiResponse(null);
     }
   };
 
@@ -66,6 +71,19 @@ const Configuration = () => {
         <p style={{ marginTop: '20px', color: message.startsWith('Error') ? 'red' : 'green' }}>
           {message}
         </p>
+      )}
+      {apiResponse && (
+        <pre
+          style={{
+            marginTop: '20px',
+            padding: '10px',
+            backgroundColor: '#f8f9fa',
+            border: '1px solid #ddd',
+            borderRadius: '5px',
+          }}
+        >
+          {JSON.stringify(apiResponse, null, 2)}
+        </pre>
       )}
     </div>
   );
