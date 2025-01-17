@@ -1,15 +1,37 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 const Configuration = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [message, setMessage] = useState<string>('');
   const [apiResponse, setApiResponse] = useState<any>(null); // Tárolja az API válasz teljes tartalmát
+  const fileInputRef = useRef<HTMLInputElement>(null); // Referencia a fájl inputhoz
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      setSelectedFile(e.dataTransfer.files[0]);
+      setMessage(`Selected file: ${e.dataTransfer.files[0].name}`);
+    }
+  };
+
+  const handleClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click(); // Megnyitja a fájlkezelőt
+    }
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setSelectedFile(e.target.files[0]);
+      setMessage(`Selected file: ${e.target.files[0].name}`);
     }
   };
 
@@ -46,14 +68,30 @@ const Configuration = () => {
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
       <h1>Configuration</h1>
-      <p>Select a CSV file to upload:</p>
+      <p>Drag and drop a CSV file here, or click to select a file:</p>
+      <div
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+        onClick={handleClick}
+        style={{
+          border: '2px dashed #007bff',
+          borderRadius: '5px',
+          padding: '20px',
+          textAlign: 'center',
+          backgroundColor: '#f8f9fa',
+          cursor: 'pointer',
+          marginBottom: '10px',
+        }}
+      >
+        {selectedFile ? selectedFile.name : 'Drag and drop a file here, or click to select'}
+      </div>
       <input
         type="file"
         accept=".csv"
+        ref={fileInputRef}
         onChange={handleFileChange}
-        style={{ marginBottom: '10px' }}
+        style={{ display: 'none' }} // Elrejtjük a fájl inputot
       />
-      <br />
       <button
         onClick={handleUpload}
         style={{
