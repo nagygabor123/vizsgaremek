@@ -29,6 +29,7 @@ import {
   ExternalLink,
   ChevronsUpDown,
   BookUser,
+  Bolt,
   UserCog,
   SquarePen,
   ChevronDown,
@@ -266,7 +267,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <DropdownMenuGroup>
               <DropdownMenuItem>
                
-              <Settings/>
+              <Settings2/>
               <span>Beállítások</span>
               </DropdownMenuItem>
             </DropdownMenuGroup>
@@ -331,7 +332,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarMenu>
       <SidebarMenuItem>
       <SidebarMenuButton asChild>
-  <Link href="r">
+  <Link href="timetable">
   <Calendar/>
     <span>Órarend</span>
   </Link>
@@ -339,7 +340,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 </SidebarMenuItem>
 <SidebarMenuItem>
 <SidebarMenuButton asChild>
-  <Link href="">
+  <Link href="students">
   <Users/>
     <span>Tanulók</span>
   </Link>
