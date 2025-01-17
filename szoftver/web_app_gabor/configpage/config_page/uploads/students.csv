@@ -1,6 +1,6 @@
 student_id,full_name,class,rfid_tag,access
-OM55555,John Doe,10A,nincs1,nyithato
-OM66666,Jane Smith,10B,nincs2,nyithato
-OM77777,Alice Johnson,10A,nincs3,nyithato
-OM88888,Bob Brown,10C,nincs4,nyithato
-OM99999,Charlie Davis,10B,nincs5,nyithato
+OM55555,John Doe,10A,nincs1,nyitva
+OM66666,Jane Smith,10B,nincs2,nyitva
+OM77777,Alice Johnson,10A,nincs3,nyitva
+OM88888,Bob Brown,10C,nincs4,nyitva
+OM99999,Charlie Davis,10B,nincs5,nyitva
