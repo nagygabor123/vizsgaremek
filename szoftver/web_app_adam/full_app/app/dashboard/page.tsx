@@ -73,72 +73,21 @@ export default function Page() {
             {/* <NavActions /> */}
             
 
-<DropdownMenu>
-<DropdownMenuTrigger asChild>
-  <SidebarMenuButton
-    size="lg"
-    className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-  >
-  
-  <Avatar className="h-7 w-7 rounded-lg">
-      <AvatarFallback className="rounded-lg bg-lime-300">VZ</AvatarFallback>
-    </Avatar>
-    <div className="grid flex-1 text-left text-sm leading-tight">
-      <span className="truncate font-semibold">Vincze Zsolt</span>
 
-      <span className="truncate text-xs">vincze.zsolt@szbi-pg.hu</span>
-      </div>
-   
-    <ChevronDown className="ml-auto size-4" />
-  </SidebarMenuButton>
-</DropdownMenuTrigger>
-<DropdownMenuContent>
-  <DropdownMenuLabel className="p-0 font-normal">
-    <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-      <Avatar className="h-9 w-9 rounded-lg">
-        <AvatarFallback className="rounded-lg bg-lime-300">VZ</AvatarFallback>
-      </Avatar>
-      <div className="grid flex-1 text-left text-sm leading-tight">
-      <span className="truncate font-semibold">Vincze Zsolt</span>
-        <span className="truncate text-xs">vincze.zsolt@szbi-pg.hu</span>
-      </div>
-    </div>
-  </DropdownMenuLabel>
-  <DropdownMenuSeparator />
-  {/* <DropdownMenuGroup>
-    <DropdownMenuItem>
-      <Sparkles />
-      Upgrade to Pro
-    </DropdownMenuItem>
-  </DropdownMenuGroup>
-  <DropdownMenuSeparator /> */}
-  {/* <DropdownMenuGroup>
-
-    <DropdownMenuItem>
-      <Settings />
-      Beállítások
-    </DropdownMenuItem>
-  </DropdownMenuGroup>
-  <DropdownMenuSeparator /> */}
-  <DropdownMenuItem>
-    {/* <LogOut /> */}
-    Kijelentkezés
-  </DropdownMenuItem>
-</DropdownMenuContent>
-</DropdownMenu>
      
   
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
-          </div>
-          <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
-        
-        </div>
+  <div className="grid auto-rows-min gap-4">
+    {/* Vékony széles elem */}
+    <div className="aspect-[17/1] rounded-xl bg-muted/50" />
+
+    {/* Nagy széles elem */}
+    <div className="aspect-[2/1] rounded-xl bg-muted/50" />
+  </div>
+</div>
+
 
       </SidebarInset>
     </SidebarProvider>

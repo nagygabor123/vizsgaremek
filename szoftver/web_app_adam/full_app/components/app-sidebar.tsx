@@ -31,6 +31,7 @@ import {
   BookUser,
   UserCog,
   SquarePen,
+  ChevronDown,
   MessageCircleQuestion,
   CircleUser,
   CalendarCog,
@@ -226,25 +227,63 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     // variant="inset"
     <Sidebar variant="inset" className="border-r-0" {...props}>
       <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <a href="#">
-                {/* <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <Command className="size-4" />
-                </div> */}
+      <DropdownMenu>
+<DropdownMenuTrigger asChild>
+  <SidebarMenuButton
+    size="lg"
+    className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+  >
+  <div className="grid flex-1 text-left text-sm leading-tight">
+      <span className="truncate text-s">Kiskunfélegyházi Szent</span>
+        <span className="truncate text-s">Benedek PG Középiskola</span>
+      </div>
+  
+   
+    <Avatar className="h-7 w-7 rounded-full ">
+      <AvatarFallback className="rounded-lg bg-lime-300 ml-auto">VZ</AvatarFallback>
+    </Avatar>
+    <ChevronDown className="ml-auto size-4" />
+  </SidebarMenuButton>
+</DropdownMenuTrigger>
+<DropdownMenuContent>
+  <DropdownMenuLabel className="p-0 font-normal">
+    <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+      <Avatar className="h-9 w-9 rounded-full">
+        <AvatarFallback className="rounded-lg bg-lime-300">VZ</AvatarFallback>
+      </Avatar>
+      <div className="grid flex-1 text-left text-sm leading-tight">
+      <span className="truncate font-semibold">Vincze Zsolt</span>
+        <span className="truncate text-xs">vincze.zsolt@szbi-pg.hu</span>
+      </div>
+    </div>
+  </DropdownMenuLabel>
+  <DropdownMenuSeparator />
+{/* <DropdownMenuGroup>
+    <DropdownMenuItem>
+    <LifeBuoy/> 
+      Súgóközpont
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+    <MessageCircleWarning/> 
+      Probléma jelentése
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+    <Settings /> 
+      Beállítások
+    </DropdownMenuItem>
+  </DropdownMenuGroup>*/}
 
-                {/* <div className="flex size-8 items-center justify-center rounded-sm border">
-                  <School  className="size-4 shrink-0" />
-                </div> */}
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Kiskunfélegyházi Szent Benedek PG</span>
-                  <span className="truncate text-xs ">Két Tanítási Nyelvű Technikum és Kollégium</span>
-                </div>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
+
+  <DropdownMenuSeparator />
+  <DropdownMenuGroup>
+  <DropdownMenuItem>
+   <LogOut /> 
+    Kijelentkezés
+  </DropdownMenuItem>
+  </DropdownMenuGroup>
+</DropdownMenuContent>
+</DropdownMenu>
+
         <Separator/>
       </SidebarHeader>
 
@@ -303,7 +342,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
  
 
     <SidebarGroup>
-          <SidebarGroupLabel>Adminisztráció</SidebarGroupLabel>
+          <SidebarGroupLabel>Iskola</SidebarGroupLabel>
       <SidebarMenu>
 
 {/*
@@ -344,18 +383,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 </SidebarMenuButton>
 </SidebarMenuItem>
 
-
-
-      </SidebarMenu>
-    </SidebarGroup>
- 
-
-    <SidebarGroup>
-          <SidebarGroupLabel>Rendszer</SidebarGroupLabel>
-      <SidebarMenu>
-
-
-      <SidebarMenuItem>
+<SidebarMenuItem>
 <SidebarMenuButton asChild>
   <Link href="">
 <SlidersHorizontal/>
@@ -376,6 +404,53 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
       </SidebarMenu>
     </SidebarGroup>
+ 
+
+
+
+    <SidebarGroup>
+          <SidebarGroupLabel>Rendszer</SidebarGroupLabel>
+      <SidebarMenu>
+
+
+      <SidebarMenuItem>
+<SidebarMenuButton asChild>
+  <Link href="">
+  <LifeBuoy/>
+    <span>Súgóközpont</span>
+
+  </Link>
+</SidebarMenuButton>
+</SidebarMenuItem>
+
+
+<SidebarMenuItem>
+<SidebarMenuButton asChild>
+  <Link href="">
+  <MessageCircleWarning/>
+  <span>Probléma jelentése</span>
+
+  </Link>
+</SidebarMenuButton>
+</SidebarMenuItem>
+
+
+<SidebarMenuItem>
+<SidebarMenuButton asChild>
+  <Link href="">
+  <Settings/>
+    <span>Beállítások</span>
+
+  </Link>
+</SidebarMenuButton>
+</SidebarMenuItem>
+
+
+      </SidebarMenu>
+    </SidebarGroup>
+
+
+
 
       </SidebarContent>
       <SidebarFooter>
@@ -396,13 +471,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 </SidebarMenuButton>
 </SidebarMenuItem>  */}
 
+   {/* <SquareArrowOutUpRight className="ml-auto" />*/}
+{/*
       <SidebarMenuItem>
       <SidebarMenuButton asChild size="sm">
         
   <Link href="">
   <LifeBuoy/>
     <span>Súgóközpont</span>
-   {/* <SquareArrowOutUpRight className="ml-auto" />*/}
+
   </Link>
  
 </SidebarMenuButton>
@@ -433,12 +510,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   </Link>
  
 </SidebarMenuButton>
-</SidebarMenuItem>
+</SidebarMenuItem>*/}
 
       </SidebarMenu>
 
     
-
+      <span className="text-xs text-center">powered by teLock</span>
       </SidebarFooter>
     </Sidebar>
   )
