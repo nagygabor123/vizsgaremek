@@ -229,6 +229,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   <Link href="/dashboard/school/timetable">
 <CalendarSearch/>
     <span>Órarendek</span>
+    <TriangleAlert className="ml-auto text-amber-400" />
   </Link>
 </SidebarMenuButton>
 </SidebarMenuItem>
@@ -250,6 +251,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   <Link href="/dashboard/school/teachers">
   <BriefcaseBusiness/>
     <span>Alkalmazottak</span>
+    <TriangleAlert className="ml-auto text-amber-400" />
   </Link>
 </SidebarMenuButton>
 </SidebarMenuItem>
@@ -271,6 +273,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   <Link href="/dashboard/school/settings">
 <SlidersHorizontal/>
     <span>Tanév beállításai</span>
+    <TriangleAlert className="ml-auto text-amber-400" />
   </Link>
 </SidebarMenuButton>
 </SidebarMenuItem>
