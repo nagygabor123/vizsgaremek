@@ -68,7 +68,7 @@ export default function Page() {
       </BreadcrumbItem>
     <BreadcrumbSeparator />
     <BreadcrumbItem>
-      <BreadcrumbPage>Saját osztáy</BreadcrumbPage>
+      <BreadcrumbPage>Osztáy</BreadcrumbPage>
     </BreadcrumbItem>
     <BreadcrumbSeparator />
     <BreadcrumbItem>

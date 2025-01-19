@@ -68,7 +68,7 @@ export default function Page() {
       </BreadcrumbItem>
     <BreadcrumbSeparator />
     <BreadcrumbItem>
-      <BreadcrumbPage>Saját óráim</BreadcrumbPage>
+      <BreadcrumbPage>Tanóráim</BreadcrumbPage>
     </BreadcrumbItem>
   </BreadcrumbList>
 </Breadcrumb>

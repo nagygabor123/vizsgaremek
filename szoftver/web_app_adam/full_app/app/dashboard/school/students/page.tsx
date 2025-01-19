@@ -66,7 +66,7 @@ export default function Page() {
       </BreadcrumbItem>
     <BreadcrumbSeparator />
     <BreadcrumbItem>
-      <BreadcrumbPage>Rendszer</BreadcrumbPage>
+    <BreadcrumbPage>Adminisztráció</BreadcrumbPage>
     </BreadcrumbItem>
     <BreadcrumbSeparator />
     <BreadcrumbItem>

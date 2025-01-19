@@ -36,6 +36,8 @@ import {
   Bolt,
   UserCog,
   SquarePen,
+  UserRound,
+  UserRoundSearch,
   ChevronDown,
   MessageCircleQuestion,
   CircleUser,
@@ -211,7 +213,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         
   <Link href="/dashboard/timetable">
   <CalendarHeart/>
-    <span>Óráim</span>
+    <span>Tanóráim</span>
     
   </Link>
  
@@ -234,7 +236,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 <SidebarMenuItem>
 <SidebarMenuButton asChild isActive={isActive("/dashboard/class/students")}>
   <Link href="/dashboard/class/students">
-  <Users/>
+  <UserRound/>
     <span>Tanulók</span>
   </Link>
 </SidebarMenuButton>
@@ -258,8 +260,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 </SidebarMenuItem>*/}
 
       <SidebarMenuItem>
-      <SidebarMenuButton asChild isActive={isActive("/dashboard/school/timetable")}>
-  <Link href="/dashboard/school/timetable">
+      <SidebarMenuButton asChild isActive={isActive("/dashboard/school/timetables")}>
+  <Link href="/dashboard/school/timetables">
 <CalendarSearch/>
     <span>Órarendek</span>
     {isButtonVisible && (
@@ -274,7 +276,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 <SidebarMenuItem>
 <SidebarMenuButton asChild isActive={isActive("/dashboard/school/students")}>
   <Link href="/dashboard/school/students">
-<UserSearch/>
+<UserRoundSearch/>
     <span>Tanulók</span> 
     {isButtonVisible && (
     <TriangleAlert className="ml-auto text-amber-400" />
@@ -284,8 +286,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 </SidebarMenuButton>
 </SidebarMenuItem>
 <SidebarMenuItem>
-<SidebarMenuButton asChild isActive={isActive("/dashboard/school/teachers")}>
-  <Link href="/dashboard/school/teachers">
+<SidebarMenuButton asChild isActive={isActive("/dashboard/school/employees")}>
+  <Link href="/dashboard/school/employees">
   <BriefcaseBusiness/>
     <span>Alkalmazottak</span>
     {isButtonVisible && (
