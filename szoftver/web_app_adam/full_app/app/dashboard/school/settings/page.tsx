@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { TriangleAlert } from "lucide-react";
+import Link from "next/link";
 
 export default function Page() {
   const [isOverlayVisible, setOverlayVisible] = useState(false);
@@ -57,9 +58,11 @@ export default function Page() {
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
   <BreadcrumbList>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/dashboard">Főoldal</BreadcrumbLink>
-    </BreadcrumbItem>
+  <BreadcrumbItem>
+  <BreadcrumbLink asChild>
+        <Link href="/dashboard">Főoldal</Link>
+      </BreadcrumbLink>
+      </BreadcrumbItem>
     <BreadcrumbSeparator />
     <BreadcrumbItem>
       <BreadcrumbPage>Rendszer</BreadcrumbPage>

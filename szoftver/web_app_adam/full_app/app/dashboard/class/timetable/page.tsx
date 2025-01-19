@@ -48,7 +48,7 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar"
 
-
+import Link from "next/link";
 export default function Page() {
 
   return (
@@ -61,9 +61,11 @@ export default function Page() {
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
   <BreadcrumbList>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/dashboard">Főoldal</BreadcrumbLink>
-    </BreadcrumbItem>
+  <BreadcrumbItem>
+  <BreadcrumbLink asChild>
+        <Link href="/dashboard">Főoldal</Link>
+      </BreadcrumbLink>
+      </BreadcrumbItem>
     <BreadcrumbSeparator />
     <BreadcrumbItem>
       <BreadcrumbPage>Saját osztáy</BreadcrumbPage>
