@@ -19,6 +19,12 @@ export default function HomePage() {
     localStorage.setItem("hasClickedOverlayButton", "true");
   };
 
+  // Bezárás gomb kattintás kezelése
+  const handleClose = () => {
+    setOverlayVisible(false);
+    window.location.reload(); // Újratöltés az ablak bezárása után
+  };
+
   // Addig ne rendereljük a gombot, amíg nem töltöttük be az adatot
   if (isButtonVisible === null) {
     return null; // Várakozás a localStorage betöltésére
@@ -47,7 +53,7 @@ export default function HomePage() {
           <div className="text-center text-white">
             <p className="mb-6 text-2xl font-bold">Ez egy teljes képernyős felugró ablak!</p>
             <button
-              onClick={() => setOverlayVisible(false)}
+              onClick={handleClose}
               className="px-4 py-2 text-black bg-white rounded hover:bg-gray-200"
             >
               Bezárás

@@ -7,9 +7,11 @@ import {
   Command,
   Frame,
   FileText,
+  Flag,
   LifeBuoy,
   Map,
   ShieldHalf,
+  TriangleAlert,
   PieChart,
   Send,
   Settings2,
@@ -54,9 +56,7 @@ import {
 } from "lucide-react"
 
 
-import { NavProjects } from "@/components/nav-projects"
-import { NavSecondary } from "@/components/nav-secondary"
-import { NavUser } from "@/components/nav-user"
+
 import {
   Sidebar,
   SidebarTrigger,
@@ -95,131 +95,6 @@ import {
 import Link from "next/link";
 
 
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  navMain: [
-    {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  navSecondary: [
-    {
-      title: "Support",
-      url: "#",
-      icon: LifeBuoy,
-    },
-    {
-      title: "Feedback",
-      url: "#",
-      icon: Send,
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
-  ],
-}
-
-
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { isMobile } = useSidebar()
 
@@ -228,17 +103,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     // variant="inset"
     <Sidebar variant="inset" className="border-r-0" {...props}>
       <SidebarHeader>
-      <DropdownMenu>
+      <DropdownMenu >
+        
           <DropdownMenuTrigger asChild>
+            
             <SidebarMenuButton
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-            
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate text-xs">Kiskunfélegyházi Szent</span>
-                <span className="truncate text-xs">Benedek PG Középiskola</span>
+               <div className="grid flex-1 text-left text-sm leading-tight">
+                <span className="text-xs">Kiskunfélegyházi Szent Benedek PG Középiskola</span>
+                
               </div>
+           
               <Avatar className="h-8 w-8 rounded-full ">
                 <AvatarFallback className="rounded-lg bg-blue-200">VZ</AvatarFallback>
               </Avatar>
@@ -265,7 +142,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem >
                
               <Settings2/>
               <span>Beállítások</span>
@@ -280,7 +157,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </DropdownMenuItem>
               <DropdownMenuItem>
               
-              <MessageCircleWarning/>
+              <Flag/>
               <span>Probléma jelentése</span>
               </DropdownMenuItem>
 
@@ -300,23 +177,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
       <SidebarGroup>
       <SidebarMenu>
-      {/* <SidebarMenuItem>
-      <SidebarMenuButton asChild>
-        
-  <Link href="">
-  <Home/>
-    <span>Konfigurátor</span>
-    
-  </Link>
- 
-</SidebarMenuButton>
-</SidebarMenuItem> */}
+
 
 
       <SidebarMenuItem>
       <SidebarMenuButton asChild>
         
-  <Link href="">
+  <Link href="/dashboard/timetable">
   <CalendarHeart/>
     <span>Saját óráim</span>
     
@@ -332,7 +199,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarMenu>
       <SidebarMenuItem>
       <SidebarMenuButton asChild>
-  <Link href="timetable">
+  <Link href="/dashboard/class/timetable">
   <Calendar/>
     <span>Órarend</span>
   </Link>
@@ -340,7 +207,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 </SidebarMenuItem>
 <SidebarMenuItem>
 <SidebarMenuButton asChild>
-  <Link href="students">
+  <Link href="/dashboard//class/students">
   <Users/>
     <span>Tanulók</span>
   </Link>
@@ -366,7 +233,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
       <SidebarMenuItem>
       <SidebarMenuButton asChild>
-  <Link href="">
+  <Link href="/dashboard/school/timetable">
 <CalendarSearch/>
     <span>Órarendek</span>
   </Link>
@@ -377,15 +244,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
 <SidebarMenuItem>
 <SidebarMenuButton asChild>
-  <Link href="">
+  <Link href="/dashboard/school/students">
 <UserSearch/>
-    <span>Tanulók</span>
+    <span>Tanulók</span> 
+    <TriangleAlert className="ml-auto text-amber-400" />
   </Link>
+  
 </SidebarMenuButton>
 </SidebarMenuItem>
 <SidebarMenuItem>
 <SidebarMenuButton asChild>
-  <Link href="">
+  <Link href="/dashboard/school/teachers">
   <BriefcaseBusiness/>
     <span>Alkalmazottak</span>
   </Link>
@@ -406,7 +275,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
       <SidebarMenuItem>
 <SidebarMenuButton asChild>
-  <Link href="">
+  <Link href="/dashboard/school/settings">
 <SlidersHorizontal/>
     <span>Tanév beállításai</span>
   </Link>
@@ -416,7 +285,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
 <SidebarMenuItem>
 <SidebarMenuButton asChild>
-  <Link href="">
+  <Link href="/dashboard/school/logs">
   <FileClock/>
     <span>Tevékenységnapló</span>
   </Link>
@@ -435,59 +304,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
 
       <SidebarMenu className="mt-auto">
-{/* 
-      <SidebarMenuItem>
-      <SidebarMenuButton asChild size="sm">
-        
-  <Link href="">
-  <Settings/>
-    <span>Beállítások</span>
-    
-  </Link>
- 
-</SidebarMenuButton>
-</SidebarMenuItem>  */}
 
-   {/* <SquareArrowOutUpRight className="ml-auto" />*/}
-{/*
-      <SidebarMenuItem>
-      <SidebarMenuButton asChild size="sm">
-        
-  <Link href="">
-  <LifeBuoy/>
-    <span>Súgóközpont</span>
-
-  </Link>
- 
-</SidebarMenuButton>
-</SidebarMenuItem>
-
-
-
-<SidebarMenuItem>
-      <SidebarMenuButton asChild size="sm">
-        
-  <Link href="">
-  <MessageCircleWarning/>
-    <span>Probléma jelentése</span>
-    
-  </Link>
- 
-</SidebarMenuButton>
-</SidebarMenuItem>
-
-
-<SidebarMenuItem>
-      <SidebarMenuButton asChild size="sm">
-        
-  <Link href="">
-  <Settings/>
-    <span>Beállítások</span>
-    
-  </Link>
- 
-</SidebarMenuButton>
-</SidebarMenuItem>*/}
 
       </SidebarMenu>
 
