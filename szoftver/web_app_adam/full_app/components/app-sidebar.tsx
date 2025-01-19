@@ -93,11 +93,33 @@ import {
 } from "@/components/ui/avatar"
 
 import Link from "next/link";
-
+import { useState, useEffect } from "react";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { isMobile } = useSidebar()
+  const [isOverlayVisible, setOverlayVisible] = useState(false);
+  const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
 
+  useEffect(() => {
+    const hasClickedBefore = localStorage.getItem("hasClickedOverlayButton");
+    setButtonVisible(hasClickedBefore !== "true");
+  }, []);
+
+  // Gomb kattintás kezelése
+  const handleButtonClick = () => {
+    setOverlayVisible(true);
+  };
+
+  const handleConfirmClick = () => {
+    setOverlayVisible(false);
+    setButtonVisible(false);
+    localStorage.setItem("hasClickedOverlayButton", "true");
+  };
+
+  // Addig ne rendereljük a gombot, amíg nem töltöttük be az adatot
+  if (isButtonVisible === null) {
+    return null; // Várakozás a localStorage betöltésére
+  }
 
   return (
     // variant="inset"
@@ -229,7 +251,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   <Link href="/dashboard/school/timetable">
 <CalendarSearch/>
     <span>Órarendek</span>
+    {isButtonVisible && (
     <TriangleAlert className="ml-auto text-amber-400" />
+    )}
   </Link>
 </SidebarMenuButton>
 </SidebarMenuItem>
@@ -241,7 +265,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   <Link href="/dashboard/school/students">
 <UserSearch/>
     <span>Tanulók</span> 
+    {isButtonVisible && (
     <TriangleAlert className="ml-auto text-amber-400" />
+    )}
   </Link>
   
 </SidebarMenuButton>
@@ -251,7 +277,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   <Link href="/dashboard/school/teachers">
   <BriefcaseBusiness/>
     <span>Alkalmazottak</span>
+    {isButtonVisible && (
     <TriangleAlert className="ml-auto text-amber-400" />
+    )}
   </Link>
 </SidebarMenuButton>
 </SidebarMenuItem>
@@ -273,7 +301,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   <Link href="/dashboard/school/settings">
 <SlidersHorizontal/>
     <span>Tanév beállításai</span>
+    {isButtonVisible && (
     <TriangleAlert className="ml-auto text-amber-400" />
+    )}
   </Link>
 </SidebarMenuButton>
 </SidebarMenuItem>

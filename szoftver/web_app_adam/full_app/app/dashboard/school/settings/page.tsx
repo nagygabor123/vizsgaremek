@@ -39,6 +39,7 @@ export default function Page() {
     setOverlayVisible(false);
     setButtonVisible(false);
     localStorage.setItem("hasClickedOverlayButton", "true");
+    window.location.reload();
   };
 
   // Addig ne rendereljük a gombot, amíg nem töltöttük be az adatot
