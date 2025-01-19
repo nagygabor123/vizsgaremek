@@ -15,6 +15,8 @@ import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
+import { TriangleAlert } from "lucide-react";
 
 export default function Page() {
   const [isOverlayVisible, setOverlayVisible] = useState(false);
@@ -29,6 +31,10 @@ export default function Page() {
   // Gomb kattintás kezelése
   const handleButtonClick = () => {
     setOverlayVisible(true);
+  };
+
+  const handleConfirmClick = () => {
+    setOverlayVisible(false);
     setButtonVisible(false);
     localStorage.setItem("hasClickedOverlayButton", "true");
   };
@@ -49,9 +55,7 @@ export default function Page() {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem>
-                  <BreadcrumbPage className="line-clamp-1">
-                    Project Management & Task Tracking
-                  </BreadcrumbPage>
+                  <BreadcrumbPage>Főoldal</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
@@ -59,49 +63,51 @@ export default function Page() {
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 overflow-x-hidden w-full">
           <div className="grid auto-rows-min gap-4 w-full">
-            {/* Warning Message */}
-            <div className="aspect-[17/1] rounded-xl bg-yellow-50 flex items-center justify-between px-4 w-full box-border overflow-hidden">
-              <p className="text-sm font-semibold text-gray-800 truncate">
-                Ez egy figyelmeztető üzenet. Kérjük, figyelmesen olvassa el!
-              </p>
-              <button className="px-3 py-1 text-sm font-semibold text-yellow-900 bg-yellow-300 rounded hover:bg-yellow-400">
-                Akció
-              </button>
-            </div>
+            {isButtonVisible && (
+              <div className="aspect-[17/1] rounded-xl bg-yellow-50 flex items-center px-4 w-full box-border overflow-hidden">
+                <TriangleAlert className="text-amber-400" />
+                <p className="text-sm truncate ml-3">
+                  Ez egy figyelmeztető üzenet. Kérjük, figyelmesen olvassa el!
+                </p>
+                <Button
+                  onClick={handleButtonClick}
+                  className="ml-auto"
+                  variant="link"
+                >
+                  Beállítás
+                </Button>
+              </div>
+            )}
 
-            {/* Nagy széles elem */}
-            <div className="aspect-[2/1] rounded-xl bg-muted/50 flex items-center justify-center w-full overflow-hidden">
+            <div className="aspect-[16/10] rounded-xl bg-muted/50 flex items-center justify-center w-full overflow-hidden">
               <p className="text-center text-lg font-bold text-gray-800">
                 Ez egy nagy széles elem tartalma.
               </p>
             </div>
 
-            {/* Gomb csak akkor jelenik meg, ha az isButtonVisible true */}
-            {isButtonVisible && (
-              <button
-                onClick={handleButtonClick}
-                className="px-4 py-2 text-black bg-blue-500 rounded hover:bg-blue-600"
-              >
-                Mutasd az ablakot
-              </button>
-            )}
-
             {isOverlayVisible && (
               <div className="fixed inset-0 bg-white z-50 flex items-center justify-center">
-                {/* Bal felső sarokban szöveg */}
                 <div className="absolute top-4 left-4 text-white text-lg font-semibold">
                   Ez egy bal felső sarokban lévő szöveg
                 </div>
-
-                {/* Középen tartalom */}
                 <div className="text-center text-black">
-                  <p className="mb-6 text-2xl font-bold">Ez egy teljes képernyős felugró ablak!</p>
-                  <button
-                    onClick={() => setOverlayVisible(false)}
-                    className="px-4 py-2 text-black bg-white rounded hover:bg-gray-200"
-                  >
-                    Bezárás
-                  </button>
+                  <p className="mb-6 text-2xl font-bold">
+                    Ez egy teljes képernyős felugró ablak!
+                  </p>
+                  <div className="flex gap-4 justify-center">
+                    <button
+                      onClick={() => setOverlayVisible(false)}
+                      className="px-4 py-2 text-black bg-white rounded hover:bg-gray-200"
+                    >
+                      Bezárás
+                    </button>
+                    <button
+                      onClick={handleConfirmClick}
+                      className="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700"
+                    >
+                      Megerősítés
+                    </button>
+                  </div>
                 </div>
               </div>
             )}

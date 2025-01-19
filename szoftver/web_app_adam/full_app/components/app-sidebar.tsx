@@ -112,12 +112,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
                <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="text-xs">Kiskunfélegyházi Szent Benedek PG Középiskola</span>
+                <span className="text-s truncate">Kiskunfélegyházi Szent</span>
+                <span className="text-s truncate">Benedek PG Középiskola</span>
                 
               </div>
            
-              <Avatar className="h-8 w-8 rounded-full ">
-                <AvatarFallback className="rounded-lg bg-blue-200">VZ</AvatarFallback>
+              <Avatar className="h-9 w-9 rounded-full">
+                <AvatarFallback className="rounded-lg bg-emerald-200">VZ</AvatarFallback>
               </Avatar>
               <ChevronDown className="ml-auto size-4" />
             
@@ -131,8 +132,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-9 w-9 rounded-lg">
-                  <AvatarFallback className="rounded-full bg-blue-200">VZ</AvatarFallback>
+                <Avatar className="h-9 w-9 rounded-full">
+                  <AvatarFallback className="rounded-lg bg-emerald-200">VZ</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">Vincze Zsolt</span>
@@ -140,14 +141,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </div>
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem >
-               
-              <Settings2/>
-              <span>Beállítások</span>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>

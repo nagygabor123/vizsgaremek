@@ -66,7 +66,11 @@ export default function Page() {
     </BreadcrumbItem>
     <BreadcrumbSeparator />
     <BreadcrumbItem>
-      <BreadcrumbPage>Saját óráim</BreadcrumbPage>
+      <BreadcrumbPage>Rendszer</BreadcrumbPage>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Tevékenységnapló</BreadcrumbPage>
     </BreadcrumbItem>
   </BreadcrumbList>
 </Breadcrumb>
@@ -80,9 +84,8 @@ export default function Page() {
   
           </div>
         </header>
-       
-Órarend
 
+Data table
 
 
 
