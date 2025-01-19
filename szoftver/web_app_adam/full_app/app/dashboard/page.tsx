@@ -79,7 +79,7 @@ export default function Page() {
               </div>
             )}
 
-            <div className="aspect-[16/10] rounded-xl bg-muted/50 flex items-center justify-center w-full overflow-hidden">
+            <div className="aspect-[1/1] rounded-xl bg-muted/50 flex items-center justify-center w-full overflow-hidden">
               <p className="text-center text-lg font-bold text-gray-800">
                 Ez egy nagy széles elem tartalma.
               </p>
