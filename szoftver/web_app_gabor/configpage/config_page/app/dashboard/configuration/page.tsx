@@ -67,8 +67,8 @@ const Configuration = () => {
 
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-      <h1>Configuration</h1>
-      <p>Drag and drop a CSV file here, or click to select a file:</p>
+      <h1>Konfigurációs felület</h1>
+      <p>Diák hozzáadása:</p>
       <div
         onDragOver={handleDragOver}
         onDrop={handleDrop}
@@ -103,7 +103,7 @@ const Configuration = () => {
           cursor: 'pointer',
         }}
       >
-        Upload CSV
+        Feltöltés
       </button>
       {message && (
         <p style={{ marginTop: '20px', color: message.startsWith('Error') ? 'red' : 'green' }}>

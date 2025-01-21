@@ -1,6 +1,5 @@
 import pool from '../../../lib/db';
 import fs from 'fs';
-import path from 'path';
 import multiparty from 'multiparty';
 
 export const config = {
