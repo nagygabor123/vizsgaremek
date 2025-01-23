@@ -31,8 +31,17 @@ RFID (RC522)
  3.3V -> 3.3V
 
 
-DE/MULTIPLEXER: (https://adam-meyer.com/arduino/CD74HC4067)
-    cimzes: (1 is HIGH, 0 is LOW)
+DE/MULTIPLEXER: (https://www.youtube.com/watch?v=Dco6jo9xgAo)
+ SIG -> PIN 9
+ S0 -> PIN 3
+ S1 -> PIN 4
+ S2 -> PIN 5
+ S3 -> PIN 6
+ EN -> GND
+ VCC -> 5V
+ GND -> GND
+
+ cimzes: (1 is HIGH, 0 is LOW)
     0000 - 0
     1000 - 1
     0100 - 2
