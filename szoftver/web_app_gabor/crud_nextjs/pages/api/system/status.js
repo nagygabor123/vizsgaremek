@@ -4,10 +4,10 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
       // Csatlakozás az adatbázishoz
-      const pool = await connectToDatabase();
+      const connection = await connectToDatabase();
 
       // Lekérdezés a system_status táblából az id = 1 státusz lekérésére
-      const { rows } = await pool.query('SELECT status FROM system_status WHERE id = $1', [1]);
+      const [rows] = await connection.execute('SELECT status FROM system_status WHERE id = 1');
 
       // Ha nem találunk rekordot, hibát adunk vissza
       if (rows.length === 0) {

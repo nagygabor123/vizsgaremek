@@ -3,46 +3,43 @@ import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {
   if (req.method === 'PATCH') {
-    // Locker azonosító kinyerése az URL-ből
+    // Extract locker number from the URL
     const { id } = req.query;
 
-    // Azonosító validálása (ellenőrizzük, hogy szám-e és 1-99 között van-e)
+    // Validate the id (ensure it's a number and within 1-99 range)
     const lockerId = parseInt(id);
     if (isNaN(lockerId) || lockerId < 1 || lockerId > 99) {
       return res.status(400).json({ message: 'Invalid locker number' });
     }
 
     try {
-      // Adatbázishoz való csatlakozás
-      const pool = await connectToDatabase();
+      // Connect to the database
+      const db = await connectToDatabase();
 
-      // Jelenlegi státusz lekérdezése
-      const result = await pool.query(
-        'SELECT status FROM lockers WHERE locker_id = $1',
-        [lockerId]
-      );
+      // Get the current status of the locker
+      const [rows] = await db.execute('SELECT status FROM lockers WHERE locker_id = ?', [lockerId]);
 
-      // Ha nincs találat, akkor a szekrény nem létezik
-      if (result.rows.length === 0) {
+      // If no rows are returned, the locker doesn't exist
+      if (rows.length === 0) {
         return res.status(404).json({ message: 'Locker not found' });
       }
 
-      // A jelenlegi státusz lekérése
-      const currentStatus = result.rows[0].status;
+      // Determine the new status
+      const currentStatus = rows[0].status;
       const newStatus = currentStatus === 'be' ? 'ki' : 'be';
 
-      // A szekrény státuszának frissítése
-      const updateResult = await pool.query(
-        'UPDATE lockers SET status = $1 WHERE locker_id = $2',
+      // Update the locker status
+      const [result] = await db.execute(
+        'UPDATE lockers SET status = ? WHERE locker_id = ?',
         [newStatus, lockerId]
       );
 
-      // Ha nem történt frissítés, hiba történt
-      if (updateResult.rowCount === 0) {
+      // If no rows were affected, something went wrong
+      if (result.affectedRows === 0) {
         return res.status(500).json({ message: 'Failed to update locker status' });
       }
 
-      // Sikeres válasz visszaküldése
+      // Return success response
       res.status(200).json({ message: `Locker ${lockerId} status updated to '${newStatus}'` });
     } catch (error) {
       console.error(error);
