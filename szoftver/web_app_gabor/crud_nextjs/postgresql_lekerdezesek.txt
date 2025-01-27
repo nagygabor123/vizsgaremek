@@ -1,0 +1,331 @@
+// pages/api/locker/getLocker.js
+import { connectToDatabase } from '../../../lib/db';
+
+export default async function handler(req, res) {
+  if (req.method === 'GET') {
+    const { rfid } = req.query;
+
+    if (!rfid) {
+      return res.status(400).json({ error: 'RFID is required' });
+    }
+
+    try {
+      // Csatlakozás az adatbázishoz
+      const pool = await connectToDatabase();
+
+      // Lekérdezés a students táblából az "access" értékéért az RFID alapján
+      const studentResult = await pool.query(
+        'SELECT access FROM students WHERE rfid_tag = $1',
+        [rfid]
+      );
+
+      // Ha nincs találat a students táblában
+      if (studentResult.rows.length === 0) {
+        return res.status(200).send("nincs");
+      }
+
+      const access = studentResult.rows[0].access;
+
+      // Ellenőrizzük az access értéket
+      if (access === 'zarva') {
+        return res.status(200).send("zarva");
+      } else if (access === 'nyitva') {
+        // Lekérdezés a locker_relationships táblából
+        const lockerRelationshipResult = await pool.query(
+          'SELECT locker_id FROM locker_relationships WHERE rfid_tag = $1',
+          [rfid]
+        );
+
+        if (lockerRelationshipResult.rows.length === 0) {
+          return res.status(404).json({ error: 'No locker found for this RFID' });
+        }
+
+        const lockerId = lockerRelationshipResult.rows[0].locker_id;
+
+        // Lekérdezés a lockers táblából
+        const lockerResult = await pool.query(
+          'SELECT * FROM lockers WHERE locker_id = $1',
+          [lockerId]
+        );
+
+        if (lockerResult.rows.length === 0) {
+          return res.status(404).json({ error: 'Locker not found' });
+        }
+
+        return res.status(200).send(lockerResult.rows[0].locker_id.toString());
+      } else {
+        return res.status(400).json({ error: 'Invalid access value' });
+      }
+    } catch (error) {
+      console.error('Database error:', error);
+      return res.status(500).json({ error: 'Database connection error' });
+    }
+  } else {
+    return res.status(405).json({ error: 'Method Not Allowed' });
+  }
+}
+
+
+
+
+// pages/api/locker/checkLocker.js
+import { connectToDatabase } from '../../../lib/db';
+
+export default async function handler(req, res) {
+  if (req.method === 'GET') {
+    const { rfid } = req.query;
+
+    if (!rfid) {
+      return res.status(400).json({ error: 'RFID is required' });
+    }
+
+    try {
+      // Adatbázis kapcsolat létrehozása
+      const pool = await connectToDatabase();
+
+      // Lekérdezés az RFID alapján
+      const result = await pool.query(
+        'SELECT access FROM students WHERE rfid_tag = $1',
+        [rfid]
+      );
+
+      // Ellenőrizzük, hogy van-e találat
+      if (result.rows.length > 0) {
+        const access = result.rows[0].access;
+        return res.status(200).json(result.rows);
+      } else {
+        return res.status(404).json({ error: 'RFID not found' });
+      }
+    } catch (error) {
+      console.error('Database error:', error);
+      return res.status(500).json({ error: 'Database connection error' });
+    }
+  } else {
+    return res.status(405).json({ error: 'Method Not Allowed' });
+  }
+}
+
+
+
+
+
+
+// pages/api/locker/setLockerStatus.js
+import { connectToDatabase } from '../../../lib/db';
+
+export default async function handler(req, res) {
+  if (req.method === 'PATCH') {
+    // Locker azonosító kinyerése az URL-ből
+    const { id } = req.query;
+
+    // Azonosító validálása (ellenőrizzük, hogy szám-e és 1-99 között van-e)
+    const lockerId = parseInt(id);
+    if (isNaN(lockerId) || lockerId < 1 || lockerId > 99) {
+      return res.status(400).json({ message: 'Invalid locker number' });
+    }
+
+    try {
+      // Adatbázishoz való csatlakozás
+      const pool = await connectToDatabase();
+
+      // Jelenlegi státusz lekérdezése
+      const result = await pool.query(
+        'SELECT status FROM lockers WHERE locker_id = $1',
+        [lockerId]
+      );
+
+      // Ha nincs találat, akkor a szekrény nem létezik
+      if (result.rows.length === 0) {
+        return res.status(404).json({ message: 'Locker not found' });
+      }
+
+      // A jelenlegi státusz lekérése
+      const currentStatus = result.rows[0].status;
+      const newStatus = currentStatus === 'be' ? 'ki' : 'be';
+
+      // A szekrény státuszának frissítése
+      const updateResult = await pool.query(
+        'UPDATE lockers SET status = $1 WHERE locker_id = $2',
+        [newStatus, lockerId]
+      );
+
+      // Ha nem történt frissítés, hiba történt
+      if (updateResult.rowCount === 0) {
+        return res.status(500).json({ message: 'Failed to update locker status' });
+      }
+
+      // Sikeres válasz visszaküldése
+      res.status(200).json({ message: `Locker ${lockerId} status updated to '${newStatus}'` });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  } else {
+    res.status(405).json({ message: 'Method Not Allowed' });
+  }
+}
+
+
+
+
+// pages/api/timetable/admin.js
+import { connectToDatabase } from '../../../lib/db';
+
+export default async function handler(req, res) {
+  if (req.method === 'GET') {
+    const teacherName = 'nagy'; // A tanár neve, amit keresünk
+
+    try {
+      // Csatlakozás az adatbázishoz
+      const pool = await connectToDatabase();
+
+      // Az SQL lekérdezés
+      const { rows } = await pool.query(
+        `SELECT DISTINCT
+          tg.day_of_week, 
+          tg.start_time, 
+          tg.end_time, 
+          g.group_name, 
+          a.full_name AS teacher_name, 
+          s.class AS "class"
+        FROM 
+          timetables tg
+        JOIN 
+          groups g ON tg.group_id = g.group_id
+        JOIN 
+          admins a ON tg.admin_id = a.admin_id
+        JOIN 
+          student_groups sg ON g.group_id = sg.group_id  -- Csatlakozás a student_groups táblához
+        JOIN 
+          students s ON sg.student_id = s.student_id  -- Csatlakozás a students táblához
+        WHERE 
+          a.full_name = $1
+        ORDER BY 
+          tg.day_of_week, tg.start_time;`,
+        [teacherName] // Paraméterként átadjuk a tanár nevét
+      );
+
+      // Visszaadjuk a lekérdezett adatokat
+      return res.status(200).json(rows);
+
+    } catch (error) {
+      console.error('Database error:', error);
+      return res.status(500).json({ error: 'Database connection error' });
+    }
+  } else {
+    // Ha nem GET metódust használunk
+    return res.status(405).json({ error: 'Method Not Allowed' });
+  }
+}
+
+
+
+
+// pages/api/system/status.js
+import { connectToDatabase } from '../../../lib/db';
+
+export default async function handler(req, res) {
+  if (req.method === 'GET') {
+    try {
+      // Csatlakozás az adatbázishoz
+      const pool = await connectToDatabase();
+
+      // Lekérdezés a system_status táblából az id = 1 státusz lekérésére
+      const { rows } = await pool.query('SELECT status FROM system_status WHERE id = $1', [1]);
+
+      // Ha nem találunk rekordot, hibát adunk vissza
+      if (rows.length === 0) {
+        return res.status(404).json({ error: 'System status not found' });
+      }
+
+      // Visszaküldjük a státuszt
+      return res.status(200).json({ status: rows[0].status });
+    } catch (error) {
+      console.error('Database error:', error);
+      return res.status(500).json({ error: 'Database connection error' });
+    }
+  } else {
+    return res.status(405).json({ error: 'Method Not Allowed' });
+  }
+}
+
+
+
+
+
+// pages/api/locker/studentOpen.js
+import { connectToDatabase } from '../../../lib/db';
+
+export default async function handler(req, res) {
+  if (req.method === 'POST') {
+    const { student_id } = req.body;
+
+    if (!student_id) {
+      return res.status(400).json({ error: 'Student ID is required' });
+    }
+
+    try {
+      // Adatbázis kapcsolat létrehozása
+      const pool = await connectToDatabase();
+
+      // Frissítés: az adott diák "access" mezőjének módosítása "nyitva" értékre
+      const result = await pool.query(
+        'UPDATE students SET access = $1 WHERE student_id = $2',
+        ['nyitva', student_id]
+      );
+
+      // Ellenőrizzük, hogy történt-e változás
+      if (result.rowCount > 0) {
+        return res.status(200).json({ message: 'Locker opened successfully' });
+      } else {
+        return res.status(404).json({ error: 'Student not found' });
+      }
+    } catch (error) {
+      console.error('Database error:', error);
+      return res.status(500).json({ error: 'Database connection error' });
+    }
+  } else {
+    return res.status(405).json({ error: 'Method Not Allowed' });
+  }
+}
+
+
+
+
+
+
+
+
+// pages/api/system/closeOpen.js
+import { connectToDatabase } from '../../../lib/db';
+
+export default async function handler(req, res) {
+  if (req.method === 'POST') {
+    const { action } = req.body;  // A request body-ban jön a "close" vagy "open" üzenet
+
+    // Ellenőrizzük, hogy a kapott action érték érvényes-e
+    if (action !== 'close' && action !== 'open') {
+      return res.status(400).json({ message: "Invalid action" });
+    }
+
+    const pool = await connectToDatabase();
+    // Az access mezőt frissítjük mindenkinek a students táblában
+    const newAccessState = action === 'close' ? 'zarva' : 'nyitva';
+
+    try {
+      // Az 'access' oszlopot frissítjük
+      await pool.query('UPDATE students SET access = $1', [newAccessState]);
+
+      // A rendszer státuszának frissítése
+      await pool.query('UPDATE system_status SET status = $1 WHERE id = 1', [newAccessState]);
+
+      return res.status(200).json({ message: `All students' access updated to ${newAccessState} and system status updated` });
+    } catch (error) {
+      console.error("Error updating access state:", error);
+      return res.status(500).json({ message: "Failed to update access state and system status" });
+    }
+  } else {
+    // Ha nem POST metódust használunk, akkor 405-ös hibát küldünk
+    res.status(405).json({ message: "Method Not Allowed" });
+  }
+}

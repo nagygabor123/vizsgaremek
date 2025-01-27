@@ -21,7 +21,7 @@ export async function connectToDatabase() {
   return connection;
 }
 
-
+*/
 
 
 
@@ -38,8 +38,8 @@ export async function connectToDatabase() {
     database: process.env.DB_NAME,
   });
   return connection;
-}*/
-
+}
+/*
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
 
@@ -56,3 +56,4 @@ const pool = new Pool({
 export async function connectToDatabase() {
   return pool; // A Pool automatikusan kezeli a kapcsolódásokat
 }
+*/
