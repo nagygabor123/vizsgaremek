@@ -1,11 +1,10 @@
-// app/dashboard/student-list/page.tsx
-
 "use client";  // Add this line at the top
 
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import '../../globals.css';
+
 // Diák típus
 interface Student {
   student_id: string;
@@ -15,8 +14,15 @@ interface Student {
   status: string;
 }
 
+interface Timetable {
+  student_id: string;
+  first_class_start: string;
+  last_class_end: string;
+}
+
 export default function Home() {
   const [students, setStudents] = useState<Student[]>([]);
+  const [studentTimetable, setStudentTimetable] = useState<Timetable[]>([]);
   const [formData, setFormData] = useState<Student>({
     student_id: '',
     full_name: '',
@@ -26,9 +32,7 @@ export default function Home() {
   });
   const [editing, setEditing] = useState<boolean>(false);
   const [editStudentId, setEditStudentId] = useState<string | null>(null);
-
-  // State for system closure
-  const [systemClose, setSystemClose] = useState<boolean>(false); // initial state is false
+  const [systemClose, setSystemClose] = useState<boolean>(false);
 
   // Fetch students from the database
   const fetchStudents = async () => {
@@ -42,9 +46,15 @@ export default function Home() {
     const response = await fetch('http://localhost:3000/api/system/status');
     if (response.ok) {
       const data = await response.json();
-      // If the system status is "nyitva", set systemClose to false, else set it to true
       setSystemClose(data.status === "nyitva" ? false : true);
     }
+  };
+
+  // Fetch timetable for each student
+  const fetchStudentTimetable = async (student_id: string) => {
+    const response = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${student_id}`);
+    const data = await response.json();
+    return data;
   };
 
   // Call fetchStudents and fetchSystemStatus on initial load
@@ -52,6 +62,27 @@ export default function Home() {
     fetchStudents();
     fetchSystemStatus();
   }, []);
+
+  // Fetch timetable for each student
+  useEffect(() => {
+    const fetchTimetables = async () => {
+      const timetables = await Promise.all(
+        students.map(async (student) => {
+          const timetable = await fetchStudentTimetable(student.student_id);
+          return {
+            student_id: student.student_id,
+            first_class_start: timetable.first_class_start,
+            last_class_end: timetable.last_class_end,
+          };
+        })
+      );
+      setStudentTimetable(timetables);
+    };
+
+    if (students.length > 0) {
+      fetchTimetables();
+    }
+  }, [students]);
 
   // Handle form input changes
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -105,8 +136,6 @@ export default function Home() {
   // Handle system close/unlock button click
   const handleSystemClose = async () => {
     const action = systemClose ? 'open' : 'close'; // Determine whether to send "open" or "close"
-    
-    // Send the action to the API
     const response = await fetch('/api/system/closeOpen', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -166,10 +195,19 @@ export default function Home() {
       <ul>
         {students.map((student) => (
           <li key={student.student_id}>
-            {student.full_name} ({student.class},{student.status})
+            {student.full_name} ({student.class}, {student.status})
             <Button onClick={() => handleEdit(student)}>Edit</Button>
             <Button onClick={() => handleDelete(student.student_id)}>Delete</Button>
             <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!systemClose}>Feloldás</Button>
+            <div>
+              {/* Display timetable information */}
+              {studentTimetable.find((timetable) => timetable.student_id === student.student_id) && (
+                <p>
+                  First class starts at: {studentTimetable.find((timetable) => timetable.student_id === student.student_id)?.first_class_start}<br />
+                  Last class ends at: {studentTimetable.find((timetable) => timetable.student_id === student.student_id)?.last_class_end}
+                </p>
+              )}
+            </div>
           </li>
         ))}
       </ul>
