@@ -22,8 +22,21 @@ import { TriangleAlert } from "lucide-react";
 import Link from "next/link";
 
 export default function Page() {
+
+
   const [isOverlayVisible, setOverlayVisible] = useState(false);
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    age: "",
+    city: "",
+    profession: "",
+    hobby: "",
+    experience: "",
+    feedback: "",
+  });
 
   // Ellenőrizzük a localStorage-t a komponens betöltésekor
   useEffect(() => {
@@ -36,17 +49,45 @@ export default function Page() {
     setOverlayVisible(true);
   };
 
-  const handleConfirmClick = () => {
-    setOverlayVisible(false);
-    setButtonVisible(false);
+  // Form adatváltoztatás kezelése
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // Tovább gomb kezelése
+  const handleNext = () => {
+    if (step < 5) setStep(step + 1);
+  };
+
+  // Vissza gomb kezelése
+  const handleBack = () => {
+    if (step > 1) setStep(step - 1);
+  };
+
+  // Form beküldés kezelése
+  const handleFormSubmit = () => {
+    console.log("Form Data:", formData);
+    setOverlayVisible(false); // Felugró ablak eltüntetése
+    setButtonVisible(false); // "Mutasd az ablakot" gomb eltüntetése
     localStorage.setItem("hasClickedOverlayButton", "true");
     window.location.reload();
+  };
+
+  // Bezárás gomb kezelése
+  const handleClose = () => {
+    setOverlayVisible(false); // Felugró ablak eltüntetése
   };
 
   // Addig ne rendereljük a gombot, amíg nem töltöttük be az adatot
   if (isButtonVisible === null) {
     return null; // Várakozás a localStorage betöltésére
   }
+
+
+
 
   return (
     <SidebarProvider>
@@ -100,31 +141,183 @@ export default function Page() {
             </div>
 
             {isOverlayVisible && (
-              <div className="fixed inset-0 bg-white z-50 flex items-center justify-center">
-                <div className="absolute top-4 left-4 text-white text-lg font-semibold">
-                  Ez egy bal felső sarokban lévő szöveg
+        <div className="fixed inset-0 bg-white z-50 flex items-center justify-center">
+          {/*  
+          <div className="absolute top-4 left-4 text-white text-lg font-semibold">
+            Ez egy bal felső sarokban lévő szöveg
+          </div> */}
+
+          {/* Középen tartalom */}
+          <div className="bg-white p-6 max-w-xl w-full">
+            {/* Progress Bar */}
+            <div className="mb-4">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium">Step {step} / 5</span>
+                <div className="flex-1 mx-4 h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div
+                    className={`h-full bg-blue-500 transition-all duration-300`}
+                    style={{ width: `${(step / 5) * 100}%` }}
+                  ></div>
                 </div>
-                <div className="text-center text-black">
-                  <p className="mb-6 text-2xl font-bold">
-                    Ez egy teljes képernyős felugró ablak!
-                  </p>
-                  <div className="flex gap-4 justify-center">
-                    <button
-                      onClick={() => setOverlayVisible(false)}
-                      className="px-4 py-2 text-black bg-white rounded hover:bg-gray-200"
-                    >
-                      Bezárás
-                    </button>
-                    <button
-                      onClick={handleConfirmClick}
-                      className="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700"
-                    >
-                      Megerősítés
-                    </button>
-                  </div>
+              </div>
+            </div>
+
+            {step === 1 && (
+              <div>
+                <h2 className="text-xl font-semibold mb-4">Step 1: Personal Info</h2>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium mb-2">Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded-lg"
+                    placeholder="Enter your name"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium mb-2">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded-lg"
+                    placeholder="Enter your email"
+                  />
                 </div>
               </div>
             )}
+
+            {step === 2 && (
+              <div>
+                <h2 className="text-xl font-semibold mb-4">Step 2: Additional Info</h2>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium mb-2">Age</label>
+                  <input
+                    type="number"
+                    name="age"
+                    value={formData.age}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded-lg"
+                    placeholder="Enter your age"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium mb-2">City</label>
+                  <input
+                    type="text"
+                    name="city"
+                    value={formData.city}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded-lg"
+                    placeholder="Enter your city"
+                  />
+                </div>
+              </div>
+            )}
+
+            {step === 3 && (
+              <div>
+                <h2 className="text-xl font-semibold mb-4">Step 3: Professional Info</h2>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium mb-2">Profession</label>
+                  <input
+                    type="text"
+                    name="profession"
+                    value={formData.profession}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded-lg"
+                    placeholder="Enter your profession"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium mb-2">Hobby</label>
+                  <input
+                    type="text"
+                    name="hobby"
+                    value={formData.hobby}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded-lg"
+                    placeholder="Enter your hobby"
+                  />
+                </div>
+              </div>
+            )}
+
+            {step === 4 && (
+              <div>
+                <h2 className="text-xl font-semibold mb-4">Step 4: Experience</h2>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium mb-2">Experience</label>
+                  <textarea
+                    name="experience"
+                    value={formData.experience}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded-lg"
+                    placeholder="Describe your experience"
+                  />
+                </div>
+              </div>
+            )}
+
+            {step === 5 && (
+              <div>
+                <h2 className="text-xl font-semibold mb-4">Step 5: Feedback</h2>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium mb-2">Feedback</label>
+                  <textarea
+                    name="feedback"
+                    value={formData.feedback}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded-lg"
+                    placeholder="Share your feedback"
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* Navigation Buttons */}
+            <div className="flex justify-between mt-6">
+              {step > 1 && (
+                <button
+                  onClick={handleBack}
+                  className="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
+                >
+                  Back
+                </button>
+              )}
+
+              {step < 5 ? (
+                <button
+                  onClick={handleNext}
+                  className="ml-auto px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                >
+                  Next
+                </button>
+              ) : (
+                <button
+                  onClick={handleFormSubmit}
+                  className="ml-auto px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+                >
+                  Submit
+                </button>
+              )}
+            </div>
+
+            {/* Bezárás gomb */}
+            <div className="mt-4 text-center">
+              <button
+                onClick={handleClose}
+                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+              >
+                Bezárás
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
           </div>
         </div>
       </SidebarInset>

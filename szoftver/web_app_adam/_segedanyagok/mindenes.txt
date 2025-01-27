@@ -5,6 +5,7 @@ LOGÓK
  https://dribbble.com/venos_studio
 
 FŐ WEB DESIGN
+https://dribbble.com/shots/24839518-Get-in-touch-Untitled-UI
  https://dribbble.com/shots/23044530-NTUC-First-Campus-Website
  https://dribbble.com/shots/24301924-NTUC-First-Campus-Responsive-Design
 
@@ -17,12 +18,10 @@ KONFIGURÁTOR
 
 KONFIGURÁTOR MINTA
 https://dribbble.com/shots/20483900-File-Uploader-Modals-Tetrisly-Design-System
+https://dribbble.com/shots/24855426-Simple-Poll-Modal-Question-Answers
 
 
- https://dribbble.com/shots/24855426-Simple-Poll-Modal-Question-Answers
- https://dribbble.com/shots/24494696-Sign-In-Page
- https://github.com/elenamarinaki/multi-step-form---part1
+https://dribbble.com/shots/24494696-Sign-In-Page
 
 
-https://github.com/ebulku/next-stepper !!!!!!!!
-!!!!!!!!!!! https://kodaschool.com/blog/build-a-multistep-form-in-next-js-powered-by-react-hook-form-and-zod 
+

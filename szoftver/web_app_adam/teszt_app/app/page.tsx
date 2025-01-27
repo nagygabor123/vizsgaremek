@@ -52,6 +52,7 @@ export default function HomePage() {
     setOverlayVisible(false); // Felugró ablak eltüntetése
     setButtonVisible(false); // "Mutasd az ablakot" gomb eltüntetése
     localStorage.setItem("hasClickedOverlayButton", "true");
+    window.location.reload();
   };
 
   // Bezárás gomb kezelése
@@ -77,14 +78,14 @@ export default function HomePage() {
       )}
 
       {isOverlayVisible && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center">
-          {/* Bal felső sarokban szöveg */}
+        <div className="fixed inset-0 bg-white z-50 flex items-center justify-center">
+          {/*  
           <div className="absolute top-4 left-4 text-white text-lg font-semibold">
             Ez egy bal felső sarokban lévő szöveg
-          </div>
+          </div> */}
 
           {/* Középen tartalom */}
-          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+          <div className="bg-white p-6 max-w-xl w-full">
             {/* Progress Bar */}
             <div className="mb-4">
               <div className="flex items-center justify-between mb-2">
