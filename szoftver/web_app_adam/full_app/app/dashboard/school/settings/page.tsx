@@ -134,189 +134,112 @@ export default function Page() {
               </div>
             )}
 
-            <div className="aspect-[1/1] rounded-xl bg-muted/50 flex items-center justify-center w-full overflow-hidden">
+            <div className="aspect-[3/1] rounded-xl bg-muted/50 flex items-center justify-center w-full overflow-hidden">
               <p className="text-center text-lg font-bold text-gray-800">
                 Vegyes
               </p>
             </div>
 
             {isOverlayVisible && (
-        <div className="fixed inset-0 bg-white z-50 flex items-center justify-center">
-          {/*  
-          <div className="absolute top-4 left-4 text-white text-lg font-semibold">
-            Ez egy bal felső sarokban lévő szöveg
-          </div> */}
+         <button
+         onClick={handleButtonClick}
+         className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+       >
+         Mutasd az ablakot
+       </button>
+     )}
 
-          {/* Középen tartalom */}
-          <div className="bg-white p-6 max-w-xl w-full">
-            {/* Progress Bar */}
-            <div className="mb-4">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium">Step {step} / 5</span>
-                <div className="flex-1 mx-4 h-2 bg-gray-200 rounded-full overflow-hidden">
-                  <div
-                    className={`h-full bg-blue-500 transition-all duration-300`}
-                    style={{ width: `${(step / 5) * 100}%` }}
-                  ></div>
-                </div>
-              </div>
-            </div>
+{isOverlayVisible && (
+      <div className="fixed inset-0 bg-white z-50 grid grid-cols-2">
+      {/* Left Side */}
+      <div className="flex flex-col justify-between p-8 border-r border-gray-300">
+        {/* Progress Bar */}
+        <div className="w-full bg-gray-200 h-2 relative mb-6">
+          <div
+            className="bg-blue-500 h-2 transition-all duration-300"
+            style={{ width: `${(step / 5) * 100}%` }}
+          ></div>
+        </div>
 
+        {/* Form Content */}
+        <div className="flex flex-col items-center">
+          <h3 className="text-xl font-bold mb-4">Step {step} / 5</h3>
+          <div className="w-full max-w-md">
             {step === 1 && (
-              <div>
-                <h2 className="text-xl font-semibold mb-4">Step 1: Personal Info</h2>
-                <div className="mb-4">
-                  <label className="block text-sm font-medium mb-2">Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded-lg"
-                    placeholder="Enter your name"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className="block text-sm font-medium mb-2">Email</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded-lg"
-                    placeholder="Enter your email"
-                  />
-                </div>
+              <div className="mb-6">
+                <label className="block text-sm font-medium mb-2">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full p-3 border rounded-lg"
+                  placeholder="Enter your name"
+                />
               </div>
             )}
 
             {step === 2 && (
-              <div>
-                <h2 className="text-xl font-semibold mb-4">Step 2: Additional Info</h2>
-                <div className="mb-4">
-                  <label className="block text-sm font-medium mb-2">Age</label>
-                  <input
-                    type="number"
-                    name="age"
-                    value={formData.age}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded-lg"
-                    placeholder="Enter your age"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className="block text-sm font-medium mb-2">City</label>
-                  <input
-                    type="text"
-                    name="city"
-                    value={formData.city}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded-lg"
-                    placeholder="Enter your city"
-                  />
-                </div>
+              <div className="mb-6">
+                <label className="block text-sm font-medium mb-2">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full p-3 border rounded-lg"
+                  placeholder="Enter your email"
+                />
               </div>
             )}
 
-            {step === 3 && (
-              <div>
-                <h2 className="text-xl font-semibold mb-4">Step 3: Professional Info</h2>
-                <div className="mb-4">
-                  <label className="block text-sm font-medium mb-2">Profession</label>
-                  <input
-                    type="text"
-                    name="profession"
-                    value={formData.profession}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded-lg"
-                    placeholder="Enter your profession"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className="block text-sm font-medium mb-2">Hobby</label>
-                  <input
-                    type="text"
-                    name="hobby"
-                    value={formData.hobby}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded-lg"
-                    placeholder="Enter your hobby"
-                  />
-                </div>
-              </div>
-            )}
+            {/* Add similar sections for steps 3, 4, and 5 */}
+          </div>
 
-            {step === 4 && (
-              <div>
-                <h2 className="text-xl font-semibold mb-4">Step 4: Experience</h2>
-                <div className="mb-4">
-                  <label className="block text-sm font-medium mb-2">Experience</label>
-                  <textarea
-                    name="experience"
-                    value={formData.experience}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded-lg"
-                    placeholder="Describe your experience"
-                  />
-                </div>
-              </div>
-            )}
-
-            {step === 5 && (
-              <div>
-                <h2 className="text-xl font-semibold mb-4">Step 5: Feedback</h2>
-                <div className="mb-4">
-                  <label className="block text-sm font-medium mb-2">Feedback</label>
-                  <textarea
-                    name="feedback"
-                    value={formData.feedback}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded-lg"
-                    placeholder="Share your feedback"
-                  />
-                </div>
-              </div>
-            )}
-
-            {/* Navigation Buttons */}
-            <div className="flex justify-between mt-6">
-              {step > 1 && (
-                <button
-                  onClick={handleBack}
-                  className="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
-                >
-                  Back
-                </button>
-              )}
-
-              {step < 5 ? (
-                <button
-                  onClick={handleNext}
-                  className="ml-auto px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-                >
-                  Next
-                </button>
-              ) : (
-                <button
-                  onClick={handleFormSubmit}
-                  className="ml-auto px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
-                >
-                  Submit
-                </button>
-              )}
-            </div>
-
-            {/* Bezárás gomb */}
-            <div className="mt-4 text-center">
+          {/* Navigation Buttons */}
+          <div className="flex justify-end w-full max-w-md mt-6 space-x-4">
+            {step > 1 && (
               <button
-                onClick={handleClose}
-                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+                onClick={handleBack}
+                className="px-6 py-3 bg-gray-300 rounded-lg hover:bg-gray-400"
               >
-                Bezárás
+                Back
               </button>
-            </div>
+            )}
+            {step < 5 ? (
+              <button
+                onClick={handleNext}
+                className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+              >
+                Next
+              </button>
+            ) : (
+              <button
+                onClick={handleFormSubmit}
+                className="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600"
+              >
+                Submit
+              </button>
+            )}
           </div>
         </div>
+
+        {/* Close Button */}
+        <button
+          onClick={handleClose}
+          className="absolute bottom-4 left-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+        >
+          Bezárás
+        </button>
+      </div>
+
+      {/* Right Side */}
+      <div className="flex items-center justify-center">
+        <div className="w-3/4 h-3/4 bg-gray-100 border border-gray-300 rounded-lg flex items-center justify-center">
+          <p className="text-gray-500">Image placeholder</p>
+        </div>
+      </div>
+    </div>
       )}
           </div>
         </div>

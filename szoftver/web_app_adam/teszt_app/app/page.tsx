@@ -17,18 +17,15 @@ export default function HomePage() {
     feedback: "",
   });
 
-  // Ellenőrizzük a localStorage-t a komponens betöltésekor
   useEffect(() => {
     const hasClickedBefore = localStorage.getItem("hasClickedOverlayButton");
     setButtonVisible(hasClickedBefore !== "true");
   }, []);
 
-  // Gomb kattintás kezelése
   const handleButtonClick = () => {
     setOverlayVisible(true);
   };
 
-  // Form adatváltoztatás kezelése
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
@@ -36,38 +33,32 @@ export default function HomePage() {
     });
   };
 
-  // Tovább gomb kezelése
   const handleNext = () => {
     if (step < 5) setStep(step + 1);
   };
 
-  // Vissza gomb kezelése
   const handleBack = () => {
     if (step > 1) setStep(step - 1);
   };
 
-  // Form beküldés kezelése
   const handleFormSubmit = () => {
     console.log("Form Data:", formData);
-    setOverlayVisible(false); // Felugró ablak eltüntetése
-    setButtonVisible(false); // "Mutasd az ablakot" gomb eltüntetése
+    setOverlayVisible(false);
+    setButtonVisible(false);
     localStorage.setItem("hasClickedOverlayButton", "true");
     window.location.reload();
   };
 
-  // Bezárás gomb kezelése
   const handleClose = () => {
-    setOverlayVisible(false); // Felugró ablak eltüntetése
+    setOverlayVisible(false);
   };
 
-  // Addig ne rendereljük a gombot, amíg nem töltöttük be az adatot
   if (isButtonVisible === null) {
-    return null; // Várakozás a localStorage betöltésére
+    return null;
   }
 
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-gray-100">
-      {/* Gomb csak akkor jelenik meg, ha az isButtonVisible true */}
       {isButtonVisible && (
         <button
           onClick={handleButtonClick}
@@ -78,30 +69,25 @@ export default function HomePage() {
       )}
 
       {isOverlayVisible && (
-        <div className="fixed inset-0 bg-white z-50 flex items-center justify-center">
-          {/*  
-          <div className="absolute top-4 left-4 text-white text-lg font-semibold">
-            Ez egy bal felső sarokban lévő szöveg
-          </div> */}
+        <div className="fixed inset-0 bg-white z-50 flex flex-col">
+          {/* Progress Bar */}
+          <div className="w-full bg-gray-200 h-2 relative">
+            <div
+              className="bg-blue-500 h-2 transition-all duration-300"
+              style={{ width: `${(step / 5) * 100}%` }}
+            ></div>
+          </div>
 
-          {/* Középen tartalom */}
-          <div className="bg-white p-6 max-w-xl w-full">
-            {/* Progress Bar */}
-            <div className="mb-4">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium">Step {step} / 5</span>
-                <div className="flex-1 mx-4 h-2 bg-gray-200 rounded-full overflow-hidden">
-                  <div
-                    className={`h-full bg-blue-500 transition-all duration-300`}
-                    style={{ width: `${(step / 5) * 100}%` }}
-                  ></div>
-                </div>
-              </div>
-            </div>
+          {/* Title and Steps */}
+          <div className="flex flex-col items-start p-4">
+            <h2 className="text-2xl font-bold mb-2">Step {step} / 5</h2>
+          </div>
 
+          {/* Form Content */}
+          <div className="flex flex-col justify-center items-center flex-grow">
             {step === 1 && (
-              <div>
-                <h2 className="text-xl font-semibold mb-4">Step 1: Personal Info</h2>
+              <div className="w-full max-w-lg">
+                <h3 className="text-xl font-semibold mb-4">Personal Info</h3>
                 <div className="mb-4">
                   <label className="block text-sm font-medium mb-2">Name</label>
                   <input
@@ -128,8 +114,8 @@ export default function HomePage() {
             )}
 
             {step === 2 && (
-              <div>
-                <h2 className="text-xl font-semibold mb-4">Step 2: Additional Info</h2>
+              <div className="w-full max-w-lg">
+                <h3 className="text-xl font-semibold mb-4">Additional Info</h3>
                 <div className="mb-4">
                   <label className="block text-sm font-medium mb-2">Age</label>
                   <input
@@ -156,8 +142,8 @@ export default function HomePage() {
             )}
 
             {step === 3 && (
-              <div>
-                <h2 className="text-xl font-semibold mb-4">Step 3: Professional Info</h2>
+              <div className="w-full max-w-lg">
+                <h3 className="text-xl font-semibold mb-4">Professional Info</h3>
                 <div className="mb-4">
                   <label className="block text-sm font-medium mb-2">Profession</label>
                   <input
@@ -184,8 +170,8 @@ export default function HomePage() {
             )}
 
             {step === 4 && (
-              <div>
-                <h2 className="text-xl font-semibold mb-4">Step 4: Experience</h2>
+              <div className="w-full max-w-lg">
+                <h3 className="text-xl font-semibold mb-4">Experience</h3>
                 <div className="mb-4">
                   <label className="block text-sm font-medium mb-2">Experience</label>
                   <textarea
@@ -200,8 +186,8 @@ export default function HomePage() {
             )}
 
             {step === 5 && (
-              <div>
-                <h2 className="text-xl font-semibold mb-4">Step 5: Feedback</h2>
+              <div className="w-full max-w-lg">
+                <h3 className="text-xl font-semibold mb-4">Feedback</h3>
                 <div className="mb-4">
                   <label className="block text-sm font-medium mb-2">Feedback</label>
                   <textarea
@@ -215,8 +201,7 @@ export default function HomePage() {
               </div>
             )}
 
-            {/* Navigation Buttons */}
-            <div className="flex justify-between mt-6">
+            <div className="flex justify-between w-full max-w-lg mt-6">
               {step > 1 && (
                 <button
                   onClick={handleBack}
@@ -225,33 +210,32 @@ export default function HomePage() {
                   Back
                 </button>
               )}
-
               {step < 5 ? (
                 <button
                   onClick={handleNext}
-                  className="ml-auto px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                  className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 ml-auto"
                 >
                   Next
                 </button>
               ) : (
                 <button
                   onClick={handleFormSubmit}
-                  className="ml-auto px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+                  className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 ml-auto"
                 >
                   Submit
                 </button>
               )}
             </div>
+          </div>
 
-            {/* Bezárás gomb */}
-            <div className="mt-4 text-center">
-              <button
-                onClick={handleClose}
-                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-              >
-                Bezárás
-              </button>
-            </div>
+          {/* Close Button */}
+          <div className="fixed bottom-4 left-4">
+            <button
+              onClick={handleClose}
+              className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+            >
+              Bezárás
+            </button>
           </div>
         </div>
       )}
