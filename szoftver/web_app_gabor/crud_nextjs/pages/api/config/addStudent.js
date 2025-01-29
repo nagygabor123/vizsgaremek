@@ -1,13 +1,3 @@
-import { connectToDatabase } from '../../../lib/db';
-import fs from 'fs';
-import multiparty from 'multiparty';
-
-export const config = {
-  api: {
-    bodyParser: false, // Le kell tiltani a Next.js alapértelmezett bodyParser-t
-  },
-};
-
 /**
  * @swagger
  * /api/config/addStudent:
@@ -69,6 +59,18 @@ export const config = {
  *                   type: string
  *                   example: "Failed to process the file"
  */
+
+import { connectToDatabase } from '../../../lib/db';
+import fs from 'fs';
+import multiparty from 'multiparty';
+
+export const config = {
+  api: {
+    bodyParser: false, // Le kell tiltani a Next.js alapértelmezett bodyParser-t
+  },
+};
+
+
 export default function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Only POST requests are allowed' });

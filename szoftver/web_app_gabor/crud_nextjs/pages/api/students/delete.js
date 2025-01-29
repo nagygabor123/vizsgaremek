@@ -1,5 +1,3 @@
-import { connectToDatabase } from '../../../lib/db';
-
 /**
  * @swagger
  * /api/students/delete:
@@ -75,6 +73,10 @@ import { connectToDatabase } from '../../../lib/db';
  *                   type: string
  *                   example: "Database error details"
  */
+
+import { connectToDatabase } from '../../../lib/db';
+
+
 export default async function handler(req, res) {
   if (req.method === 'DELETE') {
     const { student_id } = req.body;

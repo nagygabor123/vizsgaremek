@@ -1,5 +1,3 @@
-import { connectToDatabase } from '../../../lib/db';
-
 /**
  * @swagger
  * /api/system/closeOpen:
@@ -62,6 +60,10 @@ import { connectToDatabase } from '../../../lib/db';
  *                   type: string
  *                   example: "Failed to update access state and system status"
  */
+
+import { connectToDatabase } from '../../../lib/db';
+
+
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { action } = req.body;  // A request body-ban jön a "close" vagy "open" üzenet

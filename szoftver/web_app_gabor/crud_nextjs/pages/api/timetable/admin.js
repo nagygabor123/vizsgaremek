@@ -1,5 +1,4 @@
 // pages/api/timetable/admin.js
-import { connectToDatabase } from '../../../lib/db';
 /**
  * @swagger
  * /api/timetable/admin:
@@ -63,6 +62,9 @@ import { connectToDatabase } from '../../../lib/db';
  *                   type: string
  *                   example: "Method Not Allowed"
  */
+
+import { connectToDatabase } from '../../../lib/db';
+
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     const teacherName = 'nagy'; // A tanár neve, amit keresünk

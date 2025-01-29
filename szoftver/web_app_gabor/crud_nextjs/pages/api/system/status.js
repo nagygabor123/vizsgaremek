@@ -1,4 +1,3 @@
-import { connectToDatabase } from '../../../lib/db';
 /**
  * @swagger
  * /api/system/status:
@@ -49,6 +48,9 @@ import { connectToDatabase } from '../../../lib/db';
  *                   type: string
  *                   example: "Method Not Allowed"
  */
+
+import { connectToDatabase } from '../../../lib/db';
+
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
