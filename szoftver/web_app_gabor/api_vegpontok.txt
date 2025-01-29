@@ -24,7 +24,7 @@ DIÁKOK LITÁJA  http://localhost:3000/dashboard/student-list
 
 KONFIGURÁCIÓS OLDAL  http://localhost:3000/dashboard/configuration  
 
-
+API DOKUMENTÁCIÓ  http://localhost:3000/api-docs
 
 
 

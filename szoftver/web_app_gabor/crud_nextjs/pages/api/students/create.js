@@ -17,11 +17,11 @@
  *               student_id:
  *                 type: string
  *                 description: A diák azonosítója.
- *                 example: "12345"
+ *                 example: "OM56555"
  *               full_name:
  *                 type: string
  *                 description: A diák teljes neve.
- *                 example: "Kovács Gábor"
+ *                 example: "fasz kalap"
  *               class:
  *                 type: string
  *                 description: A diák osztálya.
@@ -29,7 +29,7 @@
  *               rfid_tag:
  *                 type: string
  *                 description: A diák RFID címkéje.
- *                 example: "abc123"
+ *                 example: "58D90E3E"
  *     responses:
  *       201:
  *         description: Sikeresen létrehozott diák

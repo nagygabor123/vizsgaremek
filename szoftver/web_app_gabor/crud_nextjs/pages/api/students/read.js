@@ -19,23 +19,27 @@
  *                   student_id:
  *                     type: string
  *                     description: A diák azonosítója.
- *                     example: "12345"
+ *                     example: "OM11111"
  *                   full_name:
  *                     type: string
  *                     description: A diák teljes neve.
- *                     example: "Kovács Gábor"
+ *                     example: "Szalkai-Szabó Ádám"
  *                   class:
  *                     type: string
  *                     description: A diák osztálya.
- *                     example: "12.A"
+ *                     example: "13.I"
  *                   rfid_tag:
  *                     type: string
  *                     description: A diák RFID címkéje.
- *                     example: "abc123"
+ *                     example: "DA6BD581"
+ *                   access:
+ *                     type: string
+ *                     description: A szekrény státusza (pl. elérhető, foglalt).
+ *                     example: "nyitva"
  *                   status:
  *                     type: string
  *                     description: A szekrény státusza (pl. elérhető, foglalt).
- *                     example: "elérhető"
+ *                     example: "ki"
  *       405:
  *         description: A HTTP metódus nem engedélyezett
  *         content:

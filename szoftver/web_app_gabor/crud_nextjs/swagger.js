@@ -4,9 +4,9 @@ const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerDefinition = {
   openapi: '3.0.0',
   info: {
-    title: 'CRUD API Dokumentáció',
+    title: 'TELOCK API Dokumentáció',
     version: '1.0.0',
-    description: 'Dokumentáció a CRUD műveletekhez',
+    description: 'API dokumentáció a TELOCK szoftverhez',
   },
   servers: [
     {

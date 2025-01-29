@@ -17,7 +17,7 @@
  *               student_id:
  *                 type: string
  *                 description: A törlendő diák azonosítója.
- *                 example: "12345"
+ *                 example: "OM56555"
  *     responses:
  *       200:
  *         description: Sikeres törlés

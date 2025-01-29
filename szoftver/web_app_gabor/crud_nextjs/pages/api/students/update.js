@@ -17,19 +17,19 @@
  *               student_id:
  *                 type: string
  *                 description: A módosítani kívánt diák azonosítója.
- *                 example: "12345"
+ *                 example: "OM44444"
  *               full_name:
  *                 type: string
  *                 description: A diák teljes neve.
- *                 example: "Kovács Gábor"
+ *                 example: "Pál Edvin"
  *               class:
  *                 type: string
  *                 description: A diák osztálya.
- *                 example: "12.A"
+ *                 example: "13.D"
  *               rfid_tag:
  *                 type: string
  *                 description: A diák RFID címkéje.
- *                 example: "abc123"
+ *                 example: "53D00E3E"
  *     responses:
  *       200:
  *         description: Sikeres frissítés
