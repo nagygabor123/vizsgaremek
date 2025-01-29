@@ -1,4 +1,3 @@
-// pages/api/students/create.js
 import { connectToDatabase } from '../../../lib/db';
 
 /**
@@ -6,40 +5,73 @@ import { connectToDatabase } from '../../../lib/db';
  * /api/students/create:
  *   post:
  *     summary: Új diák létrehozása
- *     description: Új diák hozzáadása az adatbázishoz a megadott adatokkal.
+ *     description: Létrehoz egy új diákot a megadott adatokkal.
+ *     tags:
+ *       - Students
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
- *             required:
- *               - student_id
- *               - full_name
- *               - class
- *               - rfid_tag
  *             properties:
  *               student_id:
  *                 type: string
- *                 description: A diák egyedi azonosítója.
+ *                 description: A diák azonosítója.
+ *                 example: "12345"
  *               full_name:
  *                 type: string
  *                 description: A diák teljes neve.
+ *                 example: "Kovács Gábor"
  *               class:
  *                 type: string
- *                 description: Az osztály, amelybe a diák tartozik.
+ *                 description: A diák osztálya.
+ *                 example: "12.A"
  *               rfid_tag:
  *                 type: string
- *                 description: A diák RFID kártyájának azonosítója.
+ *                 description: A diák RFID címkéje.
+ *                 example: "abc123"
  *     responses:
  *       201:
- *         description: A diák sikeresen létrehozva.
+ *         description: Sikeresen létrehozott diák
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Student created"
  *       400:
- *         description: Hiányzó kötelező mezők.
+ *         description: Hiányzó kötelező mezők
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Missing required fields"
  *       500:
- *         description: Hiba történt a diák létrehozása közben.
+ *         description: Hiba a diák létrehozása során
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Error creating student"
  *       405:
- *         description: Nem támogatott HTTP metódus.
+ *         description: A HTTP metódus nem engedélyezett
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Method Not Allowed"
  */
 export default async function handler(req, res) {
   if (req.method === 'POST') {

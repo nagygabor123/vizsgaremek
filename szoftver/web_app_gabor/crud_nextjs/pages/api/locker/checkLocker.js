@@ -1,4 +1,76 @@
 // pages/api/locker/checkLocker.js
+
+/**
+ * @swagger
+ * /api/locker/checkLocker:
+ *   get:
+ *     summary: Az RFID kártya státuszának lekérdezése
+ *     description: Lekérdezi a diák hozzáférési státuszát az RFID kártya alapján, és visszaadja azt.
+ *     parameters:
+ *       - in: query
+ *         name: rfid
+ *         required: true
+ *         description: Az RFID kártya azonosítója, amely alapján ellenőrizzük a hozzáférési státuszt.
+ *         schema:
+ *           type: string
+ *           example: "F7F59C7A"
+ *     tags:
+ *       - Locker
+ *     responses:
+ *       200:
+ *         description: A sikeres lekérdezés, amely tartalmazza a diák hozzáférési státuszát.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   access:
+ *                     type: string
+ *                     description: A diák hozzáférési státusza.
+ *                     example: "nyitva"
+ *       400:
+ *         description: Ha az RFID paraméter hiányzik a kérésből.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "RFID is required"
+ *       404:
+ *         description: Ha az RFID kártya nem található az adatbázisban.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "RFID not found"
+ *       500:
+ *         description: Ha hiba történik az adatbázis kapcsolat során.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Database connection error"
+ *       405:
+ *         description: Ha nem GET metódust használunk.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Method Not Allowed"
+ */
 import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {

@@ -1,5 +1,80 @@
 import { connectToDatabase } from '../../../lib/db';
 
+/**
+ * @swagger
+ * /api/students/delete:
+ *   delete:
+ *     summary: Diák törlése
+ *     description: A diák törlésére szolgáló API végpont, amely eltávolítja a diákot és a hozzá kapcsolódó adatokat a rendszerből.
+ *     tags:
+ *       - Students
+ *     requestBody:
+ *       description: A diák törléséhez szükséges adatok.
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               student_id:
+ *                 type: string
+ *                 description: A törlendő diák azonosítója.
+ *                 example: "12345"
+ *     responses:
+ *       200:
+ *         description: Sikeres törlés
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Student deleted"
+ *       400:
+ *         description: Hiányzó student_id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Missing student_id"
+ *       404:
+ *         description: A diák nem található
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Student not found"
+ *       405:
+ *         description: A HTTP metódus nem engedélyezett
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Method Not Allowed"
+ *       500:
+ *         description: Hiba történt a diák törlése során
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Error deleting student"
+ *                 error:
+ *                   type: string
+ *                   example: "Database error details"
+ */
 export default async function handler(req, res) {
   if (req.method === 'DELETE') {
     const { student_id } = req.body;

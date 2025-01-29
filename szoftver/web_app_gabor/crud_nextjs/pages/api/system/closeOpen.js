@@ -1,5 +1,67 @@
 import { connectToDatabase } from '../../../lib/db';
 
+/**
+ * @swagger
+ * /api/system/closeOpen:
+ *   post:
+ *     summary: Frissíti a rendszer hozzáférési állapotát és a rendszer státuszt
+ *     description: A POST kérés frissíti a diákok hozzáférési állapotát ("nyitva" vagy "zárva"), valamint frissíti a rendszer státuszát.
+ *     tags:
+ *       - System
+ *     requestBody:
+ *       description: A kívánt művelet ("close" vagy "open") megadása.
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               action:
+ *                 type: string
+ *                 enum: [open, close]
+ *                 description: A művelet, amelyet végre kell hajtani a diákok hozzáférésének módosítására és a rendszer státuszának frissítésére.
+ *                 example: "open"
+ *     responses:
+ *       200:
+ *         description: A diákok hozzáférési állapotának és a rendszer státuszának frissítése sikeres volt.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "All students' access updated to nyitva and system status updated"
+ *       400:
+ *         description: Érvénytelen művelet (ha a 'action' érték nem 'open' vagy 'close').
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Invalid action"
+ *       405:
+ *         description: Az adott HTTP metódus nem engedélyezett (nem POST kérés).
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Method Not Allowed"
+ *       500:
+ *         description: Hiba történt a hozzáférési állapot és a rendszer státuszának frissítése során.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Failed to update access state and system status"
+ */
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { action } = req.body;  // A request body-ban jön a "close" vagy "open" üzenet

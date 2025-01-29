@@ -8,6 +8,67 @@ export const config = {
   },
 };
 
+/**
+ * @swagger
+ * /api/config/addStudent:
+ *   post:
+ *     summary: Diákok CSV fájl alapú feltöltése
+ *     description: A felhasználó CSV fájlt tölthet fel, amely tartalmazza a diákok adatait, és ezek az adatok bekerülnek az adatbázisba.
+ *     tags:
+ *       - Configuration
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               file:
+ *                 type: string
+ *                 format: binary
+ *                 description: A CSV fájl feltöltése
+ *     responses:
+ *       200:
+ *         description: Sikeresen hozzáadott diákok
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Students added successfully"
+ *       400:
+ *         description: Hiányzó mezők vagy duplikált bejegyzés
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Missing required fields for a student" 
+ *       405:
+ *         description: A HTTP metódus nem engedélyezett
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Only POST requests are allowed"
+ *       500:
+ *         description: Hiba a fájl feldolgozása vagy az adatbázis művelet során
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Failed to process the file"
+ */
 export default function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Only POST requests are allowed' });

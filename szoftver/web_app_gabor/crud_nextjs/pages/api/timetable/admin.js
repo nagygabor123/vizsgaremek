@@ -1,6 +1,68 @@
 // pages/api/timetable/admin.js
 import { connectToDatabase } from '../../../lib/db';
-
+/**
+ * @swagger
+ * /api/timetable/admin:
+ *   get:
+ *     summary: Tanári órarend lekérése
+ *     description: A GET kérés lekéri a megadott tanár órarendi adatait a napok és időpontok szerint, csoportok és diákok számára.
+ *     tags:
+ *       - Timetable
+ *     responses:
+ *       200:
+ *         description: A tanár órarendi adatainak sikeres lekérése.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   day_of_week:
+ *                     type: string
+ *                     description: A hét napja (pl. Hetfo).
+ *                     example: "Hetfo"
+ *                   start_time:
+ *                     type: string
+ *                     description: Az óra kezdési ideje.
+ *                     example: "07:15:00"
+ *                   end_time:
+ *                     type: string
+ *                     description: Az óra befejezési ideje.
+ *                     example: "08:00:00"
+ *                   group_name:
+ *                     type: string
+ *                     description: A csoport neve.
+ *                     example: "13.I Physics"
+ *                   teacher_name:
+ *                     type: string
+ *                     description: A tanár neve.
+ *                     example: "nagy"
+ *                   class:
+ *                     type: string
+ *                     description: A diák osztálya.
+ *                     example: "13.I"
+ *       500:
+ *         description: Hiba történt az adatbázis kapcsolat során.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Database connection error"
+ *       405:
+ *         description: Az adott HTTP metódus nem engedélyezett (nem GET kérés).
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Method Not Allowed"
+ */
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     const teacherName = 'nagy'; // A tanár neve, amit keresünk

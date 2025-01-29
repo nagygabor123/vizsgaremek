@@ -1,3 +1,69 @@
+
+/**
+ * @swagger
+ * /api/locker/getLocker:
+ *   get:
+ *     summary: RFID kártya alapú zár lekérdezése
+ *     description: Lekérdezi, hogy az adott RFID kártyához tartozó zár "nyitva" vagy "zárva" van-e, és ha "nyitva" van, akkor visszaadja a hozzárendelt zár azonosítóját.
+ *     parameters:
+ *       - in: query
+ *         name: rfid
+ *         required: true
+ *         description: Az RFID kártya azonosítója, amely alapján ellenőrizzük a hozzáférést.
+ *         schema:
+ *           type: string
+ *           example: "F7F59C7A"
+ *     tags:
+ *       - Locker
+ *     responses:
+ *       200:
+ *         description: A lekérdezés eredménye. Visszaadja a zár azonosítóját, ha "nyitva" van, vagy "zarva", ha zárva van.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ *               example: "123"
+ *       400:
+ *         description: Ha az RFID paraméter hiányzik vagy érvénytelen "access" érték található.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "RFID is required"
+ *       404:
+ *         description: Ha nem található sem zár, sem diák az adatbázisban.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "No locker found for this RFID"
+ *       405:
+ *         description: Ha nem GET metódust használunk.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Method Not Allowed"
+ *       500:
+ *         description: Ha hiba történt az adatbázis kapcsolat során.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Database connection error"
+ */
 import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {

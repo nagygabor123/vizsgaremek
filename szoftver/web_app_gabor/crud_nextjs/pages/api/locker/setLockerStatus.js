@@ -1,4 +1,73 @@
 // pages/api/locker/setLockerStatus.js
+
+/**
+ * @swagger
+ * /api/locker/setLockerStatus:
+ *   patch:
+ *     summary: Zár állapotának frissítése
+ *     description: Frissíti a zár állapotát "nyitva" (be) vagy "zárva" (ki) állapotra, a jelenlegi állapottól függően.
+ *     parameters:
+ *       - in: query
+ *         name: id
+ *         required: true
+ *         description: A zár azonosítója, amelyet módosítani szeretnénk. Az értéknek 1 és 99 között kell lennie.
+ *         schema:
+ *           type: integer
+ *           example: 2
+ *     tags:
+ *       - Locker
+ *     responses:
+ *       200:
+ *         description: A zár állapota sikeresen frissítve lett.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Locker 2 status updated to 'ki'"
+ *       400:
+ *         description: Ha a zár azonosítója nem érvényes (nem szám vagy kívül esik az engedélyezett tartományon).
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Invalid locker number"
+ *       404:
+ *         description: Ha a zár nem található az adatbázisban.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Locker not found"
+ *       500:
+ *         description: Ha hiba történt az adatbázis kapcsolat vagy a zár állapotának frissítése során.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Internal Server Error"
+ *       405:
+ *         description: Ha nem PATCH metódust használunk.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Method Not Allowed"
+ */
 import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {
