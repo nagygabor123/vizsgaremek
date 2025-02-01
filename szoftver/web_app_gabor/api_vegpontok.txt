@@ -33,7 +33,7 @@ BACKEND:
 
 RENDSZER STÁTUSZ  http://localhost:3000/api/system/status  GET
 
-RENDSZER|DIÁKOK ZARVA/NYITVA  http://localhost:3000/api/system/closeOpen  POST
+RENDSZER|OSSZES DIÁK ZARVA/NYITVA  http://localhost:3000/api/system/closeOpen  POST
 
 DIÁK ENGEDÉLYEZÉSE  http://localhost:3000/api/locker/studentOpen  POST
 
@@ -48,3 +48,6 @@ DIÁK STÁTUSZÁNAK ÁLLÍTÁSA  http://localhost:3000/api/locker/setLockerStatu
 DIÁKOK FELTÖLTÉSE AZ ADATBAZISBAN  http://localhost:3000/api/config/addStudent  POST
 
 DIÁK NAPJA START/END  http://localhost:3000/api/timetable/scheduleStart?student=OM44444  GET
+
+EGY DIÁK CLOSE/OPEN  http://localhost:3000/api/system/studentCloseOpen?student=OM44444  POST 
+
