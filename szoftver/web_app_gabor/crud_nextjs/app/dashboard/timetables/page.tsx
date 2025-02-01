@@ -63,6 +63,7 @@ const breakDates = [
 const plusDates = [
   { date: '2024-12-07', replaceDay: 'monday' },
   { date: '2024-12-21', replaceDay: 'monday' },
+  { date: '2025-02-01', replaceDay: 'monday' },
 ];
 
 
