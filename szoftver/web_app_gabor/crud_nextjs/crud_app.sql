@@ -105,7 +105,7 @@ INSERT INTO `locker_relationships` (`relationship_id`, `rfid_tag`, `locker_id`) 
 
 
 INSERT INTO `system_status` (`id`, `status`) VALUES
-(1, 'nyithato');
+(1, 'nyitva');
 
 
 INSERT INTO `groups` ( `group_name`) VALUES

@@ -86,7 +86,7 @@ export default async function handler(req, res) {
       // Frissítés: az adott diák "access" mezőjének módosítása "nyitva" értékre
       const [result] = await connection.execute(
         'UPDATE students SET access = ? WHERE student_id = ?',
-        ['nyithato', student_id]
+        ['nyitva', student_id]
       );
 
       // Ellenőrizzük, hogy történt-e változás

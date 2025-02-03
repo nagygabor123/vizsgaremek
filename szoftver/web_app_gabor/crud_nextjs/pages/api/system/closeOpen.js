@@ -75,7 +75,7 @@ export default async function handler(req, res) {
 
     const db = await connectToDatabase();
     // Az access mezőt frissítjük mindenkinek a students táblában
-    const newAccessState = action === 'close' ? 'zarva' : 'nyithato';
+    const newAccessState = action === 'close' ? 'zarva' : 'nyitva';
 
     try {
       // Az 'access' oszlopot frissítjük
