@@ -152,9 +152,6 @@ export default function Page() {
 {isOverlayVisible && (
   <div className="fixed inset-0 bg-white z-50 flex flex-col sm:grid sm:grid-cols-2">
     {/* Left Side */}
-    <div className="flex flex-col justify-center items-center p-8 border-b sm:border-r sm:border-b-0 border-gray-300">
-      {/* Progress Bar */}
-      <div className="w-full bg-gray-200 h-2 relative mb-6">
     <div className="relative flex flex-col items-center justify-center p-8 sm:border-r border-gray-300">
       {/* Form Content */}
       <div className="flex flex-col items-center w-full max-w-md">
