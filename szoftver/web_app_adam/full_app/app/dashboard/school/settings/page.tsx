@@ -155,51 +155,66 @@ export default function Page() {
     <div className="flex flex-col justify-center items-center p-8 border-b sm:border-r sm:border-b-0 border-gray-300">
       {/* Progress Bar */}
       <div className="w-full bg-gray-200 h-2 relative mb-6">
-        <div
-          className="bg-blue-500 h-2 transition-all duration-300"
-          style={{ width: `${(step / 5) * 100}%` }}
-        ></div>
-      </div>
-
+    <div className="relative flex flex-col items-center justify-center p-8 sm:border-r border-gray-300">
       {/* Form Content */}
-      <div className="w-full max-w-md">
-        <h3 className="text-xl font-bold mb-4 text-center">Step {step} / 5</h3>
-        {step === 1 && (
-          <div className="mb-6">
-            <label className="block text-sm font-medium mb-2">Name</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full p-3 border rounded-lg"
-              placeholder="Enter your name"
-            />
+      <div className="flex flex-col items-center w-full max-w-md">
+        {/* Progress Bar */}
+        <div className="w-full mb-6">
+          <div className="bg-gray-200 h-2 rounded">
+            <div
+              className="bg-blue-500 h-2 rounded transition-all duration-300"
+              style={{ width: `${(step / 5) * 100}%` }}
+            ></div>
           </div>
-        )}
+        </div>
 
-        {step === 2 && (
-          <div className="mb-6">
-            <label className="block text-sm font-medium mb-2">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full p-3 border rounded-lg"
-              placeholder="Enter your email"
-            />
-          </div>
-        )}
+        {/* Step Title */}
+        <h3 className="text-lg font-bold mb-6 text-center sm:mb-4">Step {step} / 5</h3>
+
+        <div className="w-full">
+          {step === 1 && (
+            <div className="mb-6">
+              <label className="block text-sm font-medium mb-2 text-center sm:text-left">
+                Név
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-lg"
+                placeholder="Adja meg a nevét"
+              />
+            </div>
+          )}
+
+          {step === 2 && (
+            <div className="mb-6">
+              <label className="block text-sm font-medium mb-2 text-center sm:text-left">
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-lg"
+                placeholder="Adja meg az email címét"
+              />
+            </div>
+          )}
+
+          {/* Add similar sections for steps 3, 4, and 5 */}
+        </div>
 
         {/* Navigation Buttons */}
-        <div className="flex justify-end mt-6 space-x-4">
+        <div className="flex justify-end w-full mt-6 space-x-4">
           {step > 1 && (
             <button
               onClick={handleBack}
               className="px-6 py-3 bg-gray-300 rounded-lg hover:bg-gray-400"
             >
-              Back
+              Vissza
             </button>
           )}
           {step < 5 ? (
@@ -207,28 +222,37 @@ export default function Page() {
               onClick={handleNext}
               className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
             >
-              Next
+              Tovább
             </button>
           ) : (
             <button
               onClick={handleFormSubmit}
               className="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600"
             >
-              Submit
+              Küldés
             </button>
           )}
         </div>
       </div>
+
+      {/* "Bezárás" gomb bal alul */}
+      <button
+        onClick={handleClose}
+        className="absolute bottom-4 left-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+      >
+        Bezárás
+      </button>
     </div>
 
-    {/* Right Side */}
+    {/* Right Side (csak desktop nézetben) */}
     <div className="hidden sm:flex items-center justify-center">
       <div className="w-3/4 h-3/4 bg-gray-100 border border-gray-300 rounded-lg flex items-center justify-center">
-        <p className="text-gray-500">Image placeholder</p>
+        <p className="text-gray-500">Képes helyőrző</p>
       </div>
     </div>
   </div>
 )}
+
 
           </div>
         </div>
