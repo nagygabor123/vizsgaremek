@@ -96,11 +96,7 @@ export default function Page() {
               </div>
             )}
 
-            <div className="aspect-[1/1] rounded-xl bg-muted/50 flex items-center justify-center w-full overflow-hidden">
-              <p className="text-center text-lg font-bold text-gray-800">
-                Órarend
-              </p>
-            </div>
+         
 
             {isOverlayVisible && (
               <div className="fixed inset-0 bg-white z-50 flex items-center justify-center">
@@ -129,6 +125,10 @@ export default function Page() {
               </div>
             )}
           </div>
+
+
+órarend
+
         </div>
       </SidebarInset>
     </SidebarProvider>

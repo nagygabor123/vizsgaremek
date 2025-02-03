@@ -83,7 +83,7 @@ export default function Page() {
           </div>
         </header>
        
-Órarend
+órarend
 
 
 

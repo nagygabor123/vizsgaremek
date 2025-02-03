@@ -86,7 +86,7 @@ export default function Page() {
   
           </div>
         </header>
-Data table
+data table
 
 
 
