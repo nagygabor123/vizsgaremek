@@ -21,8 +21,9 @@ import { Button } from "@/components/ui/button";
 import { TriangleAlert } from "lucide-react";
 import Link from "next/link";
 
-export default function Page() {
+import { ChevronRight, ChevronLeft } from "lucide-react"
 
+export default function Page() {
 
   const [isOverlayVisible, setOverlayVisible] = useState(false);
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
@@ -38,18 +39,15 @@ export default function Page() {
     feedback: "",
   });
 
-  // Ellenőrizzük a localStorage-t a komponens betöltésekor
   useEffect(() => {
     const hasClickedBefore = localStorage.getItem("hasClickedOverlayButton");
     setButtonVisible(hasClickedBefore !== "true");
   }, []);
 
-  // Gomb kattintás kezelése
   const handleButtonClick = () => {
     setOverlayVisible(true);
   };
 
-  // Form adatváltoztatás kezelése
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
@@ -57,37 +55,29 @@ export default function Page() {
     });
   };
 
-  // Tovább gomb kezelése
   const handleNext = () => {
     if (step < 5) setStep(step + 1);
   };
 
-  // Vissza gomb kezelése
   const handleBack = () => {
     if (step > 1) setStep(step - 1);
   };
 
-  // Form beküldés kezelése
   const handleFormSubmit = () => {
     console.log("Form Data:", formData);
-    setOverlayVisible(false); // Felugró ablak eltüntetése
-    setButtonVisible(false); // "Mutasd az ablakot" gomb eltüntetése
+    setOverlayVisible(false);
+    setButtonVisible(false);
     localStorage.setItem("hasClickedOverlayButton", "true");
     window.location.reload();
   };
 
-  // Bezárás gomb kezelése
   const handleClose = () => {
-    setOverlayVisible(false); // Felugró ablak eltüntetése
+    setOverlayVisible(false);
   };
 
-  // Addig ne rendereljük a gombot, amíg nem töltöttük be az adatot
   if (isButtonVisible === null) {
-    return null; // Várakozás a localStorage betöltésére
+    return null;
   }
-
-
-
 
   return (
     <SidebarProvider>
@@ -98,22 +88,22 @@ export default function Page() {
             <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
-  <BreadcrumbList>
-  <BreadcrumbItem>
-  <BreadcrumbLink asChild>
-        <Link href="/dashboard">Főoldal</Link>
-      </BreadcrumbLink>
-      </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbPage>Rendszer</BreadcrumbPage>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbPage>Tanév beállításai</BreadcrumbPage>
-    </BreadcrumbItem>
-  </BreadcrumbList>
-</Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link href="/dashboard">Főoldal</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Rendszer</BreadcrumbPage>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Tanév beállításai</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 overflow-x-hidden w-full">
@@ -134,112 +124,75 @@ export default function Page() {
               </div>
             )}
 
-            <div className="aspect-[3/1] rounded-xl bg-muted/50 flex items-center justify-center w-full overflow-hidden">
-              <p className="text-center text-lg font-bold text-gray-800">
-                Vegyes
-              </p>
-            </div>
-
             {isOverlayVisible && (
-         <button
-         onClick={handleButtonClick}
-         className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
-       >
-         Mutasd az ablakot
-       </button>
-     )}
+              <div className="fixed inset-0 bg-white z-50 flex flex-col sm:grid sm:grid-cols-2">
+                <div className="relative flex flex-col items-center justify-center p-8"> {/* sm:border-r border-gray-300*/}
+                  <div className="w-1/2 mb-6 self-start fixed top-0 left-0 right-1/2 px-0">
+                    <div className="bg-white h-3">
+                      <div
+                        className="bg-red-500 h-3 transition-all duration-300"
+                        style={{ width: `${(step / 5) * 100}%` }}
+                      ></div>
+                    </div>
+                  </div>
 
-{isOverlayVisible && (
-  <div className="fixed inset-0 bg-white z-50 flex flex-col sm:grid sm:grid-cols-2">
-    {/* Left Side */}
-    <div className="relative flex flex-col items-center justify-center p-8 sm:border-r border-gray-300">
-      {/* Form Content */}
-      <div className="flex flex-col items-center w-full max-w-md">
-        {/* Progress Bar */}
-        <div className="w-full mb-6">
-          <div className="bg-gray-200 h-2 rounded">
-            <div
-              className="bg-blue-500 h-2 rounded transition-all duration-300"
-              style={{ width: `${(step / 5) * 100}%` }}
-            ></div>
-          </div>
-        </div>
+                  <div className="w-full relative mt-8">
+                    <span className="absolute top-0 right-0 text-sm text-gray-500">{step} / 5</span>
+                    {step === 1 && (
+                      <div className="mb-6">
+                        <label className="block text-sm font-bold">Név</label>
+                        <p className="text-xs text-gray-500 mb-2">Adja meg a nevét</p>
+                        <input
+                          type="text"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          className="w-full p-3 border rounded-lg"
+                        />
+                      </div>
+                    )}
+                    {step === 2 && (
+                      <div className="mb-6">
+                        <label className="block text-sm font-bold">Email</label>
+                        <p className="text-xs text-gray-500 mb-2">Adja meg az email címét</p>
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          className="w-full p-3 border rounded-lg"
+                        />
+                      </div>
+                    )}
+                  </div>
 
-        {/* Step Title */}
-        <h3 className="text-lg font-bold mb-6 text-center sm:mb-4">Step {step} / 5</h3>
+                  <div className="flex justify-end w-full mt-6 space-x-4">
+                    {step > 1 && (
+                      <Button onClick={handleBack} className="px-6 py-3" variant="outline" size="icon">
+                        <ChevronLeft />
+                      </Button>
+                    )}
+                    {step < 5 ? (
+                      <Button onClick={handleNext} className="px-6 py-3 " variant="outline" size="icon">
+                        <ChevronRight />
+                      </Button>
+                    ) : (
+                      <Button onClick={handleFormSubmit} className="px-6 py-3">
+                        Küldés
+                      </Button>
+                    )}
+                  </div>
+                </div>
 
-        <div className="w-full">
-          {step === 1 && (
-            <div className="mb-6">
-              <label className="block text-sm font-medium mb-2 text-center sm:text-left">
-                Név
-              </label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className="w-full p-3 border rounded-lg"
-                placeholder="Adja meg a nevét"
-              />
-            </div>
-          )}
 
-          {step === 2 && (
-            <div className="mb-6">
-              <label className="block text-sm font-medium mb-2 text-center sm:text-left">
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full p-3 border rounded-lg"
-                placeholder="Adja meg az email címét"
-              />
-            </div>
-          )}
-
-          {/* Add similar sections for steps 3, 4, and 5 */}
-        </div>
-
-        {/* Navigation Buttons */}
-        <div className="flex justify-end w-full mt-6 space-x-4">
-          {step > 1 && (
-            <button
-              onClick={handleBack}
-              className="px-6 py-3 bg-gray-300 rounded-lg hover:bg-gray-400"
-            >
-              Vissza
-            </button>
-          )}
-          {step < 5 ? (
-            <button
-              onClick={handleNext}
-              className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-            >
-              Tovább
-            </button>
-          ) : (
-            <button
-              onClick={handleFormSubmit}
-              className="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600"
-            >
-              Küldés
-            </button>
-          )}
-        </div>
-      </div>
-
-      {/* "Bezárás" gomb bal alul */}
-      <button
-        onClick={handleClose}
-        className="absolute bottom-4 left-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-      >
-        Bezárás
-      </button>
-    </div>
+                <Button
+                  onClick={handleClose}
+        className="absolute bottom-4 left-4 px-4 py-2" // px-4 py-2
+                  variant="link"
+                >
+                  Mentés & bezárás
+                </Button>
+    
 
     {/* Right Side (csak desktop nézetben) */}
     <div className="hidden sm:flex items-center justify-center">
@@ -247,10 +200,10 @@ export default function Page() {
         <p className="text-gray-500">Képes helyőrző</p>
       </div>
     </div>
-  </div>
-)}
 
-
+                
+              </div>
+            )}
           </div>
         </div>
       </SidebarInset>
