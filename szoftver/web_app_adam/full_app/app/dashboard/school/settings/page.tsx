@@ -126,11 +126,11 @@ export default function Page() {
 
             {isOverlayVisible && (
               <div className="fixed inset-0 bg-white z-50 flex flex-col sm:grid sm:grid-cols-2">
-                <div className="relative flex flex-col items-center justify-center p-8"> {/* sm:border-r border-gray-300*/}
-                  <div className="w-1/2 mb-6 self-start fixed top-0 left-0 right-1/2 px-0">
+                <div className="relative flex flex-col items-center justify-center p-8 shadow-md"> {/* sm:border-r border-gray-300*/}
+                  <div className="w-1/2 mb-6 self-start fixed top-0 left-0 right-1/2 px-0 ">
                     <div className="bg-white h-3">
                       <div
-                        className="bg-red-500 h-3 transition-all duration-300"
+                        className="bg-neutral-950 h-3 transition-all duration-300"
                         style={{ width: `${(step / 5) * 100}%` }}
                       ></div>
                     </div>
@@ -195,10 +195,10 @@ export default function Page() {
     
 
     {/* Right Side (csak desktop nézetben) */}
-    <div className="hidden sm:flex items-center justify-center">
-      <div className="w-3/4 h-3/4 bg-gray-100 border border-gray-300 rounded-lg flex items-center justify-center">
+    <div className="hidden sm:flex items-center justify-center bg-neutral-50">
+     {/* <div className="w-3/4 h-3/4 bg-gray-100 border border-gray-300 rounded-lg flex items-center justify-center">
         <p className="text-gray-500">Képes helyőrző</p>
-      </div>
+      </div>*/}
     </div>
 
                 
