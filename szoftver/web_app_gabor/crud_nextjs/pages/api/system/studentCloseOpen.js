@@ -56,7 +56,7 @@ export default async function handler(req, res) {
   }
 
   const db = await connectToDatabase();
-  const newAccessState = action === 'close' ? 'zarva' : 'nyitva';
+  const newAccessState = action === 'close' ? 'zarva' : 'nyithato';
 
   try {
     // A diák hozzáférésének frissítése

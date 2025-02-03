@@ -205,7 +205,7 @@ const Calendar: React.FC = () => {
     const response = await fetch('http://localhost:3000/api/system/status');
     if (response.ok) {
       const data = await response.json();
-      setSystemClose(data.status === "nyitva" ? false : true);
+      setSystemClose(data.status === "nyithato" ? false : true);
       
     }
   };
