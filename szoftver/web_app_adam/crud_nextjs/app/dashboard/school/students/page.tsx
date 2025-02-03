@@ -57,6 +57,8 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar"
 
+import Link from "next/link";
+
 // Diák típus
 interface Student {
   student_id: string;
@@ -216,12 +218,22 @@ export default function Home() {
             <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Főoldal</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
+  <BreadcrumbList>
+  <BreadcrumbItem>
+  <BreadcrumbLink asChild>
+        <Link href="/dashboard">Főoldal</Link>
+      </BreadcrumbLink>
+      </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+    <BreadcrumbPage>Adminisztráció</BreadcrumbPage>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Tanulók</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
           </div>
         </header>
         <div className="p-4">
