@@ -1,6 +1,115 @@
 
 
 
+
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import {
+  format,
+  startOfWeek,
+  addDays,
+  subDays,
+  addWeeks,
+  getDay,
+  isToday,
+  isAfter,
+  isBefore,
+} from 'date-fns';
+import { hu } from 'date-fns/locale';
+import '../../globals.css';
+
+import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+
+import { AppSidebar } from "@/components/app-sidebar"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+import { Separator } from "@/components/ui/separator"
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar"
+
+
+
+interface TimetableEntry {
+  day: string;
+  subject: string;
+  start: string;
+  end: string;
+  class: string;
+  group: string;
+  teacher: string;
+}
+
+interface Student {
+  student_id: string;
+  full_name: string;
+  class: string;
+  rfid_tag: string;
+  access: string;
+  status: string;
+}
+
+const lessonTimes = [
+  { start: '07:15', end: '08:00' },
+  { start: '08:10', end: '08:55' },
+  { start: '09:05', end: '09:50' },
+  { start: '10:00', end: '10:45' },
+  { start: '10:55', end: '11:40' },
+  { start: '11:50', end: '12:35' },
+  { start: '12:55', end: '13:40' },
+  { start: '13:45', end: '14:30' },
+  { start: '14:35', end: '15:20' },
+];
+
+const breakDates = [
+  { start: '2024-12-25', end: '2025-01-05' },
+];
+
+const plusDates = [
+  { date: '2024-12-07', replaceDay: 'monday' },
+  { date: '2024-12-21', replaceDay: 'monday' },
+  { date: '2025-02-01', replaceDay: 'monday' },
+];
+
+
+
+const getDayName = (date: Date): string => {
+  const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+  return dayNames[getDay(date)];
+};
+
+const isBreakDay = (date: Date) => {
+  const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  return breakDates.some(({ start, end }) => {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    return targetDate >= startDate && targetDate <= endDate;
+  });
+};
+
+const getReplacedDayName = (date: Date): string => {
+  const formattedDate = format(date, 'yyyy-MM-dd');
+  const replacement = plusDates.find((entry) => entry.date === formattedDate);
+  return replacement ? replacement.replaceDay : getDayName(date);
+};
+
 const Calendar: React.FC = () => {
   const [systemClose, setSystemClose] = useState<boolean>(false); 
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -124,6 +233,30 @@ const Calendar: React.FC = () => {
   };
 
   return (
+
+    <SidebarProvider>
+    <AppSidebar />
+    <SidebarInset>
+      <header className="flex h-16 shrink-0 items-center gap-2">
+        <div className="flex items-center gap-2 px-4">
+          <SidebarTrigger className="-ml-1" />
+          <Separator orientation="vertical" className="mr-2 h-4" />
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem className="hidden md:block">
+                <BreadcrumbLink href="#">
+                  Building Your Application
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator className="hidden md:block" />
+              <BreadcrumbItem>
+                <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
+      </header>
+
     <div className="calendar-container">
       <div className="calendar-header">
         <div className="calendar-date">
@@ -302,7 +435,11 @@ const Calendar: React.FC = () => {
         )}
       </div>
     </div>
+    </SidebarInset>
+    </SidebarProvider>
+
   );
 };
 
 export default Calendar;
+
