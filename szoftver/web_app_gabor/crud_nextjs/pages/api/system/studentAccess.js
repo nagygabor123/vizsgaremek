@@ -1,6 +1,6 @@
 /**
  * @swagger
- * /api/system/studentCloseOpen:
+ * /api/system/studentAccess:
  *   post:
  *     summary: Diák hozzáférésének ideiglenes megnyitása
  *     description: A megadott diák "access" állapotát "nyithato" értékre állítja, majd 10 perc elteltével automatikusan "zarva" állapotra váltja vissza.

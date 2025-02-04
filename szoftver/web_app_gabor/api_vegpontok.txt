@@ -49,7 +49,7 @@ DIÁKOK FELTÖLTÉSE AZ ADATBAZISBAN  http://localhost:3000/api/config/addStuden
 
 DIÁK NAPJA START/END  http://localhost:3000/api/timetable/scheduleStart?student=OM44444  GET
 
-EGY DIÁK enable access 10perc http://localhost:3000/api/system/studentCloseOpen?student=OM44444  POST 
+EGY DIÁK enable access 10perc http://localhost:3000/api/system/studentAccess?student=OM44444  POST 
 
 
 

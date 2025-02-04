@@ -148,12 +148,16 @@ export default function Home() {
   };
 
   const handleStudentOpen = async (student_id: string) => {
-    const response = await fetch('/api/locker/studentOpen', {
+    const response = await fetch(`http://localhost:3000/api/system/studentAccess?student=${student_id}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ student_id }),
     });
+  
+    if (!response.ok) {
+      console.error('Hiba történt a zárolás feloldásakor:', await response.text());
+    }
   };
+  
 
   return (
     <div>
