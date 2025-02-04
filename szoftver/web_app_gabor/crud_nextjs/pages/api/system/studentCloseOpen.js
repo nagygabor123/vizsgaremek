@@ -2,41 +2,28 @@
  * @swagger
  * /api/system/studentCloseOpen:
  *   post:
- *     summary: Frissíti egy adott diák hozzáférési állapotát és a rendszer státuszát
- *     description: A POST kérés frissíti a megadott diák hozzáférési állapotát ("nyitva" vagy "zárva"), valamint frissíti a rendszer státuszát.
- *     tags:
- *       - System
+ *     summary: Diák hozzáférésének ideiglenes megnyitása
+ *     description: A megadott diák "access" állapotát "nyithato" értékre állítja, majd 10 perc elteltével automatikusan "zarva" állapotra váltja vissza.
  *     parameters:
  *       - in: query
  *         name: student
  *         required: true
+ *         description: A diák azonosítója.
  *         schema:
  *           type: string
  *           example: "OM44444"
- *         description: A diák OM azonosítója
- *     requestBody:
- *       description: A kívánt művelet ("close" vagy "open") megadása.
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               action:
- *                 type: string
- *                 enum: [open, close]
- *                 description: A művelet, amelyet végre kell hajtani a diák hozzáférésének módosítására.
- *                 example: "open"
+ *     tags:
+ *       - System
  *     responses:
  *       200:
- *         description: A diák hozzáférési állapotának és a rendszer státuszának frissítése sikeres volt.
+ *         description: Sikeres állapotfrissítés és időzített esemény létrehozása.
  *       400:
- *         description: Érvénytelen művelet vagy hiányzó student azonosító.
- *       405:
- *         description: Az adott HTTP metódus nem engedélyezett.
+ *         description: Hiányzó diák azonosító.
+ *       404:
+ *         description: A megadott diák nem található.
  *       500:
- *         description: Hiba történt a hozzáférési állapot frissítése során.
+ *         description: Hiba történt az adatbázis frissítése vagy az esemény létrehozása közben.
  */
-
 import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {
@@ -44,34 +31,31 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: "Method Not Allowed" });
   }
 
-  const { action } = req.body;
   const { student } = req.query;
 
   if (!student) {
     return res.status(400).json({ message: "Missing student identifier" });
   }
-  
-  if (action !== 'close' && action !== 'open') {
-    return res.status(400).json({ message: "Invalid action" });
-  }
 
   const db = await connectToDatabase();
-  const newAccessState = action === 'close' ? 'zarva' : 'nyitva';
 
   try {
-    // A diák hozzáférésének frissítése
-    const [result] = await db.query('UPDATE students SET access = ? WHERE student_id = ?', [newAccessState, student]);
+    // A diák hozzáférésének frissítése "nyithato" állapotra
+    const [result] = await db.query('UPDATE students SET access = "nyithato" WHERE student_id = ?', [student]);
     
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: "Student not found" });
     }
 
-    // A rendszer státuszának frissítése
-    await db.query('UPDATE system_status SET status = ? WHERE id = 1', [newAccessState]);
-
-    return res.status(200).json({ message: `Student ${student} access updated to ${newAccessState} and system status updated` });
+    // Esemény létrehozása, amely 10 perc után visszaállítja az access értéket "zarva"-ra
+    const eventName = `student _access_${student}`;
+    await db.query(`CREATE EVENT ??
+                    ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL 10 MINUTE
+                    DO UPDATE students SET access = 'zarva' WHERE student_id = ?`, [eventName, student]);
+    
+    return res.status(200).json({ message: `Student ${student} access updated to nyithato and reset event created` });
   } catch (error) {
     console.error("Error updating access state:", error);
-    return res.status(500).json({ message: "Failed to update access state and system status" });
+    return res.status(500).json({ message: "Failed to update access state and create reset event" });
   }
 }
