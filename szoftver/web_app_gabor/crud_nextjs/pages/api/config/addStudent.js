@@ -27,9 +27,9 @@
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "Students added successfully"
+ *                   example: "A diákok sikeresen hozzáadva"
  *       400:
- *         description: Hiányzó mezők vagy duplikált bejegyzés
+ *         description: Hiányzó mezők vagy duplikált bejegyzés vagy "Nincs fájl feltöltve "
  *         content:
  *           application/json:
  *             schema:
@@ -37,7 +37,7 @@
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "Missing required fields for a student" 
+ *                   example: "Hiányoznak egy tanuló kötelező mezői" 
  *       405:
  *         description: A HTTP metódus nem engedélyezett
  *         content:
@@ -47,7 +47,7 @@
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "Only POST requests are allowed"
+ *                   example: "'Csak a POST metódus használható"
  *       500:
  *         description: Hiba a fájl feldolgozása vagy az adatbázis művelet során
  *         content:
@@ -57,7 +57,7 @@
  *               properties:
  *                 error:
  *                   type: string
- *                   example: "Failed to process the file"
+ *                   example: "Hiba a csv fájl elemzésekor"
  */
 
 import { connectToDatabase } from '../../../lib/db';
@@ -66,40 +66,34 @@ import multiparty from 'multiparty';
 
 export const config = {
   api: {
-    bodyParser: false, // Le kell tiltani a Next.js alapértelmezett bodyParser-t
+    bodyParser: false, 
   },
 };
 
 
 export default function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Only POST requests are allowed' });
+    return res.status(405).json({ error: 'Csak a POST metódus használható' });
   }
 
-  // Fájl feltöltése a multiparty segítségével
   const form = new multiparty.Form();
 
   form.parse(req, async (err, fields, files) => {
     if (err) {
-      console.error('Error parsing the form:', err);
-      return res.status(500).json({ error: 'Error parsing the form' });
+      console.error('Hiba a csv fájl elemzésekor:', err);
+      return res.status(500).json({ error: 'Hiba a csv fájl elemzésekor' });
     }
 
-    // A fájl elérési útja
-    const file = files.file[0]; // Az első fájlt vesszük
+    const file = files.file[0];
     if (!file) {
-      return res.status(400).json({ error: 'No file uploaded' });
+      return res.status(400).json({ error: 'Nincs fájl feltöltve' });
     }
 
     try {
-      // A fájl elérési útja
       const filePath = file.path;
       const csvData = fs.readFileSync(filePath, 'utf8');
-
-      // CSV fájl feldolgozása
       const rows = csvData.split('\n').filter(Boolean);
       const header = rows.shift().split(',');
-
       const data = rows.map((row) => {
         const values = row.split(',');
         return header.reduce((acc, key, index) => {
@@ -108,37 +102,36 @@ export default function handler(req, res) {
         }, {});
       });
 
-      // Adatok beszúrása az adatbázisba
-      const db = await connectToDatabase(); // Csatlakozás az adatbázishoz
+      const db = await connectToDatabase(); 
       const insertQuery = 'INSERT INTO students (`student_id`, `full_name`, `class`, `rfid_tag`, `access`) VALUES (?, ?, ?, ?, ?)';
       
       for (let student of data) {
         const { student_id, full_name, class: studentClass, rfid_tag, access } = student;
 
         if (!student_id || !full_name || !studentClass || !rfid_tag) {
-          return res.status(400).json({ message: 'Missing required fields for a student' });
+          return res.status(400).json({ message: 'Hiányoznak egy tanuló kötelező mezői' });
         }
 
-        const accessValue = access || 'nyitva';
+        const accessValue = access || 'zarva';
 
         try {
           await db.execute(insertQuery, [student_id, full_name, studentClass, rfid_tag, accessValue]);
         } catch (dbError) {
           if (dbError.code === 'ER_DUP_ENTRY') {
-            console.warn(`Duplicate entry: ${student_id}`);
+            console.warn(`Ismétlődő adat: ${student_id}`);
             return res.status(400).json({
-              message: `Duplicate entry found for student ID: ${student_id}. This record already exists.`,
+              message: `Ismétlődő adat található a következő diákazonosítóhoz: ${student_id}. Ez a rekord már létezik.`,
             });
           } else {
-            throw dbError; // Más adatbázis hiba esetén dobjuk tovább
+            throw dbError;
           }
         }
       }
 
-      return res.status(200).json({ message: 'Students added successfully' });
+      return res.status(200).json({ message: 'A diákok sikeresen hozzáadva' });
     } catch (error) {
-      console.error('Error processing the file:', error);
-      return res.status(500).json({ error: 'Failed to process the file' });
+      console.error('Hiba a fájl feldolgozása közben:', error);
+      return res.status(500).json({ error: 'Hiba a fájl feldolgozása közben:' });
     }
   });
 }

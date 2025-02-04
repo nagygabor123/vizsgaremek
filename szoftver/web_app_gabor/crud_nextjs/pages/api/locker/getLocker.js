@@ -16,17 +16,42 @@
  *       - Locker
  *     responses:
  *       200:
- *         description: A diák szekrényének azonosítója vagy "zarva" / "nincs" állapot
+ *         description: A sikeres válasz a szekrény azonosítójával vagy "zarva" vagy "nincs" státusszal.
  *         content:
  *           text/plain:
  *             schema:
  *               type: string
+ *               example: "12"
  *       400:
- *         description: Az RFID paraméter hiányzik
+ *         description: Az RFID azonosító hiányzik
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "RFID szükséges"
  *       404:
- *         description: Nem található szekrény ehhez az RFID-hoz
+ *         description: Az RFID-hez nem található szekrény vagy diák
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Nem található szekrény_id ehhez az RFID-hez"
  *       500:
- *         description: Adatbázis kapcsolat hiba
+ *         description: Belső szerverhiba vagy adatbázis csatlakozási hiba
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Adatbázis csatlakozási hiba"
  */
 import { connectToDatabase } from '../../../lib/db';
 
@@ -37,7 +62,7 @@ async function getLockerByRFID(rfid, connection) {
   );
 
   if (lockerRelationship.length === 0) {
-    return { error: 'No locker found for this RFID', status: 404 };
+    return { error: 'Nem található szekrény_id ehhez az RFID-hez', status: 404 };
   }
 
   const lockerId = lockerRelationship[0].locker_id;
@@ -47,7 +72,7 @@ async function getLockerByRFID(rfid, connection) {
   );
 
   if (locker.length === 0) {
-    return { error: 'Locker not found', status: 404 };
+    return { error: 'Nem található a szekrény', status: 404 };
   }
 
   return { lockerId: locker[0].locker_id.toString(), status: 200 };
@@ -58,7 +83,7 @@ export default async function handler(req, res) {
     const { rfid } = req.query;
 
     if (!rfid) {
-      return res.status(400).json({ error: 'RFID is required' });
+      return res.status(400).json({ error: 'RFID szükséges' });
     }
 
     try {
@@ -76,10 +101,9 @@ export default async function handler(req, res) {
       const studentid = student[0].student_id;
       const studentaccess = student[0].access;
 
-      // Lekérdezzük a diák órarendjét
       const scheduleResponse = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${studentid}`);
       if (!scheduleResponse.ok) {
-        return res.status(500).json({ error: 'Failed to fetch schedule' });
+        return res.status(500).json({ error: 'Nem sikerült lekérni a diák órarendjét.' });
       }
 
       const schedule = await scheduleResponse.json();
@@ -109,10 +133,10 @@ export default async function handler(req, res) {
         return res.status(200).send(lockerResult.lockerId);
       }
     } catch (error) {
-      console.error('Database error:', error);
-      return res.status(500).json({ error: 'Database connection error' });
+      console.error('Adatbazis error:', error);
+      return res.status(500).json({ error: 'Adatbázis csatlakozási hiba' });
     }
   } else {
-    return res.status(405).json({ error: 'Method Not Allowed' });
+    return res.status(405).json({ error: 'A módszer nem engedélyezett' });
   }
 }

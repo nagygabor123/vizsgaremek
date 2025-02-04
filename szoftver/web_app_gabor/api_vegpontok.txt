@@ -35,8 +35,6 @@ RENDSZER STÁTUSZ  http://localhost:3000/api/system/status  GET
 
 RENDSZER|OSSZES DIÁK ZARVA/NYITVA  http://localhost:3000/api/system/closeOpen  POST
 
-DIÁK ENGEDÉLYEZÉSE  http://localhost:3000/api/locker/studentOpen  POST
-
 DIÁK ENGEDÉLYÉNEK ELLENŐRZÉSE  http://localhost:3000/api/locker/checkLocker?rfid=F7F59C7A  GET
 
 REFID->SZEKRÉNY  http://localhost:3000/api/locker/getLocker?rfid=F7F59C7A  GET

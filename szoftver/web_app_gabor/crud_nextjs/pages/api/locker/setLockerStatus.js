@@ -1,11 +1,9 @@
-// pages/api/locker/setLockerStatus.js
-
 /**
  * @swagger
  * /api/locker/setLockerStatus:
  *   patch:
  *     summary: Zár állapotának frissítése
- *     description: Frissíti a zár állapotát "nyitva" (be) vagy "zárva" (ki) állapotra, a jelenlegi állapottól függően.
+ *     description: Frissíti a zár állapotát (be/ki) állapotra, a jelenlegi állapottól függően.
  *     parameters:
  *       - in: query
  *         name: id
@@ -26,7 +24,7 @@
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "Locker 2 status updated to 'ki'"
+ *                   example: "Szekrény 2 státusza frissítve 'be' (-re)"
  *       400:
  *         description: Ha a zár azonosítója nem érvényes (nem szám vagy kívül esik az engedélyezett tartományon).
  *         content:
@@ -36,7 +34,7 @@
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "Invalid locker number"
+ *                   example: "Érvénytelen szekrény Id"
  *       404:
  *         description: Ha a zár nem található az adatbázisban.
  *         content:
@@ -46,9 +44,10 @@
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "Locker not found"
+ *                   example: "A szekrény nem található"
  *       500:
- *         description: Ha hiba történt az adatbázis kapcsolat vagy a zár állapotának frissítése során.
+ *         description: >
+ *           Ha hiba történt az adatbázis kapcsolat vagy a zár állapotának frissítése során vagy "Sikertelen szekrény státusz frissétés".
  *         content:
  *           application/json:
  *             schema:
@@ -56,7 +55,7 @@
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "Internal Server Error"
+ *                   example: "Szerver hiba"
  *       405:
  *         description: Ha nem PATCH metódust használunk.
  *         content:
@@ -66,55 +65,43 @@
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "Method Not Allowed"
+ *                   example: "A módszer nem engedélyezett"
  */
 import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {
   if (req.method === 'PATCH') {
-    // Extract locker number from the URL
     const { id } = req.query;
-
-    // Validate the id (ensure it's a number and within 1-99 range)
     const lockerId = parseInt(id);
     if (isNaN(lockerId) || lockerId < 1 || lockerId > 99) {
-      return res.status(400).json({ message: 'Invalid locker number' });
+      return res.status(400).json({ message: 'Érvénytelen szekrény Id' });
     }
 
     try {
-      // Connect to the database
       const db = await connectToDatabase();
-
-      // Get the current status of the locker
       const [rows] = await db.execute('SELECT status FROM lockers WHERE locker_id = ?', [lockerId]);
 
-      // If no rows are returned, the locker doesn't exist
       if (rows.length === 0) {
-        return res.status(404).json({ message: 'Locker not found' });
+        return res.status(404).json({ message: 'Szekrény nem található' });
       }
 
-      // Determine the new status
       const currentStatus = rows[0].status;
       const newStatus = currentStatus === 'be' ? 'ki' : 'be';
-
-      // Update the locker status
       const [result] = await db.execute(
         'UPDATE lockers SET status = ? WHERE locker_id = ?',
         [newStatus, lockerId]
       );
 
-      // If no rows were affected, something went wrong
       if (result.affectedRows === 0) {
-        return res.status(500).json({ message: 'Failed to update locker status' });
+        return res.status(500).json({ message: 'Sikertelen szekrény státusz frissétés' });
       }
 
-      // Return success response
-      res.status(200).json({ message: `Locker ${lockerId} status updated to '${newStatus}'` });
+      res.status(200).json({ message: `Szekrény ${lockerId} státusza frissítve '${newStatus}' (-re)` });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Internal Server Error' });
+      res.status(500).json({ message: 'Szerver hiba' });
     }
   } else {
-    res.status(405).json({ message: 'Method Not Allowed' });
+    res.status(405).json({ message: 'A módszer nem engedélyezett' });
   }
 }

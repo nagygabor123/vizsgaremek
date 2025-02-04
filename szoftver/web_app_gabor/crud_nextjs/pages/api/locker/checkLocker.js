@@ -1,11 +1,9 @@
-// pages/api/locker/checkLocker.js
-
 /**
  * @swagger
  * /api/locker/checkLocker:
  *   get:
- *     summary: Az RFID kártya státuszának lekérdezése
- *     description: Lekérdezi a diák hozzáférési státuszát az RFID kártya alapján, és visszaadja azt.
+ *     summary: A diák státuszának lekérdezése RFID alapján
+ *     description: Lekérdezi a diák hozzáférési státuszát az RFID azonosítója alapján, és visszaadja az értékét.
  *     parameters:
  *       - in: query
  *         name: rfid
@@ -18,18 +16,16 @@
  *       - Locker
  *     responses:
  *       200:
- *         description: A sikeres lekérdezés, amely tartalmazza a diák hozzáférési státuszát.
+ *         description: A sikeres lekérdezés, amely tartalmazza a diák hozzáférési státuszát (nyithato/zarva)
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   access:
- *                     type: string
- *                     description: A diák hozzáférési státusza.
- *                     example: "nyitva"
+ *               type: object
+ *               properties:
+ *                 access:
+ *                   type: string
+ *                   description: A diák hozzáférési státusza.
+ *                   example: "nyithato"
  *       400:
  *         description: Ha az RFID paraméter hiányzik a kérésből.
  *         content:
@@ -39,7 +35,7 @@
  *               properties:
  *                 error:
  *                   type: string
- *                   example: "RFID is required"
+ *                   example: "RFID szükséges"
  *       404:
  *         description: Ha az RFID kártya nem található az adatbázisban.
  *         content:
@@ -49,7 +45,7 @@
  *               properties:
  *                 error:
  *                   type: string
- *                   example: "RFID not found"
+ *                   example: "RFID nem található"
  *       500:
  *         description: Ha hiba történik az adatbázis kapcsolat során.
  *         content:
@@ -59,9 +55,11 @@
  *               properties:
  *                 error:
  *                   type: string
- *                   example: "Database connection error"
+ *                   example: "Adatbázis csatlakozási hiba"
  *       405:
- *         description: Ha nem GET metódust használunk.
+ *         description: >
+ *           Belső szerverhiba vagy adatbázis csatlakozási hiba 
+ *           (Pl: ha az adatbázis nem érhető el).
  *         content:
  *           application/json:
  *             schema:
@@ -69,7 +67,7 @@
  *               properties:
  *                 error:
  *                   type: string
- *                   example: "Method Not Allowed"
+ *                   example: "A módszer nem engedélyezett"
  */
 import { connectToDatabase } from '../../../lib/db';
 
@@ -78,28 +76,24 @@ export default async function handler(req, res) {
     const { rfid } = req.query;
 
     if (!rfid) {
-      return res.status(400).json({ error: 'RFID is required' });
+      return res.status(400).json({ error: 'RFID szükséges' });
     }
 
     try {
-      // Adatbázis kapcsolat létrehozása
       const connection = await connectToDatabase();
-
-      // Lekérdezés az RFID alapján
       const [rows] = await connection.execute('SELECT access FROM students WHERE rfid_tag = ?', [rfid]);
 
-      // Ellenőrizzük, hogy van-e találat
       if (rows.length > 0) {
         const access = rows[0].access;
         return res.status(200).json(rows );
       } else {
-        return res.status(404).json({ error: 'RFID not found' });
+        return res.status(404).json({ error: 'RFID nem található' });
       }
     } catch (error) {
-      console.error('Database error:', error);
-      return res.status(500).json({ error: 'Database connection error' });
+      console.error('Adatbazis hiba:', error);
+      return res.status(500).json({ error: 'Adatbázis csatlakozási hiba' });
     }
   } else {
-    return res.status(405).json({ error: 'Method Not Allowed' });
+    return res.status(405).json({ error: 'A módszer nem engedélyezett' });
   }
 }
