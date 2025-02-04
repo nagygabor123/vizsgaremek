@@ -1,3 +1,33 @@
+/**
+ * @swagger
+ * /api/locker/getLocker:
+ *   get:
+ *     summary: Lekéri a szekrény azonosítóját egy adott RFID alapján
+ *     description: Megnézi, hogy a megadott RFID-hoz tartozik-e diák és szekrény. Ha a diák nyithatja a szekrényt, visszaadja az azonosítót.
+ *     parameters:
+ *       - in: query
+ *         name: rfid
+ *         required: true
+ *         description: A diák RFID azonosítója
+ *         schema:
+ *           type: string
+ *           example: "F7F59C7A"
+ *     tags:
+ *       - Locker
+ *     responses:
+ *       200:
+ *         description: A diák szekrényének azonosítója vagy "zarva" / "nincs" állapot
+ *         content:
+ *           text/plain:
+ *             schema:
+ *               type: string
+ *       400:
+ *         description: Az RFID paraméter hiányzik
+ *       404:
+ *         description: Nem található szekrény ehhez az RFID-hoz
+ *       500:
+ *         description: Adatbázis kapcsolat hiba
+ */
 import { connectToDatabase } from '../../../lib/db';
 
 async function getLockerByRFID(rfid, connection) {
