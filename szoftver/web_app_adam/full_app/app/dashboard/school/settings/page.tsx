@@ -154,7 +154,7 @@ export default function Page() {
       <p className="text-gray-700 font-semibold mt-3">Válassza ki a feltölteni kívánt CSV-fájlt</p>
       <p className="text-sm text-gray-500">vagy húzza ide a fájlt</p>
       
-      <Button className="mt-3" variant="link">Feltöltés</Button>
+      <Button className="mt-3" variant="link">(Kiválaszott fál feltöltése)</Button>
     </div>
 
       <input
