@@ -148,15 +148,38 @@ export default function Home() {
   };
 
   const handleStudentOpen = async (student_id: string) => {
-    const response = await fetch(`http://localhost:3000/api/system/studentAccess?student=${student_id}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-    });
+    try {
+      const scheduleResponse = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${student_id}`);
   
-    if (!response.ok) {
-      console.error('Hiba történt a zárolás feloldásakor:', await response.text());
+      if (!scheduleResponse.ok) {
+        console.error('Nem sikerült lekérni a diák órarendjét.');
+        return;
+      }
+  
+      const schedule = await scheduleResponse.json();
+      const { first_class_start, last_class_end } = schedule;
+  
+      // Az aktuális idő HH:MM formátumban
+      const currentTime = new Date().toTimeString().slice(0, 5);
+  
+      // Ellenőrizzük, hogy az aktuális idő az órarendi időintervallumba esik-e
+      if (currentTime >= first_class_start && currentTime <= last_class_end) {
+        const response = await fetch(`http://localhost:3000/api/system/studentAccess?student=${student_id}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+        });
+  
+        if (!response.ok) {
+          console.error('Hiba történt a zárolás feloldásakor:', await response.text());
+        }
+      } else {
+        console.warn('A diák jelenleg nincs órán, nem lehet feloldani.');
+      }
+    } catch (error) {
+      console.error('Hiba történt a kérés során:', error);
     }
   };
+  
   
 
   return (
@@ -197,23 +220,33 @@ export default function Home() {
 
       <h2>Student List</h2>
       <ul>
-        {students.map((student) => (
-          <li key={student.student_id}>
-            {student.full_name} ({student.class}, {student.status})
-            <Button onClick={() => handleEdit(student)}>Edit</Button>
-            <Button onClick={() => handleDelete(student.student_id)}>Delete</Button>
-            <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!systemClose}>Feloldás</Button>
-            <div>
-              {/* Display timetable information */}
-              {studentTimetable.find((timetable) => timetable.student_id === student.student_id) && (
-                <p>
-                  First class starts at: {studentTimetable.find((timetable) => timetable.student_id === student.student_id)?.first_class_start}<br />
-                  Last class ends at: {studentTimetable.find((timetable) => timetable.student_id === student.student_id)?.last_class_end}
-                </p>
-              )}
-            </div>
-          </li>
-        ))}
+        {students.map((student) => {
+          const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
+          const currentTime = new Date().toTimeString().slice(0, 5);
+          const canUnlockStudent = systemClose && studentTimetableData &&
+            currentTime >= studentTimetableData.first_class_start &&
+            currentTime <= studentTimetableData.last_class_end;
+
+          return (
+            <li key={student.student_id}>
+              {student.full_name} ({student.class}, {student.status})
+              <Button onClick={() => handleEdit(student)}>Edit</Button>
+              <Button onClick={() => handleDelete(student.student_id)}>Delete</Button>
+              <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>
+                Feloldás
+              </Button>
+              <div>
+                {/* Display timetable information */}
+                {studentTimetableData && (
+                  <p>
+                    First class starts at: {studentTimetableData.first_class_start}<br />
+                    Last class ends at: {studentTimetableData.last_class_end}
+                  </p>
+                )}
+              </div>
+            </li>
+          );
+        })}
       </ul>
 
       <Button variant="outline" onClick={handleSystemClose}>
