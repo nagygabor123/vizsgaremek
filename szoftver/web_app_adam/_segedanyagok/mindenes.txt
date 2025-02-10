@@ -5,6 +5,7 @@ LOGÓK
  https://dribbble.com/venos_studio
 
 FŐ WEB DESIGN
+https://youtu.be/4yBxb5RQxPs?si=TVICCNA6iPTxK7ap
 https://dribbble.com/shots/24839518-Get-in-touch-Untitled-UI
  https://dribbble.com/shots/23044530-NTUC-First-Campus-Website
  https://dribbble.com/shots/24301924-NTUC-First-Campus-Responsive-Design
@@ -15,13 +16,4 @@ KONFIGURÁTOR
  3. tanuló import/manual
  4. alkalmazott import/manual
  5. tanév rendje (szünetek, plusz napok, tanév kezdés és vége)
-
-KONFIGURÁTOR MINTA
-https://dribbble.com/shots/20483900-File-Uploader-Modals-Tetrisly-Design-System
-https://dribbble.com/shots/24855426-Simple-Poll-Modal-Question-Answers
-
-
-https://dribbble.com/shots/24494696-Sign-In-Page
-
-
 
