@@ -44,6 +44,12 @@ interface Student {
   status: string;
 }
 
+interface Timetable {
+  student_id: string;
+  first_class_start: string;
+  last_class_end: string;
+}
+
 const lessonTimes = [
   { start: '07:15', end: '08:00' },
   { start: '08:10', end: '08:55' },
@@ -81,6 +87,11 @@ const isBreakDay = (date: Date) => {
     return targetDate >= startDate && targetDate <= endDate;
   });
 };
+const fetchStudentTimetable = async (student_id: string) => {
+  const response = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${student_id}`);
+  const data = await response.json();
+  return data;
+};
 
 const getReplacedDayName = (date: Date): string => {
   const formattedDate = format(date, 'yyyy-MM-dd');
@@ -95,11 +106,13 @@ const Calendar: React.FC = () => {
   const [schedule, setSchedule] = useState<TimetableEntry[]>([]);
   const [students, setStudents] = useState<Student[]>([]);
   const [modalInfo, setModalInfo] = useState<{ lesson: string; time: string;className: string; } | null>(null);
+  const [studentTimetable, setStudentTimetable] = useState<Timetable[]>([]);
+
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentDate(new Date()); 
-    }, 60000); // 60 másodpercenként
+    }, 60000); 
   
     return () => clearInterval(interval); 
   }, []);
@@ -115,13 +128,32 @@ const Calendar: React.FC = () => {
     return () => window.removeEventListener('resize', updateView);
   }, []);
 
+  useEffect(() => {
+    const fetchTimetables = async () => {
+      const timetables = await Promise.all(
+        students.map(async (student) => {
+          const timetable = await fetchStudentTimetable(student.student_id);
+          return {
+            student_id: student.student_id,
+            first_class_start: timetable.first_class_start,
+            last_class_end: timetable.last_class_end,
+          };
+        })
+      );
+      setStudentTimetable(timetables);
+    };
+
+    if (students.length > 0) {
+      fetchTimetables();
+    }
+  }, [students]);
+
 
   useEffect(() => {
     async function fetchSchedule() {
       try {
         const response = await fetch('http://localhost:3000/api/timetable/admin'); 
         const data = await response.json();
-        // Formázd az adatokat
         const formattedData = data.map((lesson: any) => ({
           day: lesson.day_of_week,
           start: lesson.start_time.slice(0, 5), // "07:15:00" -> "07:15"
@@ -188,13 +220,35 @@ const Calendar: React.FC = () => {
 
 
   const handleStudentOpen = async (student_id: string) => {
-    const response = await fetch(`http://localhost:3000/api/system/studentAccess?student=${student_id}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-    });
+    try {
+      const scheduleResponse = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${student_id}`);
   
-    if (!response.ok) {
-      console.error('Hiba történt a zárolás feloldásakor:', await response.text());
+      if (!scheduleResponse.ok) {
+        console.error('Nem sikerült lekérni a diák órarendjét.');
+        return;
+      }
+  
+      const schedule = await scheduleResponse.json();
+      const { first_class_start, last_class_end } = schedule;
+  
+      // Az aktuális idő HH:MM formátumban
+      const currentTime = new Date().toTimeString().slice(0, 5);
+  
+      // Ellenőrizzük, hogy az aktuális idő az órarendi időintervallumba esik-e
+      if (currentTime >= first_class_start && currentTime <= last_class_end) {
+        const response = await fetch(`http://localhost:3000/api/system/studentAccess?student=${student_id}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+        });
+  
+        if (!response.ok) {
+          console.error('Hiba történt a zárolás feloldásakor:', await response.text());
+        }
+      } else {
+        console.warn('A diák jelenleg nincs órán, nem lehet feloldani.');
+      }
+    } catch (error) {
+      console.error('Hiba történt a kérés során:', error);
     }
   };
 
@@ -284,12 +338,19 @@ const Calendar: React.FC = () => {
                         <h3>Osztály: {modalInfo?.className}</h3>
                         <div>
                           <h4>Diákok:</h4>
-                          {getStudentsByClass(modalInfo?.className || '').map((student) => (
-                            <div key={student.student_id} className="student-info">
-                              <p>{student.full_name} ({student.status})</p>
-                              <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!systemClose}>Feloldás</Button>
-                            </div>
-                          ))}
+                          {getStudentsByClass(modalInfo?.className || '').map((student) => {
+                          const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
+                          const currentTime = new Date().toTimeString().slice(0, 5);
+                          const canUnlockStudent = systemClose || studentTimetableData &&
+                            currentTime >= studentTimetableData.first_class_start &&
+                            currentTime <= studentTimetableData.last_class_end;
+                            return (
+                              <div key={student.student_id} className="student-info">
+                                <p>{student.full_name} ({student.status})</p>
+                                <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>Feloldás</Button>
+                              </div>
+                            );
+                          })}
                         </div>
                       </DialogHeader>
                     </DialogContent>
@@ -368,12 +429,19 @@ const Calendar: React.FC = () => {
         <h3>Osztály: {modalInfo?.className}</h3>
         <div>
           <h4>Diákok:</h4>
-          {getStudentsByClass(modalInfo?.className || '').map((student) => (
-            <div key={student.student_id} className="student-info">
-              <p>{student.full_name} ({student.status})</p>
-              <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!systemClose}>Feloldás</Button>
-            </div>
-          ))}
+          {getStudentsByClass(modalInfo?.className || '').map((student) => {
+          const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
+          const currentTime = new Date().toTimeString().slice(0, 5);
+          const canUnlockStudent = systemClose || studentTimetableData &&
+            currentTime >= studentTimetableData.first_class_start &&
+            currentTime <= studentTimetableData.last_class_end;
+            return (
+              <div key={student.student_id} className="student-info">
+                <p>{student.full_name} ({student.status})</p>
+                <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>Feloldás</Button>
+              </div>
+            );
+          })}
         </div>
       </DialogHeader>
     </DialogContent>
