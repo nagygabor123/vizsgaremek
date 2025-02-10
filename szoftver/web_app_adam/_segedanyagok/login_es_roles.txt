@@ -1,3 +1,18 @@
+LOGIN [NextAuth, PostgreSQL, Supabase, Prisma]
+https://www.youtube.com/watch?v=bicCg4GxOP8
+
+ROLES
+https://youtu.be/rkgpOWMrI_4?si=SRAiaC0pDT7gl7xU
+
+
+
+
+------------------------------------------------------
+
+
+
+
+
 
 
 NextAuth.js login (username-password, vercel)
