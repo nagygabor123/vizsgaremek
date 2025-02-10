@@ -223,7 +223,7 @@ export default function Home() {
         {students.map((student) => {
           const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
           const currentTime = new Date().toTimeString().slice(0, 5);
-          const canUnlockStudent = systemClose && studentTimetableData &&
+          const canUnlockStudent =  studentTimetableData &&
             currentTime >= studentTimetableData.first_class_start &&
             currentTime <= studentTimetableData.last_class_end;
 
