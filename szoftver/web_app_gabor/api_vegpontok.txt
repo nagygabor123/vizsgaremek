@@ -49,6 +49,6 @@ DIÁK NAPJA START/END  http://localhost:3000/api/timetable/scheduleStart?student
 
 EGY DIÁK enable access 10perc  http://localhost:3000/api/system/studentAccess?student=OM44444  POST 
 
-
+TANÉVREND LEKÉRÉS (SZUNETEK,PLUSZNAPOK, KEZD, VEG)  http://localhost:3000/api/config/handleYearSchedule?type=plusznap  GET
 
 

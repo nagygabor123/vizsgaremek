@@ -171,3 +171,18 @@ INSERT INTO `timetables` (`group_id`, `admin_id`, `day_of_week`, `start_time`, `
 (4, 1, 'friday', '11:50', '12:35');
 
 
+
+
+CREATE TABLE year_schedule (
+    year_schedule_id INT AUTO_INCREMENT PRIMARY KEY,
+    type VARCHAR(255) NOT NULL,
+    nev VARCHAR(255) NOT NULL,
+    which_day VARCHAR(255) NOT NULL,
+    replace_day VARCHAR(255) NOT NULL
+);
+INSERT INTO year_schedule (type, nev, which_day, replace_day) VALUES
+('szunet', 'Karácsonyi szünet', '2024-12-24', '2025-01-05'),
+('plusznap', 'Szombati tanítás', '2024-12-21', 'monday'),
+('plusznap', 'Szombati tanítás', '2025-02-01', 'monday'),
+('kezd', 'Tanévkezdés', '2024-09-02', ''),
+('veg', 'Tanévzárás', '2025-06-20', '');
