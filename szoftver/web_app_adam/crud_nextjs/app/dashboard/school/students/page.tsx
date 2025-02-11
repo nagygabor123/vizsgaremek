@@ -13,6 +13,15 @@ import {
 
 } from "lucide-react"
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 import {
   Breadcrumb,
@@ -185,6 +194,8 @@ export default function Home() {
     setFormData(student);
     setEditing(true);
     setEditStudentId(student.student_id);
+    setEditingStudent({ ...student });
+    setIsEditModalOpen(true);
   };
 
   // Handle system close/unlock button click
@@ -208,6 +219,48 @@ export default function Home() {
       body: JSON.stringify({ student_id }),
     });
   };
+
+
+
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [filterClass, setFilterClass] = useState<string>("");
+  const [filterStatus, setFilterStatus] = useState<string>("");
+  const [editingStudent, setEditingStudent] = useState<Student | null>(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    fetchStudents();
+  }, []);
+
+
+  const filteredStudents = students.filter(student =>
+    student.full_name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+    (filterClass ? student.class.toLowerCase().includes(filterClass.toLowerCase()) : true) &&
+    (filterStatus ? student.status === filterStatus : true)
+  );
+
+
+
+  const handleEditChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (editingStudent) {
+      setEditingStudent({ ...editingStudent, [e.target.name]: e.target.value });
+    }
+  };
+
+  const handleSaveEdit = async () => {
+    if (editingStudent) {
+      await fetch('/api/students/update', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(editingStudent),
+      });
+      setIsEditModalOpen(false);
+      setEditingStudent(null);
+      fetchStudents();
+    }
+  };
+
+
 
   return (
     <SidebarProvider>
@@ -237,52 +290,54 @@ export default function Home() {
           </div>
         </header>
         <div className="p-4">
-          <h1 className="text-xl font-bold mb-4">Manage Students</h1>
-          <form onSubmit={handleSubmit} className="mb-4 space-y-2">
-            <Input type="text" name="student_id" placeholder="Student ID" value={formData.student_id} onChange={handleChange} />
-            <Input type="text" name="full_name" placeholder="Full Name" value={formData.full_name} onChange={handleChange} />
-            <Input type="text" name="class" placeholder="Class" value={formData.class} onChange={handleChange} />
-            <Input type="text" name="rfid_tag" placeholder="RFID Tag" value={formData.rfid_tag} onChange={handleChange} />
-            <Button variant="outline" type="submit">{editing ? 'Update' : 'Add'} Student</Button>
-          </form>
-          <h2 className="text-lg font-semibold mt-6">Student List</h2>
-          <div className="overflow-x-auto">
-            <table className="min-w-full bg-white border border-gray-200">
-              <thead>
-                <tr className="bg-gray-100">
-                  <th className="border px-4 py-2">Full Name</th>
-                  <th className="border px-4 py-2">Class</th>
-                  <th className="border px-4 py-2">Status</th>
-                  <th className="border px-4 py-2">First Class</th>
-                  <th className="border px-4 py-2">Last Class</th>
-                  <th className="border px-4 py-2">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {students.map((student) => {
-                  const timetable = studentTimetable.find((t) => t.student_id === student.student_id);
-                  return (
-                    <tr key={student.student_id} className="border-t">
-                      <td className="border px-4 py-2">{student.full_name}</td>
-                      <td className="border px-4 py-2">{student.class}</td>
-                      <td className="border px-4 py-2">{student.status}</td>
-                      <td className="border px-4 py-2">{timetable?.first_class_start || 'N/A'}</td>
-                      <td className="border px-4 py-2">{timetable?.last_class_end || 'N/A'}</td>
-                      <td className="border px-4 py-2 space-x-2">
-                        <Button variant="outline" onClick={() => handleEdit(student)}>Edit</Button>
-                        <Button variant="destructive" onClick={() => handleDelete(student.student_id)}>Delete</Button>
-                        <Button variant="outline" onClick={() => handleStudentOpen(student.student_id)} disabled={!systemClose}>Feloldás</Button>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-          <Button variant="outline" onClick={handleSystemClose} className="mt-4">
-            {systemClose ? 'Feloldás' : 'Zárás'}
-          </Button>
-        </div>
+      <h1 className="text-xl font-bold mb-4">Manage Students</h1>
+      <div className="mb-4 flex gap-2">
+        <Input type="text" placeholder="Search by name..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+        <Input type="text" placeholder="Filter by class..." value={filterClass} onChange={(e) => setFilterClass(e.target.value)} />
+        <Input type="text" placeholder="Filter by status..." value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)} />
+      </div>
+      <table className="min-w-full bg-white border border-gray-200">
+        <thead>
+          <tr className="bg-gray-100">
+            <th className="border px-4 py-2">Full Name</th>
+            <th className="border px-4 py-2">Class</th>
+            <th className="border px-4 py-2">Status</th>
+            <th className="border px-4 py-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredStudents.map((student) => (
+            <tr key={student.student_id} className="border-t">
+              <td className="border px-4 py-2">{student.full_name}</td>
+              <td className="border px-4 py-2">{student.class}</td>
+              <td className="border px-4 py-2">{student.status}</td>
+              <td className="border px-4 py-2 space-x-2">
+                <Button variant="outline" onClick={() => handleEdit(student)}>Edit</Button>
+                <Button variant="destructive" onClick={() => handleDelete(student.student_id)}>Delete</Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Edit Student</DialogTitle>
+          </DialogHeader>
+          {editingStudent && (
+            <>
+              <Input type="text" name="full_name" placeholder="Full Name" value={editingStudent.full_name} onChange={handleEditChange} />
+              <Input type="text" name="class" placeholder="Class" value={editingStudent.class} onChange={handleEditChange} />
+              <Input type="text" name="status" placeholder="Status" value={editingStudent.status} onChange={handleEditChange} />
+            </>
+          )}
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsEditModalOpen(false)}>Cancel</Button>
+            <Button variant="outline" onClick={handleSaveEdit}>Save</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
       </SidebarInset>
     </SidebarProvider>
   );
