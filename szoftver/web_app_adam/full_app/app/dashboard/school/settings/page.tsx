@@ -28,6 +28,21 @@ import { ChevronRight, ChevronLeft } from "lucide-react"
 
 export default function Page() {
 
+  const [startDate, setStartDate] = useState<string | null>(null);
+  const [endDate, setEndDate] = useState<string | null>(null);
+  const [breaks, setBreaks] = useState<string[]>([]);
+  const [saturdayClasses, setSaturdayClasses] = useState<string[]>([]);
+  const [nonTeachingDays, setNonTeachingDays] = useState<string[]>([]);
+  const [newBreak, setNewBreak] = useState<string>(""); 
+  const [newSaturdayClass, setNewSaturdayClass] = useState<string>(""); 
+  const [newNonTeachingDay, setNewNonTeachingDay] = useState<string>("");
+
+  const handleAddDate = (date: string, setter: (dates: string[]) => void, dates: string[]) => {
+    if (date && !dates.includes(date)) {
+      setter([...dates, date]);
+    }
+  };
+
   const [isOverlayVisible, setOverlayVisible] = useState(false);
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
   const [step, setStep] = useState(1);
@@ -81,6 +96,8 @@ export default function Page() {
   if (isButtonVisible === null) {
     return null;
   }
+
+
 
   return (
     <SidebarProvider>
@@ -233,6 +250,79 @@ export default function Page() {
             <label className="block text-3xl font-bold">Tanév rendje</label>
             <p className="text-base text-gray-500 mb-2">Nulla laoreet maximus placerat. Duis pellentesque maximus consequat. </p>
      
+
+            <div className="p-6">
+      <h1 className="text-xl font-bold mb-4">Tanév Konfiguráció</h1>
+      <div className="mb-4">
+        <h2 className="text-lg font-semibold">Tanév kezdete</h2>
+        <Input
+          type="date"
+          value={startDate || ""}
+          onChange={(e) => setStartDate(e.target.value)}
+        />
+        {startDate && <p>Kiválasztott dátum: {startDate}</p>}
+      </div>
+      <div className="mb-4">
+        <h2 className="text-lg font-semibold">Tanév vége</h2>
+        <Input
+          type="date"
+          value={endDate || ""}
+          onChange={(e) => setEndDate(e.target.value)}
+        />
+        {endDate && <p>Kiválasztott dátum: {endDate}</p>}
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <h2 className="text-lg font-semibold mb-2">Szünetek</h2>
+          <Input
+            type="date"
+            value={newBreak}
+            onChange={(e) => setNewBreak(e.target.value)}
+          />
+          <Button onClick={() => handleAddDate(newBreak, setBreaks, breaks)} className="mt-2">
+            Szünet hozzáadása
+          </Button>
+          <ul className="mt-2">
+            {breaks.map((date, index) => (
+              <li key={index}>{date}</li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h2 className="text-lg font-semibold mb-2">Szombati tanítási napok</h2>
+          <Input
+            type="date"
+            value={newSaturdayClass}
+            onChange={(e) => setNewSaturdayClass(e.target.value)}
+          />
+          <Button onClick={() => handleAddDate(newSaturdayClass, setSaturdayClasses, saturdayClasses)} className="mt-2">
+            Szombat hozzáadása
+          </Button>
+          <ul className="mt-2">
+            {saturdayClasses.map((date, index) => (
+              <li key={index}>{date}</li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h2 className="text-lg font-semibold mb-2">Tanítás nélküli munkanapok</h2>
+          <Input
+            type="date"
+            value={newNonTeachingDay}
+            onChange={(e) => setNewNonTeachingDay(e.target.value)}
+          />
+          <Button onClick={() => handleAddDate(newNonTeachingDay, setNonTeachingDays, nonTeachingDays)} className="mt-2">
+            Munkanap hozzáadása
+          </Button>
+          <ul className="mt-2">
+            {nonTeachingDays.map((date, index) => (
+              <li key={index}>{date}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <Button className="mt-4">Mentés</Button>
+    </div>
 
           </div>
         )}
