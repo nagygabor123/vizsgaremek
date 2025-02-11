@@ -73,54 +73,16 @@ const lessonTimes = [
   { start: '14:35', end: '15:20' },
 ];
 
-const breakDates = [
-  { start: '2024-12-25', end: '2025-01-05' },
-];
-
-const plusDates = [
-  { date: '2024-12-07', replaceDay: 'monday' },
-  { date: '2024-12-21', replaceDay: 'monday' },
-  { date: '2025-02-01', replaceDay: 'monday' },
-];
-
-
-
-const getDayName = (date: Date): string => {
-  const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-  return dayNames[getDay(date)];
-};
-
-const isBreakDay = (date: Date) => {
-  const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-  return breakDates.some(({ start, end }) => {
-    const startDate = new Date(start);
-    const endDate = new Date(end);
-    return targetDate >= startDate && targetDate <= endDate;
-  });
-};
-const fetchStudentTimetable = async (student_id: string) => {
-  const response = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${student_id}`);
-  const data = await response.json();
-  return data;
-};
-
-const getReplacedDayName = (date: Date): string => {
-  const formattedDate = format(date, 'yyyy-MM-dd');
-  const replacement = plusDates.find((entry) => entry.date === formattedDate);
-  return replacement ? replacement.replaceDay : getDayName(date);
-};
-
 const Calendar: React.FC = () => {
   const [systemClose, setSystemClose] = useState<boolean>(false); 
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isMobileView, setIsMobileView] = useState(false);
   const [schedule, setSchedule] = useState<TimetableEntry[]>([]);
   const [students, setStudents] = useState<Student[]>([]);
-  const [modalInfo, setModalInfo] = useState<{ lesson: string; time: string;className: string; } | null>(null);
+  const [modalInfo, setModalInfo] = useState<{ lesson: string; time: string; className: string } | null>(null);
   const [studentTimetable, setStudentTimetable] = useState<Timetable[]>([]);
-  const [breakdate, setbreakdate] = useState<Student[]>([]);
-  const [plusdate, setplusdate] = useState<Student[]>([]);
-
+  const [breakdate, setBreakdate] = useState<BreakDatesAlap[]>([]);
+  const [plusdate, setPlusdate] = useState<plusDatesAlap[]>([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -184,11 +146,56 @@ const Calendar: React.FC = () => {
     fetchSchedule();
   }, []);
   
+
+  useEffect(() => {
+    const fetchAdditionalData = async () => {
+      try {
+        const plusResponse = await fetch('http://localhost:3000/api/config/handleYearSchedule?type=plusznap');
+        const plusData = await plusResponse.json();
+        setPlusdate(plusData.plusDates_alap);
+
+        const breakResponse = await fetch('http://localhost:3000/api/config/handleYearSchedule?type=szunet');
+        const breakData = await breakResponse.json();
+        setBreakdate(breakData.breakDates_alap);
+      } catch (error) {
+        console.error('Error fetching additional data:', error);
+      }
+    };
+
+    fetchAdditionalData();
+  }, []);
+
   console.log('Schedule:', schedule);
   console.log('Student:', students);
-  console.log('system:',systemClose )
+  console.log('System:',systemClose )
+  console.log('Break:', breakdate);
+  console.log('Plusdate:',plusdate )
 
-
+  const getDayName = (date: Date): string => {
+    const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    return dayNames[getDay(date)];
+  };
+  
+  const isBreakDay = (date: Date) => {
+    const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    return breakdate.some(({ start, end }) => {
+      const startDate = new Date(start);
+      const endDate = new Date(end);
+      return targetDate >= startDate && targetDate <= endDate;
+    });
+  };
+  
+  const fetchStudentTimetable = async (student_id: string) => {
+    const response = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${student_id}`);
+    const data = await response.json();
+    return data;
+  };
+  
+  const getReplacedDayName = (date: Date): string => {
+    const formattedDate = format(date, 'yyyy-MM-dd');
+    const replacement = plusdate.find((entry) => entry.date === formattedDate);
+    return replacement ? replacement.replaceDay : getDayName(date);
+  };
 
   const goToPrevious = () => {
     setCurrentDate((prevDate) => (isMobileView ? subDays(prevDate, 1) : addWeeks(prevDate, -1)));
