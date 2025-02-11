@@ -18,7 +18,7 @@ import {
   SidebarProvider,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
-import { TriangleAlert } from "lucide-react";
+import { TriangleAlert, Plus } from "lucide-react";
 import Link from "next/link";
 
 import { Input } from "@/components/ui/input"
@@ -245,87 +245,101 @@ export default function Page() {
 
           </div>
         )}
-         {step === 5 && (
-            <div className="mb-6">
-            <label className="block text-3xl font-bold">Tanév rendje</label>
-            <p className="text-base text-gray-500 mb-2">Nulla laoreet maximus placerat. Duis pellentesque maximus consequat. </p>
-     
+     {step === 5 && (
+  <div className="mb-6">
+    <label className="block text-3xl font-bold">Tanév rendje</label>
+    <p className="text-base text-gray-500 mb-2">Nulla laoreet maximus placerat. Duis pellentesque maximus consequat. </p>
 
-            <div className="p-6">
-      <h1 className="text-xl font-bold mb-4">Tanév Konfiguráció</h1>
-      <div className="mb-4">
-        <h2 className="text-lg font-semibold">Tanév kezdete</h2>
-        <Input
-          type="date"
-          value={startDate || ""}
-          onChange={(e) => setStartDate(e.target.value)}
-        />
-        {startDate && <p>Kiválasztott dátum: {startDate}</p>}
-      </div>
-      <div className="mb-4">
-        <h2 className="text-lg font-semibold">Tanév vége</h2>
-        <Input
-          type="date"
-          value={endDate || ""}
-          onChange={(e) => setEndDate(e.target.value)}
-        />
-        {endDate && <p>Kiválasztott dátum: {endDate}</p>}
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div>
-          <h2 className="text-lg font-semibold mb-2">Szünetek</h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+      <div>
+        <h2 className="mt-2">A tanítási év első napja</h2>
+        <div className="flex items-center gap-2">
           <Input
             type="date"
-            value={newBreak}
-            onChange={(e) => setNewBreak(e.target.value)}
+            value={startDate || ""}
+            onChange={(e) => setStartDate(e.target.value)}
           />
-          <Button onClick={() => handleAddDate(newBreak, setBreaks, breaks)} className="mt-2">
-            Szünet hozzáadása
-          </Button>
-          <ul className="mt-2">
-            {breaks.map((date, index) => (
-              <li key={index}>{date}</li>
-            ))}
-          </ul>
         </div>
-        <div>
-          <h2 className="text-lg font-semibold mb-2">Szombati tanítási napok</h2>
+        {startDate && <p>Kiválasztott dátum: {startDate}</p>}
+      </div>
+
+      <div>
+        <h2 className="mt-2">A tanítási év utolsó napja</h2>
+        <div className="flex items-center gap-2">
+          <Input
+            type="date"
+            value={endDate || ""}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+       
+        </div>
+        {endDate && <p>Kiválasztott dátum: {endDate}</p>}
+      </div>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+
+      <div>
+        <h2 className="">Szombati tanítási napok</h2>
+        <div className="flex items-center gap-2">
           <Input
             type="date"
             value={newSaturdayClass}
             onChange={(e) => setNewSaturdayClass(e.target.value)}
           />
-          <Button onClick={() => handleAddDate(newSaturdayClass, setSaturdayClasses, saturdayClasses)} className="mt-2">
-            Szombat hozzáadása
+          <Button onClick={() => handleAddDate(newSaturdayClass, setSaturdayClasses, saturdayClasses)} variant="outline" size="icon">
+            <Plus />
           </Button>
-          <ul className="mt-2">
-            {saturdayClasses.map((date, index) => (
-              <li key={index}>{date}</li>
-            ))}
-          </ul>
         </div>
-        <div>
-          <h2 className="text-lg font-semibold mb-2">Tanítás nélküli munkanapok</h2>
+        <ul className="mt-2">
+          {saturdayClasses.map((date, index) => (
+            <li key={index}>{date}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h2 className="">Tanítás nélküli munkanapok</h2>
+        <div className="flex items-center gap-2">
           <Input
             type="date"
             value={newNonTeachingDay}
             onChange={(e) => setNewNonTeachingDay(e.target.value)}
           />
-          <Button onClick={() => handleAddDate(newNonTeachingDay, setNonTeachingDays, nonTeachingDays)} className="mt-2">
-            Munkanap hozzáadása
+          <Button onClick={() => handleAddDate(newNonTeachingDay, setNonTeachingDays, nonTeachingDays)} variant="outline" size="icon">
+            <Plus />
           </Button>
-          <ul className="mt-2">
-            {nonTeachingDays.map((date, index) => (
-              <li key={index}>{date}</li>
-            ))}
-          </ul>
         </div>
+        <ul className="mt-2">
+          {nonTeachingDays.map((date, index) => (
+            <li key={index}>{date}</li>
+          ))}
+        </ul>
       </div>
-      <Button className="mt-4">Mentés</Button>
     </div>
 
-          </div>
-        )}
+    <div>
+        <h2 className="">Szünetek rendje</h2>
+        <div className="flex items-center gap-2">
+          <Input
+            type="date"
+            value={newBreak}
+            onChange={(e) => setNewBreak(e.target.value)}
+          />
+          <Button onClick={() => handleAddDate(newBreak, setBreaks, breaks)} variant="outline" size="icon">
+            <Plus />
+          </Button>
+        </div>
+        <ul className="mt-2">
+          {breaks.map((date, index) => (
+            <li key={index}>{date}</li>
+          ))}
+        </ul>
+      </div>
+
+  </div>
+)}
+
       </div>
 
       <div className="flex justify-end w-full mt-6 space-x-4">
