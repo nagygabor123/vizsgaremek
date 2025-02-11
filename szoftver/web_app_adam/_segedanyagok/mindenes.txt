@@ -15,5 +15,5 @@ KONFIGURÁTOR
  2. órarend import/manual          \ egyben /
  3. tanuló import/manual
  4. alkalmazott import/manual
- 5. tanév rendje (szünetek, plusz napok, tanév kezdés és vége)
+ 5. tanév rendje (szünetek, plusz napok, tanév kezdés és vége, tanítási nélkli munkanap)
 
