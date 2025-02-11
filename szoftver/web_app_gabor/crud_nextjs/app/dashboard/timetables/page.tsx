@@ -83,6 +83,8 @@ const Calendar: React.FC = () => {
   const [studentTimetable, setStudentTimetable] = useState<Timetable[]>([]);
   const [breakdate, setBreakdate] = useState<BreakDatesAlap[]>([]);
   const [plusdate, setPlusdate] = useState<plusDatesAlap[]>([]);
+  const [tanevkezdes, setStartYear] = useState<string | null>(null);
+  const [tanevvege, setEndYear] = useState<string | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -157,6 +159,14 @@ const Calendar: React.FC = () => {
         const breakResponse = await fetch('http://localhost:3000/api/config/handleYearSchedule?type=szunet');
         const breakData = await breakResponse.json();
         setBreakdate(breakData.breakDates_alap);
+
+        const startResponse = await fetch('http://localhost:3000/api/config/handleYearSchedule?type=kezd');
+        const startData = await startResponse.json();
+        setStartYear(startData.schoolYearStart.start); // assuming startDate is the field in the response
+
+        const endResponse = await fetch('http://localhost:3000/api/config/handleYearSchedule?type=veg');
+        const endData = await endResponse.json();
+        setEndYear(endData.schoolYearEnd.end);
       } catch (error) {
         console.error('Error fetching additional data:', error);
       }
@@ -167,9 +177,11 @@ const Calendar: React.FC = () => {
 
   console.log('Schedule:', schedule);
   console.log('Student:', students);
-  console.log('System:',systemClose )
+  console.log('System:',systemClose);
   console.log('Break:', breakdate);
-  console.log('Plusdate:',plusdate )
+  console.log('Plusdate:',plusdate);
+  console.log('Tanévkezdes:', tanevkezdes);
+  console.log('Tanevvege:',tanevvege);
 
   const getDayName = (date: Date): string => {
     const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
