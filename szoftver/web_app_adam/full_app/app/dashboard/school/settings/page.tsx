@@ -28,6 +28,8 @@ import { ChevronRight, ChevronLeft } from "lucide-react"
 
 export default function Page() {
 
+  
+
   const [startDate, setStartDate] = useState<string | null>(null);
   const [endDate, setEndDate] = useState<string | null>(null);
   const [breaks, setBreaks] = useState<string[]>([]);
@@ -97,6 +99,7 @@ export default function Page() {
     return null;
   }
 
+  // Állapotok a dátumok és a szünetekhez
 
 
   return (
@@ -162,7 +165,7 @@ export default function Page() {
           <div className="mb-6">
             <label className="block text-3xl font-bold">Csengetési rend</label>
             <p className="text-base text-gray-500 mb-2">Nullam mattis sodales sem quis tincidunt. </p>
-    <div className="border-dashed border-2 border-zinc-300 rounded-md p-4 flex flex-col items-center justify-center min-h-[250px] cursor-pointer hover:bg-zinc-50 transition text-center">
+    <div className="mt-5 border-dashed border-2 border-zinc-300 rounded-md p-4 flex flex-col items-center justify-center min-h-[250px] cursor-pointer hover:bg-zinc-50 transition text-center">
       <img
         src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNsb3VkLXVwbG9hZCI+PHBhdGggZD0iTTEyIDEzdjgiLz48cGF0aCBkPSJNNCAxNC44OTlBNyA3IDAgMSAxIDE1LjcxIDhoMS43OWE0LjUgNC41IDAgMCAxIDIuNSA4LjI0MiIvPjxwYXRoIGQ9Im04IDE3IDQtNCA0IDQiLz48L3N2Zz4="
         alt="Upload Icon"
@@ -186,7 +189,7 @@ export default function Page() {
             <div className="mb-6">
             <label className="block text-3xl font-bold">Órarend</label>
             <p className="text-base text-gray-500 mb-2">Aliquam porta condimentum ultrices. Morbi commodo posuere venenatis. In in egestas diam. Quisque mattis lectus id velit scelerisque ornare. </p>
-            <div className="border-dashed border-2 border-zinc-300 rounded-md p-4 flex flex-col items-center justify-center min-h-[250px] cursor-pointer hover:bg-zinc-50 transition text-center">
+            <div className="mt-5 border-dashed border-2 border-zinc-300 rounded-md p-4 flex flex-col items-center justify-center min-h-[250px] cursor-pointer hover:bg-zinc-50 transition text-center">
       <img
         src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNsb3VkLXVwbG9hZCI+PHBhdGggZD0iTTEyIDEzdjgiLz48cGF0aCBkPSJNNCAxNC44OTlBNyA3IDAgMSAxIDE1LjcxIDhoMS43OWE0LjUgNC41IDAgMCAxIDIuNSA4LjI0MiIvPjxwYXRoIGQ9Im04IDE3IDQtNCA0IDQiLz48L3N2Zz4="
         alt="Upload Icon"
@@ -207,7 +210,7 @@ export default function Page() {
             <div className="mb-6">
             <label className="block text-3xl font-bold">Tanulók</label>
             <p className="text-base text-gray-500 mb-2">Aliquam porta condimentum ultrices. Morbi commodo posuere venenatis. In in egestas diam. </p>
-            <div className="border-dashed border-2 border-zinc-300 rounded-md p-4 flex flex-col items-center justify-center min-h-[250px] cursor-pointer hover:bg-zinc-50 transition text-center">
+            <div className="mt-5 border-dashed border-2 border-zinc-300 rounded-md p-4 flex flex-col items-center justify-center min-h-[250px] cursor-pointer hover:bg-zinc-50 transition text-center">
       <img
         src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNsb3VkLXVwbG9hZCI+PHBhdGggZD0iTTEyIDEzdjgiLz48cGF0aCBkPSJNNCAxNC44OTlBNyA3IDAgMSAxIDE1LjcxIDhoMS43OWE0LjUgNC41IDAgMCAxIDIuNSA4LjI0MiIvPjxwYXRoIGQ9Im04IDE3IDQtNCA0IDQiLz48L3N2Zz4="
         alt="Upload Icon"
@@ -228,7 +231,7 @@ export default function Page() {
             <div className="mb-6">
             <label className="block text-3xl font-bold">Alkalmazottak</label>
             <p className="text-base text-gray-500 mb-2">Maecenas quis dignissim diam, eu commodo augue. Vestibulum fringilla est vitae gravida tincidunt. Etiam arcu lorem, iaculis in bibendum et, condimentum eget dolor.</p>
-            <div className="border-dashed border-2 border-zinc-300 rounded-md p-4 flex flex-col items-center justify-center min-h-[250px] cursor-pointer hover:bg-zinc-50 transition text-center">
+            <div className="mt-5 border-dashed border-2 border-zinc-300 rounded-md p-4 flex flex-col items-center justify-center min-h-[250px] cursor-pointer hover:bg-zinc-50 transition text-center">
       <img
         src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNsb3VkLXVwbG9hZCI+PHBhdGggZD0iTTEyIDEzdjgiLz48cGF0aCBkPSJNNCAxNC44OTlBNyA3IDAgMSAxIDE1LjcxIDhoMS43OWE0LjUgNC41IDAgMCAxIDIuNSA4LjI0MiIvPjxwYXRoIGQ9Im04IDE3IDQtNCA0IDQiLz48L3N2Zz4="
         alt="Upload Icon"
@@ -381,7 +384,143 @@ export default function Page() {
           </div>
 
          
-         mindenes / data table
+          <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-4">Iskola Beállítások</h1>
+
+      {/* Módosítás gomb */}
+      <div className="mb-4">
+        <button
+          
+          className="bg-blue-500 text-white py-2 px-4 rounded"
+        >
+          { 'Módosítás mentése'}
+        </button>
+      </div>
+
+      {/* Tanév kezdete és vége */}
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold">Tanév kezdet és befejezés</h2>
+        <div className="flex gap-4">
+          <div className="flex items-center gap-2">
+            <input
+              type="date"
+             
+            
+            />
+            <input
+              type="date"
+             
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Szünetek */}
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold">Iskolai Szünetek</h2>
+        <div className="flex gap-2">
+          <input
+            type="date"
+           
+            className="border p-2 rounded"
+          />
+         
+            <button
+             
+              className="bg-green-500 text-white px-4 rounded"
+            >
+              Új szünet hozzáadása
+            </button>
+          
+        </div>
+        <ul>
+         
+            <li className="flex items-center gap-2">
+          
+              
+                <button
+                
+                  className="text-red-500"
+                >
+                 
+                </button>
+              
+            </li>
+        
+        </ul>
+      </div>
+
+      {/* Szombati tanítási napok */}
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold">Szombati Tanítási Napok</h2>
+        <div className="flex gap-2">
+          <input
+            type="date"
+           
+            className="border p-2 rounded"
+          />
+         
+            <button
+            
+              className="bg-green-500 text-white px-4 rounded"
+            >
+              Új nap hozzáadása
+            </button>
+         
+        </div>
+        <ul>
+         
+            <li  className="flex items-center gap-2">
+              
+           
+                <button
+                 
+                  className="text-red-500"
+                >
+                 
+                </button>
+            
+            </li>
+        
+        </ul>
+      </div>
+
+      {/* Tanítás nélküli munkanapok */}
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold">Tanítás Nélküli Munkanapok</h2>
+        <div className="flex gap-2">
+          <input
+            type="date"
+        
+          
+            className="border p-2 rounded"
+          />
+        
+            <button
+              
+              className="bg-green-500 text-white px-4 rounded"
+            >
+              Új nap hozzáadása
+            </button>
+         
+        </div>
+        <ul>
+         
+            <li  className="flex items-center gap-2">
+          
+             
+                <button
+                
+                  className="text-red-500"
+                >
+                
+                </button>
+             
+            </li>
+       
+        </ul>
+      </div>
+    </div>
 
         </div>
       </SidebarInset>
