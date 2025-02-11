@@ -50,6 +50,17 @@ interface Timetable {
   last_class_end: string;
 }
 
+interface BreakDatesAlap {
+  start: string;
+  end: string;
+}
+
+interface plusDatesAlap {
+  date: string;
+  replaceDay: string;
+}
+
+
 const lessonTimes = [
   { start: '07:15', end: '08:00' },
   { start: '08:10', end: '08:55' },
@@ -107,6 +118,8 @@ const Calendar: React.FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
   const [modalInfo, setModalInfo] = useState<{ lesson: string; time: string;className: string; } | null>(null);
   const [studentTimetable, setStudentTimetable] = useState<Timetable[]>([]);
+  const [breakdate, setbreakdate] = useState<Student[]>([]);
+  const [plusdate, setplusdate] = useState<Student[]>([]);
 
 
   useEffect(() => {
