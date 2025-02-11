@@ -232,20 +232,7 @@ export default function Page() {
             <div className="mb-6">
             <label className="block text-3xl font-bold">Tanév rendje</label>
             <p className="text-base text-gray-500 mb-2">Nulla laoreet maximus placerat. Duis pellentesque maximus consequat. </p>
-            <div className="border-dashed border-2 border-zinc-300 rounded-md p-4 flex flex-col items-center justify-center min-h-[250px] cursor-pointer hover:bg-zinc-50 transition text-center">
-      <img
-        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNsb3VkLXVwbG9hZCI+PHBhdGggZD0iTTEyIDEzdjgiLz48cGF0aCBkPSJNNCAxNC44OTlBNyA3IDAgMSAxIDE1LjcxIDhoMS43OWE0LjUgNC41IDAgMCAxIDIuNSA4LjI0MiIvPjxwYXRoIGQ9Im04IDE3IDQtNCA0IDQiLz48L3N2Zz4="
-        alt="Upload Icon"
-        className="w-12 h-12 opacity-75 mx-auto"
-      />
-      <p className="text-gray-700 font-semibold mt-3">Válassza ki a feltölteni kívánt CSV-fájlt</p>
-      <p className="text-sm text-gray-500">vagy húzza ide a fájlt</p>
-    </div>
-      <input
-        type="file"
-        accept=".csv"
-        style={{ display: 'none' }} // Elrejtjük a fájl inputot
-      />
+     
 
           </div>
         )}
