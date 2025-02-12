@@ -1,22 +1,81 @@
+/**
+ * @swagger
+ * /api/config/setPlusBreak:
+ *   post:
+ *     summary: Plusznapok és szünetek hozzáadása az év rendjéhez
+ *     description: A végpont lehetővé teszi új plusznapok és szünetek rögzítését az év rendjében.
+ *     tags:
+ *       - Configuration
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - type
+ *               - which_day
+ *             properties:
+ *               type:
+ *                 type: string
+ *                 enum: [kezd, veg]
+ *                 description: A frissítendő dátum típusa (évkezdés vagy évvége).
+ *                 example: "kezd"
+ *               nev:
+ *                 type: string
+ *                 description: A szünet vagy plusz nap neve.
+ *                 example: "Tavaszi szünet"
+ *               which_day:
+ *                 type: string
+ *                 format: date
+ *                 description: Az új dátum (ÉÉÉÉ-HH-NN formátumban).
+ *                 example: "2025-04-02"
+ *               replace_day:
+ *                 type: string
+ *                 format: date
+ *                 description: Az új dátum (ÉÉÉÉ-HH-NN formátumban).
+ *                 example: "2025-04-10"
+ *     responses:
+ *       200:
+ *         description: "Sikeres frissítés"
+ *         schema:
+ *           type: object
+ *           properties:
+ *             message:
+ *               type: string
+ *               example: "Sikeres frissítés"
+ *             updatedType:
+ *               type: string
+ *               example: "plusznap"
+ *             updatedDate:
+ *               type: string
+ *               example: "2024-11-01"
+ *       400:
+ *         description: "Hibás kérés - hiányzó vagy érvénytelen paraméterek."
+ *       404:
+ *         description: "Nem található a megfelelő rekord."
+ *       500:
+ *         description: "Adatbázis csatlakozási hiba."
+ */
 import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { type, which_day } = req.body;
+    const { type,nev, which_day,replace_day } = req.body;
 
-    if (!type || !which_day) {
-      return res.status(400).json({ error: 'Type és date paraméter szükséges' });
+    if (!type || !nev || !which_day || !replace_day) {
+      return res.status(400).json({ error: 'Hiányzó paraméterek.' });
     }
 
-    if (type !== 'kezd' && type !== 'veg') {
-      return res.status(400).json({ error: 'Csak a kezd és veg típus frissíthető' });
+    if (type !== 'szunet' && type !== 'plusznap') {
+      return res.status(400).json({ error: 'Csak a szünetet illetve a plusznapokat lehet feltölteni' });
     }
 
     try {
       const connection = await connectToDatabase();
       
-      let query = 'UPDATE year_schedule SET which_day = ? WHERE type = ?';
-      let values = [which_day, type];
+      let query = 'INSERT INTO year_schedule (type, nev, which_day, replace_day) VALUES (?, ?, ?, ?);';
+      let values = [type,nev,which_day,replace_day];
 
       const [result] = await connection.execute(query, values);
 
