@@ -180,6 +180,7 @@ CREATE TABLE year_schedule (
     which_day VARCHAR(255) NOT NULL,
     replace_day VARCHAR(255) NOT NULL
 );
+
 INSERT INTO year_schedule (type, nev, which_day, replace_day) VALUES
 ('szunet', 'Karácsonyi szünet', '2024-12-24', '2025-01-05'),
 ('plusznap', 'Szombati tanítás', '2024-12-21', 'monday'),
