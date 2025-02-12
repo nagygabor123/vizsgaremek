@@ -11,7 +11,7 @@
  *         description: A diák azonosítója.
  *         schema:
  *           type: string
- *           example: "OM44444"
+ *           enum: [OM11111, OM22222, OM33333, OM44444]
  *     tags:
  *       - System
  *     responses:

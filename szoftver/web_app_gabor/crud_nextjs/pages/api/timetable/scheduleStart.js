@@ -12,7 +12,7 @@
  *         description: A diák egyedi azonosítója (student_id), amelyet a kérésben query paraméterként kell megadni.
  *         schema:
  *           type: string
- *           example: "OM44444"
+ *           enum: [OM11111, OM22222, OM33333, OM44444]
  *     tags:
  *       - Timetable
  *     responses:

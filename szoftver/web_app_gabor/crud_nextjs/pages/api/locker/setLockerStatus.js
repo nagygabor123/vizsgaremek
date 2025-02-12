@@ -11,7 +11,7 @@
  *         description: A zár azonosítója, amelyet módosítani szeretnénk. Az értéknek 1 és 99 között kell lennie.
  *         schema:
  *           type: integer
- *           example: 2
+ *           enum: [2, 5, 6, 7]
  *     tags:
  *       - Locker
  *     responses:

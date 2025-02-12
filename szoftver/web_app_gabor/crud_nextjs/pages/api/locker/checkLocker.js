@@ -11,7 +11,7 @@
  *         description: Az RFID kártya azonosítója, amely alapján ellenőrizzük a hozzáférési státuszt.
  *         schema:
  *           type: string
- *           example: "F7F59C7A"
+ *           enum: [F7F59C7A, DA6BD581, 030FC70A, 53D00E3E]
  *     tags:
  *       - Locker
  *     responses:

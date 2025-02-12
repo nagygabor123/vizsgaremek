@@ -22,7 +22,7 @@ WHERE type = 'szunet';
  *       - in: query
  *         name: type
  *         required: true
- *         description: "A lekérdezett adat típusát adja meg ('plusznap', 'szunet', 'kezd', 'veg')."
+ *         description: "A lekérdezett adat típusát adja meg."
  *         schema:
  *           type: string
  *           enum: [plusznap, szunet, kezd, veg]
