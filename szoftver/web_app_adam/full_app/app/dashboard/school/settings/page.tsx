@@ -72,8 +72,8 @@ const [newBreak, setNewBreak] = React.useState<Date | undefined>();
 const handleAddRange = () => {
   // Check if both from and to are valid Date objects before adding
   if (dateRange?.from && dateRange?.to) {
-
-    setBreaks([ //(prevBreaks) => 
+    // Safeguard to ensure `from` and `to` are both valid `Date` objects
+    setBreaks((prevBreaks) => [ //(prevBreaks) => 
       { from: dateRange.from, to: dateRange.to }
     ])
   } else {
@@ -466,10 +466,22 @@ const handleAddDate = (date: Date | undefined, setState: React.Dispatch<React.Se
         </PopoverContent>
       </Popover>
 
-      {/* Button to add the range */}
-      <Button onClick={handleAddRange} variant="outline" size="icon">
-        <Plus />
-      </Button>
+      <Button
+  onClick={() => {
+    // Csak akkor adjuk hozzá, ha a dátumok nem undefined
+    if (dateRange?.from && dateRange?.to) {
+      setBreaks(prev => [
+        ...prev,
+        { from: dateRange.from, to: dateRange.to }
+      ]);
+    }
+  }}
+  variant="outline"
+  size="icon"
+>
+  <Plus />
+</Button>
+
 
       {/* List of breaks */}
       <ul className="mt-2">
