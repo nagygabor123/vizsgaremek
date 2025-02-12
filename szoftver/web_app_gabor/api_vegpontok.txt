@@ -51,4 +51,7 @@ EGY DIÁK enable access 10perc  http://localhost:3000/api/system/studentAccess?s
 
 TANÉVREND LEKÉRÉS (SZUNETEK,PLUSZNAPOK, KEZD, VEG)  http://localhost:3000/api/config/handleYearSchedule?type=plusznap  GET
 
+TANÉV KEZDÉS ÉS VÉGE BEÁLLÍTÉS  http://localhost:3000/api/config/setYearStartEnd  POST  {"type": "kezd", "date": "2024-09-02"}
+
+
 

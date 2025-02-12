@@ -1,12 +1,44 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 const Configuration = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [message, setMessage] = useState<string>('');
-  const [apiResponse, setApiResponse] = useState<any>(null); // Tárolja az API válasz teljes tartalmát
-  const fileInputRef = useRef<HTMLInputElement>(null); // Referencia a fájl inputhoz
+  const [apiResponse, setApiResponse] = useState<any>(null);
+  const [yearSchedule, setYearSchedule] = useState<any>({
+    plusDates: [],
+    breakDates: [],
+    schoolStart: '',
+    schoolEnd: ''
+  });
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const fetchYearSchedule = async () => {
+      try {
+        const plusRes = await fetch('http://localhost:3000/api/config/handleYearSchedule?type=plusznap');
+        const szunetRes = await fetch('http://localhost:3000/api/config/handleYearSchedule?type=szunet');
+        const startRes = await fetch('http://localhost:3000/api/config/handleYearSchedule?type=kezd');
+        const endRes = await fetch('http://localhost:3000/api/config/handleYearSchedule?type=veg');
+
+        const plusDates = await plusRes.json();
+        const breakDates = await szunetRes.json();
+        const schoolStart = await startRes.json();
+        const schoolEnd = await endRes.json();
+
+        setYearSchedule({
+          plusDates: plusDates.plusDates_alap,
+          breakDates: breakDates.breakDates_alap,
+          schoolStart: schoolStart.schoolYearStart.start,
+          schoolEnd: schoolEnd.schoolYearEnd.end
+        });
+      } catch (error) {
+        console.error('Error fetching year schedule:', error);
+      }
+    };
+    fetchYearSchedule();
+  }, []);
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -24,7 +56,7 @@ const Configuration = () => {
 
   const handleClick = () => {
     if (fileInputRef.current) {
-      fileInputRef.current.click(); // Megnyitja a fájlkezelőt
+      fileInputRef.current.click();
     }
   };
 
@@ -52,7 +84,7 @@ const Configuration = () => {
       });
 
       const responseData = await response.json();
-      setApiResponse(responseData); // Az API válasz teljes tartalmának tárolása
+      setApiResponse(responseData);
 
       if (response.ok) {
         setMessage('File uploaded successfully!');
@@ -90,7 +122,7 @@ const Configuration = () => {
         accept=".csv"
         ref={fileInputRef}
         onChange={handleFileChange}
-        style={{ display: 'none' }} // Elrejtjük a fájl inputot
+        style={{ display: 'none' }}
       />
       <button
         onClick={handleUpload}
@@ -111,18 +143,27 @@ const Configuration = () => {
         </p>
       )}
       {apiResponse && (
-        <pre
-          style={{
-            marginTop: '20px',
-            padding: '10px',
-            backgroundColor: '#f8f9fa',
-            border: '1px solid #ddd',
-            borderRadius: '5px',
-          }}
-        >
+        <pre style={{ marginTop: '20px', padding: '10px', backgroundColor: '#f8f9fa', border: '1px solid #ddd', borderRadius: '5px' }}>
           {JSON.stringify(apiResponse, null, 2)}
         </pre>
       )}
+      <h2>Éves ütemterv</h2>
+      <h3>Plusznapok:</h3>
+      <ul>
+        {yearSchedule.plusDates.map((day: any, index: number) => (
+          <li key={index}>{day.date} - {day.replaceDay}</li>
+        ))}
+      </ul>
+      <h3>Szünetek:</h3>
+      <ul>
+        {yearSchedule.breakDates.map((breakPeriod: any, index: number) => (
+          <li key={index}>{breakPeriod.start} - {breakPeriod.end}</li>
+        ))}
+      </ul>
+      <h3>Tanév kezdete:</h3>
+      <p>{yearSchedule.schoolStart}</p>
+      <h3>Tanév vége:</h3>
+      <p>{yearSchedule.schoolEnd}</p>
     </div>
   );
 };
