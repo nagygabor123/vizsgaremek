@@ -26,24 +26,69 @@ import { Label } from "@/components/ui/label"
 
 import { ChevronRight, ChevronLeft } from "lucide-react"
 
+import * as React from "react"
+import { format } from "date-fns"
+import { addDays } from 'date-fns';
+
+import { CalendarIcon } from "lucide-react"
+ 
+import { cn } from "@/lib/utils"
+
+import { Calendar } from "@/components/ui/calendar"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+ 
+import { DateRange } from 'react-day-picker';
+
+
 export default function Page() {
+  const [dateRange, setDateRange] = React.useState<DateRange | undefined>({
+    from: new Date(2024, 0, 20),
+    to: addDays(new Date(2024, 0, 20), 20),
+  })
+ 
+  const [date, setDate] = React.useState<Date>()
 
   
+  const [saturdayClasses, setSaturdayClasses] = React.useState<Date[]>([]);
+  const [nonTeachingDays, setNonTeachingDays] = React.useState<Date[]>([]);
 
-  const [startDate, setStartDate] = useState<string | null>(null);
-  const [endDate, setEndDate] = useState<string | null>(null);
-  const [breaks, setBreaks] = useState<string[]>([]);
-  const [saturdayClasses, setSaturdayClasses] = useState<string[]>([]);
-  const [nonTeachingDays, setNonTeachingDays] = useState<string[]>([]);
-  const [newBreak, setNewBreak] = useState<string>(""); 
-  const [newSaturdayClass, setNewSaturdayClass] = useState<string>(""); 
-  const [newNonTeachingDay, setNewNonTeachingDay] = useState<string>("");
+  
+  
+  const [breaks, setBreaks] = React.useState<{ from: Date, to: Date }[]>([])
 
-  const handleAddDate = (date: string, setter: (dates: string[]) => void, dates: string[]) => {
-    if (date && !dates.includes(date)) {
-      setter([...dates, date]);
-    }
-  };
+  
+  const [startDate, setStartDate] = React.useState<Date | undefined>();
+const [endDate, setEndDate] = React.useState<Date | undefined>();
+const [newSaturdayClass, setNewSaturdayClass] = React.useState<Date | undefined>();
+const [newNonTeachingDay, setNewNonTeachingDay] = React.useState<Date | undefined>();
+const [newBreak, setNewBreak] = React.useState<Date | undefined>();
+
+
+
+const handleAddRange = () => {
+  // Check if both from and to are valid Date objects before adding
+  if (dateRange?.from && dateRange?.to) {
+
+    setBreaks([ //(prevBreaks) => 
+      { from: dateRange.from, to: dateRange.to }
+    ])
+  } else {
+    // If either is undefined, log an error or handle it appropriately
+    console.error("Invalid date range. Both 'from' and 'to' must be defined.");
+  }
+}
+
+
+
+const handleAddDate = (date: Date | undefined, setState: React.Dispatch<React.SetStateAction<Date[]>>, state: Date[]) => {
+  if (date) setState([...state, date]);
+};
+
+
 
   const [isOverlayVisible, setOverlayVisible] = useState(false);
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
@@ -99,7 +144,7 @@ export default function Page() {
     return null;
   }
 
-  // Állapotok a dátumok és a szünetekhez
+
 
 
   return (
@@ -248,100 +293,196 @@ export default function Page() {
 
           </div>
         )}
-     {step === 5 && (
+{step === 5 && (
   <div className="mb-6">
     <label className="block text-3xl font-bold">Tanév rendje</label>
-    <p className="text-base text-gray-500 mb-2">Nulla laoreet maximus placerat. Duis pellentesque maximus consequat. </p>
+    <p className="text-base text-gray-500 mb-2">Nulla laoreet maximus placerat. Duis pellentesque maximus consequat.</p>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
       <div>
         <h2 className="mt-2">A tanítási év első napja</h2>
-        <div className="flex items-center gap-2">
-          <Input
-            type="date"
-            value={startDate || ""}
-            onChange={(e) => setStartDate(e.target.value)}
-          />
-        </div>
-        {startDate && <p>Kiválasztott dátum: {startDate}</p>}
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant={"outline"}
+              className={cn(
+                "w-[240px] justify-start text-left font-normal",
+                !startDate && "text-muted-foreground"
+              )}
+            >
+              <CalendarIcon />
+              {startDate ? format(startDate, "PPP") : <span>Pick a date</span>}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <Calendar
+              mode="single"
+              selected={startDate}
+              onSelect={(date) => setStartDate(date ?? undefined)}
+
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
+        {startDate && <p>Kiválasztott dátum: {format(startDate, "PPP")}</p>}
       </div>
 
       <div>
         <h2 className="mt-2">A tanítási év utolsó napja</h2>
-        <div className="flex items-center gap-2">
-          <Input
-            type="date"
-            value={endDate || ""}
-            onChange={(e) => setEndDate(e.target.value)}
-          />
-       
-        </div>
-        {endDate && <p>Kiválasztott dátum: {endDate}</p>}
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant={"outline"}
+              className={cn(
+                "w-[240px] justify-start text-left font-normal",
+                !endDate && "text-muted-foreground"
+              )}
+            >
+              <CalendarIcon />
+              {endDate ? format(endDate, "PPP") : <span>Pick a date</span>}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <Calendar
+              mode="single"
+              selected={endDate}
+              onSelect={setEndDate}
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
+        {endDate && <p>Kiválasztott dátum: {format(endDate, "PPP")}</p>}
       </div>
     </div>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-
       <div>
         <h2 className="">Szombati tanítási napok</h2>
-        <div className="flex items-center gap-2">
-          <Input
-            type="date"
-            value={newSaturdayClass}
-            onChange={(e) => setNewSaturdayClass(e.target.value)}
-          />
-          <Button onClick={() => handleAddDate(newSaturdayClass, setSaturdayClasses, saturdayClasses)} variant="outline" size="icon">
-            <Plus />
-          </Button>
-        </div>
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant={"outline"}
+              className={cn(
+                "w-[240px] justify-start text-left font-normal",
+                !newSaturdayClass && "text-muted-foreground"
+              )}
+            >
+              <CalendarIcon />
+              {newSaturdayClass ? format(newSaturdayClass, "PPP") : <span>Pick a date</span>}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <Calendar
+              mode="single"
+              selected={newSaturdayClass}
+              onSelect={setNewSaturdayClass}
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
+        <Button onClick={() => handleAddDate(newSaturdayClass, setSaturdayClasses, saturdayClasses)} variant="outline" size="icon">
+          <Plus />
+        </Button>
         <ul className="mt-2">
           {saturdayClasses.map((date, index) => (
-            <li key={index}>{date}</li>
+            <li key={index}>{format(date, "PPP")}</li>
           ))}
         </ul>
       </div>
 
       <div>
         <h2 className="">Tanítás nélküli munkanapok</h2>
-        <div className="flex items-center gap-2">
-          <Input
-            type="date"
-            value={newNonTeachingDay}
-            onChange={(e) => setNewNonTeachingDay(e.target.value)}
-          />
-          <Button onClick={() => handleAddDate(newNonTeachingDay, setNonTeachingDays, nonTeachingDays)} variant="outline" size="icon">
-            <Plus />
-          </Button>
-        </div>
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant={"outline"}
+              className={cn(
+                "w-[240px] justify-start text-left font-normal",
+                !newNonTeachingDay && "text-muted-foreground"
+              )}
+            >
+              <CalendarIcon />
+              {newNonTeachingDay ? format(newNonTeachingDay, "PPP") : <span>Pick a date</span>}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <Calendar
+              mode="single"
+              selected={newNonTeachingDay}
+              onSelect={setNewNonTeachingDay}
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
+        <Button onClick={() => handleAddDate(newNonTeachingDay, setNonTeachingDays, nonTeachingDays)} variant="outline" size="icon">
+          <Plus />
+        </Button>
         <ul className="mt-2">
           {nonTeachingDays.map((date, index) => (
-            <li key={index}>{date}</li>
+            <li key={index}>{format(date, "PPP")}</li>
           ))}
         </ul>
       </div>
     </div>
 
+   
     <div>
-        <h2 className="">Szünetek rendje</h2>
-        <div className="flex items-center gap-2">
-          <Input
-            type="date"
-            value={newBreak}
-            onChange={(e) => setNewBreak(e.target.value)}
-          />
-          <Button onClick={() => handleAddDate(newBreak, setBreaks, breaks)} variant="outline" size="icon">
-            <Plus />
-          </Button>
-        </div>
-        <ul className="mt-2">
-          {breaks.map((date, index) => (
-            <li key={index}>{date}</li>
-          ))}
-        </ul>
-      </div>
+      <h2 className="">Szünetek rendje</h2>
 
+      {/* Date range picker for scheduling */}
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button
+            variant={"outline"}
+            className={cn(
+              "w-[300px] justify-start text-left font-normal",
+              !dateRange && "text-muted-foreground"
+            )}
+          >
+            <CalendarIcon />
+            {dateRange?.from ? (
+              dateRange.to ? (
+                <>
+                  {format(dateRange.from, "LLL dd, y")} -{" "}
+                  {format(dateRange.to, "LLL dd, y")}
+                </>
+              ) : (
+                format(dateRange.from, "LLL dd, y")
+              )
+            ) : (
+              <span>Pick a date range</span>
+            )}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-0" align="start">
+          <Calendar
+            initialFocus
+            mode="range"
+            defaultMonth={dateRange?.from}
+            selected={dateRange}
+            onSelect={setDateRange}
+            numberOfMonths={2}
+          />
+        </PopoverContent>
+      </Popover>
+
+      {/* Button to add the range */}
+      <Button onClick={handleAddRange} variant="outline" size="icon">
+        <Plus />
+      </Button>
+
+      {/* List of breaks */}
+      <ul className="mt-2">
+        {breaks.map((range, index) => (
+          <li key={index}>
+            {format(range.from, "PPP")} - {format(range.to, "PPP")}
+          </li>
+        ))}
+      </ul>
+    </div>
   </div>
 )}
+
 
       </div>
 
