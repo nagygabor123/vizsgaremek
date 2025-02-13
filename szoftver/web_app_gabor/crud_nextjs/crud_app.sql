@@ -182,8 +182,8 @@ CREATE TABLE year_schedule (
 );
 
 INSERT INTO year_schedule (type, nev, which_day, replace_day) VALUES
+('kezd', 'Tanévkezdés', '2024-09-02', ''),
+('veg', 'Tanévzárás', '2025-06-20', ''),
 ('szunet', 'Karácsonyi szünet', '2024-12-24', '2025-01-05'),
 ('plusznap', 'Szombati tanítás', '2024-12-21', 'monday'),
-('plusznap', 'Szombati tanítás', '2025-02-01', 'monday'),
-('kezd', 'Tanévkezdés', '2024-09-02', ''),
-('veg', 'Tanévzárás', '2025-06-20', '');
+('plusznap', 'Szombati tanítás', '2025-02-01', 'monday');

@@ -53,7 +53,9 @@ TANÉVREND LEKÉRÉS (SZUNETEK,PLUSZNAPOK, KEZD, VEG)  http://localhost:3000/api
 
 TANÉV KEZDÉS ÉS VÉGE BEÁLLÍTÉS  http://localhost:3000/api/config/setYearStartEnd  POST  {"type": "kezd", "which_day": "2024-09-02"}
 
-PLUSZNAPOK ÉS SZUNETEK  http://localhost:3000/api/config/addPlusBreak  POST  {"type": "plusznap", "nev": "Vasárnapi tanítás", "which_day": "2024-11-01", "replace_day": "friday"}
+PLUSZNAPOK ÉS SZUNETEK HOZZÁADÁSA http://localhost:3000/api/config/addPlusBreak  POST  {"type": "plusznap", "nev": "Vasárnapi tanítás", "which_day": "2024-11-01", "replace_day": "friday"}
+
+PLUSZNAPOK ÉS SZUNETEK TÖRLÉS  http://localhost:3000/api/config/deletePlusBreak?year_schedule_id=3  DELETE 
 
 
 
