@@ -46,6 +46,8 @@ const Configuration = () => {
 
   const updateSchoolYear = async (type: string, date: string) => {
     try {
+      console.log('Küldött adatok:', { type, which_day: date });
+  
       const response = await fetch('http://localhost:3000/api/config/setYearStartEnd', {
         method: 'POST',
         headers: {
@@ -53,9 +55,20 @@ const Configuration = () => {
         },
         body: JSON.stringify({ type, which_day: date }),
       });
+  
+      const responseData = await response.json();
+      console.log('API válasz:', responseData);
+  
       if (response.ok) {
         setMessage(`${type === 'kezd' ? 'Tanév kezdete' : 'Tanév vége'} sikeresen frissítve!`);
-        setYearSchedule((prev: any) => ({ ...prev, [type === 'kezd' ? 'schoolStart' : 'schoolEnd']: date }));
+  
+        setYearSchedule({
+          ...yearSchedule,
+          schoolStart: type === 'kezd' ? date : yearSchedule.schoolStart,
+          schoolEnd: type === 'veg' ? date : yearSchedule.schoolEnd
+        });
+        
+        
       } else {
         setMessage('Hiba történt az adat frissítésekor.');
       }
@@ -63,6 +76,7 @@ const Configuration = () => {
       setMessage(`Hiba: ${error}`);
     }
   };
+  
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -120,7 +134,7 @@ const Configuration = () => {
       setApiResponse(null);
     }
   };
-
+  
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
       <h1>Konfigurációs felület</h1>
@@ -186,10 +200,6 @@ const Configuration = () => {
         onChange={(e) => setSchoolEndEdit(e.target.value)}
       />
       <button onClick={() => updateSchoolYear('veg', schoolEndEdit)}>Mentés</button>
-      <h3>Aktuális tanév kezdete:</h3>
-      <p>{yearSchedule.schoolStart}</p>
-      <h3>Aktuális tanév vége:</h3>
-      <p>{yearSchedule.schoolEnd}</p>
     </div>
   );
 };
