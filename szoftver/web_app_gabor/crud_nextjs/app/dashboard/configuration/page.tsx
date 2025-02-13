@@ -280,7 +280,7 @@ const Configuration = () => {
         <ul>
           {yearSchedule.breakDates.map((breakPeriod: any, index: number) => (
             <li key={index}>
-              {breakPeriod.id} {breakPeriod.name}: {breakPeriod.start} - {breakPeriod.end}
+              {breakPeriod.id} {breakPeriod.name}: {breakPeriod.start} - {breakPeriod.end}     
               <button onClick={() => handleDeletePlusBreak(breakPeriod.id)}>Törlés</button>
             </li>
           ))}
