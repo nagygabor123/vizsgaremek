@@ -56,6 +56,7 @@ interface BreakDatesAlap {
 }
 
 interface plusDatesAlap {
+  name: string; 
   date: string;
   replaceDay: string;
 }
