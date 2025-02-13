@@ -14,7 +14,18 @@ const Configuration = () => {
   });
   const [schoolStartEdit, setSchoolStartEdit] = useState('');
   const [schoolEndEdit, setSchoolEndEdit] = useState('');
+  const [newBreak, setNewBreak] = useState({ nev: '', which_day: '', replace_day: '' });
+  const [newPlusDate, setNewPlusDate] = useState({  nev: '', which_day: '', replace_day: '' });
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const days = [
+    { label: 'Hétfő', value: 'monday' },
+    { label: 'Kedd', value: 'tuesday' },
+    { label: 'Szerda', value: 'wednesday' },
+    { label: 'Csütörtök', value: 'thursday' },
+    { label: 'Péntek', value: 'friday' },
+    { label: 'Szombat', value: 'saturday' },
+    { label: 'Vasárnap', value: 'sunday' },
+  ];
 
   useEffect(() => {
     const fetchYearSchedule = async () => {
@@ -77,6 +88,43 @@ const Configuration = () => {
     }
   };
   
+  const handleAddBreak = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/config/setPlusBreak', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'szunet', ...newBreak })
+      });
+      if (response.ok) {
+        setYearSchedule((prev: typeof yearSchedule) => ({
+          ...prev,
+          breakDates: [...prev.breakDates, newBreak]
+        }));
+        setNewBreak({ nev: '', which_day: '', replace_day: '' });
+      }
+    } catch (error) {
+      console.error('Error updating break:', error);
+    }
+  };
+  
+  const handleAddPlusDate = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/config/setPlusBreak', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'plusznap', ...newPlusDate })
+      });
+      if (response.ok) {
+        setYearSchedule((prev: typeof yearSchedule) => ({
+          ...prev,
+          plusDates: [...prev.plusDates, newPlusDate]
+        }));
+        setNewPlusDate({ nev: '', which_day: '', replace_day: '' });
+      }
+    } catch (error) {
+      console.error('Error updating plus date:', error);
+    }
+  };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -211,13 +259,31 @@ const Configuration = () => {
           <li key={index}>{breakPeriod.name}: {breakPeriod.start} - {breakPeriod.end}</li>
         ))}
       </ul>
-
+      <input type="text" placeholder="Szünet neve" value={newBreak.nev} onChange={(e) => setNewBreak({ ...newBreak, nev: e.target.value })} />
+      <input type="date" value={newBreak.which_day} onChange={(e) => setNewBreak({ ...newBreak, which_day: e.target.value })} />
+      <input type="date" value={newBreak.replace_day} onChange={(e) => setNewBreak({ ...newBreak, replace_day: e.target.value })} />
+      <button onClick={handleAddBreak}>Hozzáadás</button>
+      
       <h3>Plusznapok</h3>
       <ul>
         {yearSchedule.plusDates.map((plusDate: any, index: number) => (
-          <li key={index}>{plusDate.name}: {plusDate.date} ({plusDate.replaceDay} -i órarend)</li>
+          <li key={index}>{plusDate.name}: {plusDate.date} ({plusDate.replaceDay}-i órarend)</li>
         ))}
       </ul>
+      <input type="text" placeholder="Plusznap neve" value={newPlusDate.nev} onChange={(e) => setNewPlusDate({ ...newPlusDate, nev: e.target.value })} />
+      <input type="date" value={newPlusDate.which_day} onChange={(e) => setNewPlusDate({ ...newPlusDate, which_day: e.target.value })} />
+      <select
+        id="replace_day"
+        value={newPlusDate.replace_day}
+        onChange={(e) => setNewPlusDate({ ...newPlusDate, replace_day: e.target.value })}
+      >
+        {days.map((day) => (
+          <option key={day.value} value={day.value}>
+            {day.label}
+          </option>
+        ))}
+      </select>
+           <button onClick={handleAddPlusDate}>Hozzáadás</button>
     </div>
   );
 };
