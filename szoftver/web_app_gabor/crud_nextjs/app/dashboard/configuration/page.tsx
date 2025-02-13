@@ -186,6 +186,7 @@ const Configuration = () => {
         </pre>
       )}
       <h2>Tanév beállítása</h2>
+
       <label>Tanév kezdete:</label>
       <input
         type="date"
@@ -193,6 +194,9 @@ const Configuration = () => {
         onChange={(e) => setSchoolStartEdit(e.target.value)}
       />
       <button onClick={() => updateSchoolYear('kezd', schoolStartEdit)}>Mentés</button>
+
+      <p>valami</p>
+
       <label>Tanév vége:</label>
       <input
         type="date"
@@ -200,6 +204,20 @@ const Configuration = () => {
         onChange={(e) => setSchoolEndEdit(e.target.value)}
       />
       <button onClick={() => updateSchoolYear('veg', schoolEndEdit)}>Mentés</button>
+
+      <h3>Szünetek</h3>
+      <ul>
+        {yearSchedule.breakDates.map((breakPeriod: any, index: number) => (
+          <li key={index}>{breakPeriod.start} - {breakPeriod.end}</li>
+        ))}
+      </ul>
+
+      <h3>Plusznapok</h3>
+      <ul>
+        {yearSchedule.plusDates.map((plusDate: any, index: number) => (
+          <li key={index}>{plusDate.date} ({plusDate.replaceDay} -i órarend)</li>
+        ))}
+      </ul>
     </div>
   );
 };
