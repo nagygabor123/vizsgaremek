@@ -57,5 +57,7 @@ PLUSZNAPOK ÉS SZUNETEK HOZZÁADÁSA http://localhost:3000/api/config/addPlusBre
 
 PLUSZNAPOK ÉS SZUNETEK TÖRLÉS  http://localhost:3000/api/config/deletePlusBreak?year_schedule_id=3  DELETE 
 
+http://localhost:3000/api/config/updatePlusBreak  POST  {"id": 10,"nev": "Lelki nap","which_day": "2025-02-01","replace_day": "wednesday"}
+
 
 
