@@ -276,23 +276,31 @@ const Configuration = () => {
       <button onClick={() => updateSchoolYear('veg', schoolEndEdit)}>Mentés</button>
       
       <h3>Szünetek</h3>
-      <ul>
-        {yearSchedule.breakDates.map((breakPeriod: any, index: number) => (
-          <li key={index}>{breakPeriod.id} {breakPeriod.name}: {breakPeriod.start} - {breakPeriod.end}</li>
-        ))}
-      </ul>
+      {yearSchedule.breakDates.length > 0 ? (
+        <ul>
+          {yearSchedule.breakDates.map((breakPeriod: any, index: number) => (
+            <li key={index}>{breakPeriod.id} {breakPeriod.name}: {breakPeriod.start} - {breakPeriod.end}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>Nincsenek szünetek.</p>
+      )}
       <input type="text" placeholder="Szünet neve" value={newBreak.nev} onChange={(e) => setNewBreak({ ...newBreak, nev: e.target.value })} />
       <input type="date" value={newBreak.which_day} onChange={(e) => setNewBreak({ ...newBreak, which_day: e.target.value })} />
       <input type="date" value={newBreak.replace_day} onChange={(e) => setNewBreak({ ...newBreak, replace_day: e.target.value })} />
-      <button onClick={handleAddBreak}>Hozzáadás</button>
-      
-      <h3>Plusznapok</h3>
-      <ul>
-        {yearSchedule.plusDates.map((plusDate: any, index: number) => (
-          <li key={index}>{plusDate.id} {plusDate.name}: {plusDate.date} ({plusDate.replaceDay}-i órarend)</li>
-        ))}
-      </ul>
-      <input type="text" placeholder="Plusznap neve" value={newPlusDate.nev} onChange={(e) => setNewPlusDate({ ...newPlusDate, nev: e.target.value })} />
+      <button onClick={handleAddBreak}>Új szünet hozzáadása</button>
+
+      <h3>Plusz napok</h3>
+      {yearSchedule.plusDates.length > 0 ? (
+        <ul>
+          {yearSchedule.plusDates.map((plusDate: any, index: number) => (
+            <li key={index}>{plusDate.id} {plusDate.name}: {plusDate.date} - {plusDate.replaceDay}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>Nincsenek plusz napok.</p>
+      )}
+      <input type="text" placeholder="Plusz nap neve" value={newPlusDate.nev} onChange={(e) => setNewPlusDate({ ...newPlusDate, nev: e.target.value })} />
       <input type="date" value={newPlusDate.which_day} onChange={(e) => setNewPlusDate({ ...newPlusDate, which_day: e.target.value })} />
       <select
         id="replace_day"
@@ -304,8 +312,8 @@ const Configuration = () => {
             {day.label}
           </option>
         ))}
-      </select>
-           <button onClick={handleAddPlusDate}>Hozzáadás</button>
+      </select>      <button onClick={handleAddPlusDate}>Új plusz nap hozzáadása</button>
+
     </div>
   );
 };
