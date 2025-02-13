@@ -94,10 +94,10 @@ export default async function handler(req, res) {
       let values = [];
 
       if (type === 'plusznap') {
-        query = 'SELECT nev, which_day, replace_day FROM year_schedule WHERE type = ?';
+        query = 'SELECT year_schedule_id, nev, which_day, replace_day FROM year_schedule WHERE type = ?';
         values = ['plusznap'];
       } else if (type === 'szunet') {
-        query = 'SELECT nev,  which_day AS start, replace_day AS end FROM year_schedule WHERE type = ?';
+        query = 'SELECT year_schedule_id, nev,  which_day AS start, replace_day AS end FROM year_schedule WHERE type = ?';
         values = ['szunet'];
       } else if (type === 'kezd') {
         query = 'SELECT which_day AS start FROM year_schedule WHERE type = ? LIMIT 1';
@@ -114,6 +114,7 @@ export default async function handler(req, res) {
       if (rows.length > 0) {
         if (type === 'plusznap') {
           const plusDates_alap = rows.map(row => ({
+            id: row.year_schedule_id, 
             name: row.nev,  
             date: row.which_day,
             replaceDay: row.replace_day
@@ -121,6 +122,7 @@ export default async function handler(req, res) {
           return res.status(200).json({ plusDates_alap });
         } else if (type === 'szunet') {
           const breakDates_alap = rows.map(row => ({
+            id: row.year_schedule_id, 
             name: row.nev,  
             start: row.start,
             end: row.end

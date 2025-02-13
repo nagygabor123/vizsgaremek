@@ -126,6 +126,28 @@ const Configuration = () => {
     }
   };
 
+  const handleDeletePlusBreak = async (id: number) => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/config/deletePlusBreak?year_schedule_id=${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        setMessage('A rekord sikeresen törölve.');
+        setYearSchedule((prev: typeof yearSchedule) => ({
+          ...prev,
+          breakDates: prev.breakDates.filter((breakPeriod: any) => breakPeriod.id !== id),
+          plusDates: prev.plusDates.filter((plusDate: any) => plusDate.id !== id),
+        }));
+      } else {
+        setMessage('Hiba történt a törlés során.');
+      }
+    } catch (error) {
+      console.error('Hiba a törlés során:', error);
+      setMessage('Hiba történt a törlés során.');
+    }
+  };
+
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -256,7 +278,7 @@ const Configuration = () => {
       <h3>Szünetek</h3>
       <ul>
         {yearSchedule.breakDates.map((breakPeriod: any, index: number) => (
-          <li key={index}>{breakPeriod.name}: {breakPeriod.start} - {breakPeriod.end}</li>
+          <li key={index}>{breakPeriod.id} {breakPeriod.name}: {breakPeriod.start} - {breakPeriod.end}</li>
         ))}
       </ul>
       <input type="text" placeholder="Szünet neve" value={newBreak.nev} onChange={(e) => setNewBreak({ ...newBreak, nev: e.target.value })} />
@@ -267,7 +289,7 @@ const Configuration = () => {
       <h3>Plusznapok</h3>
       <ul>
         {yearSchedule.plusDates.map((plusDate: any, index: number) => (
-          <li key={index}>{plusDate.name}: {plusDate.date} ({plusDate.replaceDay}-i órarend)</li>
+          <li key={index}>{plusDate.id} {plusDate.name}: {plusDate.date} ({plusDate.replaceDay}-i órarend)</li>
         ))}
       </ul>
       <input type="text" placeholder="Plusznap neve" value={newPlusDate.nev} onChange={(e) => setNewPlusDate({ ...newPlusDate, nev: e.target.value })} />

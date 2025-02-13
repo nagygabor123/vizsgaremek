@@ -51,6 +51,7 @@ interface Timetable {
 }
 
 interface BreakDatesAlap {
+  name: string; 
   start: string;
   end: string;
 }
