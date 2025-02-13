@@ -12,6 +12,8 @@ const Configuration = () => {
     schoolStart: '',
     schoolEnd: ''
   });
+  const [schoolStartEdit, setSchoolStartEdit] = useState('');
+  const [schoolEndEdit, setSchoolEndEdit] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -33,12 +35,34 @@ const Configuration = () => {
           schoolStart: schoolStart.schoolYearStart.start,
           schoolEnd: schoolEnd.schoolYearEnd.end
         });
+        setSchoolStartEdit(schoolStart.schoolYearStart.start);
+        setSchoolEndEdit(schoolEnd.schoolYearEnd.end);
       } catch (error) {
         console.error('Error fetching year schedule:', error);
       }
     };
     fetchYearSchedule();
   }, []);
+
+  const updateSchoolYear = async (type: string, date: string) => {
+    try {
+      const response = await fetch('http://localhost:3000/api/config/setYearStartEnd', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ type, which_day: date }),
+      });
+      if (response.ok) {
+        setMessage(`${type === 'kezd' ? 'Tanév kezdete' : 'Tanév vége'} sikeresen frissítve!`);
+        setYearSchedule((prev: any) => ({ ...prev, [type === 'kezd' ? 'schoolStart' : 'schoolEnd']: date }));
+      } else {
+        setMessage('Hiba történt az adat frissítésekor.');
+      }
+    } catch (error) {
+      setMessage(`Hiba: ${error}`);
+    }
+  };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -147,22 +171,24 @@ const Configuration = () => {
           {JSON.stringify(apiResponse, null, 2)}
         </pre>
       )}
-      <h2>Éves ütemterv</h2>
-      <h3>Plusznapok:</h3>
-      <ul>
-        {yearSchedule.plusDates.map((day: any, index: number) => (
-          <li key={index}>{day.date} - {day.replaceDay}</li>
-        ))}
-      </ul>
-      <h3>Szünetek:</h3>
-      <ul>
-        {yearSchedule.breakDates.map((breakPeriod: any, index: number) => (
-          <li key={index}>{breakPeriod.start} - {breakPeriod.end}</li>
-        ))}
-      </ul>
-      <h3>Tanév kezdete:</h3>
+      <h2>Tanév beállítása</h2>
+      <label>Tanév kezdete:</label>
+      <input
+        type="date"
+        value={schoolStartEdit}
+        onChange={(e) => setSchoolStartEdit(e.target.value)}
+      />
+      <button onClick={() => updateSchoolYear('kezd', schoolStartEdit)}>Mentés</button>
+      <label>Tanév vége:</label>
+      <input
+        type="date"
+        value={schoolEndEdit}
+        onChange={(e) => setSchoolEndEdit(e.target.value)}
+      />
+      <button onClick={() => updateSchoolYear('veg', schoolEndEdit)}>Mentés</button>
+      <h3>Aktuális tanév kezdete:</h3>
       <p>{yearSchedule.schoolStart}</p>
-      <h3>Tanév vége:</h3>
+      <h3>Aktuális tanév vége:</h3>
       <p>{yearSchedule.schoolEnd}</p>
     </div>
   );
