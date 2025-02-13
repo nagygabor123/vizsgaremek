@@ -1,6 +1,6 @@
 /**
  * @swagger
- * /api/config/setPlusBreak:
+ * /api/config/addPlusBreak:
  *   post:
  *     summary: Plusznapok és szünetek hozzáadása az év rendjéhez
  *     description: A végpont lehetővé teszi új plusznapok és szünetek rögzítését az év rendjében.

@@ -90,7 +90,7 @@ const Configuration = () => {
   
   const handleAddBreak = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/config/setPlusBreak', {
+      const response = await fetch('http://localhost:3000/api/config/addPlusBreak', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type: 'szunet', ...newBreak })
@@ -109,7 +109,7 @@ const Configuration = () => {
   
   const handleAddPlusDate = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/config/setPlusBreak', {
+      const response = await fetch('http://localhost:3000/api/config/addPlusBreak', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type: 'plusznap', ...newPlusDate })
