@@ -1,5 +1,5 @@
 CREATE TABLE `admins` (
-  `admin_id` int(11) NOT NULL,
+  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
   `full_name` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `position` varchar(255) NOT NULL
@@ -195,7 +195,7 @@ CREATE TABLE ring_times (
     end_time TIME NOT NULL
 );
 
-INSERT INTO lesson_times (start_time, end_time) VALUES
+INSERT INTO ring_times (start_time, end_time) VALUES
 ('07:15', '08:00'),
 ('08:10', '08:55'),
 ('09:05', '09:50'),
