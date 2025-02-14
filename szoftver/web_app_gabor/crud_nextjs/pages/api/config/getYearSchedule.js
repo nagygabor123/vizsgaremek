@@ -14,7 +14,7 @@ WHERE type = 'szunet';
 */
 /**
  * @swagger
- * /api/config/handleYearSchedule:
+ * /api/config/getYearSchedule:
  *   get:
  *     summary: "Lekérdezi az iskolai évhez tartozó adatokat"
  *     description: "Ez az API végpont lehetővé teszi a különböző típusú iskolai év adatainak lekérdezését, például a plusznapok, szünetek, kezdő és záró dátumok."

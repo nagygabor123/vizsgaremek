@@ -30,10 +30,10 @@ const Configuration = () => {
   useEffect(() => {
     const fetchYearSchedule = async () => {
       try {
-        const plusRes = await fetch('http://localhost:3000/api/config/handleYearSchedule?type=plusznap');
-        const szunetRes = await fetch('http://localhost:3000/api/config/handleYearSchedule?type=szunet');
-        const startRes = await fetch('http://localhost:3000/api/config/handleYearSchedule?type=kezd');
-        const endRes = await fetch('http://localhost:3000/api/config/handleYearSchedule?type=veg');
+        const plusRes = await fetch('http://localhost:3000/api/config/getYearSchedule?type=plusznap');
+        const szunetRes = await fetch('http://localhost:3000/api/config/getYearSchedule?type=szunet');
+        const startRes = await fetch('http://localhost:3000/api/config/getYearSchedule?type=kezd');
+        const endRes = await fetch('http://localhost:3000/api/config/getYearSchedule?type=veg');
 
         const plusDates = await plusRes.json();
         const breakDates = await szunetRes.json();
