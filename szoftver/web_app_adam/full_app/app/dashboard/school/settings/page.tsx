@@ -45,11 +45,11 @@ import { DateRange } from 'react-day-picker';
 
 
 export default function Page() {
-  const [dateRange, setDateRange] = React.useState<DateRange | undefined>({
-    from: new Date(2024, 0, 20),
-    to: addDays(new Date(2024, 0, 20), 20),
-  })
+  const [dateRange, setDateRange] = React.useState<DateRange | undefined>(undefined);
+
  
+  
+
   const [date, setDate] = React.useState<Date>()
 
   
@@ -68,20 +68,16 @@ const [newNonTeachingDay, setNewNonTeachingDay] = React.useState<Date | undefine
 const [newBreak, setNewBreak] = React.useState<Date | undefined>();
 
 
-
 const handleAddRange = () => {
-  // Check if both from and to are valid Date objects before adding
-  if (dateRange?.from && dateRange?.to) {
-    // Safeguard to ensure `from` and `to` are both valid `Date` objects
-    setBreaks((prevBreaks) => [ //(prevBreaks) => 
-      { from: dateRange.from, to: dateRange.to }
-    ])
+  if (dateRange?.from instanceof Date && dateRange?.to instanceof Date) {
+    setBreaks(prevBreaks => [
+      ...prevBreaks, // Fontos: ne töröljük az előző elemeket!
+      { from: dateRange.from as Date, to: dateRange.to as Date }
+    ]);
   } else {
-    // If either is undefined, log an error or handle it appropriately
-    console.error("Invalid date range. Both 'from' and 'to' must be defined.");
+    console.error("Invalid date range. Both 'from' and 'to' must be valid Date objects.");
   }
-}
-
+};
 
 
 const handleAddDate = (date: Date | undefined, setState: React.Dispatch<React.SetStateAction<Date[]>>, state: Date[]) => {
@@ -298,101 +294,73 @@ const handleAddDate = (date: Date | undefined, setState: React.Dispatch<React.Se
     <label className="block text-3xl font-bold">Tanév rendje</label>
     <p className="text-base text-gray-500 mb-2">Nulla laoreet maximus placerat. Duis pellentesque maximus consequat.</p>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-      <div>
-        <h2 className="mt-2">A tanítási év első napja</h2>
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button
-              variant={"outline"}
-              className={cn(
-                "w-[240px] justify-start text-left font-normal",
-                !startDate && "text-muted-foreground"
-              )}
-            >
-              <CalendarIcon />
-              {startDate ? format(startDate, "PPP") : <span>Pick a date</span>}
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="start">
-            <Calendar
-              mode="single"
-              selected={startDate}
-              onSelect={(date) => setStartDate(date ?? undefined)}
-
-              initialFocus
-            />
-          </PopoverContent>
-        </Popover>
-        {startDate && <p>Kiválasztott dátum: {format(startDate, "PPP")}</p>}
-      </div>
-
-      <div>
-        <h2 className="mt-2">A tanítási év utolsó napja</h2>
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button
-              variant={"outline"}
-              className={cn(
-                "w-[240px] justify-start text-left font-normal",
-                !endDate && "text-muted-foreground"
-              )}
-            >
-              <CalendarIcon />
-              {endDate ? format(endDate, "PPP") : <span>Pick a date</span>}
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="start">
-            <Calendar
-              mode="single"
-              selected={endDate}
-              onSelect={setEndDate}
-              initialFocus
-            />
-          </PopoverContent>
-        </Popover>
-        {endDate && <p>Kiválasztott dátum: {format(endDate, "PPP")}</p>}
-      </div>
-    </div>
-
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-      <div>
-        <h2 className="">Szombati tanítási napok</h2>
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button
-              variant={"outline"}
-              className={cn(
-                "w-[240px] justify-start text-left font-normal",
-                !newSaturdayClass && "text-muted-foreground"
-              )}
-            >
-              <CalendarIcon />
-              {newSaturdayClass ? format(newSaturdayClass, "PPP") : <span>Pick a date</span>}
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="start">
-            <Calendar
-              mode="single"
-              selected={newSaturdayClass}
-              onSelect={setNewSaturdayClass}
-              initialFocus
-            />
-          </PopoverContent>
-        </Popover>
-        <Button onClick={() => handleAddDate(newSaturdayClass, setSaturdayClasses, saturdayClasses)} variant="outline" size="icon">
-          <Plus />
+    <div className="">
+  {/* First Section */}
+  <div className="">
+    <Label htmlFor="email">A tanítási év első napja </Label> {/*{startDate && format(startDate, "PPP")} */}
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button
+          variant={"outline"}
+          className={cn(
+            "w-[240px] justify-start text-left font-normal",
+            !startDate && "text-muted-foreground"
+          )}
+        >
+          <CalendarIcon />
+          {startDate ? format(startDate, "PPP") : <span>Válasszon egy napot</span>}
         </Button>
-        <ul className="mt-2">
-          {saturdayClasses.map((date, index) => (
-            <li key={index}>{format(date, "PPP")}</li>
-          ))}
-        </ul>
-      </div>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0" align="start">
+        <Calendar
+          mode="single"
+          selected={startDate}
+          onSelect={(date) => setStartDate(date ?? undefined)}
+          initialFocus
+        />
+      </PopoverContent>
+    </Popover>
+  </div>
 
-      <div>
-        <h2 className="">Tanítás nélküli munkanapok</h2>
-        <Popover>
+  {/* Second Section */}
+  <div className="">
+    <Label htmlFor="email">A tanítási év utolsó napja </Label> {/*{endDate && format(endDate, "PPP")} */}
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button
+          variant={"outline"}
+          className={cn(
+            "w-[240px] justify-start text-left font-normal",
+            !endDate && "text-muted-foreground"
+          )}
+        >
+          <CalendarIcon />
+          {endDate ? format(endDate, "PPP") : <span>Válasszon egy napot</span>}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0" align="start">
+        <Calendar
+          mode="single"
+          selected={endDate}
+          onSelect={setEndDate}
+          initialFocus
+        />
+      </PopoverContent>
+    </Popover>
+  </div>
+</div>
+
+    
+
+
+
+
+    
+
+     
+      <Label htmlFor="email">Tanítás nélküli munkanapok</Label>
+      <div className="space-x-2">  
+                <Popover>
           <PopoverTrigger asChild>
             <Button
               variant={"outline"}
@@ -402,7 +370,7 @@ const handleAddDate = (date: Date | undefined, setState: React.Dispatch<React.Se
               )}
             >
               <CalendarIcon />
-              {newNonTeachingDay ? format(newNonTeachingDay, "PPP") : <span>Pick a date</span>}
+              {newNonTeachingDay ? format(newNonTeachingDay, "PPP") : <span>Válasszon egy dátumot</span>}
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0" align="start">
@@ -414,7 +382,7 @@ const handleAddDate = (date: Date | undefined, setState: React.Dispatch<React.Se
             />
           </PopoverContent>
         </Popover>
-        <Button onClick={() => handleAddDate(newNonTeachingDay, setNonTeachingDays, nonTeachingDays)} variant="outline" size="icon">
+        <Button onClick={() => handleAddDate(newNonTeachingDay, setNonTeachingDays, nonTeachingDays)} variant="outline">
           <Plus />
         </Button>
         <ul className="mt-2">
@@ -422,20 +390,62 @@ const handleAddDate = (date: Date | undefined, setState: React.Dispatch<React.Se
             <li key={index}>{format(date, "PPP")}</li>
           ))}
         </ul>
-      </div>
-    </div>
+  
+      
+   </div>
+
+ 
+   
+      
+      <Label htmlFor="email">Szombati tanítási napok</Label>
+        
+      <div >
+      <Input type="email" placeholder="Tanítási nap" />
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant={"outline"}
+              className={cn(
+                "w-[240px] justify-start text-left font-normal",
+                !newSaturdayClass && "text-muted-foreground"
+              )}
+            >
+              <CalendarIcon />
+              {newSaturdayClass ? format(newSaturdayClass, "PPP") : <span>Válasszon egy dátumot</span>}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <Calendar
+              mode="single"
+              selected={newSaturdayClass}
+              onSelect={setNewSaturdayClass}
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
+       
+        <Button onClick={() => handleAddDate(newSaturdayClass, setSaturdayClasses, saturdayClasses)} variant="outline">
+          <Plus />
+        </Button>
+    
+        </div>
+        <ul className="mt-2">
+          {saturdayClasses.map((date, index) => (
+            <li key={index}>{format(date, "PPP")}</li>
+          ))}
+        </ul>
 
    
-    <div>
-      <h2 className="">Szünetek rendje</h2>
-
-      {/* Date range picker for scheduling */}
+  
+        <Label htmlFor="email">Tanítási szünetek</Label>
+        <div >
+      <Input type="email" placeholder="Szünet neve" />
       <Popover>
         <PopoverTrigger asChild>
           <Button
             variant={"outline"}
             className={cn(
-              "w-[300px] justify-start text-left font-normal",
+              "justify-start text-left font-normal",
               !dateRange && "text-muted-foreground"
             )}
           >
@@ -450,7 +460,7 @@ const handleAddDate = (date: Date | undefined, setState: React.Dispatch<React.Se
                 format(dateRange.from, "LLL dd, y")
               )
             ) : (
-              <span>Pick a date range</span>
+              <span>Válasszon egy dátumtartományt</span>
             )}
           </Button>
         </PopoverTrigger>
@@ -465,22 +475,22 @@ const handleAddDate = (date: Date | undefined, setState: React.Dispatch<React.Se
           />
         </PopoverContent>
       </Popover>
-
       <Button
   onClick={() => {
-    // Csak akkor adjuk hozzá, ha a dátumok nem undefined
     if (dateRange?.from && dateRange?.to) {
       setBreaks(prev => [
         ...prev,
-        { from: dateRange.from, to: dateRange.to }
+        { from: dateRange.from as Date, to: dateRange.to as Date }
       ]);
     }
   }}
   variant="outline"
-  size="icon"
+ 
 >
   <Plus />
 </Button>
+    </div>
+    
 
 
       {/* List of breaks */}
@@ -491,7 +501,7 @@ const handleAddDate = (date: Date | undefined, setState: React.Dispatch<React.Se
           </li>
         ))}
       </ul>
-    </div>
+  
   </div>
 )}
 
