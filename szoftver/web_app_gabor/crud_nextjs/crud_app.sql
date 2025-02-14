@@ -187,3 +187,21 @@ INSERT INTO year_schedule (type, nev, which_day, replace_day) VALUES
 ('szunet', 'Karácsonyi szünet', '2024-12-24', '2025-01-05'),
 ('plusznap', 'Szombati tanítás', '2024-12-21', 'monday'),
 ('plusznap', 'Szombati tanítás', '2025-02-01', 'monday');
+
+
+CREATE TABLE ring_times (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL
+);
+
+INSERT INTO lesson_times (start_time, end_time) VALUES
+('07:15', '08:00'),
+('08:10', '08:55'),
+('09:05', '09:50'),
+('10:00', '10:45'),
+('10:55', '11:40'),
+('11:50', '12:35'),
+('12:55', '13:40'),
+('13:45', '14:30'),
+('14:35', '15:20');

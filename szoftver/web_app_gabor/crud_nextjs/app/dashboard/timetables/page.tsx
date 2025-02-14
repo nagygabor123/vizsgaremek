@@ -62,18 +62,11 @@ interface plusDatesAlap {
   replaceDay: string;
 }
 
+interface lessonTimes {
+  start: string;
+  end: string;
+}
 
-const lessonTimes = [
-  { start: '07:15', end: '08:00' },
-  { start: '08:10', end: '08:55' },
-  { start: '09:05', end: '09:50' },
-  { start: '10:00', end: '10:45' },
-  { start: '10:55', end: '11:40' },
-  { start: '11:50', end: '12:35' },
-  { start: '12:55', end: '13:40' },
-  { start: '13:45', end: '14:30' },
-  { start: '14:35', end: '15:20' },
-];
 
 const Calendar: React.FC = () => {
   const [systemClose, setSystemClose] = useState<boolean>(false); 
@@ -87,6 +80,7 @@ const Calendar: React.FC = () => {
   const [plusdate, setPlusdate] = useState<plusDatesAlap[]>([]);
   const [tanevkezdes, setStartYear] = useState<string | null>(null);
   const [tanevvege, setEndYear] = useState<string | null>(null);
+  const [lessonTimes, setLessonTimes] = useState<lessonTimes[]>([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -106,6 +100,24 @@ const Calendar: React.FC = () => {
     window.addEventListener('resize', updateView);
     return () => window.removeEventListener('resize', updateView);
   }, []);
+
+  useEffect(() => {
+    const fetchLessonTimes = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/config/getRinging');
+        if (!response.ok) {
+          throw new Error('Nem sikerült lekérni a csengetési rendet.');
+        }
+        const data = await response.json();
+        setLessonTimes(data);
+      } catch (error) {
+        console.error('Hiba a csengetési rend lekérésekor:', error);
+      }
+    };
+  
+    fetchLessonTimes();
+  }, []);
+  
 
   useEffect(() => {
     const fetchTimetables = async () => {
