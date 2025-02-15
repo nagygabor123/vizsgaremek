@@ -2,7 +2,8 @@ CREATE TABLE `admins` (
   `admin_id` int(11) NOT NULL AUTO_INCREMENT,
   `full_name` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `position` varchar(255) NOT NULL
+  `position` varchar(255) NOT NULL,
+  PRIMARY KEY (`admin_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Tábla szerkezet ehhez a táblához `students`
@@ -49,9 +50,6 @@ CREATE TABLE `locker_relationships` (
   FOREIGN KEY (`rfid_tag`) REFERENCES `students` (`rfid_tag`),
   FOREIGN KEY (`locker_id`) REFERENCES `lockers` (`locker_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-ALTER TABLE `admins`
-ADD PRIMARY KEY (`admin_id`);
 
 -- Tábla szerkezet ehhez a táblához `timetables`
 CREATE TABLE `timetables` (
