@@ -2,10 +2,10 @@ CREATE TABLE `admins` (
   `admin_id` int(11) NOT NULL AUTO_INCREMENT,
   `full_name` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `position` varchar(255) NOT NULL
+  `position` varchar(255) NOT NULL,
+  PRIMARY KEY (`admin_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Tábla szerkezet ehhez a táblához `students`
 CREATE TABLE `students` (
   `student_id` VARCHAR(20) NOT NULL,
   `full_name` VARCHAR(255) NOT NULL,
@@ -16,14 +16,12 @@ CREATE TABLE `students` (
   UNIQUE KEY `rfid_tag` (`rfid_tag`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Tábla szerkezet ehhez a táblához `groups`
 CREATE TABLE `groups` (
   `group_id` INT NOT NULL AUTO_INCREMENT,
   `group_name` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Tábla szerkezet ehhez a táblához `student_groups`
 CREATE TABLE `student_groups` (
   `student_group_id` INT NOT NULL AUTO_INCREMENT,
   `student_id` VARCHAR(20) NOT NULL,
@@ -33,14 +31,12 @@ CREATE TABLE `student_groups` (
   FOREIGN KEY (`group_id`) REFERENCES `groups` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Tábla szerkezet ehhez a táblához `lockers`
 CREATE TABLE `lockers` (
   `locker_id` INT NOT NULL AUTO_INCREMENT,
   `status` ENUM('be', 'ki') NOT NULL,
   PRIMARY KEY (`locker_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Tábla szerkezet ehhez a táblához `locker_relationships`
 CREATE TABLE `locker_relationships` (
   `relationship_id` INT NOT NULL AUTO_INCREMENT,
   `rfid_tag` VARCHAR(50) NOT NULL COLLATE utf8mb4_general_ci,
@@ -50,10 +46,6 @@ CREATE TABLE `locker_relationships` (
   FOREIGN KEY (`locker_id`) REFERENCES `lockers` (`locker_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-ALTER TABLE `admins`
-ADD PRIMARY KEY (`admin_id`);
-
--- Tábla szerkezet ehhez a táblához `timetables`
 CREATE TABLE `timetables` (
   `timetable_id` INT NOT NULL AUTO_INCREMENT,
   `group_id` INT NOT NULL,
@@ -67,15 +59,24 @@ CREATE TABLE `timetables` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `system_status` (
-  `id` int(11) NOT NULL,
-  `status` varchar(10) NOT NULL
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `status` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+CREATE TABLE `year_schedule` (
+    `year_schedule_id` INT AUTO_INCREMENT PRIMARY KEY,
+    `type` VARCHAR(255) NOT NULL,
+    `nev` VARCHAR(255) NOT NULL,
+    `which_day` VARCHAR(255) NOT NULL,
+    `replace_day` VARCHAR(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
-
-
-
+CREATE TABLE `ring_times` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `start_time` TIME NOT NULL,
+    `end_time` TIME NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 INSERT INTO `admins` (`admin_id`, `full_name`, `password`, `position`) VALUES
@@ -173,14 +174,6 @@ INSERT INTO `timetables` (`group_id`, `admin_id`, `day_of_week`, `start_time`, `
 
 
 
-CREATE TABLE year_schedule (
-    year_schedule_id INT AUTO_INCREMENT PRIMARY KEY,
-    type VARCHAR(255) NOT NULL,
-    nev VARCHAR(255) NOT NULL,
-    which_day VARCHAR(255) NOT NULL,
-    replace_day VARCHAR(255) NOT NULL
-);
-
 INSERT INTO year_schedule (type, nev, which_day, replace_day) VALUES
 ('kezd', 'Tanévkezdés', '2024-09-02', ''),
 ('veg', 'Tanévzárás', '2025-06-20', ''),
@@ -189,11 +182,7 @@ INSERT INTO year_schedule (type, nev, which_day, replace_day) VALUES
 ('plusznap', 'Szombati tanítás', '2025-02-01', 'monday');
 
 
-CREATE TABLE ring_times (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    start_time TIME NOT NULL,
-    end_time TIME NOT NULL
-);
+
 
 INSERT INTO ring_times (start_time, end_time) VALUES
 ('07:15', '08:00'),
