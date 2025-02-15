@@ -8,8 +8,14 @@ export default function AddEmployeePage() {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [employees, setEmployees] = useState<any[]>([]); // Az alkalmazottak tárolására
-
-  // Alkalmazottak lekérése
+  const positions = [
+    { label: 'Igazgató', value: 'igazgato' },
+    { label: 'Osztályfőnök', value: 'osztalyfonok' },
+    { label: 'Tanár', value: 'tanar' },
+    { label: 'Portás', value: 'portas' },
+    { label: 'Rendszergazda', value: 'rendszergazda' },
+  ];
+ 
   const fetchEmployees = async () => {
     try {
       const response = await fetch('http://localhost:3000/api/config/getEmployees');
@@ -26,7 +32,7 @@ export default function AddEmployeePage() {
   };
 
   useEffect(() => {
-    fetchEmployees(); // Az alkalmazottak betöltése oldal betöltésekor
+    fetchEmployees(); 
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -52,7 +58,7 @@ export default function AddEmployeePage() {
         setMessage('Employee added successfully');
         setFullName('');
         setPosition('');
-        fetchEmployees(); // Frissítjük az alkalmazottak listáját hozzáadás után
+        fetchEmployees(); 
       } else {
         setMessage(data.message || 'Error adding employee');
       }
@@ -79,13 +85,17 @@ export default function AddEmployeePage() {
         </div>
         <div>
           <label htmlFor="position">Position:</label>
-          <input
+          <select
             id="position"
-            type="text"
             value={position}
             onChange={(e) => setPosition(e.target.value)}
-            required
-          />
+          >
+            {positions.map((possiton) => (
+              <option key={possiton.value} value={possiton.value}>
+                {possiton.label}
+              </option>
+            ))}
+          </select>
         </div>
         <button type="submit" disabled={loading}>
           {loading ? 'Adding...' : 'Add Employee'}

@@ -1,3 +1,77 @@
+
+/**
+ * @swagger
+ * /api/config/addEmployees:
+ *   post:
+ *     summary: Új admin hozzáadása
+ *     description: Hozzáad egy új adminisztrátort az adatbázishoz, automatikusan generált jelszóval.
+ *     tags:
+ *       - Configuration
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - full_name
+ *               - position
+ *             properties:
+ *               full_name:
+ *                 type: string
+ *                 example: "Kiss Péter"
+ *                 description: Az adminisztrátor teljes neve.
+ *               position:
+ *                 type: string
+ *                 example: "Rendszergazda"
+ *                 description: Az adminisztrátor munkaköre.
+ *     responses:
+ *       201:
+ *         description: Az adminisztrátor sikeresen létrehozva.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Admin created"
+ *                 password:
+ *                   type: string
+ *                   example: "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6"
+ *                   description: A generált jelszó.
+ *       400:
+ *         description: Hiányzó kötelező mezők.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Missing required fields"
+ *       500:
+ *         description: Adatbázis hiba az admin létrehozása közben.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Error creating admin"
+ *       405:
+ *         description: Hibás HTTP metódus (csak POST engedélyezett).
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Method Not Allowed"
+ */
+
 import { connectToDatabase } from '../../../lib/db';
 import crypto from 'crypto';
 
@@ -13,7 +87,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
-    const password = generatePassword(); // Jelszó generálása
+    const password = generatePassword(); 
 
     const db = await connectToDatabase();
 
@@ -22,7 +96,7 @@ export default async function handler(req, res) {
         'INSERT INTO admins (full_name, password, position) VALUES (?, ?, ?)',
         [full_name, password, position]
       );
-      res.status(201).json({ message: 'Admin created', password }); // Visszaküldjük a generált jelszót
+      res.status(201).json({ message: 'Admin created', password }); 
     } catch (error) {
       res.status(500).json({ message: 'Error creating admin' });
     }
