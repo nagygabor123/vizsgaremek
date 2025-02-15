@@ -8,7 +8,12 @@ export default function AddEmployeePage() {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [employees, setEmployees] = useState<any[]>([]); // Az alkalmazottak tárolására
-
+  const positions = [
+    { label: 'Igazgató', value: 'igazgato' },
+    { label: 'Osztályfőnök', value: 'osztalyfonok' },
+    { label: 'Tanár', value: 'tanar' },
+    { label: 'Portás', value: 'portas' },
+  ];
   // Alkalmazottak lekérése
   const fetchEmployees = async () => {
     try {
@@ -79,13 +84,17 @@ export default function AddEmployeePage() {
         </div>
         <div>
           <label htmlFor="position">Position:</label>
-          <input
+          <select
             id="position"
-            type="text"
             value={position}
             onChange={(e) => setPosition(e.target.value)}
-            required
-          />
+          >
+            {positions.map((possiton) => (
+              <option key={possiton.value} value={possiton.value}>
+                {possiton.label}
+              </option>
+            ))}
+          </select>
         </div>
         <button type="submit" disabled={loading}>
           {loading ? 'Adding...' : 'Add Employee'}
