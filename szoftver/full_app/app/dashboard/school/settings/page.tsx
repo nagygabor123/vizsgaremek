@@ -69,34 +69,32 @@ export default function Page() {
     { label: 'Szerda', value: 'wednesday' },
     { label: 'Csütörtök', value: 'thursday' },
     { label: 'Péntek', value: 'friday' },
-    { label: 'Szombat', value: 'saturday' },
-    { label: 'Vasárnap', value: 'sunday' },
   ];
 
-    const fetchYearSchedule = async () => {
-      try {
-        const plusRes = await fetch('http://localhost:3000/api/config/getYearSchedule?type=plusznap');
-        const szunetRes = await fetch('http://localhost:3000/api/config/getYearSchedule?type=szunet');
-        const startRes = await fetch('http://localhost:3000/api/config/getYearSchedule?type=kezd');
-        const endRes = await fetch('http://localhost:3000/api/config/getYearSchedule?type=veg');
+  const fetchYearSchedule = async () => {
+    try {
+      const plusRes = await fetch('http://localhost:3000/api/config/getYearSchedule?type=plusznap');
+      const szunetRes = await fetch('http://localhost:3000/api/config/getYearSchedule?type=szunet');
+      const startRes = await fetch('http://localhost:3000/api/config/getYearSchedule?type=kezd');
+      const endRes = await fetch('http://localhost:3000/api/config/getYearSchedule?type=veg');
 
-        const plusDates = await plusRes.json();
-        const breakDates = await szunetRes.json();
-        const schoolStart = await startRes.json();
-        const schoolEnd = await endRes.json();
+      const plusDates = await plusRes.json();
+      const breakDates = await szunetRes.json();
+      const schoolStart = await startRes.json();
+      const schoolEnd = await endRes.json();
 
-        setYearSchedule({
-          plusDates: plusDates.plusDates_alap,
-          breakDates: breakDates.breakDates_alap,
-          schoolStart: schoolStart.schoolYearStart.start,
-          schoolEnd: schoolEnd.schoolYearEnd.end
-        });
-        setSchoolStartEdit(schoolStart.schoolYearStart.start);
-        setSchoolEndEdit(schoolEnd.schoolYearEnd.end);
-      } catch (error) {
-        console.error('Error fetching year schedule:', error);
-      }
-    };
+      setYearSchedule({
+        plusDates: plusDates.plusDates_alap,
+        breakDates: breakDates.breakDates_alap,
+        schoolStart: schoolStart.schoolYearStart.start,
+        schoolEnd: schoolEnd.schoolYearEnd.end
+      });
+      setSchoolStartEdit(schoolStart.schoolYearStart.start);
+      setSchoolEndEdit(schoolEnd.schoolYearEnd.end);
+    } catch (error) {
+      console.error('Error fetching year schedule:', error);
+    }
+  };
 
   useEffect(() => {
     fetchYearSchedule();
@@ -201,36 +199,32 @@ export default function Page() {
 
 
   const [dateRange, setDateRange] = React.useState<DateRange | undefined>(undefined);
-
- 
-  
-
-const [date, setDate] = React.useState<Date>()
-const [saturdayClasses, setSaturdayClasses] = React.useState<Date[]>([]);
-const [nonTeachingDays, setNonTeachingDays] = React.useState<Date[]>([]);
-const [breaks, setBreaks] = React.useState<{ from: Date, to: Date }[]>([])
-const [startDate, setStartDate] = React.useState<Date | undefined>();
-const [endDate, setEndDate] = React.useState<Date | undefined>();
-const [newSaturdayClass, setNewSaturdayClass] = React.useState<Date | undefined>();
-const [newNonTeachingDay, setNewNonTeachingDay] = React.useState<Date | undefined>();
-// const [newBreak, setNewBreak] = React.useState<Date | undefined>();
+  const [date, setDate] = React.useState<Date>()
+  const [saturdayClasses, setSaturdayClasses] = React.useState<Date[]>([]);
+  const [nonTeachingDays, setNonTeachingDays] = React.useState<Date[]>([]);
+  const [breaks, setBreaks] = React.useState<{ from: Date, to: Date }[]>([])
+  const [startDate, setStartDate] = React.useState<Date | undefined>();
+  const [endDate, setEndDate] = React.useState<Date | undefined>();
+  const [newSaturdayClass, setNewSaturdayClass] = React.useState<Date | undefined>();
+  const [newNonTeachingDay, setNewNonTeachingDay] = React.useState<Date | undefined>();
+  // const [newBreak, setNewBreak] = React.useState<Date | undefined>();
 
 
-const handleAddRange = () => {
-  if (dateRange?.from instanceof Date && dateRange?.to instanceof Date) {
-    setBreaks(prevBreaks => [
-      ...prevBreaks, // Fontos: ne töröljük az előző elemeket!
-      { from: dateRange.from as Date, to: dateRange.to as Date }
-    ]);
-  } else {
-    console.error("Invalid date range. Both 'from' and 'to' must be valid Date objects.");
-  }
-};
+  const handleAddRange = () => {
+    if (dateRange?.from instanceof Date && dateRange?.to instanceof Date) {
+      setBreaks(prevBreaks => [
+        ...prevBreaks, // Fontos: ne töröljük az előző elemeket!
+        { from: dateRange.from as Date, to: dateRange.to as Date }
+      ]);
+    } else {
+      console.error("Invalid date range. Both 'from' and 'to' must be valid Date objects.");
+    }
+  };
 
 
-const handleAddDate = (date: Date | undefined, setState: React.Dispatch<React.SetStateAction<Date[]>>, state: Date[]) => {
-  if (date) setState([...state, date]);
-};
+  const handleAddDate = (date: Date | undefined, setState: React.Dispatch<React.SetStateAction<Date[]>>, state: Date[]) => {
+    if (date) setState([...state, date]);
+  };
 
 
 
