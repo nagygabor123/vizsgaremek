@@ -43,6 +43,15 @@ import {
  
 import { DateRange } from 'react-day-picker';
 
+import { AlertCircle } from "lucide-react"
+ 
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/ui/alert"
+ 
+
 
 export default function Page() {
   const [dateRange, setDateRange] = React.useState<DateRange | undefined>(undefined);
@@ -172,6 +181,20 @@ const handleAddDate = (date: Date | undefined, setState: React.Dispatch<React.Se
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 overflow-x-hidden w-full">
           <div className="grid auto-rows-min gap-4 w-full">
+
+
+          <Alert variant="destructive">
+      <AlertCircle className="h-4 w-4" />
+      <AlertTitle>Error</AlertTitle>
+      
+      <AlertDescription>
+        Your session has expired. Please log in again.
+        
+      </AlertDescription>
+      
+    </Alert>
+
+
             {isButtonVisible && (
               <div className="aspect-[17/1] rounded-xl bg-yellow-50 flex items-center px-4 w-full box-border overflow-hidden">
                 <TriangleAlert className="text-amber-400" />
