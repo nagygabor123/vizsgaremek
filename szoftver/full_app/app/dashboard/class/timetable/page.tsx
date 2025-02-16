@@ -270,7 +270,9 @@ const Calendar: React.FC = () => {
   
   const getReplacedDayName = (date: Date): string => {
     const formattedDate = format(date, 'yyyy-MM-dd');
-    const replacement = plusdate.find((entry) => entry.date === formattedDate);
+       // const replacement = plusdate.find((entry) => entry.date === formattedDate);
+       const replacement = (plusdate || []).find((entry) => entry.date === formattedDate);
+
     return replacement ? replacement.replaceDay : getDayName(date);
   };
 
