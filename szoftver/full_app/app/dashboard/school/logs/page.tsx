@@ -87,7 +87,7 @@ export default function Page() {
           </div>
         </header>
 
-data table
+összes api kérés logolva, 72 óráig, adatbázisba mentse, onnan töltse be, és 72 óa után törölje
 
 
 
