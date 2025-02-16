@@ -22,116 +22,149 @@ import { TriangleAlert } from "lucide-react";
 
 import Link from "next/link";
 
-export default function Page() {
-  const [isOverlayVisible, setOverlayVisible] = useState(false);
-  const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
 
-  // Ellenőrizzük a localStorage-t a komponens betöltésekor
+export default function AddEmployeePage() {
+  const [fullName, setFullName] = useState('');
+  const [position, setPosition] = useState('');
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [employees, setEmployees] = useState<any[]>([]); // Az alkalmazottak tárolására
+  const positions = [
+    { label: 'Igazgató', value: 'igazgato' },
+    { label: 'Osztályfőnök', value: 'osztalyfonok' },
+    { label: 'Tanár', value: 'tanar' },
+    { label: 'Portás', value: 'portas' },
+    { label: 'Rendszergazda', value: 'rendszergazda' },
+  ];
+ 
+  const fetchEmployees = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/config/getEmployees');
+      const data = await response.json();
+
+      if (response.ok) {
+        setEmployees(data);
+      } else {
+        setMessage('Error fetching employees');
+      }
+    } catch (error) {
+      setMessage('Error connecting to the server');
+    }
+  };
+
   useEffect(() => {
-    const hasClickedBefore = localStorage.getItem("hasClickedOverlayButton");
-    setButtonVisible(hasClickedBefore !== "true");
+    fetchEmployees(); 
   }, []);
 
-  // Gomb kattintás kezelése
-  const handleButtonClick = () => {
-    setOverlayVisible(true);
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage('');
 
-  const handleConfirmClick = () => {
-    setOverlayVisible(false);
-    setButtonVisible(false);
-    localStorage.setItem("hasClickedOverlayButton", "true");
-    window.location.reload();
-  };
+    try {
+      const response = await fetch('http://localhost:3000/api/config/addEmployees', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          full_name: fullName,
+          position: position,
+        }),
+      });
 
-  // Addig ne rendereljük a gombot, amíg nem töltöttük be az adatot
-  if (isButtonVisible === null) {
-    return null; // Várakozás a localStorage betöltésére
-  }
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage('Employee added successfully');
+        setFullName('');
+        setPosition('');
+        fetchEmployees(); 
+      } else {
+        setMessage(data.message || 'Error adding employee');
+      }
+    } catch (error) {
+      setMessage('Error connecting to the server');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b">
-          <div className="flex flex-1 items-center gap-2 px-3">
-            <SidebarTrigger />
-            <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumb>
-  <BreadcrumbList>
+    <AppSidebar />
+    <SidebarInset>
+      <header className="flex h-16 shrink-0 items-center gap-2 border-b">
+        <div className="flex flex-1 items-center gap-2 px-3">
+          <SidebarTrigger />
+          <Separator orientation="vertical" className="mr-2 h-4" />
+          <Breadcrumb>
+<BreadcrumbList>
+<BreadcrumbItem>
+<BreadcrumbLink asChild>
+      <Link href="/dashboard">Főoldal</Link>
+    </BreadcrumbLink>
+    </BreadcrumbItem>
+  <BreadcrumbSeparator />
   <BreadcrumbItem>
-  <BreadcrumbLink asChild>
-        <Link href="/dashboard">Főoldal</Link>
-      </BreadcrumbLink>
-      </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-    <BreadcrumbPage>Adminisztráció</BreadcrumbPage>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbPage>Alkalmazottak</BreadcrumbPage>
-    </BreadcrumbItem>
-  </BreadcrumbList>
+  <BreadcrumbPage>Adminisztráció</BreadcrumbPage>
+  </BreadcrumbItem>
+  <BreadcrumbSeparator />
+  <BreadcrumbItem>
+    <BreadcrumbPage>Alkalmazottak</BreadcrumbPage>
+  </BreadcrumbItem>
+</BreadcrumbList>
 </Breadcrumb>
-          </div>
-        </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 overflow-x-hidden w-full">
-          <div className="grid auto-rows-min gap-4 w-full">
-            {isButtonVisible && (
-              <div className="aspect-[17/1] rounded-xl bg-yellow-50 flex items-center px-4 w-full box-border overflow-hidden">
-                <TriangleAlert className="text-amber-400" />
-                <p className="text-sm truncate ml-3">
-                  Ez egy figyelmeztető üzenet. Kérjük, figyelmesen olvassa el!
-                </p>
-                <Button
-                  onClick={handleButtonClick}
-                  className="ml-auto"
-                  variant="link"
-                >
-                  Beállítás
-                </Button>
-              </div>
-            )}
-
-     
-
-            {isOverlayVisible && (
-              <div className="fixed inset-0 bg-white z-50 flex items-center justify-center">
-                <div className="absolute top-4 left-4 text-white text-lg font-semibold">
-                  Ez egy bal felső sarokban lévő szöveg
-                </div>
-                <div className="text-center text-black">
-                  <p className="mb-6 text-2xl font-bold">
-                    Ez egy teljes képernyős felugró ablak!
-                  </p>
-                  <div className="flex gap-4 justify-center">
-                    <button
-                      onClick={() => setOverlayVisible(false)}
-                      className="px-4 py-2 text-black bg-white rounded hover:bg-gray-200"
-                    >
-                      Bezárás
-                    </button>
-                    <button
-                      onClick={handleConfirmClick}
-                      className="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700"
-                    >
-                      Megerősítés
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            
-          </div>
-
-
-data table
-
-
         </div>
-      </SidebarInset>
+      </header>
+    <div>
+      <h1>Add New Employee</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="fullName">Full Name:</label>
+          <input
+            id="fullName"
+            type="text"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="position">Position:</label>
+          <select
+            id="position"
+            value={position}
+            onChange={(e) => setPosition(e.target.value)}
+          >
+            {positions.map((possiton) => (
+              <option key={possiton.value} value={possiton.value}>
+                {possiton.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <button type="submit" disabled={loading}>
+          {loading ? 'Adding...' : 'Add Employee'}
+        </button>
+      </form>
+
+      {message && <p>{message}</p>}
+
+      <h2 className="m-2 text-xl">Employees List</h2>
+      <ul>
+        {employees.length === 0 ? (
+          <li>No employees found</li>
+        ) : (
+          employees.map((employee) => (
+            <li key={employee.admin_id}>
+              {employee.full_name} - {employee.position} (ID: {employee.admin_id})
+            </li>
+          ))
+        )}
+      </ul>
+    </div>
+    </SidebarInset>
     </SidebarProvider>
   );
 }
