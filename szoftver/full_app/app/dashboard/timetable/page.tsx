@@ -2,11 +2,8 @@
 
 
 import { AppSidebar } from "@/components/app-sidebar"
-import {
-   ChevronDown,
 
-} from "lucide-react"
-
+import { ChevronRight, ChevronLeft } from "lucide-react"
 
 import {
   Breadcrumb,
@@ -399,14 +396,14 @@ const Calendar: React.FC = () => {
         </div>
       </header>
     <div className="calendar-container">
-      <div className="calendar-header">
-        <div className="calendar-date">
+      <div className="calendar-header"> 
+        <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
           <span>{format(currentDate, 'yyyy MMMM', { locale: hu })}</span>
-        </div>
+        </h2>
         <div className="calendar-controls">
-          <Button onClick={goToPrevious}>{isMobileView ? 'Előző nap' : 'Előző hét'}</Button>
-          <Button onClick={goToToday}>Mai nap</Button>
-          <Button onClick={goToNext}>{isMobileView ? 'Következő nap' : 'Következő hét'}</Button>
+        <Button onClick={goToToday} variant="outline">Mai nap</Button>
+          <Button size="icon" variant="ghost"onClick={goToPrevious}>{isMobileView ? <ChevronLeft /> : <ChevronLeft />}</Button>
+          <Button size="icon" variant="ghost" onClick={goToNext}>{isMobileView ? <ChevronRight /> : <ChevronRight />}</Button>
         </div>
       </div>
 

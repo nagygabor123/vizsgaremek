@@ -339,7 +339,7 @@ const handleAddDate = (date: Date | undefined, setState: React.Dispatch<React.Se
       <div className="w-1/2 mb-6 self-start fixed top-0 left-0 right-1/2 px-0">
         <div className="bg-white h-3">
           <div
-            className="bg-neutral-950 h-3 transition-all duration-300"
+            className="bg-blue-500 h-3 transition-all duration-300"
             style={{ width: `${(step / 5) * 100}%` }}
           ></div>
         </div>
@@ -351,13 +351,13 @@ const handleAddDate = (date: Date | undefined, setState: React.Dispatch<React.Se
           <div className="mb-6">
             <label className="block text-3xl font-bold">Csengetési rend</label>
             <p className="text-base text-gray-500 mb-2">Nullam mattis sodales sem quis tincidunt. </p>
-    <div className="mt-5 border-dashed border-2 border-zinc-300 rounded-md p-4 flex flex-col items-center justify-center min-h-[250px] cursor-pointer hover:bg-zinc-50 transition text-center">
+    <div className="mt-5 border-dashed border-2 border-blue-400 rounded-md p-4 flex flex-col items-center justify-center min-h-[250px] cursor-pointer hover:bg-zinc-50 transition text-center">
       <img
         src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNsb3VkLXVwbG9hZCI+PHBhdGggZD0iTTEyIDEzdjgiLz48cGF0aCBkPSJNNCAxNC44OTlBNyA3IDAgMSAxIDE1LjcxIDhoMS43OWE0LjUgNC41IDAgMCAxIDIuNSA4LjI0MiIvPjxwYXRoIGQ9Im04IDE3IDQtNCA0IDQiLz48L3N2Zz4="
         alt="Upload Icon"
         className="w-12 h-12 opacity-75 mx-auto"
       />
-      <p className="text-gray-700 font-semibold mt-3">Válassza ki a feltölteni kívánt CSV-fájlt</p>
+      <p className="text-zinc-700 font-semibold mt-3">Válassza ki a feltölteni kívánt CSV-fájlt</p>
       <p className="text-sm text-gray-500">vagy húzza ide a fájlt</p>
       
       <Button className="mt-3" variant="link">(Kiválaszott fál feltöltése)</Button>
