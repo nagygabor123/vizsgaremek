@@ -73,7 +73,6 @@ export default function Page() {
     { label: 'Vasárnap', value: 'sunday' },
   ];
 
-  useEffect(() => {
     const fetchYearSchedule = async () => {
       try {
         const plusRes = await fetch('http://localhost:3000/api/config/getYearSchedule?type=plusznap');
@@ -98,6 +97,8 @@ export default function Page() {
         console.error('Error fetching year schedule:', error);
       }
     };
+
+  useEffect(() => {
     fetchYearSchedule();
   }, []);
 
@@ -147,6 +148,7 @@ export default function Page() {
           breakDates: [...prev.breakDates, newBreak]
         }));
         setNewBreak({ nev: '', which_day: '', replace_day: '' });
+        await fetchYearSchedule();  
       }
     } catch (error) {
       console.error('Error updating break:', error);
@@ -166,6 +168,7 @@ export default function Page() {
           plusDates: [...prev.plusDates, newPlusDate]
         }));
         setNewPlusDate({ nev: '', which_day: '', replace_day: '' });
+        await fetchYearSchedule();  
       }
     } catch (error) {
       console.error('Error updating plus date:', error);
