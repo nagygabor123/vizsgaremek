@@ -326,34 +326,55 @@ export default function Home() {
 
 
       <div className="p-4">
-          <Button variant="outline" onClick={handleSystemClose}>
-            {systemClose ? 'Szekrények feloldása' : 'Szekrények zárolása'}
-          </Button>
+         
          
   
-          <div>
-      {/* Keresőmezők */}
+         
       <div className="flex gap-2 mb-4">
-        <input
-          type="text"
-          placeholder="Keresés név szerint..."
-          className="border p-2 rounded w-1/3"
-          value={searchName}
-          onChange={(e) => setSearchName(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Keresés osztály szerint..."
-          className="border p-2 rounded w-1/3"
-          value={searchClass}
-          onChange={(e) => setSearchClass(e.target.value)}
-        />
-      </div>
+  <div className="flex gap-2">
+    <input
+      type="text"
+      placeholder="Keresés név szerint..."
+      className="border p-2 rounded w-1/3"
+      value={searchName}
+      onChange={(e) => setSearchName(e.target.value)}
+    />
+    <input
+      type="text"
+      placeholder="Keresés osztály szerint..."
+      className="border p-2 rounded w-1/3"
+      value={searchClass}
+      onChange={(e) => setSearchClass(e.target.value)}
+    />
+  </div>
+  
+  <Button variant="outline" onClick={handleSystemClose} className="ml-auto">
+    {systemClose ? 'Szekrények feloldása' : 'Szekrények zárolása'}
+  </Button>
+</div>
 
-      {/* Táblázat */}
-      <table className="w-full border-collapse border border-gray-300">
+<table className="rounded-sm text-left border border-separate border-tools-table-outline border-black border-1 w-full">
+    <thead className="" >
+      <th className="rounded-tl-sm bg-yellow-200 pl-12">One</th>
+      <th className="rounded-tr-sm bg-yellow-200 pl-12">Two</th>
+    </thead>
+    <tbody className="rounded-b-sm">
+      <tr>
+        <td className="bg-blue-100 pl-12">1</td>
+        <td className="bg-blue-100 pl-12">2</td>
+      </tr>
+
+      <tr>
+        <td className="rounded-bl-sm bg-blue-100 pl-12">1</td>
+        <td className="rounded-br-sm bg-blue-100 pl-12">2</td>
+      </tr>
+    </tbody>
+  </table>
+
+      {/* border-collapse border border-gray-300      bg-gray-100*/}
+      <table className="w-full border-collapse border border-gray-300 rounded-sm" >
   <thead>
-    <tr className="bg-gray-100">
+    <tr className="text-zinc-400">
       <th className="p-2 cursor-pointer" onClick={() => toggleSort("full_name")}>
         Teljes név <ArrowUpDown className="w-4 h-4 inline-block" />
       </th>
@@ -407,7 +428,7 @@ export default function Home() {
     })}
   </tbody>
 </table>
-    </div>
+    
 
 
 
