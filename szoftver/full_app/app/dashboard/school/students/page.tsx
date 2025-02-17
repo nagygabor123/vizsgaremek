@@ -215,6 +215,52 @@ export default function Home() {
   
   
 
+
+
+
+
+  const [sortField, setSortField] = useState<"full_name" | "class" | null>(null);
+
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [searchName, setSearchName] = useState("");
+  const [searchClass, setSearchClass] = useState("");
+  
+
+
+  // Rendezési logika
+  const sortedStudents = [...students].sort((a, b) => {
+    if (!sortField) return 0;
+    const fieldA = String(a[sortField] ?? "").toLowerCase();
+    const fieldB = String(b[sortField] ?? "").toLowerCase();
+    
+    return sortOrder === "asc" ? fieldA.localeCompare(fieldB, "hu") : fieldB.localeCompare(fieldA, "hu");
+  });
+
+  // Szűrés
+  const filteredStudents = sortedStudents.filter(student => 
+    student.full_name.toLowerCase().includes(searchName.toLowerCase()) &&
+    student.class.toLowerCase().includes(searchClass.toLowerCase())
+  );
+
+  // Rendezés váltása adott mező szerint
+  const toggleSort = (field: "full_name" | "class") => {
+    if (sortField === field) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortField(field);
+      setSortOrder("asc");
+    }
+  };
+  
+
+
+
+
+
+
+
+
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -277,89 +323,97 @@ export default function Home() {
         <Button variant="outline" type="submit">{editing ? 'Update' : 'Add'} Student</Button>
       </form>
 
-      <h2>Student List</h2>
-      <ul>
-        {students.map((student) => {
-          const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
-          const currentTime = new Date().toTimeString().slice(0, 5);
-          const canUnlockStudent =   systemClose || studentTimetableData &&
-            currentTime >= studentTimetableData.first_class_start &&
-            currentTime <= studentTimetableData.last_class_end;
-
-          return (
-            <li key={student.student_id}>
-              {student.full_name} ({student.class}, {student.status})
-              {/*<Button onClick={() => handleEdit(student)}>Edit</Button>
-              <Button onClick={() => handleDelete(student.student_id)}>Delete</Button>
-              <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>
-                Feloldás
-              </Button>*/}
-              <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon">
-      <Ellipsis />
-    </Button>
-      </DropdownMenuTrigger>
-  <DropdownMenuContent>
-    <DropdownMenuLabel>Műveletek</DropdownMenuLabel>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem onClick={() => handleEdit(student)}>Szerkesztés</DropdownMenuItem>
-    <DropdownMenuItem onClick={() => handleDelete(student.student_id)}>Törlés</DropdownMenuItem>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>Feloldás</DropdownMenuItem>
-  </DropdownMenuContent>
-</DropdownMenu>
-
-              <div>
-                {/* Display timetable information */}
-                {studentTimetableData && (
-                  <p>
-                    First class starts at: {studentTimetableData.first_class_start}<br />
-                    Last class ends at: {studentTimetableData.last_class_end}
-                  </p>
-                )}
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-
 
 
       <div className="p-4">
-          <h1>Tanulók kezelése</h1>
-          <table className="w-full border-collapse border border-gray-300">
-            <thead>
-              <tr className="bg-gray-100">
-                <th className="border border-gray-300 p-2">Név</th>
-                <th className="border border-gray-300 p-2">Osztály</th>
-                <th className="border border-gray-300 p-2">Állapot</th>
-                <th className="border border-gray-300 p-2">Műveletek</th>
+          <Button variant="outline" onClick={handleSystemClose}>
+            {systemClose ? 'Szekrények feloldása' : 'Szekrények zárolása'}
+          </Button>
+         
+  
+          <div>
+      {/* Keresőmezők */}
+      <div className="flex gap-2 mb-4">
+        <input
+          type="text"
+          placeholder="Keresés név szerint..."
+          className="border p-2 rounded w-1/3"
+          value={searchName}
+          onChange={(e) => setSearchName(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Keresés osztály szerint..."
+          className="border p-2 rounded w-1/3"
+          value={searchClass}
+          onChange={(e) => setSearchClass(e.target.value)}
+        />
+      </div>
+
+      {/* Táblázat */}
+      <table className="w-full border-collapse border border-gray-300">
+        <thead>
+          <tr className="bg-gray-100">
+            <th className="border border-gray-300 p-2 cursor-pointer" onClick={() => toggleSort("full_name")}>
+              Név {sortField === "full_name" ? (sortOrder === "asc" ? "🔼" : "🔽") : "↕️"}
+            </th>
+            <th className="border border-gray-300 p-2 cursor-pointer" onClick={() => toggleSort("class")}>
+              Osztály {sortField === "class" ? (sortOrder === "asc" ? "🔼" : "🔽") : "↕️"}
+            </th>
+            <th className="border border-gray-300 p-2">Állapot</th>
+            <th className="border border-gray-300 p-2">Műveletek</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredStudents.map((student) => {
+            const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
+            const currentTime = new Date().toTimeString().slice(0, 5);
+            const canUnlockStudent = systemClose || (studentTimetableData &&
+              currentTime >= studentTimetableData.first_class_start &&
+              currentTime <= studentTimetableData.last_class_end);
+
+            return (
+              <tr key={student.student_id} className="text-center">
+                <td className="border border-gray-300 p-2">{student.full_name}</td>
+                <td className="border border-gray-300 p-2">{student.class}</td>
+                <td className="border border-gray-300 p-2">
+                  {student.status === "ki" ? (
+                    <span className="text-red-500">●</span>
+                  ) : student.status === "be" ? (
+                    <span className="text-green-500">●</span>
+                  ) : null}
+                </td>
+                <td className="border border-gray-300 p-2">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="icon">
+                        <Ellipsis />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuLabel>Műveletek</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={() => handleEdit(student)}>Szerkesztés</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleDelete(student.student_id)}>Törlés</DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>
+                        Feloldás
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-             
-
-            {students.map((student) => (
-                <tr key={student.student_id} className="text-center">
-                  <td className="border border-gray-300 p-2">{student.full_name}</td>
-                  <td className="border border-gray-300 p-2">{student.class}</td>
-                  <td className="border border-gray-300 p-2">{student.status}</td>
-                  <td className="border border-gray-300 p-2">
-                    <Button onClick={() => handleEdit(student)} className="mr-2">Szerkesztés</Button>
-                    <Button onClick={() => handleDelete(student.student_id)} variant="destructive">Törlés</Button>
-                  </td>
-                </tr>
-              ))}
-             
-            </tbody>
-          </table>
-        </div>
-
-      <Button variant="outline" onClick={handleSystemClose}>
-        {systemClose ? 'Szekrények feloldása' : 'Szekrények zárolása'}
-      </Button>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
+
+
+
+        </div>
+    </div>
+
     </SidebarInset>
     </SidebarProvider>
   );
