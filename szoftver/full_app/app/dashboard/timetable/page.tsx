@@ -389,14 +389,7 @@ const Calendar: React.FC = () => {
 </BreadcrumbList>
 </Breadcrumb>
         </div>
-        <div className="ml-auto px-3">
-          {/* <NavActions /> */}
-          
 
-
-   
-
-        </div>
       </header>
     <div className="calendar-container">
       <div className="calendar-header"> 

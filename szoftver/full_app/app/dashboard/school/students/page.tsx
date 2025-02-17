@@ -266,36 +266,32 @@ export default function Home() {
         <Button variant="outline" type="submit">{editing ? 'Update' : 'Add'} Student</Button>
       </form>
 
-      <h2>Student List</h2>
-      <ul>
-        {students.map((student) => {
-          const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
-          const currentTime = new Date().toTimeString().slice(0, 5);
-          const canUnlockStudent =   systemClose || studentTimetableData &&
-            currentTime >= studentTimetableData.first_class_start &&
-            currentTime <= studentTimetableData.last_class_end;
-
-          return (
-            <li key={student.student_id}>
-              {student.full_name} ({student.class}, {student.status})
-              <Button onClick={() => handleEdit(student)}>Edit</Button>
-              <Button onClick={() => handleDelete(student.student_id)}>Delete</Button>
-              <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>
-                Feloldás
-              </Button>
-              <div>
-                {/* Display timetable information */}
-                {studentTimetableData && (
-                  <p>
-                    First class starts at: {studentTimetableData.first_class_start}<br />
-                    Last class ends at: {studentTimetableData.last_class_end}
-                  </p>
-                )}
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="p-4">
+          <h1>Tanulók kezelése</h1>
+          <table className="w-full border-collapse border border-gray-300">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="border border-gray-300 p-2">Név</th>
+                <th className="border border-gray-300 p-2">Osztály</th>
+                <th className="border border-gray-300 p-2">Állapot</th>
+                <th className="border border-gray-300 p-2">Műveletek</th>
+              </tr>
+            </thead>
+            <tbody>
+              {students.map((student) => (
+                <tr key={student.student_id} className="text-center">
+                  <td className="border border-gray-300 p-2">{student.full_name}</td>
+                  <td className="border border-gray-300 p-2">{student.class}</td>
+                  <td className="border border-gray-300 p-2">{student.status}</td>
+                  <td className="border border-gray-300 p-2">
+                    <Button onClick={() => handleEdit(student)} className="mr-2">Szerkesztés</Button>
+                    <Button onClick={() => handleDelete(student.student_id)} variant="destructive">Törlés</Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
       <Button variant="outline" onClick={handleSystemClose}>
         {systemClose ? 'Feloldás' : 'Zárás'}
