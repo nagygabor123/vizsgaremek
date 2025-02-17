@@ -353,7 +353,7 @@ export default function Home() {
   </Button>
 </div>
 
-<table className="rounded-sm text-left border border-separate border-tools-table-outline border-black border-1 w-full">
+<table className="rounded-lg text-left border border-separate border-tools-table-outline border-black border-1 w-full">
     <thead className="" >
       <th className="rounded-tl-sm bg-yellow-200 pl-12">One</th>
       <th className="rounded-tr-sm bg-yellow-200 pl-12">Two</th>
