@@ -29,7 +29,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 
-import { Ellipsis } from "lucide-react"
+import { Ellipsis, ArrowUpDown } from "lucide-react"
 
 
 
@@ -354,11 +354,11 @@ export default function Home() {
       <table className="w-full border-collapse border border-gray-300">
         <thead>
           <tr className="bg-gray-100">
-            <th className="border border-gray-300 p-2 cursor-pointer" onClick={() => toggleSort("full_name")}>
-              Név {sortField === "full_name" ? (sortOrder === "asc" ? "🔼" : "🔽") : "↕️"}
+            <th className="" onClick={() => toggleSort("full_name")}>
+              Teljes név <ArrowUpDown className="w-4 h-4 inline-block" /> {/* Név {sortField === "full_name" ? (sortOrder === "asc" ? <ArrowUpDown /> : <ArrowUpDown />) : <ArrowUpDown />} */}
             </th>
             <th className="border border-gray-300 p-2 cursor-pointer" onClick={() => toggleSort("class")}>
-              Osztály {sortField === "class" ? (sortOrder === "asc" ? "🔼" : "🔽") : "↕️"}
+              Osztály <ArrowUpDown className="w-4 h-4 inline-block" /> {/* Osztály {sortField === "class" ? (sortOrder === "asc" ? <ArrowUpDown /> : <ArrowUpDown />) : <ArrowUpDown />} */}
             </th>
             <th className="border border-gray-300 p-2">Állapot</th>
             <th className="border border-gray-300 p-2">Műveletek</th>
