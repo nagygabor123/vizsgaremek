@@ -4,7 +4,7 @@
 #include <EthernetClient.h>
 
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; // Ethernet MAC-cím
-IPAddress server(192, 168, 1, 49); // A localhost IP-címe
+IPAddress server(172,16,13,9); // A localhost IP-címe
 EthernetClient client;
 
 // RFID beállítások
@@ -87,7 +87,7 @@ void updateLockerStatus(int lockerId) {
 }
 
 bool areAllLocksClosed(int lockerId) {
-  bool currentLockState = (digitalRead(2) == LOW && digitalRead(3) == LOW && digitalRead(8) == LOW);
+  bool currentLockState = (digitalRead(8) == LOW);
 
   if (currentLockState && !previousLockState) {
     updateLockerStatus(lockerId);
