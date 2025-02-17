@@ -352,61 +352,61 @@ export default function Home() {
 
       {/* Táblázat */}
       <table className="w-full border-collapse border border-gray-300">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="" onClick={() => toggleSort("full_name")}>
-              Teljes név <ArrowUpDown className="w-4 h-4 inline-block" /> {/* Név {sortField === "full_name" ? (sortOrder === "asc" ? <ArrowUpDown /> : <ArrowUpDown />) : <ArrowUpDown />} */}
-            </th>
-            <th className="border border-gray-300 p-2 cursor-pointer" onClick={() => toggleSort("class")}>
-              Osztály <ArrowUpDown className="w-4 h-4 inline-block" /> {/* Osztály {sortField === "class" ? (sortOrder === "asc" ? <ArrowUpDown /> : <ArrowUpDown />) : <ArrowUpDown />} */}
-            </th>
-            <th className="border border-gray-300 p-2">Állapot</th>
-            <th className="border border-gray-300 p-2">Műveletek</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredStudents.map((student) => {
-            const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
-            const currentTime = new Date().toTimeString().slice(0, 5);
-            const canUnlockStudent = systemClose || (studentTimetableData &&
-              currentTime >= studentTimetableData.first_class_start &&
-              currentTime <= studentTimetableData.last_class_end);
+  <thead>
+    <tr className="bg-gray-100">
+      <th className="p-2 cursor-pointer" onClick={() => toggleSort("full_name")}>
+        Teljes név <ArrowUpDown className="w-4 h-4 inline-block" />
+      </th>
+      <th className="p-2 cursor-pointer" onClick={() => toggleSort("class")}>
+        Osztály <ArrowUpDown className="w-4 h-4 inline-block" />
+      </th>
+      <th className="p-2">Állapot</th>
+      <th className="p-2">Műveletek</th>
+    </tr>
+  </thead>
+  <tbody>
+    {filteredStudents.map((student) => {
+      const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
+      const currentTime = new Date().toTimeString().slice(0, 5);
+      const canUnlockStudent = systemClose || (studentTimetableData &&
+        currentTime >= studentTimetableData.first_class_start &&
+        currentTime <= studentTimetableData.last_class_end);
 
-            return (
-              <tr key={student.student_id} className="text-center">
-                <td className="border border-gray-300 p-2">{student.full_name}</td>
-                <td className="border border-gray-300 p-2">{student.class}</td>
-                <td className="border border-gray-300 p-2">
-                  {student.status === "ki" ? (
-                    <span className="text-red-500">●</span>
-                  ) : student.status === "be" ? (
-                    <span className="text-green-500">●</span>
-                  ) : null}
-                </td>
-                <td className="border border-gray-300 p-2">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon">
-                        <Ellipsis />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuLabel>Műveletek</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={() => handleEdit(student)}>Szerkesztés</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => handleDelete(student.student_id)}>Törlés</DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>
-                        Feloldás
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      return (
+        <tr key={student.student_id} className="text-center border-b border-gray-300">
+          <td className="p-2">{student.full_name}</td>
+          <td className="p-2">{student.class}</td>
+          <td className="p-2">
+            {student.status === "ki" ? (
+              <span className="text-red-500">●</span>
+            ) : student.status === "be" ? (
+              <span className="text-green-500">●</span>
+            ) : null}
+          </td>
+          <td className="p-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Ellipsis />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>Műveletek</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => handleEdit(student)}>Szerkesztés</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleDelete(student.student_id)}>Törlés</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>
+                  Feloldás
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </td>
+        </tr>
+      );
+    })}
+  </tbody>
+</table>
     </div>
 
 
