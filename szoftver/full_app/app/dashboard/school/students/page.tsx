@@ -223,6 +223,9 @@ export default function Home() {
   
         if (!response.ok) {
           console.error('Hiba történt a zárolás feloldásakor:', await response.text());
+        }else{
+          const data = await response.json();
+          console.log(data.message);
         }
       } else {
         console.warn('A diák jelenleg nincs órán, nem lehet feloldani.');
