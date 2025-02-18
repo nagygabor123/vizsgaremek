@@ -103,7 +103,7 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Adatbázis csatlakozási hiba' });
     } finally {
       if (connection) {
-        await connection.end(); // Kapcsolat lezárása
+        await connection.end(); 
       }
     }
   } else {
