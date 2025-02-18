@@ -5,7 +5,7 @@
  *     summary: Adminisztrátor adatainak frissítése
  *     description: Egy meglévő adminisztrátor adatait frissíti az adatbázisban.
  *     tags:
- *       - Adminisztrátorok
+ *       - Configuration
  *     requestBody:
  *       required: true
  *       content:
