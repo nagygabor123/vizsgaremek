@@ -60,9 +60,7 @@
  *                   type: string
  *                   example: "Nem sikerült frissíteni az 'access' és 'status' állapotot"
  */
-
 import { connectToDatabase } from '../../../lib/db';
-
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -78,6 +76,7 @@ export default async function handler(req, res) {
     try {
       await db.query('UPDATE students SET access = ?', [newAccessState]);
       await db.query('UPDATE system_status SET status = ? WHERE id = 1', [newAccessState]);
+      await db.end();
 
       return res.status(200).json({ message: `Az összes diák 'access' mezője és a 'status' ${newAccessState} (-ra) frissítve` });
     } catch (error) {
