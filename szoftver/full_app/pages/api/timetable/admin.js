@@ -62,16 +62,16 @@
  *                   type: string
  *                   example: "Method Not Allowed"
  */
-
 import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
-    const teacherName = 'nagy'; // A tanár neve, amit keresünk
+    const teacherName = 'nagy'; 
+
+    let connection;
 
     try {
-      // Csatlakozás az adatbázishoz
-      const connection = await connectToDatabase();
+      connection = await connectToDatabase();
 
       const [results] = await connection.execute(
         `SELECT DISTINCT
@@ -98,15 +98,17 @@ export default async function handler(req, res) {
         [teacherName]
       );
 
-      // Visszaadjuk a lekérdezett adatokat
       return res.status(200).json(results);
 
     } catch (error) {
       console.error('Database error:', error);
       return res.status(500).json({ error: 'Database connection error' });
+    } finally {
+      if (connection) {
+        await connection.end();
+      }
     }
   } else {
-    // Ha nem GET metódust használunk
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 }

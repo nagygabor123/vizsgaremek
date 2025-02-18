@@ -78,7 +78,7 @@
 import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {
-  const { student } = req.query; // lekérjük a 'student' query paramétert
+  const { student } = req.query; 
   
   if (!student) {
     return res.status(400).json({ error: 'Student ID is required' });
@@ -117,8 +117,10 @@ export default async function handler(req, res) {
     }
 
     res.status(200).json(rows[0]);
+    await connection.end();
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Database error occurred' });
   }
 }
+
