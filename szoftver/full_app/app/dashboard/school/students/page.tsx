@@ -38,6 +38,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogFooter
 } from "@/components/ui/dialog"
 
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
@@ -150,6 +151,7 @@ export default function Home() {
       setEditing(false);
       setEditStudentId(null);
       fetchStudents();  // Refresh the student list after creating or updating
+      setIsModalOpen(false);
     }
   };
 
@@ -171,6 +173,7 @@ export default function Home() {
     setFormData(student);
     setEditing(true);
     setEditStudentId(student.student_id);
+    setIsModalOpen(true);
   };
 
 
@@ -265,7 +268,7 @@ export default function Home() {
 
 
 
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
 
 
@@ -300,40 +303,7 @@ export default function Home() {
         </header>
     <div>
       <h1>Manage Students</h1>
-      <form onSubmit={handleSubmit}>
-        <Input 
-          type="text"
-          name="student_id"
-          placeholder="Student ID"
-          value={formData.student_id}
-          onChange={handleChange}
-        />
-        <Input 
-          type="text"
-          name="full_name"
-          placeholder="Full Name"
-          value={formData.full_name}
-          onChange={handleChange}
-        />
-        <Input 
-          type="text"
-          name="class"
-          placeholder="Class"
-          value={formData.class}
-          onChange={handleChange}
-        />
-        <Input 
-          type="text"
-          name="rfid_tag"
-          placeholder="RFID Tag"
-          value={formData.rfid_tag}
-          onChange={handleChange}
-        />
-        
-        <Button variant="outline" type="submit">{editing ? 'Update' : 'Add'} Student</Button>
-      </form>
-
-
+   
 
 
       <div className="p-4">
@@ -429,7 +399,55 @@ export default function Home() {
               <DropdownMenuContent>
                 <DropdownMenuLabel>Műveletek</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => handleEdit(student)}>Szerkesztés</DropdownMenuItem>
+               
+                <button onClick={() => handleEdit(student)}>
+        Szerkesztés
+      </button>
+
+      {isModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h2>fasz vagy?</h2>
+              <button onClick={() => setIsModalOpen(false)} className="close-btn">X</button>
+            </div>
+            <form onSubmit={handleSubmit}>
+              <input 
+                type="text"
+                name="student_id"
+                placeholder="Student ID"
+                value={formData.student_id}
+                onChange={handleChange}
+              />
+              <input 
+                type="text"
+                name="full_name"
+                placeholder="Full Name"
+                value={formData.full_name}
+                onChange={handleChange}
+              />
+              <input 
+                type="text"
+                name="class"
+                placeholder="Class"
+                value={formData.class}
+                onChange={handleChange}
+              />
+              <input 
+                type="text"
+                name="rfid_tag"
+                placeholder="RFID Tag"
+                value={formData.rfid_tag}
+                onChange={handleChange}
+              />
+              <div className="modal-footer">
+                <button type="submit">{editing ? 'Update' : 'Add'} Student</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
                 <DropdownMenuItem onClick={() => handleDelete(student.student_id)}>Törlés</DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>
