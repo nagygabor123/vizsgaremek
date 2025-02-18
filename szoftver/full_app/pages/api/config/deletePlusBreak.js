@@ -82,13 +82,15 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Az ID értéke nem lehet 1 vagy 2.' });
     }
 
+    let connection;
     try {
-      const connection = await connectToDatabase(); 
+      connection = await connectToDatabase();
       const [record] = await connection.execute('SELECT * FROM year_schedule WHERE year_schedule_id = ?', [year_schedule_id]);
       
       if (record.length === 0) {
         return res.status(404).json({ error: 'Nem található rekord ezzel az ID-val.' });
       }
+
       const [result] = await connection.execute('DELETE FROM year_schedule WHERE year_schedule_id= ?', [year_schedule_id]);
 
       if (result.affectedRows > 0) {
@@ -99,6 +101,10 @@ export default async function handler(req, res) {
     } catch (error) {
       console.error('Adatbázis hiba:', error);
       return res.status(500).json({ error: 'Adatbázis csatlakozási hiba' });
+    } finally {
+      if (connection) {
+        await connection.end(); // Kapcsolat lezárása
+      }
     }
   } else {
     return res.status(405).json({ error: 'A módszer nem engedélyezett' });

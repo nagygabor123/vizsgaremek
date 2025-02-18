@@ -115,8 +115,10 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Az 1-es és 2-es id nem frissíthető' });
     }
 
+    let connection;
+
     try {
-      const connection = await connectToDatabase();
+      connection = await connectToDatabase();
       
       let query = 'UPDATE year_schedule SET nev = ?, which_day = ?, replace_day = ? WHERE year_schedule_id = ?';
       let values = [nev, which_day, replace_day, id];
@@ -131,8 +133,13 @@ export default async function handler(req, res) {
     } catch (error) {
       console.error('Adatbázis hiba:', error);
       return res.status(500).json({ error: 'Adatbázis csatlakozási hiba' });
+    } finally {
+      if (connection) {
+        await connection.end();
+      }
     }
   } else {
     return res.status(405).json({ error: 'A módszer nem engedélyezett' });
   }
 }
+

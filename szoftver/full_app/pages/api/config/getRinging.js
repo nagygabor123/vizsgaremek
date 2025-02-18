@@ -52,8 +52,9 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Csak a GET metódus használható' });
   }
 
+  let db;
   try {
-    const db = await connectToDatabase();
+    db = await connectToDatabase();
     const [rows] = await db.execute('SELECT start_time as "start", end_time as "end" FROM ring_times');
 
     const result = rows.map(row => ({
@@ -65,5 +66,9 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error('Hiba a csengetési rend lekérdezésekor:', error);
     return res.status(500).json({ error: 'Hiba a csengetési rend lekérdezésekor' });
+  } finally {
+    if (db) {
+      await db.end();
+    }
   }
 }

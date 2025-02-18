@@ -59,7 +59,6 @@
  *                   type: string
  *                   example: "Hiba a csv fájl elemzésekor"
  */
-
 import { connectToDatabase } from '../../../lib/db';
 import fs from 'fs';
 import multiparty from 'multiparty';
@@ -69,7 +68,6 @@ export const config = {
     bodyParser: false, 
   },
 };
-
 
 export default function handler(req, res) {
   if (req.method !== 'POST') {
@@ -89,6 +87,7 @@ export default function handler(req, res) {
       return res.status(400).json({ error: 'Nincs fájl feltöltve' });
     }
 
+    let db;
     try {
       const filePath = file.path;
       const csvData = fs.readFileSync(filePath, 'utf8');
@@ -102,9 +101,9 @@ export default function handler(req, res) {
         }, {});
       });
 
-      const db = await connectToDatabase(); 
+      db = await connectToDatabase(); 
       const insertQuery = 'INSERT INTO students (`student_id`, `full_name`, `class`, `rfid_tag`, `access`) VALUES (?, ?, ?, ?, ?)';
-      
+
       for (let student of data) {
         const { student_id, full_name, class: studentClass, rfid_tag, access } = student;
 
@@ -131,7 +130,11 @@ export default function handler(req, res) {
       return res.status(200).json({ message: 'A diákok sikeresen hozzáadva' });
     } catch (error) {
       console.error('Hiba a fájl feldolgozása közben:', error);
-      return res.status(500).json({ error: 'Hiba a fájl feldolgozása közben:' });
+      return res.status(500).json({ error: 'Hiba a fájl feldolgozása közben' });
+    } finally {
+      if (db) {
+        await db.end(); // Az adatbázis kapcsolat lezárása
+      }
     }
   });
 }

@@ -71,8 +71,7 @@
  *                   type: string
  *                   example: "Method Not Allowed"
  */
-
-import { connectToDatabase } from '../../../lib/db';
+import { connectToDatabase } from '../../../lib/db'; 
 import crypto from 'crypto';
 
 function generatePassword(length = 12) {
@@ -99,6 +98,8 @@ export default async function handler(req, res) {
       res.status(201).json({ message: 'Admin created', password }); 
     } catch (error) {
       res.status(500).json({ message: 'Error creating admin' });
+    } finally {
+      await db.end(); 
     }
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });

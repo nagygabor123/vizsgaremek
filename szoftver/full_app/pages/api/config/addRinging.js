@@ -90,6 +90,7 @@ export default function handler(req, res) {
     const file = files.file[0];
     const filePath = file.path;
 
+    let db;
     try {
       const csvData = fs.readFileSync(filePath, 'utf8');
       const rows = csvData.split('\n').filter(row => row.trim() !== '');
@@ -103,7 +104,7 @@ export default function handler(req, res) {
         }, {});
       });
 
-      const db = await connectToDatabase();
+      db = await connectToDatabase();
       const insertQuery = 'INSERT INTO ring_times (`start_time`, `end_time`) VALUES (?, ?)';
 
       for (let row of data) {
@@ -125,6 +126,10 @@ export default function handler(req, res) {
     } catch (error) {
       console.error('Hiba a fájl feldolgozása közben:', error);
       return res.status(500).json({ error: 'Hiba a fájl feldolgozása közben' });
+    } finally {
+      if (db) {
+        await db.end(); // Kapcsolat lezárása
+      }
     }
   });
 }
