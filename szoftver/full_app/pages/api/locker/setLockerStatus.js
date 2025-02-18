@@ -77,8 +77,9 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: 'Érvénytelen szekrény Id' });
     }
 
+    let db;
     try {
-      const db = await connectToDatabase();
+      db = await connectToDatabase();
       const [rows] = await db.execute('SELECT status FROM lockers WHERE locker_id = ?', [lockerId]);
 
       if (rows.length === 0) {
@@ -93,13 +94,17 @@ export default async function handler(req, res) {
       );
 
       if (result.affectedRows === 0) {
-        return res.status(500).json({ message: 'Sikertelen szekrény státusz frissétés' });
+        return res.status(500).json({ message: 'Sikertelen szekrény státusz frissités' });
       }
 
       res.status(200).json({ message: `Szekrény ${lockerId} státusza frissítve '${newStatus}' (-re)` });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Szerver hiba' });
+    } finally {
+      if (db) {
+        await db.end(); // Az adatbázis kapcsolat lezárása
+      }
     }
   } else {
     res.status(405).json({ message: 'A módszer nem engedélyezett' });
