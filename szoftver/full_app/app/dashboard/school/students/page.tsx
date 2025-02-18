@@ -29,7 +29,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 
-import { Pen, X, Lock, ArrowUpDown, CirclePlus } from "lucide-react"
+import { Pen, X, Lock, ArrowUpDown, CirclePlus, LockKeyholeOpen, LockKeyhole} from "lucide-react"
 
 import {
   Dialog,
@@ -332,16 +332,20 @@ export default function Home() {
       value={searchClass}
       onChange={(e) => setSearchClass(e.target.value)}
     />
+
+    <Button variant="outline" onClick={handleSystemClose} > {/*className="ml-auto" */}
+  {systemClose ? <LockKeyholeOpen/> : <LockKeyhole/> }
+    {systemClose ? 'Feloldás' : 'Zárolás'}
+  
+  </Button>
   </div>
   
-  <Button variant="outline" onClick={handleSystemClose} > {/*className="ml-auto" */}
-    {systemClose ? 'Szekrények feloldása' : 'Szekrények zárolása'}
-  </Button>
+
 
 
   <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-      <Button variant="ghost"><CirclePlus/> Tanuló hozzáadása </Button>
+      <Button variant="outline" className="ml-auto" ><CirclePlus/> Új tanuló hozzáadás</Button>
       </DialogTrigger>
       <DialogContent>
     <DialogHeader>
@@ -412,17 +416,18 @@ export default function Home() {
   </table>*/}
 
       {/* border-collapse border border-gray-300      bg-gray-100*/}
-      <table className="rounded-lg border border-separate w-full">
-  <thead>
+      <div className="rounded-md border">
+      <table className=" w-full">
+  <thead className="text-center text-sm text-neutral-500 "  >
     <tr>
-      <th className="p-2 cursor-pointer" onClick={() => toggleSort("full_name")}>
+      <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>
         Teljes név <ArrowUpDown className="w-4 h-4 inline-block" />
       </th>
-      <th className="p-2 cursor-pointer" onClick={() => toggleSort("class")}>
+      <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("class")}>
         Osztály <ArrowUpDown className="w-4 h-4 inline-block" />
       </th>
-      <th className="p-2">Státusz</th>
-      <th className="p-2">Műveletek</th>
+      <th className="p-2 font-normal">Státusz</th>
+      <th className="p-2 font-normal">Műveletek</th>
     </tr>
   </thead>
   <tbody>
@@ -436,21 +441,21 @@ export default function Home() {
       return (
         <tr 
           key={student.student_id} 
-          className={`text-center border-b border-gray-300 ${index % 2 === 0 ? "bg-zinc-50" : "bg-zinc-100"}`}
+          className="text-center border-t"
         >
-          <td className="p-2">{student.full_name}</td>
-          <td className="p-2">{student.class}</td>
-          <td className="p-2">
+          <td className="p-1">{student.full_name}</td>
+          <td className="p-1">{student.class}</td>
+          <td className="p-1">
             {student.status === "ki" ? (
               <span className="text-red-500">●</span>
             ) : student.status === "be" ? (
               <span className="text-green-500">●</span>
             ) : null}
           </td>
-          <td className="p-2">
+          <td className="p-1">
             
         
-<Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}><Lock /></Button>
+<Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}><Lock className="w-4 h-4 inline-block"/></Button>
 
 
 <Dialog open={open} onOpenChange={setOpen}>
@@ -509,7 +514,7 @@ export default function Home() {
     })}
   </tbody>
 </table>
-
+</div>
     
 
 
