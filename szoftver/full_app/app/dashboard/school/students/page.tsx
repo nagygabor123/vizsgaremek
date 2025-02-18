@@ -29,7 +29,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 
-import { Pen, X, Lock, ArrowUpDown } from "lucide-react"
+import { Pen, X, Lock, ArrowUpDown, CirclePlus } from "lucide-react"
 
 import {
   Dialog,
@@ -76,6 +76,7 @@ export default function Home() {
   const [systemClose, setSystemClose] = useState<boolean>(false);
 
 
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [open, setOpen] = useState(false);
 
   // Fetch students from the database
@@ -154,8 +155,9 @@ export default function Home() {
       setEditing(false);
       setEditStudentId(null);
       fetchStudents();  // Refresh the student list after creating or updating
-      setIsModalOpen(false);
+      //setIsModalOpen(false);
       setOpen(false);
+      setIsDialogOpen(false);
     }
   };
 
@@ -177,7 +179,7 @@ export default function Home() {
     setFormData(student);
     setEditing(true);
     setEditStudentId(student.student_id);
-    setIsModalOpen(true);
+    //setIsModalOpen(true);
   };
 
 
@@ -234,8 +236,6 @@ export default function Home() {
 
 
 
-
-
   const [sortField, setSortField] = useState<"full_name" | "class" | null>(null);
 
   const [sortOrder, setSortOrder] = useState("asc");
@@ -272,9 +272,6 @@ export default function Home() {
 
 
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-
 
 
 
@@ -306,8 +303,9 @@ export default function Home() {
           </div>
         </header>
     <div>
-      <h1>Manage Students</h1>
-   
+  
+
+
 
 
       <div className="p-4">
@@ -317,14 +315,14 @@ export default function Home() {
          
       <div className="flex gap-2 mb-4">
   <div className="flex gap-2">
-    <input
+    <Input
       type="text"
       placeholder="Keresés név szerint..."
       className="border p-2 rounded w-1/3"
       value={searchName}
       onChange={(e) => setSearchName(e.target.value)}
     />
-    <input
+    <Input
       type="text"
       placeholder="Keresés osztály szerint..."
       className="border p-2 rounded w-1/3"
@@ -333,9 +331,63 @@ export default function Home() {
     />
   </div>
   
-  <Button variant="outline" onClick={handleSystemClose} className="ml-auto">
+  <Button variant="outline" onClick={handleSystemClose} > {/*className="ml-auto" */}
     {systemClose ? 'Szekrények feloldása' : 'Szekrények zárolása'}
   </Button>
+
+
+  <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      <DialogTrigger asChild>
+      <Button variant="ghost"><CirclePlus/> Tanuló hozzáadása </Button>
+      </DialogTrigger>
+      <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Tanuló hozzáadása</DialogTitle>
+      <DialogDescription>
+      <div>
+        <Input 
+            type="text"
+        placeholder="Student_id"
+          name="student_id"
+         // value={formData.student_id}
+          onChange={e => setFormData({ ...formData, student_id: e.target.value })}
+        />
+        <Input
+          type="text"
+          name="full_name"
+          placeholder="Full Name"
+         // value={formData.full_name}
+          onChange={e => setFormData({ ...formData, full_name: e.target.value })}
+        />
+        <Input
+          type="text"
+          name="class"
+          placeholder="Class"
+         // value={formData.class}
+          onChange={e => setFormData({ ...formData, class: e.target.value })}
+        />
+        <Input
+          type="text"
+          name="rfid_tag"
+          placeholder="RFID Tag"
+         //  value={formData.rfid_tag}
+          onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
+        />
+      </div>
+      </DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+    <form onSubmit={handleSubmit}>
+  <Button type="submit">
+   Kész
+  </Button> {/* {editing}     {editing ? 'Update' : 'Add'} Student*/}
+</form>
+    
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+
+
 </div>
 
 {/*<table className="rounded-lg text-left border border-separate border-tools-table-outline border-black border-1 w-full">
@@ -366,7 +418,7 @@ export default function Home() {
       <th className="p-2 cursor-pointer" onClick={() => toggleSort("class")}>
         Osztály <ArrowUpDown className="w-4 h-4 inline-block" />
       </th>
-      <th className="p-2">Állapot</th>
+      <th className="p-2">Státusz</th>
       <th className="p-2">Műveletek</th>
     </tr>
   </thead>
@@ -407,13 +459,7 @@ export default function Home() {
       <DialogTitle>Tanuló szerkesztése</DialogTitle>
       <DialogDescription>
       <div>
-        <Input 
-            type="text"
-        placeholder="Student_id"
-          name="student_id"
-          value={formData.student_id}
-          onChange={e => setFormData({ ...formData, student_id: e.target.value })}
-        />
+      
         <Input
           type="text"
           name="full_name"
@@ -441,7 +487,7 @@ export default function Home() {
     <DialogFooter>
     <form onSubmit={handleSubmit}>
   <Button type="submit">
-   Edit Student
+   Kész
   </Button> {/* {editing}     {editing ? 'Update' : 'Add'} Student*/}
 </form>
     
