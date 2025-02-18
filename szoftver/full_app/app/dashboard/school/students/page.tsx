@@ -29,7 +29,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 
-import { Pen, X, Lock, ArrowUpDown, CirclePlus, LockKeyholeOpen, LockKeyhole} from "lucide-react"
+import { Pen, X, Lock, ArrowUpDown, CirclePlus, LockKeyholeOpen, LockKeyhole, LockOpen} from "lucide-react"
 
 import {
   Dialog,
@@ -416,7 +416,7 @@ export default function Home() {
   </table>*/}
 
       {/* border-collapse border border-gray-300      bg-gray-100*/}
-      <div className="rounded-md border">
+      <div className="rounded-md border mt-5">
       <table className=" w-full">
   <thead className="text-center text-sm text-neutral-500 "  >
     <tr>
@@ -455,7 +455,7 @@ export default function Home() {
           <td className="p-1">
             
         
-<Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}><Lock className="w-4 h-4 inline-block"/></Button>
+<Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}><LockOpen className="w-4 h-4 inline-block"/></Button>
 
 
 <Dialog open={open} onOpenChange={setOpen}>
