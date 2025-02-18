@@ -26,6 +26,9 @@ export default function AddEmployeePage() {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [employees, setEmployees] = useState<any[]>([]);
+  const [editId, setEditId] = useState<number | null>(null);
+  const [editName, setEditName] = useState('');
+  const [editPosition, setEditPosition] = useState('');
 
   const positions = [
     { label: 'Igazgató', value: 'igazgato' },
@@ -59,7 +62,7 @@ export default function AddEmployeePage() {
     setMessage('');
 
     try {
-      const response = await fetch('http://localhost:3000/api/config/addEmployees', {
+      const response = await fetch('http://localhost:3000/api/config/addEmployee', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ full_name: fullName, position: position }),
@@ -82,13 +85,43 @@ export default function AddEmployeePage() {
 
   const handleDelete = async (id: number) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/config/deleteEmployees?admin_id=${id}`, {
+      const response = await fetch(`http://localhost:3000/api/config/deleteEmployee?admin_id=${id}`, {
         method: 'DELETE',
       });
       if (response.ok) {
         setEmployees(employees.filter(employee => employee.admin_id !== id));
       } else {
         setMessage('Error deleting employee');
+      }
+    } catch (error) {
+      setMessage('Error connecting to the server');
+    }
+  };
+
+  const handleEdit = (employee: any) => {
+    setEditId(employee.admin_id);
+    setEditName(employee.full_name);
+    setEditPosition(employee.position);
+  };
+
+  const handleUpdate = async () => {
+    if (!editId) return;
+
+    try {
+      const response = await fetch('http://localhost:3000/api/config/updateEmployee', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ admin_id: editId, full_name: editName, position: editPosition }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setMessage('Employee updated successfully');
+        setEditId(null);
+        setEditName('');
+        setEditPosition('');
+        fetchEmployees();
+      } else {
+        setMessage(data.message || 'Error updating employee');
       }
     } catch (error) {
       setMessage('Error connecting to the server');
@@ -123,7 +156,7 @@ export default function AddEmployeePage() {
           </div>
         </header>
         <div>
-          <h1>Alkalmazottak:</h1>
+        <h1>Alkalmazottak:</h1>
           <form onSubmit={handleSubmit}>
             <div>
               <label htmlFor="fullName">Név:</label>
@@ -155,7 +188,6 @@ export default function AddEmployeePage() {
           </form>
 
           {message && <p>{message}</p>}
-
           <h2 className="m-2 text-xl">Alkalmazottak listája</h2>
           <ul>
             {employees.length === 0 ? (
@@ -167,10 +199,25 @@ export default function AddEmployeePage() {
                   <button onClick={() => handleDelete(employee.admin_id)} className="ml-2 bg-red-500 text-white p-1 rounded">
                     Törlés
                   </button>
+                  <button onClick={() => handleEdit(employee)} className="ml-2 bg-blue-500 text-white p-1 rounded">
+                    Frissítés
+                  </button>
                 </li>
               ))
             )}
           </ul>
+          {editId && (
+            <div>
+              <h3>Alkalmazott szerkesztése</h3>
+              <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} />
+              <select value={editPosition} onChange={(e) => setEditPosition(e.target.value)}>
+                {positions.map((pos) => (
+                  <option key={pos.value} value={pos.value}>{pos.label}</option>
+                ))}
+              </select>
+              <button onClick={handleUpdate} className="bg-green-500 text-white p-1 rounded">Mentés</button>
+            </div>
+          )}
         </div>
       </SidebarInset>
     </SidebarProvider>
