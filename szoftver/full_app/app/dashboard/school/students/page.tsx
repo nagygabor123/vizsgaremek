@@ -31,7 +31,14 @@ import {
 
 import { Ellipsis, ArrowUpDown } from "lucide-react"
 
-
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { Button } from "@/components/ui/button";
@@ -165,6 +172,9 @@ export default function Home() {
     setEditing(true);
     setEditStudentId(student.student_id);
   };
+
+
+  
 
   // Handle system close/unlock button click
   const handleSystemClose = async () => {
@@ -325,6 +335,7 @@ export default function Home() {
 
 
 
+
       <div className="p-4">
          
          
@@ -353,7 +364,7 @@ export default function Home() {
   </Button>
 </div>
 
-<table className="rounded-lg text-left border border-separate border-tools-table-outline border-black border-1 w-full">
+{/*<table className="rounded-lg text-left border border-separate border-tools-table-outline border-black border-1 w-full">
     <thead className="" >
       <th className="rounded-tl-sm bg-yellow-200 pl-12">One</th>
       <th className="rounded-tr-sm bg-yellow-200 pl-12">Two</th>
@@ -369,12 +380,12 @@ export default function Home() {
         <td className="rounded-br-sm bg-blue-100 pl-12">2</td>
       </tr>
     </tbody>
-  </table>
+  </table>*/}
 
       {/* border-collapse border border-gray-300      bg-gray-100*/}
-      <table className="w-full border-collapse border border-gray-300 rounded-sm" >
+      <table className="rounded-lg border border-separate w-full">
   <thead>
-    <tr className="text-zinc-400">
+    <tr>
       <th className="p-2 cursor-pointer" onClick={() => toggleSort("full_name")}>
         Teljes név <ArrowUpDown className="w-4 h-4 inline-block" />
       </th>
@@ -386,7 +397,7 @@ export default function Home() {
     </tr>
   </thead>
   <tbody>
-    {filteredStudents.map((student) => {
+    {filteredStudents.map((student, index) => {
       const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
       const currentTime = new Date().toTimeString().slice(0, 5);
       const canUnlockStudent = systemClose || (studentTimetableData &&
@@ -394,7 +405,10 @@ export default function Home() {
         currentTime <= studentTimetableData.last_class_end);
 
       return (
-        <tr key={student.student_id} className="text-center border-b border-gray-300">
+        <tr 
+          key={student.student_id} 
+          className={`text-center border-b border-gray-300 ${index % 2 === 0 ? "bg-zinc-50" : "bg-zinc-100"}`}
+        >
           <td className="p-2">{student.full_name}</td>
           <td className="p-2">{student.class}</td>
           <td className="p-2">
@@ -405,6 +419,7 @@ export default function Home() {
             ) : null}
           </td>
           <td className="p-2">
+            
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon">
@@ -428,11 +443,15 @@ export default function Home() {
     })}
   </tbody>
 </table>
+
     
 
 
 
         </div>
+
+
+        
     </div>
 
     </SidebarInset>
