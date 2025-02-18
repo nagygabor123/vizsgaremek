@@ -80,8 +80,8 @@ CREATE TABLE `ring_times` (
 
 
 INSERT INTO `admins` (`admin_id`, `full_name`, `password`, `position`) VALUES
-(1, 'szalkai', 'piciakukija', 'senki'),
-(2, 'nagy', 'nagyakukija', 'igazgató');
+(0, 'szalkai', 'piciakukija', 'senki'),
+(1, 'nagy', 'nagyakukija', 'igazgató');
 
 
 INSERT INTO `lockers` (`locker_id`, `status`) VALUES

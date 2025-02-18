@@ -71,6 +71,7 @@
  *                   type: string
  *                   example: "Method Not Allowed"
  */
+
 import { connectToDatabase } from '../../../lib/db'; 
 import crypto from 'crypto';
 
@@ -87,17 +88,28 @@ export default async function handler(req, res) {
     }
 
     const password = generatePassword(); 
-
     const db = await connectToDatabase();
 
     try {
+      // Lekérdezzük az utolsó admin_id-t
+      const [lastAdmin] = await db.execute('SELECT admin_id FROM admins ORDER BY admin_id DESC LIMIT 1');
+      
+      // Ha nincs admin (első admin), kezdjük 3-tól
+      let nextAdminId = 3;
+      if (lastAdmin.length > 0) {
+        nextAdminId = lastAdmin[0].admin_id + 1; // A legutolsó admin_id-hoz hozzáadunk 1-et
+      }
+
+      // Az admin hozzáadása az új admin_id-val
       await db.execute(
-        'INSERT INTO admins (full_name, password, position) VALUES (?, ?, ?)',
-        [full_name, password, position]
+        'INSERT INTO admins (admin_id, full_name, password, position) VALUES (?, ?, ?, ?)',
+        [nextAdminId, full_name, password, position]
       );
+      
       res.status(201).json({ message: 'Admin created', password }); 
     } catch (error) {
-      res.status(500).json({ message: 'Error creating admin' });
+      console.error('Error creating admin:', error);  
+      res.status(500).json({ message: 'Error creating admin', error: error.message });
     } finally {
       await db.end(); 
     }
