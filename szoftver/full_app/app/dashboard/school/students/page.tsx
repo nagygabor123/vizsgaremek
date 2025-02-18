@@ -29,7 +29,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 
-import { Ellipsis, ArrowUpDown } from "lucide-react"
+import { Pen, X, Lock, ArrowUpDown } from "lucide-react"
 
 import {
   Dialog,
@@ -74,6 +74,9 @@ export default function Home() {
   const [editing, setEditing] = useState<boolean>(false);
   const [editStudentId, setEditStudentId] = useState<string | null>(null);
   const [systemClose, setSystemClose] = useState<boolean>(false);
+
+
+  const [open, setOpen] = useState(false);
 
   // Fetch students from the database
   const fetchStudents = async () => {
@@ -152,6 +155,7 @@ export default function Home() {
       setEditStudentId(null);
       fetchStudents();  // Refresh the student list after creating or updating
       setIsModalOpen(false);
+      setOpen(false);
     }
   };
 
@@ -390,71 +394,66 @@ export default function Home() {
           </td>
           <td className="p-2">
             
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Ellipsis />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuLabel>Műveletek</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-               
-                <button onClick={() => handleEdit(student)}>
-        Szerkesztés
-      </button>
+        
+<Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}><Lock /></Button>
 
-      {isModalOpen && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h2>fasz vagy?</h2>
-              <button onClick={() => setIsModalOpen(false)} className="close-btn">X</button>
-            </div>
-            <form onSubmit={handleSubmit}>
-              <input 
-                type="text"
-                name="student_id"
-                placeholder="Student ID"
-                value={formData.student_id}
-                onChange={handleChange}
-              />
-              <input 
-                type="text"
-                name="full_name"
-                placeholder="Full Name"
-                value={formData.full_name}
-                onChange={handleChange}
-              />
-              <input 
-                type="text"
-                name="class"
-                placeholder="Class"
-                value={formData.class}
-                onChange={handleChange}
-              />
-              <input 
-                type="text"
-                name="rfid_tag"
-                placeholder="RFID Tag"
-                value={formData.rfid_tag}
-                onChange={handleChange}
-              />
-              <div className="modal-footer">
-                <button type="submit">{editing ? 'Update' : 'Add'} Student</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
 
-                <DropdownMenuItem onClick={() => handleDelete(student.student_id)}>Törlés</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>
-                  Feloldás
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+<Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+      <Button variant="ghost" onClick={() => handleEdit(student)}><Pen /></Button>
+      </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Tanuló szerkesztése</DialogTitle>
+      <DialogDescription>
+      <div>
+        <Input 
+            type="text"
+        placeholder="Student_id"
+          name="student_id"
+          value={formData.student_id}
+          onChange={e => setFormData({ ...formData, student_id: e.target.value })}
+        />
+        <Input
+          type="text"
+          name="full_name"
+          placeholder="Full Name"
+          value={formData.full_name}
+          onChange={e => setFormData({ ...formData, full_name: e.target.value })}
+        />
+        <Input
+          type="text"
+          name="class"
+          placeholder="Class"
+          value={formData.class}
+          onChange={e => setFormData({ ...formData, class: e.target.value })}
+        />
+        <Input
+          type="text"
+          name="rfid_tag"
+          placeholder="RFID Tag"
+          value={formData.rfid_tag}
+          onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
+        />
+      </div>
+      </DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+    <form onSubmit={handleSubmit}>
+  <Button type="submit">
+   Edit Student
+  </Button> {/* {editing}     {editing ? 'Update' : 'Add'} Student*/}
+</form>
+    
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+
+
+
+<Button variant="ghost" onClick={() => handleDelete(student.student_id)}><X /></Button>
+
+         
           </td>
         </tr>
       );
