@@ -275,7 +275,15 @@ export default function Home() {
 
 
 
+  const PAGE_SIZE = 10;
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(filteredStudents.length / PAGE_SIZE);
+  
+  const paginatedStudents = filteredStudents.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE
+  );
 
 
   return (
@@ -416,7 +424,7 @@ export default function Home() {
   </table>*/}
 
       {/* border-collapse border border-gray-300      bg-gray-100*/}
-      <div className="rounded-md border mt-5">
+      {/* <div className="rounded-md border mt-5">
       <table className=" w-full">
   <thead className="text-center text-sm text-neutral-500 "  >
     <tr>
@@ -496,7 +504,7 @@ export default function Home() {
     <form onSubmit={handleSubmit}>
   <Button type="submit">
    Kész
-  </Button> {/* {editing}     {editing ? 'Update' : 'Add'} Student*/}
+  </Button> 
 </form>
     
     </DialogFooter>
@@ -514,10 +522,98 @@ export default function Home() {
     })}
   </tbody>
 </table>
-</div>
+</div> */}
     
+{/* {editing}     {editing ? 'Update' : 'Add'} Student*/}
 
+<div className="rounded-md border mt-5">
+    <table className="w-full">
+      <thead className="text-center text-sm text-neutral-500">
+        <tr>
+          <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Teljes név <ArrowUpDown className="w-4 h-4 inline-block" /></th>
+          <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("class")}>Osztály <ArrowUpDown className="w-4 h-4 inline-block" /></th>
+          <th className="p-2 font-normal">Státusz</th>
+          <th className="p-2 font-normal">Műveletek</th>
+        </tr>
+      </thead>
+      <tbody>
+        {paginatedStudents.map((student) => {
+          const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
+          const currentTime = new Date().toTimeString().slice(0, 5);
+          const canUnlockStudent = systemClose || (studentTimetableData &&
+            currentTime >= studentTimetableData.first_class_start &&
+            currentTime <= studentTimetableData.last_class_end);
 
+          return (
+            <tr key={student.student_id} className="text-center border-t">
+              <td className="p-1">{student.full_name}</td>
+              <td className="p-1">{student.class}</td>
+              <td className="p-1">
+                {student.status === "ki" ? <span className="text-red-500">●</span> : student.status === "be" ? <span className="text-green-500">●</span> : null}
+              </td>
+              <td className="p-1">
+              
+                <Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}><LockOpen className="w-4 h-4 inline-block"/></Button>
+                <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+      <Button variant="ghost" onClick={() => handleEdit(student)}><Pen /></Button>
+      </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Tanuló szerkesztése</DialogTitle>
+      <DialogDescription>
+      <div>
+      
+        <Input
+          type="text"
+          name="full_name"
+          placeholder="Full Name"
+          value={formData.full_name}
+          onChange={e => setFormData({ ...formData, full_name: e.target.value })}
+        />
+        <Input
+          type="text"
+          name="class"
+          placeholder="Class"
+          value={formData.class}
+          onChange={e => setFormData({ ...formData, class: e.target.value })}
+        />
+        <Input
+          type="text"
+          name="rfid_tag"
+          placeholder="RFID Tag"
+          value={formData.rfid_tag}
+          onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
+        />
+      </div>
+      </DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+    <form onSubmit={handleSubmit}>
+  <Button type="submit">
+   Kész
+  </Button> 
+</form>
+    
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+
+                <Button variant="ghost" onClick={() => handleDelete(student.student_id)}><X /></Button>
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+
+    {/* Lapozó gombok */}
+    <div className="flex justify-between items-center p-2">
+      <Button variant="ghost" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Előző</Button>
+      <span>Oldal {currentPage} / {totalPages}</span>
+      <Button variant="ghost" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>Következő</Button>
+    </div>
+  </div>
 
         </div>
 
