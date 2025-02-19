@@ -608,18 +608,21 @@ export default function Home() {
     </table>
 
     {/* Lapozó gombok */}
-    <div className="flex justify-between items-center p-2">
+
+
+        </div>
+
+        <div className="flex justify-between items-center p-2">
       <Button variant="ghost" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Előző</Button>
       <span>Oldal {currentPage} / {totalPages}</span>
       <Button variant="ghost" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>Következő</Button>
     </div>
   </div>
-
-        </div>
-
-
         
     </div>
+
+
+    
 
     </SidebarInset>
     </SidebarProvider>
