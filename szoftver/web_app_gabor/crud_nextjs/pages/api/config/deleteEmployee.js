@@ -1,21 +1,23 @@
+
 /**
  * @swagger
- * /api/config/deletePlusBreak:
+ * /api/config/deleteEmployees:
  *   delete:
- *     summary: Plusznap vagy szünet törlése
- *     description: Törli a megadott `year_schedule_id` azonosítójú rekordot az `year_schedule` táblából.
+ *     summary: Törli az adminisztrátort az adatbázisból.
+ *     description: Ezzel az API végponttal törölheted az adminisztrátorokat az adatbázisból az admin_id alapján. Az admin_id 1 és 2 nem törölhető.
  *     tags:
  *       - Configuration
  *     parameters:
  *       - in: query
- *         name: year_schedule_id
+ *         name: admin_id
  *         required: true
+ *         description: Az adminisztrátor azonosítója, amelyet törölni szeretnél.
  *         schema:
  *           type: integer
- *         description: A törlendő rekord azonosítója.
+ *           example: 3
  *     responses:
  *       200:
- *         description: Sikeres törlés, visszaadja a törölt rekord azonosítóját.
+ *         description: A törlés sikeres volt.
  *         content:
  *           application/json:
  *             schema:
@@ -26,9 +28,9 @@
  *                   example: "Sikeres törlés"
  *                 deletedId:
  *                   type: integer
- *                   example: 5
+ *                   example: 3
  *       400:
- *         description: Hiányzó vagy tiltott ID paraméter.
+ *         description: Hibás kérés, ha az admin_id hiányzik vagy az értéke 1 vagy 2.
  *         content:
  *           application/json:
  *             schema:
@@ -36,9 +38,9 @@
  *               properties:
  *                 error:
  *                   type: string
- *                   example: "Hiányzó ID paraméter."
+ *                   example: "Az ID értéke nem lehet 1 vagy 2."
  *       404:
- *         description: Nem található rekord a megadott ID-val.
+ *         description: Az adminisztrátor nem található az adatbázisban.
  *         content:
  *           application/json:
  *             schema:
@@ -46,9 +48,9 @@
  *               properties:
  *                 error:
  *                   type: string
- *                   example: "Nem található rekord ezzel az ID-val."
+ *                   example: "Nem található adminisztrátor ezzel az ID-val."
  *       500:
- *         description: Adatbázis hiba vagy a törlés sikertelen.
+ *         description: Adatbázis hiba történt.
  *         content:
  *           application/json:
  *             schema:
@@ -58,7 +60,7 @@
  *                   type: string
  *                   example: "Adatbázis csatlakozási hiba"
  *       405:
- *         description: Hibás HTTP metódus (csak DELETE engedélyezett).
+ *         description: A megadott HTTP metódus nem támogatott.
  *         content:
  *           application/json:
  *             schema:
@@ -72,31 +74,31 @@ import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {
   if (req.method === 'DELETE') {
-    const { year_schedule_id } = req.query;
+    const { admin_id } = req.query;
 
-    if (!year_schedule_id) {
+    if (!admin_id) {
       return res.status(400).json({ error: 'Hiányzó ID paraméter.' });
     }
 
-    if (year_schedule_id === '1' || year_schedule_id === '2') {
+    if (admin_id === '1' || admin_id === '2') {
       return res.status(400).json({ error: 'Az ID értéke nem lehet 1 vagy 2.' });
     }
 
     let connection;
     try {
       connection = await connectToDatabase();
-      const [record] = await connection.execute('SELECT * FROM year_schedule WHERE year_schedule_id = ?', [year_schedule_id]);
+            const [record] = await connection.execute('SELECT * FROM admins WHERE admin_id = ?', [admin_id]);
       
       if (record.length === 0) {
-        return res.status(404).json({ error: 'Nem található rekord ezzel az ID-val.' });
+        return res.status(404).json({ error: 'Nem található adminisztrátor ezzel az ID-val.' });
       }
 
-      const [result] = await connection.execute('DELETE FROM year_schedule WHERE year_schedule_id= ?', [year_schedule_id]);
+      const [result] = await connection.execute('DELETE FROM admins WHERE admin_id = ?', [admin_id]);
 
       if (result.affectedRows > 0) {
-        return res.status(200).json({ message: 'Sikeres törlés', deletedId: year_schedule_id });
+        return res.status(200).json({ message: 'Sikeres törlés', deletedId: admin_id });
       } else {
-        return res.status(500).json({ error: 'Nem sikerült törölni a rekordot.' });
+        return res.status(500).json({ error: 'Nem sikerült törölni az adminisztrátort.' });
       }
     } catch (error) {
       console.error('Adatbázis hiba:', error);

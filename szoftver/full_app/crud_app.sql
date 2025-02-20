@@ -169,8 +169,16 @@ INSERT INTO `timetables` (`group_id`, `admin_id`, `day_of_week`, `start_time`, `
 (2, 1, 'friday', '09:05', '09:50'),
 (2, 1, 'friday', '10:00', '10:45'),
 (2, 2, 'friday', '10:55', '11:40'),
-(4, 1, 'friday', '11:50', '12:35');
-
+(4, 1, 'friday', '11:50', '12:35'),
+(1, 2, 'thursday', '10:55', '11:40'),
+(1, 2, 'thursday', '11:50', '12:35'),
+(1, 2, 'thursday', '12:55', '13:40'),
+(1, 2, 'thursday', '13:45', '14:30'),
+(1, 2, 'thursday', '14:35', '15:20'),
+(1, 2, 'thursday', '15:30', '16:15'),
+(1, 2, 'thursday', '16:25', '17:10'),
+(1, 2, 'thursday', '17:20', '18:05'),
+(1, 2, 'thursday', '18:15', '19:00');
 
 
 INSERT INTO year_schedule (type, nev, which_day, replace_day) VALUES
@@ -200,15 +208,4 @@ INSERT INTO ring_times (start_time, end_time) VALUES
 
 
 
---ezek csak teszt adatok  
-
-(1, 2, 'thursday', '10:55', '11:40'),
-(1, 2, 'thursday', '11:50', '12:35'),
-(1, 2, 'thursday', '12:55', '13:40'),
-(1, 2, 'thursday', '13:45', '14:30'),
-(1, 2, 'thursday', '14:35', '15:20'),
-(1, 2, 'thursday', '15:30', '16:15'),
-(1, 2, 'thursday', '16:25', '17:10'),
-(1, 2, 'thursday', '17:20', '18:05'),
-(1, 2, 'thursday', '18:15', '19:00');
 

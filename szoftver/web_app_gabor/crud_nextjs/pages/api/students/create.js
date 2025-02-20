@@ -72,7 +72,6 @@
  *                   type: string
  *                   example: "Method Not Allowed"
  */
-
 import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {
@@ -93,6 +92,8 @@ export default async function handler(req, res) {
       res.status(201).json({ message: 'Student created' });
     } catch (error) {
       res.status(500).json({ message: 'Error creating student' });
+    } finally {
+      await db.end(); // Close the database connection
     }
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });

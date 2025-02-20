@@ -62,6 +62,7 @@ async function getLockerByRFID(rfid, connection) {
   );
 
   if (lockerRelationship.length === 0) {
+    connection.end(); // Kapcsolat lezárása
     return { error: 'Nem található szekrény_id ehhez az RFID-hez', status: 404 };
   }
 
@@ -72,9 +73,11 @@ async function getLockerByRFID(rfid, connection) {
   );
 
   if (locker.length === 0) {
+    connection.end(); // Kapcsolat lezárása
     return { error: 'Nem található a szekrény', status: 404 };
   }
 
+  connection.end(); // Kapcsolat lezárása
   return { lockerId: locker[0].locker_id.toString(), status: 200 };
 }
 
@@ -95,6 +98,7 @@ export default async function handler(req, res) {
       );
 
       if (student.length === 0) {
+        connection.end(); // Kapcsolat lezárása
         return res.status(200).send("nincs");
       }
 
@@ -103,6 +107,7 @@ export default async function handler(req, res) {
 
       const scheduleResponse = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${studentid}`);
       if (!scheduleResponse.ok) {
+        connection.end(); // Kapcsolat lezárása
         return res.status(500).json({ error: 'Nem sikerült lekérni a diák órarendjét.' });
       }
 

@@ -100,8 +100,10 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Csak a kezd és veg típus frissíthető' });
     }
 
+    let connection;
+
     try {
-      const connection = await connectToDatabase();
+      connection = await connectToDatabase();
       
       let query = 'UPDATE year_schedule SET which_day = ? WHERE type = ?';
       let values = [which_day, type];
@@ -116,6 +118,10 @@ export default async function handler(req, res) {
     } catch (error) {
       console.error('Adatbázis hiba:', error);
       return res.status(500).json({ error: 'Adatbázis csatlakozási hiba' });
+    } finally {
+      if (connection) {
+        await connection.end(); // Kapcsolat lezárása
+      }
     }
   } else {
     return res.status(405).json({ error: 'A módszer nem engedélyezett' });

@@ -87,8 +87,10 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Type paraméter szükséges' });
     }
 
+    let connection;
+    
     try {
-      const connection = await connectToDatabase();
+      connection = await connectToDatabase();
       
       let query = '';
       let values = [];
@@ -97,7 +99,7 @@ export default async function handler(req, res) {
         query = 'SELECT year_schedule_id, nev, which_day, replace_day FROM year_schedule WHERE type = ?';
         values = ['plusznap'];
       } else if (type === 'szunet') {
-        query = 'SELECT year_schedule_id, nev,  which_day AS start, replace_day AS end FROM year_schedule WHERE type = ?';
+        query = 'SELECT year_schedule_id, nev, which_day AS start, replace_day AS end FROM year_schedule WHERE type = ?';
         values = ['szunet'];
       } else if (type === 'kezd') {
         query = 'SELECT which_day AS start FROM year_schedule WHERE type = ? LIMIT 1';
@@ -139,6 +141,10 @@ export default async function handler(req, res) {
     } catch (error) {
       console.error('Adatbázis hiba:', error);
       return res.status(500).json({ error: 'Adatbázis csatlakozási hiba' });
+    } finally {
+      if (connection) {
+        await connection.end();
+      }
     }
   } else {
     return res.status(405).json({ error: 'A módszer nem engedélyezett' });

@@ -61,7 +61,7 @@ import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { type,nev, which_day,replace_day } = req.body;
+    const { type, nev, which_day, replace_day } = req.body;
 
     if (!type || !nev || !which_day || !replace_day) {
       return res.status(400).json({ error: 'Hiányzó paraméterek.' });
@@ -71,11 +71,13 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Csak a szünetet illetve a plusznapokat lehet feltölteni' });
     }
 
+    let connection;
+
     try {
-      const connection = await connectToDatabase();
-      
+      connection = await connectToDatabase();
+
       let query = 'INSERT INTO year_schedule (type, nev, which_day, replace_day) VALUES (?, ?, ?, ?);';
-      let values = [type,nev,which_day,replace_day];
+      let values = [type, nev, which_day, replace_day];
 
       const [result] = await connection.execute(query, values);
 
@@ -87,6 +89,10 @@ export default async function handler(req, res) {
     } catch (error) {
       console.error('Adatbázis hiba:', error);
       return res.status(500).json({ error: 'Adatbázis csatlakozási hiba' });
+    } finally {
+      if (connection) {
+        await connection.end(); // Kapcsolat lezárása
+      }
     }
   } else {
     return res.status(405).json({ error: 'A módszer nem engedélyezett' });
