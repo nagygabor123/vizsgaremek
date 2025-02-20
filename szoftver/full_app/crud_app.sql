@@ -80,8 +80,8 @@ CREATE TABLE `ring_times` (
 
 
 INSERT INTO `admins` (`admin_id`, `full_name`, `password`, `position`) VALUES
-(0, 'szalkai', 'piciakukija', 'senki'),
-(1, 'nagy', 'nagyakukija', 'igazgató');
+(1, 'szalkai', 'piciakukija', 'senki'),
+(2, 'nagy', 'nagyakukija', 'igazgató');
 
 
 INSERT INTO `lockers` (`locker_id`, `status`) VALUES
@@ -173,7 +173,6 @@ INSERT INTO `timetables` (`group_id`, `admin_id`, `day_of_week`, `start_time`, `
 
 
 
-
 INSERT INTO year_schedule (type, nev, which_day, replace_day) VALUES
 ('kezd', 'Tanévkezdés', '2024-09-02', ''),
 ('veg', 'Tanévzárás', '2025-06-20', ''),
@@ -193,4 +192,23 @@ INSERT INTO ring_times (start_time, end_time) VALUES
 ('11:50', '12:35'),
 ('12:55', '13:40'),
 ('13:45', '14:30'),
-('14:35', '15:20');
+('14:35', '15:20'),
+('15:30', '16:15'),
+('16:25', '17:10'),
+('17:20', '18:05'),
+('18:15', '19:00');
+
+
+
+--ezek csak teszt adatok  
+
+(1, 2, 'thursday', '10:55', '11:40'),
+(1, 2, 'thursday', '11:50', '12:35'),
+(1, 2, 'thursday', '12:55', '13:40'),
+(1, 2, 'thursday', '13:45', '14:30'),
+(1, 2, 'thursday', '14:35', '15:20'),
+(1, 2, 'thursday', '15:30', '16:15'),
+(1, 2, 'thursday', '16:25', '17:10'),
+(1, 2, 'thursday', '17:20', '18:05'),
+(1, 2, 'thursday', '18:15', '19:00');
+
