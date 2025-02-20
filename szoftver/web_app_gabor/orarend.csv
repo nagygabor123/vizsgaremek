@@ -1,1 +1,14 @@
-group_name,
+group_id,admin_id,day_of_week, start_time,end_time
+1,2,monday,13:45,14:30
+1,2,monday,14:35,15:20
+1,2,monday,15:30,16:15
+1,2,monday,16:25,17:10
+1,2,monday,17:20,18:05
+1,2,monday,18:15,19:00
+1,2,wednesday,16:25,17:10
+1,2,wednesday,17:20,18:05
+1,2,wednesday,18:15,19:00
+1,2,friday,16:25,17:10
+1,2,friday,17:20,18:05
+1,2,friday,18:15,19:00
+
