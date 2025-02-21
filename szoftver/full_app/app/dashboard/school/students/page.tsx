@@ -22,7 +22,7 @@ import {
 import { Label } from "@/components/ui/label"
 import Link from "next/link";
 
-import { Pen, X, ArrowUpDown, CirclePlus, LockKeyholeOpen, LockKeyhole, LockOpen, Lock, ChevronRight, ChevronLeft } from "lucide-react"
+import { Pen, X, ArrowUpDown, CirclePlus, CircleCheck, LockKeyholeOpen, LockKeyhole, LockOpen, CircleAlert, CircleMinus, Lock, ChevronRight, ChevronLeft } from "lucide-react"
 
 import {
   Dialog,
@@ -294,7 +294,7 @@ export default function Home() {
                     <Link href="/dashboard">Főoldal</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
-               {/* <BreadcrumbSeparator />
+                {/* <BreadcrumbSeparator />
                 <BreadcrumbItem>
                   <BreadcrumbPage>Adminisztráció</BreadcrumbPage>
                 </BreadcrumbItem>*/}
@@ -310,7 +310,7 @@ export default function Home() {
 
 
 
-        <div  className="overflow-x-auto">
+        <div className="overflow-x-auto">
 
           <div className="p-4">
 
@@ -336,7 +336,7 @@ export default function Home() {
 
                 <Button variant="outline" onClick={handleSystemClose} > {/*className="ml-auto" */}
                   {systemClose ? <LockKeyholeOpen /> : <LockKeyhole />}
-                  {systemClose ? 'Feloldás' : 'Zárolás'}
+                  {systemClose ? 'Összes feloldás' : 'Összes zárolás'}
 
                 </Button>
               </div>
@@ -348,55 +348,63 @@ export default function Home() {
                 <DialogTrigger asChild>
                   <Button variant="outline" className="ml-auto" ><CirclePlus /> Új tanuló hozzáadás</Button>
                 </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Tanuló hozzáadása</DialogTitle>
-                    <DialogDescription>
-                      <div>
-                        
-                        <div className="grid w-full max-w-sm items-center mt-2 gap-1.5">
-                        <Label htmlFor="student_id">Azonosító szám</Label>
-                        <Input
-                          type="text"
-                          placeholder="Azonosító szám"
-                          name="student_id"
-                          // value={formData.student_id}
-                          onChange={e => setFormData({ ...formData, student_id: e.target.value })}
-                        />
+                <DialogContent className="sm:max-w-[550px]">
+                              <DialogHeader>
+                                <DialogTitle>Tanuló hozzáadása</DialogTitle>
+                                <DialogDescription>
+                                Aliquam metus eros, tristique nec semper id, congue eget metus.
+                                </DialogDescription>
+                                </DialogHeader>
+
+              
+
+                                <div className="grid gap-4 py-4">
+                                <div className="grid grid-cols-4 items-center gap-4">
+                          <Label className="text-right" htmlFor="student_id">Azonosító szám</Label>
+                          <Input
+                           className="col-span-3"
+                            type="text"
+                            placeholder="Azonosító szám"
+                            name="student_id"
+                            // value={formData.student_id}
+                            onChange={e => setFormData({ ...formData, student_id: e.target.value })}
+                          />
                         </div>
-                        <div className="grid w-full max-w-sm items-center mt-2 gap-1.5">
-                        <Label htmlFor="full_name">Teljes név</Label>
-                        <Input
-                          type="text"
-                          name="full_name"
-                          placeholder="Teljes név"
-                          // value={formData.full_name}
-                          onChange={e => setFormData({ ...formData, full_name: e.target.value })}
-                        />
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label className="text-right" htmlFor="full_name">Teljes név</Label>
+                          <Input
+                           className="col-span-3"
+                            type="text"
+                            name="full_name"
+                            placeholder="Teljes név"
+                            // value={formData.full_name}
+                            onChange={e => setFormData({ ...formData, full_name: e.target.value })}
+                          />
                         </div>
-                        <div className="grid w-full max-w-sm items-center mt-2 gap-1.5">
-                        <Label htmlFor="class">Osztály</Label>
-                        <Input
-                          type="text"
-                          name="class"
-                          placeholder="Osztály"
-                          // value={formData.class}
-                          onChange={e => setFormData({ ...formData, class: e.target.value })}
-                        />
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label className="text-right" htmlFor="class">Osztály</Label>
+                          <Input
+                           className="col-span-3"
+                            type="text"
+                            name="class"
+                            placeholder="Osztály"
+                            // value={formData.class}
+                            onChange={e => setFormData({ ...formData, class: e.target.value })}
+                          />
                         </div>
-                        <div className="grid w-full max-w-sm items-center mt-2 gap-1.5">
-                        <Label htmlFor="class">RFID azonosító</Label>
-                        <Input
-                          type="text"
-                          name="rfid_tag"
-                          placeholder="RFID azonosító"
-                          //  value={formData.rfid_tag}
-                          onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
-                        />
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label className="text-right" htmlFor="class">RFID azonosító</Label>
+                          <Input
+                           className="col-span-3"
+                            type="text"
+                            name="rfid_tag"
+                            placeholder="RFID azonosító"
+                            //  value={formData.rfid_tag}
+                            onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
+                          />
                         </div>
                       </div>
-                    </DialogDescription>
-                  </DialogHeader>
+    
                   <DialogFooter>
                     <form onSubmit={handleSubmit}>
                       <Button type="submit">
@@ -539,71 +547,80 @@ export default function Home() {
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Teljes név <ArrowUpDown className="w-4 h-4 inline-block" /></th>
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("class")}>Osztály <ArrowUpDown className="w-4 h-4 inline-block" /></th>
                     <th className="p-2 font-normal">Státusz</th>
+                    <th className="p-2 font-normal">RFID azonosító</th>
                     <th className="p-2 font-normal">Műveletek</th>
                   </tr>
                 </thead>
                 <tbody>
                   {paginatedStudents.map((student) => {
-                  const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
-                  const currentTime = new Date().toTimeString().slice(0, 5);
-                  const canUnlockStudent = systemClose || (studentTimetableData &&
-                    currentTime >= studentTimetableData.first_class_start &&
-                    currentTime <= studentTimetableData.last_class_end);
+                    const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
+                    const currentTime = new Date().toTimeString().slice(0, 5);
+                    const canUnlockStudent = systemClose || (studentTimetableData &&
+                      currentTime >= studentTimetableData.first_class_start &&
+                      currentTime <= studentTimetableData.last_class_end);
 
                     return (
-                      <tr key={student.student_id} className="text-center border-t">
+                      <tr key={student.student_id} className="text-center text-sm border-t">
                         <td className="p-1">{student.full_name}</td>
                         <td className="p-1">{student.class}</td>
                         <td className="p-1">
-                          {student.status === "ki" ? <span className="text-red-500">●</span> : student.status === "be" ? <span className="text-green-500">●</span> : null}
+                          {student.status === "ki" ? <span className="text-red-500"><CircleMinus className="w-4 h-4 inline-block"/></span>: student.status === "be" ? <span className="text-green-500"><CircleCheck className="w-4 h-4 inline-block"/></span> : <span className="text-amber-500"><CircleAlert className="w-4 h-4 inline-block"/></span>}
+
+                         
                         </td>
+                        <td className="p-1">{student.rfid_tag}</td>
                         <td className="p-1">
 
-                          <Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>{canUnlockStudent ? <LockOpen className="w-4 h-4 inline-block" /> : <Lock className="w-4 h-4 inline-block" />}</Button>
+                          <Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}> <LockOpen className="w-4 h-4 inline-block" /> {/* {canUnlockStudent ? <LockOpen className="w-4 h-4 inline-block" /> : <LockOpen className="w-4 h-4 inline-block" />}*/}</Button>
                           <Dialog open={open} onOpenChange={setOpen}>
                             <DialogTrigger asChild>
                               <Button variant="ghost" onClick={() => handleEdit(student)}><Pen /></Button>
                             </DialogTrigger>
-                            <DialogContent>
+                            <DialogContent className="sm:max-w-[550px]"> {/*className="sm:max-w-[425px]" */}
                               <DialogHeader>
                                 <DialogTitle>Tanuló szerkesztése</DialogTitle>
                                 <DialogDescription>
-                                  <div>
 
+                                  Aliquam metus eros, tristique nec semper id, congue eget metus
+                                </DialogDescription>
+                              </DialogHeader>
 
-                                    
-                                <div className="grid w-full max-w-sm items-center mt-2 gap-1.5">
-                                <Label htmlFor="full_name">Teljes név</Label>
-                                    <Input
-                                      type="text"
-                                      name="full_name"
-                                      placeholder="Teljes név"
-                                      value={formData.full_name}
-                                      onChange={e => setFormData({ ...formData, full_name: e.target.value })}
-                                    />
-                                    </div>
+                              <div className="grid gap-4 py-4">
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                  <Label className="text-right" htmlFor="full_name">Teljes név</Label>
+                                  <Input
+                                    className="col-span-3"
+                                    type="text"
+                                    name="full_name"
+                                    placeholder="Teljes név"
+                                    value={formData.full_name}
+                                    onChange={e => setFormData({ ...formData, full_name: e.target.value })}
+                                  />
+                                </div>
+                         
 
-                                    {/*<Input
+                              {/*<Input
                                       type="text"
                                       name="class"
                                       placeholder="Class"
                                       value={formData.class}
                                       onChange={e => setFormData({ ...formData, class: e.target.value })}
                                     />*/}
-                                    
-                                <div className="grid w-full max-w-sm items-center mt-2 gap-1.5">
-                                <Label htmlFor="rfid_tag">RFID azonosító</Label>
-                                    <Input
-                                      type="text"
-                                      name="rfid_tag"
-                                      placeholder="RFID azonosító"
-                                      value={formData.rfid_tag}
-                                      onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
-                                    />
-                                    </div>
-                                  </div>
-                                </DialogDescription>
-                              </DialogHeader>
+
+                        
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                  <Label className="text-right" htmlFor="rfid_tag">RFID azonosító</Label>
+                                  <Input
+                                    className="col-span-3"
+                                    type="text"
+                                    name="rfid_tag"
+                                    placeholder="RFID azonosító"
+                                    value={formData.rfid_tag}
+                                    onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
+                                  />
+                                </div>
+                              </div>
+
                               <DialogFooter>
                                 <form onSubmit={handleSubmit}>
                                   <Button type="submit">
@@ -617,6 +634,7 @@ export default function Home() {
 
                           <Button variant="ghost" onClick={() => handleDelete(student.student_id)}><X /></Button>
                         </td>
+                     
                       </tr>
                     );
                   })}

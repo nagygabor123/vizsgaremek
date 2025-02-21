@@ -263,14 +263,19 @@ export default function AddEmployeePage() {
                 <DialogTrigger asChild>
                   <Button variant="outline" className="ml-auto" ><CirclePlus /> Új alkalmazott hozzáadás</Button>
                 </DialogTrigger>
-                <DialogContent>
+                <DialogContent className="sm:max-w-[400px]">
                   <DialogHeader>
                     <DialogTitle>Alkalmazott hozzáadása</DialogTitle>
                     <DialogDescription>
-                      <div>
-                      <div className="grid w-full max-w-sm items-center mt-2 gap-1.5">
-                      <Label htmlFor="fullName">Teljes név</Label>
+                    Aliquam metus eros, tristique nec semper id, congue eget metus
+                                </DialogDescription>
+                              </DialogHeader>
+
+                              <div className="grid gap-4 py-4">
+                              <div className="grid grid-cols-4 items-center gap-4">
+                      <Label className="text-right" htmlFor="fullName">Teljes név</Label>
                         <Input
+                         className="col-span-3"
                           id="fullName"
                           type="text"
                           placeholder="Teljes név"
@@ -280,10 +285,10 @@ export default function AddEmployeePage() {
                         </div>
 
 
-                        <div className="grid w-full max-w-sm items-center mt-2 gap-1.5">
-                        <Label htmlFor="position">Pozíció</Label>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                        <Label className="text-right" htmlFor="position">Pozíció</Label>
                         <Select value={position} onValueChange={setPosition}>
-                          <SelectTrigger>
+                          <SelectTrigger  className="col-span-3">
                             <SelectValue placeholder="Pozíció" />
                           </SelectTrigger>
                           <SelectContent>
@@ -297,8 +302,7 @@ export default function AddEmployeePage() {
                         </div>
 
                       </div>
-                    </DialogDescription>
-                  </DialogHeader>
+              
                   <DialogFooter>
                     <form onSubmit={handleSubmit}>
                       <Button type="submit">
@@ -344,14 +348,21 @@ export default function AddEmployeePage() {
                                 <Pen />
                               </Button>
                             </DialogTrigger>
-                            <DialogContent>
+                            <DialogContent className="sm:max-w-[400px]">
                               <DialogHeader>
                                 <DialogTitle>Alkalmazott szerkesztése</DialogTitle>
                                 <DialogDescription>
+                                Aliquam metus eros, tristique nec semper id, congue eget metus.
+                                </DialogDescription>
+                                </DialogHeader>
 
-                                <div className="grid w-full max-w-sm items-center mt-2 gap-1.5">
-                                <Label htmlFor="fullName">Teljes név</Label>
+
+
+                                <div className="grid gap-4 py-4">
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                <Label className="text-right" htmlFor="fullName">Teljes név</Label>
                                   <Input
+                                     className="col-span-3"
                                     id="fullName"
                                     type="text"
                                     placeholder="Teljes név"
@@ -360,10 +371,10 @@ export default function AddEmployeePage() {
                                   />
                                 </div>
 
-                                <div className="grid w-full max-w-sm items-center mt-2 gap-1.5">
-                                <Label htmlFor="position">Pozíció</Label>
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                <Label className="text-right" htmlFor="position">Pozíció</Label>
                                   <Select value={editPosition} onValueChange={setEditPosition}>
-                                    <SelectTrigger> {/** className="w-[180px]" */}
+                                    <SelectTrigger className="col-span-3"> {/** className="w-[180px]" */}
                                       <SelectValue placeholder="Pozíció" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -375,14 +386,13 @@ export default function AddEmployeePage() {
                                     </SelectContent>
                                   </Select>
                                 </div>
+                              </div>
 
 
 
 
 
-
-                                </DialogDescription>
-                              </DialogHeader>
+                      
                               <DialogFooter>
 
                                 <Button onClick={handleUpdate} >Mentés</Button>
