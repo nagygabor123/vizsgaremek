@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Pen, X, ArrowUpDown, CirclePlus, LockKeyholeOpen, LockKeyhole, LockOpen } from "lucide-react"
+import { Pen, X, ArrowUpDown, CirclePlus, ChevronLeft, ChevronRight  } from "lucide-react"
 import { Input } from "@/components/ui/input";
 import {
   Dialog,
@@ -223,10 +223,10 @@ export default function AddEmployeePage() {
                   </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
-                <BreadcrumbItem>
+                {/*<BreadcrumbItem>
                   <BreadcrumbPage>Adminisztráció</BreadcrumbPage>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator />
+                <BreadcrumbSeparator />*/}
                 <BreadcrumbItem>
                   <BreadcrumbPage>Alkalmazottak</BreadcrumbPage>
                 </BreadcrumbItem>
@@ -463,10 +463,10 @@ export default function AddEmployeePage() {
               </table>
             </div>
 
-            <div className="flex justify-between items-center p-2">
-              <Button variant="ghost" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Előző</Button>
-              <span>Oldal {currentPage} / {totalPages}</span>
-              <Button variant="ghost" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>Következő</Button>
+            <div className="flex justify-between items-center p-2 ">
+              <Button variant="ghost" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}> <ChevronLeft /> Előző</Button>
+              <span> {currentPage} / {totalPages}</span>
+              <Button variant="ghost" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>Következő  <ChevronRight /></Button>
             </div>
 
 

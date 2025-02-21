@@ -22,7 +22,7 @@ import {
 import { Label } from "@/components/ui/label"
 import Link from "next/link";
 
-import { Pen, X, ArrowUpDown, CirclePlus, LockKeyholeOpen, LockKeyhole, LockOpen } from "lucide-react"
+import { Pen, X, ArrowUpDown, CirclePlus, LockKeyholeOpen, LockKeyhole, LockOpen, Lock, ChevronRight, ChevronLeft } from "lucide-react"
 
 import {
   Dialog,
@@ -294,10 +294,10 @@ export default function Home() {
                     <Link href="/dashboard">Főoldal</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator />
+               {/* <BreadcrumbSeparator />
                 <BreadcrumbItem>
                   <BreadcrumbPage>Adminisztráció</BreadcrumbPage>
-                </BreadcrumbItem>
+                </BreadcrumbItem>*/}
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
                   <BreadcrumbPage>Tanulók</BreadcrumbPage>
@@ -559,7 +559,7 @@ export default function Home() {
                         </td>
                         <td className="p-1">
 
-                          <Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}><LockOpen className="w-4 h-4 inline-block" /></Button>
+                          <Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>{canUnlockStudent ? <LockOpen className="w-4 h-4 inline-block" /> : <Lock className="w-4 h-4 inline-block" />}</Button>
                           <Dialog open={open} onOpenChange={setOpen}>
                             <DialogTrigger asChild>
                               <Button variant="ghost" onClick={() => handleEdit(student)}><Pen /></Button>
@@ -629,9 +629,9 @@ export default function Home() {
             </div>
 
             <div className="flex justify-between items-center p-2">
-              <Button variant="ghost" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Előző</Button>
-              <span>Oldal {currentPage} / {totalPages}</span>
-              <Button variant="ghost" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>Következő</Button>
+              <Button variant="ghost" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}> <ChevronLeft /> Előző</Button>
+              <span> {currentPage} / {totalPages}</span>
+              <Button variant="ghost" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>Következő <ChevronRight /></Button>
             </div>
           </div>
 
