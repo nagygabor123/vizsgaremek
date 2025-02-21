@@ -9,7 +9,9 @@ import {
   BreadcrumbSeparator,
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb";
+
 import { Separator } from "@/components/ui/separator";
+
 import {
   Sidebar,
   SidebarTrigger,
@@ -19,17 +21,7 @@ import {
 
 import Link from "next/link";
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-
-
-import { Pen, X, Lock, ArrowUpDown, CirclePlus, LockKeyholeOpen, LockKeyhole, LockOpen} from "lucide-react"
+import { Pen, X, ArrowUpDown, CirclePlus, LockKeyholeOpen, LockKeyhole, LockOpen } from "lucide-react"
 
 import {
   Dialog,
@@ -151,7 +143,7 @@ export default function Home() {
     });
 
     if (response.ok) {
-      setFormData({ student_id: '', full_name: '', class: '', rfid_tag: '', status:'' });
+      setFormData({ student_id: '', full_name: '', class: '', rfid_tag: '', status: '' });
       setEditing(false);
       setEditStudentId(null);
       fetchStudents();  // Refresh the student list after creating or updating
@@ -183,7 +175,7 @@ export default function Home() {
   };
 
 
-  
+
 
   // Handle system close/unlock button click
   const handleSystemClose = async () => {
@@ -202,28 +194,28 @@ export default function Home() {
   const handleStudentOpen = async (student_id: string) => {
     try {
       const scheduleResponse = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${student_id}`);
-  
+
       if (!scheduleResponse.ok) {
         console.error('Nem sikerült lekérni a diák órarendjét.');
         return;
       }
-  
+
       const schedule = await scheduleResponse.json();
       const { first_class_start, last_class_end } = schedule;
-  
+
       // Az aktuális idő HH:MM formátumban
       const currentTime = new Date().toTimeString().slice(0, 5);
-  
+
       // Ellenőrizzük, hogy az aktuális idő az órarendi időintervallumba esik-e
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
         const response = await fetch(`http://localhost:3000/api/system/studentAccess?student=${student_id}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
         });
-  
+
         if (!response.ok) {
           console.error('Hiba történt a zárolás feloldásakor:', await response.text());
-        }else{
+        } else {
           const data = await response.json();
           console.log(data.message);
         }
@@ -234,8 +226,8 @@ export default function Home() {
       console.error('Hiba történt a kérés során:', error);
     }
   };
-  
-  
+
+
 
 
 
@@ -244,7 +236,7 @@ export default function Home() {
   const [sortOrder, setSortOrder] = useState("asc");
   const [searchName, setSearchName] = useState("");
   const [searchClass, setSearchClass] = useState("");
-  
+
 
 
   // Rendezési logika
@@ -252,12 +244,12 @@ export default function Home() {
     if (!sortField) return 0;
     const fieldA = String(a[sortField] ?? "").toLowerCase();
     const fieldB = String(b[sortField] ?? "").toLowerCase();
-    
+
     return sortOrder === "asc" ? fieldA.localeCompare(fieldB, "hu") : fieldB.localeCompare(fieldA, "hu");
   });
 
   // Szűrés
-  const filteredStudents = sortedStudents.filter(student => 
+  const filteredStudents = sortedStudents.filter(student =>
     student.full_name.toLowerCase().includes(searchName.toLowerCase()) &&
     student.class.toLowerCase().includes(searchClass.toLowerCase())
   );
@@ -271,7 +263,7 @@ export default function Home() {
       setSortOrder("asc");
     }
   };
-  
+
 
 
 
@@ -279,7 +271,7 @@ export default function Home() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(filteredStudents.length / PAGE_SIZE);
-  
+
   const paginatedStudents = filteredStudents.slice(
     (currentPage - 1) * PAGE_SIZE,
     currentPage * PAGE_SIZE
@@ -295,117 +287,117 @@ export default function Home() {
             <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
-  <BreadcrumbList>
-  <BreadcrumbItem>
-  <BreadcrumbLink asChild>
-        <Link href="/dashboard">Főoldal</Link>
-      </BreadcrumbLink>
-      </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-    <BreadcrumbPage>Adminisztráció</BreadcrumbPage>
-    </BreadcrumbItem>
-    <BreadcrumbSeparator />
-    <BreadcrumbItem>
-      <BreadcrumbPage>Tanulók</BreadcrumbPage>
-    </BreadcrumbItem>
-  </BreadcrumbList>
-</Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link href="/dashboard">Főoldal</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Adminisztráció</BreadcrumbPage>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Tanulók</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
           </div>
         </header>
-    <div>
-  
+        <div>
 
 
 
 
-      <div className="p-4">
-         
-         
-  
-         
-      <div className="flex gap-2 mb-4">
-  <div className="flex gap-2">
-    <Input
-      type="text"
-      placeholder="Keresés név szerint..."
-      className="border p-2 rounded w-1/3"
-      value={searchName}
-      onChange={(e) => setSearchName(e.target.value)}
-    />
-    <Input
-      type="text"
-      placeholder="Keresés osztály szerint..."
-      className="border p-2 rounded w-1/3"
-      value={searchClass}
-      onChange={(e) => setSearchClass(e.target.value)}
-    />
 
-    <Button variant="outline" onClick={handleSystemClose} > {/*className="ml-auto" */}
-  {systemClose ? <LockKeyholeOpen/> : <LockKeyhole/> }
-    {systemClose ? 'Feloldás' : 'Zárolás'}
-  
-  </Button>
-  </div>
-  
+          <div className="p-4">
 
 
 
-  <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-      <DialogTrigger asChild>
-      <Button variant="outline" className="ml-auto" ><CirclePlus/> Új tanuló hozzáadás</Button>
-      </DialogTrigger>
-      <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Tanuló hozzáadása</DialogTitle>
-      <DialogDescription>
-      <div>
-        <Input 
-            type="text"
-        placeholder="Student_id"
-          name="student_id"
-         // value={formData.student_id}
-          onChange={e => setFormData({ ...formData, student_id: e.target.value })}
-        />
-        <Input
-          type="text"
-          name="full_name"
-          placeholder="Full Name"
-         // value={formData.full_name}
-          onChange={e => setFormData({ ...formData, full_name: e.target.value })}
-        />
-        <Input
-          type="text"
-          name="class"
-          placeholder="Class"
-         // value={formData.class}
-          onChange={e => setFormData({ ...formData, class: e.target.value })}
-        />
-        <Input
-          type="text"
-          name="rfid_tag"
-          placeholder="RFID Tag"
-         //  value={formData.rfid_tag}
-          onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
-        />
-      </div>
-      </DialogDescription>
-    </DialogHeader>
-    <DialogFooter>
-    <form onSubmit={handleSubmit}>
-  <Button type="submit">
-   Kész
-  </Button> {/* {editing}     {editing ? 'Update' : 'Add'} Student*/}
-</form>
-    
-    </DialogFooter>
-  </DialogContent>
-</Dialog>
+
+            <div className="flex gap-2 mb-4">
+              <div className="flex gap-2">
+                <Input
+                  type="text"
+                  placeholder="Keresés név szerint..."
+                  className="border p-2 rounded w-1/3"
+                  value={searchName}
+                  onChange={(e) => setSearchName(e.target.value)}
+                />
+                <Input
+                  type="text"
+                  placeholder="Keresés osztály szerint..."
+                  className="border p-2 rounded w-1/3"
+                  value={searchClass}
+                  onChange={(e) => setSearchClass(e.target.value)}
+                />
+
+                <Button variant="outline" onClick={handleSystemClose} > {/*className="ml-auto" */}
+                  {systemClose ? <LockKeyholeOpen /> : <LockKeyhole />}
+                  {systemClose ? 'Feloldás' : 'Zárolás'}
+
+                </Button>
+              </div>
 
 
-</div>
 
-{/*<table className="rounded-lg text-left border border-separate border-tools-table-outline border-black border-1 w-full">
+
+              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                <DialogTrigger asChild>
+                  <Button variant="outline" className="ml-auto" ><CirclePlus /> Új tanuló hozzáadás</Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Tanuló hozzáadása</DialogTitle>
+                    <DialogDescription>
+                      <div>
+                        <Input
+                          type="text"
+                          placeholder="Student_id"
+                          name="student_id"
+                          // value={formData.student_id}
+                          onChange={e => setFormData({ ...formData, student_id: e.target.value })}
+                        />
+                        <Input
+                          type="text"
+                          name="full_name"
+                          placeholder="Full Name"
+                          // value={formData.full_name}
+                          onChange={e => setFormData({ ...formData, full_name: e.target.value })}
+                        />
+                        <Input
+                          type="text"
+                          name="class"
+                          placeholder="Class"
+                          // value={formData.class}
+                          onChange={e => setFormData({ ...formData, class: e.target.value })}
+                        />
+                        <Input
+                          type="text"
+                          name="rfid_tag"
+                          placeholder="RFID Tag"
+                          //  value={formData.rfid_tag}
+                          onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
+                        />
+                      </div>
+                    </DialogDescription>
+                  </DialogHeader>
+                  <DialogFooter>
+                    <form onSubmit={handleSubmit}>
+                      <Button type="submit">
+                        Kész
+                      </Button> {/* {editing}     {editing ? 'Update' : 'Add'} Student*/}
+                    </form>
+
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+
+
+            </div>
+
+            {/*<table className="rounded-lg text-left border border-separate border-tools-table-outline border-black border-1 w-full">
     <thead className="" >
       <th className="rounded-tl-sm bg-yellow-200 pl-12">One</th>
       <th className="rounded-tr-sm bg-yellow-200 pl-12">Two</th>
@@ -423,8 +415,8 @@ export default function Home() {
     </tbody>
   </table>*/}
 
-      {/* border-collapse border border-gray-300      bg-gray-100*/}
-      {/* <div className="rounded-md border mt-5">
+            {/* border-collapse border border-gray-300      bg-gray-100*/}
+            {/* <div className="rounded-md border mt-5">
       <table className=" w-full">
   <thead className="text-center text-sm text-neutral-500 "  >
     <tr>
@@ -523,108 +515,108 @@ export default function Home() {
   </tbody>
 </table>
 </div> */}
-    
-{/* {editing}     {editing ? 'Update' : 'Add'} Student*/}
 
-<div className="rounded-md border mt-5">
-    <table className="w-full">
-      <thead className="text-center text-sm text-neutral-500">
-        <tr>
-          <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Teljes név <ArrowUpDown className="w-4 h-4 inline-block" /></th>
-          <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("class")}>Osztály <ArrowUpDown className="w-4 h-4 inline-block" /></th>
-          <th className="p-2 font-normal">Státusz</th>
-          <th className="p-2 font-normal">Műveletek</th>
-        </tr>
-      </thead>
-      <tbody>
-        {paginatedStudents.map((student) => {
-          const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
-          const currentTime = new Date().toTimeString().slice(0, 5);
-          const canUnlockStudent = systemClose || (studentTimetableData &&
-            currentTime >= studentTimetableData.first_class_start &&
-            currentTime <= studentTimetableData.last_class_end);
+            {/* {editing}     {editing ? 'Update' : 'Add'} Student*/}
 
-          return (
-            <tr key={student.student_id} className="text-center border-t">
-              <td className="p-1">{student.full_name}</td>
-              <td className="p-1">{student.class}</td>
-              <td className="p-1">
-                {student.status === "ki" ? <span className="text-red-500">●</span> : student.status === "be" ? <span className="text-green-500">●</span> : null}
-              </td>
-              <td className="p-1">
-              
-                <Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}><LockOpen className="w-4 h-4 inline-block"/></Button>
-                <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-      <Button variant="ghost" onClick={() => handleEdit(student)}><Pen /></Button>
-      </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Tanuló szerkesztése</DialogTitle>
-      <DialogDescription>
-      <div>
-      
-        <Input
-          type="text"
-          name="full_name"
-          placeholder="Full Name"
-          value={formData.full_name}
-          onChange={e => setFormData({ ...formData, full_name: e.target.value })}
-        />
-        <Input
-          type="text"
-          name="class"
-          placeholder="Class"
-          value={formData.class}
-          onChange={e => setFormData({ ...formData, class: e.target.value })}
-        />
-        <Input
-          type="text"
-          name="rfid_tag"
-          placeholder="RFID Tag"
-          value={formData.rfid_tag}
-          onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
-        />
-      </div>
-      </DialogDescription>
-    </DialogHeader>
-    <DialogFooter>
-    <form onSubmit={handleSubmit}>
-  <Button type="submit">
-   Kész
-  </Button> 
-</form>
-    
-    </DialogFooter>
-  </DialogContent>
-</Dialog>
+            <div className="rounded-md border mt-5">
+              <table className="w-full">
+                <thead className="text-center text-sm text-neutral-500">
+                  <tr>
+                    <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Teljes név <ArrowUpDown className="w-4 h-4 inline-block" /></th>
+                    <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("class")}>Osztály <ArrowUpDown className="w-4 h-4 inline-block" /></th>
+                    <th className="p-2 font-normal">Státusz</th>
+                    <th className="p-2 font-normal">Műveletek</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {paginatedStudents.map((student) => {
+                  const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
+                  const currentTime = new Date().toTimeString().slice(0, 5);
+                  const canUnlockStudent = systemClose || (studentTimetableData &&
+                    currentTime >= studentTimetableData.first_class_start &&
+                    currentTime <= studentTimetableData.last_class_end);
 
-                <Button variant="ghost" onClick={() => handleDelete(student.student_id)}><X /></Button>
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+                    return (
+                      <tr key={student.student_id} className="text-center border-t">
+                        <td className="p-1">{student.full_name}</td>
+                        <td className="p-1">{student.class}</td>
+                        <td className="p-1">
+                          {student.status === "ki" ? <span className="text-red-500">●</span> : student.status === "be" ? <span className="text-green-500">●</span> : null}
+                        </td>
+                        <td className="p-1">
 
-    {/* Lapozó gombok */}
+                          <Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}><LockOpen className="w-4 h-4 inline-block" /></Button>
+                          <Dialog open={open} onOpenChange={setOpen}>
+                            <DialogTrigger asChild>
+                              <Button variant="ghost" onClick={() => handleEdit(student)}><Pen /></Button>
+                            </DialogTrigger>
+                            <DialogContent>
+                              <DialogHeader>
+                                <DialogTitle>Tanuló szerkesztése</DialogTitle>
+                                <DialogDescription>
+                                  <div>
 
+                                    <Input
+                                      type="text"
+                                      name="full_name"
+                                      placeholder="Full Name"
+                                      value={formData.full_name}
+                                      onChange={e => setFormData({ ...formData, full_name: e.target.value })}
+                                    />
+                                    {/*<Input
+                                      type="text"
+                                      name="class"
+                                      placeholder="Class"
+                                      value={formData.class}
+                                      onChange={e => setFormData({ ...formData, class: e.target.value })}
+                                    />*/}
+                                    <Input
+                                      type="text"
+                                      name="rfid_tag"
+                                      placeholder="RFID Tag"
+                                      value={formData.rfid_tag}
+                                      onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
+                                    />
+                                  </div>
+                                </DialogDescription>
+                              </DialogHeader>
+                              <DialogFooter>
+                                <form onSubmit={handleSubmit}>
+                                  <Button type="submit">
+                                    Kész
+                                  </Button>
+                                </form>
+
+                              </DialogFooter>
+                            </DialogContent>
+                          </Dialog>
+
+                          <Button variant="ghost" onClick={() => handleDelete(student.student_id)}><X /></Button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+
+              {/* Lapozó gombok */}
+
+
+            </div>
+
+            <div className="flex justify-between items-center p-2">
+              <Button variant="ghost" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Előző</Button>
+              <span>Oldal {currentPage} / {totalPages}</span>
+              <Button variant="ghost" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>Következő</Button>
+            </div>
+          </div>
 
         </div>
 
-        <div className="flex justify-between items-center p-2">
-      <Button variant="ghost" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Előző</Button>
-      <span>Oldal {currentPage} / {totalPages}</span>
-      <Button variant="ghost" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>Következő</Button>
-    </div>
-  </div>
-        
-    </div>
 
 
-    
 
-    </SidebarInset>
+      </SidebarInset>
     </SidebarProvider>
   );
 }

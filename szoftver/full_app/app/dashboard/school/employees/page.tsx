@@ -19,6 +19,24 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Pen, X, ArrowUpDown, CirclePlus, LockKeyholeOpen, LockKeyhole, LockOpen } from "lucide-react"
+import { Input } from "@/components/ui/input";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter
+} from "@/components/ui/dialog"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 export default function AddEmployeePage() {
   const [fullName, setFullName] = useState('');
@@ -29,6 +47,10 @@ export default function AddEmployeePage() {
   const [editId, setEditId] = useState<number | null>(null);
   const [editName, setEditName] = useState('');
   const [editPosition, setEditPosition] = useState('');
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+
 
   const positions = [
     { label: 'Igazgató', value: 'igazgato' },
@@ -73,6 +95,8 @@ export default function AddEmployeePage() {
         setFullName('');
         setPosition('');
         fetchEmployees();
+        setIsDialogOpen(false);
+        //setOpen(false);
       } else {
         setMessage(data.message || 'Error adding employee');
       }
@@ -120,6 +144,7 @@ export default function AddEmployeePage() {
         setEditName('');
         setEditPosition('');
         fetchEmployees();
+        setOpen(false);
       } else {
         setMessage(data.message || 'Error updating employee');
       }
@@ -127,6 +152,59 @@ export default function AddEmployeePage() {
       setMessage('Error connecting to the server');
     }
   };
+
+
+
+
+
+  const [sortField, setSortField] = useState<"full_name" | "position" | null>(null);
+
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [searchName, setSearchName] = useState("");
+  const [searchPosition, setSearchPosition] = useState("");
+
+
+
+  // Rendezési logika
+  const sortedEmployees = [...employees].sort((a, b) => {
+    if (!sortField) return 0;
+    const fieldA = String(a[sortField] ?? "").toLowerCase();
+    const fieldB = String(b[sortField] ?? "").toLowerCase();
+
+    return sortOrder === "asc" ? fieldA.localeCompare(fieldB, "hu") : fieldB.localeCompare(fieldA, "hu");
+  });
+
+  // Szűrés
+  const filteredEmployees = sortedEmployees.filter(student =>
+    student.full_name.toLowerCase().includes(searchName.toLowerCase()) &&
+    student.position.toLowerCase().includes(searchPosition.toLowerCase())
+  );
+
+  // Rendezés váltása adott mező szerint
+  const toggleSort = (field: "full_name" | "position") => {
+    if (sortField === field) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortField(field);
+      setSortOrder("asc");
+    }
+  };
+
+
+
+
+
+  
+  const PAGE_SIZE = 10;
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(filteredEmployees.length / PAGE_SIZE);
+
+  const paginatedEmployees = filteredEmployees.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE
+  );
+
 
   return (
     <SidebarProvider>
@@ -156,8 +234,8 @@ export default function AddEmployeePage() {
           </div>
         </header>
         <div>
-        <h1>Alkalmazottak:</h1>
-          <form onSubmit={handleSubmit}>
+        <div className="p-4">
+         {/* <form onSubmit={handleSubmit}>
             <div>
               <label htmlFor="fullName">Név:</label>
               <input
@@ -185,27 +263,181 @@ export default function AddEmployeePage() {
             <button type="submit" disabled={loading}>
               {loading ? 'Hozzáadás...' : 'Alkalmazott hozzáadása'}
             </button>
-          </form>
+          </form>*/}
 
-          {message && <p>{message}</p>}
-          <h2 className="m-2 text-xl">Alkalmazottak listája</h2>
-          <ul>
+        
+       
+
+
+
+          <div className="flex gap-2 mb-4">
+              <div className="flex gap-2">
+                <Input
+                  type="text"
+                  placeholder="Keresés név szerint..."
+                  className="border p-2 rounded w-1/3"
+                  value={searchName}
+                  onChange={(e) => setSearchName(e.target.value)}
+                />
+                <Input
+                  type="text"
+                  placeholder="Keresés pozíció szerint..."
+                  className="border p-2 rounded w-1/3"
+                  value={searchPosition}
+                  onChange={(e) => setSearchPosition(e.target.value)}
+                />
+
+             
+              </div>
+
+
+
+
+
+
+
+              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                <DialogTrigger asChild>
+                  <Button variant="outline" className="ml-auto" ><CirclePlus /> Új alkalmazott hozzáadás</Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Alkalmazott hozzáadása</DialogTitle>
+                    <DialogDescription>
+                      <div>
+                        <Input
+                          id="fullName"
+                          type="text"
+                          value={fullName}
+                          onChange={(e) => setFullName(e.target.value)}
+                        />
+
+
+
+                          <Select value={position} onValueChange={setPosition}>
+                            <SelectTrigger className="w-[180px]">
+                              <SelectValue placeholder="Válassz pozíciót" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {positions.map((pos) => (
+                                <SelectItem key={pos.value} value={pos.value}>
+                                  {pos.label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+
+
+
+
+
+
+                      </div>
+                    </DialogDescription>
+                  </DialogHeader>
+                  <DialogFooter>
+                    <form onSubmit={handleSubmit}>
+                      <Button type="submit">
+                        Kész
+                      </Button> {/* {editing}     {editing ? 'Update' : 'Add'} Student*/}
+                    </form>
+
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+
+
+
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <div className="rounded-md border mt-5">
+          <table className="w-full">
+                <thead className="text-center text-sm text-neutral-500">
+            <tr>
+              <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Név  <ArrowUpDown className="w-4 h-4 inline-block" /></th>
+              <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("position")}>Pozíció  <ArrowUpDown className="w-4 h-4 inline-block" /></th>
+              <th className="p-2 cursor-pointer font-normal">Műveletek</th>
+            </tr>
+          </thead>
+          <tbody>
             {employees.length === 0 ? (
-              <li>Nem találom az alkalmazottakat</li>
+              <tr className="text-center border-t">
+                <td className="p-1">
+                  Nem találom az alkalmazottakat
+                </td>
+              </tr>
             ) : (
-              employees.map((employee) => (
-                <li key={employee.admin_id}>
-                  {employee.full_name} - {employee.position} (ID: {employee.admin_id})
-                  <button onClick={() => handleDelete(employee.admin_id)} className="ml-2 bg-red-500 text-white p-1 rounded">
-                    Törlés
-                  </button>
-                  <button onClick={() => handleEdit(employee)} className="ml-2 bg-blue-500 text-white p-1 rounded">
-                    Frissítés
-                  </button>
-                </li>
+              
+              paginatedEmployees.map((employee) => (
+                <tr key={employee.admin_id}  className="text-center border-t">
+                  <td className="p-1">{employee.full_name}</td>
+                  <td className="p-1">{employee.position}</td>
+                  <td className="p-1">
+                    
+                  <Dialog open={open} onOpenChange={setOpen}>
+  <DialogTrigger asChild>
+    <Button variant="ghost" onClick={() => handleEdit(employee)}>
+      <Pen />
+    </Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Alkalmazott szerkesztése</DialogTitle>
+      <DialogDescription>
+      <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} />
+              <select value={editPosition} onChange={(e) => setEditPosition(e.target.value)}>
+                {positions.map((pos) => (
+                  <option key={pos.value} value={pos.value}>{pos.label}</option>
+                ))}
+              </select>
+      </DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+
+    <button onClick={handleUpdate} className="bg-green-500 text-white p-1 rounded">Mentés</button>
+
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+
+
+
+
+
+                    
+                    <Button variant="ghost" onClick={() => handleDelete(employee.admin_id)}><X className="w-4 h-4 inline-block" /></Button>
+
+                  </td>
+                </tr>
               ))
             )}
-          </ul>
+          </tbody>
+        </table>
+        </div>
+
+        <div className="flex justify-between items-center p-2">
+              <Button variant="ghost" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Előző</Button>
+              <span>Oldal {currentPage} / {totalPages}</span>
+              <Button variant="ghost" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>Következő</Button>
+        </div>
+            
+
+
           {editId && (
             <div>
               <h3>Alkalmazott szerkesztése</h3>
@@ -218,7 +450,17 @@ export default function AddEmployeePage() {
               <button onClick={handleUpdate} className="bg-green-500 text-white p-1 rounded">Mentés</button>
             </div>
           )}
+
+
+
+
+          </div>
         </div>
+
+        {/*{message && <p>{message}</p>}*/}
+
+
+
       </SidebarInset>
     </SidebarProvider>
   );
