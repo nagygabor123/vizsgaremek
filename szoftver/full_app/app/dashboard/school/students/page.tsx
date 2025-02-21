@@ -19,6 +19,7 @@ import {
   SidebarProvider,
 } from "@/components/ui/sidebar";
 
+import { Label } from "@/components/ui/label"
 import Link from "next/link";
 
 import { Pen, X, ArrowUpDown, CirclePlus, LockKeyholeOpen, LockKeyhole, LockOpen } from "lucide-react"
@@ -321,14 +322,14 @@ export default function Home() {
                 <Input
                   type="text"
                   placeholder="Keresés név szerint..."
-                  className="border p-2 rounded w-1/3"
+                  className="border p-2 rounded"
                   value={searchName}
                   onChange={(e) => setSearchName(e.target.value)}
                 />
                 <Input
                   type="text"
                   placeholder="Keresés osztály szerint..."
-                  className="border p-2 rounded w-1/3"
+                  className="border p-2 rounded"
                   value={searchClass}
                   onChange={(e) => setSearchClass(e.target.value)}
                 />
@@ -352,34 +353,47 @@ export default function Home() {
                     <DialogTitle>Tanuló hozzáadása</DialogTitle>
                     <DialogDescription>
                       <div>
+                        
+                        <div className="grid w-full max-w-sm items-center mt-2 gap-1.5">
+                        <Label htmlFor="student_id">Azonosító szám</Label>
                         <Input
                           type="text"
-                          placeholder="Student_id"
+                          placeholder="Azonosító szám"
                           name="student_id"
                           // value={formData.student_id}
                           onChange={e => setFormData({ ...formData, student_id: e.target.value })}
                         />
+                        </div>
+                        <div className="grid w-full max-w-sm items-center mt-2 gap-1.5">
+                        <Label htmlFor="full_name">Teljes név</Label>
                         <Input
                           type="text"
                           name="full_name"
-                          placeholder="Full Name"
+                          placeholder="Teljes név"
                           // value={formData.full_name}
                           onChange={e => setFormData({ ...formData, full_name: e.target.value })}
                         />
+                        </div>
+                        <div className="grid w-full max-w-sm items-center mt-2 gap-1.5">
+                        <Label htmlFor="class">Osztály</Label>
                         <Input
                           type="text"
                           name="class"
-                          placeholder="Class"
+                          placeholder="Osztály"
                           // value={formData.class}
                           onChange={e => setFormData({ ...formData, class: e.target.value })}
                         />
+                        </div>
+                        <div className="grid w-full max-w-sm items-center mt-2 gap-1.5">
+                        <Label htmlFor="class">RFID azonosító</Label>
                         <Input
                           type="text"
                           name="rfid_tag"
-                          placeholder="RFID Tag"
+                          placeholder="RFID azonosító"
                           //  value={formData.rfid_tag}
                           onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
                         />
+                        </div>
                       </div>
                     </DialogDescription>
                   </DialogHeader>
@@ -556,13 +570,19 @@ export default function Home() {
                                 <DialogDescription>
                                   <div>
 
+
+                                    
+                                <div className="grid w-full max-w-sm items-center mt-2 gap-1.5">
+                                <Label htmlFor="full_name">Teljes név</Label>
                                     <Input
                                       type="text"
                                       name="full_name"
-                                      placeholder="Full Name"
+                                      placeholder="Teljes név"
                                       value={formData.full_name}
                                       onChange={e => setFormData({ ...formData, full_name: e.target.value })}
                                     />
+                                    </div>
+
                                     {/*<Input
                                       type="text"
                                       name="class"
@@ -570,13 +590,17 @@ export default function Home() {
                                       value={formData.class}
                                       onChange={e => setFormData({ ...formData, class: e.target.value })}
                                     />*/}
+                                    
+                                <div className="grid w-full max-w-sm items-center mt-2 gap-1.5">
+                                <Label htmlFor="rfid_tag">RFID azonosító</Label>
                                     <Input
                                       type="text"
                                       name="rfid_tag"
-                                      placeholder="RFID Tag"
+                                      placeholder="RFID azonosító"
                                       value={formData.rfid_tag}
                                       onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
                                     />
+                                    </div>
                                   </div>
                                 </DialogDescription>
                               </DialogHeader>

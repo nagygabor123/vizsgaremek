@@ -37,6 +37,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { Label } from "@/components/ui/label"
 
 export default function AddEmployeePage() {
   const [fullName, setFullName] = useState('');
@@ -275,14 +276,14 @@ export default function AddEmployeePage() {
                 <Input
                   type="text"
                   placeholder="Keresés név szerint..."
-                  className="border p-2 rounded w-1/3"
+                  className="border p-2 rounded"
                   value={searchName}
                   onChange={(e) => setSearchName(e.target.value)}
                 />
                 <Input
                   type="text"
                   placeholder="Keresés pozíció szerint..."
-                  className="border p-2 rounded w-1/3"
+                  className="border p-2 rounded"
                   value={searchPosition}
                   onChange={(e) => setSearchPosition(e.target.value)}
                 />
@@ -305,18 +306,23 @@ export default function AddEmployeePage() {
                     <DialogTitle>Alkalmazott hozzáadása</DialogTitle>
                     <DialogDescription>
                       <div>
+                      <div className="grid w-full max-w-sm items-center mt-2 gap-1.5">
+                      <Label htmlFor="fullName">Teljes név</Label>
                         <Input
                           id="fullName"
                           type="text"
+                          placeholder="Teljes név"
                           value={fullName}
                           onChange={(e) => setFullName(e.target.value)}
                         />
+                        </div>
 
 
-
+                        <div className="grid w-full max-w-sm items-center mt-2 gap-1.5">
+                        <Label htmlFor="position">Pozíció</Label>
                         <Select value={position} onValueChange={setPosition}>
-                          <SelectTrigger className="w-[180px]">
-                            <SelectValue placeholder="Válassz pozíciót" />
+                          <SelectTrigger>
+                            <SelectValue placeholder="Pozíció" />
                           </SelectTrigger>
                           <SelectContent>
                             {positions.map((pos) => (
@@ -326,7 +332,7 @@ export default function AddEmployeePage() {
                             ))}
                           </SelectContent>
                         </Select>
-
+                        </div>
 
 
 
@@ -400,18 +406,22 @@ export default function AddEmployeePage() {
                                 <DialogTitle>Alkalmazott szerkesztése</DialogTitle>
                                 <DialogDescription>
 
+                                <div className="grid w-full max-w-sm items-center mt-2 gap-1.5">
+                                <Label htmlFor="fullName">Teljes név</Label>
                                   <Input
                                     id="fullName"
                                     type="text"
+                                    placeholder="Teljes név"
                                     value={editName}
                                     onChange={(e) => setEditName(e.target.value)}
                                   />
+                                </div>
 
-
-
+                                <div className="grid w-full max-w-sm items-center mt-2 gap-1.5">
+                                <Label htmlFor="position">Pozíció</Label>
                                   <Select value={editPosition} onValueChange={setEditPosition}>
-                                    <SelectTrigger className="w-[180px]">
-                                      <SelectValue placeholder="Válassz pozíciót" />
+                                    <SelectTrigger> {/** className="w-[180px]" */}
+                                      <SelectValue placeholder="Pozíció" />
                                     </SelectTrigger>
                                     <SelectContent>
                                       {positions.map((pos) => (
@@ -421,7 +431,7 @@ export default function AddEmployeePage() {
                                       ))}
                                     </SelectContent>
                                   </Select>
-
+                                </div>
 
 
 
