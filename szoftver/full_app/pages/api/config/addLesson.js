@@ -48,7 +48,7 @@ export default function handler(req, res) {
       });
 
       db = await connectToDatabase();
-      const insertQuery = 'INSERT INTO groups (`group_name`) VALUES (?)';
+      const insertQuery = 'INSERT INTO `groups` (`group_name`) VALUES (?)';
 
       for (let row of data) {
         const { group_name } = row;
