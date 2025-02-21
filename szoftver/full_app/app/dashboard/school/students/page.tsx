@@ -386,7 +386,7 @@ export default function Home() {
                   <DialogFooter>
                     <form onSubmit={handleSubmit}>
                       <Button type="submit">
-                        Kész
+                        Mentés
                       </Button> {/* {editing}     {editing ? 'Update' : 'Add'} Student*/}
                     </form>
 
@@ -583,7 +583,7 @@ export default function Home() {
                               <DialogFooter>
                                 <form onSubmit={handleSubmit}>
                                   <Button type="submit">
-                                    Kész
+                                    Mentés
                                   </Button>
                                 </form>
 

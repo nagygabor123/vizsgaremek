@@ -194,7 +194,7 @@ export default function AddEmployeePage() {
 
 
 
-  
+
   const PAGE_SIZE = 10;
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -234,8 +234,8 @@ export default function AddEmployeePage() {
           </div>
         </header>
         <div>
-        <div className="p-4">
-         {/* <form onSubmit={handleSubmit}>
+          <div className="p-4">
+            {/* <form onSubmit={handleSubmit}>
             <div>
               <label htmlFor="fullName">Név:</label>
               <input
@@ -265,12 +265,12 @@ export default function AddEmployeePage() {
             </button>
           </form>*/}
 
-        
-       
 
 
 
-          <div className="flex gap-2 mb-4">
+
+
+            <div className="flex gap-2 mb-4">
               <div className="flex gap-2">
                 <Input
                   type="text"
@@ -287,7 +287,7 @@ export default function AddEmployeePage() {
                   onChange={(e) => setSearchPosition(e.target.value)}
                 />
 
-             
+
               </div>
 
 
@@ -314,18 +314,18 @@ export default function AddEmployeePage() {
 
 
 
-                          <Select value={position} onValueChange={setPosition}>
-                            <SelectTrigger className="w-[180px]">
-                              <SelectValue placeholder="Válassz pozíciót" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {positions.map((pos) => (
-                                <SelectItem key={pos.value} value={pos.value}>
-                                  {pos.label}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
+                        <Select value={position} onValueChange={setPosition}>
+                          <SelectTrigger className="w-[180px]">
+                            <SelectValue placeholder="Válassz pozíciót" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {positions.map((pos) => (
+                              <SelectItem key={pos.value} value={pos.value}>
+                                {pos.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
 
 
 
@@ -338,7 +338,7 @@ export default function AddEmployeePage() {
                   <DialogFooter>
                     <form onSubmit={handleSubmit}>
                       <Button type="submit">
-                        Kész
+                        Mentés
                       </Button> {/* {editing}     {editing ? 'Update' : 'Add'} Student*/}
                     </form>
 
@@ -348,7 +348,7 @@ export default function AddEmployeePage() {
 
 
 
-              </div>
+            </div>
 
 
 
@@ -365,91 +365,114 @@ export default function AddEmployeePage() {
 
 
 
-          <div className="rounded-md border mt-5">
-          <table className="w-full">
+            <div className="rounded-md border mt-5">
+              <table className="w-full">
                 <thead className="text-center text-sm text-neutral-500">
-            <tr>
-              <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Név  <ArrowUpDown className="w-4 h-4 inline-block" /></th>
-              <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("position")}>Pozíció  <ArrowUpDown className="w-4 h-4 inline-block" /></th>
-              <th className="p-2 cursor-pointer font-normal">Műveletek</th>
-            </tr>
-          </thead>
-          <tbody>
-            {employees.length === 0 ? (
-              <tr className="text-center border-t">
-                <td className="p-1">
-                  Nem találom az alkalmazottakat
-                </td>
-              </tr>
-            ) : (
-              
-              paginatedEmployees.map((employee) => (
-                <tr key={employee.admin_id}  className="text-center border-t">
-                  <td className="p-1">{employee.full_name}</td>
-                  <td className="p-1">{employee.position}</td>
-                  <td className="p-1">
-                    
-                  <Dialog open={open} onOpenChange={setOpen}>
-  <DialogTrigger asChild>
-    <Button variant="ghost" onClick={() => handleEdit(employee)}>
-      <Pen />
-    </Button>
-  </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Alkalmazott szerkesztése</DialogTitle>
-      <DialogDescription>
-      <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} />
-              <select value={editPosition} onChange={(e) => setEditPosition(e.target.value)}>
-                {positions.map((pos) => (
-                  <option key={pos.value} value={pos.value}>{pos.label}</option>
-                ))}
-              </select>
-      </DialogDescription>
-    </DialogHeader>
-    <DialogFooter>
+                  <tr>
+                    <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Név  <ArrowUpDown className="w-4 h-4 inline-block" /></th>
+                    <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("position")}>Pozíció  <ArrowUpDown className="w-4 h-4 inline-block" /></th>
+                    <th className="p-2 cursor-pointer font-normal">Műveletek</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {employees.length === 0 ? (
+                    <tr className="text-center border-t">
+                      <td className="p-1">
+                        Nem találom az alkalmazottakat
+                      </td>
+                    </tr>
+                  ) : (
 
-    <button onClick={handleUpdate} className="bg-green-500 text-white p-1 rounded">Mentés</button>
+                    paginatedEmployees.map((employee) => (
+                      <tr key={employee.admin_id} className="text-center border-t">
+                        <td className="p-1">{employee.full_name}</td>
+                        <td className="p-1">{employee.position}</td>
+                        <td className="p-1">
 
-    </DialogFooter>
-  </DialogContent>
-</Dialog>
+                          <Dialog open={open} onOpenChange={setOpen}>
+                            <DialogTrigger asChild>
+                              <Button variant="ghost" onClick={() => handleEdit(employee)}>
+                                <Pen />
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent>
+                              <DialogHeader>
+                                <DialogTitle>Alkalmazott szerkesztése</DialogTitle>
+                                <DialogDescription>
+
+                                  <Input
+                                    id="fullName"
+                                    type="text"
+                                    value={editName}
+                                    onChange={(e) => setEditName(e.target.value)}
+                                  />
 
 
 
+                                  <Select value={editPosition} onValueChange={setEditPosition}>
+                                    <SelectTrigger className="w-[180px]">
+                                      <SelectValue placeholder="Válassz pozíciót" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      {positions.map((pos) => (
+                                        <SelectItem key={pos.value} value={pos.value}>
+                                          {pos.label}
+                                        </SelectItem>
+                                      ))}
+                                    </SelectContent>
+                                  </Select>
 
 
-                    
-                    <Button variant="ghost" onClick={() => handleDelete(employee.admin_id)}><X className="w-4 h-4 inline-block" /></Button>
 
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-        </div>
 
-        <div className="flex justify-between items-center p-2">
+
+
+
+                                </DialogDescription>
+                              </DialogHeader>
+                              <DialogFooter>
+
+                                <Button onClick={handleUpdate} >Mentés</Button>
+
+                              </DialogFooter>
+                            </DialogContent>
+                          </Dialog>
+
+
+
+
+
+
+                          <Button variant="ghost" onClick={() => handleDelete(employee.admin_id)}><X className="w-4 h-4 inline-block" /></Button>
+
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="flex justify-between items-center p-2">
               <Button variant="ghost" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Előző</Button>
               <span>Oldal {currentPage} / {totalPages}</span>
               <Button variant="ghost" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>Következő</Button>
-        </div>
-            
-
-
-          {editId && (
-            <div>
-              <h3>Alkalmazott szerkesztése</h3>
-              <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} />
-              <select value={editPosition} onChange={(e) => setEditPosition(e.target.value)}>
-                {positions.map((pos) => (
-                  <option key={pos.value} value={pos.value}>{pos.label}</option>
-                ))}
-              </select>
-              <button onClick={handleUpdate} className="bg-green-500 text-white p-1 rounded">Mentés</button>
             </div>
-          )}
+
+
+
+           {/* {editId && (
+              <div>
+                <h3>Alkalmazott szerkesztése</h3>
+                <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} />
+                <select value={editPosition} onChange={(e) => setEditPosition(e.target.value)}>
+                  {positions.map((pos) => (
+                    <option key={pos.value} value={pos.value}>{pos.label}</option>
+                  ))}
+                </select>
+                <button onClick={handleUpdate} className="bg-green-500 text-white p-1 rounded">Mentés</button>
+              </div>
+            )}*/}
 
 
 
