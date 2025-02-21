@@ -306,19 +306,19 @@ export default function Home() {
             </Breadcrumb>
           </div>
         </header>
-        <div>
 
 
 
 
+        <div  className="overflow-x-auto">
 
           <div className="p-4">
 
 
 
 
-            <div className="flex gap-2 mb-4">
-              <div className="flex gap-2">
+            <div className="flex flex-col gap-2 md:flex-row mb-4">
+              <div className="flex flex-col gap-2 md:flex-row">
                 <Input
                   type="text"
                   placeholder="Keresés név szerint..."

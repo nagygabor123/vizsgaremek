@@ -234,45 +234,13 @@ export default function AddEmployeePage() {
             </Breadcrumb>
           </div>
         </header>
-        <div>
+        <div  className="overflow-x-auto">
           <div className="p-4">
-            {/* <form onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="fullName">Név:</label>
-              <input
-                id="fullName"
-                type="text"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="position">Pozició:</label>
-              <select
-                id="position"
-                value={position}
-                onChange={(e) => setPosition(e.target.value)}
-              >
-                {positions.map((pos) => (
-                  <option key={pos.value} value={pos.value}>
-                    {pos.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <button type="submit" disabled={loading}>
-              {loading ? 'Hozzáadás...' : 'Alkalmazott hozzáadása'}
-            </button>
-          </form>*/}
 
 
-
-
-
-
-            <div className="flex gap-2 mb-4">
-              <div className="flex gap-2">
+           
+          <div className="flex flex-col gap-2 md:flex-row mb-4">
+              <div className="flex flex-col gap-2 md:flex-row">
                 <Input
                   type="text"
                   placeholder="Keresés név szerint..."
@@ -290,12 +258,6 @@ export default function AddEmployeePage() {
 
 
               </div>
-
-
-
-
-
-
 
               <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogTrigger asChild>
@@ -334,10 +296,6 @@ export default function AddEmployeePage() {
                         </Select>
                         </div>
 
-
-
-
-
                       </div>
                     </DialogDescription>
                   </DialogHeader>
@@ -355,21 +313,6 @@ export default function AddEmployeePage() {
 
 
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             <div className="rounded-md border mt-5">
               <table className="w-full">
@@ -470,19 +413,6 @@ export default function AddEmployeePage() {
             </div>
 
 
-
-           {/* {editId && (
-              <div>
-                <h3>Alkalmazott szerkesztése</h3>
-                <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} />
-                <select value={editPosition} onChange={(e) => setEditPosition(e.target.value)}>
-                  {positions.map((pos) => (
-                    <option key={pos.value} value={pos.value}>{pos.label}</option>
-                  ))}
-                </select>
-                <button onClick={handleUpdate} className="bg-green-500 text-white p-1 rounded">Mentés</button>
-              </div>
-            )}*/}
 
 
 
