@@ -576,7 +576,7 @@ export default function Home() {
                         <td className="p-1">{student.full_name}</td>
                         <td className="p-1">{student.class}</td>
                         <td className="p-1">
-                          {student.status === "ki" ? <span className="text-red-500"><CircleMinus className="w-4 h-4 inline-block"/></span>: student.status === "be" ? <span className="text-green-500"><CircleCheck className="w-4 h-4 inline-block"/></span> : <span className="text-amber-500"><CircleAlert className="w-4 h-4 inline-block"/></span>}
+                          {student.status === "ki" ? <span className="text-gray-500"><CircleMinus className="w-4 h-4 inline-block"/></span>: student.status === "be" ? <span className="text-green-500"><CircleCheck className="w-4 h-4 inline-block"/></span> : <span className="text-amber-500"><CircleAlert className="w-4 h-4 inline-block"/></span>}
 
                          
                         </td>
