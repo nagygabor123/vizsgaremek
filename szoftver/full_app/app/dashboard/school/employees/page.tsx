@@ -331,7 +331,7 @@ export default function AddEmployeePage() {
                   {employees.length === 0 ? (
                     <tr className="text-center border-t">
                       <td className="p-1">
-                        Nem találom az alkalmazottakat
+                      Nincs megjelenítendő alkalmazott
                       </td>
                     </tr>
                   ) : (
@@ -339,7 +339,10 @@ export default function AddEmployeePage() {
                     paginatedEmployees.map((employee) => (
                       <tr key={employee.admin_id} className="text-center border-t">
                         <td className="p-1">{employee.full_name}</td>
-                        <td className="p-1">{employee.position}</td>
+                        <td className="p-1">
+  {positions.find((pos) => pos.value === employee.position)?.label || employee.position}
+</td>
+
                         <td className="p-1">
 
                           <Dialog open={open} onOpenChange={setOpen}>

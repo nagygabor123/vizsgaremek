@@ -552,7 +552,19 @@ export default function Home() {
                   </tr>
                 </thead>
                 <tbody>
-                  {paginatedStudents.map((student) => {
+                  
+                  {
+                  
+                  students.length === 0 ? (
+                    <tr className="text-center border-t">
+                      <td className="p-1">
+                        Nincs megjelenítendő diák
+                      </td>
+                    </tr>
+                  ) : (
+                  
+                  
+                  paginatedStudents.map((student) => {
                     const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
                     const currentTime = new Date().toTimeString().slice(0, 5);
                     const canUnlockStudent = systemClose || (studentTimetableData &&
@@ -637,7 +649,8 @@ export default function Home() {
                      
                       </tr>
                     );
-                  })}
+                  })
+                  )}
                 </tbody>
               </table>
 
