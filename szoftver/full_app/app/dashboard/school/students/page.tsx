@@ -22,7 +22,7 @@ import {
 import { Label } from "@/components/ui/label"
 import Link from "next/link";
 
-import { Pen, X, ArrowUpDown, CirclePlus, CircleCheck, LockKeyholeOpen, LockKeyhole, LockOpen, CircleAlert, CircleMinus, Lock, ChevronRight, ChevronLeft } from "lucide-react"
+import { Pen, X, ArrowUpDown, CirclePlus, CircleCheck, LockKeyholeOpen, LockKeyhole, LockOpen, CircleAlert, CircleMinus, Lock, ChevronRight, ChevronLeft, CircleX } from "lucide-react"
 
 import {
   Dialog,
@@ -348,7 +348,7 @@ export default function Home() {
                 <DialogTrigger asChild>
                   <Button variant="outline" className="ml-auto" ><CirclePlus /> Új tanuló hozzáadás</Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[550px]">
+                <DialogContent className="sm:max-w-[425px]">
                               <DialogHeader>
                                 <DialogTitle>Tanuló hozzáadása</DialogTitle>
                                 <DialogDescription>
@@ -356,9 +356,58 @@ export default function Home() {
                                 </DialogDescription>
                                 </DialogHeader>
 
-              
+                                <form onSubmit={handleSubmit} className="grid items-start gap-4">
+      <div className="grid gap-2">
+        <Label  htmlFor="student_id">Azonosító szám</Label>
+                          <Input
+                           className="col-span-3"
+                            type="text"
+                            placeholder="OM1234567"
+                            name="student_id"
+                            // value={formData.student_id}
+                            onChange={e => setFormData({ ...formData, student_id: e.target.value })}
+                          />
+      </div>
+      <div className="grid gap-2">
+      <Label htmlFor="full_name">Teljes név</Label>
+                          <Input
+                           className="col-span-3"
+                            type="text"
+                            name="full_name"
+                            placeholder="Teszt Elek"
+                            // value={formData.full_name}
+                            onChange={e => setFormData({ ...formData, full_name: e.target.value })}
+                          />
+      </div>
+      <div className="grid gap-2">
+                          <Label htmlFor="class">Osztály</Label>
+                          <Input
+                           className="col-span-3"
+                            type="text"
+                            name="class"
+                            placeholder="9.I"
+                            // value={formData.class}
+                            onChange={e => setFormData({ ...formData, class: e.target.value })}
+                          />
+                        </div>
 
-                                <div className="grid gap-4 py-4">
+                        <div className="grid gap-2">
+                          <Label htmlFor="class">RFID azonosító</Label>
+                          <Input
+                           className="col-span-3"
+                            type="text"
+                            name="rfid_tag"
+                            placeholder="R6HF6K86"
+                            //  value={formData.rfid_tag}
+                            onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
+                          />
+                        </div>
+
+
+      <Button type="submit">Mentés</Button>
+    </form>
+
+                                {/* <div className="grid gap-4 py-4">
                                 <div className="grid grid-cols-4 items-center gap-4">
                           <Label className="text-right" htmlFor="student_id">Azonosító szám</Label>
                           <Input
@@ -409,136 +458,20 @@ export default function Home() {
                     <form onSubmit={handleSubmit}>
                       <Button type="submit">
                         Mentés
-                      </Button> {/* {editing}     {editing ? 'Update' : 'Add'} Student*/}
+                      </Button> 
                     </form>
 
-                  </DialogFooter>
+                  </DialogFooter> */}
                 </DialogContent>
               </Dialog>
 
 
+
             </div>
 
-            {/*<table className="rounded-lg text-left border border-separate border-tools-table-outline border-black border-1 w-full">
-    <thead className="" >
-      <th className="rounded-tl-sm bg-yellow-200 pl-12">One</th>
-      <th className="rounded-tr-sm bg-yellow-200 pl-12">Two</th>
-    </thead>
-    <tbody className="rounded-b-sm">
-      <tr>
-        <td className="bg-blue-100 pl-12">1</td>
-        <td className="bg-blue-100 pl-12">2</td>
-      </tr>
-
-      <tr>
-        <td className="rounded-bl-sm bg-blue-100 pl-12">1</td>
-        <td className="rounded-br-sm bg-blue-100 pl-12">2</td>
-      </tr>
-    </tbody>
-  </table>*/}
-
-            {/* border-collapse border border-gray-300      bg-gray-100*/}
-            {/* <div className="rounded-md border mt-5">
-      <table className=" w-full">
-  <thead className="text-center text-sm text-neutral-500 "  >
-    <tr>
-      <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>
-        Teljes név <ArrowUpDown className="w-4 h-4 inline-block" />
-      </th>
-      <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("class")}>
-        Osztály <ArrowUpDown className="w-4 h-4 inline-block" />
-      </th>
-      <th className="p-2 font-normal">Státusz</th>
-      <th className="p-2 font-normal">Műveletek</th>
-    </tr>
-  </thead>
-  <tbody>
-    {filteredStudents.map((student, index) => {
-      const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
-      const currentTime = new Date().toTimeString().slice(0, 5);
-      const canUnlockStudent = systemClose || (studentTimetableData &&
-        currentTime >= studentTimetableData.first_class_start &&
-        currentTime <= studentTimetableData.last_class_end);
-
-      return (
-        <tr 
-          key={student.student_id} 
-          className="text-center border-t"
-        >
-          <td className="p-1">{student.full_name}</td>
-          <td className="p-1">{student.class}</td>
-          <td className="p-1">
-            {student.status === "ki" ? (
-              <span className="text-red-500">●</span>
-            ) : student.status === "be" ? (
-              <span className="text-green-500">●</span>
-            ) : null}
-          </td>
-          <td className="p-1">
-            
-        
-<Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}><LockOpen className="w-4 h-4 inline-block"/></Button>
+   
 
 
-<Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-      <Button variant="ghost" onClick={() => handleEdit(student)}><Pen /></Button>
-      </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Tanuló szerkesztése</DialogTitle>
-      <DialogDescription>
-      <div>
-      
-        <Input
-          type="text"
-          name="full_name"
-          placeholder="Full Name"
-          value={formData.full_name}
-          onChange={e => setFormData({ ...formData, full_name: e.target.value })}
-        />
-        <Input
-          type="text"
-          name="class"
-          placeholder="Class"
-          value={formData.class}
-          onChange={e => setFormData({ ...formData, class: e.target.value })}
-        />
-        <Input
-          type="text"
-          name="rfid_tag"
-          placeholder="RFID Tag"
-          value={formData.rfid_tag}
-          onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
-        />
-      </div>
-      </DialogDescription>
-    </DialogHeader>
-    <DialogFooter>
-    <form onSubmit={handleSubmit}>
-  <Button type="submit">
-   Kész
-  </Button> 
-</form>
-    
-    </DialogFooter>
-  </DialogContent>
-</Dialog>
-
-
-
-<Button variant="ghost" onClick={() => handleDelete(student.student_id)}><X /></Button>
-
-         
-          </td>
-        </tr>
-      );
-    })}
-  </tbody>
-</table>
-</div> */}
-
-            {/* {editing}     {editing ? 'Update' : 'Add'} Student*/}
 
             <div className="rounded-md border mt-5">
               <table className="w-full">
@@ -576,7 +509,7 @@ export default function Home() {
                         <td className="p-1">{student.full_name}</td>
                         <td className="p-1">{student.class}</td>
                         <td className="p-1">
-                          {student.status === "ki" ? <span className="text-gray-500"><CircleMinus className="w-4 h-4 inline-block"/></span>: student.status === "be" ? <span className="text-green-500"><CircleCheck className="w-4 h-4 inline-block"/></span> : <span className="text-red-500"><CircleAlert className="w-4 h-4 inline-block"/></span>}
+                          {student.status === "ki" ? <span className="text-gray-500"><CircleMinus className="w-4 h-4 inline-block"/></span>: student.status === "be" ? <span className="text-green-500"><CircleCheck className="w-4 h-4 inline-block"/></span> : <span className="text-amber-500"><CircleAlert className="w-4 h-4 inline-block"/></span>}
 
                          
                         </td>
@@ -588,7 +521,7 @@ export default function Home() {
                             <DialogTrigger asChild>
                               <Button variant="ghost" onClick={() => handleEdit(student)}><Pen /></Button>
                             </DialogTrigger>
-                            <DialogContent className="sm:max-w-[550px]"> {/*className="sm:max-w-[425px]" */}
+                            <DialogContent className="sm:max-w-[425px]">
                               <DialogHeader>
                                 <DialogTitle>Tanuló szerkesztése</DialogTitle>
                                 <DialogDescription>
@@ -597,14 +530,14 @@ export default function Home() {
                                 </DialogDescription>
                               </DialogHeader>
 
-                              <div className="grid gap-4 py-4">
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                  <Label className="text-right" htmlFor="full_name">Teljes név</Label>
+                              <form onSubmit={handleSubmit} className="grid items-start gap-4">
+                              <div className="grid gap-2">
+                                  <Label  htmlFor="full_name">Teljes név</Label>
                                   <Input
                                     className="col-span-3"
                                     type="text"
                                     name="full_name"
-                                    placeholder="Teljes név"
+                                    placeholder=""
                                     value={formData.full_name}
                                     onChange={e => setFormData({ ...formData, full_name: e.target.value })}
                                   />
@@ -620,27 +553,30 @@ export default function Home() {
                                     />*/}
 
                         
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                  <Label className="text-right" htmlFor="rfid_tag">RFID azonosító</Label>
+                                <div className="grid gap-2">
+                                  <Label  htmlFor="rfid_tag">RFID azonosító</Label>
                                   <Input
                                     className="col-span-3"
                                     type="text"
                                     name="rfid_tag"
-                                    placeholder="RFID azonosító"
+                                    placeholder=""
                                     value={formData.rfid_tag}
                                     onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
                                   />
                                 </div>
-                              </div>
+                           
 
-                              <DialogFooter>
+
+                              <Button type="submit">Mentés</Button>
+                              </form>
+                              {/* <DialogFooter>
                                 <form onSubmit={handleSubmit}>
                                   <Button type="submit">
                                     Mentés
                                   </Button>
                                 </form>
 
-                              </DialogFooter>
+                              </DialogFooter> */}
                             </DialogContent>
                           </Dialog>
 

@@ -265,7 +265,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 <CalendarSearch/>
     <span>Órarendek</span>
     {isButtonVisible && (
-    <TriangleAlert className="ml-auto text-amber-400" />
+    <TriangleAlert className="ml-auto text-amber-500" />
     )}
   </Link>
 </SidebarMenuButton>

@@ -263,7 +263,7 @@ export default function AddEmployeePage() {
                 <DialogTrigger asChild>
                   <Button variant="outline" className="ml-auto" ><CirclePlus /> Új alkalmazott hozzáadás</Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[400px]">
+                <DialogContent className="sm:max-w-[425px]">
                   <DialogHeader>
                     <DialogTitle>Alkalmazott hozzáadása</DialogTitle>
                     <DialogDescription>
@@ -271,25 +271,25 @@ export default function AddEmployeePage() {
                                 </DialogDescription>
                               </DialogHeader>
 
-                              <div className="grid gap-4 py-4">
-                              <div className="grid grid-cols-4 items-center gap-4">
-                      <Label className="text-right" htmlFor="fullName">Teljes név</Label>
+                              <form onSubmit={handleSubmit} className="grid items-start gap-4">
+                              <div className="grid gap-2">
+                      <Label htmlFor="fullName">Teljes név</Label>
                         <Input
                          className="col-span-3"
                           id="fullName"
                           type="text"
-                          placeholder="Teljes név"
+                          placeholder="Teszt elek"
                           value={fullName}
                           onChange={(e) => setFullName(e.target.value)}
                         />
                         </div>
 
 
-                        <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right" htmlFor="position">Pozíció</Label>
+                        <div className="grid gap-2">
+                        <Label htmlFor="position">Pozíció</Label>
                         <Select value={position} onValueChange={setPosition}>
                           <SelectTrigger  className="col-span-3">
-                            <SelectValue placeholder="Pozíció" />
+                            <SelectValue placeholder="Tanár" />
                           </SelectTrigger>
                           <SelectContent>
                             {positions.map((pos) => (
@@ -299,18 +299,20 @@ export default function AddEmployeePage() {
                             ))}
                           </SelectContent>
                         </Select>
-                        </div>
+                    
 
                       </div>
+                      <Button type="submit">Mentés</Button>
+                      </form>
               
-                  <DialogFooter>
+                  {/* <DialogFooter>
                     <form onSubmit={handleSubmit}>
                       <Button type="submit">
                         Mentés
-                      </Button> {/* {editing}     {editing ? 'Update' : 'Add'} Student*/}
+                      </Button> 
                     </form>
 
-                  </DialogFooter>
+                  </DialogFooter> */}
                 </DialogContent>
               </Dialog>
 
@@ -351,7 +353,7 @@ export default function AddEmployeePage() {
                                 <Pen />
                               </Button>
                             </DialogTrigger>
-                            <DialogContent className="sm:max-w-[400px]">
+                            <DialogContent className="sm:max-w-[425px]">
                               <DialogHeader>
                                 <DialogTitle>Alkalmazott szerkesztése</DialogTitle>
                                 <DialogDescription>
@@ -361,24 +363,24 @@ export default function AddEmployeePage() {
 
 
 
-                                <div className="grid gap-4 py-4">
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                <Label className="text-right" htmlFor="fullName">Teljes név</Label>
+                                <div className="grid items-start gap-4">
+                                <div className="grid gap-2">
+                                <Label htmlFor="fullName">Teljes név</Label>
                                   <Input
                                      className="col-span-3"
                                     id="fullName"
                                     type="text"
-                                    placeholder="Teljes név"
+                                    placeholder=""
                                     value={editName}
                                     onChange={(e) => setEditName(e.target.value)}
                                   />
                                 </div>
 
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                <Label className="text-right" htmlFor="position">Pozíció</Label>
+                                <div className="grid gap-2">
+                                <Label htmlFor="position">Pozíció</Label>
                                   <Select value={editPosition} onValueChange={setEditPosition}>
                                     <SelectTrigger className="col-span-3"> {/** className="w-[180px]" */}
-                                      <SelectValue placeholder="Pozíció" />
+                                      <SelectValue placeholder="" />
                                     </SelectTrigger>
                                     <SelectContent>
                                       {positions.map((pos) => (
@@ -388,7 +390,12 @@ export default function AddEmployeePage() {
                                       ))}
                                     </SelectContent>
                                   </Select>
+
+
+
+
                                 </div>
+                                <Button onClick={handleUpdate} >Mentés</Button>
                               </div>
 
 
@@ -396,11 +403,11 @@ export default function AddEmployeePage() {
 
 
                       
-                              <DialogFooter>
+                              {/* <DialogFooter>
 
                                 <Button onClick={handleUpdate} >Mentés</Button>
 
-                              </DialogFooter>
+                              </DialogFooter> */}
                             </DialogContent>
                           </Dialog>
 
