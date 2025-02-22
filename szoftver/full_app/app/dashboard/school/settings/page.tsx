@@ -300,10 +300,10 @@ export default function Page() {
                     <Link href="/dashboard">Főoldal</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator />
+                {/* <BreadcrumbSeparator />
                 <BreadcrumbItem>
                   <BreadcrumbPage>Rendszer</BreadcrumbPage>
-                </BreadcrumbItem>
+                </BreadcrumbItem> */}
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
                   <BreadcrumbPage>Tanév beállításai</BreadcrumbPage>
@@ -347,15 +347,70 @@ export default function Page() {
               {JSON.stringify(apiResponse, null, 2)}
             </pre>
           )}
-          <h2>Tanév beállítása</h2>
+          {/* <h2>Tanév beállítása</h2> */}
 
-          <label>Tanév kezdete:</label>
+          {/* <label>Tanév kezdete:</label> */}
           <input
             type="date"
             value={schoolStartEdit}
             onChange={(e) => setSchoolStartEdit(e.target.value)}
           />
           <button onClick={() => updateSchoolYear('kezd', schoolStartEdit)}>Mentés</button>
+
+
+          <Popover>
+      <PopoverTrigger asChild>
+        <Button
+          variant={"outline"}
+          className={cn(
+            "w-[240px] justify-start text-left font-normal",
+            !startDate && "text-muted-foreground"
+          )}
+        >
+          <CalendarIcon />
+           {schoolStartEdit ? format(schoolStartEdit, "PPP") : startDate ? format(startDate, "PPP") : ( <span>Válasszon egy napot</span>)} 
+
+
+
+          {/* {startDate ? (
+              (
+                startDate ? format(schoolStartEdit, "PPP")
+              )
+            ) : 
+              (
+                startDate ? format(startDate, "PPP")
+              
+             : (
+              <span>Válasszon egy napot</span>
+            )} */}
+
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0" align="start">
+        <Calendar
+          mode="single"
+          // selected={schoolStartEdit ? new Date(schoolStartEdit) : undefined}
+          selected={startDate}
+          onSelect={(date) => setStartDate(date ?? undefined)}
+          initialFocus
+        />
+            <Button
+  onClick={() => {
+    if (!startDate) return;
+    const formattedDate = format(startDate, "yyyy-MM-dd");
+    updateSchoolYear("kezd", formattedDate);
+  }}
+  disabled={!startDate}
+  className="w-full"
+>
+  Mentés
+</Button>
+      </PopoverContent>
+      
+    </Popover>
+
+
+
 
           <br></br>
 
