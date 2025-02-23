@@ -19,7 +19,8 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Pen, X, ArrowUpDown, CirclePlus, ChevronLeft, ChevronRight  } from "lucide-react"
+import { Pen, X, ArrowUpDown, CirclePlus, ChevronLeft, ChevronRight, TriangleAlert  } from "lucide-react"
+
 import { Input } from "@/components/ui/input";
 import {
   Dialog,
@@ -235,9 +236,31 @@ export default function AddEmployeePage() {
           </div>
         </header>
         <div  className="overflow-x-auto">
+        
+
+          <div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
+            <div className="grid auto-rows-min gap-4 w-full">
+              {/* {isButtonVisible && ( */}
+              <div className="aspect-[18/1] rounded-xl bg-red-100 flex items-center px-4 w-full box-border overflow-hidden">
+                <TriangleAlert className="text-red-500" />
+                <p className="text-sm truncate ml-3">
+                A rendszer nincs teljesen beállítva. Kérjük, végezze el a szükséges konfigurációt!
+                </p>
+                <Button
+                  // onClick={handleButtonClick}
+                  className="ml-auto"
+                  variant="link"
+                >
+                  Konfigurálás most
+                </Button>
+              </div>
+              {/* )} */}
+              {/* ide jönne a kód */}
+
+            </div>
+          </div>
+
           <div className="p-4">
-
-
            
           <div className="flex flex-col gap-2 md:flex-row mb-4">
               <div className="flex flex-col gap-2 md:flex-row">
