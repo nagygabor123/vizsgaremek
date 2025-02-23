@@ -20,13 +20,27 @@ import {
 import { Button } from "@/components/ui/button";
 import { TriangleAlert } from "lucide-react";
 
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+
+
+import AppKonfig from '@/components/app-konfig';
+
+
+
 import Link from "next/link";
 
 export default function Page() {
   const [isOverlayVisible, setOverlayVisible] = useState(false);
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
 
-  // Ellenőrizzük a localStorage-t a komponens betöltésekor
+  // // Ellenőrizzük a localStorage-t a komponens betöltésekor
   useEffect(() => {
     const hasClickedBefore = localStorage.getItem("hasClickedOverlayButton");
     setButtonVisible(hasClickedBefore !== "true");
@@ -78,25 +92,26 @@ export default function Page() {
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 overflow-x-hidden w-full">
           <div className="grid auto-rows-min gap-4 w-full">
-            {isButtonVisible && (
+             {isButtonVisible && ( 
               <div className="aspect-[17/1] rounded-xl bg-yellow-50 flex items-center px-4 w-full box-border overflow-hidden">
                 <TriangleAlert className="text-amber-400" />
                 <p className="text-sm truncate ml-3">
                   Ez egy figyelmeztető üzenet. Kérjük, figyelmesen olvassa el!
                 </p>
-                <Button
+                {/* <Button
                   onClick={handleButtonClick}
                   className="ml-auto"
                   variant="link"
                 >
                   Beállítás
-                </Button>
+                </Button> */}
+                < AppKonfig/>
               </div>
-            )}
+            )} 
 
          
 
-            {isOverlayVisible && (
+            {/* {isOverlayVisible && (
               <div className="fixed inset-0 bg-white z-50 flex items-center justify-center">
                 <div className="absolute top-4 left-4 text-white text-lg font-semibold">
                   Ez egy bal felső sarokban lévő szöveg
@@ -121,11 +136,11 @@ export default function Page() {
                   </div>
                 </div>
               </div>
-            )}
+            )} */}
           </div>
 
+   
 
-data table
 
         </div>
       </SidebarInset>

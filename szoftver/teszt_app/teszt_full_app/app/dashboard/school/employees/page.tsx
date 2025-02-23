@@ -186,23 +186,56 @@ export default function Page() {
       </CardFooter>
     </Card> */}
 
-    <Tabs defaultValue="account" className="w-full">
-      <TabsList className="grid w-full grid-cols-5">
-        <TabsTrigger value="account">Tanítási év első napja</TabsTrigger>
-        <TabsTrigger value="password">Tanítási év utolsó napja</TabsTrigger>
-        <TabsTrigger value="password2">Tanítási nélküli munkanapok</TabsTrigger>
-        <TabsTrigger value="password3">Szombati tanítási napok</TabsTrigger>
-        <TabsTrigger value="password4">Szünetek rendje</TabsTrigger>
-
+<Tabs defaultValue="account" className="w-full">
+      <TabsList className="grid w-full grid-cols-2">
+        <TabsTrigger value="account">Account</TabsTrigger>
+        <TabsTrigger value="password">Password</TabsTrigger>
       </TabsList>
-  
-      <TabsContent value="password4">
- 
-           Password
-     
+      <TabsContent value="account">
+        <Card>
+          <CardHeader>
+            <CardTitle>Account</CardTitle>
+            <CardDescription>
+              Make changes to your account here. Click save when you're done.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <div className="space-y-1">
+              <Label htmlFor="username">Username</Label>
+              <Input id="username" defaultValue="@peduarte" />
+            </div>
+          </CardContent>
+          <CardFooter>
+            <Button>Save changes</Button>
+          </CardFooter>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Account</CardTitle>
+            <CardDescription>
+              Make changes to your account here. Click save when you're done.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <div className="space-y-1">
+              <Label htmlFor="username">Username</Label>
+              <Input id="username" defaultValue="@peduarte" />
+            </div>
+          </CardContent>
+          <CardFooter>
+            <Button>Save changes</Button>
+          </CardFooter>
+        </Card>
+      </TabsContent>
+      <TabsContent value="password">
+        <Card>
+          <CardHeader>
+            <CardTitle>Password</CardTitle>
+            <CardDescription>
               Change your password here. After saving, you'll be logged out.
-      
-          <div className="space-y-2">
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-2">
             <div className="space-y-1">
               <Label htmlFor="current">Current password</Label>
               <Input id="current" type="password" />
@@ -211,11 +244,11 @@ export default function Page() {
               <Label htmlFor="new">New password</Label>
               <Input id="new" type="password" />
             </div>
-          </div>
-
+          </CardContent>
+          <CardFooter>
             <Button>Save password</Button>
-       
-       
+          </CardFooter>
+        </Card>
       </TabsContent>
     </Tabs>
 
