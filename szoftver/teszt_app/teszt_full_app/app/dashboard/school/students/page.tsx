@@ -37,7 +37,7 @@ import AppKonfig from '@/components/app-konfig';
 import Link from "next/link";
 
 export default function Page() {
-  const [isOverlayVisible, setOverlayVisible] = useState(false);
+  // const [isOverlayVisible, setOverlayVisible] = useState(false);
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
 
   // // Ellenőrizzük a localStorage-t a komponens betöltésekor
@@ -47,16 +47,16 @@ export default function Page() {
   }, []);
 
   // Gomb kattintás kezelése
-  const handleButtonClick = () => {
-    setOverlayVisible(true);
-  };
+  // const handleButtonClick = () => {
+  //   setOverlayVisible(true);
+  // };
 
-  const handleConfirmClick = () => {
-    setOverlayVisible(false);
-    setButtonVisible(false);
-    localStorage.setItem("hasClickedOverlayButton", "true");
-    window.location.reload();
-  };
+  // const handleConfirmClick = () => {
+  //   setOverlayVisible(false);
+  //   setButtonVisible(false);
+  //   localStorage.setItem("hasClickedOverlayButton", "true");
+  //   window.location.reload();
+  // };
 
   // Addig ne rendereljük a gombot, amíg nem töltöttük be az adatot
   if (isButtonVisible === null) {
