@@ -39,6 +39,9 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
+import AppKonfig from '@/components/app-konfig';
+
+
 
 export default function AddEmployeePage() {
   const [fullName, setFullName] = useState('');
@@ -246,13 +249,14 @@ export default function AddEmployeePage() {
                 <p className="text-sm truncate ml-3">
                 A rendszer nincs teljesen beállítva. Kérjük, végezze el a szükséges konfigurációt!
                 </p>
-                <Button
-                  // onClick={handleButtonClick}
-                  className="ml-auto"
-                  variant="link"
-                >
-                  Konfigurálás most
-                </Button>
+                     {/* <Button
+                onClick={handleButtonClick}
+                className="ml-auto"
+                variant="link"
+              >
+                Konfigurálás most
+              </Button> */}
+              <AppKonfig/>
               </div>
               {/* )} */}
               {/* ide jönne a kód */}

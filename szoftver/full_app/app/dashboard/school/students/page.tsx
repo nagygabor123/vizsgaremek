@@ -49,6 +49,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import '../../../globals.css';
 
+import AppKonfig from '@/components/app-konfig';
+
+
+
 // Diák típus
 interface Student {
   student_id: string;
@@ -333,13 +337,14 @@ export default function Home() {
                 <p className="text-sm truncate ml-3">
                 A rendszer nincs teljesen beállítva. Kérjük, végezze el a szükséges konfigurációt!
                 </p>
-                <Button
-                  // onClick={handleButtonClick}
-                  className="ml-auto"
-                  variant="link"
-                >
-                  Konfigurálás most
-                </Button>
+                  {/* <Button
+                onClick={handleButtonClick}
+                className="ml-auto"
+                variant="link"
+              >
+                Konfigurálás most
+              </Button> */}
+              <AppKonfig/>
               </div>
               {/* )} */}
               {/* ide jönne a kód */}
@@ -381,7 +386,7 @@ export default function Home() {
               </Select>
 
                 <Button variant="outline" onClick={handleSystemClose} > {/*className="ml-auto" */}
-                  {systemClose ? <LockKeyholeOpen /> : <LockKeyhole />}
+                  {systemClose ? <LockOpen /> : <Lock />} {/*   Keyhole  */}
                   {systemClose ? 'Összes feloldás' : 'Összes zárolás'}
 
                 </Button>

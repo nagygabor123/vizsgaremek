@@ -52,7 +52,7 @@ const SheetComponent: React.FC = () => {
                   className="ml-auto"
                   variant="link"
                 >
-                  Beállítás
+                  Konfigurálás most
                 </Button>
       </SheetTrigger>
       <SheetContent side={"bottom"}>
@@ -90,12 +90,14 @@ const SheetComponent: React.FC = () => {
       />
 
           </div>
-                    <Button
+          <div  className="text-right"><Button
+                
                       onClick={handleConfirmClick}
                       
                     >
                       Megerősítés
-                    </Button>
+                    </Button></div>
+                    
       </SheetContent>
     </Sheet>
   );

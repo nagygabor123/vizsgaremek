@@ -31,22 +31,6 @@ import {
 
 } from "@/components/ui/sidebar"
 
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
 import Link from "next/link";
 
 
@@ -74,6 +58,10 @@ import {
 } from 'date-fns';
 import { hu } from 'date-fns/locale';
 import '../../../globals.css';
+
+import AppKonfig from '@/components/app-konfig';
+
+
 
 import { Button } from '@/components/ui/button';
 import {
@@ -416,13 +404,14 @@ const Calendar: React.FC = () => {
                 <p className="text-sm truncate ml-3">
                 A rendszer nincs teljesen beállítva. Kérjük, végezze el a szükséges konfigurációt!
                 </p>
-                <Button
-                  // onClick={handleButtonClick}
-                  className="ml-auto"
-                  variant="link"
-                >
-                  Konfigurálás most
-                </Button>
+                 {/* <Button
+                onClick={handleButtonClick}
+                className="ml-auto"
+                variant="link"
+              >
+                Konfigurálás most
+              </Button> */}
+              <AppKonfig/>
               </div>
               {/* )} */}
               {/* ide jönne a kód */}

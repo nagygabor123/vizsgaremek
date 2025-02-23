@@ -59,7 +59,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-
+import AppKonfig from '@/components/app-konfig';
 
 
 
@@ -341,13 +341,16 @@ export default function Page() {
               <p className="text-sm truncate ml-3">
                 A rendszer nincs teljesen beállítva. Kérjük, végezze el a szükséges konfigurációt!
               </p>
-              <Button
+              {/* <Button
                 onClick={handleButtonClick}
                 className="ml-auto"
                 variant="link"
               >
                 Konfigurálás most
-              </Button>
+              </Button> */}
+              <AppKonfig/>
+              
+
             </div>
             {/* )} */}
             {/* ide jönne a kód */}
