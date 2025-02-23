@@ -34,6 +34,16 @@ import {
   DialogFooter
 } from "@/components/ui/dialog"
 
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -358,6 +368,17 @@ export default function Home() {
                   value={searchClass}
                   onChange={(e) => setSearchClass(e.target.value)}
                 />
+                <Select>
+                <SelectTrigger >  {/*className="w-[180px]" */}
+                  <SelectValue placeholder="Keresés osztály szerint..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Osztályok</SelectLabel>
+                    <SelectItem value="13i">13.I</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
 
                 <Button variant="outline" onClick={handleSystemClose} > {/*className="ml-auto" */}
                   {systemClose ? <LockKeyholeOpen /> : <LockKeyhole />}

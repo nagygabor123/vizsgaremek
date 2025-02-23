@@ -108,6 +108,7 @@
 .calendar-day.current-day {
   color: #2563eb;
   border-bottom: 1px solid #2563eb;
+
   font-weight: bold;
 }
 
@@ -186,6 +187,7 @@
 .calendar-day{
   text-align: center;
   font-weight: bold;
+ 
    border-bottom: 1px solid #ddd;
  /* border-left: 1px solid #ddd;*/
 }
