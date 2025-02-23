@@ -49,7 +49,16 @@ import {
 } from "@/components/ui/avatar"
 import Link from "next/link";
 
-
+ 
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 import React, { useState, useEffect } from 'react';
 import {
@@ -102,13 +111,13 @@ interface Timetable {
 }
 
 interface BreakDatesAlap {
-  name: string; 
+  name: string;
   start: string;
   end: string;
 }
 
 interface plusDatesAlap {
-  name: string; 
+  name: string;
   date: string;
   replaceDay: string;
 }
@@ -120,7 +129,7 @@ interface lessonTimes {
 
 
 const Calendar: React.FC = () => {
-  const [systemClose, setSystemClose] = useState<boolean>(false); 
+  const [systemClose, setSystemClose] = useState<boolean>(false);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isMobileView, setIsMobileView] = useState(false);
   const [schedule, setSchedule] = useState<TimetableEntry[]>([]);
@@ -135,12 +144,12 @@ const Calendar: React.FC = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentDate(new Date()); 
-    }, 60000); 
-  
-    return () => clearInterval(interval); 
+      setCurrentDate(new Date());
+    }, 60000);
+
+    return () => clearInterval(interval);
   }, []);
-  
+
 
   useEffect(() => {
     const updateView = () => {
@@ -165,10 +174,10 @@ const Calendar: React.FC = () => {
         console.error('Hiba a csengetési rend lekérésekor:', error);
       }
     };
-  
+
     fetchLessonTimes();
   }, []);
-  
+
 
   useEffect(() => {
     const fetchTimetables = async () => {
@@ -194,12 +203,12 @@ const Calendar: React.FC = () => {
   useEffect(() => {
     async function fetchSchedule() {
       try {
-        const response = await fetch('http://localhost:3000/api/timetable/admin'); 
+        const response = await fetch('http://localhost:3000/api/timetable/admin');
         const data = await response.json();
         const formattedData = data.map((lesson: any) => ({
           day: lesson.day_of_week,
           start: lesson.start_time.slice(0, 5), // "07:15:00" -> "07:15"
-          end: lesson.end_time.slice(0, 5), 
+          end: lesson.end_time.slice(0, 5),
           subject: lesson.group_name,
           teacher: lesson.teacher_name,
           class: lesson.class
@@ -212,7 +221,7 @@ const Calendar: React.FC = () => {
 
     fetchSchedule();
   }, []);
-  
+
 
   useEffect(() => {
     const fetchAdditionalData = async () => {
@@ -227,7 +236,7 @@ const Calendar: React.FC = () => {
 
         const startResponse = await fetch('http://localhost:3000/api/config/getYearSchedule?type=kezd');
         const startData = await startResponse.json();
-        setStartYear(startData.schoolYearStart.start); 
+        setStartYear(startData.schoolYearStart.start);
 
         const endResponse = await fetch('http://localhost:3000/api/config/getYearSchedule?type=veg');
         const endData = await endResponse.json();
@@ -242,17 +251,17 @@ const Calendar: React.FC = () => {
 
   console.log('Schedule:', schedule);
   console.log('Student:', students);
-  console.log('System:',systemClose);
+  console.log('System:', systemClose);
   console.log('Break:', breakdate);
-  console.log('Plusdate:',plusdate);
+  console.log('Plusdate:', plusdate);
   console.log('Tanévkezdes:', tanevkezdes);
-  console.log('Tanevvege:',tanevvege);
+  console.log('Tanevvege:', tanevvege);
 
   const getDayName = (date: Date): string => {
     const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     return dayNames[getDay(date)];
   };
-  
+
   const isBreakDay = (date: Date) => {
     const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     return breakdate.some(({ start, end }) => {
@@ -261,17 +270,17 @@ const Calendar: React.FC = () => {
       return targetDate >= startDate && targetDate <= endDate;
     });
   };
-  
+
   const fetchStudentTimetable = async (student_id: string) => {
     const response = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${student_id}`);
     const data = await response.json();
     return data;
   };
-  
+
   const getReplacedDayName = (date: Date): string => {
     const formattedDate = format(date, 'yyyy-MM-dd');
-       // const replacement = plusdate.find((entry) => entry.date === formattedDate);
-       const replacement = (plusdate || []).find((entry) => entry.date === formattedDate);
+    // const replacement = plusdate.find((entry) => entry.date === formattedDate);
+    const replacement = (plusdate || []).find((entry) => entry.date === formattedDate);
 
     return replacement ? replacement.replaceDay : getDayName(date);
   };
@@ -321,25 +330,25 @@ const Calendar: React.FC = () => {
   const handleStudentOpen = async (student_id: string) => {
     try {
       const scheduleResponse = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${student_id}`);
-  
+
       if (!scheduleResponse.ok) {
         console.error('Nem sikerült lekérni a diák órarendjét.');
         return;
       }
-  
+
       const schedule = await scheduleResponse.json();
       const { first_class_start, last_class_end } = schedule;
-  
+
       // Az aktuális idő HH:MM formátumban
       const currentTime = new Date().toTimeString().slice(0, 5);
-  
+
       // Ellenőrizzük, hogy az aktuális idő az órarendi időintervallumba esik-e
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
         const response = await fetch(`http://localhost:3000/api/system/studentAccess?student=${student_id}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
         });
-  
+
         if (!response.ok) {
           console.error('Hiba történt a zárolás feloldásakor:', await response.text());
         }
@@ -362,240 +371,251 @@ const Calendar: React.FC = () => {
     if (response.ok) {
       const data = await response.json();
       setSystemClose(data.status === "nyitva" ? false : true);
-      
+
     }
   };
 
   return (
     <SidebarProvider>
-    <AppSidebar />
-    <SidebarInset>
-    <header className="flex h-16 shrink-0 items-center gap-2 border-b">
-        <div className="flex flex-1 items-center gap-2 px-3">
-          <SidebarTrigger />
-          <Separator orientation="vertical" className="mr-2 h-4" />
-          <Breadcrumb>
-<BreadcrumbList>
+      <AppSidebar />
+      <SidebarInset>
+        <header className="flex h-16 shrink-0 items-center gap-2 border-b">
+          <div className="flex flex-1 items-center gap-2 px-3">
+            <SidebarTrigger />
+            <Separator orientation="vertical" className="mr-2 h-4" />
+            <Breadcrumb>
+              <BreadcrumbList>
 
-<BreadcrumbItem>
-<BreadcrumbLink asChild>
-      <Link href="/dashboard">Főoldal</Link>
-    </BreadcrumbLink>
-    </BreadcrumbItem>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link href="/dashboard">Főoldal</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
 
-  <BreadcrumbSeparator />
-  <BreadcrumbItem>
-    <BreadcrumbPage>Osztály</BreadcrumbPage>
-  </BreadcrumbItem>
-  <BreadcrumbSeparator />
-  <BreadcrumbItem>
-    <BreadcrumbPage>Órarend</BreadcrumbPage>
-  </BreadcrumbItem>
-</BreadcrumbList>
-</Breadcrumb>
-        </div>
-        <div className="ml-auto px-3">
-          {/* <NavActions /> */}
-          
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Osztály</BreadcrumbPage>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Órarend</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+          <div className="ml-auto px-3">
+            {/* <NavActions /> */}
 
 
-   
 
-        </div>
-      </header>
-    <div className="calendar-container">
-    <div className="calendar-header"> 
-        <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-          <span>{format(currentDate, 'yyyy MMMM', { locale: hu })}</span>
-        </h2>
-        <div className="calendar-controls">
-        <Button onClick={goToToday} variant="outline">Mai nap</Button>
-          <Button size="icon" variant="ghost"onClick={goToPrevious}>{isMobileView ? <ChevronLeft /> : <ChevronLeft />}</Button>
-          <Button size="icon" variant="ghost" onClick={goToNext}>{isMobileView ? <ChevronRight /> : <ChevronRight />}</Button>
-        </div>
-      </div>
 
-      <div className="calendar-grid">
-      {isMobileView ? (
-  <div>
-    <div className="calendar-day">
-      {format(currentDate, 'eeee d', { locale: hu })}
-    </div>
-    {isBreakDay(currentDate) ? (
-      <div className="no-lessons">Ma nincs tanítás!</div>
-    ) : dailyLessons.length === 0 ? (
-      <div className="no-lessons">Ma nincs tanítás!</div>
-    ) : (
-      lessonTimes.map((time, lessonIndex) => {
-        const lessonsAtSameTime = dailyLessons.filter(
-          (lesson) => lesson.start === time.start && lesson.end === time.end
-        );
 
-        if (lessonsAtSameTime.length === 0) return null;
+          </div>
+        </header>
+        <div className="calendar-container">
+          <div className="calendar-header">
+            <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+              <span>{format(currentDate, 'yyyy MMMM', { locale: hu })}</span>
+            </h2>
+            <div className="calendar-controls">
+            <Select disabled>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Osztály neve" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Osztályok</SelectLabel>
+                    <SelectItem value="13i">13.I</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              <Button onClick={goToToday} variant="outline">Mai nap</Button>
+              <Button size="icon" variant="ghost" onClick={goToPrevious}>{isMobileView ? <ChevronLeft /> : <ChevronLeft />}</Button>
+              <Button size="icon" variant="ghost" onClick={goToNext}>{isMobileView ? <ChevronRight /> : <ChevronRight />}</Button>
+            </div>
+          </div>
 
-        return (
-          <div key={lessonIndex} className="calendar-cell">
-            {lessonsAtSameTime.map((lesson, index) => {
-              const isCurrent = isCurrentLesson(lesson);
+          <div className="calendar-grid">
+            {isMobileView ? (
+              <div>
+                <div className="calendar-day">
+                  {format(currentDate, 'eeee d', { locale: hu })}
+                </div>
+                {isBreakDay(currentDate) ? (
+                  <div className="no-lessons">Ma nincs tanítás!</div>
+                ) : dailyLessons.length === 0 ? (
+                  <div className="no-lessons">Ma nincs tanítás!</div>
+                ) : (
+                  lessonTimes.map((time, lessonIndex) => {
+                    const lessonsAtSameTime = dailyLessons.filter(
+                      (lesson) => lesson.start === time.start && lesson.end === time.end
+                    );
 
-              return (
-                <Dialog key={`${index}`}>
-                  <DialogTrigger asChild>
-                    {isToday(currentDate) && isCurrentLesson(lesson) ? ( 
-                      <div
-                        className={`lesson-card ${isCurrent ? 'current-lesson' : ''}`}
-                        onClick={() => {
-                          openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
-                          fetchStudents();
-                          fetchSystemStatus();
-                        }}
-                      >
-                        <div className="lesson-index">{lessonIndex + 1}</div>
-                        <div className="lesson-name">{lesson.subject}</div>
-                        <div className="lesson-class">{lesson.class}</div>
+                    if (lessonsAtSameTime.length === 0) return null;
+
+                    return (
+                      <div key={lessonIndex} className="calendar-cell">
+                        {lessonsAtSameTime.map((lesson, index) => {
+                          const isCurrent = isCurrentLesson(lesson);
+
+                          return (
+                            <Dialog key={`${index}`}>
+                              <DialogTrigger asChild>
+                                {isToday(currentDate) && isCurrentLesson(lesson) ? (
+                                  <div
+                                    className={`lesson-card ${isCurrent ? 'current-lesson' : ''}`}
+                                    onClick={() => {
+                                      openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
+                                      fetchStudents();
+                                      fetchSystemStatus();
+                                    }}
+                                  >
+                                    <div className="lesson-index">{lessonIndex + 1}</div>
+                                    <div className="lesson-name">{lesson.subject}</div>
+                                    <div className="lesson-class">{lesson.class}</div>
+                                  </div>
+                                ) : (
+                                  <div
+                                    className="lesson-card disabled-lesson"
+                                  >
+                                    <div className="lesson-index">{lessonIndex + 1}</div>
+                                    <div className="lesson-name">{lesson.subject}</div>
+                                    <div className="lesson-class">{lesson.class}</div>
+                                  </div>
+                                )}
+                              </DialogTrigger>
+
+                              {isToday(currentDate) && isCurrentLesson(lesson) && (
+                                <DialogContent>
+                                  <DialogHeader>
+                                    <DialogTitle>{modalInfo?.lesson}</DialogTitle>
+                                    <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
+                                    <h3>Osztály: {modalInfo?.className}</h3>
+                                    <div>
+                                      <h4>Diákok:</h4>
+                                      {getStudentsByClass(modalInfo?.className || '').map((student) => {
+                                        const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
+                                        const currentTime = new Date().toTimeString().slice(0, 5);
+                                        const canUnlockStudent = systemClose || studentTimetableData &&
+                                          currentTime >= studentTimetableData.first_class_start &&
+                                          currentTime <= studentTimetableData.last_class_end;
+                                        return (
+                                          <div key={student.student_id} className="student-info">
+                                            <p>{student.full_name} ({student.status})</p>
+                                            <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>Feloldás</Button>
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                  </DialogHeader>
+                                </DialogContent>
+                              )}
+                            </Dialog>
+                          );
+                        })}
                       </div>
-                    ) : (
-                      <div
-                        className="lesson-card disabled-lesson" 
-                      >
-                        <div className="lesson-index">{lessonIndex + 1}</div>
-                        <div className="lesson-name">{lesson.subject}</div>
-                        <div className="lesson-class">{lesson.class}</div>
-                      </div>
-                    )}
-                  </DialogTrigger>
+                    );
+                  })
+                )}
+              </div>
+            ) : (
+              <>
+                <div className="calendar-day"></div>
+                {daysOfWeek.map((day, index) => (
+                  <div className={`calendar-day ${isToday(day) ? 'current-day' : ''}`} key={index}>
+                    {format(day, 'EEE d', { locale: hu })}
+                  </div>
+                ))}
 
-                  {isToday(currentDate) && isCurrentLesson(lesson) && ( 
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>{modalInfo?.lesson}</DialogTitle>
-                        <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
-                        <h3>Osztály: {modalInfo?.className}</h3>
-                        <div>
-                          <h4>Diákok:</h4>
-                          {getStudentsByClass(modalInfo?.className || '').map((student) => {
-                          const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
-                          const currentTime = new Date().toTimeString().slice(0, 5);
-                          const canUnlockStudent = systemClose || studentTimetableData &&
-                            currentTime >= studentTimetableData.first_class_start &&
-                            currentTime <= studentTimetableData.last_class_end;
+                {lessonTimes.map((time, lessonIndex) => (
+                  <React.Fragment key={lessonIndex}>
+                    <div className="lesson-time">
+                      <span className="time-start">{time.start}</span>
+                      <span className="time-end">{time.end}</span>
+                    </div>
+                    {daysOfWeek.map((day, dayIndex) => {
+                      const dayName = getReplacedDayName(day);
+                      const dailyLessons = schedule.filter((lesson) => lesson.day === dayName);
+                      const lessonsAtSameTime = dailyLessons.filter(
+                        (l) => l.start === time.start && l.end === time.end,
+                      );
+
+                      const isBreak = isBreakDay(day);
+                      if (lessonsAtSameTime.length === 0 || isBreak) {
+                        return <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell empty" />;
+                      }
+
+                      return (
+                        <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell">
+                          {lessonsAtSameTime.map((lesson, index) => {
+
+                            const isCurrent = isToday(day) && isCurrentLesson(lesson);
                             return (
-                              <div key={student.student_id} className="student-info">
-                                <p>{student.full_name} ({student.status})</p>
-                                <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>Feloldás</Button>
-                              </div>
+                              <Dialog key={`${lessonIndex}-${dayIndex}-${index}`}>
+                                <DialogTrigger asChild>
+                                  {isToday(day) && isCurrentLesson(lesson) ? (
+                                    <div
+                                      className={`lesson-card ${isCurrent ? 'current-lesson' : ''}`}
+                                      onClick={() => {
+                                        openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
+                                        fetchStudents();
+                                        fetchSystemStatus();
+                                      }}
+                                    >
+                                      <div className="lesson-index">{lessonIndex + 1}</div>
+                                      <div className="lesson-name">{lesson.subject}</div>
+                                      <div className="lesson-class">{lesson.class}</div>
+                                    </div>
+                                  ) : (
+                                    <div
+                                      className="lesson-card disabled-lesson"
+                                    >
+                                      <div className="lesson-index">{lessonIndex + 1}</div>
+                                      <div className="lesson-name">{lesson.subject}</div>
+                                      <div className="lesson-class">{lesson.class}</div>
+                                    </div>
+                                  )}
+                                </DialogTrigger>
+                                {isToday(day) && isCurrentLesson(lesson) && (
+                                  <DialogContent>
+                                    <DialogHeader>
+                                      <DialogTitle>{modalInfo?.lesson}</DialogTitle>
+                                      <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
+                                      <h3>Osztály: {modalInfo?.className}</h3>
+                                      <div>
+                                        <h4>Diákok:</h4>
+                                        {getStudentsByClass(modalInfo?.className || '').map((student) => {
+                                          const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
+                                          const currentTime = new Date().toTimeString().slice(0, 5);
+                                          const canUnlockStudent = systemClose || studentTimetableData &&
+                                            currentTime >= studentTimetableData.first_class_start &&
+                                            currentTime <= studentTimetableData.last_class_end;
+                                          return (
+                                            <div key={student.student_id} className="student-info">
+                                              <p>{student.full_name} ({student.status})</p>
+                                              <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>Feloldás</Button>
+                                            </div>
+                                          );
+                                        })}
+                                      </div>
+                                    </DialogHeader>
+                                  </DialogContent>
+                                )}
+                              </Dialog>
+
                             );
                           })}
                         </div>
-                      </DialogHeader>
-                    </DialogContent>
-                  )}
-                </Dialog>
-              );
-            })}
+                      );
+                    })}
+                  </React.Fragment>
+                ))}
+
+              </>
+            )}
           </div>
-        );
-      })
-    )}
-  </div>
-) : (
-          <>
-            <div className="calendar-day"></div>
-            {daysOfWeek.map((day, index) => (
-              <div className={`calendar-day ${isToday(day) ? 'current-day' : ''}`} key={index}>
-                {format(day, 'EEE d', { locale: hu })}
-              </div>
-            ))}
-
-{lessonTimes.map((time, lessonIndex) => (
-  <React.Fragment key={lessonIndex}>
-    <div className="lesson-time">
-      <span className="time-start">{time.start}</span>
-      <span className="time-end">{time.end}</span>
-    </div>
-    {daysOfWeek.map((day, dayIndex) => {
-      const dayName = getReplacedDayName(day);
-      const dailyLessons = schedule.filter((lesson) => lesson.day === dayName);
-      const lessonsAtSameTime = dailyLessons.filter(
-        (l) => l.start === time.start && l.end === time.end,
-      );
-
-      const isBreak = isBreakDay(day);
-      if (lessonsAtSameTime.length === 0 || isBreak) {
-        return <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell empty" />;
-      }
-
-      return (
-        <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell">
-          {lessonsAtSameTime.map((lesson, index) => {
-            
-            const isCurrent = isToday(day) && isCurrentLesson(lesson);
-            return (
-              <Dialog key={`${lessonIndex}-${dayIndex}-${index}`}>
-  <DialogTrigger asChild>
-    {isToday(day) && isCurrentLesson(lesson) ? ( 
-      <div
-        className={`lesson-card ${isCurrent ? 'current-lesson' : ''}`}
-        onClick={() => {
-          openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
-          fetchStudents();
-          fetchSystemStatus(); 
-        }}
-      >
-        <div className="lesson-index">{lessonIndex + 1}</div>
-        <div className="lesson-name">{lesson.subject}</div>
-        <div className="lesson-class">{lesson.class}</div>
-      </div>
-    ) : (
-      <div
-        className="lesson-card disabled-lesson" 
-      >
-        <div className="lesson-index">{lessonIndex + 1}</div>
-        <div className="lesson-name">{lesson.subject}</div>
-        <div className="lesson-class">{lesson.class}</div>
-      </div>
-    )}
-  </DialogTrigger>
-  {isToday(day) && isCurrentLesson(lesson) && ( 
-    <DialogContent>
-      <DialogHeader>
-        <DialogTitle>{modalInfo?.lesson}</DialogTitle>
-        <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
-        <h3>Osztály: {modalInfo?.className}</h3>
-        <div>
-          <h4>Diákok:</h4>
-          {getStudentsByClass(modalInfo?.className || '').map((student) => {
-          const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
-          const currentTime = new Date().toTimeString().slice(0, 5);
-          const canUnlockStudent = systemClose || studentTimetableData &&
-            currentTime >= studentTimetableData.first_class_start &&
-            currentTime <= studentTimetableData.last_class_end;
-            return (
-              <div key={student.student_id} className="student-info">
-                <p>{student.full_name} ({student.status})</p>
-                <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>Feloldás</Button>
-              </div>
-            );
-          })}
         </div>
-      </DialogHeader>
-    </DialogContent>
-  )}
-</Dialog>
-
-            );
-          })}
-        </div>
-      );
-    })}
-  </React.Fragment>
-))}
-
-          </>
-        )}
-      </div>
-    </div>
-    </SidebarInset>
+      </SidebarInset>
     </SidebarProvider>
   );
 };

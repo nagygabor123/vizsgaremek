@@ -325,12 +325,12 @@ export default function Page() {
             </Breadcrumb>
           </div>
         </header>
-        <div className="p-4">
+
           <div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
             <div className="grid auto-rows-min gap-4 w-full">
               {/* {isButtonVisible && ( */}
-              <div className="aspect-[20/1] rounded-xl bg-yellow-50 flex items-center px-4 w-full box-border overflow-hidden">
-                <TriangleAlert className="text-amber-400" />
+              <div className="aspect-[20/1] rounded-xl bg-red-100 flex items-center px-4 w-full box-border overflow-hidden">
+                <TriangleAlert className="text-red-500" />
                 <p className="text-sm truncate ml-3">
                   Ez egy figyelmeztető üzenet. Kérjük, figyelmesen olvassa el!
                 </p>
@@ -348,10 +348,10 @@ export default function Page() {
             </div>
           </div>
 
+          <div className="p-4">
 
 
-
-          {message && (
+          {/* {message && (
             <p style={{ marginTop: '20px', color: message.startsWith('Error') ? 'red' : 'green' }}>
               {message}
             </p>
@@ -360,20 +360,26 @@ export default function Page() {
             <pre style={{ marginTop: '20px', padding: '10px', backgroundColor: '#f8f9fa', border: '1px solid #ddd', borderRadius: '5px' }}>
               {JSON.stringify(apiResponse, null, 2)}
             </pre>
-          )}
+          )} */}
 
 
 
           <Tabs defaultValue="startDate" className="w-full">
             <TabsList className="grid w-full grid-cols-5">
-              <TabsTrigger value="startDate">Tanítási év első napja</TabsTrigger>
-              <TabsTrigger value="endDate">Tanítási év utolsó napja</TabsTrigger>
-              <TabsTrigger value="noSchool">Tanítási nélküli munkanapok</TabsTrigger>
-              <TabsTrigger value="plusDates">Szombati tanítási napok</TabsTrigger>
-              <TabsTrigger value="breakDates">Szünetek rendje</TabsTrigger>
+              <TabsTrigger value="startDate">Tanítási év első napja</TabsTrigger> {/*disabled */}
+              <TabsTrigger value="endDate">Tanítási év utolsó napja</TabsTrigger> {/*disabled */}
+               <TabsTrigger value="noSchool">Tanítási nélküli munkanapok</TabsTrigger> {/*disabled */}
+              <TabsTrigger value="plusDates">Szombati tanítási napok</TabsTrigger> {/*disabled */}
+              <TabsTrigger value="breakDates">Szünetek rendje</TabsTrigger> {/*disabled */}
             </TabsList>
 
             <TabsContent value="startDate">
+            <div className="space-y-2">
+            <h4 className="font-medium leading-none">Dimensions</h4>
+            <p className="text-sm text-muted-foreground">
+              Set the dimensions for the layer.
+            </p>
+          </div>
               <Label htmlFor="startDate">A tanítási év első napja </Label>
               <Popover>
                 <PopoverTrigger asChild>
@@ -397,19 +403,20 @@ export default function Page() {
                     onSelect={(date) => setStartDate(date ?? undefined)}
                     initialFocus
                   />
-                  <Button
+                
+                </PopoverContent>
+              </Popover>
+              <Button
                     onClick={() => {
                       if (!startDate) return;
                       const formattedDate = format(startDate, "yyyy-MM-dd");
                       updateSchoolYear("kezd", formattedDate);
                     }}
                     disabled={!startDate}
-                    className="w-full"
+                   
                   >
                     Mentés
                   </Button>
-                </PopoverContent>
-              </Popover>
             </TabsContent>
             <TabsContent value="endDate">
 
@@ -514,19 +521,6 @@ export default function Page() {
             onChange={(e) => setSchoolStartEdit(e.target.value)}
           />
           <button onClick={() => updateSchoolYear('kezd', schoolStartEdit)}>Mentés</button> */}
-
-
-
-
-
-
-
-
-
-     
-
-
-
 
 
 

@@ -49,7 +49,16 @@ import {
 } from "@/components/ui/avatar"
 import Link from "next/link";
 
-
+ 
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 import React, { useState, useEffect } from 'react';
 import {
@@ -397,6 +406,17 @@ const Calendar: React.FC = () => {
           <span>{format(currentDate, 'yyyy MMMM', { locale: hu })}</span>
         </h2>
         <div className="calendar-controls">
+        <Select disabled>
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Tanár neve" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>Tanárok</SelectLabel>
+          <SelectItem value="kisPista">Kis Pista</SelectItem>
+        </SelectGroup>
+      </SelectContent>
+    </Select>
         <Button onClick={goToToday} variant="outline">Mai nap</Button>
           <Button size="icon" variant="ghost"onClick={goToPrevious}>{isMobileView ? <ChevronLeft /> : <ChevronLeft />}</Button>
           <Button size="icon" variant="ghost" onClick={goToNext}>{isMobileView ? <ChevronRight /> : <ChevronRight />}</Button>

@@ -265,7 +265,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 <CalendarSearch/>
     <span>Órarendek</span>
     {isButtonVisible && (
-    <TriangleAlert className="ml-auto text-amber-500" />
+    <TriangleAlert className="ml-auto text-red-500" />
     )}
   </Link>
 </SidebarMenuButton>
@@ -279,7 +279,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 <UserRoundSearch/>
     <span>Tanulók</span> 
     {isButtonVisible && (
-    <TriangleAlert className="ml-auto text-amber-400" />
+    <TriangleAlert className="ml-auto text-red-500" />
     )}
   </Link>
   
@@ -291,7 +291,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   <BriefcaseBusiness/>
     <span>Alkalmazottak</span>
     {isButtonVisible && (
-    <TriangleAlert className="ml-auto text-amber-400" />
+    <TriangleAlert className="ml-auto text-red-500" />
     )}
   </Link>
 </SidebarMenuButton>
@@ -315,7 +315,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 <SlidersHorizontal/>
     <span>Tanév beállításai</span>
     {isButtonVisible && (
-    <TriangleAlert className="ml-auto text-amber-400" />
+    <TriangleAlert className="ml-auto text-red-500" />
     )}
   </Link>
 </SidebarMenuButton>
