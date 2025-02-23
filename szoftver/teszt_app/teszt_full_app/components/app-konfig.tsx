@@ -55,7 +55,7 @@ const SheetComponent: React.FC = () => {
                   Beállítás
                 </Button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent side={"bottom"}>
         <SheetHeader>
           <SheetTitle>Are you absolutely sure?</SheetTitle>
           <SheetDescription>
