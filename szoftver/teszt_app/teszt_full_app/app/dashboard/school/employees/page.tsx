@@ -20,6 +20,31 @@ import {
 import { Button } from "@/components/ui/button";
 import { TriangleAlert } from "lucide-react";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+
 import Link from "next/link";
 
 export default function Page() {
@@ -126,8 +151,78 @@ export default function Page() {
             
           </div>
 
+          {/* <Card className="w-[350px]">
+      <CardHeader>
+        <CardTitle>Create project</CardTitle>
+        <CardDescription>Deploy your new project in one-click.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form>
+          <div className="grid w-full items-center gap-4">
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="name">Name</Label>
+              <Input id="name" placeholder="Name of your project" />
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="framework">Framework</Label>
+              <Select>
+                <SelectTrigger id="framework">
+                  <SelectValue placeholder="Select" />
+                </SelectTrigger>
+                <SelectContent position="popper">
+                  <SelectItem value="next">Next.js</SelectItem>
+                  <SelectItem value="sveltekit">SvelteKit</SelectItem>
+                  <SelectItem value="astro">Astro</SelectItem>
+                  <SelectItem value="nuxt">Nuxt.js</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </form>
+      </CardContent>
+      <CardFooter className="flex justify-between">
+        <Button variant="outline">Cancel</Button>
+        <Button>Deploy</Button>
+      </CardFooter>
+    </Card> */}
 
-data table
+    <Tabs defaultValue="account" className="w-full">
+      <TabsList className="grid w-full grid-cols-5">
+        <TabsTrigger value="account">Tanítási év első napja</TabsTrigger>
+        <TabsTrigger value="password">Tanítási év utolsó napja</TabsTrigger>
+        <TabsTrigger value="password2">Tanítási nélküli munkanapok</TabsTrigger>
+        <TabsTrigger value="password3">Szombati tanítási napok</TabsTrigger>
+        <TabsTrigger value="password4">Szünetek rendje</TabsTrigger>
+
+      </TabsList>
+  
+      <TabsContent value="password4">
+ 
+           Password
+     
+              Change your password here. After saving, you'll be logged out.
+      
+          <div className="space-y-2">
+            <div className="space-y-1">
+              <Label htmlFor="current">Current password</Label>
+              <Input id="current" type="password" />
+            </div>
+            <div className="space-y-1">
+              <Label htmlFor="new">New password</Label>
+              <Input id="new" type="password" />
+            </div>
+          </div>
+
+            <Button>Save password</Button>
+       
+       
+      </TabsContent>
+    </Tabs>
+
+
+
+
+
 
 
         </div>

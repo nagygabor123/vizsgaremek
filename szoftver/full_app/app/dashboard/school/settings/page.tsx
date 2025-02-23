@@ -43,6 +43,13 @@ import {
 
 import { DateRange } from 'react-day-picker';
 
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs"
+
 
 
 
@@ -161,10 +168,16 @@ export default function Page() {
         body: JSON.stringify({ type: 'plusznap', ...newPlusDate })
       });
       if (response.ok) {
+        // setYearSchedule((prev: typeof yearSchedule) => ({
+        //   ...prev,
+        //   plusDates: [...prev.plusDates, newPlusDate]
+        // }));
+
         setYearSchedule((prev: typeof yearSchedule) => ({
           ...prev,
-          plusDates: [...prev.plusDates, newPlusDate]
+          plusDates: [...(prev.plusDates ?? []), newPlusDate],
         }));
+
         setNewPlusDate({ nev: '', which_day: '', replace_day: '' });
         await fetchYearSchedule();
       }
@@ -312,31 +325,32 @@ export default function Page() {
             </Breadcrumb>
           </div>
         </header>
-        <div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
-          <div className="grid auto-rows-min gap-4 w-full">
-            {/* {isButtonVisible && ( */}
-            <div className="aspect-[20/1] rounded-xl bg-yellow-50 flex items-center px-4 w-full box-border overflow-hidden">
-              <TriangleAlert className="text-amber-400" />
-              <p className="text-sm truncate ml-3">
-                Ez egy figyelmeztető üzenet. Kérjük, figyelmesen olvassa el!
-              </p>
-              <Button
-                onClick={handleButtonClick}
-                className="ml-auto"
-                variant="link"
-              >
-                Beállítás
-              </Button>
+        <div className="p-4">
+          <div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
+            <div className="grid auto-rows-min gap-4 w-full">
+              {/* {isButtonVisible && ( */}
+              <div className="aspect-[20/1] rounded-xl bg-yellow-50 flex items-center px-4 w-full box-border overflow-hidden">
+                <TriangleAlert className="text-amber-400" />
+                <p className="text-sm truncate ml-3">
+                  Ez egy figyelmeztető üzenet. Kérjük, figyelmesen olvassa el!
+                </p>
+                <Button
+                  onClick={handleButtonClick}
+                  className="ml-auto"
+                  variant="link"
+                >
+                  Beállítás
+                </Button>
+              </div>
+              {/* )} */}
+              {/* ide jönne a kód */}
+
             </div>
-            {/* )} */}
-            {/* ide jönne a kód */}
-
           </div>
-        </div>
 
 
 
-        <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+
           {message && (
             <p style={{ marginTop: '20px', color: message.startsWith('Error') ? 'red' : 'green' }}>
               {message}
@@ -347,74 +361,59 @@ export default function Page() {
               {JSON.stringify(apiResponse, null, 2)}
             </pre>
           )}
-          {/* <h2>Tanév beállítása</h2> */}
-
-          {/* <label>Tanév kezdete:</label> */}
-          <input
-            type="date"
-            value={schoolStartEdit}
-            onChange={(e) => setSchoolStartEdit(e.target.value)}
-          />
-          <button onClick={() => updateSchoolYear('kezd', schoolStartEdit)}>Mentés</button>
-
-
-          <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant={"outline"}
-          className={cn(
-            "w-[240px] justify-start text-left font-normal",
-            !startDate && "text-muted-foreground"
-          )}
-        >
-          <CalendarIcon />
-           {schoolStartEdit ? format(schoolStartEdit, "PPP") : startDate ? format(startDate, "PPP") : ( <span>Válasszon egy napot</span>)} 
 
 
 
-          {/* {startDate ? (
-              (
-                startDate ? format(schoolStartEdit, "PPP")
-              )
-            ) : 
-              (
-                startDate ? format(startDate, "PPP")
-              
-             : (
-              <span>Válasszon egy napot</span>
-            )} */}
+          <Tabs defaultValue="startDate" className="w-full">
+            <TabsList className="grid w-full grid-cols-5">
+              <TabsTrigger value="startDate">Tanítási év első napja</TabsTrigger>
+              <TabsTrigger value="endDate">Tanítási év utolsó napja</TabsTrigger>
+              <TabsTrigger value="noSchool">Tanítási nélküli munkanapok</TabsTrigger>
+              <TabsTrigger value="plusDates">Szombati tanítási napok</TabsTrigger>
+              <TabsTrigger value="breakDates">Szünetek rendje</TabsTrigger>
+            </TabsList>
 
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0" align="start">
-        <Calendar
-          mode="single"
-          // selected={schoolStartEdit ? new Date(schoolStartEdit) : undefined}
-          selected={startDate}
-          onSelect={(date) => setStartDate(date ?? undefined)}
-          initialFocus
-        />
-            <Button
-  onClick={() => {
-    if (!startDate) return;
-    const formattedDate = format(startDate, "yyyy-MM-dd");
-    updateSchoolYear("kezd", formattedDate);
-  }}
-  disabled={!startDate}
-  className="w-full"
->
-  Mentés
-</Button>
-      </PopoverContent>
-      
-    </Popover>
+            <TabsContent value="startDate">
+              <Label htmlFor="startDate">A tanítási év első napja </Label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant={"outline"}
+                    className={cn(
+                      "w-[240px] justify-start text-left font-normal",
+                      !startDate && "text-muted-foreground"
+                    )}
+                  >
+                    <CalendarIcon />
+                    {startDate ? format(startDate, "PPP") : schoolStartEdit ? format(schoolStartEdit, "PPP") : (<span>Válasszon egy napot</span>)}
 
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    // selected={schoolStartEdit ? new Date(schoolStartEdit) : undefined}
+                    selected={startDate}
+                    onSelect={(date) => setStartDate(date ?? undefined)}
+                    initialFocus
+                  />
+                  <Button
+                    onClick={() => {
+                      if (!startDate) return;
+                      const formattedDate = format(startDate, "yyyy-MM-dd");
+                      updateSchoolYear("kezd", formattedDate);
+                    }}
+                    disabled={!startDate}
+                    className="w-full"
+                  >
+                    Mentés
+                  </Button>
+                </PopoverContent>
+              </Popover>
+            </TabsContent>
+            <TabsContent value="endDate">
 
-
-
-          <br></br>
-
-          <label>Tanév vége:</label>
+            <label>A tanítási év utolsó napja</label>
           <input
             type="date"
             value={schoolEndEdit}
@@ -422,7 +421,55 @@ export default function Page() {
           />
           <button onClick={() => updateSchoolYear('veg', schoolEndEdit)}>Mentés</button>
 
-          <h3>Szünetek</h3>
+
+            </TabsContent>
+            <TabsContent value="noSchool">
+            <h3>Tanítási nélküli munkanapok</h3>
+            </TabsContent>
+            <TabsContent value="plusDates">
+     
+            <h3>Szombati tanítási napok</h3>
+          {yearSchedule?.plusDates?.length > 0 ? (
+            <ul>
+              {yearSchedule.plusDates.map((plusDate: any, index: number) => (
+                <li key={index}>
+                  {plusDate.id} {plusDate.name}: {plusDate.date} - {plusDate.replaceDay}
+                  <button onClick={() => handleDeletePlusBreak(plusDate.id)}>Törlés</button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>Nincsenek plusz napok.</p>
+          )}
+          {/* <input
+            type="text"
+            placeholder="Plusz nap neve"
+            value={newPlusDate.nev}
+            onChange={(e) => setNewPlusDate({ ...newPlusDate, nev: newPlusDate.which_day })}
+          /> */}
+          <input
+            type="date"
+            value={newPlusDate.which_day}
+            onChange={(e) => setNewPlusDate({ ...newPlusDate, which_day: e.target.value, nev: e.target.value })}
+          />
+          <select
+            id="replace_day"
+            value={newPlusDate.replace_day}
+            onChange={(e) => setNewPlusDate({ ...newPlusDate, replace_day: e.target.value })}
+          >
+            {days.map((day) => (
+              <option key={day.value} value={day.value}>
+                {day.label}
+              </option>
+            ))}
+          </select>
+
+          <button onClick={handleAddPlusDate}>Új plusz nap hozzáadása</button>
+
+            </TabsContent>
+            <TabsContent value="breakDates">
+
+          <h3>Szünetek rendje</h3>
           {yearSchedule.breakDates.length > 0 ? (
             <ul>
               {yearSchedule.breakDates.map((breakPeriod: any, index: number) => (
@@ -452,45 +499,38 @@ export default function Page() {
             onChange={(e) => setNewBreak({ ...newBreak, replace_day: e.target.value })}
           />
           <button onClick={handleAddBreak}>Új szünet hozzáadása</button>
+            </TabsContent>
+          </Tabs>
 
-          <h3>Plusz napok</h3>
-          {yearSchedule.plusDates.length > 0 ? (
-            <ul>
-              {yearSchedule.plusDates.map((plusDate: any, index: number) => (
-                <li key={index}>
-                  {plusDate.id} {plusDate.name}: {plusDate.date} - {plusDate.replaceDay}
-                  <button onClick={() => handleDeletePlusBreak(plusDate.id)}>Törlés</button>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>Nincsenek plusz napok.</p>
-          )}
-          <input
-            type="text"
-            placeholder="Plusz nap neve"
-            value={newPlusDate.nev}
-            onChange={(e) => setNewPlusDate({ ...newPlusDate, nev: e.target.value })}
-          />
-          <input
+
+
+
+          {/* <h2>Tanév beállítása</h2> */}
+
+          {/* <label>Tanév kezdete:</label> */}
+          {/* <input
             type="date"
-            value={newPlusDate.which_day}
-            onChange={(e) => setNewPlusDate({ ...newPlusDate, which_day: e.target.value })}
+            value={schoolStartEdit}
+            onChange={(e) => setSchoolStartEdit(e.target.value)}
           />
-          <select
-            id="replace_day"
-            value={newPlusDate.replace_day}
-            onChange={(e) => setNewPlusDate({ ...newPlusDate, replace_day: e.target.value })}
-          >
-            {days.map((day) => (
-              <option key={day.value} value={day.value}>
-                {day.label}
-              </option>
-            ))}
-          </select>
-          <button onClick={handleAddPlusDate}>Új plusz nap hozzáadása</button>
-        </div>
+          <button onClick={() => updateSchoolYear('kezd', schoolStartEdit)}>Mentés</button> */}
 
+
+
+
+
+
+
+
+
+     
+
+
+
+
+
+
+        </div>
 
       </SidebarInset>
     </SidebarProvider>
