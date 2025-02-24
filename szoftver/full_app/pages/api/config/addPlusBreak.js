@@ -67,7 +67,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Hiányzó paraméterek.' });
     }
 
-    if (type !== 'szunet' && type !== 'plusznap') {
+    if (type !== 'szunet' && type !== 'plusznap' && type !== 'tanitasnelkul') {
       return res.status(400).json({ error: 'Csak a szünetet illetve a plusznapokat lehet feltölteni' });
     }
 
