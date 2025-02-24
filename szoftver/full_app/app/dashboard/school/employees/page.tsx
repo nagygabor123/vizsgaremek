@@ -61,7 +61,7 @@ export default function AddEmployeePage() {
 
   const positions = [
     { label: 'Igazgató', value: 'igazgato' },
-    { label: 'Osztályfőnök', value: 'osztalyfonok' },
+   // { label: 'Osztályfőnök', value: 'osztalyfonok' },
     { label: 'Tanár', value: 'tanar' },
     { label: 'Portás', value: 'portas' },
     { label: 'Rendszergazda', value: 'rendszergazda' },
@@ -237,6 +237,7 @@ export default function AddEmployeePage() {
     return null; 
   }
 
+  const isOsztalyfonok = editPosition === "osztalyfonok";
 
   return (
     <SidebarProvider>
@@ -356,9 +357,9 @@ export default function AddEmployeePage() {
                     
 
                       </div>
-
+                
                       <div className="grid gap-2">
-                        <Label htmlFor="position">Osztályfönök-e?</Label>
+                        <Label htmlFor="position">Van osztálya?</Label>
                         <Select value={osztaly} onValueChange={setOsztaly}>
                           <SelectTrigger  className="col-span-3">
                             <SelectValue placeholder="Tanár" />
@@ -374,6 +375,7 @@ export default function AddEmployeePage() {
                     
 
                       </div>
+                 
                       <Button type="submit">Mentés</Button>
                       </form>
               
@@ -463,10 +465,6 @@ export default function AddEmployeePage() {
                                       ))}
                                     </SelectContent>
                                   </Select>
-
-
-
-
                                 </div>
 
                                 <div className="grid gap-2">
@@ -484,10 +482,10 @@ export default function AddEmployeePage() {
                                     </SelectContent>
                                   </Select>
 
-
-
-
                                 </div>
+
+
+
                                 <Button onClick={handleUpdate} >Mentés</Button>
                               </div>
 
