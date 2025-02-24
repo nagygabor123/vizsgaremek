@@ -41,6 +41,7 @@ export default function handler(req, res) {
       console.log(employees);
 
       //await sendRingingData(ringing);
+      await sendEmployeesData(employees);
 
       return res.status(200).json({
         message: 'XML adatok sikeresen feldolgozva és továbbítva!',
@@ -82,15 +83,15 @@ function extractTeachers(parsedXml) {
   });
 
   return teachers.map(t => ({
-    name: t.$.name,
+    full_name: t.$.name,
     position: "Tanár", // Ha van pontosabb pozíció, azt itt lehet megadni
-    class_teacher_of: classTeacherMap[t.$.id] ? classes.find(c => c.$.id === classTeacherMap[t.$.id])?.$.name || null : null,
+    osztalyfonok: classTeacherMap[t.$.id] ? classes.find(c => c.$.id === classTeacherMap[t.$.id])?.$.name || null : null,
   }));
 }
 
 async function sendRingingData(ringing) {
   try {
-    const response = await fetch('http://localhost:3000/api/config/addRinging', {
+    const response = await fetch('http://localhost:3000/api/config/uploadRinging', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -105,5 +106,25 @@ async function sendRingingData(ringing) {
     console.log('Ringing adatok sikeresen továbbítva!');
   } catch (error) {
     console.error('Hiba a ringing adatok küldése közben:', error);
+  }
+}
+
+async function sendEmployeesData(employees) {
+  try {
+    const response = await fetch('http://localhost:3000/api/config/uploadEmployees', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ employees }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Hiba az employees adatok továbbításakor: ${response.statusText}`);
+    }
+
+    console.log('Employees adatok sikeresen továbbítva!');
+  } catch (error) {
+    console.error('Hiba az employees adatok küldése közben:', error);
   }
 }
