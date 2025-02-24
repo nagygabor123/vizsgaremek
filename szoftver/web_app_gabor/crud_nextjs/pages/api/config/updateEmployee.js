@@ -79,25 +79,26 @@ import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {
   if (req.method === 'PUT') {
-    const { admin_id, full_name, position } = req.body;
+    const { admin_id, full_name, position, osztalyfonok } = req.body;
 
-    if (!admin_id || !full_name || !position) {
+    if (!admin_id || !full_name || !position || !osztalyfonok) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
     const db = await connectToDatabase();
     try {
       await db.execute(
-        'UPDATE admins SET full_name = ?, position = ? WHERE admin_id = ?',
-        [full_name, position, admin_id]
+        'UPDATE admins SET full_name = ?, position = ?, osztalyfonok = ? WHERE admin_id = ?',
+        [full_name, position, osztalyfonok, admin_id] // <-- Helyes sorrend
       );
       res.status(200).json({ message: 'Admin updated' });
     } catch (error) {
       res.status(500).json({ message: 'Error updating admin', error: error.message });
     } finally {
-      await db.end();  
+      await db.end();
     }
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });
   }
 }
+

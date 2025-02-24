@@ -36,12 +36,16 @@ export default function handler(req, res) {
       const ringing = extractRingingSchedule(parsedXml);
       console.log(ringing);
 
-      // Küldje el az adatokat a /api/config/addRinging végpontra
-      await sendRingingData(ringing);
+      // Tanárok kinyerése
+      const employees = extractTeachers(parsedXml);
+      console.log(employees);
+
+      //await sendRingingData(ringing);
 
       return res.status(200).json({
         message: 'XML adatok sikeresen feldolgozva és továbbítva!',
         ringing,
+        employees,
       });
     } catch (error) {
       console.error('Hiba az XML fájl feldolgozása közben:', error);
@@ -58,6 +62,29 @@ function extractRingingSchedule(parsedXml) {
   return parsedXml.timetable.periods[0].period.map(p => ({
     start_time: p.$.starttime,
     end_time: p.$.endtime,
+  }));
+}
+
+function extractTeachers(parsedXml) {
+  if (!parsedXml.timetable || !parsedXml.timetable.teachers || !parsedXml.timetable.teachers[0].teacher) {
+    return [];
+  }
+
+  const teachers = parsedXml.timetable.teachers[0].teacher;
+  const classes = parsedXml.timetable.classes ? parsedXml.timetable.classes[0].class : [];
+  const lessons = parsedXml.timetable.lessons ? parsedXml.timetable.lessons[0].lesson : [];
+
+  const classTeacherMap = {};
+  lessons.forEach(lesson => {
+    if (lesson.$.subjectid === "DAA739606BB71EE6" && lesson.$.teacherids && lesson.$.classids) {
+      classTeacherMap[lesson.$.teacherids] = lesson.$.classids;
+    }
+  });
+
+  return teachers.map(t => ({
+    name: t.$.name,
+    position: "Tanár", // Ha van pontosabb pozíció, azt itt lehet megadni
+    class_teacher_of: classTeacherMap[t.$.id] ? classes.find(c => c.$.id === classTeacherMap[t.$.id])?.$.name || null : null,
   }));
 }
 
