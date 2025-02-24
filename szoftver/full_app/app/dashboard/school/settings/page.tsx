@@ -77,12 +77,14 @@ export default function Page() {
   const [yearSchedule, setYearSchedule] = useState<any>({
     plusDates: [],
     breakDates: [],
+    noSchool:[],
     schoolStart: '',
     schoolEnd: ''
   });
   const [schoolStartEdit, setSchoolStartEdit] = useState('');
   const [schoolEndEdit, setSchoolEndEdit] = useState('');
   const [newBreak, setNewBreak] = useState({ nev: '', which_day: '', replace_day: '' });
+  const [newNo, setNewNo] = useState({ nev: '', which_day: '', replace_day: '' });
   const [newPlusDate, setNewPlusDate] = useState({ nev: '', which_day: '', replace_day: '' });
   const days = [
     { label: 'Hétfő', value: 'monday' },
@@ -96,6 +98,7 @@ export default function Page() {
     try {
       const plusRes = await fetch('http://localhost:3000/api/config/getYearSchedule?type=plusznap');
       const szunetRes = await fetch('http://localhost:3000/api/config/getYearSchedule?type=szunet');
+      const noschoolRes = await fetch('http://localhost:3000/api/config/getYearSchedule?type=tanitasnelkul');
       const startRes = await fetch('http://localhost:3000/api/config/getYearSchedule?type=kezd');
       const endRes = await fetch('http://localhost:3000/api/config/getYearSchedule?type=veg');
 
@@ -103,10 +106,12 @@ export default function Page() {
       const breakDates = await szunetRes.json();
       const schoolStart = await startRes.json();
       const schoolEnd = await endRes.json();
+      const noSchool = await noschoolRes.json();
 
       setYearSchedule({
         plusDates: plusDates.plusDates_alap,
         breakDates: breakDates.breakDates_alap,
+        noSchool: noSchool.tanitasnelkul_alap,
         schoolStart: schoolStart.schoolYearStart.start,
         schoolEnd: schoolEnd.schoolYearEnd.end
       });
@@ -174,6 +179,26 @@ export default function Page() {
     }
   };
 
+  const handleAddNoSchool = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/config/addPlusBreak', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'tanitasnelkul', ...newNo })
+      });
+      if (response.ok) {
+        setYearSchedule((prev: typeof yearSchedule) => ({
+          ...prev,
+          noSchool: [...prev.noSchool, newNo]
+        }));
+        setNewNo({ nev: '', which_day: '', replace_day: '' });
+        await fetchYearSchedule();
+      }
+    } catch (error) {
+      console.error('Error updating break:', error);
+    }
+  };
+
   const handleAddPlusDate = async () => {
     try {
       const response = await fetch('http://localhost:3000/api/config/addPlusBreak', {
@@ -211,6 +236,7 @@ export default function Page() {
         setYearSchedule((prev: typeof yearSchedule) => ({
           ...prev,
           breakDates: prev.breakDates.filter((breakPeriod: any) => breakPeriod.id !== id),
+          noSchool: prev.noSchool.filter((noSchoolPeriod: any) => noSchoolPeriod.id !== id),
           plusDates: prev.plusDates.filter((plusDate: any) => plusDate.id !== id),
         }));
       } else {
@@ -221,7 +247,7 @@ export default function Page() {
       setMessage('Hiba történt a törlés során.');
     }
   };
-
+  
 
 
 
@@ -532,27 +558,36 @@ export default function Page() {
 
             </TabsContent>
             <TabsContent value="noSchool">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Tanítás nélküli munkanapok</CardTitle>
-                  <CardDescription>
-                    Aliquam metus eros, tristique nec semper id, congue eget metus.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  <div className="space-y-1">
-                    <Label htmlFor="name">Name</Label>
-                    <Input id="name" defaultValue="Pedro Duarte" />
-                  </div>
-                  <div className="space-y-1">
-                    <Label htmlFor="username">Username</Label>
-                    <Input id="username" defaultValue="@peduarte" />
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <Button>Új nap hozzáadás</Button>
-                </CardFooter>
-              </Card>
+              {yearSchedule?.noSchool?.length > 0 ? (
+                <ul>
+                  {yearSchedule.noSchool.map((noSchoolPeriod: any, index: number) => (
+                    <li key={index}>
+                      {noSchoolPeriod.id} {noSchoolPeriod.name}: {noSchoolPeriod.start} - {noSchoolPeriod.end}
+                      <button onClick={() => handleDeletePlusBreak(noSchoolPeriod.id)}>Törlés</button>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>Nincsenek szünetek.</p>
+              )}
+              <input
+                type="text"
+                placeholder="Szünet neve"
+                value={newNo.nev}
+                onChange={(e) => setNewNo({ ...newNo, nev: e.target.value })}
+              />
+              <input
+                type="date"
+                value={newNo.which_day}
+                onChange={(e) => setNewNo({ ...newNo, which_day: e.target.value })}
+              />
+              <input
+                type="date"
+                value={newNo.replace_day}
+                onChange={(e) => setNewNo({ ...newNo, replace_day: e.target.value })}
+              />
+              <button onClick={handleAddNoSchool}>Új szünet hozzáadása</button>
+
             </TabsContent>
             <TabsContent value="plusDates">
 

@@ -98,9 +98,12 @@ export default async function handler(req, res) {
       if (type === 'plusznap') {
         query = 'SELECT year_schedule_id, nev, which_day, replace_day FROM year_schedule WHERE type = ?';
         values = ['plusznap'];
-      } else if (type === 'szunet') {
+      }else if (type === 'szunet') {
+        query = 'SELECT year_schedule_id, nev, which_day AS start, replace_day AS end FROM year_schedule WHERE type IN (?, ?)';
+        values = ['szunet', 'tanitasnelkul'];
+      }else if (type === 'tanitasnelkul') {
         query = 'SELECT year_schedule_id, nev, which_day AS start, replace_day AS end FROM year_schedule WHERE type = ?';
-        values = ['szunet'];
+        values = ['tanitasnelkul'];
       } else if (type === 'kezd') {
         query = 'SELECT which_day AS start FROM year_schedule WHERE type = ? LIMIT 1';
         values = ['kezd'];
@@ -110,7 +113,6 @@ export default async function handler(req, res) {
       } else {
         return res.status(400).json({ error: 'Érvénytelen type paraméter' });
       }
-
       const [rows] = await connection.execute(query, values);
 
       if (rows.length > 0) {
@@ -130,7 +132,15 @@ export default async function handler(req, res) {
             end: row.end
           }));
           return res.status(200).json({ breakDates_alap });
-        } else if (type === 'kezd') {
+        } else if (type === 'tanitasnelkul') {
+          const tanitasnelkul_alap = rows.map(row => ({
+            id: row.year_schedule_id, 
+            name: row.nev,  
+            start: row.start,
+            end: row.end
+          }));
+          return res.status(200).json({ tanitasnelkul_alap });
+        }else if (type === 'kezd') {
           return res.status(200).json({ schoolYearStart: rows[0] });
         } else if (type === 'veg') {
           return res.status(200).json({ schoolYearEnd: rows[0] });
