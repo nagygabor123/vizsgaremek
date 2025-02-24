@@ -1,3 +1,64 @@
+/**
+ * @swagger
+ * /api/config/addLesson:
+ *   post:
+ *     summary: Órák (tantárgycsoportok) feltöltése CSV fájlból
+ *     description: Egy CSV fájl alapján hozzáadja az új órákat (tantárgycsoportokat) a `groups` táblához az adatbázisban.
+ *     tags:
+ *       - Configuration
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               file:
+ *                 type: string
+ *                 format: binary
+ *                 description: A feltöltendő CSV fájl, amelynek egyetlen oszlopa van: `group_name`
+ *     responses:
+ *       200:
+ *         description: Sikeres feltöltés és mentés az adatbázisba.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Órák sikeresen feltöltve a groups táblába!"
+ *       400:
+ *         description: Hibás fájlformátum vagy hiányzó adatok.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Hibás formátum! A CSV fájlnak csak a 'group_name' oszlopot kell tartalmaznia."
+ *       500:
+ *         description: Adatbázis hiba vagy fájl feldolgozási hiba.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Hiba a fájl feldolgozása közben"
+ *       405:
+ *         description: Hibás HTTP metódus (csak POST engedélyezett).
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Csak a POST metódus használható"
+ */
 import { connectToDatabase } from '../../../lib/db';
 import fs from 'fs';
 import multiparty from 'multiparty';

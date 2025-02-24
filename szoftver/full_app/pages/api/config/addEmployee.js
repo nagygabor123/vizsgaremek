@@ -1,7 +1,7 @@
 
 /**
  * @swagger
- * /api/config/addEmployees:
+ * /api/config/addEmployee:
  *   post:
  *     summary: Új admin hozzáadása
  *     description: Hozzáad egy új adminisztrátort az adatbázishoz, automatikusan generált jelszóval.

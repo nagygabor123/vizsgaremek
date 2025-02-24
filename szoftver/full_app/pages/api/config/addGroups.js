@@ -1,3 +1,65 @@
+/**
+ * @swagger
+ * /api/config/addLesson:
+ *   post:
+ *     summary: Diákok és csoportok összerendelése CSV fájlból
+ *     description: A végpont lehetővé teszi egy CSV fájl feltöltését, amely diákokat és csoportokat kapcsol össze a student_groups táblában.
+ *     tags:
+ *       - Configuration
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               file:
+ *                 type: string
+ *                 format: binary
+ *                 description: A feltöltendő CSV fájl, amely tartalmazza a student_id és group_id oszlopokat.
+ *     responses:
+ *       200:
+ *         description: Sikeres feltöltés és mentés.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Adatok sikeresen feltöltve a student_groups táblába!"
+ *       400:
+ *         description: Hibás fájl vagy hiányzó adat.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Hibás formátum! A CSV fájlnak a 'student_id' és 'group_id' oszlopokat kell tartalmaznia."
+ *       500:
+ *         description: Adatbázis hiba vagy fájl feldolgozási hiba.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Hiba a fájl feldolgozása közben"
+ *       405:
+ *         description: Hibás HTTP metódus (csak POST engedélyezett).
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Csak a POST metódus használható"
+ */
+
 import { connectToDatabase } from '../../../lib/db';
 import fs from 'fs';
 import multiparty from 'multiparty';

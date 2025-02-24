@@ -18,9 +18,9 @@
  *             properties:
  *               type:
  *                 type: string
- *                 enum: [kezd, veg]
+ *                 enum: [kezd, veg, szunet, plusznap]
  *                 description: A frissítendő dátum típusa (évkezdés vagy évvége).
- *                 example: "kezd"
+ *                 example: "szunet"
  *               nev:
  *                 type: string
  *                 description: A szünet vagy plusz nap neve.
