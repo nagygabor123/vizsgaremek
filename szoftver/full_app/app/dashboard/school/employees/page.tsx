@@ -46,12 +46,14 @@ import AppKonfig from '@/components/app-konfig';
 export default function AddEmployeePage() {
   const [fullName, setFullName] = useState('');
   const [position, setPosition] = useState('');
+  const [osztaly, setOsztaly] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [employees, setEmployees] = useState<any[]>([]);
   const [editId, setEditId] = useState<number | null>(null);
   const [editName, setEditName] = useState('');
   const [editPosition, setEditPosition] = useState('');
+  const [editOsztaly, setEditOsztaly] = useState('');
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [open, setOpen] = useState(false);
@@ -64,6 +66,16 @@ export default function AddEmployeePage() {
     { label: 'Portás', value: 'portas' },
     { label: 'Rendszergazda', value: 'rendszergazda' },
   ];
+
+
+  
+  const osztalyok = [
+    { label: 'Nem osztályfőnök', value: 'nincs' },
+    { label: '13.I', value: '13.I' },
+    { label: '12.I', value: '12.I' },
+
+  ];
+
 
   const fetchEmployees = async () => {
     try {
@@ -92,13 +104,14 @@ export default function AddEmployeePage() {
       const response = await fetch('http://localhost:3000/api/config/addEmployee', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ full_name: fullName, position: position }),
+        body: JSON.stringify({ full_name: fullName, position: position,osztalyfonok: osztaly  }),
       });
       const data = await response.json();
       if (response.ok) {
         setMessage('Employee added successfully');
         setFullName('');
         setPosition('');
+        setOsztaly('');
         fetchEmployees();
         setIsDialogOpen(false);
         //setOpen(false);
@@ -131,6 +144,7 @@ export default function AddEmployeePage() {
     setEditId(employee.admin_id);
     setEditName(employee.full_name);
     setEditPosition(employee.position);
+    setEditOsztaly(employee.osztalyfonok);
   };
 
   const handleUpdate = async () => {
@@ -140,7 +154,7 @@ export default function AddEmployeePage() {
       const response = await fetch('http://localhost:3000/api/config/updateEmployee', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ admin_id: editId, full_name: editName, position: editPosition }),
+        body: JSON.stringify({ admin_id: editId, full_name: editName, position: editPosition, osztalyfonok: editOsztaly }),
       });
       const data = await response.json();
       if (response.ok) {
@@ -148,6 +162,7 @@ export default function AddEmployeePage() {
         setEditId(null);
         setEditName('');
         setEditPosition('');
+        setEditOsztaly('');
         fetchEmployees();
         setOpen(false);
       } else {
@@ -341,6 +356,24 @@ export default function AddEmployeePage() {
                     
 
                       </div>
+
+                      <div className="grid gap-2">
+                        <Label htmlFor="position">Osztályfönök-e?</Label>
+                        <Select value={osztaly} onValueChange={setOsztaly}>
+                          <SelectTrigger  className="col-span-3">
+                            <SelectValue placeholder="Tanár" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {osztalyok.map((pos) => (
+                              <SelectItem key={pos.value} value={pos.value}>
+                                {pos.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                    
+
+                      </div>
                       <Button type="submit">Mentés</Button>
                       </form>
               
@@ -365,6 +398,7 @@ export default function AddEmployeePage() {
                   <tr>
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Név  <ArrowUpDown className="w-4 h-4 inline-block" /></th>
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("position")}>Pozíció  <ArrowUpDown className="w-4 h-4 inline-block" /></th>
+                    <th className="p-2 cursor-pointer font-normal">Osztály</th>
                     <th className="p-2 cursor-pointer font-normal">Műveletek</th>
                   </tr>
                 </thead>
@@ -383,7 +417,7 @@ export default function AddEmployeePage() {
                         <td className="p-1">
   {positions.find((pos) => pos.value === employee.position)?.label || employee.position}
 </td>
-
+<td className="p-1">{employee.osztalyfonok}</td>
                         <td className="p-1">
 
                           <Dialog open={open} onOpenChange={setOpen}>
@@ -423,6 +457,26 @@ export default function AddEmployeePage() {
                                     </SelectTrigger>
                                     <SelectContent>
                                       {positions.map((pos) => (
+                                        <SelectItem key={pos.value} value={pos.value}>
+                                          {pos.label}
+                                        </SelectItem>
+                                      ))}
+                                    </SelectContent>
+                                  </Select>
+
+
+
+
+                                </div>
+
+                                <div className="grid gap-2">
+                                <Label htmlFor="position">Osztályfonok-e</Label>
+                                  <Select value={editOsztaly} onValueChange={setEditOsztaly}>
+                                    <SelectTrigger className="col-span-3"> {/** className="w-[180px]" */}
+                                      <SelectValue placeholder="" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      {osztalyok.map((pos) => (
                                         <SelectItem key={pos.value} value={pos.value}>
                                           {pos.label}
                                         </SelectItem>
