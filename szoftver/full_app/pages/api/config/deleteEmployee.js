@@ -1,7 +1,7 @@
 
 /**
  * @swagger
- * /api/config/deleteEmployee:
+ * /api/config/deleteEmployees:
  *   delete:
  *     summary: Törli az adminisztrátort az adatbázisból.
  *     description: Ezzel az API végponttal törölheted az adminisztrátorokat az adatbázisból az admin_id alapján. Az admin_id 1 és 2 nem törölhető.

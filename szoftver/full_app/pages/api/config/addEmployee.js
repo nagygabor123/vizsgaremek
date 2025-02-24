@@ -1,7 +1,7 @@
 
 /**
  * @swagger
- * /api/config/addEmployee:
+ * /api/config/addEmployees:
  *   post:
  *     summary: Új admin hozzáadása
  *     description: Hozzáad egy új adminisztrátort az adatbázishoz, automatikusan generált jelszóval.
@@ -81,9 +81,9 @@ function generatePassword(length = 12) {
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { full_name, position } = req.body;
+    const { full_name, position,osztalyfonok } = req.body;
 
-    if (!full_name || !position) {
+    if (!full_name || !position ||!osztalyfonok) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
@@ -102,8 +102,8 @@ export default async function handler(req, res) {
 
       // Az admin hozzáadása az új admin_id-val
       await db.execute(
-        'INSERT INTO admins (admin_id, full_name, password, position) VALUES (?, ?, ?, ?)',
-        [nextAdminId, full_name, password, position]
+        'INSERT INTO admins (admin_id, full_name, password, position,osztalyfonok) VALUES (?, ?, ?, ?, ?)',
+        [nextAdminId, full_name, password, position,osztalyfonok]
       );
       
       res.status(201).json({ message: 'Admin created', password }); 

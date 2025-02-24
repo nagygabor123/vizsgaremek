@@ -57,7 +57,7 @@ export default async function handler(req, res) {
     const db = await connectToDatabase();
 
     try {
-      const [rows] = await db.execute('SELECT admin_id, full_name, position FROM admins');
+      const [rows] = await db.execute('SELECT admin_id, full_name, position,osztalyfonok FROM admins');
       res.status(200).json(rows); 
     } catch (error) {
       res.status(500).json({ message: 'Error fetching employees' });
