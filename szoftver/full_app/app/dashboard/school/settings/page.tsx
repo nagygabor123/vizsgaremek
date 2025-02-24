@@ -18,7 +18,7 @@ import {
   SidebarProvider,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
-import { TriangleAlert, Plus } from "lucide-react";
+import { TriangleAlert, Plus, Trash2, Trash } from "lucide-react";
 import Link from "next/link";
 
 import { Input } from "@/components/ui/input"
@@ -682,8 +682,8 @@ export default function Page() {
   <table className="w-full">
     <thead className="text-center text-sm text-neutral-500">
       <tr>
-        <th className="p-2 cursor-pointer font-normal">ID</th>
-        <th className="p-2 cursor-pointer font-normal">Név</th>
+        {/* <th className="p-2 cursor-pointer font-normal">ID</th>
+        <th className="p-2 cursor-pointer font-normal">Név</th> */}
         <th className="p-2 cursor-pointer font-normal">Dátum</th>
         <th className="p-2 cursor-pointer font-normal">Helyettesítő nap</th>
         <th className="p-2 cursor-pointer font-normal">Művelet</th>
@@ -692,12 +692,12 @@ export default function Page() {
     <tbody>
       {yearSchedule.plusDates.map((plusDate: any) => (
         <tr key={plusDate.id} className="text-center border-t">
-          <td className="p-1">{plusDate.id}</td>
-          <td className="p-1">{plusDate.name}</td>
+          {/* <td className="p-1">{plusDate.id}</td>
+          <td className="p-1">{plusDate.name}</td> */}
           <td className="p-1">{plusDate.date}</td>
           <td className="p-1">{plusDate.replaceDay}</td>
           <td  className="p-1">
-            <Button onClick={() => handleDeletePlusBreak(plusDate.id)}>Törlés</Button>
+            <Button variant="ghost" onClick={() => handleDeletePlusBreak(plusDate.id)}><Trash2 className="w-4 h-4 inline-block" /></Button>
           </td> 
         </tr>
       ))}
