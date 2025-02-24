@@ -70,7 +70,7 @@ export default function AddEmployeePage() {
 
   
   const osztalyok = [
-    { label: 'Nem osztályfőnök', value: 'nincs' },
+    { label: 'Nincs', value: 'nincs' },
     { label: '13.I', value: '13.I' },
     { label: '12.I', value: '12.I' },
 
@@ -177,11 +177,12 @@ export default function AddEmployeePage() {
 
 
 
-  const [sortField, setSortField] = useState<"full_name" | "position" | null>(null);
+  const [sortField, setSortField] = useState<"full_name" | "position" | "osztalyfonok" | null>(null);
 
   const [sortOrder, setSortOrder] = useState("asc");
   const [searchName, setSearchName] = useState("");
   const [searchPosition, setSearchPosition] = useState("");
+  const [searchOsztalyfonok, setSearchOsztalyfonok] = useState("");
 
 
 
@@ -197,11 +198,12 @@ export default function AddEmployeePage() {
   // Szűrés
   const filteredEmployees = sortedEmployees.filter(student =>
     student.full_name.toLowerCase().includes(searchName.toLowerCase()) &&
-    student.position.toLowerCase().includes(searchPosition.toLowerCase())
+    student.position.toLowerCase().includes(searchPosition.toLowerCase()) &&
+    student.osztalyfonok.toLowerCase().includes(searchOsztalyfonok.toLowerCase())
   );
 
   // Rendezés váltása adott mező szerint
-  const toggleSort = (field: "full_name" | "position") => {
+  const toggleSort = (field: "full_name" | "position" | "osztalyfonok") => {
     if (sortField === field) {
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
@@ -237,7 +239,7 @@ export default function AddEmployeePage() {
     return null; 
   }
 
-  const isOsztalyfonok = editPosition === "osztalyfonok";
+  //const isOsztalyfonok = editPosition === "osztalyfonok";
 
   return (
     <SidebarProvider>
@@ -310,7 +312,13 @@ export default function AddEmployeePage() {
                   value={searchPosition}
                   onChange={(e) => setSearchPosition(e.target.value)}
                 />
-
+                 <Input
+                  type="text"
+                  placeholder="Keresés osztály szerint..."
+                  className="border p-2 rounded"
+                  value={searchOsztalyfonok}
+                  onChange={(e) => setSearchOsztalyfonok(e.target.value)}
+                />
 
               </div>
 
@@ -341,40 +349,39 @@ export default function AddEmployeePage() {
 
 
                         <div className="grid gap-2">
-                        <Label htmlFor="position">Pozíció</Label>
-                        <Select value={position} onValueChange={setPosition}>
-                          <SelectTrigger  className="col-span-3">
-                            <SelectValue placeholder="Tanár" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {positions.map((pos) => (
-                              <SelectItem key={pos.value} value={pos.value}>
-                                {pos.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                    
+  <Label htmlFor="position">Pozíció</Label>
+  <Select value={position} onValueChange={setPosition}>
+    <SelectTrigger className="col-span-3">
+      <SelectValue placeholder="Válasszon..." />
+    </SelectTrigger>
+    <SelectContent>
+      {positions.map((pos) => (
+        <SelectItem key={pos.value} value={pos.value}>
+          {pos.label}
+        </SelectItem>
+      ))}
+    </SelectContent>
+  </Select>
+</div>
 
-                      </div>
-                
-                      <div className="grid gap-2">
-                        <Label htmlFor="position">Van osztálya?</Label>
-                        <Select value={osztaly} onValueChange={setOsztaly}>
-                          <SelectTrigger  className="col-span-3">
-                            <SelectValue placeholder="Tanár" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {osztalyok.map((pos) => (
-                              <SelectItem key={pos.value} value={pos.value}>
-                                {pos.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                    
+{/*{["tanar", "igazgato"].includes(position) && (*/}
+  <div className="grid gap-2">
+    <Label htmlFor="osztaly">Van osztálya?</Label>
+    <Select value={osztaly} onValueChange={setOsztaly}>
+      <SelectTrigger className="col-span-3">
+        <SelectValue placeholder="Válasszon..." />
+      </SelectTrigger>
+      <SelectContent>
+        {osztalyok.map((pos) => (
+          <SelectItem key={pos.value} value={pos.value}>
+            {pos.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  </div>
+{/*)}*/}
 
-                      </div>
                  
                       <Button type="submit">Mentés</Button>
                       </form>
@@ -400,7 +407,7 @@ export default function AddEmployeePage() {
                   <tr>
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Név  <ArrowUpDown className="w-4 h-4 inline-block" /></th>
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("position")}>Pozíció  <ArrowUpDown className="w-4 h-4 inline-block" /></th>
-                    <th className="p-2 cursor-pointer font-normal">Osztály</th>
+                    <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("osztalyfonok")}>Osztálya <ArrowUpDown className="w-4 h-4 inline-block"/></th>
                     <th className="p-2 cursor-pointer font-normal">Műveletek</th>
                   </tr>
                 </thead>
@@ -468,7 +475,7 @@ export default function AddEmployeePage() {
                                 </div>
 
                                 <div className="grid gap-2">
-                                <Label htmlFor="position">Osztályfonok-e</Label>
+                                <Label htmlFor="position">Van osztálya?</Label>
                                   <Select value={editOsztaly} onValueChange={setEditOsztaly}>
                                     <SelectTrigger className="col-span-3"> {/** className="w-[180px]" */}
                                       <SelectValue placeholder="" />
