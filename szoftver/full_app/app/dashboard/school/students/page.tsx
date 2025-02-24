@@ -293,6 +293,17 @@ export default function Home() {
   );
 
 
+  const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const hasClickedBefore = localStorage.getItem("hasClickedOverlayButton");
+    setButtonVisible(hasClickedBefore !== "true");
+  }, []);
+
+  if (isButtonVisible === null) {
+    return null; 
+  }
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -331,7 +342,7 @@ export default function Home() {
 
         <div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
             <div className="grid auto-rows-min gap-4 w-full">
-              {/* {isButtonVisible && ( */}
+            {isButtonVisible && ( 
               <div className="aspect-[18/1] rounded-xl bg-red-100 flex items-center px-4 w-full box-border overflow-hidden">
                 <TriangleAlert className="text-red-500" />
                 <p className="text-sm truncate ml-3">
@@ -346,7 +357,7 @@ export default function Home() {
               </Button> */}
               <AppKonfig/>
               </div>
-              {/* )} */}
+            )} 
               {/* ide jönne a kód */}
 
             </div>

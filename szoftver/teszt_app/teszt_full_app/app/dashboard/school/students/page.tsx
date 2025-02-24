@@ -40,11 +40,15 @@ export default function Page() {
   // const [isOverlayVisible, setOverlayVisible] = useState(false);
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
 
-  // // Ellenőrizzük a localStorage-t a komponens betöltésekor
   useEffect(() => {
     const hasClickedBefore = localStorage.getItem("hasClickedOverlayButton");
     setButtonVisible(hasClickedBefore !== "true");
   }, []);
+
+  if (isButtonVisible === null) {
+    return null; 
+  }
+
 
   // Gomb kattintás kezelése
   // const handleButtonClick = () => {
@@ -58,11 +62,8 @@ export default function Page() {
   //   window.location.reload();
   // };
 
-  // Addig ne rendereljük a gombot, amíg nem töltöttük be az adatot
-  if (isButtonVisible === null) {
-    return null; // Várakozás a localStorage betöltésére
-  }
-
+ 
+ 
   return (
     <SidebarProvider>
       <AppSidebar />
