@@ -381,7 +381,7 @@ export default function Page() {
 
 
 
-          <Tabs defaultValue="breakDates" className="w-full">
+          <Tabs defaultValue="startendDate" className="w-full">
             <TabsList className="grid w-full grid-cols-4">
               <TabsTrigger value="startendDate">Első és utolsó tanítáis nap</TabsTrigger> {/*disabled */}
               {/* <TabsTrigger value="endDate">Utolsó tanítási nap</TabsTrigger>  */}
@@ -479,23 +479,28 @@ export default function Page() {
                           onSelect={(date) => setEndDate(date ?? undefined)}
                           initialFocus
                         />
-
-                      </PopoverContent>
-                    </Popover>
-                  </div>
-                  </div>
-                </CardContent>
-                <CardFooter>
+ {endDate && (
                   <Button
+                  className="w-full m-2"
                     onClick={() => {
                       if (!endDate) return;
                       const formattedDate = format(endDate, "yyyy-MM-dd");
                       updateSchoolYear("veg", formattedDate);
                     }}
-                    disabled={!endDate}
+                   
                   >
                     Mentés
                   </Button>
+                )}
+                      </PopoverContent>
+                      
+                    </Popover>
+                  </div>
+                  </div>
+                </CardContent>
+                <CardFooter>
+               
+                 {/*disabled={!endDate}*/}
                 </CardFooter>
               </Card>
               {/* <input
@@ -510,7 +515,7 @@ export default function Page() {
             <TabsContent value="noSchool">
               <Card>
                 <CardHeader>
-                  <CardTitle>Tanítáis nélküli munkanapok</CardTitle>
+                  <CardTitle>Tanítás nélküli munkanapok</CardTitle>
                   <CardDescription>
                     Aliquam metus eros, tristique nec semper id, congue eget metus.
                   </CardDescription>
@@ -532,7 +537,7 @@ export default function Page() {
             </TabsContent>
             <TabsContent value="plusDates">
 
-              <h3>Szombati tanítási napok</h3>
+              
               {yearSchedule?.plusDates?.length > 0 ? (
                 <ul>
                   {yearSchedule.plusDates.map((plusDate: any, index: number) => (
@@ -573,7 +578,7 @@ export default function Page() {
             </TabsContent>
             <TabsContent value="breakDates">
 
-              <h3>Szünetek rendje</h3>
+           
               {yearSchedule.breakDates.length > 0 ? (
                 <ul>
                   {yearSchedule.breakDates.map((breakPeriod: any, index: number) => (
