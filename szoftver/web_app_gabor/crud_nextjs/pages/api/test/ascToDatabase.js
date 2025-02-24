@@ -40,8 +40,15 @@ export default function handler(req, res) {
       const employees = extractTeachers(parsedXml);
       console.log(employees);
 
+      // Órarend kinyerése
+      const schedule = extractSchedule(parsedXml);
+      //console.log(schedule);
+
+      const jsonData = JSON.stringify(schedule, null, 2);
+       fs.writeFileSync('orarend.json', jsonData, 'utf8');
+       console.log('Órarend sikeresen kiírva: orarend.json');
       //await sendRingingData(ringing);
-      await sendEmployeesData(employees);
+      //await sendEmployeesData(employees);
 
       return res.status(200).json({
         message: 'XML adatok sikeresen feldolgozva és továbbítva!',
@@ -89,6 +96,96 @@ function extractTeachers(parsedXml) {
   }));
 }
 
+function extractSchedule(parsedXml) {
+  if (!parsedXml.timetable?.lessons?.[0]?.lesson || !parsedXml.timetable?.cards?.[0]?.card) return [];
+
+  // 1. Időszakok feldolgozása (óra kezdési és befejezési időpontjai)
+  const periods = Object.fromEntries(
+    parsedXml.timetable.periods[0].period.map(p => [
+      p.$.period.trim(),
+      { start: p.$.starttime, end: p.$.endtime }
+    ])
+  );
+
+  // 2. Napok dekódolása (`daysdef` alapján)
+  const dayCodes = ["Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek"];
+  const daysMap = Object.fromEntries(
+    parsedXml.timetable.daysdefs[0].daysdef.map(d => {
+      const daysBinary = d.$.days.padStart(5, '0'); // Biztosítjuk, hogy 5 karakter hosszú legyen
+      const activeDays = daysBinary
+        .split("")
+        .map((bit, index) => (bit === "1" ? dayCodes[index] : null))
+        .filter(Boolean);
+      
+      return [d.$.id.trim(), activeDays];
+    })
+  );
+
+  // 3. Tantárgyak és tanárok lekérése
+  const subjects = Object.fromEntries(
+    parsedXml.timetable.subjects[0].subject.map(s => [s.$.id.trim(), s.$.name])
+  );
+
+  const teachers = Object.fromEntries(
+    parsedXml.timetable.teachers[0].teacher.map(t => [t.$.id.trim(), t.$.name])
+  );
+
+  // 4. Osztályok és csoportok (`groups`) összekapcsolása
+  const groups = Object.fromEntries(
+    parsedXml.timetable.groups[0].group.map(g => [g.$.id.trim(), g.$.name])
+  );
+
+  // 5. Az órák (`lessons`) lekérése `lessonid` alapján
+  const lessons = Object.fromEntries(
+    parsedXml.timetable.lessons[0].lesson.map(lesson => [lesson.$.id.trim(), lesson.$])
+  );
+
+  // 6. Órarend feldolgozása a `cards` szekció alapján
+  return parsedXml.timetable.cards[0].card.flatMap(card => {
+    const lesson = lessons[card.$.lessonid.trim()];
+    if (!lesson) return []; // Ha nincs ilyen lesson, akkor lépjen tovább
+
+    // Period hozzárendelése
+    const period = periods[card.$.period?.trim()] || { start: "N/A", end: "N/A" };
+
+    // Napok dekódolása a `days` mezőből (közvetlenül a `card` adja meg)
+    const daysBinary = card.$.days.padStart(5, '0'); // Biztosítjuk, hogy 5 karakter hosszú legyen
+    const activeDays = daysBinary
+      .split("")
+      .map((bit, index) => (bit === "1" ? dayCodes[index] : null))
+      .filter(Boolean);
+
+    // Tanárok keresése (ellenőrizzük, hogy létezik-e teacherids)
+    const teacherIds = lesson.teacherids || ""; // Ha nincs, üres string
+    const teacherNames = teacherIds.split(",")
+      .map(id => teachers[id.trim()] || "Ismeretlen tanár")
+      .join(", ");
+
+    // Tantárgy keresése
+    const subjectName = subjects[lesson.subjectid?.trim()] || "Ismeretlen tantárgy";
+
+    // Csoport nevének megkeresése (`groups` táblából)
+    const groupIds = lesson.groupids?.split(",")
+      .map(id => groups[id.trim()] || id.trim()) // Lecseréljük a `groupids`-t a `groups` alapján
+      .join(", ") || "Nincs csoport";
+
+    return activeDays.map(day => ({
+      day,
+      start_time: period.start,
+      end_time: period.end,
+      subject: subjectName,
+      teacher: teacherNames,
+      group: groupIds
+    }));
+  });
+}
+
+
+
+
+
+
+
 async function sendRingingData(ringing) {
   try {
     const response = await fetch('http://localhost:3000/api/config/uploadRinging', {
@@ -128,3 +225,6 @@ async function sendEmployeesData(employees) {
     console.error('Hiba az employees adatok küldése közben:', error);
   }
 }
+
+
+
