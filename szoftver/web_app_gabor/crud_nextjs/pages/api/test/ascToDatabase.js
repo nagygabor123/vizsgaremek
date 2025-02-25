@@ -111,7 +111,7 @@ function extractSchedule(parsedXml) {
   const dayCodes = ["Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek"];
   const daysMap = Object.fromEntries(
     parsedXml.timetable.daysdefs[0].daysdef.map(d => {
-      const daysBinary = d.$.days.padStart(5, '0'); // Biztosítjuk, hogy 5 karakter hosszú legyen
+      const daysBinary = d.$.days.padStart(5, '0');
       const activeDays = daysBinary
         .split("")
         .map((bit, index) => (bit === "1" ? dayCodes[index] : null))
@@ -130,33 +130,41 @@ function extractSchedule(parsedXml) {
     parsedXml.timetable.teachers[0].teacher.map(t => [t.$.id.trim(), t.$.name])
   );
 
-  // 4. Osztályok és csoportok (`groups`) összekapcsolása
-  const groups = Object.fromEntries(
-    parsedXml.timetable.groups[0].group.map(g => [g.$.id.trim(), g.$.name])
+  // 4. Osztályok betöltése
+  const classes = Object.fromEntries(
+    parsedXml.timetable.classes[0].class.map(cls => [cls.$.id.trim(), cls.$.name])
   );
 
-  // 5. Az órák (`lessons`) lekérése `lessonid` alapján
+  // 5. Csoportok (`groups`) betöltése és kapcsolás osztályokhoz
+  const groups = Object.fromEntries(
+    parsedXml.timetable.groups[0].group.map(g => [
+      g.$.id.trim(), 
+      g.$.entireclass === "1" ? classes[g.$.classid.trim()] || "Ismeretlen osztály" : g.$.name
+    ])
+  );
+
+  // 6. Az órák (`lessons`) lekérése `lessonid` alapján
   const lessons = Object.fromEntries(
     parsedXml.timetable.lessons[0].lesson.map(lesson => [lesson.$.id.trim(), lesson.$])
   );
 
-  // 6. Órarend feldolgozása a `cards` szekció alapján
+  // 7. Órarend feldolgozása a `cards` szekció alapján
   return parsedXml.timetable.cards[0].card.flatMap(card => {
     const lesson = lessons[card.$.lessonid.trim()];
-    if (!lesson) return []; // Ha nincs ilyen lesson, akkor lépjen tovább
+    if (!lesson) return [];
 
     // Period hozzárendelése
     const period = periods[card.$.period?.trim()] || { start: "N/A", end: "N/A" };
 
-    // Napok dekódolása a `days` mezőből (közvetlenül a `card` adja meg)
-    const daysBinary = card.$.days.padStart(5, '0'); // Biztosítjuk, hogy 5 karakter hosszú legyen
+    // Napok dekódolása a `days` mezőből
+    const daysBinary = card.$.days.padStart(5, '0');
     const activeDays = daysBinary
       .split("")
       .map((bit, index) => (bit === "1" ? dayCodes[index] : null))
       .filter(Boolean);
 
-    // Tanárok keresése (ellenőrizzük, hogy létezik-e teacherids)
-    const teacherIds = lesson.teacherids || ""; // Ha nincs, üres string
+    // Tanárok keresése
+    const teacherIds = lesson.teacherids || "";
     const teacherNames = teacherIds.split(",")
       .map(id => teachers[id.trim()] || "Ismeretlen tanár")
       .join(", ");
@@ -166,7 +174,7 @@ function extractSchedule(parsedXml) {
 
     // Csoport nevének megkeresése (`groups` táblából)
     const groupIds = lesson.groupids?.split(",")
-      .map(id => groups[id.trim()] || id.trim()) // Lecseréljük a `groupids`-t a `groups` alapján
+      .map(id => groups[id.trim()] || id.trim())
       .join(", ") || "Nincs csoport";
 
     return activeDays.map(day => ({
@@ -179,6 +187,7 @@ function extractSchedule(parsedXml) {
     }));
   });
 }
+
 
 
 

@@ -37,7 +37,7 @@
     "end_time": "8:55",
     "subject": "Munkav�llal�i ismeretek",
     "teacher": "H�di �gnes",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.D"
   },
   {
     "day": "Szerda",
@@ -45,7 +45,7 @@
     "end_time": "8:55",
     "subject": "Irodalom",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.D"
   },
   {
     "day": "Csütörtök",
@@ -53,7 +53,7 @@
     "end_time": "8:00",
     "subject": "Irodalom",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.D"
   },
   {
     "day": "Hétfő",
@@ -61,7 +61,7 @@
     "end_time": "12:40",
     "subject": "Irodalom",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.D"
   },
   {
     "day": "Szerda",
@@ -69,7 +69,7 @@
     "end_time": "9:50",
     "subject": "Magyar nyelv ",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.D"
   },
   {
     "day": "Péntek",
@@ -77,7 +77,7 @@
     "end_time": "11:40",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.I"
   },
   {
     "day": "Hétfő",
@@ -85,7 +85,7 @@
     "end_time": "10:45",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.I"
   },
   {
     "day": "Kedd",
@@ -93,7 +93,7 @@
     "end_time": "10:45",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.I"
   },
   {
     "day": "Kedd",
@@ -101,7 +101,7 @@
     "end_time": "8:00",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.I"
   },
   {
     "day": "Hétfő",
@@ -109,7 +109,7 @@
     "end_time": "8:00",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Kedd",
@@ -117,7 +117,7 @@
     "end_time": "14:30",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Szerda",
@@ -125,7 +125,7 @@
     "end_time": "12:40",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Péntek",
@@ -133,7 +133,7 @@
     "end_time": "10:45",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Szerda",
@@ -141,7 +141,7 @@
     "end_time": "8:55",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Péntek",
@@ -149,7 +149,7 @@
     "end_time": "13:40",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Hétfő",
@@ -157,7 +157,7 @@
     "end_time": "12:40",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Kedd",
@@ -165,7 +165,7 @@
     "end_time": "12:40",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Péntek",
@@ -173,7 +173,7 @@
     "end_time": "9:50",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Hétfő",
@@ -181,7 +181,7 @@
     "end_time": "8:55",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Kedd",
@@ -189,7 +189,7 @@
     "end_time": "8:00",
     "subject": "Irodalom",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.D"
   },
   {
     "day": "Péntek",
@@ -197,7 +197,7 @@
     "end_time": "10:45",
     "subject": "Irodalom",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.D"
   },
   {
     "day": "Hétfő",
@@ -205,7 +205,7 @@
     "end_time": "8:55",
     "subject": "Irodalom",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.D"
   },
   {
     "day": "Péntek",
@@ -213,7 +213,7 @@
     "end_time": "13:40",
     "subject": "Magyar nyelv ",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.D"
   },
   {
     "day": "Hétfő",
@@ -221,7 +221,7 @@
     "end_time": "13:40",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knya"
   },
   {
     "day": "Hétfő",
@@ -229,7 +229,7 @@
     "end_time": "14:30",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knya"
   },
   {
     "day": "Szerda",
@@ -237,7 +237,7 @@
     "end_time": "13:40",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knya"
   },
   {
     "day": "Csütörtök",
@@ -245,7 +245,7 @@
     "end_time": "10:45",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knya"
   },
   {
     "day": "Péntek",
@@ -253,7 +253,7 @@
     "end_time": "11:40",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knya"
   },
   {
     "day": "Hétfő",
@@ -293,7 +293,7 @@
     "end_time": "14:30",
     "subject": "Vizu�lis kommunik�ci�",
     "teacher": "�ron-G�r�g Szilvia",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knya"
   },
   {
     "day": "Csütörtök",
@@ -349,7 +349,7 @@
     "end_time": "13:40",
     "subject": "Komplex term�szettudom�ny",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Csütörtök",
@@ -357,7 +357,7 @@
     "end_time": "8:00",
     "subject": "Komplex term�szettudom�ny",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Péntek",
@@ -365,7 +365,7 @@
     "end_time": "8:00",
     "subject": "Komplex term�szettudom�ny",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Csütörtök",
@@ -389,7 +389,7 @@
     "end_time": "15:20",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.D"
   },
   {
     "day": "Kedd",
@@ -397,7 +397,7 @@
     "end_time": "14:30",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.D"
   },
   {
     "day": "Péntek",
@@ -405,7 +405,7 @@
     "end_time": "12:40",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.D"
   },
   {
     "day": "Csütörtök",
@@ -413,7 +413,7 @@
     "end_time": "13:40",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.D"
   },
   {
     "day": "Szerda",
@@ -421,7 +421,7 @@
     "end_time": "11:40",
     "subject": "Komplex term�szettudom�ny",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.D"
   },
   {
     "day": "Péntek",
@@ -429,7 +429,7 @@
     "end_time": "8:55",
     "subject": "Komplex term�szettudom�ny",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.D"
   },
   {
     "day": "Kedd",
@@ -437,7 +437,7 @@
     "end_time": "12:40",
     "subject": "Komplex term�szettudom�ny",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.D"
   },
   {
     "day": "Csütörtök",
@@ -445,7 +445,7 @@
     "end_time": "12:40",
     "subject": "P�nz�gyi �s v�llalkoz�i ismeretek",
     "teacher": "�ron-G�r�g Szilvia",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Péntek",
@@ -453,7 +453,7 @@
     "end_time": "9:50",
     "subject": "Fizika",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Kedd",
@@ -461,7 +461,7 @@
     "end_time": "9:50",
     "subject": "Fizika",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Péntek",
@@ -469,7 +469,7 @@
     "end_time": "8:55",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Csütörtök",
@@ -477,7 +477,7 @@
     "end_time": "13:40",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Szerda",
@@ -485,7 +485,7 @@
     "end_time": "12:40",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Hétfő",
@@ -541,7 +541,7 @@
     "end_time": "9:50",
     "subject": "P�nz�gyi �s v�llalkoz�i ismeretek",
     "teacher": "�ron-G�r�g Szilvia",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Kedd",
@@ -549,7 +549,7 @@
     "end_time": "9:50",
     "subject": "Oszt�lyk�z�ss�g-�p�t� program",
     "teacher": "Bog�csi Csaba Mih�ly",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Péntek",
@@ -557,7 +557,7 @@
     "end_time": "11:40",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Kedd",
@@ -565,7 +565,7 @@
     "end_time": "11:40",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Csütörtök",
@@ -589,7 +589,7 @@
     "end_time": "13:40",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.I"
   },
   {
     "day": "Csütörtök",
@@ -597,7 +597,7 @@
     "end_time": "12:40",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.I"
   },
   {
     "day": "Szerda",
@@ -605,7 +605,7 @@
     "end_time": "13:40",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.I"
   },
   {
     "day": "Szerda",
@@ -613,7 +613,7 @@
     "end_time": "12:40",
     "subject": "Fizika",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.I"
   },
   {
     "day": "Csütörtök",
@@ -621,7 +621,7 @@
     "end_time": "8:55",
     "subject": "Fizika",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.I"
   },
   {
     "day": "Szerda",
@@ -629,7 +629,7 @@
     "end_time": "14:30",
     "subject": "M�szaki sz�m�t�sok",
     "teacher": "Preisz Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Csütörtök",
@@ -637,7 +637,7 @@
     "end_time": "12:40",
     "subject": "M�szaki sz�m�t�sok",
     "teacher": "Preisz Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Kedd",
@@ -645,7 +645,7 @@
     "end_time": "11:40",
     "subject": "Fizika",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.D"
   },
   {
     "day": "Csütörtök",
@@ -653,7 +653,7 @@
     "end_time": "13:40",
     "subject": "Fizika",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.D"
   },
   {
     "day": "Csütörtök",
@@ -661,7 +661,7 @@
     "end_time": "11:40",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Szerda",
@@ -669,7 +669,7 @@
     "end_time": "11:40",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Péntek",
@@ -677,7 +677,7 @@
     "end_time": "12:40",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Csütörtök",
@@ -685,7 +685,7 @@
     "end_time": "8:55",
     "subject": "IKT projektmunka I.",
     "teacher": "H�di �gnes",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.D"
   },
   {
     "day": "Péntek",
@@ -693,7 +693,7 @@
     "end_time": "9:50",
     "subject": "Munkav�llal�i ismeretek",
     "teacher": "H�di �gnes",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Csütörtök",
@@ -701,7 +701,7 @@
     "end_time": "12:40",
     "subject": "Fizika",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.D"
   },
   {
     "day": "Szerda",
@@ -709,7 +709,7 @@
     "end_time": "14:30",
     "subject": "Fizika",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.D"
   },
   {
     "day": "Hétfő",
@@ -973,7 +973,7 @@
     "end_time": "13:40",
     "subject": "G�p�szeti alapismeretek2",
     "teacher": "�ron-G�r�g Szilvia",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Szerda",
@@ -981,7 +981,7 @@
     "end_time": "13:40",
     "subject": "G�p�szeti alapismeretek1",
     "teacher": "�ron-G�r�g Szilvia",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Kedd",
@@ -989,7 +989,7 @@
     "end_time": "10:45",
     "subject": "P�nz�gyi �s v�llalkoz�i ismeretek",
     "teacher": "�ron-G�r�g Szilvia",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.C"
   },
   {
     "day": "Szerda",
@@ -997,7 +997,7 @@
     "end_time": "10:45",
     "subject": "Fizika",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.C"
   },
   {
     "day": "Péntek",
@@ -1005,7 +1005,7 @@
     "end_time": "10:45",
     "subject": "Fizika",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.C"
   },
   {
     "day": "Kedd",
@@ -1061,7 +1061,7 @@
     "end_time": "13:40",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.D"
   },
   {
     "day": "Szerda",
@@ -1069,7 +1069,7 @@
     "end_time": "12:40",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.D"
   },
   {
     "day": "Péntek",
@@ -1077,7 +1077,7 @@
     "end_time": "9:50",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.D"
   },
   {
     "day": "Kedd",
@@ -1085,7 +1085,7 @@
     "end_time": "12:40",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.D"
   },
   {
     "day": "Kedd",
@@ -1093,7 +1093,7 @@
     "end_time": "14:30",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.D"
   },
   {
     "day": "Hétfő",
@@ -1101,7 +1101,7 @@
     "end_time": "11:40",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.D"
   },
   {
     "day": "Szerda",
@@ -1109,7 +1109,7 @@
     "end_time": "11:40",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Csütörtök",
@@ -1117,7 +1117,7 @@
     "end_time": "10:45",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Péntek",
@@ -1125,7 +1125,7 @@
     "end_time": "10:45",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Kedd",
@@ -1133,7 +1133,7 @@
     "end_time": "9:50",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Kedd",
@@ -1141,7 +1141,7 @@
     "end_time": "13:40",
     "subject": "Fizika",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Péntek",
@@ -1149,7 +1149,7 @@
     "end_time": "11:40",
     "subject": "Fizika",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Csütörtök",
@@ -1189,7 +1189,7 @@
     "end_time": "8:55",
     "subject": "Irodalom",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Péntek",
@@ -1197,7 +1197,7 @@
     "end_time": "14:30",
     "subject": "Irodalom",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Péntek",
@@ -1205,7 +1205,7 @@
     "end_time": "11:40",
     "subject": "Irodalom",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Kedd",
@@ -1213,7 +1213,7 @@
     "end_time": "9:50",
     "subject": "Magyar nyelv ",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Hétfő",
@@ -1245,7 +1245,7 @@
     "end_time": "13:40",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Hétfő",
@@ -1253,7 +1253,7 @@
     "end_time": "10:45",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Hétfő",
@@ -1261,7 +1261,7 @@
     "end_time": "11:40",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Péntek",
@@ -1269,7 +1269,7 @@
     "end_time": "13:40",
     "subject": "Fizika",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Kedd",
@@ -1277,7 +1277,7 @@
     "end_time": "8:00",
     "subject": "Fizika",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Szerda",
@@ -1285,7 +1285,7 @@
     "end_time": "13:40",
     "subject": "M�szaki sz�m�t�sok",
     "teacher": "Preisz Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Szerda",
@@ -1293,7 +1293,7 @@
     "end_time": "8:55",
     "subject": "M�szaki sz�m�t�sok",
     "teacher": "Preisz Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Szerda",
@@ -1301,7 +1301,7 @@
     "end_time": "12:40",
     "subject": "M�szaki sz�m�t�sok",
     "teacher": "Preisz Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Csütörtök",
@@ -1309,7 +1309,7 @@
     "end_time": "10:45",
     "subject": "Fizika",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Kedd",
@@ -1317,7 +1317,7 @@
     "end_time": "10:45",
     "subject": "Fizika",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Szerda",
@@ -1325,7 +1325,7 @@
     "end_time": "13:40",
     "subject": "Gy�rt�s-el�k�sz�t�s1",
     "teacher": "Pallagi Ern� Ferenc",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Csütörtök",
@@ -1341,7 +1341,7 @@
     "end_time": "8:55",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Hétfő",
@@ -1349,7 +1349,7 @@
     "end_time": "14:30",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Hétfő",
@@ -1405,7 +1405,7 @@
     "end_time": "11:40",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.D"
   },
   {
     "day": "Hétfő",
@@ -1413,7 +1413,7 @@
     "end_time": "8:55",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.D"
   },
   {
     "day": "Csütörtök",
@@ -1421,7 +1421,7 @@
     "end_time": "13:40",
     "subject": "Matematika",
     "teacher": "Sim� Zsuzsanna",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.I"
   },
   {
     "day": "Csütörtök",
@@ -1429,7 +1429,7 @@
     "end_time": "10:45",
     "subject": "Matematika",
     "teacher": "Sim� Zsuzsanna",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.I"
   },
   {
     "day": "Hétfő",
@@ -1437,7 +1437,7 @@
     "end_time": "14:30",
     "subject": "Matematika",
     "teacher": "Sim� Zsuzsanna",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.I"
   },
   {
     "day": "Szerda",
@@ -1445,7 +1445,7 @@
     "end_time": "11:40",
     "subject": "Matematika",
     "teacher": "Sim� Zsuzsanna",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.I"
   },
   {
     "day": "Csütörtök",
@@ -1453,7 +1453,7 @@
     "end_time": "15:20",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.A"
   },
   {
     "day": "Csütörtök",
@@ -1461,7 +1461,7 @@
     "end_time": "8:00",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.A"
   },
   {
     "day": "Hétfő",
@@ -1469,7 +1469,7 @@
     "end_time": "11:40",
     "subject": "M�szaki sz�m�t�sok",
     "teacher": "Preisz Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.A"
   },
   {
     "day": "Hétfő",
@@ -1477,7 +1477,7 @@
     "end_time": "10:45",
     "subject": "M�szaki sz�m�t�sok",
     "teacher": "Preisz Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.A"
   },
   {
     "day": "Kedd",
@@ -1485,7 +1485,7 @@
     "end_time": "8:55",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Hétfő",
@@ -1493,7 +1493,7 @@
     "end_time": "11:40",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Szerda",
@@ -1501,7 +1501,7 @@
     "end_time": "8:00",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Péntek",
@@ -1509,7 +1509,7 @@
     "end_time": "8:55",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Szerda",
@@ -1517,7 +1517,7 @@
     "end_time": "8:55",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.D"
   },
   {
     "day": "Csütörtök",
@@ -1525,7 +1525,7 @@
     "end_time": "14:30",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.D"
   },
   {
     "day": "Péntek",
@@ -1533,7 +1533,7 @@
     "end_time": "13:40",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.D"
   },
   {
     "day": "Péntek",
@@ -1541,7 +1541,7 @@
     "end_time": "12:40",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.D"
   },
   {
     "day": "Hétfő",
@@ -1549,7 +1549,7 @@
     "end_time": "11:40",
     "subject": "Matematika",
     "teacher": "Sim� Zsuzsanna",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.D"
   },
   {
     "day": "Péntek",
@@ -1557,7 +1557,7 @@
     "end_time": "14:30",
     "subject": "Matematika",
     "teacher": "Sim� Zsuzsanna",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.D"
   },
   {
     "day": "Péntek",
@@ -1565,7 +1565,7 @@
     "end_time": "11:40",
     "subject": "Matematika",
     "teacher": "Sim� Zsuzsanna",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.D"
   },
   {
     "day": "Kedd",
@@ -1573,7 +1573,7 @@
     "end_time": "10:45",
     "subject": "Matematika",
     "teacher": "Sim� Zsuzsanna",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.D"
   },
   {
     "day": "Hétfő",
@@ -1581,7 +1581,7 @@
     "end_time": "14:30",
     "subject": "�llampolg�ri ismeretek",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.I"
   },
   {
     "day": "Hétfő",
@@ -1605,7 +1605,7 @@
     "end_time": "9:50",
     "subject": "Komplex term�szettudom�ny",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Csütörtök",
@@ -1613,7 +1613,7 @@
     "end_time": "14:30",
     "subject": "Komplex term�szettudom�ny",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Péntek",
@@ -1621,7 +1621,7 @@
     "end_time": "12:40",
     "subject": "Komplex term�szettudom�ny",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Szerda",
@@ -1629,7 +1629,7 @@
     "end_time": "8:55",
     "subject": "Digit�lis kult�ra",
     "teacher": "H�di �gnes",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knya"
   },
   {
     "day": "Szerda",
@@ -1637,7 +1637,7 @@
     "end_time": "9:50",
     "subject": "Digit�lis kult�ra",
     "teacher": "H�di �gnes",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knya"
   },
   {
     "day": "Szerda",
@@ -1645,7 +1645,7 @@
     "end_time": "10:45",
     "subject": "Digit�lis kult�ra",
     "teacher": "H�di �gnes",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knya"
   },
   {
     "day": "Hétfő",
@@ -1653,7 +1653,7 @@
     "end_time": "14:30",
     "subject": "Hittan",
     "teacher": "V�gh Andrea",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.C"
   },
   {
     "day": "Szerda",
@@ -1661,7 +1661,7 @@
     "end_time": "11:40",
     "subject": "Hittan",
     "teacher": "V�gh Andrea",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.C"
   },
   {
     "day": "Péntek",
@@ -1669,7 +1669,7 @@
     "end_time": "9:50",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Kedd",
@@ -1677,7 +1677,7 @@
     "end_time": "12:40",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Hétfő",
@@ -1685,7 +1685,7 @@
     "end_time": "8:00",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.I"
   },
   {
     "day": "Péntek",
@@ -1693,7 +1693,7 @@
     "end_time": "8:55",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.I"
   },
   {
     "day": "Csütörtök",
@@ -1701,7 +1701,7 @@
     "end_time": "8:00",
     "subject": "M�szaki sz�m�t�sok",
     "teacher": "Preisz Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Kedd",
@@ -1741,7 +1741,7 @@
     "end_time": "9:50",
     "subject": "IKT projektmunka I.",
     "teacher": "H�di �gnes",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Kedd",
@@ -1765,7 +1765,7 @@
     "end_time": "8:00",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.D"
   },
   {
     "day": "Hétfő",
@@ -1773,7 +1773,7 @@
     "end_time": "9:50",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.D"
   },
   {
     "day": "Szerda",
@@ -1781,7 +1781,7 @@
     "end_time": "12:40",
     "subject": "Munkav�llal�i ismeretek",
     "teacher": "�ron-G�r�g Szilvia",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.C"
   },
   {
     "day": "Csütörtök",
@@ -1829,7 +1829,7 @@
     "end_time": "13:40",
     "subject": "G�p�szeti alapismeretek3",
     "teacher": "T�rk�ly Csaba Gy�rgy",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Csütörtök",
@@ -1837,7 +1837,7 @@
     "end_time": "8:55",
     "subject": "Gy�rt�s-el�k�sz�t�s1",
     "teacher": "Pallagi Ern� Ferenc",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Szerda",
@@ -1869,7 +1869,7 @@
     "end_time": "10:45",
     "subject": "Villamos alapismeretek1",
     "teacher": "Pallagi Ern� Ferenc",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.C"
   },
   {
     "day": "Hétfő",
@@ -1877,7 +1877,7 @@
     "end_time": "11:40",
     "subject": "Villamos alapismeretek1",
     "teacher": "Pallagi Ern� Ferenc",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.C"
   },
   {
     "day": "Szerda",
@@ -1957,7 +1957,7 @@
     "end_time": "12:40",
     "subject": "M�szaki sz�m�t�sok",
     "teacher": "Preisz Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Péntek",
@@ -1965,7 +1965,7 @@
     "end_time": "11:40",
     "subject": "M�szaki sz�m�t�sok",
     "teacher": "Preisz Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Péntek",
@@ -1981,7 +1981,7 @@
     "end_time": "10:45",
     "subject": "Gy�rt�s-el�k�sz�t�s1",
     "teacher": "Pallagi Ern� Ferenc",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Csütörtök",
@@ -1989,7 +1989,7 @@
     "end_time": "11:40",
     "subject": "Fizika",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Kedd",
@@ -1997,7 +1997,7 @@
     "end_time": "8:55",
     "subject": "Fizika",
     "teacher": "Gy�ngy�si Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Hétfő",
@@ -2037,7 +2037,7 @@
     "end_time": "8:55",
     "subject": "Matematika",
     "teacher": "Sim� Zsuzsanna",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Kedd",
@@ -2045,7 +2045,7 @@
     "end_time": "11:40",
     "subject": "Matematika",
     "teacher": "Sim� Zsuzsanna",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Kedd",
@@ -2053,7 +2053,7 @@
     "end_time": "14:30",
     "subject": "Matematika",
     "teacher": "Sim� Zsuzsanna",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Hétfő",
@@ -2061,7 +2061,7 @@
     "end_time": "8:55",
     "subject": "Matematika",
     "teacher": "Sim� Zsuzsanna",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Hétfő",
@@ -2093,7 +2093,7 @@
     "end_time": "12:40",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "Pal�sti �d�m",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Csütörtök",
@@ -2101,7 +2101,7 @@
     "end_time": "8:55",
     "subject": "M�szaki rajz",
     "teacher": "T�rk�ly Csaba Gy�rgy",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Csütörtök",
@@ -2109,7 +2109,7 @@
     "end_time": "11:40",
     "subject": "M�szaki rajz",
     "teacher": "T�rk�ly Csaba Gy�rgy",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Csütörtök",
@@ -2117,7 +2117,7 @@
     "end_time": "8:00",
     "subject": "Irodalom",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Kedd",
@@ -2125,7 +2125,7 @@
     "end_time": "8:00",
     "subject": "Irodalom",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Hétfő",
@@ -2133,7 +2133,7 @@
     "end_time": "8:00",
     "subject": "Irodalom",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Csütörtök",
@@ -2141,7 +2141,7 @@
     "end_time": "9:50",
     "subject": "Magyar nyelv ",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Kedd",
@@ -2213,7 +2213,7 @@
     "end_time": "12:40",
     "subject": "Testnevel�s",
     "teacher": "Bal�zs L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Csütörtök",
@@ -2221,7 +2221,7 @@
     "end_time": "13:40",
     "subject": "Testnevel�s",
     "teacher": "Bal�zs L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Csütörtök",
@@ -2229,7 +2229,7 @@
     "end_time": "14:30",
     "subject": "Testnevel�s",
     "teacher": "Bal�zs L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Hétfő",
@@ -2237,7 +2237,7 @@
     "end_time": "14:30",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "Csenkin� Zatyk� Helga",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Péntek",
@@ -2253,7 +2253,7 @@
     "end_time": "13:40",
     "subject": "Hittan",
     "teacher": "V�gh Andrea",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Kedd",
@@ -2261,7 +2261,7 @@
     "end_time": "14:30",
     "subject": "Hittan",
     "teacher": "V�gh Andrea",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Péntek",
@@ -2397,7 +2397,7 @@
     "end_time": "10:45",
     "subject": "M�szaki sz�m�t�sok",
     "teacher": "Preisz Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Kedd",
@@ -2405,7 +2405,7 @@
     "end_time": "13:40",
     "subject": "M�szaki sz�m�t�sok",
     "teacher": "Preisz Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Péntek",
@@ -2413,7 +2413,7 @@
     "end_time": "13:40",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Szerda",
@@ -2421,7 +2421,7 @@
     "end_time": "12:40",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Szerda",
@@ -2429,7 +2429,7 @@
     "end_time": "8:00",
     "subject": "Irodalom",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.A"
   },
   {
     "day": "Csütörtök",
@@ -2437,7 +2437,7 @@
     "end_time": "11:40",
     "subject": "Irodalom",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.A"
   },
   {
     "day": "Péntek",
@@ -2445,7 +2445,7 @@
     "end_time": "8:00",
     "subject": "Irodalom",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.A"
   },
   {
     "day": "Csütörtök",
@@ -2453,7 +2453,7 @@
     "end_time": "10:45",
     "subject": "Magyar nyelv ",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.A"
   },
   {
     "day": "Péntek",
@@ -2557,7 +2557,7 @@
     "end_time": "11:40",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.A"
   },
   {
     "day": "Péntek",
@@ -2565,7 +2565,7 @@
     "end_time": "13:40",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.A"
   },
   {
     "day": "Péntek",
@@ -2573,7 +2573,7 @@
     "end_time": "14:30",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.A"
   },
   {
     "day": "Csütörtök",
@@ -2581,7 +2581,7 @@
     "end_time": "9:50",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "T�th T�mea",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.A"
   },
   {
     "day": "Hétfő",
@@ -2589,7 +2589,7 @@
     "end_time": "8:55",
     "subject": "Anyagismeret �s gy�rt�stechnol�gia",
     "teacher": "Kov�cs �va",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.A"
   },
   {
     "day": "Hétfő",
@@ -2597,7 +2597,7 @@
     "end_time": "9:50",
     "subject": "Anyagismeret �s gy�rt�stechnol�gia",
     "teacher": "Kov�cs �va",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.A"
   },
   {
     "day": "Hétfő",
@@ -2605,7 +2605,7 @@
     "end_time": "8:00",
     "subject": "Anyagismeret �s gy�rt�stechnol�gia",
     "teacher": "Kov�cs �va",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.A"
   },
   {
     "day": "Kedd",
@@ -2701,7 +2701,7 @@
     "end_time": "8:55",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "13.A"
   },
   {
     "day": "Csütörtök",
@@ -2949,7 +2949,7 @@
     "end_time": "9:50",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "Sim� Zsuzsanna",
-    "group": "Eg�sz oszt�ly"
+    "group": "13.A"
   },
   {
     "day": "Péntek",
@@ -3085,7 +3085,7 @@
     "end_time": "10:45",
     "subject": "Magyar nyelv ",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knya"
   },
   {
     "day": "Csütörtök",
@@ -3093,7 +3093,7 @@
     "end_time": "13:40",
     "subject": "Magyar nyelv ",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knya"
   },
   {
     "day": "Hétfő",
@@ -3101,7 +3101,7 @@
     "end_time": "8:55",
     "subject": "Matematika",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knya"
   },
   {
     "day": "Kedd",
@@ -3109,7 +3109,7 @@
     "end_time": "10:45",
     "subject": "Matematika",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knya"
   },
   {
     "day": "Hétfő",
@@ -3117,7 +3117,7 @@
     "end_time": "9:50",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "T�th Levente Zsoltn�",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knya"
   },
   {
     "day": "Kedd",
@@ -3125,7 +3125,7 @@
     "end_time": "8:55",
     "subject": "Magyar nyelv ",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyc"
   },
   {
     "day": "Péntek",
@@ -3133,7 +3133,7 @@
     "end_time": "8:55",
     "subject": "Magyar nyelv ",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyc"
   },
   {
     "day": "Kedd",
@@ -3173,7 +3173,7 @@
     "end_time": "9:50",
     "subject": "Matematika",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyc"
   },
   {
     "day": "Csütörtök",
@@ -3181,7 +3181,7 @@
     "end_time": "8:55",
     "subject": "Matematika",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyc"
   },
   {
     "day": "Hétfő",
@@ -3213,7 +3213,7 @@
     "end_time": "13:40",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyc"
   },
   {
     "day": "Kedd",
@@ -3221,7 +3221,7 @@
     "end_time": "11:40",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyc"
   },
   {
     "day": "Szerda",
@@ -3229,7 +3229,7 @@
     "end_time": "10:45",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyc"
   },
   {
     "day": "Péntek",
@@ -3237,7 +3237,7 @@
     "end_time": "11:40",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyc"
   },
   {
     "day": "Csütörtök",
@@ -3245,7 +3245,7 @@
     "end_time": "12:40",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyc"
   },
   {
     "day": "Hétfő",
@@ -3269,7 +3269,7 @@
     "end_time": "13:40",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyc"
   },
   {
     "day": "Kedd",
@@ -3277,7 +3277,7 @@
     "end_time": "8:00",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyc"
   },
   {
     "day": "Hétfő",
@@ -3285,7 +3285,7 @@
     "end_time": "13:40",
     "subject": "Magyar nyelv ",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyd"
   },
   {
     "day": "Szerda",
@@ -3293,7 +3293,7 @@
     "end_time": "8:55",
     "subject": "Magyar nyelv ",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyd"
   },
   {
     "day": "Csütörtök",
@@ -3341,7 +3341,7 @@
     "end_time": "11:40",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyd"
   },
   {
     "day": "Csütörtök",
@@ -3349,7 +3349,7 @@
     "end_time": "8:00",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyd"
   },
   {
     "day": "Csütörtök",
@@ -3381,7 +3381,7 @@
     "end_time": "9:50",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyd"
   },
   {
     "day": "Csütörtök",
@@ -3389,7 +3389,7 @@
     "end_time": "9:50",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyd"
   },
   {
     "day": "Szerda",
@@ -3397,7 +3397,7 @@
     "end_time": "14:30",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyd"
   },
   {
     "day": "Kedd",
@@ -3405,7 +3405,7 @@
     "end_time": "10:45",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyd"
   },
   {
     "day": "Péntek",
@@ -3413,7 +3413,7 @@
     "end_time": "9:50",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyd"
   },
   {
     "day": "Péntek",
@@ -3421,7 +3421,7 @@
     "end_time": "12:40",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyd"
   },
   {
     "day": "Szerda",
@@ -3429,7 +3429,7 @@
     "end_time": "8:00",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyd"
   },
   {
     "day": "Kedd",
@@ -3437,7 +3437,7 @@
     "end_time": "13:40",
     "subject": "Irodalom",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Péntek",
@@ -3445,7 +3445,7 @@
     "end_time": "12:40",
     "subject": "Irodalom",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Csütörtök",
@@ -3453,7 +3453,7 @@
     "end_time": "9:50",
     "subject": "Irodalom",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Péntek",
@@ -3461,7 +3461,7 @@
     "end_time": "9:50",
     "subject": "Magyar nyelv ",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Hétfő",
@@ -3469,7 +3469,7 @@
     "end_time": "9:50",
     "subject": "Magyar nyelv ",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Kedd",
@@ -3477,7 +3477,7 @@
     "end_time": "9:50",
     "subject": "Digit�lis kult�ra",
     "teacher": "H�di �gnes",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Kedd",
@@ -3485,7 +3485,7 @@
     "end_time": "10:45",
     "subject": "Digit�lis kult�ra",
     "teacher": "H�di �gnes",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Szerda",
@@ -3493,7 +3493,7 @@
     "end_time": "8:55",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "Nov�k Olga",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Hétfő",
@@ -3501,7 +3501,7 @@
     "end_time": "9:50",
     "subject": "Irodalom",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Péntek",
@@ -3509,7 +3509,7 @@
     "end_time": "11:40",
     "subject": "Irodalom",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Csütörtök",
@@ -3517,7 +3517,7 @@
     "end_time": "10:45",
     "subject": "Irodalom",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Hétfő",
@@ -3525,7 +3525,7 @@
     "end_time": "8:55",
     "subject": "Magyar nyelv ",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Szerda",
@@ -3533,7 +3533,7 @@
     "end_time": "10:45",
     "subject": "Magyar nyelv ",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Péntek",
@@ -3541,7 +3541,7 @@
     "end_time": "9:50",
     "subject": "Matematika",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Szerda",
@@ -3549,7 +3549,7 @@
     "end_time": "12:40",
     "subject": "Matematika",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Csütörtök",
@@ -3557,7 +3557,7 @@
     "end_time": "12:40",
     "subject": "Matematika",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Hétfő",
@@ -3565,7 +3565,7 @@
     "end_time": "11:40",
     "subject": "Matematika",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Kedd",
@@ -3573,7 +3573,7 @@
     "end_time": "11:40",
     "subject": "Matematika",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Szerda",
@@ -3613,7 +3613,7 @@
     "end_time": "8:00",
     "subject": "Testnevel�s",
     "teacher": "Al�cs Gyula L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Kedd",
@@ -3621,7 +3621,7 @@
     "end_time": "8:00",
     "subject": "Testnevel�s",
     "teacher": "Al�cs Gyula L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Péntek",
@@ -3629,7 +3629,7 @@
     "end_time": "8:55",
     "subject": "Testnevel�s",
     "teacher": "Al�cs Gyula L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Szerda",
@@ -3637,7 +3637,7 @@
     "end_time": "9:50",
     "subject": "Testnevel�s",
     "teacher": "Al�cs Gyula L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Péntek",
@@ -3645,7 +3645,7 @@
     "end_time": "10:45",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "T�rk�ly Csaba Gy�rgy",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Csütörtök",
@@ -3653,7 +3653,7 @@
     "end_time": "11:40",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Hétfő",
@@ -3661,7 +3661,7 @@
     "end_time": "10:45",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Hétfő",
@@ -3669,7 +3669,7 @@
     "end_time": "10:45",
     "subject": "Irodalom",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Csütörtök",
@@ -3677,7 +3677,7 @@
     "end_time": "11:40",
     "subject": "Irodalom",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Szerda",
@@ -3685,7 +3685,7 @@
     "end_time": "11:40",
     "subject": "Irodalom",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Szerda",
@@ -3693,7 +3693,7 @@
     "end_time": "14:30",
     "subject": "Magyar nyelv ",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Hétfő",
@@ -3701,7 +3701,7 @@
     "end_time": "11:40",
     "subject": "Magyar nyelv ",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Péntek",
@@ -3757,7 +3757,7 @@
     "end_time": "11:40",
     "subject": "Matematika",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Kedd",
@@ -3765,7 +3765,7 @@
     "end_time": "12:40",
     "subject": "Matematika",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Szerda",
@@ -3773,7 +3773,7 @@
     "end_time": "8:55",
     "subject": "Matematika",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Csütörtök",
@@ -3781,7 +3781,7 @@
     "end_time": "13:40",
     "subject": "Matematika",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Péntek",
@@ -3837,7 +3837,7 @@
     "end_time": "11:40",
     "subject": "Testnevel�s",
     "teacher": "Bal�zs L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Hétfő",
@@ -3845,7 +3845,7 @@
     "end_time": "9:50",
     "subject": "Testnevel�s",
     "teacher": "Bal�zs L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Csütörtök",
@@ -3853,7 +3853,7 @@
     "end_time": "8:00",
     "subject": "Testnevel�s",
     "teacher": "Bal�zs L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Csütörtök",
@@ -3861,7 +3861,7 @@
     "end_time": "8:55",
     "subject": "Testnevel�s",
     "teacher": "Bal�zs L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Péntek",
@@ -3869,7 +3869,7 @@
     "end_time": "8:00",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "�ron-G�r�g Szilvia",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Péntek",
@@ -3877,7 +3877,7 @@
     "end_time": "10:45",
     "subject": "Komplex term�szettudom�ny",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Szerda",
@@ -3885,7 +3885,7 @@
     "end_time": "9:50",
     "subject": "Komplex term�szettudom�ny",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Kedd",
@@ -3893,7 +3893,7 @@
     "end_time": "13:40",
     "subject": "Komplex term�szettudom�ny",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Kedd",
@@ -3925,7 +3925,7 @@
     "end_time": "13:40",
     "subject": "G�p�szeti alapismeretek3",
     "teacher": "�ron-G�r�g Szilvia",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Péntek",
@@ -3933,7 +3933,7 @@
     "end_time": "8:55",
     "subject": "G�p�szeti alapismeretek2",
     "teacher": "�ron-G�r�g Szilvia",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Csütörtök",
@@ -3949,7 +3949,7 @@
     "end_time": "8:00",
     "subject": "Irodalom",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.D"
   },
   {
     "day": "Kedd",
@@ -3957,7 +3957,7 @@
     "end_time": "9:50",
     "subject": "Irodalom",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.D"
   },
   {
     "day": "Szerda",
@@ -3965,7 +3965,7 @@
     "end_time": "8:55",
     "subject": "Irodalom",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.D"
   },
   {
     "day": "Péntek",
@@ -3973,7 +3973,7 @@
     "end_time": "11:40",
     "subject": "Magyar nyelv ",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.D"
   },
   {
     "day": "Szerda",
@@ -3981,7 +3981,7 @@
     "end_time": "9:50",
     "subject": "Magyar nyelv ",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.D"
   },
   {
     "day": "Kedd",
@@ -4069,7 +4069,7 @@
     "end_time": "12:40",
     "subject": "Matematika",
     "teacher": "Sim� Zsuzsanna",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.D"
   },
   {
     "day": "Kedd",
@@ -4077,7 +4077,7 @@
     "end_time": "13:40",
     "subject": "Matematika",
     "teacher": "Sim� Zsuzsanna",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.D"
   },
   {
     "day": "Péntek",
@@ -4085,7 +4085,7 @@
     "end_time": "10:45",
     "subject": "Matematika",
     "teacher": "Sim� Zsuzsanna",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.D"
   },
   {
     "day": "Szerda",
@@ -4093,7 +4093,7 @@
     "end_time": "13:40",
     "subject": "Matematika",
     "teacher": "Sim� Zsuzsanna",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.D"
   },
   {
     "day": "Kedd",
@@ -4117,7 +4117,7 @@
     "end_time": "8:00",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "Verebn� L�n�rt Judit",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.D"
   },
   {
     "day": "Szerda",
@@ -4165,7 +4165,7 @@
     "end_time": "10:45",
     "subject": "Hittan",
     "teacher": "V�gh Andrea",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.D"
   },
   {
     "day": "Hétfő",
@@ -4173,7 +4173,7 @@
     "end_time": "11:40",
     "subject": "Hittan",
     "teacher": "V�gh Andrea",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.D"
   },
   {
     "day": "Csütörtök",
@@ -4181,7 +4181,7 @@
     "end_time": "12:40",
     "subject": "Irodalom",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Péntek",
@@ -4189,7 +4189,7 @@
     "end_time": "13:40",
     "subject": "Irodalom",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Szerda",
@@ -4197,7 +4197,7 @@
     "end_time": "12:40",
     "subject": "Irodalom",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Csütörtök",
@@ -4205,7 +4205,7 @@
     "end_time": "8:55",
     "subject": "Magyar nyelv ",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Szerda",
@@ -4213,7 +4213,7 @@
     "end_time": "9:50",
     "subject": "Magyar nyelv ",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Kedd",
@@ -4221,7 +4221,7 @@
     "end_time": "8:55",
     "subject": "Testnevel�s",
     "teacher": "Al�cs Gyula L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Csütörtök",
@@ -4229,7 +4229,7 @@
     "end_time": "8:00",
     "subject": "Testnevel�s",
     "teacher": "Al�cs Gyula L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Szerda",
@@ -4237,7 +4237,7 @@
     "end_time": "8:55",
     "subject": "Testnevel�s",
     "teacher": "Al�cs Gyula L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Hétfő",
@@ -4245,7 +4245,7 @@
     "end_time": "8:55",
     "subject": "Testnevel�s",
     "teacher": "Al�cs Gyula L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Kedd",
@@ -4253,7 +4253,7 @@
     "end_time": "10:45",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "Dong� P�ter",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Szerda",
@@ -4261,7 +4261,7 @@
     "end_time": "13:40",
     "subject": "Komplex term�szettudom�ny",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Csütörtök",
@@ -4269,7 +4269,7 @@
     "end_time": "9:50",
     "subject": "Komplex term�szettudom�ny",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Kedd",
@@ -4277,7 +4277,7 @@
     "end_time": "8:00",
     "subject": "Komplex term�szettudom�ny",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Csütörtök",
@@ -4389,7 +4389,7 @@
     "end_time": "9:50",
     "subject": "Irodalom",
     "teacher": "Vas Viola",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.C"
   },
   {
     "day": "Péntek",
@@ -4397,7 +4397,7 @@
     "end_time": "8:00",
     "subject": "Irodalom",
     "teacher": "Vas Viola",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.C"
   },
   {
     "day": "Hétfő",
@@ -4405,7 +4405,7 @@
     "end_time": "8:55",
     "subject": "Irodalom",
     "teacher": "Vas Viola",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.C"
   },
   {
     "day": "Szerda",
@@ -4413,7 +4413,7 @@
     "end_time": "9:50",
     "subject": "Irodalom",
     "teacher": "Vas Viola",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.C"
   },
   {
     "day": "Csütörtök",
@@ -4421,7 +4421,7 @@
     "end_time": "8:55",
     "subject": "Magyar nyelv ",
     "teacher": "Vas Viola",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.C"
   },
   {
     "day": "Péntek",
@@ -4429,7 +4429,7 @@
     "end_time": "9:50",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "Vas Viola",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.C"
   },
   {
     "day": "Hétfő",
@@ -4517,7 +4517,7 @@
     "end_time": "8:00",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.C"
   },
   {
     "day": "Péntek",
@@ -4525,7 +4525,7 @@
     "end_time": "12:40",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.C"
   },
   {
     "day": "Hétfő",
@@ -4533,7 +4533,7 @@
     "end_time": "12:40",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.C"
   },
   {
     "day": "Kedd",
@@ -4541,7 +4541,7 @@
     "end_time": "8:55",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.C"
   },
   {
     "day": "Csütörtök",
@@ -4661,7 +4661,7 @@
     "end_time": "11:40",
     "subject": "Irodalom",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Péntek",
@@ -4669,7 +4669,7 @@
     "end_time": "12:40",
     "subject": "Irodalom",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Hétfő",
@@ -4677,7 +4677,7 @@
     "end_time": "9:50",
     "subject": "Irodalom",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Csütörtök",
@@ -4685,7 +4685,7 @@
     "end_time": "8:55",
     "subject": "Irodalom",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Csütörtök",
@@ -4693,7 +4693,7 @@
     "end_time": "11:40",
     "subject": "Magyar nyelv ",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Kedd",
@@ -4765,7 +4765,7 @@
     "end_time": "11:40",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Hétfő",
@@ -4773,7 +4773,7 @@
     "end_time": "10:45",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Hétfő",
@@ -4781,7 +4781,7 @@
     "end_time": "8:55",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Péntek",
@@ -4789,7 +4789,7 @@
     "end_time": "8:00",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Péntek",
@@ -4797,7 +4797,7 @@
     "end_time": "14:30",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Kedd",
@@ -4805,7 +4805,7 @@
     "end_time": "10:45",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Szerda",
@@ -4813,7 +4813,7 @@
     "end_time": "13:40",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Péntek",
@@ -4821,7 +4821,7 @@
     "end_time": "13:40",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Hétfő",
@@ -4829,7 +4829,7 @@
     "end_time": "12:40",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Csütörtök",
@@ -4837,7 +4837,7 @@
     "end_time": "9:50",
     "subject": "Villamos alapismeretek1",
     "teacher": "Preisz Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Csütörtök",
@@ -4845,7 +4845,7 @@
     "end_time": "10:45",
     "subject": "Villamos alapismeretek1",
     "teacher": "Preisz Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Szerda",
@@ -4893,7 +4893,7 @@
     "end_time": "8:00",
     "subject": "Hittan",
     "teacher": "Kiss K�roly",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Szerda",
@@ -4901,7 +4901,7 @@
     "end_time": "8:00",
     "subject": "Hittan",
     "teacher": "Kiss K�roly",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Hétfő",
@@ -4909,7 +4909,7 @@
     "end_time": "14:30",
     "subject": "Irodalom",
     "teacher": "Vas Viola",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.D"
   },
   {
     "day": "Kedd",
@@ -4917,7 +4917,7 @@
     "end_time": "10:45",
     "subject": "Irodalom",
     "teacher": "Vas Viola",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.D"
   },
   {
     "day": "Csütörtök",
@@ -4925,7 +4925,7 @@
     "end_time": "9:50",
     "subject": "Irodalom",
     "teacher": "Vas Viola",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.D"
   },
   {
     "day": "Szerda",
@@ -4933,7 +4933,7 @@
     "end_time": "8:00",
     "subject": "Irodalom",
     "teacher": "Vas Viola",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.D"
   },
   {
     "day": "Hétfő",
@@ -4941,7 +4941,7 @@
     "end_time": "12:40",
     "subject": "Magyar nyelv ",
     "teacher": "Vas Viola",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.D"
   },
   {
     "day": "Péntek",
@@ -4949,7 +4949,7 @@
     "end_time": "11:40",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "Csuka Tibor",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.D"
   },
   {
     "day": "Hétfő",
@@ -4957,7 +4957,7 @@
     "end_time": "13:40",
     "subject": "P�nz�gyi �s v�llalkoz�i ismeretek",
     "teacher": "Bog�csi Csaba Mih�ly",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.D"
   },
   {
     "day": "Péntek",
@@ -5021,7 +5021,7 @@
     "end_time": "10:45",
     "subject": "Irodalom",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Péntek",
@@ -5029,7 +5029,7 @@
     "end_time": "8:55",
     "subject": "Irodalom",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Kedd",
@@ -5037,7 +5037,7 @@
     "end_time": "11:40",
     "subject": "Irodalom",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Csütörtök",
@@ -5045,7 +5045,7 @@
     "end_time": "12:40",
     "subject": "Irodalom",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Kedd",
@@ -5053,7 +5053,7 @@
     "end_time": "10:45",
     "subject": "Magyar nyelv ",
     "teacher": "Szebeni Zolt�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Szerda",
@@ -5125,7 +5125,7 @@
     "end_time": "11:40",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "Havas Attila",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Szerda",
@@ -5213,7 +5213,7 @@
     "end_time": "8:00",
     "subject": "Hittan",
     "teacher": "Kiss K�roly",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Kedd",
@@ -5221,7 +5221,7 @@
     "end_time": "8:00",
     "subject": "Hittan",
     "teacher": "Kiss K�roly",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Szerda",
@@ -5229,7 +5229,7 @@
     "end_time": "12:40",
     "subject": "Forg�csol� megmunk�l�sok1",
     "teacher": "S�veges Zsolt Imre",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Csütörtök",
@@ -5237,7 +5237,7 @@
     "end_time": "10:45",
     "subject": "Forg�csol� megmunk�l�sok1",
     "teacher": "S�veges Zsolt Imre",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Csütörtök",
@@ -5245,7 +5245,7 @@
     "end_time": "9:50",
     "subject": "Forg�csol� megmunk�l�sok1",
     "teacher": "S�veges Zsolt Imre",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.A"
   },
   {
     "day": "Hétfő",
@@ -5253,7 +5253,7 @@
     "end_time": "8:55",
     "subject": "Irodalom",
     "teacher": "Patak Judit",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Kedd",
@@ -5261,7 +5261,7 @@
     "end_time": "11:40",
     "subject": "Irodalom",
     "teacher": "Patak Judit",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Csütörtök",
@@ -5269,7 +5269,7 @@
     "end_time": "13:40",
     "subject": "Irodalom",
     "teacher": "Patak Judit",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Hétfő",
@@ -5277,7 +5277,7 @@
     "end_time": "8:00",
     "subject": "Magyar nyelv ",
     "teacher": "Patak Judit",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Kedd",
@@ -5333,7 +5333,7 @@
     "end_time": "8:55",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Hétfő",
@@ -5341,7 +5341,7 @@
     "end_time": "9:50",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Kedd",
@@ -5349,7 +5349,7 @@
     "end_time": "9:50",
     "subject": "T�rt�nelem",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Csütörtök",
@@ -5357,7 +5357,7 @@
     "end_time": "8:00",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "Vincze Zsolt",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Hétfő",
@@ -5365,7 +5365,7 @@
     "end_time": "11:40",
     "subject": "Testnevel�s",
     "teacher": "Bal�zs L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Kedd",
@@ -5373,7 +5373,7 @@
     "end_time": "8:00",
     "subject": "Testnevel�s",
     "teacher": "Bal�zs L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Csütörtök",
@@ -5381,7 +5381,7 @@
     "end_time": "11:40",
     "subject": "Testnevel�s",
     "teacher": "Bal�zs L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Szerda",
@@ -5389,7 +5389,7 @@
     "end_time": "10:45",
     "subject": "Gy�rt�s-el�k�sz�t�s1",
     "teacher": "S�veges Zsolt Imre",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Szerda",
@@ -5397,7 +5397,7 @@
     "end_time": "13:40",
     "subject": "Forg�csol� megmunk�l�sok1",
     "teacher": "S�veges Zsolt Imre",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Szerda",
@@ -5405,7 +5405,7 @@
     "end_time": "11:40",
     "subject": "Forg�csol� megmunk�l�sok1",
     "teacher": "S�veges Zsolt Imre",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Szerda",
@@ -5413,7 +5413,7 @@
     "end_time": "9:50",
     "subject": "Forg�csol� megmunk�l�sok1",
     "teacher": "S�veges Zsolt Imre",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Szerda",
@@ -5429,7 +5429,7 @@
     "end_time": "12:40",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knya"
   },
   {
     "day": "Csütörtök",
@@ -5437,7 +5437,7 @@
     "end_time": "8:55",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knya"
   },
   {
     "day": "Hétfő",
@@ -5445,7 +5445,7 @@
     "end_time": "9:50",
     "subject": "Hittan",
     "teacher": "V�gh Andrea",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Kedd",
@@ -5453,7 +5453,7 @@
     "end_time": "11:40",
     "subject": "Hittan",
     "teacher": "V�gh Andrea",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Szerda",
@@ -5461,7 +5461,7 @@
     "end_time": "11:40",
     "subject": "Irodalom",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Csütörtök",
@@ -5469,7 +5469,7 @@
     "end_time": "12:40",
     "subject": "Irodalom",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Péntek",
@@ -5477,7 +5477,7 @@
     "end_time": "8:55",
     "subject": "Irodalom",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Péntek",
@@ -5485,7 +5485,7 @@
     "end_time": "9:50",
     "subject": "Magyar nyelv ",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Csütörtök",
@@ -5517,7 +5517,7 @@
     "end_time": "10:45",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Csütörtök",
@@ -5525,7 +5525,7 @@
     "end_time": "13:40",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Szerda",
@@ -5533,7 +5533,7 @@
     "end_time": "10:45",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Csütörtök",
@@ -5541,7 +5541,7 @@
     "end_time": "11:40",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Péntek",
@@ -5549,7 +5549,7 @@
     "end_time": "12:40",
     "subject": "�llampolg�ri ismeretek",
     "teacher": "T�th Petra D�ra",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Péntek",
@@ -5557,7 +5557,7 @@
     "end_time": "11:40",
     "subject": "T�rt�nelem",
     "teacher": "T�th Petra D�ra",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Csütörtök",
@@ -5565,7 +5565,7 @@
     "end_time": "9:50",
     "subject": "T�rt�nelem",
     "teacher": "T�th Petra D�ra",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Szerda",
@@ -5573,7 +5573,7 @@
     "end_time": "13:40",
     "subject": "T�rt�nelem",
     "teacher": "T�th Petra D�ra",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Szerda",
@@ -5581,7 +5581,7 @@
     "end_time": "8:55",
     "subject": "T�rt�nelem",
     "teacher": "T�th Petra D�ra",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Szerda",
@@ -5589,7 +5589,7 @@
     "end_time": "8:00",
     "subject": "Testnevel�s",
     "teacher": "Al�cs Gyula L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Csütörtök",
@@ -5597,7 +5597,7 @@
     "end_time": "8:55",
     "subject": "Testnevel�s",
     "teacher": "Al�cs Gyula L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Péntek",
@@ -5605,7 +5605,7 @@
     "end_time": "8:00",
     "subject": "Testnevel�s",
     "teacher": "Al�cs Gyula L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Szerda",
@@ -5613,7 +5613,7 @@
     "end_time": "14:30",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "T�th Petra D�ra",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Kedd",
@@ -5661,7 +5661,7 @@
     "end_time": "14:30",
     "subject": "Min�s�g-ellen�rz�s",
     "teacher": "S�veges Zsolt Imre",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Hétfő",
@@ -5669,7 +5669,7 @@
     "end_time": "9:50",
     "subject": "Min�s�g-ellen�rz�s",
     "teacher": "S�veges Zsolt Imre",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Hétfő",
@@ -5677,7 +5677,7 @@
     "end_time": "10:45",
     "subject": "Min�s�g-ellen�rz�s",
     "teacher": "S�veges Zsolt Imre",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Kedd",
@@ -5685,7 +5685,7 @@
     "end_time": "11:40",
     "subject": "M�szaki rajz",
     "teacher": "S�veges Zsolt Imre",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Kedd",
@@ -5693,7 +5693,7 @@
     "end_time": "12:40",
     "subject": "M�szaki rajz",
     "teacher": "S�veges Zsolt Imre",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Hétfő",
@@ -5701,7 +5701,7 @@
     "end_time": "11:40",
     "subject": "Anyagismeret �s gy�rt�stechnol�gia",
     "teacher": "Kov�cs �va",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Hétfő",
@@ -5709,7 +5709,7 @@
     "end_time": "12:40",
     "subject": "Anyagismeret �s gy�rt�stechnol�gia",
     "teacher": "Kov�cs �va",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Hétfő",
@@ -5717,7 +5717,7 @@
     "end_time": "13:40",
     "subject": "Anyagismeret �s gy�rt�stechnol�gia",
     "teacher": "Kov�cs �va",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Kedd",
@@ -5725,7 +5725,7 @@
     "end_time": "8:55",
     "subject": "Automatiz�l�s",
     "teacher": "Preisz Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Kedd",
@@ -5733,7 +5733,7 @@
     "end_time": "9:50",
     "subject": "Automatiz�l�s",
     "teacher": "Preisz Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Kedd",
@@ -5757,7 +5757,7 @@
     "end_time": "13:40",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.D"
   },
   {
     "day": "Szerda",
@@ -5765,7 +5765,7 @@
     "end_time": "12:40",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.D"
   },
   {
     "day": "Csütörtök",
@@ -5773,7 +5773,7 @@
     "end_time": "8:55",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.D"
   },
   {
     "day": "Hétfő",
@@ -5781,7 +5781,7 @@
     "end_time": "9:50",
     "subject": "Matematika",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.D"
   },
   {
     "day": "Csütörtök",
@@ -5789,7 +5789,7 @@
     "end_time": "15:20",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.D"
   },
   {
     "day": "Hétfő",
@@ -5797,7 +5797,7 @@
     "end_time": "14:30",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.D"
   },
   {
     "day": "Csütörtök",
@@ -5805,7 +5805,7 @@
     "end_time": "14:30",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.D"
   },
   {
     "day": "Szerda",
@@ -5813,7 +5813,7 @@
     "end_time": "8:00",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "Messzi-Szab�n� Major M�rta",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.D"
   },
   {
     "day": "Szerda",
@@ -5821,7 +5821,7 @@
     "end_time": "8:00",
     "subject": "Irodalom",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.I"
   },
   {
     "day": "Szerda",
@@ -5829,7 +5829,7 @@
     "end_time": "10:45",
     "subject": "Irodalom",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.I"
   },
   {
     "day": "Hétfő",
@@ -5837,7 +5837,7 @@
     "end_time": "8:55",
     "subject": "Irodalom",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.I"
   },
   {
     "day": "Hétfő",
@@ -5845,7 +5845,7 @@
     "end_time": "11:40",
     "subject": "Magyar nyelv ",
     "teacher": "Palot�s Aranka Erzs�bet",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.I"
   },
   {
     "day": "Csütörtök",
@@ -5925,7 +5925,7 @@
     "end_time": "9:50",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.I"
   },
   {
     "day": "Szerda",
@@ -5933,7 +5933,7 @@
     "end_time": "8:55",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.I"
   },
   {
     "day": "Szerda",
@@ -5941,7 +5941,7 @@
     "end_time": "9:50",
     "subject": "Testnevel�s",
     "teacher": "Erd�lyi Szabolcs",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.I"
   },
   {
     "day": "Csütörtök",
@@ -5949,7 +5949,7 @@
     "end_time": "11:40",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "P�sztor Zolt�n Albert",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.I"
   },
   {
     "day": "Szerda",
@@ -5957,7 +5957,7 @@
     "end_time": "14:30",
     "subject": "Hittan",
     "teacher": "V�gh Andrea",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.I"
   },
   {
     "day": "Hétfő",
@@ -5965,7 +5965,7 @@
     "end_time": "10:45",
     "subject": "Hittan",
     "teacher": "V�gh Andrea",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.I"
   },
   {
     "day": "Hétfő",
@@ -6061,7 +6061,7 @@
     "end_time": "10:45",
     "subject": "Testnevel�s",
     "teacher": "Bal�zs L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.D"
   },
   {
     "day": "Kedd",
@@ -6069,7 +6069,7 @@
     "end_time": "9:50",
     "subject": "Testnevel�s",
     "teacher": "Bal�zs L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.D"
   },
   {
     "day": "Péntek",
@@ -6077,7 +6077,7 @@
     "end_time": "8:55",
     "subject": "Testnevel�s",
     "teacher": "Bal�zs L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.D"
   },
   {
     "day": "Kedd",
@@ -6085,7 +6085,7 @@
     "end_time": "12:40",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "Cs�sz Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.D"
   },
   {
     "day": "Hétfő",
@@ -6093,7 +6093,7 @@
     "end_time": "11:40",
     "subject": "Irodalom",
     "teacher": "Vas Viola",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.I"
   },
   {
     "day": "Péntek",
@@ -6101,7 +6101,7 @@
     "end_time": "10:45",
     "subject": "Irodalom",
     "teacher": "Vas Viola",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.I"
   },
   {
     "day": "Kedd",
@@ -6109,7 +6109,7 @@
     "end_time": "11:40",
     "subject": "Irodalom",
     "teacher": "Vas Viola",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.I"
   },
   {
     "day": "Péntek",
@@ -6117,7 +6117,7 @@
     "end_time": "13:40",
     "subject": "Magyar nyelv ",
     "teacher": "Vas Viola",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.I"
   },
   {
     "day": "Kedd",
@@ -6149,7 +6149,7 @@
     "end_time": "13:40",
     "subject": "Matematika",
     "teacher": "Sim� Zsuzsanna",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.I"
   },
   {
     "day": "Péntek",
@@ -6157,7 +6157,7 @@
     "end_time": "9:50",
     "subject": "Matematika",
     "teacher": "Sim� Zsuzsanna",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.I"
   },
   {
     "day": "Kedd",
@@ -6165,7 +6165,7 @@
     "end_time": "8:55",
     "subject": "Matematika",
     "teacher": "Sim� Zsuzsanna",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.I"
   },
   {
     "day": "Kedd",
@@ -6173,7 +6173,7 @@
     "end_time": "9:50",
     "subject": "Matematika",
     "teacher": "Sim� Zsuzsanna",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.I"
   },
   {
     "day": "Hétfő",
@@ -6181,7 +6181,7 @@
     "end_time": "8:55",
     "subject": "Testnevel�s",
     "teacher": "Bal�zs L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.I"
   },
   {
     "day": "Kedd",
@@ -6189,7 +6189,7 @@
     "end_time": "12:40",
     "subject": "Testnevel�s",
     "teacher": "Bal�zs L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.I"
   },
   {
     "day": "Péntek",
@@ -6197,7 +6197,7 @@
     "end_time": "8:00",
     "subject": "Testnevel�s",
     "teacher": "Bal�zs L�szl�",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.I"
   },
   {
     "day": "Szerda",
@@ -6309,7 +6309,7 @@
     "end_time": "11:40",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "Boz� Be�ta",
-    "group": "Eg�sz oszt�ly"
+    "group": "13.D"
   },
   {
     "day": "Kedd",
@@ -6349,7 +6349,7 @@
     "end_time": "10:45",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "13.D"
   },
   {
     "day": "Szerda",
@@ -6437,7 +6437,7 @@
     "end_time": "9:50",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "Eg�sz oszt�ly"
+    "group": "13.I"
   },
   {
     "day": "Csütörtök",
@@ -6445,7 +6445,7 @@
     "end_time": "12:40",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "13.A-BN, 13.A-BA, Eg�sz oszt�ly"
+    "group": "13.A-BN, 13.A-BA, 13.I"
   },
   {
     "day": "Szerda",
@@ -6453,7 +6453,7 @@
     "end_time": "10:45",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "13.A-BN, 13.A-BA, Eg�sz oszt�ly"
+    "group": "13.A-BN, 13.A-BA, 13.I"
   },
   {
     "day": "Csütörtök",
@@ -6461,7 +6461,7 @@
     "end_time": "11:40",
     "subject": "Testnevel�s",
     "teacher": "Preiszn� Bene M�nika Melinda",
-    "group": "13.A-BN, 13.A-BA, Eg�sz oszt�ly"
+    "group": "13.A-BN, 13.A-BA, 13.I"
   },
   {
     "day": "Csütörtök",
@@ -6469,7 +6469,7 @@
     "end_time": "10:45",
     "subject": "Hittan",
     "teacher": "Gr�sz Erika",
-    "group": "Eg�sz oszt�ly"
+    "group": "13.I"
   },
   {
     "day": "Kedd",
@@ -6477,7 +6477,7 @@
     "end_time": "11:40",
     "subject": "CNC-g�pkezel�s �s -forg�csol�s ",
     "teacher": "Bog�csi Csaba Mih�ly",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Kedd",
@@ -6485,7 +6485,7 @@
     "end_time": "8:55",
     "subject": "CNC-g�pkezel�s �s -forg�csol�s ",
     "teacher": "Bog�csi Csaba Mih�ly",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Hétfő",
@@ -6493,7 +6493,7 @@
     "end_time": "8:55",
     "subject": "CNC-programoz�s alapjai ",
     "teacher": "Bog�csi Csaba Mih�ly",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Hétfő",
@@ -6501,7 +6501,7 @@
     "end_time": "9:50",
     "subject": "CNC-programoz�s alapjai ",
     "teacher": "Bog�csi Csaba Mih�ly",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Hétfő",
@@ -6509,7 +6509,7 @@
     "end_time": "10:45",
     "subject": "CNC-programoz�s alapjai ",
     "teacher": "Bog�csi Csaba Mih�ly",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Kedd",
@@ -6517,7 +6517,7 @@
     "end_time": "10:45",
     "subject": "CNC-programoz�s alapjai ",
     "teacher": "Bog�csi Csaba Mih�ly",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Csütörtök",
@@ -6525,7 +6525,7 @@
     "end_time": "8:00",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Csütörtök",
@@ -6533,7 +6533,7 @@
     "end_time": "8:55",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Csütörtök",
@@ -6541,7 +6541,7 @@
     "end_time": "9:50",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Csütörtök",
@@ -6549,7 +6549,7 @@
     "end_time": "10:45",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Csütörtök",
@@ -6557,7 +6557,7 @@
     "end_time": "11:40",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Csütörtök",
@@ -6565,7 +6565,7 @@
     "end_time": "12:40",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Csütörtök",
@@ -6573,7 +6573,7 @@
     "end_time": "13:40",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Csütörtök",
@@ -6581,7 +6581,7 @@
     "end_time": "14:30",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Kedd",
@@ -7997,7 +7997,7 @@
     "end_time": "14:30",
     "subject": "Digit�lis kult�ra",
     "teacher": "Dong� P�ter",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Péntek",
@@ -8109,7 +8109,7 @@
     "end_time": "8:00",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Péntek",
@@ -8117,7 +8117,7 @@
     "end_time": "8:55",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Péntek",
@@ -8125,7 +8125,7 @@
     "end_time": "9:50",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Péntek",
@@ -8133,7 +8133,7 @@
     "end_time": "10:45",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Péntek",
@@ -8141,7 +8141,7 @@
     "end_time": "11:40",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Péntek",
@@ -8149,7 +8149,7 @@
     "end_time": "12:40",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Péntek",
@@ -8157,7 +8157,7 @@
     "end_time": "13:40",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Szerda",
@@ -8165,7 +8165,7 @@
     "end_time": "8:00",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Szerda",
@@ -8173,7 +8173,7 @@
     "end_time": "8:55",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Szerda",
@@ -8181,7 +8181,7 @@
     "end_time": "9:50",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Szerda",
@@ -8189,7 +8189,7 @@
     "end_time": "10:45",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Szerda",
@@ -8197,7 +8197,7 @@
     "end_time": "11:40",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Szerda",
@@ -8205,7 +8205,7 @@
     "end_time": "12:40",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Szerda",
@@ -8213,7 +8213,7 @@
     "end_time": "13:40",
     "subject": "Forg�csol� megmunk�l�sok",
     "teacher": "Hilti",
-    "group": "Eg�sz oszt�ly"
+    "group": "2/12.CNC"
   },
   {
     "day": "Kedd",
@@ -8517,7 +8517,7 @@
     "end_time": "8:00",
     "subject": "Szerel�s �s karbantart�s",
     "teacher": "T�th Tam�s",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Hétfő",
@@ -8525,7 +8525,7 @@
     "end_time": "8:55",
     "subject": "Szerel�s �s karbantart�s",
     "teacher": "T�th Tam�s",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.B"
   },
   {
     "day": "Hétfő",
@@ -8885,7 +8885,7 @@
     "end_time": "9:50",
     "subject": "M�szaki rajz",
     "teacher": "T�rk�ly Csaba Gy�rgy",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Péntek",
@@ -8893,7 +8893,7 @@
     "end_time": "13:40",
     "subject": "M�szaki rajz",
     "teacher": "T�rk�ly Csaba Gy�rgy",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Szerda",
@@ -9157,7 +9157,7 @@
     "end_time": "10:45",
     "subject": "Matematika",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Szerda",
@@ -9165,7 +9165,7 @@
     "end_time": "10:45",
     "subject": "Matematika",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Kedd",
@@ -9173,7 +9173,7 @@
     "end_time": "9:50",
     "subject": "Matematika",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Péntek",
@@ -9181,7 +9181,7 @@
     "end_time": "8:55",
     "subject": "Matematika",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Csütörtök",
@@ -9189,7 +9189,7 @@
     "end_time": "10:45",
     "subject": "Matematika",
     "teacher": "Horv�th-Heged�s Hel�na",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.I"
   },
   {
     "day": "Péntek",
@@ -9229,7 +9229,7 @@
     "end_time": "14:30",
     "subject": "Digit�lis kult�ra",
     "teacher": "�ron-G�r�g Szilvia",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Kedd",
@@ -9237,7 +9237,7 @@
     "end_time": "8:00",
     "subject": "Digit�lis kult�ra",
     "teacher": "�ron-G�r�g Szilvia",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Csütörtök",
@@ -9957,7 +9957,7 @@
     "end_time": "9:50",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "Sz�l Nikoletta",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyd"
   },
   {
     "day": "Péntek",
@@ -10389,7 +10389,7 @@
     "end_time": "12:40",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "Fekete-Csenki Eszter",
-    "group": "Eg�sz oszt�ly"
+    "group": "9/Knyc"
   },
   {
     "day": "Hétfő",
@@ -10397,7 +10397,7 @@
     "end_time": "12:40",
     "subject": "Oszt�lyf�n�ki",
     "teacher": "Kiss G�bor Istv�n",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.I"
   },
   {
     "day": "Szerda",
@@ -10581,7 +10581,7 @@
     "end_time": "12:40",
     "subject": "Hittan",
     "teacher": "V�gh Andrea",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Hétfő",
@@ -10589,7 +10589,7 @@
     "end_time": "8:55",
     "subject": "Hittan",
     "teacher": "V�gh Andrea",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.C"
   },
   {
     "day": "Kedd",
@@ -10677,7 +10677,7 @@
     "end_time": "8:00",
     "subject": "G�p�szeti alapismeretek3",
     "teacher": "T�rk�ly Csaba Gy�rgy",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Szerda",
@@ -10685,7 +10685,7 @@
     "end_time": "8:00",
     "subject": "G�p�szeti alapismeretek1",
     "teacher": "�ron-G�r�g Szilvia",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.B"
   },
   {
     "day": "Kedd",
@@ -10693,7 +10693,7 @@
     "end_time": "14:30",
     "subject": "Munkav�llal�i ismeretek",
     "teacher": "�ron-G�r�g Szilvia",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.B"
   },
   {
     "day": "Szerda",
@@ -10701,7 +10701,7 @@
     "end_time": "14:30",
     "subject": "Gy�rt�s-el�k�sz�t�s1",
     "teacher": "S�veges Zsolt Imre",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Szerda",
@@ -10765,7 +10765,7 @@
     "end_time": "8:55",
     "subject": "Gy�rt�s-el�k�sz�t�s1",
     "teacher": "Pallagi Ern� Ferenc",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Péntek",
@@ -10773,7 +10773,7 @@
     "end_time": "14:30",
     "subject": "G�p�szeti alapismeretek1",
     "teacher": "�ron-G�r�g Szilvia",
-    "group": "Eg�sz oszt�ly"
+    "group": "9.A"
   },
   {
     "day": "Péntek",
@@ -10789,7 +10789,7 @@
     "end_time": "13:40",
     "subject": "M�szaki sz�m�t�sok",
     "teacher": "Preisz Csaba",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Kedd",
@@ -10965,7 +10965,7 @@
     "end_time": "10:45",
     "subject": "Matematika",
     "teacher": "Csenkin� Zatyk� Helga",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Kedd",
@@ -10973,7 +10973,7 @@
     "end_time": "9:50",
     "subject": "Matematika",
     "teacher": "Csenkin� Zatyk� Helga",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Kedd",
@@ -10981,7 +10981,7 @@
     "end_time": "13:40",
     "subject": "Matematika",
     "teacher": "Csenkin� Zatyk� Helga",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Csütörtök",
@@ -10989,7 +10989,7 @@
     "end_time": "10:45",
     "subject": "Matematika",
     "teacher": "Csenkin� Zatyk� Helga",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.C"
   },
   {
     "day": "Péntek",
@@ -10997,7 +10997,7 @@
     "end_time": "13:40",
     "subject": "Matematika",
     "teacher": "Csenkin� Zatyk� Helga",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Kedd",
@@ -11005,7 +11005,7 @@
     "end_time": "8:55",
     "subject": "Matematika",
     "teacher": "Csenkin� Zatyk� Helga",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Csütörtök",
@@ -11013,7 +11013,7 @@
     "end_time": "11:40",
     "subject": "Matematika",
     "teacher": "Csenkin� Zatyk� Helga",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Péntek",
@@ -11021,7 +11021,7 @@
     "end_time": "12:40",
     "subject": "Matematika",
     "teacher": "Csenkin� Zatyk� Helga",
-    "group": "Eg�sz oszt�ly"
+    "group": "10.I"
   },
   {
     "day": "Kedd",
@@ -11029,7 +11029,7 @@
     "end_time": "12:40",
     "subject": "Matematika",
     "teacher": "Csenkin� Zatyk� Helga",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Hétfő",
@@ -11037,7 +11037,7 @@
     "end_time": "12:40",
     "subject": "Matematika",
     "teacher": "Csenkin� Zatyk� Helga",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Csütörtök",
@@ -11045,7 +11045,7 @@
     "end_time": "9:50",
     "subject": "Matematika",
     "teacher": "Csenkin� Zatyk� Helga",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Hétfő",
@@ -11053,7 +11053,7 @@
     "end_time": "13:40",
     "subject": "Matematika",
     "teacher": "Csenkin� Zatyk� Helga",
-    "group": "Eg�sz oszt�ly"
+    "group": "11.B"
   },
   {
     "day": "Csütörtök",
@@ -11061,7 +11061,7 @@
     "end_time": "8:55",
     "subject": "Matematika",
     "teacher": "Csenkin� Zatyk� Helga",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.A"
   },
   {
     "day": "Csütörtök",
@@ -11069,7 +11069,7 @@
     "end_time": "14:30",
     "subject": "Matematika",
     "teacher": "Csenkin� Zatyk� Helga",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.A"
   },
   {
     "day": "Szerda",
@@ -11077,7 +11077,7 @@
     "end_time": "8:55",
     "subject": "Matematika",
     "teacher": "Csenkin� Zatyk� Helga",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.A"
   },
   {
     "day": "Szerda",
@@ -11085,7 +11085,7 @@
     "end_time": "9:50",
     "subject": "Matematika",
     "teacher": "Csenkin� Zatyk� Helga",
-    "group": "Eg�sz oszt�ly"
+    "group": "12.A"
   },
   {
     "day": "Kedd",
