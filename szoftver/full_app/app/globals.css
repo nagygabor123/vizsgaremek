@@ -47,13 +47,14 @@
   color: rgb(85, 85, 85);
   border-radius: 8px;
   margin: 0; 
+  height: 140px;
   box-sizing: border-box; 
   position: relative;
   /* padding: 8px; */
   overflow: hidden; 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
 }
 
 
@@ -127,7 +128,7 @@
   font-weight: bold;
   font-size: 15px; 
   text-align: left;
-  white-space: nowrap; 
+
   overflow: hidden; 
   text-overflow: ellipsis; 
   /* line-height: 120%; */
@@ -229,6 +230,11 @@
 
 /* @media (max-width: 480px) { */
 @media (max-width: 920px) {
+
+  .lesson-card {
+  height: 100px;
+  }
+
   .lesson-card.current-lesson {
     transition: background-color 0.3s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -261,6 +267,10 @@
 
 /* @media (max-width: 480px) { */
 @media (max-width: 920px) {
+  .lesson-card {
+    height: 100px;
+    }
+
   .lesson-card.current-lesson {
     transition: background-color 0.3s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

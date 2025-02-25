@@ -449,7 +449,7 @@ const Calendar: React.FC = () => {
               <span>{format(currentDate, 'yyyy MMMM', { locale: hu })}</span>
             </h2>
             <div className="calendar-controls">
-              <Select>
+              {/* <Select>
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Válasszon..." />
                 </SelectTrigger>
@@ -461,7 +461,7 @@ const Calendar: React.FC = () => {
                     <SelectItem value="kisPista">Kis Pista</SelectItem>
                   </SelectGroup>
                 </SelectContent>
-              </Select>
+              </Select> */}
               <Button onClick={goToToday} variant="outline">Mai nap</Button>
               <Button size="icon" variant="ghost" onClick={goToPrevious}>{isMobileView ? <ChevronLeft /> : <ChevronLeft />}</Button>
               <Button size="icon" variant="ghost" onClick={goToNext}>{isMobileView ? <ChevronRight /> : <ChevronRight />}</Button>
