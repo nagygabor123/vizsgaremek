@@ -235,9 +235,9 @@ export default function Page() {
         setMessage('A rekord sikeresen törölve.');
         setYearSchedule((prev: typeof yearSchedule) => ({
           ...prev,
-          breakDates: prev.breakDates.filter((breakPeriod: any) => breakPeriod.id !== id),
-          noSchool: prev.noSchool.filter((noSchoolPeriod: any) => noSchoolPeriod.id !== id),
-          plusDates: prev.plusDates.filter((plusDate: any) => plusDate.id !== id),
+          breakDates: prev.breakDates?.filter((breakPeriod: any) => breakPeriod.id !== id) || [],
+          noSchool: prev.noSchool?.filter((noSchoolPeriod: any) => noSchoolPeriod.id !== id) || [],
+          plusDates: prev.plusDates?.filter((plusDate: any) => plusDate.id !== id) || []
         }));
       } else {
         setMessage('Hiba történt a törlés során.');
@@ -733,7 +733,7 @@ export default function Page() {
             <TabsContent value="breakDates">
 
 
-              {yearSchedule.breakDates.length > 0 ? (
+              {yearSchedule?.breakDates?.length > 0 ? (
                 <ul>
                   {yearSchedule.breakDates.map((breakPeriod: any, index: number) => (
                     <li key={index}>
