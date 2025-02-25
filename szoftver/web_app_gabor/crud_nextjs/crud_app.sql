@@ -4,6 +4,7 @@ CREATE TABLE `admins` (
   `password` varchar(255) NOT NULL,
   `position` varchar(255) NOT NULL,
   `osztalyfonok` varchar(255) NOT NULL,
+  `short_name` VARCHAR(8) NOT NULL,
   PRIMARY KEY (`admin_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -64,9 +65,9 @@ CREATE TABLE `ring_times` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
-INSERT INTO `admins` (`admin_id`, `full_name`, `password`, `position`,`osztalyfonok`) VALUES
-(1, 'szalkai', 'piciakukija', 'senki','nincs'),
-(2, 'nagy', 'nagyakukija', 'igazgató','nincs');
+INSERT INTO `admins` (`admin_id`, `full_name`, `password`, `position`,`osztalyfonok`,`short_name`) VALUES
+(1, 'szalkai', 'piciakukija', 'senki','nincs','SSSS'),
+(2, 'nagy', 'nagyakukija', 'igazgató','nincs','GGGG');
 
 
 INSERT INTO `lockers` (`locker_id`, `status`) VALUES

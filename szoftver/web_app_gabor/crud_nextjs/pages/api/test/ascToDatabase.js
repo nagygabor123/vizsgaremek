@@ -37,15 +37,14 @@ export default function handler(req, res) {
       const employees = extractTeachers(parsedXml);
       const schedule = extractSchedule(parsedXml);
 
-      const jsonData = JSON.stringify(schedule, null, 2);
-      fs.writeFileSync('orarend.json', jsonData, 'utf8');
+      //const jsonData = JSON.stringify(schedule, null, 2);
+      //fs.writeFileSync('orarend.json', jsonData, 'utf8');
 
       await sendRingingData(ringing);
       await sendEmployeesData(employees);
       await waitForDatabaseToBeReady(db, 'admins', employees.length);
       await sendScheduleData(schedule);
       
-
       return res.status(200).json({
         message: 'XML adatok sikeresen feldolgozva és továbbítva!',
         ringing,
@@ -65,15 +64,15 @@ async function waitForDatabaseToBeReady(db, table, minRows = 1, timeout = 5000) 
     const [rows] = await db.query(`SELECT COUNT(*) as count FROM ${table}`);
     
     if (rows[0].count >= minRows) {
-      console.log(`✅ Adatbázis készen áll: ${table} (${rows[0].count} sor)`);
+      console.log(`Adatbázis készen áll: ${table} (${rows[0].count} sor)`);
       return; 
     }
 
-    console.log(`⏳ Várakozás az adatbázisra: ${table} (${rows[0].count} sor)`);
+    console.log(`Várakozás az adatbázisra: ${table} (${rows[0].count} sor)`);
     await new Promise(resolve => setTimeout(resolve, 1000)); // Várunk 1 másodpercet
   }
 
-  throw new Error(`❌ Timeout: Az adatbázis (${table}) nem állt készen ${timeout / 1000} másodperc alatt.`);
+  throw new Error(`Timeout: Az adatbázis (${table}) nem állt készen ${timeout / 1000} másodperc alatt.`);
 }
 
 
@@ -96,8 +95,8 @@ function extractTeachers(parsedXml) {
   const teachers = parsedXml.timetable.teachers[0].teacher;
   const classes = parsedXml.timetable.classes ? parsedXml.timetable.classes[0].class : [];
   const lessons = parsedXml.timetable.lessons ? parsedXml.timetable.lessons[0].lesson : [];
-
   const classTeacherMap = {};
+  
   lessons.forEach(lesson => {
     if (lesson.$.subjectid === "DAA739606BB71EE6" && lesson.$.teacherids && lesson.$.classids) {
       classTeacherMap[lesson.$.teacherids] = lesson.$.classids;
@@ -106,10 +105,12 @@ function extractTeachers(parsedXml) {
 
   return teachers.map(t => ({
     full_name: t.$.name,
+    short_name: t.$.short,  // Extracting the short name here
     position: "Tanár", // Ha van pontosabb pozíció, azt itt lehet megadni
     osztalyfonok: classTeacherMap[t.$.id] ? classes.find(c => c.$.id === classTeacherMap[t.$.id])?.$.name || null : null,
   }));
 }
+
 
 function extractSchedule(parsedXml) {
   if (!parsedXml.timetable?.lessons?.[0]?.lesson || !parsedXml.timetable?.cards?.[0]?.card) return [];
