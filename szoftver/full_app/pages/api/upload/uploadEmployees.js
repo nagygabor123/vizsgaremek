@@ -29,11 +29,12 @@ export default async function handler(req, res) {
         employee.full_name, 
         generatePassword(), 
         employee.position, 
-        employee.osztalyfonok || 'nincs' // Ha null, akkor "nincs"
+        employee.osztalyfonok || 'nincs', // Ha null, akkor "nincs"
+        employee.short_name || null // Adding short_name to the insert values
       ]);
 
       await db.query(
-        'INSERT INTO admins (admin_id, full_name, password, position, osztalyfonok) VALUES ?;',
+        'INSERT INTO admins (admin_id, full_name, password, position, osztalyfonok, short_name) VALUES ?;',
         [insertValues]
       );
 
