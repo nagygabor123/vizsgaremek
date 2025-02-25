@@ -1,6 +1,7 @@
 import fs from 'fs';
 import multiparty from 'multiparty';
 import { parseStringPromise } from 'xml2js';
+import { connectToDatabase } from '../../../lib/db';
 
 export const config = {
   api: {
@@ -29,6 +30,7 @@ export default function handler(req, res) {
     const filePath = file.path;
 
     try {
+      const db = await connectToDatabase();
       const xmlData = fs.readFileSync(filePath, 'utf8');
       const parsedXml = await parseStringPromise(xmlData);
       const ringing = extractRingingSchedule(parsedXml);
@@ -39,9 +41,10 @@ export default function handler(req, res) {
       fs.writeFileSync('orarend.json', jsonData, 'utf8');
 
       await sendRingingData(ringing);
-      await sendEmployeesData(employees);       
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await sendEmployeesData(employees);
+      await waitForDatabaseToBeReady(db, 'admins', employees.length);
       await sendScheduleData(schedule);
+      
 
       return res.status(200).json({
         message: 'XML adatok sikeresen feldolgozva és továbbítva!',
@@ -54,6 +57,25 @@ export default function handler(req, res) {
     }
   });
 }
+
+async function waitForDatabaseToBeReady(db, table, minRows = 1, timeout = 5000) {
+  const startTime = Date.now();
+
+  while (Date.now() - startTime < timeout) {
+    const [rows] = await db.query(`SELECT COUNT(*) as count FROM ${table}`);
+    
+    if (rows[0].count >= minRows) {
+      console.log(`✅ Adatbázis készen áll: ${table} (${rows[0].count} sor)`);
+      return; 
+    }
+
+    console.log(`⏳ Várakozás az adatbázisra: ${table} (${rows[0].count} sor)`);
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Várunk 1 másodpercet
+  }
+
+  throw new Error(`❌ Timeout: Az adatbázis (${table}) nem állt készen ${timeout / 1000} másodperc alatt.`);
+}
+
 
 function extractRingingSchedule(parsedXml) {
   if (!parsedXml.timetable || !parsedXml.timetable.periods || !parsedXml.timetable.periods[0].period) {
