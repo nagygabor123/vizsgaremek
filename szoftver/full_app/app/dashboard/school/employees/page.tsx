@@ -37,6 +37,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  SelectGroup,
+  SelectLabel
 } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 import AppKonfig from '@/components/app-konfig';
@@ -319,6 +321,17 @@ export default function AddEmployeePage() {
                   value={searchOsztalyfonok}
                   onChange={(e) => setSearchOsztalyfonok(e.target.value)}
                 />
+                       <Select>
+                <SelectTrigger > 
+                  <SelectValue placeholder="Keresés osztály szerint..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Osztályok</SelectLabel>
+                    <SelectItem value="13i">13.I</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select> 
 
               </div>
 

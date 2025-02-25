@@ -384,8 +384,8 @@ export default function Home() {
                   value={searchClass}
                   onChange={(e) => setSearchClass(e.target.value)}
                 />
-                <Select>
-                <SelectTrigger >  {/*className="w-[180px]" */}
+                {/* <Select>
+                <SelectTrigger > 
                   <SelectValue placeholder="Keresés osztály szerint..." />
                 </SelectTrigger>
                 <SelectContent>
@@ -394,7 +394,7 @@ export default function Home() {
                     <SelectItem value="13i">13.I</SelectItem>
                   </SelectGroup>
                 </SelectContent>
-              </Select>
+              </Select> */}
 
                 <Button variant="outline" onClick={handleSystemClose} > {/*className="ml-auto" */}
                   {systemClose ? <LockOpen /> : <Lock />} {/*   Keyhole  */}

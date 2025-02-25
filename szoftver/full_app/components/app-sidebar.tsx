@@ -7,6 +7,7 @@ import {
   BookOpen,
   Bot,
   Command,
+  CalendarDays,
   Frame,
   FileText,
   Flag,
@@ -236,7 +237,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 <SidebarMenuItem>
 <SidebarMenuButton asChild isActive={isActive("/dashboard/class/students")}>
   <Link href="/dashboard/class/students">
-  <UserRound/>
+  <GraduationCap/>
     <span>Tanulók</span>
   </Link>
 </SidebarMenuButton>
@@ -262,7 +263,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarMenuItem>
       <SidebarMenuButton asChild isActive={isActive("/dashboard/school/timetables")}>
   <Link href="/dashboard/school/timetables">
-<CalendarSearch/>
+<Calendar/>
     <span>Órarendek</span>
     {isButtonVisible && (
     <TriangleAlert className="ml-auto text-red-500" />
@@ -276,7 +277,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 <SidebarMenuItem>
 <SidebarMenuButton asChild isActive={isActive("/dashboard/school/students")}>
   <Link href="/dashboard/school/students">
-<UserRoundSearch/>
+  <GraduationCap/>
     <span>Tanulók</span> 
     {isButtonVisible && (
     <TriangleAlert className="ml-auto text-red-500" />
