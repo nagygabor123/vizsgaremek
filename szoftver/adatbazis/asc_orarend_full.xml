@@ -16,174 +16,174 @@
       <period name="13" short="13" period="13" starttime="17:55" endtime="18:40"/>
    </periods>
    <daysdefs options="canadd,export:silent" columns="id,days,name,short">
-      <daysdef id="B40E6ADA32D98F9F" name="Bármely nap" short="X" days="10000,01000,00100,00010,00001"/>
+      <daysdef id="B40E6ADA32D98F9F" name="BÃ¡rmely nap" short="X" days="10000,01000,00100,00010,00001"/>
       <daysdef id="C355F88379946784" name="Minden nap" short="E" days="11111"/>
-      <daysdef id="FC505125C6C97195" name="Hétfõ" short="Hé" days="10000"/>
+      <daysdef id="FC505125C6C97195" name="HÃ©tfÅ‘" short="HÃ©" days="10000"/>
       <daysdef id="0B98E72137833AE8" name="Kedd" short="Ke" days="01000"/>
       <daysdef id="0401BEC4960BDDC1" name="Szerda" short="Sz" days="00100"/>
-      <daysdef id="7B4D05398DBFEF4B" name="Csütörtök" short="Cs" days="00010"/>
-      <daysdef id="2521C46C336D8AA4" name="Péntek" short="Pé" days="00001"/>
+      <daysdef id="7B4D05398DBFEF4B" name="CsÃ¼tÃ¶rtÃ¶k" short="Cs" days="00010"/>
+      <daysdef id="2521C46C336D8AA4" name="PÃ©ntek" short="PÃ©" days="00001"/>
    </daysdefs>
    <weeksdefs options="canadd,export:silent" columns="id,weeks,name,short">
-      <weeksdef id="C51A9409FC4B42D3" name="Bármely hét" short="Bármely" weeks="10,01"/>
-      <weeksdef id="F2E3741F63D94AE3" name="Minden héten" short="Mind" weeks="11"/>
-      <weeksdef id="7AC0C36143C4D9A2" name="A hét" short="A" weeks="10"/>
-      <weeksdef id="5AF174860E96EBF8" name="B hét" short="B" weeks="01"/>
+      <weeksdef id="C51A9409FC4B42D3" name="BÃ¡rmely hÃ©t" short="BÃ¡rmely" weeks="10,01"/>
+      <weeksdef id="F2E3741F63D94AE3" name="Minden hÃ©ten" short="Mind" weeks="11"/>
+      <weeksdef id="7AC0C36143C4D9A2" name="A hÃ©t" short="A" weeks="10"/>
+      <weeksdef id="5AF174860E96EBF8" name="B hÃ©t" short="B" weeks="01"/>
    </weeksdefs>
    <termsdefs options="canadd,export:silent" columns="id,terms,name,short">
-      <termsdef id="F0D2AC121DEB5FCC" name="Egész év" short="YR" terms="1"/>
+      <termsdef id="F0D2AC121DEB5FCC" name="EgÃ©sz Ã©v" short="YR" terms="1"/>
    </termsdefs>
    <subjects options="canadd,export:silent" columns="id,name,short,partner_id">
       <subject id="CB3A1ADDE3C65C34" name="Angol lektor" short="anglek" partner_id=""/>
       <subject id="A656C4ED83562E72" name="Angol nyelv" short="angol" partner_id=""/>
       <subject id="E010699FC89D7300" name="Angol alap" short="anga" partner_id=""/>
-      <subject id="883EC73CA2184F3A" name="Angol célnyelvi civilizáció" short="angciv" partner_id=""/>
-      <subject id="E0FD4A436337BA13" name="Angol kommunikáció" short="angkom" partner_id=""/>
+      <subject id="883EC73CA2184F3A" name="Angol cÃ©lnyelvi civilizÃ¡ciÃ³" short="angciv" partner_id=""/>
+      <subject id="E0FD4A436337BA13" name="Angol kommunikÃ¡ciÃ³" short="angkom" partner_id=""/>
       <subject id="0040A9255C01E2BB" name="Angol nyelvtan" short="angolny" partner_id=""/>
       <subject id="28B755A607A9189D" name="CNC tanfolyam" short="cnctan" partner_id=""/>
       <subject id="764D7DF60F52B185" name="Fizika" short="fiz" partner_id=""/>
       <subject id="1F56AA18CEBDA5CB" name="Irodalom" short="irod" partner_id=""/>
       <subject id="C8BA6915692394FB" name="Magyar nyelv " short="magyny" partner_id=""/>
       <subject id="88B475C00DBCB346" name="Matematika" short="mat" partner_id=""/>
-      <subject id="F275D9EFD59AF8A5" name="Német nyelv" short="nem" partner_id=""/>
-      <subject id="94E3AAC0A59705E2" name="Német alap" short="nemal" partner_id=""/>
-      <subject id="C0786809710991B7" name="Német célnyelvi civilizáció" short="nemciv" partner_id=""/>
-      <subject id="678351D92C170E52" name="Német kommunikáció" short="nemkom" partner_id=""/>
-      <subject id="6E2DC8178643DA41" name="Német lektor" short="nemlekt" partner_id=""/>
-      <subject id="63F50D82E2E538E2" name="Német nyelvtan" short="nemny" partner_id=""/>
-      <subject id="DAA739606BB71EE6" name="Osztályfõnöki" short="of" partner_id=""/>
-      <subject id="4EEB6700DC4787F5" name="Testnevelés" short="tesi" partner_id=""/>
-      <subject id="CC9DA7706513AD11" name="Vizuális kommunikáció" short="vizkomm" partner_id=""/>
+      <subject id="F275D9EFD59AF8A5" name="NÃ©met nyelv" short="nem" partner_id=""/>
+      <subject id="94E3AAC0A59705E2" name="NÃ©met alap" short="nemal" partner_id=""/>
+      <subject id="C0786809710991B7" name="NÃ©met cÃ©lnyelvi civilizÃ¡ciÃ³" short="nemciv" partner_id=""/>
+      <subject id="678351D92C170E52" name="NÃ©met kommunikÃ¡ciÃ³" short="nemkom" partner_id=""/>
+      <subject id="6E2DC8178643DA41" name="NÃ©met lektor" short="nemlekt" partner_id=""/>
+      <subject id="63F50D82E2E538E2" name="NÃ©met nyelvtan" short="nemny" partner_id=""/>
+      <subject id="DAA739606BB71EE6" name="OsztÃ¡lyfÅ‘nÃ¶ki" short="of" partner_id=""/>
+      <subject id="4EEB6700DC4787F5" name="TestnevelÃ©s" short="tesi" partner_id=""/>
+      <subject id="CC9DA7706513AD11" name="VizuÃ¡lis kommunikÃ¡ciÃ³" short="vizkomm" partner_id=""/>
       <subject id="E9B6B66A421E2403" name="Hittan" short="hit" partner_id=""/>
-      <subject id="3346D722DFB63DF0" name="Gépírás" short="gepi" partner_id=""/>
+      <subject id="3346D722DFB63DF0" name="GÃ©pÃ­rÃ¡s" short="gepi" partner_id=""/>
       <subject id="9FCDAE20A088FC91" name="angol" short="ang" partner_id=""/>
-      <subject id="3DAC5FB565F90B82" name="Német" short="n" partner_id=""/>
-      <subject id="0E13EC51988173DF" name="Történelem" short="tor" partner_id=""/>
-      <subject id="5068327959056FFE" name="Komplex természettudomány" short="ktt" partner_id=""/>
-      <subject id="1037EF299F6677F4" name="Pénzügyi és vállalkozói ismeretek" short="pevism" partner_id=""/>
-      <subject id="EDB1F8D306056E44" name="Hálózatok I." short="halI" partner_id=""/>
-      <subject id="615571DB7B6E8144" name="Minõségellenõr tanfolyam" short="met" partner_id=""/>
-      <subject id="9304073E8AD199B1" name="Gyártástervezés1" short="gyterv1" partner_id=""/>
-      <subject id="D27D0620072D5D21" name="Gyártástervezés2" short="gyterv2" partner_id=""/>
-      <subject id="3FDD295D6459BC8D" name="Matematika fakultáció" short="matfakt" partner_id=""/>
-      <subject id="656589B44CD949DB" name="Digitális kultúra" short="digk" partner_id=""/>
+      <subject id="3DAC5FB565F90B82" name="NÃ©met" short="n" partner_id=""/>
+      <subject id="0E13EC51988173DF" name="TÃ¶rtÃ©nelem" short="tor" partner_id=""/>
+      <subject id="5068327959056FFE" name="Komplex termÃ©szettudomÃ¡ny" short="ktt" partner_id=""/>
+      <subject id="1037EF299F6677F4" name="PÃ©nzÃ¼gyi Ã©s vÃ¡llalkozÃ³i ismeretek" short="pevism" partner_id=""/>
+      <subject id="EDB1F8D306056E44" name="HÃ¡lÃ³zatok I." short="halI" partner_id=""/>
+      <subject id="615571DB7B6E8144" name="MinÅ‘sÃ©gellenÅ‘r tanfolyam" short="met" partner_id=""/>
+      <subject id="9304073E8AD199B1" name="GyÃ¡rtÃ¡stervezÃ©s1" short="gyterv1" partner_id=""/>
+      <subject id="D27D0620072D5D21" name="GyÃ¡rtÃ¡stervezÃ©s2" short="gyterv2" partner_id=""/>
+      <subject id="3FDD295D6459BC8D" name="Matematika fakultÃ¡ciÃ³" short="matfakt" partner_id=""/>
+      <subject id="656589B44CD949DB" name="DigitÃ¡lis kultÃºra" short="digk" partner_id=""/>
       <subject id="DDE7E345924443F1" name="Villamos alapismeretek" short="vaism" partner_id=""/>
-      <subject id="2A820DD48E7721A9" name="Mûszaki rajz" short="mra" partner_id=""/>
-      <subject id="D30AB50D71E87212" name="Munkavállalói ismeretek" short="mvism" partner_id=""/>
-      <subject id="5CDA19A4B723DDA7" name="Informatikai és távközlési alapok I." short="itai" partner_id=""/>
-      <subject id="3FCDB40A8731E962" name="Programozási alapok" short="prga" partner_id=""/>
+      <subject id="2A820DD48E7721A9" name="MÅ±szaki rajz" short="mra" partner_id=""/>
+      <subject id="D30AB50D71E87212" name="MunkavÃ¡llalÃ³i ismeretek" short="mvism" partner_id=""/>
+      <subject id="5CDA19A4B723DDA7" name="Informatikai Ã©s tÃ¡vkÃ¶zlÃ©si alapok I." short="itai" partner_id=""/>
+      <subject id="3FCDB40A8731E962" name="ProgramozÃ¡si alapok" short="prga" partner_id=""/>
       <subject id="F7D0EF1A663E1982" name="IKT projektmunka I." short="iktpmi" partner_id=""/>
-      <subject id="D45E7EE4FA7EA142" name="Gépészeti alapismeretek1" short="gaism1" partner_id=""/>
-      <subject id="97807ACF5DD873CD" name="Gépészeti alapismeretek2" short="gaism2" partner_id=""/>
-      <subject id="AEA5CAF0BB092F91" name="Gépészeti alapismeretek4" short="gaism4" partner_id=""/>
-      <subject id="2E49EDE82353C861" name="Hálózatok II." short="halII" partner_id=""/>
-      <subject id="314B3B9EA8D1D618" name="Hálózat programozása és IoT" short="hprg" partner_id=""/>
+      <subject id="D45E7EE4FA7EA142" name="GÃ©pÃ©szeti alapismeretek1" short="gaism1" partner_id=""/>
+      <subject id="97807ACF5DD873CD" name="GÃ©pÃ©szeti alapismeretek2" short="gaism2" partner_id=""/>
+      <subject id="AEA5CAF0BB092F91" name="GÃ©pÃ©szeti alapismeretek4" short="gaism4" partner_id=""/>
+      <subject id="2E49EDE82353C861" name="HÃ¡lÃ³zatok II." short="halII" partner_id=""/>
+      <subject id="314B3B9EA8D1D618" name="HÃ¡lÃ³zat programozÃ¡sa Ã©s IoT" short="hprg" partner_id=""/>
       <subject id="45B6BDB9C292A81E" name="Szerverek" short="szer" partner_id=""/>
       <subject id="827FB9D7F6235955" name="IKT projektmunka II." short="iktpmii" partner_id=""/>
-      <subject id="201B82AD432ABD7F" name="Munkavállalói idegen nyelv" short="mvi" partner_id=""/>
-      <subject id="59DA501D28921B8C" name="CNC-programozás alapjai " short="cncpra" partner_id=""/>
-      <subject id="06DA1D3C77C08215" name="CNC-gépkezelés és -forgácsolás " short="cncgkf" partner_id=""/>
-      <subject id="DBAA22724D3E1099" name="Osztályközösség-építõ program" short="okp" partner_id=""/>
-      <subject id="90999D4C0C98961E" name="Forgácsoló megmunkálások1" short="fm1" partner_id=""/>
-      <subject id="E4B430CD71D33824" name="Forgácsoló megmunkálások2" short="fm2" partner_id=""/>
-      <subject id="C90B05EAF4068F9C" name="Informatikai és távközlési alapok II." short="itaii" partner_id=""/>
-      <subject id="53D05EAA4B5C97D0" name="Mûszaki számítások" short="musz" partner_id=""/>
-      <subject id="B64BD9FAB8AB3C5C" name="Adatbázis-kezelés I." short="abki" partner_id=""/>
+      <subject id="201B82AD432ABD7F" name="MunkavÃ¡llalÃ³i idegen nyelv" short="mvi" partner_id=""/>
+      <subject id="59DA501D28921B8C" name="CNC-programozÃ¡s alapjai " short="cncpra" partner_id=""/>
+      <subject id="06DA1D3C77C08215" name="CNC-gÃ©pkezelÃ©s Ã©s -forgÃ¡csolÃ¡s " short="cncgkf" partner_id=""/>
+      <subject id="DBAA22724D3E1099" name="OsztÃ¡lykÃ¶zÃ¶ssÃ©g-Ã©pÃ­tÅ‘ program" short="okp" partner_id=""/>
+      <subject id="90999D4C0C98961E" name="ForgÃ¡csolÃ³ megmunkÃ¡lÃ¡sok1" short="fm1" partner_id=""/>
+      <subject id="E4B430CD71D33824" name="ForgÃ¡csolÃ³ megmunkÃ¡lÃ¡sok2" short="fm2" partner_id=""/>
+      <subject id="C90B05EAF4068F9C" name="Informatikai Ã©s tÃ¡vkÃ¶zlÃ©si alapok II." short="itaii" partner_id=""/>
+      <subject id="53D05EAA4B5C97D0" name="MÅ±szaki szÃ¡mÃ­tÃ¡sok" short="musz" partner_id=""/>
+      <subject id="B64BD9FAB8AB3C5C" name="AdatbÃ¡zis-kezelÃ©s I." short="abki" partner_id=""/>
       <subject id="8D269F8259F2463C" name="Szakmai angol" short="szaang" partner_id=""/>
-      <subject id="4ACE42D8B92B2305" name="Asztali alkalmazások fejlesztése" short="Aaf" partner_id=""/>
-      <subject id="EC2BEBDA82D75F32" name="Webprogramozás" short="webp" partner_id=""/>
-      <subject id="E3FF1205B0FC3F37" name="Felhõszolgáltatások" short="Fsz" partner_id=""/>
-      <subject id="153731D5F437F48B" name="Gyártás-elõkészítés1" short="gyek1" partner_id=""/>
-      <subject id="4F85B107936223DF" name="Gyártás-elõkészítés2" short="gyek2" partner_id=""/>
-      <subject id="FB8DB6AA99AD96F0" name="Állampolgári ismeretek" short="alli" partner_id=""/>
-      <subject id="17918EFDC30A6003" name="Mûszaki rajz" short="mur" partner_id=""/>
-      <subject id="351F720168C95766" name="Automatizálás" short="aut" partner_id=""/>
-      <subject id="A75F9A3522B59F4A" name="Minõség-ellenõrzés" short="minell" partner_id=""/>
-      <subject id="DF86126FB7F3EBB8" name="Szerelés és karbantartás" short="szerkar" partner_id=""/>
-      <subject id="2E15D305F9D409F2" name="Anyagismeret és gyártástechnológia" short="anygyt" partner_id=""/>
-      <subject id="1236CC9F1D75A0BF" name="Szoftvertesztelés" short="ste" partner_id=""/>
-      <subject id="37AD58F4C1B090DA" name="Gépészeti alapismeretek3" short="gaism3" partner_id=""/>
+      <subject id="4ACE42D8B92B2305" name="Asztali alkalmazÃ¡sok fejlesztÃ©se" short="Aaf" partner_id=""/>
+      <subject id="EC2BEBDA82D75F32" name="WebprogramozÃ¡s" short="webp" partner_id=""/>
+      <subject id="E3FF1205B0FC3F37" name="FelhÅ‘szolgÃ¡ltatÃ¡sok" short="Fsz" partner_id=""/>
+      <subject id="153731D5F437F48B" name="GyÃ¡rtÃ¡s-elÅ‘kÃ©szÃ­tÃ©s1" short="gyek1" partner_id=""/>
+      <subject id="4F85B107936223DF" name="GyÃ¡rtÃ¡s-elÅ‘kÃ©szÃ­tÃ©s2" short="gyek2" partner_id=""/>
+      <subject id="FB8DB6AA99AD96F0" name="ÃllampolgÃ¡ri ismeretek" short="alli" partner_id=""/>
+      <subject id="17918EFDC30A6003" name="MÅ±szaki rajz" short="mur" partner_id=""/>
+      <subject id="351F720168C95766" name="AutomatizÃ¡lÃ¡s" short="aut" partner_id=""/>
+      <subject id="A75F9A3522B59F4A" name="MinÅ‘sÃ©g-ellenÅ‘rzÃ©s" short="minell" partner_id=""/>
+      <subject id="DF86126FB7F3EBB8" name="SzerelÃ©s Ã©s karbantartÃ¡s" short="szerkar" partner_id=""/>
+      <subject id="2E15D305F9D409F2" name="Anyagismeret Ã©s gyÃ¡rtÃ¡stechnolÃ³gia" short="anygyt" partner_id=""/>
+      <subject id="1236CC9F1D75A0BF" name="SzoftvertesztelÃ©s" short="ste" partner_id=""/>
+      <subject id="37AD58F4C1B090DA" name="GÃ©pÃ©szeti alapismeretek3" short="gaism3" partner_id=""/>
       <subject id="9900D9F40F14735A" name="Villamos alapismeretek1" short="vaism1" partner_id=""/>
       <subject id="5F02D15CDCA1DF35" name="Villamos alapismeretek2" short="vaism2" partner_id=""/>
-      <subject id="CC3CE38B2D57FF4C" name="Német irodalom" short="nemir" partner_id=""/>
-      <subject id="63CF3BA3B2D5BE08" name="Forgácsoló megmunkálások" short="fm" partner_id=""/>
-      <subject id="529635125C9AD241" name="Gyártástervezés3" short="gyterv3" partner_id=""/>
-      <subject id="AF95245C2C57176E" name="Minõség-ellenõrzés1" short="minell1" partner_id=""/>
-      <subject id="C1B05C504C0B1D5C" name="Minõség-ellenõrzés2" short="minell2" partner_id=""/>
+      <subject id="CC3CE38B2D57FF4C" name="NÃ©met irodalom" short="nemir" partner_id=""/>
+      <subject id="63CF3BA3B2D5BE08" name="ForgÃ¡csolÃ³ megmunkÃ¡lÃ¡sok" short="fm" partner_id=""/>
+      <subject id="529635125C9AD241" name="GyÃ¡rtÃ¡stervezÃ©s3" short="gyterv3" partner_id=""/>
+      <subject id="AF95245C2C57176E" name="MinÅ‘sÃ©g-ellenÅ‘rzÃ©s1" short="minell1" partner_id=""/>
+      <subject id="C1B05C504C0B1D5C" name="MinÅ‘sÃ©g-ellenÅ‘rzÃ©s2" short="minell2" partner_id=""/>
       <subject id="D47D754451178A25" name="Angol irodalom" short="angir" partner_id=""/>
-      <subject id="95245B55B2857092" name="Asztali és mobil alkalmazások fejlesztése" short="Amaf" partner_id=""/>
-      <subject id="B1A1D7ABA0B0FB50" name="Frontend programozás és tesztelés" short="fpt" partner_id=""/>
-      <subject id="5AED719980D4B251" name="Backend programozás és tesztelés" short="bpt" partner_id=""/>
-      <subject id="246739F4318CD3AD" name="Adatbázis-kezelés II." short="abkii" partner_id=""/>
-      <subject id="FFEA9C73E82231A2" name="Fizika fakultáció" short="Ff" partner_id=""/>
-      <subject id="396F6DD69B367778" name="Emelt német" short="enem" partner_id=""/>
-      <subject id="8AE997333ACB6795" name="Emelt német lektor" short="enemlekt" partner_id=""/>
+      <subject id="95245B55B2857092" name="Asztali Ã©s mobil alkalmazÃ¡sok fejlesztÃ©se" short="Amaf" partner_id=""/>
+      <subject id="B1A1D7ABA0B0FB50" name="Frontend programozÃ¡s Ã©s tesztelÃ©s" short="fpt" partner_id=""/>
+      <subject id="5AED719980D4B251" name="Backend programozÃ¡s Ã©s tesztelÃ©s" short="bpt" partner_id=""/>
+      <subject id="246739F4318CD3AD" name="AdatbÃ¡zis-kezelÃ©s II." short="abkii" partner_id=""/>
+      <subject id="FFEA9C73E82231A2" name="Fizika fakultÃ¡ciÃ³" short="Ff" partner_id=""/>
+      <subject id="396F6DD69B367778" name="Emelt nÃ©met" short="enem" partner_id=""/>
+      <subject id="8AE997333ACB6795" name="Emelt nÃ©met lektor" short="enemlekt" partner_id=""/>
       <subject id="8FFDF76DBE47B93A" name="Emelt angol" short="eang" partner_id=""/>
       <subject id="CB172C380C2089AF" name="Emelt angol lektor" short="eanglekt" partner_id=""/>
    </subjects>
    <teachers options="canadd,export:silent" columns="id,name,short,gender,color,email,mobile,partner_id,firstname,lastname">
-      <teacher id="9304851FE1CC4322" firstname="Gyula László" lastname="Alács" name="Alács Gyula László" short="AlGy" gender="F" color="#FF0000" email="" mobile="" partner_id=""/>
-      <teacher id="C6013ED90A8B859F" firstname="László" lastname="Balázs" name="Balázs László" short="BaLa" gender="M" color="#FFCC66" email="" mobile="" partner_id=""/>
-      <teacher id="6A898E7BBCAE03FB" firstname="Bene Mónika Melinda" lastname="Preiszné" name="Preiszné Bene Mónika Melinda" short="BeMo" gender="F" color="#CC99FF" email="" mobile="" partner_id=""/>
-      <teacher id="4A4D9A02F6BBFF35" firstname="Szabolcs" lastname="Erdélyi" name="Erdélyi Szabolcs" short="ErSz" gender="M" color="#3333FF" email="" mobile="" partner_id=""/>
-      <teacher id="2ED900C79EF883D1" firstname="Szilvia" lastname="Áron-Görög" name="Áron-Görög Szilvia" short="AGSz" gender="F" color="#008080" email="" mobile="" partner_id=""/>
-      <teacher id="14A7986F65744468" firstname="Csaba Mihály" lastname="Bogácsi" name="Bogácsi Csaba Mihály" short="BoCs" gender="F" color="#66FFFF" email="" mobile="" partner_id=""/>
-      <teacher id="66F01570774BE231" firstname="Beáta" lastname="Bozó" name="Bozó Beáta" short="BoBe" gender="F" color="#A0C0FF" email="" mobile="" partner_id=""/>
-      <teacher id="6E4EADD7A8CE140F" firstname="Gábor Sándor" lastname="Buri" name="Buri Gábor Sándor" short="BuGa" gender="M" color="#DDFF97" email="" mobile="" partner_id=""/>
-      <teacher id="B79E699F3116E685" firstname="Kállai Ildikó" lastname="Czakóné" name="Czakóné Kállai Ildikó" short="CzKa" gender="F" color="#0080FF" email="" mobile="" partner_id=""/>
-      <teacher id="8CC35C9D3C539550" firstname="Bihal Mária Magdolna" lastname="Csenkiné" name="Csenkiné Bihal Mária Magdolna" short="CsBM" gender="F" color="#669900" email="" mobile="" partner_id=""/>
-      <teacher id="26DEB70B6093CFCE" firstname="Beáta" lastname="Csõsz" name="Csõsz Beáta" short="CsBe" gender="F" color="#66FF66" email="" mobile="" partner_id=""/>
+      <teacher id="9304851FE1CC4322" firstname="Gyula LÃ¡szlÃ³" lastname="AlÃ¡cs" name="AlÃ¡cs Gyula LÃ¡szlÃ³" short="AlGy" gender="F" color="#FF0000" email="" mobile="" partner_id=""/>
+      <teacher id="C6013ED90A8B859F" firstname="LÃ¡szlÃ³" lastname="BalÃ¡zs" name="BalÃ¡zs LÃ¡szlÃ³" short="BaLa" gender="M" color="#FFCC66" email="" mobile="" partner_id=""/>
+      <teacher id="6A898E7BBCAE03FB" firstname="Bene MÃ³nika Melinda" lastname="PreisznÃ©" name="PreisznÃ© Bene MÃ³nika Melinda" short="BeMo" gender="F" color="#CC99FF" email="" mobile="" partner_id=""/>
+      <teacher id="4A4D9A02F6BBFF35" firstname="Szabolcs" lastname="ErdÃ©lyi" name="ErdÃ©lyi Szabolcs" short="ErSz" gender="M" color="#3333FF" email="" mobile="" partner_id=""/>
+      <teacher id="2ED900C79EF883D1" firstname="Szilvia" lastname="Ãron-GÃ¶rÃ¶g" name="Ãron-GÃ¶rÃ¶g Szilvia" short="AGSz" gender="F" color="#008080" email="" mobile="" partner_id=""/>
+      <teacher id="14A7986F65744468" firstname="Csaba MihÃ¡ly" lastname="BogÃ¡csi" name="BogÃ¡csi Csaba MihÃ¡ly" short="BoCs" gender="F" color="#66FFFF" email="" mobile="" partner_id=""/>
+      <teacher id="66F01570774BE231" firstname="BeÃ¡ta" lastname="BozÃ³" name="BozÃ³ BeÃ¡ta" short="BoBe" gender="F" color="#A0C0FF" email="" mobile="" partner_id=""/>
+      <teacher id="6E4EADD7A8CE140F" firstname="GÃ¡bor SÃ¡ndor" lastname="Buri" name="Buri GÃ¡bor SÃ¡ndor" short="BuGa" gender="M" color="#DDFF97" email="" mobile="" partner_id=""/>
+      <teacher id="B79E699F3116E685" firstname="KÃ¡llai IldikÃ³" lastname="CzakÃ³nÃ©" name="CzakÃ³nÃ© KÃ¡llai IldikÃ³" short="CzKa" gender="F" color="#0080FF" email="" mobile="" partner_id=""/>
+      <teacher id="8CC35C9D3C539550" firstname="Bihal MÃ¡ria Magdolna" lastname="CsenkinÃ©" name="CsenkinÃ© Bihal MÃ¡ria Magdolna" short="CsBM" gender="F" color="#669900" email="" mobile="" partner_id=""/>
+      <teacher id="26DEB70B6093CFCE" firstname="BeÃ¡ta" lastname="CsÅ‘sz" name="CsÅ‘sz BeÃ¡ta" short="CsBe" gender="F" color="#66FF66" email="" mobile="" partner_id=""/>
       <teacher id="ACE47DDCE17B9FAB" firstname="Tibor" lastname="Csuka" name="Csuka Tibor" short="CsTi" gender="F" color="#FFFF66" email="" mobile="" partner_id=""/>
-      <teacher id="6E41CC9367966BB6" firstname="László" lastname="Dobos" name="Dobos László" short="DoLa" gender="M" color="#6666FF" email="" mobile="" partner_id=""/>
-      <teacher id="1104F64DC0BBCEA5" firstname="Péter" lastname="Dongó" name="Dongó Péter" short="DoPe" gender="F" color="#FF9966" email="" mobile="" partner_id=""/>
+      <teacher id="6E41CC9367966BB6" firstname="LÃ¡szlÃ³" lastname="Dobos" name="Dobos LÃ¡szlÃ³" short="DoLa" gender="M" color="#6666FF" email="" mobile="" partner_id=""/>
+      <teacher id="1104F64DC0BBCEA5" firstname="PÃ©ter" lastname="DongÃ³" name="DongÃ³ PÃ©ter" short="DoPe" gender="F" color="#FF9966" email="" mobile="" partner_id=""/>
       <teacher id="7138377611F28C0A" firstname="Szilvia" lastname="Fazekas-Kis" name="Fazekas-Kis Szilvia" short="FKSz" gender="F" color="#FFA0A0" email="" mobile="" partner_id=""/>
       <teacher id="39C6DADDB61E13F3" firstname="Eszter" lastname="Fekete-Csenki" name="Fekete-Csenki Eszter" short="FeCs" gender="F" color="#0000FF" email="" mobile="" partner_id=""/>
-      <teacher id="73FBA294EFEF1B89" firstname="Gergely" lastname="Csanádi" name="Csanádi Gergely" short="CsGe" gender="F" color="#CCFFFF" email="" mobile="" partner_id=""/>
-      <teacher id="6CD9946D59A24E42" firstname="Eleanor Elizabeth" lastname="Födõ-Vargek" name="Födõ-Vargek Eleanor Elizabeth" short="FoVa" gender="F" color="#00FFFF" email="" mobile="" partner_id=""/>
-      <teacher id="617155592A5B9E36" firstname="Anikó" lastname="Gémesné Farkas" name="Gémesné Farkas Anikó" short="GFAn" gender="F" color="#FF6666" email="" mobile="" partner_id=""/>
-      <teacher id="D8D178035373DF9E" firstname="László" lastname="Dr. Göcs" name="Dr. Göcs László" short="GoLa" gender="F" color="#9966FF" email="" mobile="" partner_id=""/>
-      <teacher id="F56DBFC9E43A1EE0" firstname="Erika" lastname="Grósz" name="Grósz Erika" short="GrEr" gender="F" color="#6600CC" email="" mobile="" partner_id=""/>
-      <teacher id="EC49D4EB1363333A" firstname="Csaba" lastname="Gyöngyösi" name="Gyöngyösi Csaba" short="GyCs" gender="F" color="#00FF80" email="" mobile="" partner_id=""/>
+      <teacher id="73FBA294EFEF1B89" firstname="Gergely" lastname="CsanÃ¡di" name="CsanÃ¡di Gergely" short="CsGe" gender="F" color="#CCFFFF" email="" mobile="" partner_id=""/>
+      <teacher id="6CD9946D59A24E42" firstname="Eleanor Elizabeth" lastname="FÃ¶dÅ‘-Vargek" name="FÃ¶dÅ‘-Vargek Eleanor Elizabeth" short="FoVa" gender="F" color="#00FFFF" email="" mobile="" partner_id=""/>
+      <teacher id="617155592A5B9E36" firstname="AnikÃ³" lastname="GÃ©mesnÃ© Farkas" name="GÃ©mesnÃ© Farkas AnikÃ³" short="GFAn" gender="F" color="#FF6666" email="" mobile="" partner_id=""/>
+      <teacher id="D8D178035373DF9E" firstname="LÃ¡szlÃ³" lastname="Dr. GÃ¶cs" name="Dr. GÃ¶cs LÃ¡szlÃ³" short="GoLa" gender="F" color="#9966FF" email="" mobile="" partner_id=""/>
+      <teacher id="F56DBFC9E43A1EE0" firstname="Erika" lastname="GrÃ³sz" name="GrÃ³sz Erika" short="GrEr" gender="F" color="#6600CC" email="" mobile="" partner_id=""/>
+      <teacher id="EC49D4EB1363333A" firstname="Csaba" lastname="GyÃ¶ngyÃ¶si" name="GyÃ¶ngyÃ¶si Csaba" short="GyCs" gender="F" color="#00FF80" email="" mobile="" partner_id=""/>
       <teacher id="59EDAFD431FCBE12" firstname="Attila" lastname="Havas" name="Havas Attila" short="HaAt" gender="F" color="#00CC00" email="" mobile="" partner_id=""/>
-      <teacher id="C86BFC5AB59B3656" firstname="Ágnes" lastname="Hódi" name="Hódi Ágnes" short="HoAg" gender="F" color="#00FF00" email="" mobile="" partner_id=""/>
-      <teacher id="46DA8D48E9C43EC9" firstname="Katalin Anita" lastname="Horváthné Zombory" name="Horváthné Zombory Katalin Anita" short="HZK" gender="F" color="#009933" email="" mobile="" partner_id=""/>
-      <teacher id="DD2FA60EF55803E5" firstname="Szabolcs" lastname="Juhász" name="Juhász Szabolcs" short="JuSz" gender="F" color="#FFC000" email="" mobile="" partner_id=""/>
-      <teacher id="9187999A422F8444" firstname="Uredat Dagmar" lastname="Kertészné" name="Kertészné Uredat Dagmar" short="KeUr" gender="F" color="#33CC33" email="" mobile="" partner_id=""/>
-      <teacher id="C76C1182A1593766" firstname="Károly" lastname="Kiss" name="Kiss Károly" short="KiKa" gender="M" color="#800080" email="" mobile="" partner_id=""/>
-      <teacher id="E8A2A8C94E3AF501" firstname="Gábor István" lastname="Kiss" name="Kiss Gábor István" short="KiGI" gender="F" color="#808000" email="" mobile="" partner_id=""/>
-      <teacher id="333BD0A47457BEAE" firstname="Anita Gabriella" lastname="Kovács" name="Kovács Anita Gabriella" short="KoAn" gender="F" color="#6600FF" email="" mobile="" partner_id=""/>
-      <teacher id="7F4CAB2C55C7D3F4" firstname="Dénes" lastname="Kovács" name="Kovács Dénes" short="KoDe" gender="F" color="#808080" email="" mobile="" partner_id=""/>
-      <teacher id="F02FC4EF1787540C" firstname="Éva" lastname="Kovács" name="Kovács Éva" short="KoEv" gender="F" color="#80FF80" email="" mobile="" partner_id=""/>
-      <teacher id="FE205EB35F7EFCF2" firstname="Tímea" lastname="Kun" name="Kun Tímea" short="KuTi" gender="F" color="#800052" email="" mobile="" partner_id=""/>
-      <teacher id="46311675DDDF2642" firstname="Ádám" lastname="Maróthy" name="Maróthy Ádám" short="MaAd" gender="F" color="#FF8080" email="" mobile="" partner_id=""/>
-      <teacher id="3F4D16686C3A161D" firstname="Major Márta" lastname="Messzi-Szabóné" name="Messzi-Szabóné Major Márta" short="MeMM" gender="F" color="#FFC030" email="" mobile="" partner_id=""/>
-      <teacher id="52637FBBCD73F37C" firstname="Szabó Lilian" lastname="Michnáné" name="Michnáné Szabó Lilian" short="MiLi" gender="F" color="#8000FF" email="" mobile="" partner_id=""/>
-      <teacher id="B323D965C3E380D7" firstname="Olga" lastname="Novák" name="Novák Olga" short="NoOl" gender="F" color="#FFCCFF" email="" mobile="" partner_id=""/>
-      <teacher id="DFB0E1A65DAE7E47" firstname="Ádám" lastname="Palásti" name="Palásti Ádám" short="PaAd" gender="F" color="#6060C0" email="" mobile="" partner_id=""/>
-      <teacher id="7202A07CC4F028C8" firstname="Ernõ Ferenc" lastname="Pallagi" name="Pallagi Ernõ Ferenc" short="PaEr" gender="F" color="#14C0C0" email="" mobile="" partner_id=""/>
-      <teacher id="18E540099BC805FB" firstname="Aranka Erzsébet" lastname="Palotás" name="Palotás Aranka Erzsébet" short="PaAr" gender="M" color="#CC6600" email="" mobile="" partner_id=""/>
-      <teacher id="657C43163B0A54C0" firstname="Zoltán Albert" lastname="Pásztor" name="Pásztor Zoltán Albert" short="PaZo" gender="M" color="#FFFFFF" email="" mobile="" partner_id=""/>
+      <teacher id="C86BFC5AB59B3656" firstname="Ãgnes" lastname="HÃ³di" name="HÃ³di Ãgnes" short="HoAg" gender="F" color="#00FF00" email="" mobile="" partner_id=""/>
+      <teacher id="46DA8D48E9C43EC9" firstname="Katalin Anita" lastname="HorvÃ¡thnÃ© Zombory" name="HorvÃ¡thnÃ© Zombory Katalin Anita" short="HZK" gender="F" color="#009933" email="" mobile="" partner_id=""/>
+      <teacher id="DD2FA60EF55803E5" firstname="Szabolcs" lastname="JuhÃ¡sz" name="JuhÃ¡sz Szabolcs" short="JuSz" gender="F" color="#FFC000" email="" mobile="" partner_id=""/>
+      <teacher id="9187999A422F8444" firstname="Uredat Dagmar" lastname="KertÃ©sznÃ©" name="KertÃ©sznÃ© Uredat Dagmar" short="KeUr" gender="F" color="#33CC33" email="" mobile="" partner_id=""/>
+      <teacher id="C76C1182A1593766" firstname="KÃ¡roly" lastname="Kiss" name="Kiss KÃ¡roly" short="KiKa" gender="M" color="#800080" email="" mobile="" partner_id=""/>
+      <teacher id="E8A2A8C94E3AF501" firstname="GÃ¡bor IstvÃ¡n" lastname="Kiss" name="Kiss GÃ¡bor IstvÃ¡n" short="KiGI" gender="F" color="#808000" email="" mobile="" partner_id=""/>
+      <teacher id="333BD0A47457BEAE" firstname="Anita Gabriella" lastname="KovÃ¡cs" name="KovÃ¡cs Anita Gabriella" short="KoAn" gender="F" color="#6600FF" email="" mobile="" partner_id=""/>
+      <teacher id="7F4CAB2C55C7D3F4" firstname="DÃ©nes" lastname="KovÃ¡cs" name="KovÃ¡cs DÃ©nes" short="KoDe" gender="F" color="#808080" email="" mobile="" partner_id=""/>
+      <teacher id="F02FC4EF1787540C" firstname="Ã‰va" lastname="KovÃ¡cs" name="KovÃ¡cs Ã‰va" short="KoEv" gender="F" color="#80FF80" email="" mobile="" partner_id=""/>
+      <teacher id="FE205EB35F7EFCF2" firstname="TÃ­mea" lastname="Kun" name="Kun TÃ­mea" short="KuTi" gender="F" color="#800052" email="" mobile="" partner_id=""/>
+      <teacher id="46311675DDDF2642" firstname="ÃdÃ¡m" lastname="MarÃ³thy" name="MarÃ³thy ÃdÃ¡m" short="MaAd" gender="F" color="#FF8080" email="" mobile="" partner_id=""/>
+      <teacher id="3F4D16686C3A161D" firstname="Major MÃ¡rta" lastname="Messzi-SzabÃ³nÃ©" name="Messzi-SzabÃ³nÃ© Major MÃ¡rta" short="MeMM" gender="F" color="#FFC030" email="" mobile="" partner_id=""/>
+      <teacher id="52637FBBCD73F37C" firstname="SzabÃ³ Lilian" lastname="MichnÃ¡nÃ©" name="MichnÃ¡nÃ© SzabÃ³ Lilian" short="MiLi" gender="F" color="#8000FF" email="" mobile="" partner_id=""/>
+      <teacher id="B323D965C3E380D7" firstname="Olga" lastname="NovÃ¡k" name="NovÃ¡k Olga" short="NoOl" gender="F" color="#FFCCFF" email="" mobile="" partner_id=""/>
+      <teacher id="DFB0E1A65DAE7E47" firstname="ÃdÃ¡m" lastname="PalÃ¡sti" name="PalÃ¡sti ÃdÃ¡m" short="PaAd" gender="F" color="#6060C0" email="" mobile="" partner_id=""/>
+      <teacher id="7202A07CC4F028C8" firstname="ErnÅ‘ Ferenc" lastname="Pallagi" name="Pallagi ErnÅ‘ Ferenc" short="PaEr" gender="F" color="#14C0C0" email="" mobile="" partner_id=""/>
+      <teacher id="18E540099BC805FB" firstname="Aranka ErzsÃ©bet" lastname="PalotÃ¡s" name="PalotÃ¡s Aranka ErzsÃ©bet" short="PaAr" gender="M" color="#CC6600" email="" mobile="" partner_id=""/>
+      <teacher id="657C43163B0A54C0" firstname="ZoltÃ¡n Albert" lastname="PÃ¡sztor" name="PÃ¡sztor ZoltÃ¡n Albert" short="PaZo" gender="M" color="#FFFFFF" email="" mobile="" partner_id=""/>
       <teacher id="183BA02E572EE4E7" firstname="Judit" lastname="Patak" name="Patak Judit" short="PaJu" gender="F" color="#14C030" email="" mobile="" partner_id=""/>
       <teacher id="96D23595C4360C66" firstname="Csaba" lastname="Preisz" name="Preisz Csaba" short="PrCs" gender="F" color="#80C014" email="" mobile="" partner_id=""/>
       <teacher id="76EE952DE3C33290" firstname="Csaba" lastname="Rokolya" name="Rokolya Csaba" short="RoCs" gender="F" color="#1414C0" email="" mobile="" partner_id=""/>
-      <teacher id="6381EE167DED9243" firstname="Tamás" lastname="Sárkány" name="Sárkány Tamás" short="SaTa" gender="F" color="#CC9900" email="" mobile="" partner_id=""/>
-      <teacher id="325214F720C80886" firstname="" lastname="Simó Zsuzsanna" name="Simó Zsuzsanna" short="SiZs" gender="F" color="#99FF66" email="" mobile="" partner_id=""/>
-      <teacher id="6E33950097700E2B" firstname="Zatykó Helga" lastname="Csenkiné" name="Csenkiné Zatykó Helga" short="CsZa" gender="M" color="#993333" email="" mobile="" partner_id=""/>
-      <teacher id="B53E0ADDC37EF7AF" firstname="Heléna" lastname="Horváth-Hegedûs" name="Horváth-Hegedûs Heléna" short="HoHe" gender="F" color="#FFCCFF" email="" mobile="" partner_id=""/>
-      <teacher id="0CC8501ECFBEA73F" firstname="Nikoletta" lastname="Szél" name="Szél Nikoletta" short="SzNi" gender="F" color="#00FFC0" email="" mobile="" partner_id=""/>
-      <teacher id="3A0AA23961C26EB2" firstname="Tamás" lastname="Simon" name="Simon Tamás" short="SiTa" gender="F" color="#003399" email="" mobile="" partner_id=""/>
-      <teacher id="A53C13859DAEB59E" firstname="Zsolt Imre" lastname="Süveges" name="Süveges Zsolt Imre" short="SuZI" gender="F" color="#9966FF" email="" mobile="" partner_id=""/>
-      <teacher id="706A6D45B94E19CA" firstname="Zoltán" lastname="Szebeni" name="Szebeni Zoltán" short="SzZo" gender="F" color="#FFC000" email="" mobile="" partner_id=""/>
-      <teacher id="B8E275659D621804" firstname="Sándor" lastname="Szijártó" name="Szijártó Sándor" short="SzSa" gender="M" color="#FF8000" email="" mobile="" partner_id=""/>
-      <teacher id="AEC0D280B3F07A7A" firstname="Levente Zsoltné" lastname="Tóth" name="Tóth Levente Zsoltné" short="ToLZ" gender="F" color="#339933" email="" mobile="" partner_id=""/>
-      <teacher id="30D0B897286BF9D9" firstname="Petra Dóra" lastname="Tóth" name="Tóth Petra Dóra" short="ToPe" gender="F" color="#FF00FF" email="" mobile="" partner_id=""/>
-      <teacher id="B7ABA330D5E342B9" firstname="Tamás" lastname="Tóth" name="Tóth Tamás" short="ToTa" gender="F" color="#3399FF" email="" mobile="" partner_id=""/>
-      <teacher id="E7690326C83FB372" firstname="Tímea" lastname="Tóth" name="Tóth Tímea" short="ToTi" gender="F" color="#800080" email="" mobile="" partner_id=""/>
-      <teacher id="75151820F559C7E7" firstname="Csaba György" lastname="Törköly" name="Törköly Csaba György" short="ToCs" gender="M" color="#008012" email="" mobile="" partner_id=""/>
+      <teacher id="6381EE167DED9243" firstname="TamÃ¡s" lastname="SÃ¡rkÃ¡ny" name="SÃ¡rkÃ¡ny TamÃ¡s" short="SaTa" gender="F" color="#CC9900" email="" mobile="" partner_id=""/>
+      <teacher id="325214F720C80886" firstname="" lastname="SimÃ³ Zsuzsanna" name="SimÃ³ Zsuzsanna" short="SiZs" gender="F" color="#99FF66" email="" mobile="" partner_id=""/>
+      <teacher id="6E33950097700E2B" firstname="ZatykÃ³ Helga" lastname="CsenkinÃ©" name="CsenkinÃ© ZatykÃ³ Helga" short="CsZa" gender="M" color="#993333" email="" mobile="" partner_id=""/>
+      <teacher id="B53E0ADDC37EF7AF" firstname="HelÃ©na" lastname="HorvÃ¡th-HegedÅ±s" name="HorvÃ¡th-HegedÅ±s HelÃ©na" short="HoHe" gender="F" color="#FFCCFF" email="" mobile="" partner_id=""/>
+      <teacher id="0CC8501ECFBEA73F" firstname="Nikoletta" lastname="SzÃ©l" name="SzÃ©l Nikoletta" short="SzNi" gender="F" color="#00FFC0" email="" mobile="" partner_id=""/>
+      <teacher id="3A0AA23961C26EB2" firstname="TamÃ¡s" lastname="Simon" name="Simon TamÃ¡s" short="SiTa" gender="F" color="#003399" email="" mobile="" partner_id=""/>
+      <teacher id="A53C13859DAEB59E" firstname="Zsolt Imre" lastname="SÃ¼veges" name="SÃ¼veges Zsolt Imre" short="SuZI" gender="F" color="#9966FF" email="" mobile="" partner_id=""/>
+      <teacher id="706A6D45B94E19CA" firstname="ZoltÃ¡n" lastname="Szebeni" name="Szebeni ZoltÃ¡n" short="SzZo" gender="F" color="#FFC000" email="" mobile="" partner_id=""/>
+      <teacher id="B8E275659D621804" firstname="SÃ¡ndor" lastname="SzijÃ¡rtÃ³" name="SzijÃ¡rtÃ³ SÃ¡ndor" short="SzSa" gender="M" color="#FF8000" email="" mobile="" partner_id=""/>
+      <teacher id="AEC0D280B3F07A7A" firstname="Levente ZsoltnÃ©" lastname="TÃ³th" name="TÃ³th Levente ZsoltnÃ©" short="ToLZ" gender="F" color="#339933" email="" mobile="" partner_id=""/>
+      <teacher id="30D0B897286BF9D9" firstname="Petra DÃ³ra" lastname="TÃ³th" name="TÃ³th Petra DÃ³ra" short="ToPe" gender="F" color="#FF00FF" email="" mobile="" partner_id=""/>
+      <teacher id="B7ABA330D5E342B9" firstname="TamÃ¡s" lastname="TÃ³th" name="TÃ³th TamÃ¡s" short="ToTa" gender="F" color="#3399FF" email="" mobile="" partner_id=""/>
+      <teacher id="E7690326C83FB372" firstname="TÃ­mea" lastname="TÃ³th" name="TÃ³th TÃ­mea" short="ToTi" gender="F" color="#800080" email="" mobile="" partner_id=""/>
+      <teacher id="75151820F559C7E7" firstname="Csaba GyÃ¶rgy" lastname="TÃ¶rkÃ¶ly" name="TÃ¶rkÃ¶ly Csaba GyÃ¶rgy" short="ToCs" gender="M" color="#008012" email="" mobile="" partner_id=""/>
       <teacher id="20CB7BC3D517A984" firstname="Viola" lastname="Vas" name="Vas Viola" short="VaVi" gender="F" color="#FFFF00" email="" mobile="" partner_id=""/>
-      <teacher id="6B1A9442747EFEE7" firstname="Lénárt Judit" lastname="Verebné" name="Verebné Lénárt Judit" short="VeLJ" gender="F" color="#C0FFFF" email="" mobile="" partner_id=""/>
+      <teacher id="6B1A9442747EFEE7" firstname="LÃ©nÃ¡rt Judit" lastname="VerebnÃ©" name="VerebnÃ© LÃ©nÃ¡rt Judit" short="VeLJ" gender="F" color="#C0FFFF" email="" mobile="" partner_id=""/>
       <teacher id="1A8562962C9AD476" firstname="Zsolt" lastname="Vincze" name="Vincze Zsolt" short="ViZs" gender="F" color="#FFCCCC" email="" mobile="" partner_id=""/>
-      <teacher id="759D4AF63F6C10BC" firstname="Andrea" lastname="Vígh" name="Vígh Andrea" short="ViAn" gender="F" color="#FFFFCC" email="" mobile="" partner_id=""/>
+      <teacher id="759D4AF63F6C10BC" firstname="Andrea" lastname="VÃ­gh" name="VÃ­gh Andrea" short="ViAn" gender="F" color="#FFFFCC" email="" mobile="" partner_id=""/>
       <teacher id="C14EA93EB9238C8D" firstname="" lastname="Hilti" name="Hilti" short="Hilti" gender="M" color="#FF0042" email="" mobile="" partner_id=""/>
    </teachers>
    <classrooms options="canadd,export:silent" columns="id,name,short,capacity,partner_id">
@@ -237,29 +237,29 @@
       <classroom id="FE17037289D73AC7" name="csarnok2" short="cs2" capacity="*" partner_id=""/>
       <classroom id="FECA69D15B83B594" name="Hilti" short="H" capacity="*" partner_id=""/>
       <classroom id="3CC62556228FD781" name="Hilti2" short="H2" capacity="*" partner_id=""/>
-      <classroom id="7F1BDDA5E9E772E6" name="Közösségi tér" short="KT" capacity="*" partner_id=""/>
+      <classroom id="7F1BDDA5E9E772E6" name="KÃ¶zÃ¶ssÃ©gi tÃ©r" short="KT" capacity="*" partner_id=""/>
    </classrooms>
    <grades options="canadd,export:silent" columns="grade,name,short">
-      <grade name="Osztályzat 1" short="O 1" grade="1"/>
-      <grade name="Osztályzat 2" short="O 2" grade="2"/>
-      <grade name="Osztályzat 3" short="O 3" grade="3"/>
-      <grade name="Osztályzat 4" short="O 4" grade="4"/>
-      <grade name="Osztályzat 5" short="O 5" grade="5"/>
-      <grade name="Osztályzat 6" short="O 6" grade="6"/>
-      <grade name="Osztályzat 7" short="O 7" grade="7"/>
-      <grade name="Osztályzat 8" short="O 8" grade="8"/>
-      <grade name="Osztályzat 9" short="O 9" grade="9"/>
-      <grade name="Osztályzat 10" short="O 10" grade="10"/>
-      <grade name="Osztályzat 11" short="O 11" grade="11"/>
-      <grade name="Osztályzat 12" short="O 12" grade="12"/>
-      <grade name="Osztályzat 13" short="O 13" grade="13"/>
-      <grade name="Osztályzat 14" short="O 14" grade="14"/>
-      <grade name="Osztályzat 15" short="O 15" grade="15"/>
-      <grade name="Osztályzat 16" short="O 16" grade="16"/>
-      <grade name="Osztályzat 17" short="O 17" grade="17"/>
-      <grade name="Osztályzat 18" short="O 18" grade="18"/>
-      <grade name="Osztályzat 19" short="O 19" grade="19"/>
-      <grade name="Osztályzat 20" short="O 20" grade="20"/>
+      <grade name="OsztÃ¡lyzat 1" short="O 1" grade="1"/>
+      <grade name="OsztÃ¡lyzat 2" short="O 2" grade="2"/>
+      <grade name="OsztÃ¡lyzat 3" short="O 3" grade="3"/>
+      <grade name="OsztÃ¡lyzat 4" short="O 4" grade="4"/>
+      <grade name="OsztÃ¡lyzat 5" short="O 5" grade="5"/>
+      <grade name="OsztÃ¡lyzat 6" short="O 6" grade="6"/>
+      <grade name="OsztÃ¡lyzat 7" short="O 7" grade="7"/>
+      <grade name="OsztÃ¡lyzat 8" short="O 8" grade="8"/>
+      <grade name="OsztÃ¡lyzat 9" short="O 9" grade="9"/>
+      <grade name="OsztÃ¡lyzat 10" short="O 10" grade="10"/>
+      <grade name="OsztÃ¡lyzat 11" short="O 11" grade="11"/>
+      <grade name="OsztÃ¡lyzat 12" short="O 12" grade="12"/>
+      <grade name="OsztÃ¡lyzat 13" short="O 13" grade="13"/>
+      <grade name="OsztÃ¡lyzat 14" short="O 14" grade="14"/>
+      <grade name="OsztÃ¡lyzat 15" short="O 15" grade="15"/>
+      <grade name="OsztÃ¡lyzat 16" short="O 16" grade="16"/>
+      <grade name="OsztÃ¡lyzat 17" short="O 17" grade="17"/>
+      <grade name="OsztÃ¡lyzat 18" short="O 18" grade="18"/>
+      <grade name="OsztÃ¡lyzat 19" short="O 19" grade="19"/>
+      <grade name="OsztÃ¡lyzat 20" short="O 20" grade="20"/>
    </grades>
    <classes options="canadd,export:silent" columns="id,name,short,classroomids,teacherid,grade,partner_id">
       <class id="15B58FF687EFECC6" name="9/Knya" short="9/Knya" teacherid="" classroomids="" grade="" partner_id=""/>
@@ -289,21 +289,21 @@
       <class id="2189691C24A45F58" name="2/12.CNC" short="2/12.CNC" teacherid="" classroomids="" grade="" partner_id=""/>
    </classes>
    <groups options="canadd,export:silent" columns="id,classid,name,entireclass,divisiontag,studentcount,studentids">
-      <group id="28F06CDFED463DB8" name="Egész osztály" classid="15B58FF687EFECC6" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="28F06CDFED463DB8" name="EgÃ©sz osztÃ¡ly" classid="15B58FF687EFECC6" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="8F564D3EA9480D72" name="9/Knya-N1" classid="15B58FF687EFECC6" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="7314A103ED95C44F" name="9/Knya-N2" classid="15B58FF687EFECC6" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
-      <group id="4B3142D64CF80D0E" name="Egész osztály" classid="30F4E6803187AF03" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="4B3142D64CF80D0E" name="EgÃ©sz osztÃ¡ly" classid="30F4E6803187AF03" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="08A15559EF2880BE" name="9/Knyc-A1" classid="30F4E6803187AF03" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="E00130ED38DF69AC" name="9/Knyc-A2" classid="30F4E6803187AF03" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
-      <group id="B3BD2074880CE6EF" name="Egész osztály" classid="2E4341D3B8B3205A" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="B3BD2074880CE6EF" name="EgÃ©sz osztÃ¡ly" classid="2E4341D3B8B3205A" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="C809DA46EA96E14B" name="9/Knyd-A1" classid="2E4341D3B8B3205A" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="2A52B65CC3F5983C" name="9/Knyd-A2" classid="2E4341D3B8B3205A" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
-      <group id="A819B442A148F14D" name="Egész osztály" classid="95BE216CDDE089EC" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="A819B442A148F14D" name="EgÃ©sz osztÃ¡ly" classid="95BE216CDDE089EC" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="9C12F2751B816523" name="9.A-N1" classid="95BE216CDDE089EC" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="DA7F4A552423BDFB" name="9.A-N2" classid="95BE216CDDE089EC" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="8B477F9DE9C1ECA2" name="9.A-GY1" classid="95BE216CDDE089EC" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
       <group id="1F753E4EFD183AEF" name="9.A-GY2" classid="95BE216CDDE089EC" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
-      <group id="2540E5923731169B" name="Egész osztály" classid="47F9825805F8BAF0" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="2540E5923731169B" name="EgÃ©sz osztÃ¡ly" classid="47F9825805F8BAF0" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="A741D3CD6BB316BC" name="9.B-A1" classid="47F9825805F8BAF0" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="6BC98A5F9BA6C4AF" name="9.B-A2" classid="47F9825805F8BAF0" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="51CBD75CDB823D18" name="9.B-N" classid="47F9825805F8BAF0" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
@@ -312,37 +312,37 @@
       <group id="6A9B6D58CDB1AB9D" name="9.B-GY3" classid="47F9825805F8BAF0" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
       <group id="F439F9B9EF4F0187" name="9.B-I1" classid="47F9825805F8BAF0" studentids="" entireclass="0" divisiontag="3" studentcount=""/>
       <group id="A66E5FAE0AA044FF" name="9.B-I2" classid="47F9825805F8BAF0" studentids="" entireclass="0" divisiontag="3" studentcount=""/>
-      <group id="02774F9DAAD637FC" name="Egész osztály" classid="4F345D0CF120E7A3" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="02774F9DAAD637FC" name="EgÃ©sz osztÃ¡ly" classid="4F345D0CF120E7A3" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="206927BA6ABCF061" name="9.C-A1" classid="4F345D0CF120E7A3" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="3ED066B57CD63940" name="9.C-A2" classid="4F345D0CF120E7A3" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="58E8D68607A15E49" name="9.C-GY1" classid="4F345D0CF120E7A3" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
       <group id="78694816FDDE96BE" name="9.C-GY2" classid="4F345D0CF120E7A3" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
-      <group id="345425E0F1EF6645" name="Egész osztály" classid="38F9B62761350AAD" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="345425E0F1EF6645" name="EgÃ©sz osztÃ¡ly" classid="38F9B62761350AAD" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="4F16EE344362962B" name="9.D-A1" classid="38F9B62761350AAD" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="3A823DEADD3802B8" name="9.D-A2" classid="38F9B62761350AAD" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
-      <group id="B4601C3D8F64DD70" name="Egész osztály" classid="8808AD9180CB8D05" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="B4601C3D8F64DD70" name="EgÃ©sz osztÃ¡ly" classid="8808AD9180CB8D05" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="5FF3C3E487D691B0" name="9.I-A1" classid="8808AD9180CB8D05" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="17BC577407C6FDC7" name="9.I-A2" classid="8808AD9180CB8D05" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="4DDCBBB2E473EDF7" name="9.I-N" classid="8808AD9180CB8D05" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
-      <group id="C07C5AEE28FFF9BC" name="Egész osztály" classid="79EE1A81F120495E" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="C07C5AEE28FFF9BC" name="EgÃ©sz osztÃ¡ly" classid="79EE1A81F120495E" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="53FBA19F66A35F8B" name="10.B-A" classid="79EE1A81F120495E" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="559AC235F9691AD8" name="10.B-N" classid="79EE1A81F120495E" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="C8BBF786D78115DE" name="10.B-GY1" classid="79EE1A81F120495E" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
       <group id="87ABFD34642E57B5" name="10.B-GY2" classid="79EE1A81F120495E" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
-      <group id="67EA6C3F9FF0F081" name="Egész osztály" classid="F92A1B529C42CB69" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="67EA6C3F9FF0F081" name="EgÃ©sz osztÃ¡ly" classid="F92A1B529C42CB69" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="AA58A36698AC1AC9" name="10.C-A1" classid="F92A1B529C42CB69" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="F86A4283CCC0CB57" name="10.C-A2" classid="F92A1B529C42CB69" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="BA5F32C1104B742B" name="10.C-N" classid="F92A1B529C42CB69" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="2165AE4F9912B6E3" name="10.C-GY1" classid="F92A1B529C42CB69" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
       <group id="6A5502B00536B297" name="10.C-GY2" classid="F92A1B529C42CB69" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
       <group id="5F4AFEDD154D1B2D" name="10.C-GY3" classid="F92A1B529C42CB69" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
-      <group id="89A0766786A101A6" name="Egész osztály" classid="94502FCDCB9BA773" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="89A0766786A101A6" name="EgÃ©sz osztÃ¡ly" classid="94502FCDCB9BA773" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="89FDCC17539B2417" name="10.D-A1" classid="94502FCDCB9BA773" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="04D9C7CE7DB54735" name="10.D-A2" classid="94502FCDCB9BA773" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
-      <group id="74E07836536E495E" name="Egész osztály" classid="318F1FDE67F36C9C" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="74E07836536E495E" name="EgÃ©sz osztÃ¡ly" classid="318F1FDE67F36C9C" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="3D76D841AD3C4105" name="10.I-A1" classid="318F1FDE67F36C9C" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="0B2D85E9FC218078" name="10.I-A2" classid="318F1FDE67F36C9C" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
-      <group id="68FA392DA40A2D4D" name="Egész osztály" classid="0E71207740225A7A" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="68FA392DA40A2D4D" name="EgÃ©sz osztÃ¡ly" classid="0E71207740225A7A" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="3C4BB3C931692F14" name="11.A-GY1" classid="0E71207740225A7A" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="F88EB8979A24BCCC" name="11.A-GY2" classid="0E71207740225A7A" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="AFD72A73635FC895" name="11.A-emat" classid="0E71207740225A7A" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
@@ -351,14 +351,14 @@
       <group id="99E4F2876C2398A4" name="11.A-B" classid="0E71207740225A7A" studentids="" entireclass="0" divisiontag="3" studentcount=""/>
       <group id="B4E7AE9619C7A6B8" name="11.A-efiz" classid="0E71207740225A7A" studentids="" entireclass="0" divisiontag="4" studentcount=""/>
       <group id="4C8358826FCE6F71" name="11.A-nefiz" classid="0E71207740225A7A" studentids="" entireclass="0" divisiontag="4" studentcount=""/>
-      <group id="EB990178390365BE" name="Egész osztály" classid="5CF046EDC47FD939" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="EB990178390365BE" name="EgÃ©sz osztÃ¡ly" classid="5CF046EDC47FD939" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="45B653F4F6B2A959" name="11.B-A1" classid="5CF046EDC47FD939" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="6C1045A8884F234D" name="11.B-A2" classid="5CF046EDC47FD939" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="1521451C4178B922" name="11.B-GY1" classid="5CF046EDC47FD939" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
       <group id="4ADB27672C57B983" name="11.B-GY2" classid="5CF046EDC47FD939" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
       <group id="B95F3178219CF17D" name="11.B-emat" classid="5CF046EDC47FD939" studentids="" entireclass="0" divisiontag="3" studentcount=""/>
       <group id="CCB4039D9630AF7F" name="11.B-nemat" classid="5CF046EDC47FD939" studentids="" entireclass="0" divisiontag="3" studentcount=""/>
-      <group id="DA4E187DFB906F85" name="Egész osztály" classid="8F4C61F1BCFA471C" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="DA4E187DFB906F85" name="EgÃ©sz osztÃ¡ly" classid="8F4C61F1BCFA471C" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="87129F4F5BEFED89" name="11.C-A1" classid="8F4C61F1BCFA471C" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="90CC86C63AE10A7A" name="11.C-A2" classid="8F4C61F1BCFA471C" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="B348860F2B8FD379" name="11.C-emat" classid="8F4C61F1BCFA471C" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
@@ -368,7 +368,7 @@
       <group id="E3565067DA14DAC7" name="11.C-H" classid="8F4C61F1BCFA471C" studentids="" entireclass="0" divisiontag="3" studentcount=""/>
       <group id="1D65B5680A091FDC" name="11.C-efiz" classid="8F4C61F1BCFA471C" studentids="" entireclass="0" divisiontag="4" studentcount=""/>
       <group id="20425DF2FFDB526E" name="11.C-nefiz" classid="8F4C61F1BCFA471C" studentids="" entireclass="0" divisiontag="4" studentcount=""/>
-      <group id="7C0382316FEDFE8F" name="Egész osztály" classid="B5112C254EDE9058" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="7C0382316FEDFE8F" name="EgÃ©sz osztÃ¡ly" classid="B5112C254EDE9058" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="9E597831FFF9BD28" name="11.D-A1" classid="B5112C254EDE9058" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="8AB60DA16BB3C7EC" name="11.D-A2" classid="B5112C254EDE9058" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="2484D142683292E7" name="11.D-emat" classid="B5112C254EDE9058" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
@@ -378,7 +378,7 @@
       <group id="B6EB0F10C6B97C65" name="11.D-S2" classid="B5112C254EDE9058" studentids="" entireclass="0" divisiontag="3" studentcount=""/>
       <group id="D0080BA7E209D3C1" name="11.D-efiz" classid="B5112C254EDE9058" studentids="" entireclass="0" divisiontag="4" studentcount=""/>
       <group id="4D2246E83124123C" name="11.D-nefiz" classid="B5112C254EDE9058" studentids="" entireclass="0" divisiontag="4" studentcount=""/>
-      <group id="4A6D12B5AD9F1F1F" name="Egész osztály" classid="C9B18EB4E93CF56C" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="4A6D12B5AD9F1F1F" name="EgÃ©sz osztÃ¡ly" classid="C9B18EB4E93CF56C" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="41C6915CDFD4480A" name="11.I-H1" classid="C9B18EB4E93CF56C" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="4B6064ABF25D346D" name="11.I-S1" classid="C9B18EB4E93CF56C" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="7DF45B579B0CF267" name="11.I-S2" classid="C9B18EB4E93CF56C" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
@@ -389,7 +389,7 @@
       <group id="1E6E37CC89BA1CDC" name="11.I-N" classid="C9B18EB4E93CF56C" studentids="" entireclass="0" divisiontag="3" studentcount=""/>
       <group id="D1895E72896DB925" name="11.I-efiz" classid="C9B18EB4E93CF56C" studentids="" entireclass="0" divisiontag="4" studentcount=""/>
       <group id="434BD85215271397" name="11.I-nefiz" classid="C9B18EB4E93CF56C" studentids="" entireclass="0" divisiontag="4" studentcount=""/>
-      <group id="EE3108537C64C936" name="Egész osztály" classid="901319961950B192" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="EE3108537C64C936" name="EgÃ©sz osztÃ¡ly" classid="901319961950B192" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="A8783656E7EC9B3E" name="12.A-N1" classid="901319961950B192" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="5B95B7E751078C2A" name="12.A-N2" classid="901319961950B192" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="43F7F928C079CC54" name="12.A-GY1" classid="901319961950B192" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
@@ -397,10 +397,10 @@
       <group id="AB2A9B7EB08BDE81" name="12.A-H" classid="901319961950B192" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
       <group id="B6831F73DAF5D536" name="12.A-mf" classid="901319961950B192" studentids="" entireclass="0" divisiontag="3" studentcount=""/>
       <group id="3BC32FDD835C2AAC" name="12.A-nmf" classid="901319961950B192" studentids="" entireclass="0" divisiontag="3" studentcount=""/>
-      <group id="F1D976537604E8C9" name="Egész osztály" classid="59D9463B422F6108" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="F1D976537604E8C9" name="EgÃ©sz osztÃ¡ly" classid="59D9463B422F6108" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="08A5E91A99453721" name="12.B-A" classid="59D9463B422F6108" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="1DEA79E4258AF749" name="12.B-N" classid="59D9463B422F6108" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
-      <group id="E3F0D20844E35517" name="Egész osztály" classid="44E29751ABE33BE5" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="E3F0D20844E35517" name="EgÃ©sz osztÃ¡ly" classid="44E29751ABE33BE5" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="97DD59B46CC0BB0A" name="12.D-A1" classid="44E29751ABE33BE5" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="CD97C0286C9F3424" name="12.D-A2" classid="44E29751ABE33BE5" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="9E9F920A7136E5D1" name="12.D-H1" classid="44E29751ABE33BE5" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
@@ -410,7 +410,7 @@
       <group id="0E8383C5A832D1EB" name="12.D-S2" classid="44E29751ABE33BE5" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
       <group id="71FD3633D129BC15" name="12.D-mf" classid="44E29751ABE33BE5" studentids="" entireclass="0" divisiontag="3" studentcount=""/>
       <group id="4499562A124E261D" name="12.D-nmf" classid="44E29751ABE33BE5" studentids="" entireclass="0" divisiontag="3" studentcount=""/>
-      <group id="9FDFC9062E8EF242" name="Egész osztály" classid="AC891685F8AE5E7F" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="9FDFC9062E8EF242" name="EgÃ©sz osztÃ¡ly" classid="AC891685F8AE5E7F" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="4FF41CEF0D9D1612" name="12.I-A1" classid="AC891685F8AE5E7F" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="6893041E781601DE" name="12.I-A2" classid="AC891685F8AE5E7F" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="8EEA9396705120F8" name="12.I-H1" classid="AC891685F8AE5E7F" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
@@ -420,7 +420,7 @@
       <group id="24C8EEECD2A8AAD6" name="12.I-S2" classid="AC891685F8AE5E7F" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
       <group id="0EA166BAEFEDF49C" name="12.I-mf" classid="AC891685F8AE5E7F" studentids="" entireclass="0" divisiontag="3" studentcount=""/>
       <group id="6AADAC586B718E9B" name="12.I-nmf" classid="AC891685F8AE5E7F" studentids="" entireclass="0" divisiontag="3" studentcount=""/>
-      <group id="2FEE52C883708A49" name="Egész osztály" classid="9EB3E4E95119295A" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="2FEE52C883708A49" name="EgÃ©sz osztÃ¡ly" classid="9EB3E4E95119295A" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="AC38E41499BCABD9" name="13.A-N" classid="9EB3E4E95119295A" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="4862F78B0F4EEA70" name="13.A-BN" classid="9EB3E4E95119295A" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="CF5409664774CC69" name="13.A-BA" classid="9EB3E4E95119295A" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
@@ -428,18 +428,18 @@
       <group id="B6C0EFF22839A798" name="13.A-H" classid="9EB3E4E95119295A" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
       <group id="60439E2DD5B76356" name="13.A-GY1" classid="9EB3E4E95119295A" studentids="" entireclass="0" divisiontag="3" studentcount=""/>
       <group id="DAB7D80D40B8E100" name="13.A-GY2" classid="9EB3E4E95119295A" studentids="" entireclass="0" divisiontag="3" studentcount=""/>
-      <group id="54ABB0D8875F998B" name="Egész osztály" classid="ECCB7E16920F5E7D" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="54ABB0D8875F998B" name="EgÃ©sz osztÃ¡ly" classid="ECCB7E16920F5E7D" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="2167F3E68B4F6169" name="13.D-A1" classid="ECCB7E16920F5E7D" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="E78CD425C441CA03" name="13.D-A2" classid="ECCB7E16920F5E7D" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="3E593FF6ACF0CE8F" name="13.D-I1" classid="ECCB7E16920F5E7D" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
       <group id="88ACE30F6EC1C81B" name="13.D-I2" classid="ECCB7E16920F5E7D" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
       <group id="7EEF7471C82B943D" name="13.D-S" classid="ECCB7E16920F5E7D" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
-      <group id="9486FCA131D61513" name="Egész osztály" classid="8E6BED420CCC832D" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="9486FCA131D61513" name="EgÃ©sz osztÃ¡ly" classid="8E6BED420CCC832D" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="23A5E99B8608CD6F" name="13.I-A1" classid="8E6BED420CCC832D" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="60E3DFEA4DCD60A1" name="13.I-A2" classid="8E6BED420CCC832D" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="37C44C3C6C12C3D9" name="13.I-I1" classid="8E6BED420CCC832D" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
       <group id="A478BEAD1A7692FA" name="13.I-S" classid="8E6BED420CCC832D" studentids="" entireclass="0" divisiontag="2" studentcount=""/>
-      <group id="7B1392B37F3E939E" name="Egész osztály" classid="2189691C24A45F58" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
+      <group id="7B1392B37F3E939E" name="EgÃ©sz osztÃ¡ly" classid="2189691C24A45F58" studentids="" entireclass="1" divisiontag="0" studentcount=""/>
       <group id="6D5EED6D1C99F424" name="2/12.CNC-I" classid="2189691C24A45F58" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
       <group id="F0E425C09D290AFA" name="2/12.CNC-M" classid="2189691C24A45F58" studentids="" entireclass="0" divisiontag="1" studentcount=""/>
    </groups>
