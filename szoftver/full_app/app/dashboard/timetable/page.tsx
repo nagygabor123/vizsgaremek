@@ -320,7 +320,15 @@ const Calendar: React.FC = () => {
   };
 
   const getStudentsByClass = (className: string) => {
-    return students.filter((student) => student.class === className);
+    return students.filter((student) => {
+      const studentClasses = student.class.split(',').map((item) => item.trim());
+      const classNames = className.split(',').map((item) => item.trim());
+      
+      console.log("Student classes:", studentClasses);
+      console.log("Search classes:", classNames);
+  
+      return studentClasses.some((cls) => classNames.includes(cls));
+    });
   };
 
   const weekStart = startOfWeek(currentDate, { weekStartsOn: 1 });
