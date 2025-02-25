@@ -86,6 +86,11 @@ export default function Page() {
   const [newBreak, setNewBreak] = useState({ nev: '', which_day: '', replace_day: '' });
   const [newNo, setNewNo] = useState({ nev: '', which_day: '', replace_day: '' });
   const [newPlusDate, setNewPlusDate] = useState({ nev: '', which_day: '', replace_day: '' });
+
+
+
+  const [selectedDate, setSelectedDate] = useState('');
+
   const days = [
     { label: 'Hétfő', value: 'monday' },
     { label: 'Kedd', value: 'tuesday' },
@@ -187,10 +192,17 @@ export default function Page() {
         body: JSON.stringify({ type: 'tanitasnelkul', ...newNo })
       });
       if (response.ok) {
-        setYearSchedule((prev: typeof yearSchedule) => ({
+        {/*setYearSchedule((prev: typeof yearSchedule) => ({
           ...prev,
           noSchool: [...prev.noSchool, newNo]
+        }));*/}
+
+        setYearSchedule((prev: typeof yearSchedule) => ({
+          ...prev,
+          noSchool: Array.isArray(prev.noSchool) ? [...prev.noSchool, newNo] : [newNo]
         }));
+
+
         setNewNo({ nev: '', which_day: '', replace_day: '' });
         await fetchYearSchedule();
       }
@@ -344,6 +356,8 @@ export default function Page() {
     return null;
   }
 
+  {/*console.log("BreakDates:", yearSchedule?.breakDates);*/ }
+
 
   return (
     <SidebarProvider>
@@ -429,9 +443,7 @@ export default function Page() {
                 <Card >
                   <CardHeader>
                     <CardTitle>Tanítási év első napja</CardTitle>
-                    <CardDescription>
-                      Aliquam metus eros, tristique nec semper id, congue eget metus.
-                    </CardDescription>
+             
                   </CardHeader>
                   <CardContent className="space-y-2">
                     <div className="space-y-1">
@@ -496,9 +508,7 @@ export default function Page() {
                 <Card >
                   <CardHeader>
                     <CardTitle>Tanítási év utolsó napja</CardTitle>
-                    <CardDescription>
-                      Aliquam metus eros, tristique nec semper id, congue eget metus.
-                    </CardDescription>
+                  
                   </CardHeader>
                   <CardContent className="space-y-2">
                     <div className="space-y-1">
@@ -560,50 +570,140 @@ export default function Page() {
 
             </TabsContent>
             <TabsContent value="noSchool">
-              {yearSchedule?.noSchool?.length > 0 ? (
-                <ul>
-                  {yearSchedule.noSchool.map((noSchoolPeriod: any, index: number) => (
-                    <li key={index}>
-                      {noSchoolPeriod.id} {noSchoolPeriod.name}: {noSchoolPeriod.start} - {noSchoolPeriod.end}
-                      <button onClick={() => handleDeletePlusBreak(noSchoolPeriod.id)}>Törlés</button>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p>Nincsenek szünetek.</p>
-              )}
-              <input
-                type="text"
-                placeholder="Szünet neve"
-                value={newNo.nev}
-                onChange={(e) => setNewNo({ ...newNo, nev: e.target.value })}
-              />
-              <input
+
+
+              {/* <input
                 type="date"
-                value={newNo.which_day}
-                onChange={(e) => setNewNo({ ...newNo, which_day: e.target.value })}
-              />
-              <input
-                type="date"
-                value={newNo.replace_day}
-                onChange={(e) => setNewNo({ ...newNo, replace_day: e.target.value })}
-              />
-              <button onClick={handleAddNoSchool}>Új szünet hozzáadása</button>
-
-            </TabsContent>
-            <TabsContent value="plusDates">
+                value={selectedDate}
 
 
+                onChange={(e) => {
+                  const originalDate = e.target.value;
+                  const whichDayDate = new Date(originalDate);
+                  whichDayDate.setDate(whichDayDate.getDate() - 1); // Egy nappal korábbi dátum
 
+                  const replaceDayDate = new Date(originalDate);
+                  const replaceDay = replaceDayDate.toISOString().split('T')[0];
+                  const whichDay = whichDayDate.toISOString().split('T')[0];
+
+                  setSelectedDate(originalDate); // Megjelenítéshez az eredeti dátumot használjuk
+                  setNewNo({
+                    ...newNo,
+                    which_day: whichDay,
+                    replace_day: replaceDay,
+                    nev: whichDay
+                  });
+                }}
+              />*/}
+
+              {/*<button onClick={handleAddNoSchool}>Új szünet hozzáadása</button>*/}
 
 
 
               <Card>
                 <CardHeader>
+                  <CardTitle>Tanítás nélküli munkanapok</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  <div className="space-y-1">
+                    <Label htmlFor="endDate">Dátum</Label>
+                    <div className="space-x-2">
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant="outline"
+                            className={cn(
+                              "w-[240px] justify-start text-left font-normal",
+                              !selectedDate && "text-muted-foreground"
+                            )}
+                          >
+                            <CalendarIcon />
+                            {selectedDate ? format(new Date(selectedDate), "PPP") : (
+                              <span>Válasszon egy dátumot</span>
+                            )}
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={selectedDate ? new Date(selectedDate) : undefined}
+                            onSelect={(date) => {
+                              if (!date) return;
+                              const originalDate = format(date, "yyyy-MM-dd");
+                              const whichDayDate = new Date(originalDate);
+                              whichDayDate.setDate(whichDayDate.getDate() - 1); // Egy nappal korábbi dátum
+
+                              const replaceDayDate = new Date(originalDate);
+                              const replaceDay = replaceDayDate.toISOString().split('T')[0];
+                              const whichDay = whichDayDate.toISOString().split('T')[0];
+
+                              setSelectedDate(originalDate); // Megjelenítéshez az eredeti dátumot használjuk
+                              setNewNo({
+                                ...newNo,
+                                which_day: whichDay,
+                                replace_day: replaceDay,
+                                nev: whichDay
+                              });
+                            }}
+                            initialFocus
+                          />
+                        </PopoverContent>
+                      </Popover>
+
+                    </div>
+                  </div>
+
+                </CardContent>
+                <CardFooter>
+                  <Button onClick={handleAddNoSchool}>Új tanítási nélküli munkanap hozzáadása</Button>
+                </CardFooter>
+              </Card>
+
+              <div className="rounded-xl border mt-5">
+                {yearSchedule?.noSchool?.length > 0 ? (
+
+                  <table className="w-full">
+                    <thead className="text-center text-sm text-neutral-500">
+                      <tr>
+                    
+
+                        <th className="p-2 cursor-pointer font-normal">Dátum</th>
+                        <th className="p-2 cursor-pointer font-normal">Művelet</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {yearSchedule.noSchool.map((noSchoolPeriod: any) => (
+                        <tr key={noSchoolPeriod.id} className="text-center border-t">
+                    
+                          <td className="p-1">{noSchoolPeriod.end}</td>
+
+                          <td className="p-1">
+                            <Button variant="ghost" onClick={() => handleDeletePlusBreak(noSchoolPeriod.id)}><Trash2 className="w-4 h-4 inline-block" /></Button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                ) : (
+                  <tr className="text-center border-t">
+                    <td className="p-1">
+                      Nincs megjelenítendő tanítási nélküli munkanap
+                    </td>
+                  </tr>
+                )}
+              </div>
+
+
+
+
+
+
+            </TabsContent>
+            <TabsContent value="plusDates">
+              <Card>
+                <CardHeader>
                   <CardTitle>Szombati tanítási napok</CardTitle>
-                  <CardDescription>
-                    Aliquam metus eros, tristique nec semper id, congue eget metus.
-                  </CardDescription>
+          
                 </CardHeader>
                 <CardContent className="space-y-2">
                   <div className="space-y-1">
@@ -659,7 +759,7 @@ export default function Page() {
                       </Select>
                     </div>
 
-           
+
 
 
                   </div>
@@ -671,49 +771,53 @@ export default function Page() {
               </Card>
 
 
-             
-  {/* <CardHeader>
+
+              {/* <CardHeader>
     <CardTitle>Card Title</CardTitle>
     <CardDescription>Card Description</CardDescription>
   </CardHeader> */}
-  <div className="rounded-xl border mt-5">
-  {yearSchedule?.plusDates?.length > 0 ? (
+              <div className="rounded-xl border mt-5">
+                {yearSchedule?.plusDates?.length > 0 ? (
 
-  <table className="w-full">
-    <thead className="text-center text-sm text-neutral-500">
-      <tr>
-        {/* <th className="p-2 cursor-pointer font-normal">ID</th>
+                  <table className="w-full">
+                    <thead className="text-center text-sm text-neutral-500">
+                      <tr>
+                        {/* <th className="p-2 cursor-pointer font-normal">ID</th>
         <th className="p-2 cursor-pointer font-normal">Név</th> */}
-        <th className="p-2 cursor-pointer font-normal">Dátum</th>
-        <th className="p-2 cursor-pointer font-normal">Helyettesítő nap</th>
-        <th className="p-2 cursor-pointer font-normal">Művelet</th>
-      </tr>
-    </thead>
-    <tbody>
-      {yearSchedule.plusDates.map((plusDate: any) => (
-        <tr key={plusDate.id} className="text-center border-t">
-          {/* <td className="p-1">{plusDate.id}</td>
+                        <th className="p-2 cursor-pointer font-normal">Dátum</th>
+                        <th className="p-2 cursor-pointer font-normal">Helyettesítő nap</th>
+                        <th className="p-2 cursor-pointer font-normal">Művelet</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {yearSchedule.plusDates.map((plusDate: any) => (
+                        <tr key={plusDate.id} className="text-center border-t">
+                          {/* <td className="p-1">{plusDate.id}</td>
           <td className="p-1">{plusDate.name}</td> */}
-          <td className="p-1">{plusDate.date}</td>
-          <td className="p-1">{plusDate.replaceDay}</td>
-          <td  className="p-1">
-            <Button variant="ghost" onClick={() => handleDeletePlusBreak(plusDate.id)}><Trash2 className="w-4 h-4 inline-block" /></Button>
-          </td> 
-        </tr>
-      ))}
-    </tbody>
-  </table>
-) : (
-  <p>Nincsenek plusz napok.</p>
-)}
-</div>
+                          <td className="p-1">{plusDate.date}</td>
+                          <td className="p-1">{plusDate.replaceDay}</td>
+                          <td className="p-1">
+                            <Button variant="ghost" onClick={() => handleDeletePlusBreak(plusDate.id)}><Trash2 className="w-4 h-4 inline-block" /></Button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                ) : (
+                  <tr className="text-center border-t">
+                    <td className="p-1">
+                      Nincs megjelenítendő szombati tanítási nap
+                    </td>
+                  </tr>
+                )}
+              </div>
 
 
 
 
 
 
-              
+
 
               {/*<select
                 id="replace_day"

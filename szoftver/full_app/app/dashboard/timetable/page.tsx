@@ -263,6 +263,8 @@ const Calendar: React.FC = () => {
   };
   
   const isBreakDay = (date: Date) => {
+    if (!breakdate || breakdate.length === 0) return false;
+    
     const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     return breakdate.some(({ start, end }) => {
       const startDate = new Date(start);
