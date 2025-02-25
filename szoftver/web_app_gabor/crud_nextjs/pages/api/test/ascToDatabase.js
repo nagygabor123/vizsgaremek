@@ -31,24 +31,17 @@ export default function handler(req, res) {
     try {
       const xmlData = fs.readFileSync(filePath, 'utf8');
       const parsedXml = await parseStringPromise(xmlData);
-
-      // Csengetési rend kinyerése
       const ringing = extractRingingSchedule(parsedXml);
-      console.log(ringing);
-
-      // Tanárok kinyerése
       const employees = extractTeachers(parsedXml);
-      console.log(employees);
-
-      // Órarend kinyerése
       const schedule = extractSchedule(parsedXml);
-      //console.log(schedule);
 
       const jsonData = JSON.stringify(schedule, null, 2);
-       fs.writeFileSync('orarend.json', jsonData, 'utf8');
-       console.log('Órarend sikeresen kiírva: orarend.json');
-      //await sendRingingData(ringing);
-      //await sendEmployeesData(employees);
+      fs.writeFileSync('orarend.json', jsonData, 'utf8');
+
+      await sendRingingData(ringing);
+      await sendEmployeesData(employees);       
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      await sendScheduleData(schedule);
 
       return res.status(200).json({
         message: 'XML adatok sikeresen feldolgozva és továbbítva!',
@@ -189,15 +182,9 @@ function extractSchedule(parsedXml) {
 }
 
 
-
-
-
-
-
-
 async function sendRingingData(ringing) {
   try {
-    const response = await fetch('http://localhost:3000/api/config/uploadRinging', {
+    const response = await fetch('http://localhost:3000/api/upload/uploadRinging', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -217,7 +204,7 @@ async function sendRingingData(ringing) {
 
 async function sendEmployeesData(employees) {
   try {
-    const response = await fetch('http://localhost:3000/api/config/uploadEmployees', {
+    const response = await fetch('http://localhost:3000/api/upload/uploadEmployees', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -235,5 +222,24 @@ async function sendEmployeesData(employees) {
   }
 }
 
+async function sendScheduleData(schedule) {
+  try {
+    const response = await fetch('http://localhost:3000/api/upload/uploadTimetables', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ schedule }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error sending schedule data: ${response.statusText}`);
+    }
+
+    console.log('Schedule data successfully sent!');
+  } catch (error) {
+    console.error('Error sending schedule data:', error);
+  }
+}
 
 
