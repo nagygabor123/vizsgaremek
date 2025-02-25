@@ -837,18 +837,21 @@ export default function Page() {
             <TabsContent value="breakDates">
 
 
-              {yearSchedule?.breakDates?.length > 0 ? (
-                <ul>
-                  {yearSchedule.breakDates.map((breakPeriod: any, index: number) => (
-                    <li key={index}>
-                      {breakPeriod.id} {breakPeriod.name}: {breakPeriod.start} - {breakPeriod.end}
-                      <button onClick={() => handleDeletePlusBreak(breakPeriod.id)}>Törlés</button>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p>Nincsenek szünetek.</p>
-              )}
+            {yearSchedule?.breakDates?.length > 0 ? (
+  <ul>
+    {yearSchedule.breakDates
+      .filter((breakPeriod: any) => breakPeriod.type === "szunet")  // Csak a szünet típusú szüneteket jelenítjük meg
+      .map((breakPeriod: any, index: number) => (
+        <li key={index}>
+          {breakPeriod.id} {breakPeriod.name}: {breakPeriod.start} - {breakPeriod.end}
+          <button onClick={() => handleDeletePlusBreak(breakPeriod.id)}>Törlés</button>
+        </li>
+      ))}
+  </ul>
+) : (
+  <p>Nincsenek szünetek.</p>
+)}
+
               <input
                 type="text"
                 placeholder="Szünet neve"

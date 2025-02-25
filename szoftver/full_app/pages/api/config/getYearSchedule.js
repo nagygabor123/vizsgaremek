@@ -96,10 +96,10 @@ export default async function handler(req, res) {
       let values = [];
 
       if (type === 'plusznap') {
-        query = 'SELECT year_schedule_id, nev, which_day, replace_day FROM year_schedule WHERE type = ?';
+        query = 'SELECT year_schedule_id,nev, which_day, replace_day FROM year_schedule WHERE type = ?';
         values = ['plusznap'];
       }else if (type === 'szunet') {
-        query = 'SELECT year_schedule_id, nev, which_day AS start, replace_day AS end FROM year_schedule WHERE type IN (?, ?)';
+        query = 'SELECT year_schedule_id,type, nev, which_day AS start, replace_day AS end FROM year_schedule WHERE type IN (?, ?)';
         values = ['szunet', 'tanitasnelkul'];
       }else if (type === 'tanitasnelkul') {
         query = 'SELECT year_schedule_id, nev, which_day AS start, replace_day AS end FROM year_schedule WHERE type = ?';
@@ -127,6 +127,7 @@ export default async function handler(req, res) {
         } else if (type === 'szunet') {
           const breakDates_alap = rows.map(row => ({
             id: row.year_schedule_id, 
+            type:row.type,
             name: row.nev,  
             start: row.start,
             end: row.end
