@@ -407,7 +407,7 @@ export default function Page() {
 
               </div>
             )}
-   
+
 
           </div>
         </div>
@@ -486,7 +486,7 @@ export default function Page() {
                   Mentés
                 </Button>
                 {/* )} */}
-          
+
               </CardFooter>
             </Card>
 
@@ -549,11 +549,10 @@ export default function Page() {
 
               </CardFooter>
             </Card>
-
           </div>
 
 
-          <Card>
+          {/* <Card>
             <CardHeader>
               <CardTitle>Tanítás nélküli munkanapok</CardTitle>
             </CardHeader>
@@ -610,29 +609,23 @@ export default function Page() {
             <CardFooter>
               <Button onClick={handleAddNoSchool}>  <CalendarPlus /> Új nap hozzáadása</Button>
             </CardFooter>
-          </Card>
+          </Card> */}
 
 
           <Separator />
           <div className="mt-5 mb-5 flex gap-10 items-start">
-           
             <div className="w-1/4">
               <h2 className="text-lg font-semibold">Tanítás nélküli munkanapok</h2>
               <p className="text-sm text-neutral-500">
                 Itt láthatóak azok a napok, amikor nincs tanítás.
               </p>
             </div>
-          
             <div className="w-3/4">
-     
               <div className="flex justify-end mb-3">
-                <Button variant="default">
+                <Button variant="outline">
                   <CalendarPlus /> Új nap hozzáadás
                 </Button>
               </div>
-
-
-
               <div className="rounded-xl border">
                 {yearSchedule?.noSchool?.length > 0 ? (
                   <table className="w-full min-w-max">
@@ -668,12 +661,7 @@ export default function Page() {
           </div>
 
 
-
-
-
-
-
-          <Card>
+          {/* <Card>
             <CardHeader>
               <CardTitle>Szombati tanítási napok</CardTitle>
 
@@ -741,33 +729,22 @@ export default function Page() {
             <CardFooter>
               <Button onClick={handleAddPlusDate}><CalendarPlus />  Új nap hozzáadása</Button>
             </CardFooter>
-          </Card>
-
-
-
+          </Card> */}
 
 
           <Separator />
           <div className="mt-5 mb-5 flex gap-10 items-start">
-
             <div className="w-1/4">
               <h2 className="text-lg font-semibold">Szombati tanítási napok</h2>
               <p className="text-sm text-neutral-500">Itt láthatóak a rendkívüli tanítási napok és a helyettesítő napok.</p>
             </div>
-
             <div className="w-3/4">
-
               <div className="flex justify-end mb-3">
-                <Button variant="default">
+                <Button variant="outline">
                   <CalendarPlus /> Új nap hozzáadás
                 </Button>
               </div>
-
-
-
-
               <div className="rounded-xl border">
-
                 {yearSchedule?.plusDates?.length > 0 ? (
                   <table className="w-full min-w-max">
                     <thead className="text-center text-sm text-neutral-500">
@@ -805,24 +782,18 @@ export default function Page() {
 
           <Separator />
           <div className="mt-5 mb-5 flex gap-10 items-start">
-       
             <div className="w-1/4">
               <h2 className="text-lg font-semibold">Szünetek</h2>
               <p className="text-sm text-neutral-500">
                 Az iskola hivatalos szünetei és időtartamuk.
               </p>
             </div>
-
-           
             <div className="w-3/4">
-             
               <div className="flex justify-end mb-3">
-                <Button variant="default">
+                <Button variant="outline">
                   <CalendarPlus /> Új szünet hozzáadás
                 </Button>
               </div>
-
-           
               <div className="rounded-xl border">
                 {yearSchedule?.breakDates?.filter((breakPeriod: any) => breakPeriod.type === "szunet").length > 0 ? (
                   <table className="w-full min-w-max">
@@ -860,7 +831,7 @@ export default function Page() {
 
 
 
-          <input
+          {/* <input
             type="text"
             placeholder="Szünet neve"
             value={newBreak.nev}
@@ -876,8 +847,8 @@ export default function Page() {
             value={newBreak.replace_day}
             onChange={(e) => setNewBreak({ ...newBreak, replace_day: e.target.value })}
           />
-          <button onClick={handleAddBreak}>Új szünet hozzáadása</button>
-      
+          <button onClick={handleAddBreak}>Új szünet hozzáadása</button> */}
+
 
 
 
