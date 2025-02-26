@@ -150,7 +150,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </div>
            
               <Avatar className="h-9 w-9 rounded-full">
-                <AvatarFallback className="rounded-lg bg-lime-300">VZ</AvatarFallback>
+                <AvatarFallback className="rounded-lg bg-lime-300">ViZs</AvatarFallback>
               </Avatar>
               <ChevronDown className="ml-auto size-4" />
             
@@ -165,7 +165,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-9 w-9 rounded-full">
-                  <AvatarFallback className="rounded-lg bg-lime-300">VZ</AvatarFallback>
+                  <AvatarFallback className="rounded-lg bg-lime-300">ViZs</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">Vincze Zsolt</span>

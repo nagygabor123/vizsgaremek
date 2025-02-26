@@ -47,17 +47,25 @@ const SheetComponent: React.FC = () => {
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
+  
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      setSelectedFile(e.dataTransfer.files[0]);
-      // setMessage(`Selected file: ${e.dataTransfer.files[0].name}`);
-      // setMessage(` ${e.dataTransfer.files[0].name}`);
-      setMessage(
-        <span>
-          <Paperclip className="w-4 h-4 inline-block" /> {e.dataTransfer.files[0].name}
-        </span>
-      );
+      const droppedFile = e.dataTransfer.files[0];
+  
+      if (droppedFile.type !== 'text/xml' && !droppedFile.name.endsWith('.xml')) {
+        setMessage('A feltöltött fájl nem .xml formátumú');
+        setFile(null);
+      } else {
+        setSelectedFile(droppedFile);
+        setFile(droppedFile); // Ezt kell hozzáadni
+        setMessage(
+          <span>
+            <Paperclip className="w-4 h-4 inline-block" /> {droppedFile.name}
+          </span>
+        );
+      }
     }
   };
+  
 
   const handleClick = () => {
     if (fileInputRef.current) {
