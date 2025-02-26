@@ -675,9 +675,18 @@ export default function Page() {
       Itt láthatóak azok a napok, amikor nincs tanítás.
     </p>
   </div>
+    {/* Gomb a táblázat fölött, jobb oldalra igazítva */}
+    <div className="w-3/4">
+    {/* Gomb a táblázat fölött, jobb oldalra igazítva */}
+    <div className="flex justify-end mb-3">
+      <Button variant="default">
+      <CalendarPlus /> Új nap hozzáadás
+      </Button>
+    </div>
+    
 
-  {/* Jobb oldali táblázat */}
-  <div className="rounded-xl border w-3/4">
+  
+  <div className="rounded-xl border">
     {yearSchedule?.noSchool?.length > 0 ? (
       <table className="w-full min-w-max">
         <thead className="text-center text-sm text-neutral-500">
@@ -709,7 +718,7 @@ export default function Page() {
     )}
   </div>
 </div>
-<Separator/>
+</div>
 
 
 
@@ -804,9 +813,18 @@ export default function Page() {
     <p className="text-sm text-neutral-500">Itt láthatóak a rendkívüli tanítási napok és a helyettesítő napok.</p>
   </div>
 
-  {/* Jobb oldali táblázat */}
+  <div className="w-3/4">
+    {/* Gomb a táblázat fölött, jobb oldalra igazítva */}
+    <div className="flex justify-end mb-3">
+      <Button variant="default">
+      <CalendarPlus /> Új nap hozzáadás
+      </Button>
+    </div>
   
-  <div className="rounded-xl border w-3/4">
+    
+
+  
+  <div className="rounded-xl border">
   
     {yearSchedule?.plusDates?.length > 0 ? (
       <table className="w-full min-w-max">
@@ -838,7 +856,7 @@ export default function Page() {
     )}
   </div>
 </div>
-
+</div>
 
 
 
@@ -865,7 +883,7 @@ export default function Page() {
             <TabsContent value="breakDates"> */}
 
 <Separator/>
-<div className="mt-5 flex gap-10 items-start">
+<div className="mt-5 mb-5 flex gap-10 items-start">
   {/* Bal oldali cím és leírás */}
   <div className="w-1/4">
     <h2 className="text-lg font-semibold">Szünetek</h2>
