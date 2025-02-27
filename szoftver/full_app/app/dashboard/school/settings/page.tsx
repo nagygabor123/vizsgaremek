@@ -108,7 +108,7 @@ export default function Page() {
     }
   }, [isDialogOpen3]);
 
-  
+
   const days = [
     { label: 'Hétfő', value: 'monday' },
     { label: 'Kedd', value: 'tuesday' },
@@ -223,7 +223,7 @@ export default function Page() {
           ...prev,
           noSchool: Array.isArray(prev.noSchool) ? [...prev.noSchool, newNo] : [newNo]
         }));
-     
+
         setIsDialogOpen3(false);
         setNewNo({ nev: '', which_day: '', replace_day: '' });
         await fetchYearSchedule();
@@ -497,19 +497,19 @@ export default function Page() {
 
 
                     <Button
-  onClick={async () => {
-    if (!startDate) return;
-    const formattedDate = format(startDate, "yyyy-MM-dd");
-    await updateSchoolYear("kezd", formattedDate);
-    await fetchYearSchedule();  // Újra lekéri az adatokat a szerverről
-    setStartDate(undefined);    // Visszaállítja a kiválasztott dátumot
-  }}
-  disabled={!startDate}
-  variant="outline"
-  size="icon"
->
-  <SaveAll className="w-4 h-4 inline-block" />
-</Button>
+                      onClick={async () => {
+                        if (!startDate) return;
+                        const formattedDate = format(startDate, "yyyy-MM-dd");
+                        await updateSchoolYear("kezd", formattedDate);
+                        await fetchYearSchedule();  // Újra lekéri az adatokat a szerverről
+                        setStartDate(undefined);    // Visszaállítja a kiválasztott dátumot
+                      }}
+                      disabled={!startDate}
+                      variant="outline"
+                      size="icon"
+                    >
+                      <SaveAll className="w-4 h-4 inline-block" />
+                    </Button>
 
 
 
@@ -563,19 +563,19 @@ export default function Page() {
 
 
                     <Button
-  onClick={async () => {
-    if (!endDate) return;
-    const formattedDate = format(endDate, "yyyy-MM-dd");
-    await updateSchoolYear("veg", formattedDate);
-    await fetchYearSchedule();  // Újra lekéri az adatokat a szerverről
-    setEndDate(undefined);    // Visszaállítja a kiválasztott dátumot
-  }}
-  disabled={!endDate}
-  variant="outline"
-  size="icon"
->
-  <SaveAll className="w-4 h-4 inline-block" />
-</Button>
+                      onClick={async () => {
+                        if (!endDate) return;
+                        const formattedDate = format(endDate, "yyyy-MM-dd");
+                        await updateSchoolYear("veg", formattedDate);
+                        await fetchYearSchedule();  // Újra lekéri az adatokat a szerverről
+                        setEndDate(undefined);    // Visszaállítja a kiválasztott dátumot
+                      }}
+                      disabled={!endDate}
+                      variant="outline"
+                      size="icon"
+                    >
+                      <SaveAll className="w-4 h-4 inline-block" />
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -596,15 +596,15 @@ export default function Page() {
             <div className="sm:w-3/4 w-full">
               {/* Gomb a táblázat felett */}
               <div className="flex justify-start sm:justify-end mb-3">
-              <Dialog
-  open={isDialogOpen3}
-  onOpenChange={(isOpen) => {
-    setIsDialogOpen3(isOpen);
-    if (!isOpen) {
-      setSelectedDate(null);
-    }
-  }}
->
+                <Dialog
+                  open={isDialogOpen3}
+                  onOpenChange={(isOpen) => {
+                    setIsDialogOpen3(isOpen);
+                    if (!isOpen) {
+                      setSelectedDate(null);
+                    }
+                  }}
+                >
                   <DialogTrigger asChild>
                     <Button variant="outline">
                       <CalendarPlus className="w-4 h-4 inline-block mr-2" /> Új nap hozzáadás
@@ -635,7 +635,7 @@ export default function Page() {
                             >
                               <CalendarIcon />
                               {selectedDate ? format(new Date(selectedDate), "PPP") : (
-                                  <span>2025. május 20.</span>
+                                <span>2025. május 20.</span>
                               )}
                             </Button>
                           </DropdownMenuTrigger>
@@ -695,7 +695,7 @@ export default function Page() {
                           <td className="p-1">{noSchoolPeriod.end}</td>
                           <td className="p-1">
                             <Button
-                            
+
                               variant="ghost"
                               onClick={() => handleDeletePlusBreak(noSchoolPeriod.id)}
                             >
