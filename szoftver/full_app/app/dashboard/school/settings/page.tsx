@@ -18,7 +18,7 @@ import {
   SidebarProvider,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
-import { TriangleAlert, Plus, Trash2, Trash, CalendarPlus, CalendarIcon } from "lucide-react";
+import { TriangleAlert, Plus, Trash2, Trash, CalendarPlus, CalendarIcon, SaveAll } from "lucide-react";
 import Link from "next/link";
 
 import { Input } from "@/components/ui/input"
@@ -456,9 +456,9 @@ export default function Page() {
           <div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
 
             <div className="sm:w-1/4 w-full">
-              <h2 className="text-lg font-semibold">Tanítási év utolsó napja</h2>
+              <h2 className="text-lg font-semibold">Tanítási év első napja</h2>
               <p className="text-sm text-neutral-500">
-                Válassza ki a tanév utolsó napját, majd mentse el.
+                Válassza ki a tanév első napját, majd mentse el.
               </p>
             </div>
 
@@ -473,7 +473,7 @@ export default function Page() {
                         <Button
                           variant="outline"
                           className={cn(
-                            "justify-start text-left font-normal w-full sm:w-auto",
+                            " justify-start text-left font-normal w-full sm:w-auto ",
                             !startDate && "text-muted-foreground"
                           )}
                         >
@@ -497,16 +497,22 @@ export default function Page() {
 
 
                     <Button
-                      onClick={() => {
-                        if (!startDate) return;
-                        const formattedDate = format(startDate, "yyyy-MM-dd");
-                        updateSchoolYear("kezd", formattedDate);
-                      }}
-                      disabled={!startDate}
-                      className="w-full sm:w-auto"
-                    >
-                      Mentés
-                    </Button>
+  onClick={async () => {
+    if (!startDate) return;
+    const formattedDate = format(startDate, "yyyy-MM-dd");
+    await updateSchoolYear("kezd", formattedDate);
+    await fetchYearSchedule();  // Újra lekéri az adatokat a szerverről
+    setStartDate(undefined);    // Visszaállítja a kiválasztott dátumot
+  }}
+  disabled={!startDate}
+  variant="outline"
+  size="icon"
+>
+  <SaveAll className="w-4 h-4 inline-block" />
+</Button>
+
+
+
                   </div>
                 </div>
               </div>
@@ -557,16 +563,19 @@ export default function Page() {
 
 
                     <Button
-                      onClick={() => {
-                        if (!endDate) return;
-                        const formattedDate = format(endDate, "yyyy-MM-dd");
-                        updateSchoolYear("veg", formattedDate);
-                      }}
-                      disabled={!endDate}
-                      className="w-full sm:w-auto"
-                    >
-                      Mentés
-                    </Button>
+  onClick={async () => {
+    if (!endDate) return;
+    const formattedDate = format(endDate, "yyyy-MM-dd");
+    await updateSchoolYear("veg", formattedDate);
+    await fetchYearSchedule();  // Újra lekéri az adatokat a szerverről
+    setEndDate(undefined);    // Visszaállítja a kiválasztott dátumot
+  }}
+  disabled={!endDate}
+  variant="outline"
+  size="icon"
+>
+  <SaveAll className="w-4 h-4 inline-block" />
+</Button>
                   </div>
                 </div>
               </div>
@@ -686,6 +695,7 @@ export default function Page() {
                           <td className="p-1">{noSchoolPeriod.end}</td>
                           <td className="p-1">
                             <Button
+                            
                               variant="ghost"
                               onClick={() => handleDeletePlusBreak(noSchoolPeriod.id)}
                             >
