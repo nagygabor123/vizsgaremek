@@ -30,6 +30,14 @@ import * as React from "react"
 import { format } from "date-fns"
 import { addDays } from 'date-fns';
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 
 import { cn } from "@/lib/utils"
@@ -43,21 +51,6 @@ import {
 
 import { DateRange } from 'react-day-picker';
 
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
-
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
 
 import AppKonfig from '@/components/app-konfig';
 import {
@@ -69,10 +62,21 @@ import {
 } from "@/components/ui/select"
 
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter
+} from "@/components/ui/dialog"
+
 
 
 export default function Page() {
-  
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const [date, setDate] = React.useState<DateRange | undefined>(undefined);
 
@@ -177,13 +181,16 @@ export default function Page() {
         body: JSON.stringify({ type: 'szunet', ...newBreak })
       });
       if (response.ok) {
- setYearSchedule((prev: typeof yearSchedule) => ({
-  ...prev,
-  breakDates: [...(prev?.breakDates || []), newBreak]
-}));
-
+        setYearSchedule((prev: typeof yearSchedule) => ({
+          ...prev,
+          breakDates: [...(prev?.breakDates || []), newBreak]
+        }));
+        setIsDialogOpen(false);
+        setDate(undefined);
         setNewBreak({ nev: '', which_day: '', replace_day: '' });
         await fetchYearSchedule();
+
+
       }
     } catch (error) {
       console.error('Error updating break:', error);
@@ -493,7 +500,7 @@ export default function Page() {
           </div>
 
 
-          <Separator/>
+          <Separator />
 
 
           <div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
@@ -674,7 +681,7 @@ export default function Page() {
 
 
 
-           {/* <Card>
+          {/* <Card>
             <CardHeader>
               <CardTitle>Szombati tanítási napok</CardTitle>
 
@@ -811,61 +818,143 @@ export default function Page() {
 
 
           <div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
-  <div className="sm:w-1/4 w-full">
-    <h2 className="text-lg font-semibold">Szünetek</h2>
-    <p className="text-sm text-neutral-500">Az iskola hivatalos szünetei és időtartamuk.</p>
-  </div>
+            <div className="sm:w-1/4 w-full">
+              <h2 className="text-lg font-semibold">Tanítási szünetek</h2>
+              <p className="text-sm text-neutral-500">Az iskola hivatalos szünetei és időtartamuk.</p>
+            </div>
 
-  <div className="sm:w-3/4 w-full">
-    <div className="flex justify-start sm:justify-end mb-3">
-      <Button variant="outline">
-        <CalendarPlus className="w-4 h-4 inline-block mr-2" /> Új szünet hozzáadás
-      </Button>
-    </div>
+            <div className="sm:w-3/4 w-full">
+              <div className="flex justify-start sm:justify-end mb-3">
+       
+              <Dialog open={isDialogOpen} onOpenChange={(isOpen) => setIsDialogOpen(isOpen)}>
+  <DialogTrigger asChild>
+    <Button variant="outline">
+      <CalendarPlus className="w-4 h-4 inline-block mr-2" /> Új szünet hozzáadás
+    </Button>
+  </DialogTrigger>
+  <DialogContent
+    className="sm:max-w-[425px]"
+   
+  >
+    <DialogHeader>
+      <DialogTitle>Szünet hozzáadása</DialogTitle>
+      <DialogDescription>
+        Aliquam metus eros, tristique nec semper id, congue eget metus
+      </DialogDescription>
+    </DialogHeader>
 
-    {/* Táblázat görgetés */}
-    <div className="rounded-xl border overflow-x-auto max-w-full">
-      {yearSchedule?.breakDates?.filter((breakPeriod: any) => breakPeriod.type === "szunet").length > 0 ? (
-        <table className="min-w-full table-auto">
-          <thead className="text-center text-sm text-neutral-500">
-            <tr>
-              <th className="p-2 cursor-pointer font-normal">Név</th>
-              <th className="p-2 cursor-pointer font-normal">Időtartam</th>
-              <th className="p-2 cursor-pointer font-normal">Művelet</th>
-            </tr>
-          </thead>
-          <tbody>
-            {yearSchedule.breakDates
-              .filter((breakPeriod: any) => breakPeriod.type === "szunet")
-              .map((breakPeriod: any) => (
-                <tr key={breakPeriod.id} className="text-center border-t">
-                  <td className="p-1 truncate">{breakPeriod.name}</td>
-                  <td className="p-1">{breakPeriod.start} - {breakPeriod.end}</td>
-                  <td className="p-1">
-                    <Button variant="ghost" onClick={() => handleDeletePlusBreak(breakPeriod.id)}>
-                      <Trash2 className="w-4 h-4 inline-block" />
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-      ) : (
-        <div className="text-center p-3 text-neutral-500">Nincsenek szünetek.</div>
+    <div className="grid items-start gap-4">
+      <div className="grid gap-2">
+        <Label htmlFor="fullName">Név</Label>
+        <Input
+          type="text"
+          placeholder="Tavaszi szünet"
+          value={newBreak.nev}
+          onChange={(e) => setNewBreak({ ...newBreak, nev: e.target.value })}
+        />
+      </div>
+
+      <div className="grid gap-2">
+        <Label htmlFor="position">Dátum</Label>
+        <DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button
+      id="date"
+      variant={"outline"}
+      className={cn(
+        "justify-start text-left font-normal",
+        !date && "text-muted-foreground"
       )}
+    >
+      <CalendarIcon />
+      {date?.from ? (
+        date.to ? (
+          <>
+            {format(date.from, "LLL dd, y")} -{" "}
+            {format(date.to, "LLL dd, y")}
+          </>
+        ) : (
+          format(date.from, "LLL dd, y")
+        )
+      ) : (
+        <span>2025. április 14. - 2025. május</span>
+      )}
+    </Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent className="w-auto p-0" align="start">
+    <Calendar
+      initialFocus
+      mode="range"
+      defaultMonth={date?.from}
+      selected={date}
+      onSelect={(selected) => {
+        setDate(selected);
+        setNewBreak((prev) => ({
+          ...prev,
+          which_day: selected?.from
+            ? format(selected.from, "yyyy-MM-dd")
+            : "",
+          replace_day: selected?.to
+            ? format(selected.to, "yyyy-MM-dd")
+            : "",
+        }));
+      }}
+      numberOfMonths={2}
+    />
+  </DropdownMenuContent>
+</DropdownMenu>
+
+      </div>
     </div>
-  </div>
-</div>
+
+    <DialogFooter>
+      <Button className="w-full" onClick={handleAddBreak}>Új szünet hozzáadása</Button>
+     
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+
+              </div>
+
+              {/* Táblázat görgetés */}
+              <div className="rounded-xl border overflow-x-auto max-w-full">
+                {yearSchedule?.breakDates?.filter((breakPeriod: any) => breakPeriod.type === "szunet").length > 0 ? (
+                  <table className="min-w-full table-auto">
+                    <thead className="text-center text-sm text-neutral-500">
+                      <tr>
+                        <th className="p-2 cursor-pointer font-normal">Név</th>
+                        <th className="p-2 cursor-pointer font-normal">Időtartam</th>
+                        <th className="p-2 cursor-pointer font-normal">Művelet</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {yearSchedule.breakDates
+                        .filter((breakPeriod: any) => breakPeriod.type === "szunet")
+                        .map((breakPeriod: any) => (
+                          <tr key={breakPeriod.id} className="text-center border-t">
+                            <td className="p-1 truncate">{breakPeriod.name}</td>
+                            <td className="p-1">{breakPeriod.start} - {breakPeriod.end}</td>
+                            <td className="p-1">
+                              <Button variant="ghost" onClick={() => handleDeletePlusBreak(breakPeriod.id)}>
+                                <Trash2 className="w-4 h-4 inline-block" />
+                              </Button>
+                            </td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                ) : (
+                  <div className="text-center p-3 text-neutral-500">Nincs megjelenítendő tanítási szünet</div>
+                  
+                )}
+              </div>
+            </div>
+          </div>
 
 
 
-          <Input
-            type="text"
-            placeholder="Szünet neve"
-            value={newBreak.nev}
-            onChange={(e) => setNewBreak({ ...newBreak, nev: e.target.value })}
-          />
-          <input
+
+          {/* <input
             type="date"
             value={newBreak.which_day}
             onChange={(e) => setNewBreak({ ...newBreak, which_day: e.target.value })}
@@ -874,61 +963,32 @@ export default function Page() {
             type="date"
             value={newBreak.replace_day}
             onChange={(e) => setNewBreak({ ...newBreak, replace_day: e.target.value })}
-          />
-          <Button onClick={handleAddBreak}>Új szünet hozzáadása</Button>
+          /> */}
 
 
 
-    
 
-          <div className="grid gap-2">
-  <Popover>
-    <PopoverTrigger asChild>
-      <Button
-        id="date"
-        variant={"outline"}
-        className={cn(
-          "w-[300px] justify-start text-left font-normal",
-          !date && "text-muted-foreground"
-        )}
-      >
-        <CalendarIcon />
-        {date?.from ? (
-          date.to ? (
-            <>
-              {format(date.from, "LLL dd, y")} -{" "}
-              {format(date.to, "LLL dd, y")}
-            </>
-          ) : (
-            format(date.from, "LLL dd, y")
-          )
-        ) : (
-          <span>Pick a date</span>
-        )}
-      </Button>
-    </PopoverTrigger>
-    <PopoverContent className="w-auto p-0" align="start">
-      <Calendar
-        initialFocus
-        mode="range"
-        defaultMonth={date?.from}
-        selected={date}
-        onSelect={setDate}
-        numberOfMonths={2}
-      />
-    </PopoverContent>
-  </Popover>
-  
-  {/* Kiíratás a kiválasztott dátumokról */}
-  {date?.from && date?.to && (
-    <p>
-      Kiválasztott dátumtartomány:{" "}
-      {format(date.from, "yyyy.MM.dd")} - {format(date.to, "yyyy.MM.dd")}
-    </p>
-  )}
-</div>
 
-                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          {/* open={isDialogOpen} onOpenChange={setIsDialogOpen} */}
+
 
 
 
