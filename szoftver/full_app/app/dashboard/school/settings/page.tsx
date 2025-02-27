@@ -77,6 +77,8 @@ import {
 export default function Page() {
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isDialogOpen2, setIsDialogOpen2] = useState(false);
+  const [isDialogOpen3, setIsDialogOpen3] = useState(false);
 
   const [date, setDate] = React.useState<DateRange | undefined>(undefined);
 
@@ -98,8 +100,15 @@ export default function Page() {
 
 
 
-  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
+  useEffect(() => {
+    if (!isDialogOpen3) {
+      setSelectedDate(null);
+    }
+  }, [isDialogOpen3]);
+
+  
   const days = [
     { label: 'Hétfő', value: 'monday' },
     { label: 'Kedd', value: 'tuesday' },
@@ -214,8 +223,8 @@ export default function Page() {
           ...prev,
           noSchool: Array.isArray(prev.noSchool) ? [...prev.noSchool, newNo] : [newNo]
         }));
-
-
+     
+        setIsDialogOpen3(false);
         setNewNo({ nev: '', which_day: '', replace_day: '' });
         await fetchYearSchedule();
       }
@@ -241,7 +250,7 @@ export default function Page() {
           ...prev,
           plusDates: [...(prev.plusDates ?? []), newPlusDate],
         }));
-
+        setIsDialogOpen2(false);
         setNewPlusDate({ nev: '', which_day: '', replace_day: '' });
         await fetchYearSchedule();
       }
@@ -434,7 +443,12 @@ export default function Page() {
 
 
 
-
+          {/* <input
+            type="date"
+            value={schoolStartEdit}
+            onChange={(e) => setSchoolStartEdit(e.target.value)}
+          />
+          <button onClick={() => updateSchoolYear('kezd', schoolStartEdit)}>Mentés</button> */}
 
 
 
@@ -499,10 +513,7 @@ export default function Page() {
             </div>
           </div>
 
-
           <Separator />
-
-
           <div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
 
             <div className="sm:w-1/4 w-full">
@@ -562,69 +573,6 @@ export default function Page() {
             </div>
           </div>
 
-
-
-
-          {/* <Card>
-            <CardHeader>
-              <CardTitle>Tanítás nélküli munkanapok</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="space-y-1">
-                <Label htmlFor="endDate">Dátum</Label>
-                <div className="space-x-2">
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className={cn(
-                          "w-[240px] justify-start text-left font-normal",
-                          !selectedDate && "text-muted-foreground"
-                        )}
-                      >
-                        <CalendarIcon />
-                        {selectedDate ? format(new Date(selectedDate), "PPP") : (
-                          <span>Válasszon egy dátumot</span>
-                        )}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={selectedDate ? new Date(selectedDate) : undefined}
-                        onSelect={(date) => {
-                          if (!date) return;
-                          const originalDate = format(date, "yyyy-MM-dd");
-                          const whichDayDate = new Date(originalDate);
-                          whichDayDate.setDate(whichDayDate.getDate() - 1); 
-
-                          const replaceDayDate = new Date(originalDate);
-                          const replaceDay = replaceDayDate.toISOString().split('T')[0];
-                          const whichDay = whichDayDate.toISOString().split('T')[0];
-
-                          setSelectedDate(originalDate); 
-                          setNewNo({
-                            ...newNo,
-                            which_day: whichDay,
-                            replace_day: replaceDay,
-                            nev: whichDay
-                          });
-                        }}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-
-                </div>
-              </div>
-
-            </CardContent>
-            <CardFooter>
-              <Button onClick={handleAddNoSchool}>  <CalendarPlus /> Új nap hozzáadása</Button>
-            </CardFooter>
-          </Card> */}
-
-
           <Separator />
           <div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
             {/* Cím és leírás */}
@@ -639,9 +587,87 @@ export default function Page() {
             <div className="sm:w-3/4 w-full">
               {/* Gomb a táblázat felett */}
               <div className="flex justify-start sm:justify-end mb-3">
-                <Button variant="outline">
-                  <CalendarPlus className="w-4 h-4 inline-block mr-2" /> Új nap hozzáadás
-                </Button>
+              <Dialog
+  open={isDialogOpen3}
+  onOpenChange={(isOpen) => {
+    setIsDialogOpen3(isOpen);
+    if (!isOpen) {
+      setSelectedDate(null);
+    }
+  }}
+>
+                  <DialogTrigger asChild>
+                    <Button variant="outline">
+                      <CalendarPlus className="w-4 h-4 inline-block mr-2" /> Új nap hozzáadás
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent
+                    className="sm:max-w-[425px]"
+
+                  >
+                    <DialogHeader>
+                      <DialogTitle>Tanítás nélküli munkanap hozzáadása</DialogTitle>
+                      <DialogDescription>
+                        Aliquam metus eros, tristique nec semper id, congue eget metus
+                      </DialogDescription>
+                    </DialogHeader>
+
+                    <div className="grid items-start gap-4">
+                      <div className="grid gap-2">
+                        <Label htmlFor="fullName">Dátum</Label>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button
+                              variant="outline"
+                              className={cn(
+                                " justify-start text-left font-normal",
+                                !selectedDate && "text-muted-foreground"
+                              )}
+                            >
+                              <CalendarIcon />
+                              {selectedDate ? format(new Date(selectedDate), "PPP") : (
+                                  <span>2025. május 20.</span>
+                              )}
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent className="w-auto p-0" align="start">
+                            <Calendar
+                              mode="single"
+                              selected={selectedDate ? new Date(selectedDate) : undefined}
+                              onSelect={(date) => {
+                                if (!date) return;
+                                const originalDate = format(date, "yyyy-MM-dd");
+                                const whichDayDate = new Date(originalDate);
+                                whichDayDate.setDate(whichDayDate.getDate() - 1);
+
+                                const replaceDayDate = new Date(originalDate);
+                                const replaceDay = replaceDayDate.toISOString().split('T')[0];
+                                const whichDay = whichDayDate.toISOString().split('T')[0];
+
+                                setSelectedDate(originalDate);
+                                setNewNo({
+                                  ...newNo,
+                                  which_day: whichDay,
+                                  replace_day: replaceDay,
+                                  nev: whichDay
+                                });
+                              }}
+                              initialFocus
+                            />
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </div>
+
+
+                    </div>
+
+                    <DialogFooter>
+
+                      <Button className="w-full" onClick={handleAddNoSchool}>Mentés </Button>
+
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
               </div>
 
               {/* Görgethető táblázat kis képernyőn */}
@@ -681,97 +707,101 @@ export default function Page() {
 
 
 
-          {/* <Card>
-            <CardHeader>
-              <CardTitle>Szombati tanítási napok</CardTitle>
-
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="space-y-1">
-                <Label htmlFor="endDate">Dátum</Label>
-                <div className="space-x-2">
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className={cn(
-                          "w-[240px] justify-start text-left font-normal",
-                          !newPlusDate.which_day && "text-muted-foreground"
-                        )}
-                      >
-                        <CalendarIcon />
-                        {newPlusDate.which_day ? format(new Date(newPlusDate.which_day), "PPP") : (
-                          <span>Válasszon egy dátumot</span>
-                        )}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={newPlusDate.which_day ? new Date(newPlusDate.which_day) : undefined}
-                        onSelect={(date) => {
-                          if (!date) return;
-                          const formattedDate = format(date, "yyyy-MM-dd");
-                          setNewPlusDate({ ...newPlusDate, which_day: formattedDate, nev: formattedDate });
-                        }}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-
-                </div>
-
-                <div className="space-y-1">
-                  <Label htmlFor="newPlusDateReplace">Helyettesítő nap</Label>
-                  <Select
-                    value={newPlusDate.replace_day}
-                    onValueChange={(value) => setNewPlusDate({ ...newPlusDate, replace_day: value })}
-                  >
-                    <SelectTrigger className="w-[220px]">
-                      <SelectValue placeholder="Válasszon tanítási napot" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {days.map((day) => (
-                        <SelectItem key={day.value} value={day.value}>
-                          {day.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
 
 
 
-
-              </div>
-
-            </CardContent>
-            <CardFooter>
-              <Button onClick={handleAddPlusDate}><CalendarPlus />  Új nap hozzáadása</Button>
-            </CardFooter>
-          </Card>  */}
 
 
           <Separator />
           <div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
-            {/* Cím és leírás */}
             <div className="sm:w-1/4 w-full">
               <h2 className="text-lg font-semibold">Szombati tanítási napok</h2>
               <p className="text-sm text-neutral-500">
                 Itt láthatóak a rendkívüli tanítási napok és a helyettesítő napok.
               </p>
             </div>
-
-            {/* Táblázat és gomb */}
             <div className="sm:w-3/4 w-full">
-              {/* Gomb a táblázat felett */}
+
               <div className="flex justify-start sm:justify-end mb-3">
-                <Button variant="outline">
-                  <CalendarPlus className="w-4 h-4 inline-block mr-2" /> Új nap hozzáadás
-                </Button>
+                <Dialog open={isDialogOpen2} onOpenChange={(isOpen) => setIsDialogOpen2(isOpen)}>
+                  <DialogTrigger asChild>
+                    <Button variant="outline">
+                      <CalendarPlus className="w-4 h-4 inline-block mr-2" /> Új nap hozzáadás
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent
+                    className="sm:max-w-[425px]"
+
+                  >
+                    <DialogHeader>
+                      <DialogTitle>Szombati tanítási nap hozzáadása</DialogTitle>
+                      <DialogDescription>
+                        Aliquam metus eros, tristique nec semper id, congue eget metus
+                      </DialogDescription>
+                    </DialogHeader>
+
+                    <div className="grid items-start gap-4">
+                      <div className="grid gap-2">
+                        <Label htmlFor="fullName">Dátum</Label>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button
+                              variant="outline"
+                              className={cn(
+                                " justify-start text-left font-normal",
+                                !newPlusDate.which_day && "text-muted-foreground"
+                              )}
+                            >
+                              <CalendarIcon />
+                              {newPlusDate.which_day ? format(new Date(newPlusDate.which_day), "PPP") : (
+                                <span>2025. április 14.</span>
+                              )}
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent className="w-auto p-0" align="start">
+                            <Calendar
+                              mode="single"
+                              selected={newPlusDate.which_day ? new Date(newPlusDate.which_day) : undefined}
+                              onSelect={(date) => {
+                                if (!date) return;
+                                const formattedDate = format(date, "yyyy-MM-dd");
+                                setNewPlusDate({ ...newPlusDate, which_day: formattedDate, nev: formattedDate });
+                              }}
+                              initialFocus
+                            />
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </div>
+
+                      <div className="grid gap-2">
+                        <Label htmlFor="position">Helyettesítő nap</Label>
+                        <Select
+                          value={newPlusDate.replace_day}
+                          onValueChange={(value) => setNewPlusDate({ ...newPlusDate, replace_day: value })}
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Válasszon..." />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {days.map((day) => (
+                              <SelectItem key={day.value} value={day.value}>
+                                {day.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+
+                      </div>
+                    </div>
+
+                    <DialogFooter>
+                      <Button className="w-full" onClick={handleAddPlusDate}>Mentés </Button>
+
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
               </div>
 
-              {/* Görgethető táblázat kis képernyőn */}
               <div className="rounded-xl border overflow-x-auto">
                 {yearSchedule?.plusDates?.length > 0 ? (
                   <table className="w-full min-w-max">
@@ -808,15 +838,6 @@ export default function Page() {
 
 
           <Separator />
-
-
-
-
-
-
-
-
-
           <div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
             <div className="sm:w-1/4 w-full">
               <h2 className="text-lg font-semibold">Tanítási szünetek</h2>
@@ -825,98 +846,97 @@ export default function Page() {
 
             <div className="sm:w-3/4 w-full">
               <div className="flex justify-start sm:justify-end mb-3">
-       
-              <Dialog open={isDialogOpen} onOpenChange={(isOpen) => setIsDialogOpen(isOpen)}>
-  <DialogTrigger asChild>
-    <Button variant="outline">
-      <CalendarPlus className="w-4 h-4 inline-block mr-2" /> Új szünet hozzáadás
-    </Button>
-  </DialogTrigger>
-  <DialogContent
-    className="sm:max-w-[425px]"
-   
-  >
-    <DialogHeader>
-      <DialogTitle>Szünet hozzáadása</DialogTitle>
-      <DialogDescription>
-        Aliquam metus eros, tristique nec semper id, congue eget metus
-      </DialogDescription>
-    </DialogHeader>
 
-    <div className="grid items-start gap-4">
-      <div className="grid gap-2">
-        <Label htmlFor="fullName">Név</Label>
-        <Input
-          type="text"
-          placeholder="Tavaszi szünet"
-          value={newBreak.nev}
-          onChange={(e) => setNewBreak({ ...newBreak, nev: e.target.value })}
-        />
-      </div>
+                <Dialog open={isDialogOpen} onOpenChange={(isOpen) => setIsDialogOpen(isOpen)}>
+                  <DialogTrigger asChild>
+                    <Button variant="outline">
+                      <CalendarPlus className="w-4 h-4 inline-block mr-2" /> Új szünet hozzáadás
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent
+                    className="sm:max-w-[425px]"
 
-      <div className="grid gap-2">
-        <Label htmlFor="position">Dátum</Label>
-        <DropdownMenu>
-  <DropdownMenuTrigger asChild>
-    <Button
-      id="date"
-      variant={"outline"}
-      className={cn(
-        "justify-start text-left font-normal",
-        !date && "text-muted-foreground"
-      )}
-    >
-      <CalendarIcon />
-      {date?.from ? (
-        date.to ? (
-          <>
-            {format(date.from, "LLL dd, y")} -{" "}
-            {format(date.to, "LLL dd, y")}
-          </>
-        ) : (
-          format(date.from, "LLL dd, y")
-        )
-      ) : (
-        <span>2025. április 14. - 2025. május</span>
-      )}
-    </Button>
-  </DropdownMenuTrigger>
-  <DropdownMenuContent className="w-auto p-0" align="start">
-    <Calendar
-      initialFocus
-      mode="range"
-      defaultMonth={date?.from}
-      selected={date}
-      onSelect={(selected) => {
-        setDate(selected);
-        setNewBreak((prev) => ({
-          ...prev,
-          which_day: selected?.from
-            ? format(selected.from, "yyyy-MM-dd")
-            : "",
-          replace_day: selected?.to
-            ? format(selected.to, "yyyy-MM-dd")
-            : "",
-        }));
-      }}
-      numberOfMonths={2}
-    />
-  </DropdownMenuContent>
-</DropdownMenu>
+                  >
+                    <DialogHeader>
+                      <DialogTitle>Szünet hozzáadása</DialogTitle>
+                      <DialogDescription>
+                        Aliquam metus eros, tristique nec semper id, congue eget metus
+                      </DialogDescription>
+                    </DialogHeader>
 
-      </div>
-    </div>
+                    <div className="grid items-start gap-4">
+                      <div className="grid gap-2">
+                        <Label htmlFor="fullName">Név</Label>
+                        <Input
+                          type="text"
+                          placeholder="Tavaszi szünet"
+                          value={newBreak.nev}
+                          onChange={(e) => setNewBreak({ ...newBreak, nev: e.target.value })}
+                        />
+                      </div>
 
-    <DialogFooter>
-      <Button className="w-full" onClick={handleAddBreak}>Új szünet hozzáadása</Button>
-     
-    </DialogFooter>
-  </DialogContent>
-</Dialog>
+                      <div className="grid gap-2">
+                        <Label htmlFor="position">Dátum</Label>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button
+                              id="date"
+                              variant={"outline"}
+                              className={cn(
+                                "justify-start text-left font-normal",
+                                !date && "text-muted-foreground"
+                              )}
+                            >
+                              <CalendarIcon />
+                              {date?.from ? (
+                                date.to ? (
+                                  <>
+                                    {format(date.from, "LLL dd, y")} -{" "}
+                                    {format(date.to, "LLL dd, y")}
+                                  </>
+                                ) : (
+                                  format(date.from, "LLL dd, y")
+                                )
+                              ) : (
+                                <span>2025. április 14. - 2025. máju 20.</span>
+                              )}
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent className="w-auto p-0" align="start">
+                            <Calendar
+                              initialFocus
+                              mode="range"
+                              defaultMonth={date?.from}
+                              selected={date}
+                              onSelect={(selected) => {
+                                setDate(selected);
+                                setNewBreak((prev) => ({
+                                  ...prev,
+                                  which_day: selected?.from
+                                    ? format(selected.from, "yyyy-MM-dd")
+                                    : "",
+                                  replace_day: selected?.to
+                                    ? format(selected.to, "yyyy-MM-dd")
+                                    : "",
+                                }));
+                              }}
+                              numberOfMonths={2}
+                            />
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+
+                      </div>
+                    </div>
+
+                    <DialogFooter>
+                      <Button className="w-full" onClick={handleAddBreak}>Mentés</Button>
+
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
 
               </div>
 
-              {/* Táblázat görgetés */}
               <div className="rounded-xl border overflow-x-auto max-w-full">
                 {yearSchedule?.breakDates?.filter((breakPeriod: any) => breakPeriod.type === "szunet").length > 0 ? (
                   <table className="min-w-full table-auto">
@@ -945,63 +965,11 @@ export default function Page() {
                   </table>
                 ) : (
                   <div className="text-center p-3 text-neutral-500">Nincs megjelenítendő tanítási szünet</div>
-                  
+
                 )}
               </div>
             </div>
           </div>
-
-
-
-
-          {/* <input
-            type="date"
-            value={newBreak.which_day}
-            onChange={(e) => setNewBreak({ ...newBreak, which_day: e.target.value })}
-          />
-          <input
-            type="date"
-            value={newBreak.replace_day}
-            onChange={(e) => setNewBreak({ ...newBreak, replace_day: e.target.value })}
-          /> */}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          {/* open={isDialogOpen} onOpenChange={setIsDialogOpen} */}
-
-
-
-
-
-
-          {/* <input
-            type="date"
-            value={schoolStartEdit}
-            onChange={(e) => setSchoolStartEdit(e.target.value)}
-          />
-          <button onClick={() => updateSchoolYear('kezd', schoolStartEdit)}>Mentés</button> */}
-
-
 
         </div>
 
