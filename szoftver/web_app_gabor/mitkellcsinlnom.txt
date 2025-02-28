@@ -1,0 +1,15 @@
+Első:
+    Az xml feltöltésénél kiszednia csoportokat is a student_groups táblába.
+     -ascToDatabase fájlhoz hozzáírni, hogy a csoportokat is nyerje ki
+     -uj vegpopnt a csoportok feltoltéséhez
+
+Második: 
+    A schedulStart és getTimetable végponotokat visszaírni a régire.(sql lekérdezésre gondolok)
+
+Harmadik:
+    A diákok feltöltése után automatikusan legenerálni a szekrény-diák kapcsolatokat.
+    uj vegpont -> setStudentLucker.js
+
+Negyedik: 
+    TÚL SOK AZ ADATBÁZIS KAPCSOLAT!!!!!!!!!
+    VALAMIT BASZNI KELL VELE!!!!!!!!!!!
