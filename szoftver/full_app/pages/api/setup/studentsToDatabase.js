@@ -89,10 +89,10 @@ export default async function handler(req, res) {
       });
 
       const insertQuery = 'INSERT INTO students (student_id, full_name, class, rfid_tag, access) VALUES (?, ?, ?, ?, ?)';
+      
       for (const student of studentMap.values()) {
-        const connection = await pool.getConnection(); // Új kapcsolat
         try {
-          await connection.execute(insertQuery, [
+          await pool.execute(insertQuery, [
             student.student_id,
             student.full_name,
             student.class,
@@ -102,8 +102,6 @@ export default async function handler(req, res) {
         } catch (dbError) {
           console.error('Adatbázis hiba:', dbError);
           return res.status(500).json({ error: 'Hiba történt az adatok mentésekor' });
-        } finally {
-          connection.release(); // Kapcsolat visszaadása a poolnak
         }
       }
 
