@@ -43,10 +43,10 @@ export default function handler(req, res) {
       const jsonGroups = JSON.stringify(groups, null, 2);
       fs.writeFileSync('groups.json', jsonGroups, 'utf8');
 
-      //await sendRingingData(ringing);
-      //await sendEmployeesData(employees);
-      //await waitForDatabaseToBeReady(db, 'admins', employees.length);
-      //await sendScheduleData(schedule);
+      await sendRingingData(ringing);
+      await sendEmployeesData(employees);
+      await waitForDatabaseToBeReady(db, 'admins', employees.length);
+      await sendScheduleData(schedule);
       
       return res.status(200).json({
         message: 'XML adatok sikeresen feldolgozva és továbbítva!',

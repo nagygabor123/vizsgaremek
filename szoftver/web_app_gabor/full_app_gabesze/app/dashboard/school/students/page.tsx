@@ -116,7 +116,7 @@ export default function Home() {
   }, []);
 
   // Fetch timetable for each student
-  useEffect(() => {
+  /*useEffect(() => {
     const fetchTimetables = async () => {
       const timetables = await Promise.all(
         students.map(async (student) => {
@@ -134,7 +134,7 @@ export default function Home() {
     if (students.length > 0) {
       fetchTimetables();
     }
-  }, [students]);
+  }, [students]);*/
 
   // Handle form input changes
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
