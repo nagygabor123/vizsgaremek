@@ -409,7 +409,7 @@ export default function Page() {
           </div>
         </header>
 
-        <div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
+        {/*<div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
           <div className="grid auto-rows-min gap-4 w-full">
             {isButtonVisible && (
               <div className="aspect-[18/1] rounded-xl bg-red-100 flex items-center px-4 w-full box-border overflow-hidden">
@@ -425,7 +425,7 @@ export default function Page() {
 
 
           </div>
-        </div>
+        </div>*/}
 
         <div className="p-4">
 
@@ -451,9 +451,13 @@ export default function Page() {
           <button onClick={() => updateSchoolYear('kezd', schoolStartEdit)}>Mentés</button> */}
 
 
+<h1 className="text-2xl mb-10 font-semibold">Aktív tanév: 2024/2025</h1>
+
 
 
           <div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
+
+      
 
             <div className="sm:w-1/4 w-full">
               <h2 className="text-lg font-semibold">Tanítási év első napja</h2>

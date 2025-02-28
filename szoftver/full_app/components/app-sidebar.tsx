@@ -315,10 +315,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   <Link href="/dashboard/school/settings">
 <SlidersHorizontal/>
     <span>Tanév beállításai</span>
-    {isButtonVisible && (
-    <TriangleAlert className="ml-auto text-red-500" />
-    )}
-  </Link>
+    {/*{isButtonVisible && (*/}
+   {/* <TriangleAlert className="ml-auto text-red-500" />*/}
+     {/* )}  */}
+  </Link> 
 </SidebarMenuButton>
 </SidebarMenuItem>
 

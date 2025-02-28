@@ -346,7 +346,7 @@ export default function Home() {
               <div className="aspect-[18/1] rounded-xl bg-red-100 flex items-center px-4 w-full box-border overflow-hidden">
                 <TriangleAlert className="text-red-500" />
                 <p className="text-sm truncate ml-3">
-                A rendszer nincs teljesen beállítva. Kérjük, végezze el a szükséges konfigurációt!
+                A rendszer nincs beállítva. Kérjük, végezze el a szükséges konfigurációt!
                 </p>
                   {/* <Button
                 onClick={handleButtonClick}
