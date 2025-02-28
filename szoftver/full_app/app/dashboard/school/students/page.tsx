@@ -540,7 +540,7 @@ export default function Home() {
                 <thead className="text-center text-sm text-neutral-500">
                   <tr>
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Teljes név <ArrowUpDown className="w-4 h-4 inline-block" /></th>
-                    <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("class")}>Osztály <ArrowUpDown className="w-4 h-4 inline-block" /></th>
+                    <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("class")}>Osztály és csoportok<ArrowUpDown className="w-4 h-4 inline-block" /></th>
                     <th className="p-2 font-normal">Státusz</th>
                     <th className="p-2 font-normal">RFID azonosító</th>
                     <th className="p-2 font-normal">Műveletek</th>
