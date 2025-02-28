@@ -210,8 +210,8 @@ const Calendar: React.FC = () => {
           start: lesson.start_time.slice(0, 5), // "07:15:00" -> "07:15"
           end: lesson.end_time.slice(0, 5), 
           subject: lesson.group_name,
-          teacher: lesson.teacher_name,
-          class: lesson.class
+          teacher: lesson.short_name,
+          class: lesson.group
         }));
         setSchedule(formattedData);
       } catch (error) {
