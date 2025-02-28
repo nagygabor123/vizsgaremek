@@ -66,6 +66,23 @@ CREATE TABLE `ring_times` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 INSERT INTO `admins` (`admin_id`, `full_name`, `password`, `position`,`osztalyfonok`,`short_name`) VALUES
 (1, 'szalkai', 'piciakukija', 'senki','nincs','SSSS'),
 (2, 'nagy', 'nagyakukija', 'igazgató','nincs','GGGG');

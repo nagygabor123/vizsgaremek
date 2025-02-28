@@ -38,13 +38,14 @@ export default function handler(req, res) {
       const schedule = extractSchedule(parsedXml);
       const groups = extractGroups(parsedXml);
       
-      //const jsonData = JSON.stringify(schedule, null, 2);
-      //fs.writeFileSync('orarend.json', jsonData, 'utf8');
+      const jsonData = JSON.stringify(schedule, null, 2);
+      fs.writeFileSync('orarend.json', jsonData, 'utf8');
       const jsonGroups = JSON.stringify(groups, null, 2);
       fs.writeFileSync('groups.json', jsonGroups, 'utf8');
 
-      await sendRingingData(ringing);
-      await sendEmployeesData(employees);
+      //await sendRingingData(ringing);
+      //await sendEmployeesData(employees);
+      //await sendGroupsData(groups);
       await waitForDatabaseToBeReady(db, 'admins', employees.length);
       await sendScheduleData(schedule);
       
@@ -268,6 +269,26 @@ async function sendEmployeesData(employees) {
     console.log('Employees adatok sikeresen továbbítva!');
   } catch (error) {
     console.error('Hiba az employees adatok küldése közben:', error);
+  }
+}
+
+async function sendGroupsData(groups) {
+  try {
+    const response = await fetch('http://localhost:3000/api/upload/uploadGroups', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ groups }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Hiba az groups adatok továbbításakor: ${response.statusText}`);
+    }
+
+    console.log('groups adatok sikeresen továbbítva!');
+  } catch (error) {
+    console.error('Hiba az groups adatok küldése közben:', error);
   }
 }
 

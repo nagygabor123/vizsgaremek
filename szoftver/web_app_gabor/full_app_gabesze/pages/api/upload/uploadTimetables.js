@@ -24,31 +24,48 @@ export default async function handler(req, res) {
   const db = await connectToDatabase();
 
   try {
-    // Lekérdezzük az admin_id értékeket
     const [admins] = await db.query('SELECT admin_id, full_name FROM admins');
     const adminMap = new Map(admins.map(admin => [admin.full_name, admin.admin_id]));
 
+    const [groups] = await db.query('SELECT group_id, group_name FROM groups');
+    const groupMap = new Map(groups.map(group => [group.group_name, group.group_id]));
+
     const insertValues = schedule
       .map(entry => {
-        const adminId = adminMap.get(entry.teacher) || null; // Ha nincs megfelelő admin_id, legyen null
+        // Több tanár kezelése: vesszővel elválasztott nevek
+        const teacherNames = entry.teacher.split(',').map(name => name.trim()); // Tanárok név listája
+        const adminIds = teacherNames
+          .map(teacher => adminMap.get(teacher)) // Keresés minden egyes tanár ID-ja alapján
+          .filter(id => id !== undefined); // Csak a létező admin_id-ket tartjuk meg
+
+        // Csoportok feldolgozása (vesszővel elválasztva)
+        const groupNames = entry.group.split(',').map(name => name.trim()); // Szétválasztás és felesleges szóközök eltávolítása
+        const groupIds = groupNames
+          .map(groupName => groupMap.get(groupName))
+          .filter(id => id !== undefined); // Csak a létező group_id-ket tartjuk meg
+
+        if (adminIds.length === 0 || groupIds.length === 0) {
+          console.warn(`Hibás adat kihagyva - Tanár: ${entry.teacher}, Csoport(ok): ${entry.group}`);
+          return null;
+        }
 
         return [
-          entry.group,
-          adminId, // Most már null lehet, ha nincs megfelelő tanár
-          dayMapping[entry.day] || 'monday',
+          groupIds.join(','),  // Csoport ID-k összefűzve
+          adminIds.join(','),   // Tanár ID-k összefűzve
           entry.group_name,
+          dayMapping[entry.day] || 'monday',
           entry.start_time,
           entry.end_time
         ];
       })
-      .filter(entry => entry[1] !== null); // Eltávolítja azokat az adatokat, ahol nincs admin_id
+      .filter(entry => entry !== null);
 
     if (insertValues.length === 0) {
       return res.status(400).json({ message: 'No valid timetable entries to insert' });
     }
 
     await db.query(
-      'INSERT INTO timetables (`group`, admin_id, day_of_week,group_name, start_time, end_time) VALUES ?;',
+      'INSERT INTO timetables (group_id, admin_id, group_name, day_of_week, start_time, end_time) VALUES ?;',
       [insertValues]
     ).catch(error => {
       console.error("Database insert error:", error);
