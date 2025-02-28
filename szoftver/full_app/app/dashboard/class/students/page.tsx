@@ -444,7 +444,7 @@ export default function Home() {
                                 <thead className="text-center text-sm text-neutral-500">
                                     <tr>
                                         <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Teljes név <ArrowUpDown className="w-4 h-4 inline-block" /></th>
-                                        {/* <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("class")}>Osztály <ArrowUpDown className="w-4 h-4 inline-block" /></th> */}
+                                         <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("class")}>Osztály és csoportok<ArrowUpDown className="w-4 h-4 inline-block" /></th> 
                                         <th className="p-2 font-normal">Státusz</th>
                                         <th className="p-2 font-normal">RFID azonosító</th>
                                         <th className="p-2 font-normal">Műveletek</th>
@@ -473,6 +473,7 @@ export default function Home() {
                                                 return (
                                                     <tr key={student.student_id} className="text-center text-sm border-t">
                                                         <td className="p-1">{student.full_name}</td>
+                                                        <td className="p-1">{student.class}</td>
                                                         {/* <td className="p-1">{student.class}</td> */}
                                                         <td className="p-1">
                                                             {student.status === "ki" ? <span className="text-gray-500"><CircleMinus className="w-4 h-4 inline-block" /></span> : student.status === "be" ? <span className="text-green-500"><CircleCheck className="w-4 h-4 inline-block" /></span> : <span className="text-red-500"><CircleAlert className="w-4 h-4 inline-block" /></span>}
