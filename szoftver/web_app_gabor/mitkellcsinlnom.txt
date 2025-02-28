@@ -1,4 +1,4 @@
-Első:
+Első: KÉSZ
     Az xml feltöltésénél kiszednia csoportokat is a student_groups táblába.
      -ascToDatabase fájlhoz hozzáírni, hogy a csoportokat is nyerje ki
      -uj vegpopnt a csoportok feltoltéséhez
