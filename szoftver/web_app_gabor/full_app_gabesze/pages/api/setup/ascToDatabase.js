@@ -36,14 +36,17 @@ export default function handler(req, res) {
       const ringing = extractRingingSchedule(parsedXml);
       const employees = extractTeachers(parsedXml);
       const schedule = extractSchedule(parsedXml);
-
+      const groups = extractGroups(parsedXml);
+      
       //const jsonData = JSON.stringify(schedule, null, 2);
       //fs.writeFileSync('orarend.json', jsonData, 'utf8');
+      const jsonGroups = JSON.stringify(groups, null, 2);
+      fs.writeFileSync('groups.json', jsonGroups, 'utf8');
 
-      await sendRingingData(ringing);
-      await sendEmployeesData(employees);
-      await waitForDatabaseToBeReady(db, 'admins', employees.length);
-      await sendScheduleData(schedule);
+      //await sendRingingData(ringing);
+      //await sendEmployeesData(employees);
+      //await waitForDatabaseToBeReady(db, 'admins', employees.length);
+      //await sendScheduleData(schedule);
       
       return res.status(200).json({
         message: 'XML adatok sikeresen feldolgozva és továbbítva!',
@@ -110,6 +113,29 @@ function extractTeachers(parsedXml) {
     osztalyfonok: classTeacherMap[t.$.id] ? classes.find(c => c.$.id === classTeacherMap[t.$.id])?.$.name || null : null,
   }));
 }
+
+function extractGroups(parsedXml) {
+  if (!parsedXml.timetable || !parsedXml.timetable.classes || !parsedXml.timetable.classes[0].class || !parsedXml.timetable.groups || !parsedXml.timetable.groups[0].group) {
+    return [];
+  }
+
+  const classes = parsedXml.timetable.classes[0].class;
+  const csoportok = parsedXml.timetable.groups[0].group;
+
+  return [
+    ...classes.map(c => ({
+      name: c.$.name,
+    })),
+    ...csoportok
+      .filter(g => g.$.name !== "Egész osztály")  
+      .map(g => ({
+        name: g.$.name,
+      }))
+  ];
+}
+
+
+
 
 
 function extractSchedule(parsedXml) {
