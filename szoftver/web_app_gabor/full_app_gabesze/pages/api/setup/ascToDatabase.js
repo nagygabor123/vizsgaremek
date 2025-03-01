@@ -43,9 +43,9 @@ export default function handler(req, res) {
       const jsonGroups = JSON.stringify(groups, null, 2);
       fs.writeFileSync('groups.json', jsonGroups, 'utf8');
 
-      //await sendRingingData(ringing);
-      //await sendEmployeesData(employees);
-      //await sendGroupsData(groups);
+      await sendRingingData(ringing);
+      await sendEmployeesData(employees);
+      await sendGroupsData(groups);
       await waitForDatabaseToBeReady(db, 'admins', employees.length);
       await sendScheduleData(schedule);
       
