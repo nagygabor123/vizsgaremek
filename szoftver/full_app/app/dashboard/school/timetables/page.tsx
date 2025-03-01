@@ -469,8 +469,8 @@ const Calendar: React.FC = () => {
               <span>{format(currentDate, 'yyyy MMMM', { locale: hu })}</span>
             </h2>
             <div className="calendar-controls">
-              {/* <Select>
-                <SelectTrigger className="w-[180px]">
+              <Select>
+                <SelectTrigger>
                   <SelectValue placeholder="Válasszon..." />
                 </SelectTrigger>
                 <SelectContent>
@@ -481,10 +481,10 @@ const Calendar: React.FC = () => {
                     <SelectItem value="kisPista">Kis Pista</SelectItem>
                   </SelectGroup>
                 </SelectContent>
-              </Select> */}
+              </Select>
               <Button onClick={goToToday} variant="outline">Mai nap</Button>
-              <Button size="icon" variant="ghost" onClick={goToPrevious}>{isMobileView ? <ChevronLeft /> : <ChevronLeft />}</Button>
-              <Button size="icon" variant="ghost" onClick={goToNext}>{isMobileView ? <ChevronRight /> : <ChevronRight />}</Button>
+              <Button variant="ghost" onClick={goToPrevious}>{isMobileView ? <ChevronLeft /> : <ChevronLeft />}</Button>
+              <Button variant="ghost" onClick={goToNext}>{isMobileView ? <ChevronRight /> : <ChevronRight />}</Button>
             </div>
           </div>
 
@@ -718,7 +718,7 @@ const Calendar: React.FC = () => {
                 ))}
 
                 {schedule.length === 0 ? (
-                    <div className="flex items-center justify-center h-96 text-xl font-semibold text-gray-500 col-span-full">
+                    <div className="flex items-center justify-center h-dvh text-base text-gray-500 col-span-full">
                     Nincsenek tanórák ezen a héten
                   </div>
                 ) : (

@@ -104,7 +104,7 @@ const SheetComponent: React.FC = () => {
   const handleConfirmClick = () => {
     setOverlayVisible(false);
     setButtonVisible(false);
-    localStorage.setItem("hasClickedOverlayButton", "true");
+    //localStorage.setItem("hasClickedOverlayButton", "true");
     window.location.reload();
   };
 

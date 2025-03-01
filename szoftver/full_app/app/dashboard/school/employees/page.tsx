@@ -487,11 +487,11 @@ export default function AddEmployeePage() {
                 </thead>
                 <tbody>
                   {employees.length === 0 ? (
-                    <tr className="text-center border-t">
-                      <td className="p-1">
-                        Nincs megjelenítendő alkalmazott
-                      </td>
-                    </tr>
+                     <tr>
+                     <td colSpan={5} className="text-center p-6 h-dvh text-base text-gray-500">
+                     Nem szerepel alkalmazott a rendszerben
+                     </td>
+                   </tr>
                   ) : (
 
                     paginatedEmployees.map((employee) => (
