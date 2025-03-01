@@ -48,7 +48,7 @@ export default function handler(req, res) {
       await sendGroupsData(groups);
       await waitForDatabaseToBeReady(db, 'admins', employees.length);
       await sendScheduleData(schedule);
-      
+
       return res.status(200).json({
         message: 'XML adatok sikeresen feldolgozva és továbbítva!',
         ringing,
@@ -311,5 +311,4 @@ async function sendScheduleData(schedule) {
     console.error('Error sending schedule data:', error);
   }
 }
-
 
