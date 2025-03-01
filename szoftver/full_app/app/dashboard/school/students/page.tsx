@@ -82,15 +82,28 @@ export default function Home() {
   const [editStudentId, setEditStudentId] = useState<string | null>(null);
   const [systemClose, setSystemClose] = useState<boolean>(false);
 
+  const [hasStudents, setHasStudents] = useState<boolean | null>(null);
+  
+
+  
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [open, setOpen] = useState(false);
 
   // Fetch students from the database
+  const [loading, setLoading] = useState(true); // Betöltési állapot
+
   const fetchStudents = async () => {
-    const response = await fetch('/api/students/read');
-    const data = await response.json();
-    setStudents(data);
+    try {
+      const response = await fetch('/api/students/read');
+      const data = await response.json();
+      setStudents(data);
+      setHasStudents(data.length > 0); // Ha van legalább egy diák, akkor true
+    } catch (error) {
+      console.error('Error fetching students', error);
+    } finally {
+      setLoading(false); // Lekérés vége
+    }
   };
 
   // Fetch system status from the database
@@ -301,8 +314,11 @@ export default function Home() {
   }, []);
 
   if (isButtonVisible === null) {
-    return null; 
+    return null;
   }
+
+  //if (loading) return null; 
+
 
   return (
     <SidebarProvider>
@@ -339,29 +355,19 @@ export default function Home() {
 
 
 
-
-        <div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
-            <div className="grid auto-rows-min gap-4 w-full">
-            {isButtonVisible && ( 
-              <div className="aspect-[18/1] rounded-xl bg-red-100 flex items-center px-4 w-full box-border overflow-hidden">
-                <TriangleAlert className="text-red-500" />
-                <p className="text-sm truncate ml-3">
-                A rendszer nincs beállítva. Kérjük, végezze el a szükséges konfigurációt!
-                </p>
-                  {/* <Button
-                onClick={handleButtonClick}
-                className="ml-auto"
-                variant="link"
-              >
-                Konfigurálás most
-              </Button> */}
-              <AppKonfig/>
-              </div>
-            )} 
-              {/* ide jönne a kód */}
-
-            </div>
-          </div>
+        
+        <div>
+    {loading ? (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-lg font-semibold">Betöltés...</p>
+      </div>
+    ) : (
+      <>
+        {!hasStudents && <AppKonfig />}
+        {/* <p>{hasStudents ? "Már vannak diákok az adatbázisban." : "Nincsenek diákok."}</p> */}
+      </>
+    )}
+  </div>
 
           <div className="p-4">
 
@@ -411,65 +417,65 @@ export default function Home() {
                   <Button variant="outline" className="ml-auto" ><CirclePlus /> Új tanuló hozzáadás</Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
-                              <DialogHeader>
-                                <DialogTitle>Tanuló hozzáadása</DialogTitle>
-                                <DialogDescription>
-                                Aliquam metus eros, tristique nec semper id, congue eget metus.
-                                </DialogDescription>
-                                </DialogHeader>
+                  <DialogHeader>
+                    <DialogTitle>Tanuló hozzáadása</DialogTitle>
+                    <DialogDescription>
+                      Aliquam metus eros, tristique nec semper id, congue eget metus.
+                    </DialogDescription>
+                  </DialogHeader>
 
-                                <form onSubmit={handleSubmit} className="grid items-start gap-4">
-      <div className="grid gap-2">
-        <Label  htmlFor="student_id">Azonosító szám</Label>
-                          <Input
-                           className="col-span-3"
-                            type="text"
-                            placeholder="OM1234567"
-                            name="student_id"
-                            // value={formData.student_id}
-                            onChange={e => setFormData({ ...formData, student_id: e.target.value })}
-                          />
-      </div>
-      <div className="grid gap-2">
-      <Label htmlFor="full_name">Teljes név</Label>
-                          <Input
-                           className="col-span-3"
-                            type="text"
-                            name="full_name"
-                            placeholder="Teszt Elek"
-                            // value={formData.full_name}
-                            onChange={e => setFormData({ ...formData, full_name: e.target.value })}
-                          />
-      </div>
-      <div className="grid gap-2">
-                          <Label htmlFor="class">Osztály</Label>
-                          <Input
-                           className="col-span-3"
-                            type="text"
-                            name="class"
-                            placeholder="9.I"
-                            // value={formData.class}
-                            onChange={e => setFormData({ ...formData, class: e.target.value })}
-                          />
-                        </div>
+                  <form onSubmit={handleSubmit} className="grid items-start gap-4">
+                    <div className="grid gap-2">
+                      <Label htmlFor="student_id">Azonosító szám</Label>
+                      <Input
+                        className="col-span-3"
+                        type="text"
+                        placeholder="OM1234567"
+                        name="student_id"
+                        // value={formData.student_id}
+                        onChange={e => setFormData({ ...formData, student_id: e.target.value })}
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="full_name">Teljes név</Label>
+                      <Input
+                        className="col-span-3"
+                        type="text"
+                        name="full_name"
+                        placeholder="Teszt Elek"
+                        // value={formData.full_name}
+                        onChange={e => setFormData({ ...formData, full_name: e.target.value })}
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="class">Osztály</Label>
+                      <Input
+                        className="col-span-3"
+                        type="text"
+                        name="class"
+                        placeholder="9.I"
+                        // value={formData.class}
+                        onChange={e => setFormData({ ...formData, class: e.target.value })}
+                      />
+                    </div>
 
-                        <div className="grid gap-2">
-                          <Label htmlFor="class">RFID azonosító</Label>
-                          <Input
-                           className="col-span-3"
-                            type="text"
-                            name="rfid_tag"
-                            placeholder="R6HF6K86"
-                            //  value={formData.rfid_tag}
-                            onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
-                          />
-                        </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="class">RFID azonosító</Label>
+                      <Input
+                        className="col-span-3"
+                        type="text"
+                        name="rfid_tag"
+                        placeholder="R6HF6K86"
+                        //  value={formData.rfid_tag}
+                        onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
+                      />
+                    </div>
 
 
-      <Button type="submit">Mentés</Button>
-    </form>
+                    <Button type="submit">Mentés</Button>
+                  </form>
 
-                                {/* <div className="grid gap-4 py-4">
+                  {/* <div className="grid gap-4 py-4">
                                 <div className="grid grid-cols-4 items-center gap-4">
                           <Label className="text-right" htmlFor="student_id">Azonosító szám</Label>
                           <Input
@@ -531,7 +537,7 @@ export default function Home() {
 
             </div>
 
-   
+
 
 
 
@@ -547,66 +553,66 @@ export default function Home() {
                   </tr>
                 </thead>
                 <tbody>
-                  
+
                   {
-                  
-                  students.length === 0 ? (
-                    <tr className="text-center border-t">
-                      <td className="p-1">
-                        Nincs megjelenítendő diák
-                      </td>
-                    </tr>
-                  ) : (
-                  
-                  
-                  paginatedStudents.map((student) => {
-                    const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
-                    const currentTime = new Date().toTimeString().slice(0, 5);
-                    const canUnlockStudent = systemClose || (studentTimetableData &&
-                      currentTime >= studentTimetableData.first_class_start &&
-                      currentTime <= studentTimetableData.last_class_end);
 
-                    return (
-                      <tr key={student.student_id} className="text-center text-sm border-t">
-                        <td className="p-1">{student.full_name}</td>
-                        <td className="p-1">{student.class}</td>
+                    students.length === 0 ? (
+                      <tr className="text-center border-t">
                         <td className="p-1">
-                          {student.status === "ki" ? <span className="text-gray-500"><CircleMinus className="w-4 h-4 inline-block"/></span>: student.status === "be" ? <span className="text-green-500"><CircleCheck className="w-4 h-4 inline-block"/></span> : <span className="text-red-500"><CircleAlert className="w-4 h-4 inline-block"/></span>}
-
-                         
+                          Nincs megjelenítendő diák
                         </td>
-                        <td className="p-1">{student.rfid_tag}</td>
-                        <td className="p-1">
+                      </tr>
+                    ) : (
 
-                          <Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}> <LockOpen className="w-4 h-4 inline-block" /> {/* {canUnlockStudent ? <LockOpen className="w-4 h-4 inline-block" /> : <LockOpen className="w-4 h-4 inline-block" />}*/}</Button>
-                          <Dialog open={open} onOpenChange={setOpen}>
-                            <DialogTrigger asChild>
-                              <Button variant="ghost" onClick={() => handleEdit(student)}><Pen /></Button>
-                            </DialogTrigger>
-                            <DialogContent className="sm:max-w-[425px]">
-                              <DialogHeader>
-                                <DialogTitle>Tanuló szerkesztése</DialogTitle>
-                                <DialogDescription>
 
-                                  Aliquam metus eros, tristique nec semper id, congue eget metus
-                                </DialogDescription>
-                              </DialogHeader>
+                      paginatedStudents.map((student) => {
+                        const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
+                        const currentTime = new Date().toTimeString().slice(0, 5);
+                        const canUnlockStudent = systemClose || (studentTimetableData &&
+                          currentTime >= studentTimetableData.first_class_start &&
+                          currentTime <= studentTimetableData.last_class_end);
 
-                              <form onSubmit={handleSubmit} className="grid items-start gap-4">
-                              <div className="grid gap-2">
-                                  <Label  htmlFor="full_name">Teljes név</Label>
-                                  <Input
-                                    className="col-span-3"
-                                    type="text"
-                                    name="full_name"
-                                    placeholder=""
-                                    value={formData.full_name}
-                                    onChange={e => setFormData({ ...formData, full_name: e.target.value })}
-                                  />
-                                </div>
-                         
+                        return (
+                          <tr key={student.student_id} className="text-center text-sm border-t">
+                            <td className="p-1">{student.full_name}</td>
+                            <td className="p-1">{student.class}</td>
+                            <td className="p-1">
+                              {student.status === "ki" ? <span className="text-gray-500"><CircleMinus className="w-4 h-4 inline-block" /></span> : student.status === "be" ? <span className="text-green-500"><CircleCheck className="w-4 h-4 inline-block" /></span> : <span className="text-red-500"><CircleAlert className="w-4 h-4 inline-block" /></span>}
 
-                              {/*<Input
+
+                            </td>
+                            <td className="p-1">{student.rfid_tag}</td>
+                            <td className="p-1">
+
+                              <Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}> <LockOpen className="w-4 h-4 inline-block" /> {/* {canUnlockStudent ? <LockOpen className="w-4 h-4 inline-block" /> : <LockOpen className="w-4 h-4 inline-block" />}*/}</Button>
+                              <Dialog open={open} onOpenChange={setOpen}>
+                                <DialogTrigger asChild>
+                                  <Button variant="ghost" onClick={() => handleEdit(student)}><Pen /></Button>
+                                </DialogTrigger>
+                                <DialogContent className="sm:max-w-[425px]">
+                                  <DialogHeader>
+                                    <DialogTitle>Tanuló szerkesztése</DialogTitle>
+                                    <DialogDescription>
+
+                                      Aliquam metus eros, tristique nec semper id, congue eget metus
+                                    </DialogDescription>
+                                  </DialogHeader>
+
+                                  <form onSubmit={handleSubmit} className="grid items-start gap-4">
+                                    <div className="grid gap-2">
+                                      <Label htmlFor="full_name">Teljes név</Label>
+                                      <Input
+                                        className="col-span-3"
+                                        type="text"
+                                        name="full_name"
+                                        placeholder=""
+                                        value={formData.full_name}
+                                        onChange={e => setFormData({ ...formData, full_name: e.target.value })}
+                                      />
+                                    </div>
+
+
+                                    {/*<Input
                                       type="text"
                                       name="class"
                                       placeholder="Class"
@@ -614,24 +620,24 @@ export default function Home() {
                                       onChange={e => setFormData({ ...formData, class: e.target.value })}
                                     />*/}
 
-                        
-                                <div className="grid gap-2">
-                                  <Label  htmlFor="rfid_tag">RFID azonosító</Label>
-                                  <Input
-                                    className="col-span-3"
-                                    type="text"
-                                    name="rfid_tag"
-                                    placeholder=""
-                                    value={formData.rfid_tag}
-                                    onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
-                                  />
-                                </div>
-                           
+
+                                    <div className="grid gap-2">
+                                      <Label htmlFor="rfid_tag">RFID azonosító</Label>
+                                      <Input
+                                        className="col-span-3"
+                                        type="text"
+                                        name="rfid_tag"
+                                        placeholder=""
+                                        value={formData.rfid_tag}
+                                        onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
+                                      />
+                                    </div>
 
 
-                              <Button type="submit">Mentés</Button>
-                              </form>
-                              {/* <DialogFooter>
+
+                                    <Button type="submit">Mentés</Button>
+                                  </form>
+                                  {/* <DialogFooter>
                                 <form onSubmit={handleSubmit}>
                                   <Button type="submit">
                                     Mentés
@@ -639,16 +645,16 @@ export default function Home() {
                                 </form>
 
                               </DialogFooter> */}
-                            </DialogContent>
-                          </Dialog>
+                                </DialogContent>
+                              </Dialog>
 
-                          <Button variant="ghost" onClick={() => handleDelete(student.student_id)}><X /></Button>
-                        </td>
-                     
-                      </tr>
-                    );
-                  })
-                  )}
+                              <Button variant="ghost" onClick={() => handleDelete(student.student_id)}><X /></Button>
+                            </td>
+
+                          </tr>
+                        );
+                      })
+                    )}
                 </tbody>
               </table>
 

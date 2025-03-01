@@ -11,6 +11,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Paperclip } from "lucide-react";
 
+
+import { TriangleAlert } from "lucide-react"
+
 const SheetComponent: React.FC = () => {
   const [isOverlayVisible, setOverlayVisible] = useState(false);
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
@@ -163,9 +166,24 @@ const SheetComponent: React.FC = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button className="ml-auto" variant="link">
+      <div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
+            <div className="grid auto-rows-min gap-4 w-full">
+            {isButtonVisible && ( 
+              <div className="min-h-[60px] rounded-xl bg-red-100 flex items-center px-4 w-full box-border overflow-hidden">
+                <TriangleAlert className="text-red-500" />
+                <p className="text-sm truncate ml-3">
+                A rendszer nincs beállítva. Kérjük, végezze el a szükséges konfigurációt!
+                </p>
+                <Button className="ml-auto" variant="link">
           Konfigurálás most
         </Button>
+            
+              </div>
+            )} 
+             
+            </div>
+          </div>
+    
       </SheetTrigger>
       <SheetContent side="bottom">
         <SheetHeader>

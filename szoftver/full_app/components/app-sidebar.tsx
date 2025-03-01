@@ -105,6 +105,31 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const [isOverlayVisible, setOverlayVisible] = useState(false);
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
 
+
+  const [students, setStudents] = useState<any[]>([]);
+  const [hasStudents, setHasStudents] = useState<boolean | null>(null);
+  const [loading, setLoading] = useState(true); // Betöltési állapot
+
+
+  const fetchStudents = async () => {
+    try {
+      const response = await fetch('/api/students/read');
+      const data = await response.json();
+      setStudents(data);
+      setHasStudents(data.length > 0); // Ha van legalább egy diák, akkor true
+    } catch (error) {
+      console.error('Error fetching students', error);
+    } finally {
+      setLoading(false); // Lekérés vége
+    }
+  };
+  
+
+  useEffect(() => {
+    fetchStudents();
+  }, []);
+
+
   useEffect(() => {
     const hasClickedBefore = localStorage.getItem("hasClickedOverlayButton");
     setButtonVisible(hasClickedBefore !== "true");
@@ -265,8 +290,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   <Link href="/dashboard/school/timetables">
 <Calendar/>
     <span>Órarendek</span>
-    {isButtonVisible && (
-    <TriangleAlert className="ml-auto text-red-500" />
+  
+    {loading ? (
+     
+        <p></p>
+     
+    ) : (
+      <>
+        {!hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
+      </>
     )}
   </Link>
 </SidebarMenuButton>
@@ -279,9 +311,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   <Link href="/dashboard/school/students">
   <GraduationCap/>
     <span>Tanulók</span> 
-    {isButtonVisible && (
-    <TriangleAlert className="ml-auto text-red-500" />
-    )}
+    {loading ? (
+     
+     <p></p>
+  
+ ) : (
+   <>
+     {!hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
+   </>
+ )}
   </Link>
   
 </SidebarMenuButton>
@@ -291,9 +329,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   <Link href="/dashboard/school/employees">
   <BriefcaseBusiness/>
     <span>Alkalmazottak</span>
-    {isButtonVisible && (
-    <TriangleAlert className="ml-auto text-red-500" />
-    )}
+    {loading ? (
+     
+     <p></p>
+  
+ ) : (
+   <>
+     {!hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
+   </>
+ )}
   </Link>
 </SidebarMenuButton>
 </SidebarMenuItem>

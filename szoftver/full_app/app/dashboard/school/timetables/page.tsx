@@ -130,6 +130,21 @@ const Calendar: React.FC = () => {
   const [tanevvege, setEndYear] = useState<string | null>(null);
   const [lessonTimes, setLessonTimes] = useState<lessonTimes[]>([]);
 
+
+
+
+
+  const [hasStudents, setHasStudents] = useState<boolean | null>(null);
+
+
+  const [loading, setLoading] = useState(true); // Betöltési állapot
+
+
+
+
+
+
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentDate(new Date());
@@ -186,7 +201,7 @@ const Calendar: React.FC = () => {
       fetchTimetables();
     }
   }, [students]);
-  
+
 
   useEffect(() => {
     async function fetchSchedule() {
@@ -251,7 +266,7 @@ const Calendar: React.FC = () => {
   };
   const isBreakDay = (date: Date) => {
     if (!breakdate || breakdate.length === 0) return false;
-    
+
     const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     return breakdate.some(({ start, end }) => {
       const startDate = new Date(start);
@@ -259,7 +274,7 @@ const Calendar: React.FC = () => {
       return targetDate >= startDate && targetDate <= endDate;
     });
   };
-  
+
 
   const fetchStudentTimetable = async (student_id: string) => {
     const response = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${student_id}`);
@@ -310,15 +325,15 @@ const Calendar: React.FC = () => {
     return students.filter((student) => {
       const studentClasses = student.class.split(',').map((item) => item.trim());
       const classNames = className.split(',').map((item) => item.trim());
-      
+
       console.log("Student classes:", studentClasses);
       console.log("Search classes:", classNames);
-  
+
       return studentClasses.some((cls) => classNames.includes(cls));
     });
   };
-  
-  
+
+
 
   const weekStart = startOfWeek(currentDate, { weekStartsOn: 1 });
   const daysOfWeek = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
@@ -361,10 +376,24 @@ const Calendar: React.FC = () => {
   };
 
   const fetchStudents = async () => {
-    const response = await fetch('/api/students/read');
-    const data = await response.json();
-    setStudents(data);
+    try {
+      const response = await fetch('/api/students/read');
+      const data = await response.json();
+      setStudents(data);
+      setHasStudents(data.length > 0); // Ha van legalább egy diák, akkor true
+    } catch (error) {
+      console.error('Error fetching students', error);
+    } finally {
+      setLoading(false); // Lekérés vége
+    }
   };
+
+
+
+  useEffect(() => {
+    fetchStudents();
+  }, []);
+
 
   const fetchSystemStatus = async () => {
     const response = await fetch('http://localhost:3000/api/system/status');
@@ -384,7 +413,7 @@ const Calendar: React.FC = () => {
   }, []);
 
   if (isButtonVisible === null) {
-    return null; 
+    return null;
   }
 
   return (
@@ -420,28 +449,19 @@ const Calendar: React.FC = () => {
 
 
 
-        <div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
-            <div className="grid auto-rows-min gap-4 w-full">
-              {isButtonVisible && ( 
-              <div className="aspect-[18/1] rounded-xl bg-red-100 flex items-center px-4 w-full box-border overflow-hidden">
-                <TriangleAlert className="text-red-500" />
-                <p className="text-sm truncate ml-3">
-                A rendszer nincs beállítva. Kérjük, végezze el a szükséges konfigurációt!
-                </p>
-                 {/* <Button
-                onClick={handleButtonClick}
-                className="ml-auto"
-                variant="link"
-              >
-                Konfigurálás most
-              </Button> */}
-              <AppKonfig/>
-              </div>
-             )} 
-              {/* ide jönne a kód */}
 
+        <div>
+          {loading ? (
+            <div className="flex items-center justify-center min-h-screen">
+              <p className="text-lg font-semibold">Betöltés...</p>
             </div>
-          </div>
+          ) : (
+            <>
+              {!hasStudents && <AppKonfig />}
+              {/* <p>{hasStudents ? "Már vannak diákok az adatbázisban." : "Nincsenek diákok."}</p> */}
+            </>
+          )}
+        </div>
 
         <div className="calendar-container">
           <div className="calendar-header">
@@ -468,7 +488,7 @@ const Calendar: React.FC = () => {
             </div>
           </div>
 
-          <div className="calendar-grid">
+          {/* <div className="calendar-grid">
             {isMobileView ? (
               <div>
                 <div className="calendar-day">
@@ -646,7 +666,109 @@ const Calendar: React.FC = () => {
 
               </>
             )}
+          </div> */}
+          <div className="calendar-grid">
+            {isMobileView ? (
+              <div>
+                <div className="calendar-day">
+                  {format(currentDate, 'eeee d', { locale: hu })}
+                </div>
+                {isBreakDay(currentDate) || dailyLessons.length === 0 ? (
+                  <div className="no-lessons">Nincsenek tanórák ezen a napon</div>
+                ) : (
+                  lessonTimes.map((time, lessonIndex) => {
+                    const lessonsAtSameTime = dailyLessons.filter(
+                      (lesson) => lesson.start === time.start && lesson.end === time.end
+                    );
+
+                    if (lessonsAtSameTime.length === 0) return null;
+
+                    return (
+                      <div key={lessonIndex} className="calendar-cell">
+                        {lessonsAtSameTime.map((lesson, index) => (
+                          <Dialog key={`${index}`}>
+                            <DialogTrigger asChild>
+                              <div
+                                className={`lesson-card ${isToday(currentDate) && isCurrentLesson(lesson) ? 'current-lesson' : 'disabled-lesson'}`}
+                                onClick={() => {
+                                  openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
+                                  fetchStudents();
+                                  fetchSystemStatus();
+                                }}
+                              >
+                                <div className="lesson-index">{lessonIndex + 1}</div>
+                                <div className="lesson-name">{lesson.subject}</div>
+                                <div className="lesson-class">{lesson.class}</div>
+                              </div>
+                            </DialogTrigger>
+                          </Dialog>
+                        ))}
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+            ) : (
+              <>
+                <div className="calendar-day"></div>
+                {daysOfWeek.map((day, index) => (
+                  <div className={`calendar-day ${isToday(day) ? 'current-day' : ''}`} key={index}>
+                    {format(day, 'EEE d', { locale: hu })}
+                  </div>
+                ))}
+
+                {schedule.length === 0 ? (
+                    <div className="flex items-center justify-center h-96 text-xl font-semibold text-gray-500 col-span-full">
+                    Nincsenek tanórák ezen a héten
+                  </div>
+                ) : (
+                  lessonTimes.map((time, lessonIndex) => (
+                    <React.Fragment key={lessonIndex}>
+                      <div className="lesson-time">
+                        <span className="time-start">{time.start}</span>
+                        <span className="time-end">{time.end}</span>
+                      </div>
+                      {daysOfWeek.map((day, dayIndex) => {
+                        const dayName = getReplacedDayName(day);
+                        const dailyLessons = schedule.filter((lesson) => lesson.day === dayName);
+                        const lessonsAtSameTime = dailyLessons.filter(
+                          (l) => l.start === time.start && l.end === time.end,
+                        );
+
+                        if (lessonsAtSameTime.length === 0) {
+                          return <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell empty" />;
+                        }
+
+                        return (
+                          <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell">
+                            {lessonsAtSameTime.map((lesson, index) => (
+                              <Dialog key={`${lessonIndex}-${dayIndex}-${index}`}>
+                                <DialogTrigger asChild>
+                                  <div
+                                    className={`lesson-card ${isToday(day) && isCurrentLesson(lesson) ? 'current-lesson' : 'disabled-lesson'}`}
+                                    onClick={() => {
+                                      openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
+                                      fetchStudents();
+                                      fetchSystemStatus();
+                                    }}
+                                  >
+                                    <div className="lesson-index">{lessonIndex + 1}</div>
+                                    <div className="lesson-name">{lesson.subject}</div>
+                                    <div className="lesson-class">{lesson.class}</div>
+                                  </div>
+                                </DialogTrigger>
+                              </Dialog>
+                            ))}
+                          </div>
+                        );
+                      })}
+                    </React.Fragment>
+                  ))
+                )}
+              </>
+            )}
           </div>
+
         </div>
       </SidebarInset>
     </SidebarProvider>
