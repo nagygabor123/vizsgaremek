@@ -649,22 +649,21 @@ export default function Page() {
                               selected={selectedDate ? new Date(selectedDate) : undefined}
                               onSelect={(date) => {
                                 if (!date) return;
-                                const originalDate = format(date, "yyyy-MM-dd");
-                                const whichDayDate = new Date(originalDate);
-                                whichDayDate.setDate(whichDayDate.getDate() - 1);
-
-                                const replaceDayDate = new Date(originalDate);
-                                const replaceDay = replaceDayDate.toISOString().split('T')[0];
-                                const whichDay = whichDayDate.toISOString().split('T')[0];
-
+                              
+                                const originalDate = format(date, "yyyy-MM-dd"); 
+                                const whichDay = originalDate; // Nem vonunk le egy napot!
+                                // const replaceDayDate = parseDate(originalDate);
+                                // const replaceDay = replaceDayDate.toISOString().split("T")[0];
+                              
                                 setSelectedDate(originalDate);
                                 setNewNo({
                                   ...newNo,
-                                  which_day: whichDay,
-                                  replace_day: replaceDay,
+                                  which_day: whichDay, // Marad ugyanaz a nap
+                                  replace_day: whichDay,
                                   nev: whichDay
                                 });
                               }}
+                              
                               initialFocus
                             />
                           </DropdownMenuContent>
