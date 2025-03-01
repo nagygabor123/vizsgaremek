@@ -416,6 +416,9 @@ const Calendar: React.FC = () => {
     return null;
   }
 
+
+  
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -488,17 +491,24 @@ const Calendar: React.FC = () => {
             </div>
           </div>
 
-          {/* <div className="calendar-grid">
+           <div className="calendar-grid">
             {isMobileView ? (
               <div>
                 <div className="calendar-day">
                   {format(currentDate, 'eeee d', { locale: hu })}
                 </div>
-                {isBreakDay(currentDate) ? (
-                  <div className="no-lessons">Ma nincs tanítás!</div>
-                ) : dailyLessons.length === 0 ? (
-                  <div className="no-lessons">Ma nincs tanítás!</div>
+
+    {isBreakDay(currentDate) || dailyLessons.length === 0 ? (
+                  <div className="no-lessons">Nincsenek tanórák ezen a napon</div>
                 ) : (
+
+
+
+                // {isBreakDay(currentDate) ? (
+                //   <div className="no-lessons">Ma nincs tanítás!</div>
+                // ) : dailyLessons.length === 0 ? (
+                //   <div className="no-lessons">Ma nincs tanítás!</div>
+                // ) : (
                   lessonTimes.map((time, lessonIndex) => {
                     const lessonsAtSameTime = dailyLessons.filter(
                       (lesson) => lesson.start === time.start && lesson.end === time.end
@@ -666,108 +676,8 @@ const Calendar: React.FC = () => {
 
               </>
             )}
-          </div> */}
-          <div className="calendar-grid">
-            {isMobileView ? (
-              <div>
-                <div className="calendar-day">
-                  {format(currentDate, 'eeee d', { locale: hu })}
-                </div>
-                {isBreakDay(currentDate) || dailyLessons.length === 0 ? (
-                  <div className="no-lessons">Nincsenek tanórák ezen a napon</div>
-                ) : (
-                  lessonTimes.map((time, lessonIndex) => {
-                    const lessonsAtSameTime = dailyLessons.filter(
-                      (lesson) => lesson.start === time.start && lesson.end === time.end
-                    );
-
-                    if (lessonsAtSameTime.length === 0) return null;
-
-                    return (
-                      <div key={lessonIndex} className="calendar-cell">
-                        {lessonsAtSameTime.map((lesson, index) => (
-                          <Dialog key={`${index}`}>
-                            <DialogTrigger asChild>
-                              <div
-                                className={`lesson-card ${isToday(currentDate) && isCurrentLesson(lesson) ? 'current-lesson' : 'disabled-lesson'}`}
-                                onClick={() => {
-                                  openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
-                                  fetchStudents();
-                                  fetchSystemStatus();
-                                }}
-                              >
-                                <div className="lesson-index">{lessonIndex + 1}</div>
-                                <div className="lesson-name">{lesson.subject}</div>
-                                <div className="lesson-class">{lesson.class}</div>
-                              </div>
-                            </DialogTrigger>
-                          </Dialog>
-                        ))}
-                      </div>
-                    );
-                  })
-                )}
-              </div>
-            ) : (
-              <>
-                <div className="calendar-day"></div>
-                {daysOfWeek.map((day, index) => (
-                  <div className={`calendar-day ${isToday(day) ? 'current-day' : ''}`} key={index}>
-                    {format(day, 'EEE d', { locale: hu })}
-                  </div>
-                ))}
-
-                {schedule.length === 0 ? (
-                    <div className="flex items-center justify-center h-dvh text-base text-gray-500 col-span-full">
-                    Nincsenek tanórák ezen a héten
-                  </div>
-                ) : (
-                  lessonTimes.map((time, lessonIndex) => (
-                    <React.Fragment key={lessonIndex}>
-                      <div className="lesson-time">
-                        <span className="time-start">{time.start}</span>
-                        <span className="time-end">{time.end}</span>
-                      </div>
-                      {daysOfWeek.map((day, dayIndex) => {
-                        const dayName = getReplacedDayName(day);
-                        const dailyLessons = schedule.filter((lesson) => lesson.day === dayName);
-                        const lessonsAtSameTime = dailyLessons.filter(
-                          (l) => l.start === time.start && l.end === time.end,
-                        );
-
-                        if (lessonsAtSameTime.length === 0) {
-                          return <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell empty" />;
-                        }
-
-                        return (
-                          <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell">
-                            {lessonsAtSameTime.map((lesson, index) => (
-                              <Dialog key={`${lessonIndex}-${dayIndex}-${index}`}>
-                                <DialogTrigger asChild>
-                                  <div
-                                    className={`lesson-card ${isToday(day) && isCurrentLesson(lesson) ? 'current-lesson' : 'disabled-lesson'}`}
-                                    onClick={() => {
-                                      openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
-                                      fetchStudents();
-                                      fetchSystemStatus();
-                                    }}
-                                  >
-                                    <div className="lesson-index">{lessonIndex + 1}</div>
-                                    <div className="lesson-name">{lesson.subject}</div>
-                                    <div className="lesson-class">{lesson.class}</div>
-                                  </div>
-                                </DialogTrigger>
-                              </Dialog>
-                            ))}
-                          </div>
-                        );
-                      })}
-                    </React.Fragment>
-                  ))
-                )}
-              </>
-            )}
           </div>
+     
 
         </div>
       </SidebarInset>
