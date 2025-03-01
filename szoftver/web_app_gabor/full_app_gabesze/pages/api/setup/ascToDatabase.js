@@ -135,10 +135,6 @@ function extractGroups(parsedXml) {
   ];
 }
 
-
-
-
-
 function extractSchedule(parsedXml) {
   if (!parsedXml.timetable?.lessons?.[0]?.lesson || !parsedXml.timetable?.cards?.[0]?.card) return [];
 
@@ -218,7 +214,7 @@ function extractSchedule(parsedXml) {
     // Csoport nevének megkeresése (`groups` táblából)
     const groupIds = lesson.groupids?.split(",")
       .map(id => groups[id.trim()] || id.trim())
-      .join(", ") || "Nincs csoport";
+      .join(",") || "Nincs csoport";
 
     return activeDays.map(day => ({
       day,

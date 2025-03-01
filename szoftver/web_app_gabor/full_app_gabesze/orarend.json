@@ -2277,7 +2277,7 @@
     "end_time": "12:40",
     "group_name": "Forgácsoló megmunkálások1",
     "teacher": "Törköly Csaba György",
-    "group": "11.C-GY1, 11.C-GY2"
+    "group": "11.C-GY1,11.C-GY2"
   },
   {
     "day": "Szerda",
@@ -2685,7 +2685,7 @@
     "end_time": "12:40",
     "group_name": "Automatizálás",
     "teacher": "Preisz Csaba",
-    "group": "12.A-GY2, 12.A-H"
+    "group": "12.A-GY2,12.A-H"
   },
   {
     "day": "Hétfő",
@@ -2693,7 +2693,7 @@
     "end_time": "13:40",
     "group_name": "Automatizálás",
     "teacher": "Preisz Csaba",
-    "group": "12.A-GY2, 12.A-H"
+    "group": "12.A-GY2,12.A-H"
   },
   {
     "day": "Szerda",
@@ -2821,7 +2821,7 @@
     "end_time": "13:40",
     "group_name": "Munkavállalói idegen nyelv",
     "teacher": "Palásti Ádám",
-    "group": "13.A-BN, 13.A-N"
+    "group": "13.A-BN,13.A-N"
   },
   {
     "day": "Péntek",
@@ -2829,7 +2829,7 @@
     "end_time": "14:30",
     "group_name": "Munkavállalói idegen nyelv",
     "teacher": "Palásti Ádám",
-    "group": "13.A-BN, 13.A-N"
+    "group": "13.A-BN,13.A-N"
   },
   {
     "day": "Péntek",
@@ -4437,7 +4437,7 @@
     "end_time": "8:00",
     "group_name": "Matematika",
     "teacher": "Csenkiné Zatykó Helga",
-    "group": "10.C-A1, 10.C-A2"
+    "group": "10.C-A1,10.C-A2"
   },
   {
     "day": "Péntek",
@@ -4445,7 +4445,7 @@
     "end_time": "11:40",
     "group_name": "Matematika",
     "teacher": "Csenkiné Zatykó Helga",
-    "group": "10.C-A1, 10.C-A2"
+    "group": "10.C-A1,10.C-A2"
   },
   {
     "day": "Kedd",
@@ -4453,7 +4453,7 @@
     "end_time": "8:00",
     "group_name": "Matematika",
     "teacher": "Csenkiné Zatykó Helga",
-    "group": "10.C-A1, 10.C-A2"
+    "group": "10.C-A1,10.C-A2"
   },
   {
     "day": "Csütörtök",
@@ -4461,7 +4461,7 @@
     "end_time": "12:40",
     "group_name": "Matematika",
     "teacher": "Csenkiné Zatykó Helga",
-    "group": "10.C-A1, 10.C-A2"
+    "group": "10.C-A1,10.C-A2"
   },
   {
     "day": "Csütörtök",
@@ -4621,7 +4621,7 @@
     "end_time": "11:40",
     "group_name": "Gépészeti alapismeretek1",
     "teacher": "Áron-Görög Szilvia",
-    "group": "10.C-A1, 10.C-A2"
+    "group": "10.C-A1,10.C-A2"
   },
   {
     "day": "Hétfő",
@@ -5621,7 +5621,7 @@
     "end_time": "13:40",
     "group_name": "Minőség-ellenőrzés1",
     "teacher": "Süveges Zsolt Imre",
-    "group": "12.A-GY1, 12.A-GY2"
+    "group": "12.A-GY1,12.A-GY2"
   },
   {
     "day": "Hétfő",
@@ -5901,7 +5901,7 @@
     "end_time": "9:50",
     "group_name": "Német nyelv",
     "teacher": "Palásti Ádám",
-    "group": "11.A-B, 11.I-N"
+    "group": "11.A-B,11.I-N"
   },
   {
     "day": "Hétfő",
@@ -5909,7 +5909,7 @@
     "end_time": "12:40",
     "group_name": "Német nyelv",
     "teacher": "Palásti Ádám",
-    "group": "11.A-B, 11.I-N"
+    "group": "11.A-B,11.I-N"
   },
   {
     "day": "Csütörtök",
@@ -5917,7 +5917,7 @@
     "end_time": "14:30",
     "group_name": "Német nyelv",
     "teacher": "Palásti Ádám",
-    "group": "11.A-B, 11.I-N"
+    "group": "11.A-B,11.I-N"
   },
   {
     "day": "Csütörtök",
@@ -6445,7 +6445,7 @@
     "end_time": "12:40",
     "group_name": "Testnevelés",
     "teacher": "Preiszné Bene Mónika Melinda",
-    "group": "13.A-BN, 13.A-BA, 13.I"
+    "group": "13.A-BN,13.A-BA,13.I"
   },
   {
     "day": "Szerda",
@@ -6453,7 +6453,7 @@
     "end_time": "10:45",
     "group_name": "Testnevelés",
     "teacher": "Preiszné Bene Mónika Melinda",
-    "group": "13.A-BN, 13.A-BA, 13.I"
+    "group": "13.A-BN,13.A-BA,13.I"
   },
   {
     "day": "Csütörtök",
@@ -6461,7 +6461,7 @@
     "end_time": "11:40",
     "group_name": "Testnevelés",
     "teacher": "Preiszné Bene Mónika Melinda",
-    "group": "13.A-BN, 13.A-BA, 13.I"
+    "group": "13.A-BN,13.A-BA,13.I"
   },
   {
     "day": "Csütörtök",
@@ -6909,7 +6909,7 @@
     "end_time": "13:40",
     "group_name": "Frontend programozás és tesztelés",
     "teacher": "Kiss Gábor István",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Kedd",
@@ -6917,7 +6917,7 @@
     "end_time": "14:30",
     "group_name": "Frontend programozás és tesztelés",
     "teacher": "Kiss Gábor István",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Kedd",
@@ -6925,7 +6925,7 @@
     "end_time": "15:20",
     "group_name": "Frontend programozás és tesztelés",
     "teacher": "Kiss Gábor István",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Hétfő",
@@ -6933,7 +6933,7 @@
     "end_time": "8:00",
     "group_name": "Frontend programozás és tesztelés",
     "teacher": "Kiss Gábor István",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Hétfő",
@@ -6941,7 +6941,7 @@
     "end_time": "8:55",
     "group_name": "Frontend programozás és tesztelés",
     "teacher": "Kiss Gábor István",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Hétfő",
@@ -6949,7 +6949,7 @@
     "end_time": "9:50",
     "group_name": "Frontend programozás és tesztelés",
     "teacher": "Kiss Gábor István",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Hétfő",
@@ -6957,7 +6957,7 @@
     "end_time": "10:45",
     "group_name": "Frontend programozás és tesztelés",
     "teacher": "Kiss Gábor István",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Péntek",
@@ -6965,7 +6965,7 @@
     "end_time": "8:00",
     "group_name": "Backend programozás és tesztelés",
     "teacher": "Kiss Gábor István",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Péntek",
@@ -6973,7 +6973,7 @@
     "end_time": "8:55",
     "group_name": "Backend programozás és tesztelés",
     "teacher": "Kiss Gábor István",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Péntek",
@@ -6981,7 +6981,7 @@
     "end_time": "9:50",
     "group_name": "Backend programozás és tesztelés",
     "teacher": "Kiss Gábor István",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Péntek",
@@ -6989,7 +6989,7 @@
     "end_time": "10:45",
     "group_name": "Backend programozás és tesztelés",
     "teacher": "Kiss Gábor István",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Péntek",
@@ -6997,7 +6997,7 @@
     "end_time": "11:40",
     "group_name": "Backend programozás és tesztelés",
     "teacher": "Kiss Gábor István",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Péntek",
@@ -7005,7 +7005,7 @@
     "end_time": "12:40",
     "group_name": "Backend programozás és tesztelés",
     "teacher": "Kiss Gábor István",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Kedd",
@@ -7013,7 +7013,7 @@
     "end_time": "9:50",
     "group_name": "Adatbázis-kezelés II.",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Kedd",
@@ -7021,7 +7021,7 @@
     "end_time": "10:45",
     "group_name": "Adatbázis-kezelés II.",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Hétfő",
@@ -7029,7 +7029,7 @@
     "end_time": "15:20",
     "group_name": "Matematika fakultáció",
     "teacher": "Csenkiné Zatykó Helga",
-    "group": "12.A-mf, 12.D-mf, 12.I-mf"
+    "group": "12.A-mf,12.D-mf,12.I-mf"
   },
   {
     "day": "Kedd",
@@ -7037,7 +7037,7 @@
     "end_time": "15:20",
     "group_name": "Matematika fakultáció",
     "teacher": "Csenkiné Zatykó Helga",
-    "group": "12.A-mf, 12.D-mf, 12.I-mf"
+    "group": "12.A-mf,12.D-mf,12.I-mf"
   },
   {
     "day": "Csütörtök",
@@ -7045,7 +7045,7 @@
     "end_time": "8:00",
     "group_name": "Szakmai angol",
     "teacher": "Vas Viola",
-    "group": "12.D-H1, 12.I-H1"
+    "group": "12.D-H1,12.I-H1"
   },
   {
     "day": "Szerda",
@@ -7053,7 +7053,7 @@
     "end_time": "13:40",
     "group_name": "Szakmai angol",
     "teacher": "Vas Viola",
-    "group": "12.D-H1, 12.I-H1"
+    "group": "12.D-H1,12.I-H1"
   },
   {
     "day": "Csütörtök",
@@ -7061,7 +7061,7 @@
     "end_time": "14:30",
     "group_name": "Szakmai angol",
     "teacher": "Michnáné Szabó Lilian",
-    "group": "12.D-H2, 12.I-H2"
+    "group": "12.D-H2,12.I-H2"
   },
   {
     "day": "Szerda",
@@ -7069,7 +7069,7 @@
     "end_time": "11:40",
     "group_name": "Szakmai angol",
     "teacher": "Michnáné Szabó Lilian",
-    "group": "12.D-H2, 12.I-H2"
+    "group": "12.D-H2,12.I-H2"
   },
   {
     "day": "Szerda",
@@ -7077,7 +7077,7 @@
     "end_time": "8:00",
     "group_name": "Hálózatok I.",
     "teacher": "Szijártó Sándor",
-    "group": "12.D-H1, 12.I-H1"
+    "group": "12.D-H1,12.I-H1"
   },
   {
     "day": "Szerda",
@@ -7085,7 +7085,7 @@
     "end_time": "8:55",
     "group_name": "Hálózatok I.",
     "teacher": "Szijártó Sándor",
-    "group": "12.D-H1, 12.I-H1"
+    "group": "12.D-H1,12.I-H1"
   },
   {
     "day": "Szerda",
@@ -7093,7 +7093,7 @@
     "end_time": "9:50",
     "group_name": "Hálózatok I.",
     "teacher": "Szijártó Sándor",
-    "group": "12.D-H1, 12.I-H1"
+    "group": "12.D-H1,12.I-H1"
   },
   {
     "day": "Csütörtök",
@@ -7101,7 +7101,7 @@
     "end_time": "10:45",
     "group_name": "Hálózatok I.",
     "teacher": "Szijártó Sándor",
-    "group": "12.D-H1, 12.I-H1"
+    "group": "12.D-H1,12.I-H1"
   },
   {
     "day": "Csütörtök",
@@ -7109,7 +7109,7 @@
     "end_time": "11:40",
     "group_name": "Hálózatok I.",
     "teacher": "Szijártó Sándor",
-    "group": "12.D-H1, 12.I-H1"
+    "group": "12.D-H1,12.I-H1"
   },
   {
     "day": "Csütörtök",
@@ -7117,7 +7117,7 @@
     "end_time": "12:40",
     "group_name": "Hálózatok I.",
     "teacher": "Szijártó Sándor",
-    "group": "12.D-H1, 12.I-H1"
+    "group": "12.D-H1,12.I-H1"
   },
   {
     "day": "Szerda",
@@ -7125,7 +7125,7 @@
     "end_time": "10:45",
     "group_name": "Hálózatok I.",
     "teacher": "Dongó Péter",
-    "group": "12.D-H3, 12.I-H3"
+    "group": "12.D-H3,12.I-H3"
   },
   {
     "day": "Szerda",
@@ -7133,7 +7133,7 @@
     "end_time": "11:40",
     "group_name": "Hálózatok I.",
     "teacher": "Dongó Péter",
-    "group": "12.D-H3, 12.I-H3"
+    "group": "12.D-H3,12.I-H3"
   },
   {
     "day": "Szerda",
@@ -7141,7 +7141,7 @@
     "end_time": "12:40",
     "group_name": "Hálózatok I.",
     "teacher": "Dongó Péter",
-    "group": "12.D-H3, 12.I-H3"
+    "group": "12.D-H3,12.I-H3"
   },
   {
     "day": "Csütörtök",
@@ -7149,7 +7149,7 @@
     "end_time": "8:00",
     "group_name": "Hálózatok I.",
     "teacher": "Dongó Péter",
-    "group": "12.D-H3, 12.I-H3"
+    "group": "12.D-H3,12.I-H3"
   },
   {
     "day": "Csütörtök",
@@ -7157,7 +7157,7 @@
     "end_time": "8:55",
     "group_name": "Hálózatok I.",
     "teacher": "Dongó Péter",
-    "group": "12.D-H3, 12.I-H3"
+    "group": "12.D-H3,12.I-H3"
   },
   {
     "day": "Csütörtök",
@@ -7165,7 +7165,7 @@
     "end_time": "9:50",
     "group_name": "Hálózatok I.",
     "teacher": "Dongó Péter",
-    "group": "12.D-H3, 12.I-H3"
+    "group": "12.D-H3,12.I-H3"
   },
   {
     "day": "Szerda",
@@ -7173,7 +7173,7 @@
     "end_time": "8:00",
     "group_name": "Hálózatok I.",
     "teacher": "Csuka Tibor",
-    "group": "12.D-H2, 12.I-H2"
+    "group": "12.D-H2,12.I-H2"
   },
   {
     "day": "Szerda",
@@ -7181,7 +7181,7 @@
     "end_time": "8:55",
     "group_name": "Hálózatok I.",
     "teacher": "Csuka Tibor",
-    "group": "12.D-H2, 12.I-H2"
+    "group": "12.D-H2,12.I-H2"
   },
   {
     "day": "Szerda",
@@ -7189,7 +7189,7 @@
     "end_time": "9:50",
     "group_name": "Hálózatok I.",
     "teacher": "Csuka Tibor",
-    "group": "12.D-H2, 12.I-H2"
+    "group": "12.D-H2,12.I-H2"
   },
   {
     "day": "Csütörtök",
@@ -7197,7 +7197,7 @@
     "end_time": "8:00",
     "group_name": "Hálózatok I.",
     "teacher": "Csuka Tibor",
-    "group": "12.D-H2, 12.I-H2"
+    "group": "12.D-H2,12.I-H2"
   },
   {
     "day": "Csütörtök",
@@ -7205,7 +7205,7 @@
     "end_time": "8:55",
     "group_name": "Hálózatok I.",
     "teacher": "Csuka Tibor",
-    "group": "12.D-H2, 12.I-H2"
+    "group": "12.D-H2,12.I-H2"
   },
   {
     "day": "Csütörtök",
@@ -7213,7 +7213,7 @@
     "end_time": "9:50",
     "group_name": "Hálózatok I.",
     "teacher": "Csuka Tibor",
-    "group": "12.D-H2, 12.I-H2"
+    "group": "12.D-H2,12.I-H2"
   },
   {
     "day": "Szerda",
@@ -7221,7 +7221,7 @@
     "end_time": "12:40",
     "group_name": "IKT projektmunka II.",
     "teacher": "Szijártó Sándor",
-    "group": "12.D-H1, 12.I-H1"
+    "group": "12.D-H1,12.I-H1"
   },
   {
     "day": "Csütörtök",
@@ -7229,7 +7229,7 @@
     "end_time": "13:40",
     "group_name": "IKT projektmunka II.",
     "teacher": "Szijártó Sándor",
-    "group": "12.D-H1, 12.I-H1"
+    "group": "12.D-H1,12.I-H1"
   },
   {
     "day": "Csütörtök",
@@ -7237,7 +7237,7 @@
     "end_time": "13:40",
     "group_name": "IKT projektmunka II.",
     "teacher": "Csuka Tibor",
-    "group": "12.D-H2, 12.I-H2"
+    "group": "12.D-H2,12.I-H2"
   },
   {
     "day": "Csütörtök",
@@ -7245,7 +7245,7 @@
     "end_time": "12:40",
     "group_name": "IKT projektmunka II.",
     "teacher": "Csuka Tibor",
-    "group": "12.D-H2, 12.I-H2"
+    "group": "12.D-H2,12.I-H2"
   },
   {
     "day": "Szerda",
@@ -7253,7 +7253,7 @@
     "end_time": "13:40",
     "group_name": "IKT projektmunka II.",
     "teacher": "Dongó Péter",
-    "group": "12.D-H3, 12.I-H3"
+    "group": "12.D-H3,12.I-H3"
   },
   {
     "day": "Szerda",
@@ -7261,7 +7261,7 @@
     "end_time": "9:50",
     "group_name": "IKT projektmunka II.",
     "teacher": "Dongó Péter",
-    "group": "12.D-H3, 12.I-H3"
+    "group": "12.D-H3,12.I-H3"
   },
   {
     "day": "Csütörtök",
@@ -7269,7 +7269,7 @@
     "end_time": "11:40",
     "group_name": "IKT projektmunka II.",
     "teacher": "Kiss Gábor István",
-    "group": "12.D-S1, 12.I-S1"
+    "group": "12.D-S1,12.I-S1"
   },
   {
     "day": "Csütörtök",
@@ -7277,7 +7277,7 @@
     "end_time": "12:40",
     "group_name": "IKT projektmunka II.",
     "teacher": "Kiss Gábor István",
-    "group": "12.D-S1, 12.I-S1"
+    "group": "12.D-S1,12.I-S1"
   },
   {
     "day": "Csütörtök",
@@ -7285,7 +7285,7 @@
     "end_time": "13:40",
     "group_name": "IKT projektmunka II.",
     "teacher": "Kiss Gábor István",
-    "group": "12.D-S1, 12.I-S1"
+    "group": "12.D-S1,12.I-S1"
   },
   {
     "day": "Csütörtök",
@@ -7293,7 +7293,7 @@
     "end_time": "12:40",
     "group_name": "IKT projektmunka II.",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "12.D-S2, 12.I-S2"
+    "group": "12.D-S2,12.I-S2"
   },
   {
     "day": "Csütörtök",
@@ -7301,7 +7301,7 @@
     "end_time": "13:40",
     "group_name": "IKT projektmunka II.",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "12.D-S2, 12.I-S2"
+    "group": "12.D-S2,12.I-S2"
   },
   {
     "day": "Csütörtök",
@@ -7309,7 +7309,7 @@
     "end_time": "14:30",
     "group_name": "IKT projektmunka II.",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "12.D-S2, 12.I-S2"
+    "group": "12.D-S2,12.I-S2"
   },
   {
     "day": "Csütörtök",
@@ -7317,7 +7317,7 @@
     "end_time": "8:55",
     "group_name": "Asztali alkalmazások fejlesztése",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "12.D-S1, 12.I-S1"
+    "group": "12.D-S1,12.I-S1"
   },
   {
     "day": "Csütörtök",
@@ -7325,7 +7325,7 @@
     "end_time": "9:50",
     "group_name": "Asztali alkalmazások fejlesztése",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "12.D-S1, 12.I-S1"
+    "group": "12.D-S1,12.I-S1"
   },
   {
     "day": "Csütörtök",
@@ -7333,7 +7333,7 @@
     "end_time": "10:45",
     "group_name": "Asztali alkalmazások fejlesztése",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "12.D-S1, 12.I-S1"
+    "group": "12.D-S1,12.I-S1"
   },
   {
     "day": "Szerda",
@@ -7341,7 +7341,7 @@
     "end_time": "10:45",
     "group_name": "Asztali alkalmazások fejlesztése",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "12.D-S2, 12.I-S2"
+    "group": "12.D-S2,12.I-S2"
   },
   {
     "day": "Szerda",
@@ -7349,7 +7349,7 @@
     "end_time": "11:40",
     "group_name": "Asztali alkalmazások fejlesztése",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "12.D-S2, 12.I-S2"
+    "group": "12.D-S2,12.I-S2"
   },
   {
     "day": "Szerda",
@@ -7357,7 +7357,7 @@
     "end_time": "12:40",
     "group_name": "Asztali alkalmazások fejlesztése",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "12.D-S2, 12.I-S2"
+    "group": "12.D-S2,12.I-S2"
   },
   {
     "day": "Szerda",
@@ -7365,7 +7365,7 @@
     "end_time": "8:00",
     "group_name": "Webprogramozás",
     "teacher": "Kiss Gábor István",
-    "group": "12.D-S1, 12.I-S1"
+    "group": "12.D-S1,12.I-S1"
   },
   {
     "day": "Szerda",
@@ -7373,7 +7373,7 @@
     "end_time": "8:55",
     "group_name": "Webprogramozás",
     "teacher": "Kiss Gábor István",
-    "group": "12.D-S1, 12.I-S1"
+    "group": "12.D-S1,12.I-S1"
   },
   {
     "day": "Szerda",
@@ -7381,7 +7381,7 @@
     "end_time": "9:50",
     "group_name": "Webprogramozás",
     "teacher": "Kiss Gábor István",
-    "group": "12.D-S1, 12.I-S1"
+    "group": "12.D-S1,12.I-S1"
   },
   {
     "day": "Csütörtök",
@@ -7389,7 +7389,7 @@
     "end_time": "8:00",
     "group_name": "Webprogramozás",
     "teacher": "Kiss Gábor István",
-    "group": "12.D-S2, 12.I-S2"
+    "group": "12.D-S2,12.I-S2"
   },
   {
     "day": "Csütörtök",
@@ -7397,7 +7397,7 @@
     "end_time": "8:55",
     "group_name": "Webprogramozás",
     "teacher": "Kiss Gábor István",
-    "group": "12.D-S2, 12.I-S2"
+    "group": "12.D-S2,12.I-S2"
   },
   {
     "day": "Csütörtök",
@@ -7405,7 +7405,7 @@
     "end_time": "9:50",
     "group_name": "Webprogramozás",
     "teacher": "Kiss Gábor István",
-    "group": "12.D-S2, 12.I-S2"
+    "group": "12.D-S2,12.I-S2"
   },
   {
     "day": "Csütörtök",
@@ -7413,7 +7413,7 @@
     "end_time": "10:45",
     "group_name": "Szakmai angol",
     "teacher": "Patak Judit",
-    "group": "12.D-S2, 12.I-S2"
+    "group": "12.D-S2,12.I-S2"
   },
   {
     "day": "Csütörtök",
@@ -7421,7 +7421,7 @@
     "end_time": "11:40",
     "group_name": "Szakmai angol",
     "teacher": "Patak Judit",
-    "group": "12.D-S2, 12.I-S2"
+    "group": "12.D-S2,12.I-S2"
   },
   {
     "day": "Szerda",
@@ -7429,7 +7429,7 @@
     "end_time": "10:45",
     "group_name": "Szoftvertesztelés",
     "teacher": "Juhász Szabolcs",
-    "group": "12.D-S1, 12.I-S1"
+    "group": "12.D-S1,12.I-S1"
   },
   {
     "day": "Szerda",
@@ -7437,7 +7437,7 @@
     "end_time": "11:40",
     "group_name": "Szoftvertesztelés",
     "teacher": "Juhász Szabolcs",
-    "group": "12.D-S1, 12.I-S1"
+    "group": "12.D-S1,12.I-S1"
   },
   {
     "day": "Szerda",
@@ -7445,7 +7445,7 @@
     "end_time": "12:40",
     "group_name": "Szoftvertesztelés",
     "teacher": "Juhász Szabolcs",
-    "group": "12.D-S1, 12.I-S1"
+    "group": "12.D-S1,12.I-S1"
   },
   {
     "day": "Szerda",
@@ -7453,7 +7453,7 @@
     "end_time": "8:00",
     "group_name": "Szoftvertesztelés",
     "teacher": "Juhász Szabolcs",
-    "group": "12.D-S2, 12.I-S2"
+    "group": "12.D-S2,12.I-S2"
   },
   {
     "day": "Szerda",
@@ -7461,7 +7461,7 @@
     "end_time": "8:55",
     "group_name": "Szoftvertesztelés",
     "teacher": "Juhász Szabolcs",
-    "group": "12.D-S2, 12.I-S2"
+    "group": "12.D-S2,12.I-S2"
   },
   {
     "day": "Szerda",
@@ -7469,7 +7469,7 @@
     "end_time": "9:50",
     "group_name": "Szoftvertesztelés",
     "teacher": "Juhász Szabolcs",
-    "group": "12.D-S2, 12.I-S2"
+    "group": "12.D-S2,12.I-S2"
   },
   {
     "day": "Kedd",
@@ -7477,7 +7477,7 @@
     "end_time": "11:40",
     "group_name": "Asztali és mobil alkalmazások fejlesztése",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Kedd",
@@ -7485,7 +7485,7 @@
     "end_time": "12:40",
     "group_name": "Asztali és mobil alkalmazások fejlesztése",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Hétfő",
@@ -7493,7 +7493,7 @@
     "end_time": "11:40",
     "group_name": "Asztali és mobil alkalmazások fejlesztése",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Hétfő",
@@ -7501,7 +7501,7 @@
     "end_time": "12:40",
     "group_name": "Asztali és mobil alkalmazások fejlesztése",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Hétfő",
@@ -7509,7 +7509,7 @@
     "end_time": "13:40",
     "group_name": "Asztali és mobil alkalmazások fejlesztése",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Hétfő",
@@ -7517,7 +7517,7 @@
     "end_time": "14:30",
     "group_name": "Asztali és mobil alkalmazások fejlesztése",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Hétfő",
@@ -7525,7 +7525,7 @@
     "end_time": "15:20",
     "group_name": "Asztali és mobil alkalmazások fejlesztése",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "13.D-S, 13.I-S"
+    "group": "13.D-S,13.I-S"
   },
   {
     "day": "Kedd",
@@ -7533,7 +7533,7 @@
     "end_time": "8:00",
     "group_name": "Hálózatok I.",
     "teacher": "Szijártó Sándor",
-    "group": "11.D-H1, 11.I-H1"
+    "group": "11.D-H1,11.I-H1"
   },
   {
     "day": "Kedd",
@@ -7541,7 +7541,7 @@
     "end_time": "8:55",
     "group_name": "Hálózatok I.",
     "teacher": "Szijártó Sándor",
-    "group": "11.D-H1, 11.I-H1"
+    "group": "11.D-H1,11.I-H1"
   },
   {
     "day": "Kedd",
@@ -7549,7 +7549,7 @@
     "end_time": "9:50",
     "group_name": "Hálózatok I.",
     "teacher": "Szijártó Sándor",
-    "group": "11.D-H1, 11.I-H1"
+    "group": "11.D-H1,11.I-H1"
   },
   {
     "day": "Kedd",
@@ -7557,7 +7557,7 @@
     "end_time": "10:45",
     "group_name": "Hálózatok I.",
     "teacher": "Szijártó Sándor",
-    "group": "11.D-H1, 11.I-H1"
+    "group": "11.D-H1,11.I-H1"
   },
   {
     "day": "Péntek",
@@ -7565,7 +7565,7 @@
     "end_time": "8:00",
     "group_name": "Hálózatok I.",
     "teacher": "Szijártó Sándor",
-    "group": "11.D-H1, 11.I-H1"
+    "group": "11.D-H1,11.I-H1"
   },
   {
     "day": "Péntek",
@@ -7573,7 +7573,7 @@
     "end_time": "8:55",
     "group_name": "Hálózatok I.",
     "teacher": "Szijártó Sándor",
-    "group": "11.D-H1, 11.I-H1"
+    "group": "11.D-H1,11.I-H1"
   },
   {
     "day": "Péntek",
@@ -7581,7 +7581,7 @@
     "end_time": "9:50",
     "group_name": "Hálózatok I.",
     "teacher": "Szijártó Sándor",
-    "group": "11.D-H1, 11.I-H1"
+    "group": "11.D-H1,11.I-H1"
   },
   {
     "day": "Péntek",
@@ -7589,7 +7589,7 @@
     "end_time": "10:45",
     "group_name": "Hálózatok I.",
     "teacher": "Szijártó Sándor",
-    "group": "11.D-H1, 11.I-H1"
+    "group": "11.D-H1,11.I-H1"
   },
   {
     "day": "Kedd",
@@ -7597,7 +7597,7 @@
     "end_time": "11:40",
     "group_name": "IKT projektmunka II.",
     "teacher": "Szijártó Sándor",
-    "group": "11.D-H1, 11.I-H1"
+    "group": "11.D-H1,11.I-H1"
   },
   {
     "day": "Péntek",
@@ -7605,7 +7605,7 @@
     "end_time": "14:30",
     "group_name": "IKT projektmunka II.",
     "teacher": "Szijártó Sándor",
-    "group": "11.D-H1, 11.I-H1"
+    "group": "11.D-H1,11.I-H1"
   },
   {
     "day": "Péntek",
@@ -7613,7 +7613,7 @@
     "end_time": "12:40",
     "group_name": "Adatbázis-kezelés I.",
     "teacher": "Juhász Szabolcs",
-    "group": "11.D-H1, 11.I-H1"
+    "group": "11.D-H1,11.I-H1"
   },
   {
     "day": "Péntek",
@@ -7621,7 +7621,7 @@
     "end_time": "13:40",
     "group_name": "Adatbázis-kezelés I.",
     "teacher": "Juhász Szabolcs",
-    "group": "11.D-H1, 11.I-H1"
+    "group": "11.D-H1,11.I-H1"
   },
   {
     "day": "Kedd",
@@ -7629,7 +7629,7 @@
     "end_time": "12:40",
     "group_name": "Szakmai angol",
     "teacher": "Vas Viola",
-    "group": "11.D-H1, 11.I-H1"
+    "group": "11.D-H1,11.I-H1"
   },
   {
     "day": "Péntek",
@@ -7637,7 +7637,7 @@
     "end_time": "11:40",
     "group_name": "Szakmai angol",
     "teacher": "Vas Viola",
-    "group": "11.D-H1, 11.I-H1"
+    "group": "11.D-H1,11.I-H1"
   },
   {
     "day": "Kedd",
@@ -7845,7 +7845,7 @@
     "end_time": "8:55",
     "group_name": "Szerverek",
     "teacher": "Kovács Dénes",
-    "group": "12.D-H1, 12.I-H1"
+    "group": "12.D-H1,12.I-H1"
   },
   {
     "day": "Csütörtök",
@@ -7853,7 +7853,7 @@
     "end_time": "9:50",
     "group_name": "Szerverek",
     "teacher": "Kovács Dénes",
-    "group": "12.D-H1, 12.I-H1"
+    "group": "12.D-H1,12.I-H1"
   },
   {
     "day": "Szerda",
@@ -7861,7 +7861,7 @@
     "end_time": "10:45",
     "group_name": "Szerverek",
     "teacher": "Kovács Dénes",
-    "group": "12.D-H1, 12.I-H1"
+    "group": "12.D-H1,12.I-H1"
   },
   {
     "day": "Szerda",
@@ -7869,7 +7869,7 @@
     "end_time": "11:40",
     "group_name": "Szerverek",
     "teacher": "Kovács Dénes",
-    "group": "12.D-H1, 12.I-H1"
+    "group": "12.D-H1,12.I-H1"
   },
   {
     "day": "Csütörtök",
@@ -7877,7 +7877,7 @@
     "end_time": "10:45",
     "group_name": "Szerverek",
     "teacher": "Kovács Dénes",
-    "group": "12.D-H2, 12.I-H2"
+    "group": "12.D-H2,12.I-H2"
   },
   {
     "day": "Csütörtök",
@@ -7885,7 +7885,7 @@
     "end_time": "11:40",
     "group_name": "Szerverek",
     "teacher": "Kovács Dénes",
-    "group": "12.D-H2, 12.I-H2"
+    "group": "12.D-H2,12.I-H2"
   },
   {
     "day": "Szerda",
@@ -7893,7 +7893,7 @@
     "end_time": "12:40",
     "group_name": "Szerverek",
     "teacher": "Kovács Dénes",
-    "group": "12.D-H2, 12.I-H2"
+    "group": "12.D-H2,12.I-H2"
   },
   {
     "day": "Szerda",
@@ -7901,7 +7901,7 @@
     "end_time": "13:40",
     "group_name": "Szerverek",
     "teacher": "Kovács Dénes",
-    "group": "12.D-H2, 12.I-H2"
+    "group": "12.D-H2,12.I-H2"
   },
   {
     "day": "Csütörtök",
@@ -7909,7 +7909,7 @@
     "end_time": "12:40",
     "group_name": "Szerverek",
     "teacher": "Kovács Dénes",
-    "group": "12.D-H3, 12.I-H3"
+    "group": "12.D-H3,12.I-H3"
   },
   {
     "day": "Csütörtök",
@@ -7917,7 +7917,7 @@
     "end_time": "13:40",
     "group_name": "Szerverek",
     "teacher": "Kovács Dénes",
-    "group": "12.D-H3, 12.I-H3"
+    "group": "12.D-H3,12.I-H3"
   },
   {
     "day": "Szerda",
@@ -7925,7 +7925,7 @@
     "end_time": "8:00",
     "group_name": "Szerverek",
     "teacher": "Kovács Dénes",
-    "group": "12.D-H3, 12.I-H3"
+    "group": "12.D-H3,12.I-H3"
   },
   {
     "day": "Szerda",
@@ -7933,7 +7933,7 @@
     "end_time": "8:55",
     "group_name": "Szerverek",
     "teacher": "Kovács Dénes",
-    "group": "12.D-H3, 12.I-H3"
+    "group": "12.D-H3,12.I-H3"
   },
   {
     "day": "Kedd",
@@ -8077,7 +8077,7 @@
     "end_time": "12:40",
     "group_name": "Forgácsoló megmunkálások2",
     "teacher": "Tóth Tamás",
-    "group": "11.A-GY2, 11.C-GY2"
+    "group": "11.A-GY2,11.C-GY2"
   },
   {
     "day": "Szerda",
@@ -8325,7 +8325,7 @@
     "end_time": "13:40",
     "group_name": "Gépészeti alapismeretek4",
     "teacher": "Sárkány Tamás, Buri Gábor Sándor",
-    "group": "9.A-GY1, 9.A-GY2"
+    "group": "9.A-GY1,9.A-GY2"
   },
   {
     "day": "Hétfő",
@@ -8333,7 +8333,7 @@
     "end_time": "14:30",
     "group_name": "Gépészeti alapismeretek4",
     "teacher": "Sárkány Tamás, Buri Gábor Sándor",
-    "group": "9.A-GY1, 9.A-GY2"
+    "group": "9.A-GY1,9.A-GY2"
   },
   {
     "day": "Csütörtök",
@@ -8341,7 +8341,7 @@
     "end_time": "9:50",
     "group_name": "Gépészeti alapismeretek4",
     "teacher": "Sárkány Tamás, Buri Gábor Sándor",
-    "group": "9.C-GY1, 9.C-GY2"
+    "group": "9.C-GY1,9.C-GY2"
   },
   {
     "day": "Csütörtök",
@@ -8349,7 +8349,7 @@
     "end_time": "10:45",
     "group_name": "Gépészeti alapismeretek4",
     "teacher": "Sárkány Tamás, Buri Gábor Sándor",
-    "group": "9.C-GY1, 9.C-GY2"
+    "group": "9.C-GY1,9.C-GY2"
   },
   {
     "day": "Kedd",
@@ -8381,7 +8381,7 @@
     "end_time": "8:55",
     "group_name": "Forgácsoló megmunkálások2",
     "teacher": "Sárkány Tamás, Tóth Tamás",
-    "group": "11.B-GY1, 11.B-GY2"
+    "group": "11.B-GY1,11.B-GY2"
   },
   {
     "day": "Péntek",
@@ -8389,7 +8389,7 @@
     "end_time": "9:50",
     "group_name": "Forgácsoló megmunkálások2",
     "teacher": "Sárkány Tamás, Tóth Tamás",
-    "group": "11.B-GY1, 11.B-GY2"
+    "group": "11.B-GY1,11.B-GY2"
   },
   {
     "day": "Péntek",
@@ -8397,7 +8397,7 @@
     "end_time": "10:45",
     "group_name": "Forgácsoló megmunkálások2",
     "teacher": "Sárkány Tamás, Tóth Tamás",
-    "group": "11.B-GY1, 11.B-GY2"
+    "group": "11.B-GY1,11.B-GY2"
   },
   {
     "day": "Péntek",
@@ -8405,7 +8405,7 @@
     "end_time": "11:40",
     "group_name": "Forgácsoló megmunkálások2",
     "teacher": "Sárkány Tamás, Tóth Tamás",
-    "group": "11.B-GY1, 11.B-GY2"
+    "group": "11.B-GY1,11.B-GY2"
   },
   {
     "day": "Péntek",
@@ -8413,7 +8413,7 @@
     "end_time": "12:40",
     "group_name": "Forgácsoló megmunkálások2",
     "teacher": "Sárkány Tamás, Tóth Tamás",
-    "group": "11.B-GY1, 11.B-GY2"
+    "group": "11.B-GY1,11.B-GY2"
   },
   {
     "day": "Szerda",
@@ -8421,7 +8421,7 @@
     "end_time": "8:00",
     "group_name": "Forgácsoló megmunkálások2",
     "teacher": "Tóth Tamás",
-    "group": "11.A-GY2, 11.C-GY2"
+    "group": "11.A-GY2,11.C-GY2"
   },
   {
     "day": "Szerda",
@@ -8429,7 +8429,7 @@
     "end_time": "8:55",
     "group_name": "Forgácsoló megmunkálások2",
     "teacher": "Tóth Tamás",
-    "group": "11.A-GY2, 11.C-GY2"
+    "group": "11.A-GY2,11.C-GY2"
   },
   {
     "day": "Szerda",
@@ -8437,7 +8437,7 @@
     "end_time": "9:50",
     "group_name": "Forgácsoló megmunkálások2",
     "teacher": "Tóth Tamás",
-    "group": "11.A-GY2, 11.C-GY2"
+    "group": "11.A-GY2,11.C-GY2"
   },
   {
     "day": "Szerda",
@@ -8445,7 +8445,7 @@
     "end_time": "10:45",
     "group_name": "Forgácsoló megmunkálások2",
     "teacher": "Tóth Tamás",
-    "group": "11.A-GY2, 11.C-GY2"
+    "group": "11.A-GY2,11.C-GY2"
   },
   {
     "day": "Szerda",
@@ -8453,7 +8453,7 @@
     "end_time": "11:40",
     "group_name": "Forgácsoló megmunkálások2",
     "teacher": "Tóth Tamás",
-    "group": "11.A-GY2, 11.C-GY2"
+    "group": "11.A-GY2,11.C-GY2"
   },
   {
     "day": "Szerda",
@@ -8501,7 +8501,7 @@
     "end_time": "8:00",
     "group_name": "Szerelés és karbantartás",
     "teacher": "Tóth Tamás",
-    "group": "12.A-GY1, 12.A-GY2"
+    "group": "12.A-GY1,12.A-GY2"
   },
   {
     "day": "Kedd",
@@ -8509,7 +8509,7 @@
     "end_time": "8:55",
     "group_name": "Szerelés és karbantartás",
     "teacher": "Tóth Tamás",
-    "group": "12.A-GY1, 12.A-GY2"
+    "group": "12.A-GY1,12.A-GY2"
   },
   {
     "day": "Hétfő",
@@ -8869,7 +8869,7 @@
     "end_time": "15:20",
     "group_name": "Matematika fakultáció",
     "teacher": "Simó Zsuzsanna",
-    "group": "11.A-emat, 11.B-emat, 11.C-emat, 11.D-emat, 11.I-emat"
+    "group": "11.A-emat,11.B-emat,11.C-emat,11.D-emat,11.I-emat"
   },
   {
     "day": "Kedd",
@@ -8877,7 +8877,7 @@
     "end_time": "16:10",
     "group_name": "Matematika fakultáció",
     "teacher": "Simó Zsuzsanna",
-    "group": "11.A-emat, 11.B-emat, 11.C-emat, 11.D-emat, 11.I-emat"
+    "group": "11.A-emat,11.B-emat,11.C-emat,11.D-emat,11.I-emat"
   },
   {
     "day": "Péntek",
@@ -8901,7 +8901,7 @@
     "end_time": "15:20",
     "group_name": "Fizika fakultáció",
     "teacher": "Szijártó Sándor",
-    "group": "11.A-efiz, 11.C-efiz, 11.D-efiz, 11.I-efiz"
+    "group": "11.A-efiz,11.C-efiz,11.D-efiz,11.I-efiz"
   },
   {
     "day": "Szerda",
@@ -8909,7 +8909,7 @@
     "end_time": "16:10",
     "group_name": "Fizika fakultáció",
     "teacher": "Szijártó Sándor",
-    "group": "11.A-efiz, 11.C-efiz, 11.D-efiz, 11.I-efiz"
+    "group": "11.A-efiz,11.C-efiz,11.D-efiz,11.I-efiz"
   },
   {
     "day": "Szerda",
@@ -9029,7 +9029,7 @@
     "end_time": "11:40",
     "group_name": "Gépészeti alapismeretek2",
     "teacher": "Törköly Csaba György",
-    "group": "9.B-A2, 9.B-N"
+    "group": "9.B-A2,9.B-N"
   },
   {
     "day": "Kedd",
@@ -9069,7 +9069,7 @@
     "end_time": "13:40",
     "group_name": "Informatikai és távközlési alapok I.",
     "teacher": "Hódi Ágnes",
-    "group": "9.I-A1, 9.I-N"
+    "group": "9.I-A1,9.I-N"
   },
   {
     "day": "Csütörtök",
@@ -9077,7 +9077,7 @@
     "end_time": "14:30",
     "group_name": "Informatikai és távközlési alapok I.",
     "teacher": "Hódi Ágnes",
-    "group": "9.I-A1, 9.I-N"
+    "group": "9.I-A1,9.I-N"
   },
   {
     "day": "Hétfő",
@@ -9085,7 +9085,7 @@
     "end_time": "11:40",
     "group_name": "IKT projektmunka I.",
     "teacher": "Hódi Ágnes",
-    "group": "9.I-A1, 9.I-N"
+    "group": "9.I-A1,9.I-N"
   },
   {
     "day": "Hétfő",
@@ -9093,7 +9093,7 @@
     "end_time": "12:40",
     "group_name": "Digitális kultúra",
     "teacher": "Hódi Ágnes",
-    "group": "9.I-A1, 9.I-N"
+    "group": "9.I-A1,9.I-N"
   },
   {
     "day": "Hétfő",
@@ -9101,7 +9101,7 @@
     "end_time": "13:40",
     "group_name": "Digitális kultúra",
     "teacher": "Hódi Ágnes",
-    "group": "9.I-A1, 9.I-N"
+    "group": "9.I-A1,9.I-N"
   },
   {
     "day": "Péntek",
@@ -9141,7 +9141,7 @@
     "end_time": "10:45",
     "group_name": "Programozási alapok",
     "teacher": "Dongó Péter",
-    "group": "9.I-A1, 9.I-N"
+    "group": "9.I-A1,9.I-N"
   },
   {
     "day": "Péntek",
@@ -9149,7 +9149,7 @@
     "end_time": "11:40",
     "group_name": "Programozási alapok",
     "teacher": "Dongó Péter",
-    "group": "9.I-A1, 9.I-N"
+    "group": "9.I-A1,9.I-N"
   },
   {
     "day": "Hétfő",
@@ -9205,7 +9205,7 @@
     "end_time": "14:30",
     "group_name": "Informatikai és távközlési alapok I.",
     "teacher": "Hódi Ágnes",
-    "group": "9.I-A1, 9.I-N"
+    "group": "9.I-A1,9.I-N"
   },
   {
     "day": "Péntek",
@@ -9661,7 +9661,7 @@
     "end_time": "11:40",
     "group_name": "Szakmai angol",
     "teacher": "Fekete-Csenki Eszter",
-    "group": "12.D-H3, 12.I-H3"
+    "group": "12.D-H3,12.I-H3"
   },
   {
     "day": "Csütörtök",
@@ -9669,7 +9669,7 @@
     "end_time": "10:45",
     "group_name": "Szakmai angol",
     "teacher": "Fekete-Csenki Eszter",
-    "group": "12.D-H3, 12.I-H3"
+    "group": "12.D-H3,12.I-H3"
   },
   {
     "day": "Hétfő",
@@ -9725,7 +9725,7 @@
     "end_time": "8:00",
     "group_name": "Szakmai angol",
     "teacher": "Kun Tímea",
-    "group": "12.D-S1, 12.I-S1"
+    "group": "12.D-S1,12.I-S1"
   },
   {
     "day": "Szerda",
@@ -9733,7 +9733,7 @@
     "end_time": "13:40",
     "group_name": "Szakmai angol",
     "teacher": "Kun Tímea",
-    "group": "12.D-S1, 12.I-S1"
+    "group": "12.D-S1,12.I-S1"
   },
   {
     "day": "Kedd",
@@ -10357,7 +10357,7 @@
     "end_time": "14:30",
     "group_name": "Német nyelv",
     "teacher": "Csanádi Gergely",
-    "group": "9.B-N, 9.I-N"
+    "group": "9.B-N,9.I-N"
   },
   {
     "day": "Kedd",
@@ -10365,7 +10365,7 @@
     "end_time": "13:40",
     "group_name": "Német nyelv",
     "teacher": "Csanádi Gergely",
-    "group": "9.B-N, 9.I-N"
+    "group": "9.B-N,9.I-N"
   },
   {
     "day": "Kedd",
@@ -10373,7 +10373,7 @@
     "end_time": "12:40",
     "group_name": "Német nyelv",
     "teacher": "Csanádi Gergely",
-    "group": "9.B-N, 9.I-N"
+    "group": "9.B-N,9.I-N"
   },
   {
     "day": "Péntek",
@@ -10381,7 +10381,7 @@
     "end_time": "8:00",
     "group_name": "Német nyelv",
     "teacher": "Csanádi Gergely",
-    "group": "9.B-N, 9.I-N"
+    "group": "9.B-N,9.I-N"
   },
   {
     "day": "Kedd",
@@ -10637,7 +10637,7 @@
     "end_time": "9:50",
     "group_name": "Műszaki rajz",
     "teacher": "Süveges Zsolt Imre",
-    "group": "12.A-GY1, 12.A-GY2"
+    "group": "12.A-GY1,12.A-GY2"
   },
   {
     "day": "Kedd",
@@ -10645,7 +10645,7 @@
     "end_time": "10:45",
     "group_name": "Műszaki rajz",
     "teacher": "Süveges Zsolt Imre",
-    "group": "12.A-GY1, 12.A-GY2"
+    "group": "12.A-GY1,12.A-GY2"
   },
   {
     "day": "Csütörtök",
@@ -10653,7 +10653,7 @@
     "end_time": "8:00",
     "group_name": "Gépészeti alapismeretek4",
     "teacher": "Buri Gábor Sándor, Tóth Tamás, Sárkány Tamás",
-    "group": "9.B-GY1, 9.B-GY2, 9.B-GY3"
+    "group": "9.B-GY1,9.B-GY2,9.B-GY3"
   },
   {
     "day": "Csütörtök",
@@ -10661,7 +10661,7 @@
     "end_time": "8:55",
     "group_name": "Gépészeti alapismeretek4",
     "teacher": "Buri Gábor Sándor, Tóth Tamás, Sárkány Tamás",
-    "group": "9.B-GY1, 9.B-GY2, 9.B-GY3"
+    "group": "9.B-GY1,9.B-GY2,9.B-GY3"
   },
   {
     "day": "Hétfő",
@@ -10725,7 +10725,7 @@
     "end_time": "8:00",
     "group_name": "Forgácsoló megmunkálások2",
     "teacher": "Sárkány Tamás, Tóth Tamás",
-    "group": "11.B-GY1, 11.B-GY2"
+    "group": "11.B-GY1,11.B-GY2"
   },
   {
     "day": "Péntek",
@@ -10749,7 +10749,7 @@
     "end_time": "14:30",
     "group_name": "Forgácsoló megmunkálások1",
     "teacher": "Törköly Csaba György",
-    "group": "11.C-GY1, 11.C-GY2"
+    "group": "11.C-GY1,11.C-GY2"
   },
   {
     "day": "Szerda",
@@ -10757,7 +10757,7 @@
     "end_time": "13:40",
     "group_name": "Forgácsoló megmunkálások1",
     "teacher": "Törköly Csaba György",
-    "group": "11.C-GY1, 11.C-GY2"
+    "group": "11.C-GY1,11.C-GY2"
   },
   {
     "day": "Péntek",
@@ -10797,7 +10797,7 @@
     "end_time": "8:55",
     "group_name": "Webprogramozás",
     "teacher": "Juhász Szabolcs",
-    "group": "11.D-S2, 11.I-S2"
+    "group": "11.D-S2,11.I-S2"
   },
   {
     "day": "Kedd",
@@ -10805,7 +10805,7 @@
     "end_time": "9:50",
     "group_name": "Webprogramozás",
     "teacher": "Juhász Szabolcs",
-    "group": "11.D-S2, 11.I-S2"
+    "group": "11.D-S2,11.I-S2"
   },
   {
     "day": "Kedd",
@@ -10813,7 +10813,7 @@
     "end_time": "10:45",
     "group_name": "Webprogramozás",
     "teacher": "Juhász Szabolcs",
-    "group": "11.D-S2, 11.I-S2"
+    "group": "11.D-S2,11.I-S2"
   },
   {
     "day": "Kedd",
@@ -10821,7 +10821,7 @@
     "end_time": "11:40",
     "group_name": "Szakmai angol",
     "teacher": "Maróthy Ádám",
-    "group": "11.D-S2, 11.I-S2"
+    "group": "11.D-S2,11.I-S2"
   },
   {
     "day": "Péntek",
@@ -10829,7 +10829,7 @@
     "end_time": "8:55",
     "group_name": "Szakmai angol",
     "teacher": "Maróthy Ádám",
-    "group": "11.D-S2, 11.I-S2"
+    "group": "11.D-S2,11.I-S2"
   },
   {
     "day": "Péntek",
@@ -10837,7 +10837,7 @@
     "end_time": "9:50",
     "group_name": "Adatbázis-kezelés I.",
     "teacher": "Juhász Szabolcs",
-    "group": "11.D-S2, 11.I-S2"
+    "group": "11.D-S2,11.I-S2"
   },
   {
     "day": "Péntek",
@@ -10845,7 +10845,7 @@
     "end_time": "10:45",
     "group_name": "Adatbázis-kezelés I.",
     "teacher": "Juhász Szabolcs",
-    "group": "11.D-S2, 11.I-S2"
+    "group": "11.D-S2,11.I-S2"
   },
   {
     "day": "Péntek",
@@ -10853,7 +10853,7 @@
     "end_time": "11:40",
     "group_name": "Adatbázis-kezelés I.",
     "teacher": "Juhász Szabolcs",
-    "group": "11.D-S2, 11.I-S2"
+    "group": "11.D-S2,11.I-S2"
   },
   {
     "day": "Péntek",
@@ -10861,7 +10861,7 @@
     "end_time": "12:40",
     "group_name": "Asztali alkalmazások fejlesztése",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "11.D-S2, 11.I-S2"
+    "group": "11.D-S2,11.I-S2"
   },
   {
     "day": "Péntek",
@@ -10869,7 +10869,7 @@
     "end_time": "13:40",
     "group_name": "Asztali alkalmazások fejlesztése",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "11.D-S2, 11.I-S2"
+    "group": "11.D-S2,11.I-S2"
   },
   {
     "day": "Péntek",
@@ -10877,7 +10877,7 @@
     "end_time": "14:30",
     "group_name": "Asztali alkalmazások fejlesztése",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "11.D-S2, 11.I-S2"
+    "group": "11.D-S2,11.I-S2"
   },
   {
     "day": "Szerda",
@@ -11093,7 +11093,7 @@
     "end_time": "8:00",
     "group_name": "IKT projektmunka II.",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "11.D-S2, 11.I-S2"
+    "group": "11.D-S2,11.I-S2"
   },
   {
     "day": "Kedd",
@@ -11101,7 +11101,7 @@
     "end_time": "13:40",
     "group_name": "IKT projektmunka II.",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "11.D-S2, 11.I-S2"
+    "group": "11.D-S2,11.I-S2"
   },
   {
     "day": "Kedd",
@@ -11109,6 +11109,6 @@
     "end_time": "14:30",
     "group_name": "IKT projektmunka II.",
     "teacher": "Pásztor Zoltán Albert",
-    "group": "11.D-S2, 11.I-S2"
+    "group": "11.D-S2,11.I-S2"
   }
 ]
