@@ -86,7 +86,7 @@ CREATE TABLE `ring_times` (
 
 
 
-
+/*
 
 INSERT INTO `admins` (`admin_id`, `full_name`, `password`, `position`,`osztalyfonok`,`short_name`) VALUES
 (1, 'szalkai', 'piciakukija', 'senki','nincs','SSSS'),
@@ -128,5 +128,5 @@ INSERT INTO year_schedule (type, nev, which_day, replace_day) VALUES
 ('plusznap', 'Szombati tanítás', '2025-02-01', 'monday'),
 ('tanitasnelkul', 'Tanítás nélküli nap', '2025-02-25', '2025-02-26');
 
-
+*/
 

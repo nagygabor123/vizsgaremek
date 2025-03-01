@@ -33,53 +33,64 @@ export default async function handler(req, res) {
     const insertValues = schedule
       .map(entry => {
         // Több tanár kezelése: vesszővel elválasztott nevek
-        const teacherNames = entry.teacher.split(',').map(name => name.trim()); // Tanárok név listája
+        const teacherNames = entry.teacher.split(',').map(name => name.trim());
         const adminIds = teacherNames
-          .map(teacher => adminMap.get(teacher)) // Keresés minden egyes tanár ID-ja alapján
-          .filter(id => id !== undefined); // Csak a létező admin_id-ket tartjuk meg
+          .map(teacher => adminMap.get(teacher))
+          .filter(id => id !== undefined);
   
         // Csoportok feldolgozása (vesszővel elválasztva)
-        const groupNames = entry.group.split(',').map(name => name.trim()); // Szétválasztás és felesleges szóközök eltávolítása
+        const groupNames = entry.group.split(',').map(name => name.trim());
         const groupIds = groupNames
-          .map(groupName => groupMap.get(groupName))
+          .map(groupName => {
+            // Ellenőrizzük, hogy a csoportnév létezik-e a groupMap-ben
+            const groupId = groupMap.get(groupName);
+            if (!groupId) {
+              console.warn(`Csoport nem található: ${groupName}`);
+            }
+            return groupId;
+          })
           .filter(id => id !== undefined); // Csak a létező group_id-ket tartjuk meg
   
+        // Hibakezelés: ha nincs érvényes tanár vagy csoport ID, kihagyjuk az adatot
         if (adminIds.length === 0 || groupIds.length === 0) {
           console.warn(`Hibás adat kihagyva - Tanár: ${entry.teacher}, Csoport(ok): ${entry.group}`);
           return null;
         }
   
-        // Ha több csoport is egy órát tart, akkor azok group_id-jait vesszővel összefűzzük
-        const groupIdsString = groupIds.join(',');
+        // Ha több csoport is van, vesszővel elválasztva összefűzzük a group_id-ket
+        const concatenatedGroupIds = groupIds.join(',');
   
         return [
-          groupIdsString,  // Csoport ID-k összefűzve
-          adminIds.join(','),   // Tanár ID-k összefűzve
+          concatenatedGroupIds,  // Csoport ID-k összefűzve
+          adminIds.join(','),    // Tanár ID-k összefűzve
           entry.group_name,
-          dayMapping[entry.day] || 'monday',
+          dayMapping[entry.day] || 'monday', // Nap leképezése (pl. "Hétfő" -> "monday")
           entry.start_time,
           entry.end_time
         ];
       })
-      .filter(entry => entry !== null);
+      .filter(entry => entry !== null); // Kihagyott elemek eltávolítása
   
+    // Ha nincs érvényes adat, hibát dobunk
     if (insertValues.length === 0) {
-      return res.status(400).json({ message: 'No valid timetable entries to insert' });
+      return res.status(400).json({ message: 'Nincs érvényes órarendi bejegyzés beszúrásra' });
     }
   
+    // Beszúrás az adatbázisba
     await db.query(
       'INSERT INTO timetables (group_id, admin_id, group_name, day_of_week, start_time, end_time) VALUES ?;',
       [insertValues]
     ).catch(error => {
-      console.error("Database insert error:", error);
-      throw new Error("Database error: " + error.message);
+      console.error("Adatbázis beszúrási hiba:", error);
+      throw new Error("Adatbázis hiba: " + error.message);
     });
   
-    res.status(201).json({ message: 'Timetables uploaded successfully' });
+    res.status(201).json({ message: 'Órarend sikeresen feltöltve' });
   } catch (error) {
-    console.error('Error uploading timetables:', error);
-    res.status(500).json({ message: 'Error uploading timetables', error: error.message });
+    console.error('Hiba az órarend feltöltésekor:', error);
+    res.status(500).json({ message: 'Hiba az órarend feltöltésekor', error: error.message });
+  } finally {
+    await db.end();
   }
-  
   
 }
