@@ -427,7 +427,7 @@ const Calendar: React.FC = () => {
             </h2>
             <div className="calendar-controls">
             <Select disabled>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger>
                   <SelectValue placeholder="Osztály neve" />
                 </SelectTrigger>
                 <SelectContent>
@@ -438,8 +438,8 @@ const Calendar: React.FC = () => {
                 </SelectContent>
               </Select>
               <Button onClick={goToToday} variant="outline">Mai nap</Button>
-              <Button size="icon" variant="ghost" onClick={goToPrevious}>{isMobileView ? <ChevronLeft /> : <ChevronLeft />}</Button>
-              <Button size="icon" variant="ghost" onClick={goToNext}>{isMobileView ? <ChevronRight /> : <ChevronRight />}</Button>
+              <Button variant="ghost" onClick={goToPrevious}>{isMobileView ? <ChevronLeft /> : <ChevronLeft />}</Button>
+              <Button variant="ghost" onClick={goToNext}>{isMobileView ? <ChevronRight /> : <ChevronRight />}</Button>
             </div>
           </div>
 

@@ -557,11 +557,11 @@ export default function Home() {
                   {
 
                     students.length === 0 ? (
-                      <tr className="text-center border-t">
-                        <td className="p-1">
-                          Nincs megjelenítendő diák
-                        </td>
-                      </tr>
+                      <tr>
+                     <td colSpan={5} className="text-center p-6 h-dvh text-base text-gray-500">
+                     Nem szerepel tanuló a rendszerben
+                     </td>
+                   </tr>
                     ) : (
 
 
