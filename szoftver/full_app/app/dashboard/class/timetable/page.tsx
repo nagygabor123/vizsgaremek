@@ -2,7 +2,7 @@
 
 
 import { AppSidebar } from "@/components/app-sidebar"
-import { ChevronRight, ChevronLeft } from "lucide-react"
+import { ChevronRight, ChevronLeft, Slash} from "lucide-react"
 
 
 import {
@@ -393,18 +393,20 @@ const Calendar: React.FC = () => {
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
               <BreadcrumbList>
-
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
-                    <Link href="/dashboard">Főoldal</Link>
+                    <Link href="/dashboard">Kezdőlap</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
-
-                <BreadcrumbSeparator />
+                <BreadcrumbSeparator>
+                  <Slash />
+                </BreadcrumbSeparator>
                 <BreadcrumbItem>
                   <BreadcrumbPage>Osztály</BreadcrumbPage>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator />
+                <BreadcrumbSeparator>
+                  <Slash />
+                </BreadcrumbSeparator>
                 <BreadcrumbItem>
                   <BreadcrumbPage>Órarend</BreadcrumbPage>
                 </BreadcrumbItem>

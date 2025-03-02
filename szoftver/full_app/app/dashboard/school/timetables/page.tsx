@@ -2,7 +2,7 @@
 
 
 import { AppSidebar } from "@/components/app-sidebar"
-import { ChevronRight, ChevronLeft, TriangleAlert } from "lucide-react"
+import { ChevronRight, ChevronLeft, TriangleAlert, Slash } from "lucide-react"
 
 
 import {
@@ -248,7 +248,7 @@ const Calendar: React.FC = () => {
       } catch (error) {
         console.error('Error fetching additional data:', error);
       }
-   
+
     };
 
     fetchAdditionalData();
@@ -269,16 +269,16 @@ const Calendar: React.FC = () => {
     if (tanevkezdes && tanevvege) {
       const kezdes = new Date(tanevkezdes);
       const vege = new Date(tanevvege);
-  
+
       kezdes.setHours(0, 0, 0, 0);
       vege.setHours(23, 59, 59, 999);
-  
+
       setTanevkezdesDate(kezdes);
       setTanevvegeDate(vege);
       setLoading(false); // Ha az adatok beálltak, kikapcsoljuk a betöltést
     }
   }, [tanevkezdes, tanevvege]); // Figyeljük a változásukat
-  
+
 
 
   const getDayName = (date: Date): string => {
@@ -300,21 +300,21 @@ const Calendar: React.FC = () => {
     const [year, month, day] = dateString.split("-").map(Number);
     return new Date(year, month - 1, day); // hónapokat 0-indexelten tárolja a JS
   };
-  
+
   const isBreakDay = (date: Date) => {
     if (!breakdate || breakdate.length === 0) return false;
-  
+
     const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-  
+
     return breakdate.some(({ start, end }) => {
       const startDate = parseDate(start);
       const endDate = parseDate(end);
-  
+
       return targetDate >= startDate && targetDate <= endDate;
     });
   };
-  
-  
+
+
 
 
   const fetchStudentTimetable = async (student_id: string) => {
@@ -424,7 +424,7 @@ const Calendar: React.FC = () => {
       setHasStudents(data.length > 0); // Ha van legalább egy diák, akkor true
     } catch (error) {
       console.error('Error fetching students', error);
-     } //finally {
+    } //finally {
     //   setLoading(false); // Lekérés vége
     // }
   };
@@ -468,18 +468,20 @@ const Calendar: React.FC = () => {
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
               <BreadcrumbList>
-
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
-                    <Link href="/dashboard">Főoldal</Link>
+                    <Link href="/dashboard">Kezdőlap</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
-
-                {/* <BreadcrumbSeparator />
+                <BreadcrumbSeparator>
+                  <Slash />
+                </BreadcrumbSeparator>
                 <BreadcrumbItem>
                   <BreadcrumbPage>Adminisztráció</BreadcrumbPage>
-                </BreadcrumbItem> */}
-                <BreadcrumbSeparator />
+                </BreadcrumbItem>
+                <BreadcrumbSeparator>
+                  <Slash />
+                </BreadcrumbSeparator>
                 <BreadcrumbItem>
                   <BreadcrumbPage>Órarendek</BreadcrumbPage>
                 </BreadcrumbItem>
@@ -506,154 +508,154 @@ const Calendar: React.FC = () => {
         </div>
 
         <div className="calendar-container">
-  {/* <span>{tanevkezdes}</span>
+          {/* <span>{tanevkezdes}</span>
   <span>{tanevvege}</span> */}
-  <div className="calendar-header">
-    <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-      <span>{format(currentDate, 'yyyy MMMM', { locale: hu })}</span>
-    </h2>
-    <div className="calendar-controls">
-      <Select>
-        <SelectTrigger>
-          <SelectValue placeholder="Válasszon..." />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>Osztályok</SelectLabel>
-            <SelectItem value="13i">13.I</SelectItem>
-            <SelectLabel>Tanárok</SelectLabel>
-            <SelectItem value="kisPista">Kis Pista</SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-      <Button onClick={goToToday} variant="outline">Mai nap</Button>
-      <Button variant="ghost" onClick={goToPrevious}><ChevronLeft /></Button>
-      <Button variant="ghost" onClick={goToNext}><ChevronRight /></Button>
-    </div>
-  </div>
-
-  <div className="calendar-grid">
-  {isMobileView ? (
-    <div>
-      <div className="calendar-day">
-        {format(currentDate, "eeee d", { locale: hu })}
-      </div>
-      {isBreakDay(currentDate) ||
-      dailyLessons.length === 0 ||
-      (tanevkezdesDate &&
-        tanevvegeDate &&
-        (currentDate < tanevkezdesDate || currentDate > tanevvegeDate)) ? (
-        <div className="flex items-center justify-center h-dvh text-base text-gray-500 col-span-full">
-          Nincsenek tanórák ezen a napon
-        </div>
-      ) : (
-        lessonTimes.map((time, lessonIndex) => {
-          const lessonsAtSameTime = dailyLessons.filter(
-            (lesson) => lesson.start === time.start && lesson.end === time.end
-          );
-
-          if (lessonsAtSameTime.length === 0) return null;
-
-          return (
-            <div key={lessonIndex} className="calendar-cell">
-              {lessonsAtSameTime.map((lesson, index) => (
-                <Dialog key={index}>
-                  <DialogTrigger asChild>
-                    <div className="lesson-card">
-                      <div className="lesson-index">{lessonIndex + 1}</div>
-                      <div className="lesson-name">{lesson.subject}</div>
-                      <div className="lesson-class">{lesson.class}</div>
-                    </div>
-                  </DialogTrigger>
-                </Dialog>
-              ))}
+          <div className="calendar-header">
+            <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+              <span>{format(currentDate, 'yyyy MMMM', { locale: hu })}</span>
+            </h2>
+            <div className="calendar-controls">
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Válasszon..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Osztályok</SelectLabel>
+                    <SelectItem value="13i">13.I</SelectItem>
+                    <SelectLabel>Tanárok</SelectLabel>
+                    <SelectItem value="kisPista">Kis Pista</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              <Button onClick={goToToday} variant="outline">Mai nap</Button>
+              <Button variant="ghost" onClick={goToPrevious}><ChevronLeft /></Button>
+              <Button variant="ghost" onClick={goToNext}><ChevronRight /></Button>
             </div>
-          );
-        })
-      )}
-    </div>
-  ) : (
-    <>
-      <div className="calendar-day"></div>
-      {daysOfWeek.map((day, index) => (
-        <div
-          className={`calendar-day ${isToday(day) ? "current-day" : ""}`}
-          key={index}
-        >
-          {format(day, "EEE d", { locale: hu })}
-        </div>
-      ))}
+          </div>
 
-      {lessonTimes.length === 0 ||
-      daysOfWeek.every(
-        (day) =>
-          !schedule.some(
-            (lesson) =>
-              lesson.day === getReplacedDayName(day) &&
-              lessonTimes.some(
-                (time) => lesson.start === time.start && lesson.end === time.end
-              )
-          )
-      ) ? (
-        <div className="flex items-center justify-center h-dvh text-base text-gray-500 col-span-full">
-          Nincsenek tanórák ezen a héten
-        </div>
-      ) : (
-        lessonTimes.map((time, lessonIndex) => (
-          <React.Fragment key={lessonIndex}>
-            <div className="lesson-time">
-              <span className="time-start">{time.start}</span>
-              <span className="time-end">{time.end}</span>
-            </div>
-            {daysOfWeek.map((day, dayIndex) => {
-              if (
-                tanevkezdesDate &&
-                tanevvegeDate &&
-                (day < tanevkezdesDate || day > tanevvegeDate)
-              ) {
-                return (
-                  <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell empty" />
-                );
-              }
-
-              const dayName = getReplacedDayName(day);
-              const dailyLessons = schedule.filter(
-                (lesson) => lesson.day === dayName
-              );
-              const lessonsAtSameTime = dailyLessons.filter(
-                (l) => l.start === time.start && l.end === time.end
-              );
-
-              if (lessonsAtSameTime.length === 0 || isBreakDay(day)) {
-                return (
-                  <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell empty" />
-                );
-              }
-
-              return (
-                <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell">
-                  {lessonsAtSameTime.map((lesson, index) => (
-                    <Dialog key={`${lessonIndex}-${dayIndex}-${index}`}>
-                      <DialogTrigger asChild>
-                        <div className="lesson-card">
-                          <div className="lesson-index">{lessonIndex + 1}</div>
-                          <div className="lesson-name">{lesson.subject}</div>
-                          <div className="lesson-class">{lesson.class}</div>
-                        </div>
-                      </DialogTrigger>
-                    </Dialog>
-                  ))}
+          <div className="calendar-grid">
+            {isMobileView ? (
+              <div>
+                <div className="calendar-day">
+                  {format(currentDate, "eeee d", { locale: hu })}
                 </div>
-              );
-            })}
-          </React.Fragment>
-        ))
-      )}
-    </>
-  )}
-</div>
+                {isBreakDay(currentDate) ||
+                  dailyLessons.length === 0 ||
+                  (tanevkezdesDate &&
+                    tanevvegeDate &&
+                    (currentDate < tanevkezdesDate || currentDate > tanevvegeDate)) ? (
+                  <div className="flex items-center justify-center h-dvh text-base text-gray-500 col-span-full">
+                    Nincsenek tanórák ezen a napon
+                  </div>
+                ) : (
+                  lessonTimes.map((time, lessonIndex) => {
+                    const lessonsAtSameTime = dailyLessons.filter(
+                      (lesson) => lesson.start === time.start && lesson.end === time.end
+                    );
 
-</div>
+                    if (lessonsAtSameTime.length === 0) return null;
+
+                    return (
+                      <div key={lessonIndex} className="calendar-cell">
+                        {lessonsAtSameTime.map((lesson, index) => (
+                          <Dialog key={index}>
+                            <DialogTrigger asChild>
+                              <div className="lesson-card">
+                                <div className="lesson-index">{lessonIndex + 1}</div>
+                                <div className="lesson-name">{lesson.subject}</div>
+                                <div className="lesson-class">{lesson.class}</div>
+                              </div>
+                            </DialogTrigger>
+                          </Dialog>
+                        ))}
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+            ) : (
+              <>
+                <div className="calendar-day"></div>
+                {daysOfWeek.map((day, index) => (
+                  <div
+                    className={`calendar-day ${isToday(day) ? "current-day" : ""}`}
+                    key={index}
+                  >
+                    {format(day, "EEE d", { locale: hu })}
+                  </div>
+                ))}
+
+                {lessonTimes.length === 0 ||
+                  daysOfWeek.every(
+                    (day) =>
+                      !schedule.some(
+                        (lesson) =>
+                          lesson.day === getReplacedDayName(day) &&
+                          lessonTimes.some(
+                            (time) => lesson.start === time.start && lesson.end === time.end
+                          )
+                      )
+                  ) ? (
+                  <div className="flex items-center justify-center h-dvh text-base text-gray-500 col-span-full">
+                    Nincsenek tanórák ezen a héten
+                  </div>
+                ) : (
+                  lessonTimes.map((time, lessonIndex) => (
+                    <React.Fragment key={lessonIndex}>
+                      <div className="lesson-time">
+                        <span className="time-start">{time.start}</span>
+                        <span className="time-end">{time.end}</span>
+                      </div>
+                      {daysOfWeek.map((day, dayIndex) => {
+                        if (
+                          tanevkezdesDate &&
+                          tanevvegeDate &&
+                          (day < tanevkezdesDate || day > tanevvegeDate)
+                        ) {
+                          return (
+                            <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell empty" />
+                          );
+                        }
+
+                        const dayName = getReplacedDayName(day);
+                        const dailyLessons = schedule.filter(
+                          (lesson) => lesson.day === dayName
+                        );
+                        const lessonsAtSameTime = dailyLessons.filter(
+                          (l) => l.start === time.start && l.end === time.end
+                        );
+
+                        if (lessonsAtSameTime.length === 0 || isBreakDay(day)) {
+                          return (
+                            <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell empty" />
+                          );
+                        }
+
+                        return (
+                          <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell">
+                            {lessonsAtSameTime.map((lesson, index) => (
+                              <Dialog key={`${lessonIndex}-${dayIndex}-${index}`}>
+                                <DialogTrigger asChild>
+                                  <div className="lesson-card">
+                                    <div className="lesson-index">{lessonIndex + 1}</div>
+                                    <div className="lesson-name">{lesson.subject}</div>
+                                    <div className="lesson-class">{lesson.class}</div>
+                                  </div>
+                                </DialogTrigger>
+                              </Dialog>
+                            ))}
+                          </div>
+                        );
+                      })}
+                    </React.Fragment>
+                  ))
+                )}
+              </>
+            )}
+          </div>
+
+        </div>
 
       </SidebarInset>
     </SidebarProvider>

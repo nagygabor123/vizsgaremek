@@ -18,7 +18,7 @@ import {
   SidebarProvider,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
-import { TriangleAlert, Plus, Trash2, Trash, CalendarPlus, CalendarIcon, SaveAll } from "lucide-react";
+import { TriangleAlert, Plus, Trash2, Trash, CalendarPlus, CalendarIcon, SaveAll, Slash } from "lucide-react";
 import Link from "next/link";
 
 import { Input } from "@/components/ui/input"
@@ -393,14 +393,18 @@ export default function Page() {
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
-                    <Link href="/dashboard">Főoldal</Link>
+                    <Link href="/dashboard">Kezdőlap</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
-                {/* <BreadcrumbSeparator />
+                <BreadcrumbSeparator>
+                  <Slash />
+                </BreadcrumbSeparator>
                 <BreadcrumbItem>
                   <BreadcrumbPage>Rendszer</BreadcrumbPage>
-                </BreadcrumbItem> */}
-                <BreadcrumbSeparator />
+                </BreadcrumbItem>
+                <BreadcrumbSeparator>
+                  <Slash />
+                </BreadcrumbSeparator>
                 <BreadcrumbItem>
                   <BreadcrumbPage>Tanév beállításai</BreadcrumbPage>
                 </BreadcrumbItem>

@@ -22,7 +22,7 @@ import {
 import { Label } from "@/components/ui/label"
 import Link from "next/link";
 
-import { Pen, X, ArrowUpDown, TriangleAlert, CirclePlus, CircleCheck, LockKeyholeOpen, LockKeyhole, LockOpen, CircleAlert, CircleMinus, Lock, ChevronRight, ChevronLeft, CircleX } from "lucide-react"
+import { Pen, X, ArrowUpDown, TriangleAlert, CirclePlus, Slash, CircleCheck, LockKeyholeOpen, LockKeyhole, LockOpen, CircleAlert, CircleMinus, Lock, ChevronRight, ChevronLeft, CircleX } from "lucide-react"
 
 import {
     Dialog,
@@ -299,22 +299,26 @@ export default function Home() {
                         <SidebarTrigger />
                         <Separator orientation="vertical" className="mr-2 h-4" />
                         <Breadcrumb>
-                            <BreadcrumbList>
-                                <BreadcrumbItem>
-                                    <BreadcrumbLink asChild>
-                                        <Link href="/dashboard">Főoldal</Link>
-                                    </BreadcrumbLink>
-                                </BreadcrumbItem>
-                                {/* <BreadcrumbSeparator />
+              <BreadcrumbList>
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Adminisztráció</BreadcrumbPage>
-                </BreadcrumbItem>*/}
-                                <BreadcrumbSeparator />
-                                <BreadcrumbItem>
-                                    <BreadcrumbPage>Tanulók</BreadcrumbPage>
-                                </BreadcrumbItem>
-                            </BreadcrumbList>
-                        </Breadcrumb>
+                  <BreadcrumbLink asChild>
+                    <Link href="/dashboard">Kezdőlap</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator>
+                  <Slash />
+                </BreadcrumbSeparator>
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Osztály</BreadcrumbPage>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator>
+                  <Slash />
+                </BreadcrumbSeparator>
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Tanulók</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
                     </div>
                 </header>
 

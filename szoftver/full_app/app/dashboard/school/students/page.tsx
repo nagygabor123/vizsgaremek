@@ -22,7 +22,7 @@ import {
 import { Label } from "@/components/ui/label"
 import Link from "next/link";
 
-import { Pen, X, ArrowUpDown, TriangleAlert, CirclePlus, CircleCheck, LockKeyholeOpen, LockKeyhole, LockOpen, CircleAlert, CircleMinus, Lock, ChevronRight, ChevronLeft, CircleX } from "lucide-react"
+import { Pen, X, ArrowUpDown, TriangleAlert, CirclePlus, CircleCheck, LockKeyholeOpen, LockKeyhole, LockOpen, CircleAlert, CircleMinus, Lock, ChevronRight, ChevronLeft, Slash, CircleX } from "lucide-react"
 
 import {
   Dialog,
@@ -295,7 +295,7 @@ export default function Home() {
 
 
 
-  const PAGE_SIZE = 10;
+  const PAGE_SIZE = 13;
 
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(filteredStudents.length / PAGE_SIZE);
@@ -332,14 +332,18 @@ export default function Home() {
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
-                    <Link href="/dashboard">Főoldal</Link>
+                    <Link href="/dashboard">Kezdőlap</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
-                {/* <BreadcrumbSeparator />
+                <BreadcrumbSeparator>
+                  <Slash />
+                </BreadcrumbSeparator>
                 <BreadcrumbItem>
                   <BreadcrumbPage>Adminisztráció</BreadcrumbPage>
-                </BreadcrumbItem>*/}
-                <BreadcrumbSeparator />
+                </BreadcrumbItem>
+                <BreadcrumbSeparator>
+                  <Slash />
+                </BreadcrumbSeparator>
                 <BreadcrumbItem>
                   <BreadcrumbPage>Tanulók</BreadcrumbPage>
                 </BreadcrumbItem>
@@ -548,7 +552,7 @@ export default function Home() {
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Teljes név <ArrowUpDown className="w-4 h-4 inline-block" /></th>
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("class")}>Osztály és csoportok<ArrowUpDown className="w-4 h-4 inline-block" /></th>
                     <th className="p-2 font-normal">Státusz</th>
-                    <th className="p-2 font-normal">RFID azonosító</th>
+                    {/* <th className="p-2 font-normal">RFID azonosító</th> */}
                     <th className="p-2 font-normal">Műveletek</th>
                   </tr>
                 </thead>
@@ -581,7 +585,7 @@ export default function Home() {
 
 
                             </td>
-                            <td className="p-1">{student.rfid_tag}</td>
+                            {/* <td className="p-1">{student.rfid_tag}</td> */}
                             <td className="p-1">
 
                               <Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}> <LockOpen className="w-4 h-4 inline-block" /> {/* {canUnlockStudent ? <LockOpen className="w-4 h-4 inline-block" /> : <LockOpen className="w-4 h-4 inline-block" />}*/}</Button>

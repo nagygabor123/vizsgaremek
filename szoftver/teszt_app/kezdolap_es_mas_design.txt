@@ -4,5 +4,3 @@ https://dribbble.com/shots/24839518-Get-in-touch-Untitled-UI
 jó shadcn gombok:
 https://enhanced-button.vercel.app/
 
-jó shadcn input:
-https://shadcn-form-build.vercel.app/playground

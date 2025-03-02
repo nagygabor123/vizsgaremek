@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Pen, X, ArrowUpDown, CirclePlus, ChevronLeft, ChevronRight, TriangleAlert } from "lucide-react"
+import { Pen, X, ArrowUpDown, CirclePlus, ChevronLeft, ChevronRight, Slash, TriangleAlert } from "lucide-react"
 
 import { Input } from "@/components/ui/input";
 import {
@@ -258,7 +258,7 @@ export default function AddEmployeePage() {
 
 
 
-  const PAGE_SIZE = 10;
+  const PAGE_SIZE = 13;
 
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(filteredEmployees.length / PAGE_SIZE);
@@ -296,14 +296,18 @@ export default function AddEmployeePage() {
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
-                    <Link href="/dashboard">Főoldal</Link>
+                    <Link href="/dashboard">Kezdőlap</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                {/*<BreadcrumbItem>
+                <BreadcrumbSeparator>
+                  <Slash />
+                </BreadcrumbSeparator>
+                <BreadcrumbItem>
                   <BreadcrumbPage>Adminisztráció</BreadcrumbPage>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator />*/}
+                <BreadcrumbSeparator>
+                  <Slash />
+                </BreadcrumbSeparator>
                 <BreadcrumbItem>
                   <BreadcrumbPage>Alkalmazottak</BreadcrumbPage>
                 </BreadcrumbItem>

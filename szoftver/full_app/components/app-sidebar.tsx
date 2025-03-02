@@ -201,22 +201,22 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
-              <Link href="/help">
-              <LifeBuoy/>
+              <Link href="/dashboard/settings">
+              <Settings/>
             
-              <span>Súgóközpont</span>
-              </Link>
+              <span>Beállítások</span>
+              </Link> 
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-              <Link href="/report">
+              {/* <DropdownMenuItem asChild>
+              <Link href="/dashboard/report">
               
               <Flag/>
               <span>Probléma jelentése</span>
               </Link>
-              </DropdownMenuItem>
+              </DropdownMenuItem> */}
 
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
+            {/* <DropdownMenuSeparator /> */}
             <DropdownMenuItem>
             <LogOut/>
             <span>Kijelentkezés</span>
