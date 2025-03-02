@@ -122,7 +122,7 @@ export default function Home() {
     </NavigationMenu>
 
 <Button asChild>
-  <Link href="/login">Belépés</Link>
+  <Link href="/login">Bejelentkezés</Link>
 </Button>
 
 
