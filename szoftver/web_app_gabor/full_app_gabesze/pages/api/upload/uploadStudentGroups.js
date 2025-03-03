@@ -9,7 +9,7 @@ export default async function handler(req, res) {
       const [students] = await db.query(`SELECT student_id, class FROM students WHERE class IS NOT NULL;`);
 
       // Lekérjük az összes csoportot
-      const [groups] = await db.query(`SELECT group_id, group_name FROM groups;`);
+      const [groups] = await db.query(`SELECT group_id, group_name FROM csoportok;`);
 
       // Felépítjük a beszúrási adatokat
       const insertValues = [];

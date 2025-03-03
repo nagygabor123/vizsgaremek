@@ -28,7 +28,7 @@ export default async function handler(req, res) {
     const [admins] = await db.query('SELECT admin_id, full_name FROM admins');
     const adminMap = new Map(admins.map(admin => [admin.full_name, admin.admin_id]));
   
-    const [groups] = await db.query('SELECT group_id, group_name FROM `groups`');
+    const [groups] = await db.query('SELECT group_id, group_name FROM csoportok');
     const groupMap = new Map(groups.map(group => [group.group_name, group.group_id]));
   
     const timetableInsertValues = [];

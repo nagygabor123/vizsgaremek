@@ -14,7 +14,7 @@ export default async function handler(req, res) {
       const insertValues = groups.map(group => [group.name]);
       
       await db.query(
-        'INSERT INTO `groups` (group_name) VALUES ?;',
+        'INSERT INTO csoportok (group_name) VALUES ?;',
         [insertValues]
       );
 
