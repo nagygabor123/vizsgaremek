@@ -33,7 +33,7 @@ CREATE TABLE `locker_relationships` (
   FOREIGN KEY (`locker_id`) REFERENCES `lockers` (`locker_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE `groups` (
+CREATE TABLE `csoportok` (
   `group_id` INT NOT NULL AUTO_INCREMENT,
   `group_name` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`group_id`)
@@ -45,7 +45,7 @@ CREATE TABLE `student_groups` (
   `group_id` INT NOT NULL,
   PRIMARY KEY (`student_group_id`),
   FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`group_id`) REFERENCES `groups` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (`group_id`) REFERENCES `csoportok` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -67,7 +67,7 @@ CREATE TABLE `group_relations` (
   `group_id` INT NOT NULL,
   PRIMARY KEY (`relation_id`),
   FOREIGN KEY (`timetable_id`) REFERENCES `timetables` (`timetable_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`group_id`) REFERENCES `groups` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (`group_id`) REFERENCES `csoportok` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
