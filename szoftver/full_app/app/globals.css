@@ -116,16 +116,7 @@
   font-weight: bold;
 }
 
-.lesson-index {
-  text-align: left;
-  position: relative;
-  /* top: 8px;
-  left: 8px; */
-  font-size: 12px; 
-  padding-bottom: 0.5rem;
-  /* font-weight: bold; */
-  /* line-height: 200%; */
-}
+
 
 .lesson-name {
   font-weight: bold;
