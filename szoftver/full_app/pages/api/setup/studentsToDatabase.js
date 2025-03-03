@@ -12,19 +12,6 @@ export const config = {
 const RESERVED_IDS = new Set(["OM11111", "OM22222", "OM33333", "OM44444"]);
 let baseID = 55555;
 
-function generateStudentID() {
-  while (RESERVED_IDS.has(`OM${baseID}`)) {
-    baseID++;
-  }
-  const id = `OM${baseID}`;
-  RESERVED_IDS.add(id);
-  baseID++;
-  return id;
-}
-
-function generateRFID() {
-  return crypto.randomBytes(4).toString('hex').toUpperCase(); // 8 karakteres RFID
-}
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -61,18 +48,19 @@ export default async function handler(req, res) {
           acc[key.trim()] = values[index]?.trim();
           return acc;
         }, {});
-
+      
         const lastName = rowData['Vezeteknev'];
         const firstName = rowData['Utonev'];
         const fullName = `${lastName} ${firstName}`;
-
+      
+        // Javított split regex a csoportokhoz
         let classGroups = rowData['Csoport']
           ? rowData['Csoport']
-              .split(/,/) 
-              .map(item => item.trim().replace(/[\s-]+/g, ',')) 
-              .filter(item => item.length > 0) 
-          : '';
-
+              .split(/[,\s]+/) // Vesszők ÉS szóközök szerint felbontás
+              .map(item => item.trim())
+              .filter(item => item.length > 0)
+          : [];
+      
         if (studentMap.has(fullName)) {
           const existingClassGroups = new Set(studentMap.get(fullName).class.split(','));
           classGroups.forEach(group => existingClassGroups.add(group));
@@ -105,6 +93,9 @@ export default async function handler(req, res) {
         }
       }
 
+      await checkStudentsInserted(pool, studentMap);
+      await triggerUploadStudentGroups();
+      
       return res.status(200).json({ message: 'A diákok sikeresen hozzáadva' });
 
     } catch (error) {
@@ -112,4 +103,44 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Hiba a fájl feldolgozása közben' });
     }
   });
+}
+
+function generateStudentID() {
+  while (RESERVED_IDS.has(`OM${baseID}`)) {
+    baseID++;
+  }
+  const id = `OM${baseID}`;
+  RESERVED_IDS.add(id);
+  baseID++;
+  return id;
+}
+
+function generateRFID() {
+  return crypto.randomBytes(4).toString('hex').toUpperCase(); // 8 karakteres RFID
+}
+
+async function checkStudentsInserted(pool, studentMap) {
+  const studentsInDb = await pool.execute('SELECT student_id FROM students');
+  const insertedStudentIDs = studentsInDb[0].map(student => student.student_id);
+
+  // Ellenőrizzük, hogy minden diák felkerült-e
+  for (const student of studentMap.values()) {
+    if (!insertedStudentIDs.includes(student.student_id)) {
+      throw new Error(`A diák nem került fel az adatbázisba: ${student.student_id}`);
+    }
+  }
+}
+
+
+async function triggerUploadStudentGroups() {
+  try {
+    const response = await fetch('http://localhost:3000/api/upload/uploadStudentGroups', {
+      method: 'POST',
+    });
+    if (!response.ok) {
+      throw new Error('Hiba az uploadStudentGroups végpont meghívása közben');
+    }
+  } catch (error) {
+    console.error('Hiba az uploadStudentGroups hívásakor:', error);
+  }
 }

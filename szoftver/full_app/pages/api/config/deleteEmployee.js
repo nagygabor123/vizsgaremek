@@ -80,8 +80,8 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Hiányzó ID paraméter.' });
     }
 
-    if (admin_id === '1' || admin_id === '2') {
-      return res.status(400).json({ error: 'Az ID értéke nem lehet 1 vagy 2.' });
+    if (admin_id === '1' ) { //|| admin_id === '2'
+      return res.status(400).json({ error: 'Az ID értéke nem lehet 1.' });
     }
 
     let connection;

@@ -178,27 +178,33 @@ const Calendar: React.FC = () => {
     fetchLessonTimes();
   }, []);
 
-
   useEffect(() => {
     const fetchTimetables = async () => {
-      const timetables = await Promise.all(
-        students.map(async (student) => {
-          const timetable = await fetchStudentTimetable(student.student_id);
-          return {
-            student_id: student.student_id,
-            first_class_start: timetable.first_class_start,
-            last_class_end: timetable.last_class_end,
-          };
-        })
-      );
-      setStudentTimetable(timetables);
+      try {
+        // Fetch all students' timetable data at once from the new API endpoint
+        const response = await fetch('http://localhost:3000/api/timetable/allScheduleStart');
+        if (!response.ok) {
+          throw new Error('Nem sikerült lekérni az összes diák órarendjét.');
+        }
+  
+        const data = await response.json();
+        // Map the response to match the structure of your state
+        const timetables = data.students.map((student: any) => ({
+          student_id: student.student_id,
+          first_class_start: student.first_class_start,
+          last_class_end: student.last_class_end,
+        }));
+  
+        setStudentTimetable(timetables);
+      } catch (error) {
+        console.error('Hiba történt az órarendek lekérésekor:', error);
+      }
     };
-
+  
     if (students.length > 0) {
       fetchTimetables();
     }
   }, [students]);
-
 
   useEffect(() => {
     async function fetchSchedule() {

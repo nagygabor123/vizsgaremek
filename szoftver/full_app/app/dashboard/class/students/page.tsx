@@ -115,24 +115,31 @@ export default function Home() {
     // Fetch timetable for each student
     useEffect(() => {
         const fetchTimetables = async () => {
-            const timetables = await Promise.all(
-                students.map(async (student) => {
-                    const timetable = await fetchStudentTimetable(student.student_id);
-                    return {
-                        student_id: student.student_id,
-                        first_class_start: timetable.first_class_start,
-                        last_class_end: timetable.last_class_end,
-                    };
-                })
-            );
+          try {
+            // Fetch all students' timetable data at once from the new API endpoint
+            const response = await fetch('http://localhost:3000/api/timetable/allScheduleStart');
+            if (!response.ok) {
+              throw new Error('Nem sikerült lekérni az összes diák órarendjét.');
+            }
+      
+            const data = await response.json();
+            // Map the response to match the structure of your state
+            const timetables = data.students.map((student: any) => ({
+              student_id: student.student_id,
+              first_class_start: student.first_class_start,
+              last_class_end: student.last_class_end,
+            }));
+      
             setStudentTimetable(timetables);
+          } catch (error) {
+            console.error('Hiba történt az órarendek lekérésekor:', error);
+          }
         };
-
+      
         if (students.length > 0) {
-            fetchTimetables();
+          fetchTimetables();
         }
-    }, [students]);
-
+      }, [students]);
     // Handle form input changes
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -450,7 +457,7 @@ export default function Home() {
                                         <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Teljes név <ArrowUpDown className="w-4 h-4 inline-block" /></th>
                                          <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("class")}>Osztály és csoportok<ArrowUpDown className="w-4 h-4 inline-block" /></th> 
                                         <th className="p-2 font-normal">Státusz</th>
-                                        <th className="p-2 font-normal">RFID azonosító</th>
+                                       {/* <th className="p-2 font-normal">RFID azonosító</th>*/}
                                         <th className="p-2 font-normal">Műveletek</th>
                                     </tr>
                                 </thead>
@@ -484,7 +491,7 @@ export default function Home() {
 
 
                                                         </td>
-                                                        <td className="p-1">{student.rfid_tag}</td>
+                                                        {/*<td className="p-1">{student.rfid_tag}</td>*/}
                                                         <td className="p-1">
 
                                                             <Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}> <LockOpen className="w-4 h-4 inline-block" /> {/* {canUnlockStudent ? <LockOpen className="w-4 h-4 inline-block" /> : <LockOpen className="w-4 h-4 inline-block" />}*/}</Button>
