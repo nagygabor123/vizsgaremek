@@ -254,7 +254,7 @@ export default function Home() {
 
     const [sortOrder, setSortOrder] = useState("asc");
     const [searchName, setSearchName] = useState("");
-    const [searchClass, setSearchClass] = useState("13.I");
+    const [searchClass, setSearchClass] = useState(""); //13.I
 
 
 
