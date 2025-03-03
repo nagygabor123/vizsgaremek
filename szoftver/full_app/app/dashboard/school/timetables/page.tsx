@@ -485,7 +485,7 @@ const Calendar: React.FC = () => {
                   <Slash />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Adminisztráció</BreadcrumbPage>
+                  <BreadcrumbPage>Iskolai nyilvántartás</BreadcrumbPage>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
                   <Slash />

@@ -70,13 +70,13 @@ export default function Page() {
                   <Slash />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Rendszer</BreadcrumbPage>
+                  <BreadcrumbPage>Beállítások és naplózás</BreadcrumbPage>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
                   <Slash />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Tevékenységnapló</BreadcrumbPage>
+                  <BreadcrumbPage>Eseménynapló</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>

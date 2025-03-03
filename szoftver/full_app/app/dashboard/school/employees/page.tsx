@@ -43,6 +43,18 @@ import {
 import { Label } from "@/components/ui/label"
 import AppKonfig from '@/components/app-konfig';
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
 
 
 export default function AddEmployeePage() {
@@ -61,7 +73,7 @@ export default function AddEmployeePage() {
   const [editOsztaly, setEditOsztaly] = useState('');
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
- 
+
   //const [open, setOpen] = useState(false);
 
 
@@ -82,15 +94,15 @@ export default function AddEmployeePage() {
       setLoading2(false); // Lekérés vége
     }
   };
-  
+
 
   useEffect(() => {
     fetchStudents();
   }, []);
 
-  
 
-  
+
+
 
   const positions = [
     { label: 'Igazgató', value: 'igazgato' },
@@ -309,13 +321,13 @@ export default function AddEmployeePage() {
                   <Slash />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Adminisztráció</BreadcrumbPage>
+                  <BreadcrumbPage>Iskolai nyilvántartás</BreadcrumbPage>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
                   <Slash />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Alkalmazottak</BreadcrumbPage>
+                  <BreadcrumbPage>Munkatársak</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
@@ -341,18 +353,18 @@ export default function AddEmployeePage() {
           </div> */}
 
 
-<div>
-    {loading2 ? (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-lg font-semibold">Betöltés...</p>
-      </div>
-    ) : (
-      <>
-        {!hasStudents && <AppKonfig />}
-        {/* <p>{hasStudents ? "Már vannak diákok az adatbázisban." : "Nincsenek diákok."}</p> */}
-      </>
-    )}
-  </div>
+          <div>
+            {loading2 ? (
+              <div className="flex items-center justify-center min-h-screen">
+                <p className="text-lg font-semibold">Betöltés...</p>
+              </div>
+            ) : (
+              <>
+                {!hasStudents && <AppKonfig />}
+                {/* <p>{hasStudents ? "Már vannak diákok az adatbázisban." : "Nincsenek diákok."}</p> */}
+              </>
+            )}
+          </div>
 
 
           <div className="p-4">
@@ -497,11 +509,11 @@ export default function AddEmployeePage() {
                 </thead>
                 <tbody>
                   {employees.length === 0 ? (
-                     <tr>
-                     <td colSpan={5} className="text-center p-6 h-dvh text-base text-gray-500">
-                     Nem szerepel alkalmazott a rendszerben
-                     </td>
-                   </tr>
+                    <tr>
+                      <td colSpan={5} className="text-center p-6 h-dvh text-base text-gray-500">
+                        Nem szerepel alkalmazott a rendszerben
+                      </td>
+                    </tr>
                   ) : (
 
                     paginatedEmployees.map((employee) => (
@@ -596,9 +608,26 @@ export default function AddEmployeePage() {
 
 
 
+                          <AlertDialog>
+                            <AlertDialogTrigger>
+                              <Button variant="ghost"><X className="w-4 h-4 inline-block" /></Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>Biztosan törölni szeretné az alkalmazottat?</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                Ez a művelet nem vonható vissza. Az alkalmazott véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Mégse</AlertDialogCancel>
+                                <AlertDialogAction onClick={() => handleDelete(employee.admin_id)}>Véglegesítés</AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
 
 
-                          <Button variant="ghost" onClick={() => handleDelete(employee.admin_id)}><X className="w-4 h-4 inline-block" /></Button>
+                          {/* <Button variant="ghost" onClick={() => handleDelete(employee.admin_id)}><X className="w-4 h-4 inline-block" /></Button>  */}
 
                         </td>
                       </tr>

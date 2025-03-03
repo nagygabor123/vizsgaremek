@@ -413,7 +413,7 @@ const Calendar: React.FC = () => {
                   <Slash />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Tanóráim</BreadcrumbPage>
+                  <BreadcrumbPage>Saját órák</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>

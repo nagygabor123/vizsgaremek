@@ -239,7 +239,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         
   <Link href="/dashboard/timetable">
   <CalendarHeart/>
-    <span>Tanóráim</span>
+    <span>Saját órák</span>
     
   </Link>
  
@@ -249,7 +249,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     </SidebarGroup>
     
           <SidebarGroup>
-          <SidebarGroupLabel>Osztály</SidebarGroupLabel>
+          <SidebarGroupLabel>Osztályom</SidebarGroupLabel>
       <SidebarMenu>
       <SidebarMenuItem>
       <SidebarMenuButton asChild isActive={isActive("/dashboard/class/timetable")}>
@@ -272,7 +272,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
  
 
     <SidebarGroup>
-          <SidebarGroupLabel>Adminisztráció</SidebarGroupLabel>
+          <SidebarGroupLabel>Iskolai nyilvántartás</SidebarGroupLabel>
       <SidebarMenu>
 
 {/*
@@ -328,7 +328,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 <SidebarMenuButton asChild isActive={isActive("/dashboard/school/employees")}>
   <Link href="/dashboard/school/employees">
   <BriefcaseBusiness/>
-    <span>Alkalmazottak</span>
+    <span>Munkatársak</span>
     {loading ? (
      
      <p></p>
@@ -351,7 +351,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
 
     <SidebarGroup>
-          <SidebarGroupLabel>Rendszer</SidebarGroupLabel>
+          <SidebarGroupLabel>Beállítások és naplózás</SidebarGroupLabel>
       <SidebarMenu>
 
       <SidebarMenuItem>
@@ -371,7 +371,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 <SidebarMenuButton asChild isActive={isActive("/dashboard/school/logs")}>
   <Link href="/dashboard/school/logs">
   <FileClock/>
-    <span>Tevékenységnapló</span>
+    <span>Eseménynapló</span>
   </Link>
 </SidebarMenuButton>
 </SidebarMenuItem>

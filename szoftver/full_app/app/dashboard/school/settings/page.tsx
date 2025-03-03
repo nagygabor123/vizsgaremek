@@ -24,6 +24,17 @@ import Link from "next/link";
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 
 import * as React from "react"
@@ -400,7 +411,7 @@ export default function Page() {
                   <Slash />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Rendszer</BreadcrumbPage>
+                  <BreadcrumbPage>Beállítások és naplózás</BreadcrumbPage>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
                   <Slash />
@@ -701,13 +712,36 @@ export default function Page() {
                         <tr key={noSchoolPeriod.id} className="text-center border-t">
                           <td className="p-1">{noSchoolPeriod.end}</td>
                           <td className="p-1">
+                          <AlertDialog>
+                            <AlertDialogTrigger>
                             <Button
+
+variant="ghost"
+
+>
+<Trash2 className="w-4 h-4 inline-block" />
+</Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>Biztosan törölni szeretné ezt a napot?</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                Ez a művelet nem vonható vissza. A tanítási nélküli munkanap véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Mégse</AlertDialogCancel>
+                                <AlertDialogAction onClick={() => handleDeletePlusBreak(noSchoolPeriod.id)}>Véglegesítés</AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
+                            {/* <Button
 
                               variant="ghost"
                               onClick={() => handleDeletePlusBreak(noSchoolPeriod.id)}
                             >
                               <Trash2 className="w-4 h-4 inline-block" />
-                            </Button>
+                            </Button> */}
                           </td>
                         </tr>
                       ))}
@@ -835,9 +869,31 @@ export default function Page() {
                           <td className="p-1">{plusDate.date}</td>
                           <td className="p-1">{plusDate.replaceDay}</td>
                           <td className="p-1">
-                            <Button variant="ghost" onClick={() => handleDeletePlusBreak(plusDate.id)}>
+
+
+                          <AlertDialog>
+                            <AlertDialogTrigger>
+                            <Button variant="ghost">
                               <Trash2 className="w-4 h-4 inline-block" />
                             </Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>Biztosan törölni szeretné ezt a napot?</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                Ez a művelet nem vonható vissza. A szombati tanítási nap véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Mégse</AlertDialogCancel>
+                                <AlertDialogAction onClick={() => handleDeletePlusBreak(plusDate.id)}>Véglegesítés</AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
+
+                            {/* <Button variant="ghost" onClick={() => handleDeletePlusBreak(plusDate.id)}>
+                              <Trash2 className="w-4 h-4 inline-block" />
+                            </Button> */}
                           </td>
                         </tr>
                       ))}
@@ -972,9 +1028,28 @@ export default function Page() {
                             <td className="p-1 truncate">{breakPeriod.name}</td>
                             <td className="p-1">{breakPeriod.start} - {breakPeriod.end}</td>
                             <td className="p-1">
-                              <Button variant="ghost" onClick={() => handleDeletePlusBreak(breakPeriod.id)}>
+                            <AlertDialog>
+                            <AlertDialogTrigger>
+                            <Button variant="ghost">
                                 <Trash2 className="w-4 h-4 inline-block" />
-                              </Button>
+                              </Button> 
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>Biztosan törölni szeretné ezt a szünetet</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                Ez a művelet nem vonható vissza. A szünet véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Mégse</AlertDialogCancel>
+                                <AlertDialogAction onClick={() => handleDeletePlusBreak(breakPeriod.id)}>Véglegesítés</AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
+                              {/* <Button variant="ghost" onClick={() => handleDeletePlusBreak(breakPeriod.id)}>
+                                <Trash2 className="w-4 h-4 inline-block" />
+                              </Button> */}
                             </td>
                           </tr>
                         ))}

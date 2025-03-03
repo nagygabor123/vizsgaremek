@@ -34,15 +34,7 @@ import {
   DialogFooter
 } from "@/components/ui/dialog"
 
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+
 
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { Button } from "@/components/ui/button";
@@ -51,6 +43,17 @@ import '../../../globals.css';
 
 import AppKonfig from '@/components/app-konfig';
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 
 // Diák típus
@@ -347,7 +350,7 @@ export default function Home() {
                   <Slash />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Adminisztráció</BreadcrumbPage>
+                  <BreadcrumbPage>Iskolai nyilvántartás</BreadcrumbPage>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
                   <Slash />
@@ -660,7 +663,27 @@ export default function Home() {
                                 </DialogContent>
                               </Dialog>
 
-                              <Button variant="ghost" onClick={() => handleDelete(student.student_id)}><X /></Button>
+
+
+                              <AlertDialog>
+                            <AlertDialogTrigger>
+                            <Button variant="ghost" ><X /></Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>Biztosan törölni szeretné a tanulót?</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                Ez a művelet nem vonható vissza. A tanuló véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Mégse</AlertDialogCancel>
+                                <AlertDialogAction onClick={() => handleDelete(student.student_id)}>Véglegesítés</AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
+
+                              {/* <Button variant="ghost" onClick={() => handleDelete(student.student_id)}><X /></Button> */}
                             </td>
 
                           </tr>
