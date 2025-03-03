@@ -624,13 +624,13 @@ export default function Home() {
                                     </div>
 
 
-                                    {/*<Input
+                                    <Input
                                       type="text"
                                       name="class"
                                       placeholder="Class"
                                       value={formData.class}
                                       onChange={e => setFormData({ ...formData, class: e.target.value })}
-                                    />*/}
+                                    />
 
 
                                     <div className="grid gap-2">

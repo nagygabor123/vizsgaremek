@@ -699,29 +699,44 @@ const Calendar: React.FC = () => {
                           )}
                         </DialogTrigger>
                         {isToday(day) && isCurrentLesson(lesson) && ( 
-                          <DialogContent>
-                            <DialogHeader>
-                              <DialogTitle>{modalInfo?.lesson}</DialogTitle>
-                              <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
-                              <h3>Osztály: {modalInfo?.className}</h3>
-                              <div>
-                                <h4>Diákok:</h4>
-                                {getStudentsByClass(modalInfo?.className || '').map((student) => {
-                                const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
-                                const currentTime = new Date().toTimeString().slice(0, 5);
-                                const canUnlockStudent = systemClose || studentTimetableData &&
-                                  currentTime >= studentTimetableData.first_class_start &&
-                                  currentTime <= studentTimetableData.last_class_end;
-                                  return (
-                                    <div key={student.student_id} className="student-info">
-                                      <p>{student.full_name} ({student.status})</p>
-                                      <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>Feloldás</Button>
-                                    </div>
-                                  );
-                                })}
-                              </div>
-                            </DialogHeader>
-                          </DialogContent>
+                       <DialogContent>
+                       <DialogHeader>
+                         <DialogTitle className="text-3xl">{modalInfo?.lesson}</DialogTitle>
+                         <DialogDescription className="text-xl">{modalInfo?.time}</DialogDescription>
+                         <h3>{modalInfo?.className}</h3>
+                         <div>                    
+                           <table className="table-auto w-full border-collapse border border-gray-300">
+                             <thead>
+                               <tr className="bg-gray-200">
+                                 <th className="border border-gray-300 px-4 py-2">Név</th>
+                                 <th className="border border-gray-300 px-4 py-2">Állapot</th>
+                                 <th className="border border-gray-300 px-4 py-2">Művelet</th>
+                               </tr>
+                             </thead>
+                             <tbody>
+                               {getStudentsByClass(modalInfo?.className || '').map((student) => {
+                                 const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
+                                 const currentTime = new Date().toTimeString().slice(0, 5);
+                                 const canUnlockStudent = systemClose || studentTimetableData &&
+                                   currentTime >= studentTimetableData.first_class_start &&
+                                   currentTime <= studentTimetableData.last_class_end;
+                                 return (
+                                   <tr key={student.student_id} className="border border-gray-300">
+                                     <td className="border border-gray-300 px-4 py-2">{student.full_name}</td>
+                                     <td className="border border-gray-300 px-4 py-2">{student.status}</td>
+                                     <td className="border border-gray-300 px-4 py-2">
+                                       <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>
+                                         Feloldás
+                                       </Button>
+                                     </td>
+                                   </tr>
+                                 );
+                               })}
+                             </tbody>
+                           </table>
+                         </div>
+                       </DialogHeader>
+                     </DialogContent>
                         )}
                       </Dialog>
                       
