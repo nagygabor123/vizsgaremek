@@ -535,12 +535,12 @@ const Calendar: React.FC = () => {
           </div>
 
           <div className="calendar-grid">
-            {isMobileView ? (
-              <div>
-                <div className="calendar-day">
-                  {format(currentDate, "eeee d", { locale: hu })}
-                </div>
-                {isBreakDay(currentDate) ||
+      {isMobileView ? (
+        <div>
+          <div className="calendar-day">
+            {format(currentDate, "eeee d", { locale: hu })}
+          </div>
+               {isBreakDay(currentDate) ||
                   dailyLessons.length === 0 ||
                   (tanevkezdesDate &&
                     tanevvegeDate &&
@@ -549,65 +549,95 @@ const Calendar: React.FC = () => {
                     Nincsenek tanórák ezen a napon
                   </div>
                 ) : (
-                  lessonTimes.map((time, lessonIndex) => {
-                    const lessonsAtSameTime = dailyLessons.filter(
-                      (lesson) => lesson.start === time.start && lesson.end === time.end
-                    );
+            lessonTimes.map((time, lessonIndex) => {
+              const lessonsAtSameTime = dailyLessons.filter(
+                (lesson) => lesson.start === time.start && lesson.end === time.end
+              );
 
-                    if (lessonsAtSameTime.length === 0) return null;
+              if (lessonsAtSameTime.length === 0) return null;
 
+              return (
+                <div key={lessonIndex} className="calendar-cell">
+                  {lessonsAtSameTime.map((lesson, index) => {
+                    const isCurrent = isCurrentLesson(lesson);
                     return (
-                      <div key={lessonIndex} className="calendar-cell">
-                        {lessonsAtSameTime.map((lesson, index) => (
-                          <Dialog key={index}>
-                            <DialogTrigger asChild>
-                              <div className="lesson-card">
-                                <div className="lesson-index">{lessonIndex + 1}</div>
-                                <div className="lesson-name">{lesson.subject}</div>
-                                <div className="lesson-class">{lesson.class}</div>
-                              </div>
-                            </DialogTrigger>
-                          </Dialog>
-                        ))}
-                      </div>
+                      <Dialog key={`${index}`}>
+                      <DialogTrigger asChild>
+                        {isToday(currentDate) && isCurrentLesson(lesson) ? ( 
+                          <div
+                            className={`lesson-card ${isCurrent ? 'current-lesson' : ''}`}
+                            onClick={() => {
+                              openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
+                              fetchStudents();
+                              fetchSystemStatus();
+                            }}
+                          >
+                            <div className="lesson-index">{lessonIndex + 1}</div>
+                            <div className="lesson-name">{lesson.subject}</div>
+                            <div className="lesson-class">{lesson.class}</div>
+                          </div>
+                        ) : (
+                          <div
+                            className="lesson-card disabled-lesson" 
+                          >
+                            <div className="lesson-index">{lessonIndex + 1}</div>
+                            <div className="lesson-name">{lesson.subject}</div>
+                            <div className="lesson-class">{lesson.class}</div>
+                          </div>
+                        )}
+                      </DialogTrigger>
+    
+                      {isToday(currentDate) && isCurrentLesson(lesson) && ( 
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>{modalInfo?.lesson}</DialogTitle>
+                            <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
+                            <h3>Osztály: {modalInfo?.className}</h3>
+                            <div>
+                              <h4>Diákok:</h4>
+                              {getStudentsByClass(modalInfo?.className || '').map((student) => {
+                              const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
+                              const currentTime = new Date().toTimeString().slice(0, 5);
+                              const canUnlockStudent = systemClose || studentTimetableData &&
+                                currentTime >= studentTimetableData.first_class_start &&
+                                currentTime <= studentTimetableData.last_class_end;
+                                return (
+                                  <div key={student.student_id} className="student-info">
+                                    <p>{student.full_name} ({student.status})</p>
+                                    <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>Feloldás</Button>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </DialogHeader>
+                        </DialogContent>
+                      )}
+                    </Dialog>
                     );
-                  })
-                )}
-              </div>
-            ) : (
-              <>
-                <div className="calendar-day"></div>
-                {daysOfWeek.map((day, index) => (
-                  <div
-                    className={`calendar-day ${isToday(day) ? "current-day" : ""}`}
-                    key={index}
-                  >
-                    {format(day, "EEE d", { locale: hu })}
-                  </div>
-                ))}
+                  })}
+                </div>
+              );
+            })
+          )}
+        </div>
+      ) : (
+        <>
+          <div className="calendar-day"></div>
+          {daysOfWeek.map((day, index) => (
+            <div className={`calendar-day ${isToday(day) ? "current-day" : ""}`} key={index}>
+              {format(day, "EEE d", { locale: hu })}
+            </div>
+          ))}
 
-                {lessonTimes.length === 0 ||
-                  daysOfWeek.every(
-                    (day) =>
-                      !schedule.some(
-                        (lesson) =>
-                          lesson.day === getReplacedDayName(day) &&
-                          lessonTimes.some(
-                            (time) => lesson.start === time.start && lesson.end === time.end
-                          )
-                      )
-                  ) ? (
-                  <div className="flex items-center justify-center h-dvh text-base text-gray-500 col-span-full">
-                    Nincsenek tanórák ezen a héten
-                  </div>
-                ) : (
-                  lessonTimes.map((time, lessonIndex) => (
-                    <React.Fragment key={lessonIndex}>
-                      <div className="lesson-time">
-                        <span className="time-start">{time.start}</span>
-                        <span className="time-end">{time.end}</span>
-                      </div>
-                      {daysOfWeek.map((day, dayIndex) => {
+          {lessonTimes.map((time, lessonIndex) => (
+            <React.Fragment key={lessonIndex}>
+              <div className="lesson-time">
+                <span className="time-start">{time.start}</span>
+                <span className="time-end">{time.end}</span>
+              </div>
+          
+
+      {daysOfWeek.map((day, dayIndex) => {
                         if (
                           tanevkezdesDate &&
                           tanevvegeDate &&
@@ -618,42 +648,85 @@ const Calendar: React.FC = () => {
                           );
                         }
 
-                        const dayName = getReplacedDayName(day);
-                        const dailyLessons = schedule.filter(
-                          (lesson) => lesson.day === dayName
-                        );
-                        const lessonsAtSameTime = dailyLessons.filter(
-                          (l) => l.start === time.start && l.end === time.end
-                        );
 
-                        if (lessonsAtSameTime.length === 0 || isBreakDay(day)) {
-                          return (
-                            <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell empty" />
-                          );
-                        }
 
-                        return (
-                          <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell">
-                            {lessonsAtSameTime.map((lesson, index) => (
-                              <Dialog key={`${lessonIndex}-${dayIndex}-${index}`}>
-                                <DialogTrigger asChild>
-                                  <div className="lesson-card">
-                                    <div className="lesson-index">{lessonIndex + 1}</div>
-                                    <div className="lesson-name">{lesson.subject}</div>
-                                    <div className="lesson-class">{lesson.class}</div>
-                                  </div>
-                                </DialogTrigger>
-                              </Dialog>
-                            ))}
-                          </div>
-                        );
-                      })}
-                    </React.Fragment>
-                  ))
-                )}
-              </>
-            )}
-          </div>
+                const dayName = getReplacedDayName(day);
+                const dailyLessons = schedule.filter((lesson) => lesson.day === dayName);
+                const lessonsAtSameTime = dailyLessons.filter(
+                  (l) => l.start === time.start && l.end === time.end
+                );
+
+                if (lessonsAtSameTime.length === 0 || isBreakDay(day)) {
+                  return <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell empty" />;
+                }
+
+                return (
+                  <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell">
+                    {lessonsAtSameTime.map((lesson, index) => {
+                      const isCurrent = isToday(day) && isCurrentLesson(lesson);
+                      return (
+                        <Dialog key={`${lessonIndex}-${dayIndex}-${index}`}>
+                        <DialogTrigger asChild>
+                          {isToday(day) && isCurrentLesson(lesson) ? ( 
+                            <div
+                              className={`lesson-card ${isCurrent ? 'current-lesson' : ''}`}
+                              onClick={() => {
+                                openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
+                                fetchStudents();
+                                fetchSystemStatus(); 
+                              }}
+                            >
+                              <div className="lesson-index">{lessonIndex + 1}</div>
+                              <div className="lesson-name">{lesson.subject}</div>
+                              <div className="lesson-class">{lesson.class}</div>
+                            </div>
+                          ) : (
+                            <div
+                              className="lesson-card disabled-lesson" 
+                            >
+                              <div className="lesson-index">{lessonIndex + 1}</div>
+                              <div className="lesson-name">{lesson.subject}</div>
+                              <div className="lesson-class">{lesson.class}</div>
+                            </div>
+                          )}
+                        </DialogTrigger>
+                        {isToday(day) && isCurrentLesson(lesson) && ( 
+                          <DialogContent>
+                            <DialogHeader>
+                              <DialogTitle>{modalInfo?.lesson}</DialogTitle>
+                              <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
+                              <h3>Osztály: {modalInfo?.className}</h3>
+                              <div>
+                                <h4>Diákok:</h4>
+                                {getStudentsByClass(modalInfo?.className || '').map((student) => {
+                                const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
+                                const currentTime = new Date().toTimeString().slice(0, 5);
+                                const canUnlockStudent = systemClose || studentTimetableData &&
+                                  currentTime >= studentTimetableData.first_class_start &&
+                                  currentTime <= studentTimetableData.last_class_end;
+                                  return (
+                                    <div key={student.student_id} className="student-info">
+                                      <p>{student.full_name} ({student.status})</p>
+                                      <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>Feloldás</Button>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </DialogHeader>
+                          </DialogContent>
+                        )}
+                      </Dialog>
+                      
+                      );
+                    })}
+                  </div>
+                );
+              })}
+            </React.Fragment>
+          ))}
+        </>
+      )}
+    </div>
 
         </div>
 
