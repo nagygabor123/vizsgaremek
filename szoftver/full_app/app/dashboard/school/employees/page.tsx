@@ -47,6 +47,8 @@ import AppKonfig from '@/components/app-konfig';
 
 export default function AddEmployeePage() {
 
+
+  const [isDialogOpen2, setIsDialogOpen2] = useState(false);
   const [fullName, setFullName] = useState('');
   const [position, setPosition] = useState('');
   const [osztaly, setOsztaly] = useState('');
@@ -59,7 +61,8 @@ export default function AddEmployeePage() {
   const [editOsztaly, setEditOsztaly] = useState('');
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [open, setOpen] = useState(false);
+ 
+  //const [open, setOpen] = useState(false);
 
 
   const [students, setStudents] = useState<any[]>([]);
@@ -186,6 +189,8 @@ export default function AddEmployeePage() {
     setEditOsztaly(employee.osztalyfonok);
   };
 
+  const [open, setOpen] = useState(false);
+
   const handleUpdate = async () => {
     if (!editId) return;
 
@@ -204,6 +209,7 @@ export default function AddEmployeePage() {
         setEditOsztaly('');
         fetchEmployees();
         setOpen(false);
+        //setIsDialogOpen2(false);
       } else {
         setMessage(data.message || 'Error updating employee');
       }
