@@ -81,9 +81,9 @@ function generatePassword(length = 12) {
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { full_name, position,osztalyfonok } = req.body;
+    const { full_name, position,osztalyfonok,short_name } = req.body;
 
-    if (!full_name || !position ||!osztalyfonok) {
+    if (!full_name || !position ||!osztalyfonok||!short_name) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
@@ -102,8 +102,8 @@ export default async function handler(req, res) {
 
       // Az admin hozzáadása az új admin_id-val
       await db.execute(
-        'INSERT INTO admins (admin_id, full_name, password, position,osztalyfonok) VALUES (?, ?, ?, ?, ?)',
-        [nextAdminId, full_name, password, position,osztalyfonok]
+        'INSERT INTO admins (admin_id, full_name, password, position,osztalyfonok,short_name) VALUES (?, ?, ?, ?, ?,?)',
+        [nextAdminId, full_name, password, position,osztalyfonok,short_name]
       );
       
       res.status(201).json({ message: 'Admin created', password }); 

@@ -69,6 +69,7 @@ export default function AddEmployeePage() {
   const [employees, setEmployees] = useState<any[]>([]);
   const [editId, setEditId] = useState<number | null>(null);
   const [editName, setEditName] = useState('');
+  const [shortname, setShortName] = useState('');
   const [editPosition, setEditPosition] = useState('');
   const [editOsztaly, setEditOsztaly] = useState('');
 
@@ -158,12 +159,13 @@ export default function AddEmployeePage() {
       const response = await fetch('http://localhost:3000/api/config/addEmployee', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ full_name: fullName, position: position, osztalyfonok: osztaly }),
+        body: JSON.stringify({ full_name: fullName, position: position, osztalyfonok: osztaly, short_name: shortname }),
       });
       const data = await response.json();
       if (response.ok) {
         setMessage('Employee added successfully');
         setFullName('');
+        setShortName('');
         setPosition('');
         setOsztaly('');
         fetchEmployees();
@@ -414,7 +416,7 @@ export default function AddEmployeePage() {
 
               </div>
 
-             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogTrigger asChild>
                   <Button variant="outline" className="ml-auto" ><CirclePlus /> Új alkalmazott hozzáadás</Button>
                 </DialogTrigger>
@@ -438,6 +440,19 @@ export default function AddEmployeePage() {
                         onChange={(e) => setFullName(e.target.value)}
                       />
                     </div>
+
+                    <div className="grid gap-2">
+                      <Label htmlFor="fullName">Felhasználónév</Label>
+                      <Input
+                        className="col-span-3"
+                        id="fullName"
+                        type="text"
+                        placeholder=""
+                        value={shortname}
+                        onChange={(e) => setShortName(e.target.value)}
+                      />
+                    </div>
+
 
 
                     <div className="grid gap-2">
@@ -502,6 +517,7 @@ export default function AddEmployeePage() {
                 <thead className="text-center text-sm text-neutral-500">
                   <tr>
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Név  <ArrowUpDown className="w-4 h-4 inline-block" /></th>
+                    <th className="p-2  font-normal">Felhasználónév</th>
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("position")}>Pozíció  <ArrowUpDown className="w-4 h-4 inline-block" /></th>
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("osztalyfonok")}>Osztály <ArrowUpDown className="w-4 h-4 inline-block" /></th>
                     <th className="p-2 cursor-pointer font-normal">Műveletek</th>
@@ -518,6 +534,7 @@ export default function AddEmployeePage() {
 
                     paginatedEmployees.map((employee) => (
                       <tr key={employee.admin_id} className="text-center border-t">
+                        <td className="p-1">{employee.short_name}</td>
                         <td className="p-1">{employee.full_name}</td>
                         <td className="p-1">
                           {positions.find((pos) => pos.value === employee.position)?.label || employee.position}
@@ -609,14 +626,14 @@ export default function AddEmployeePage() {
 
 
                           <AlertDialog>
-                            <AlertDialogTrigger disabled={employee.position === 'Tanár'} >
-                              <Button disabled={employee.position === 'Tanár'} variant="ghost"><X className="w-4 h-4 inline-block" /></Button>
+                            <AlertDialogTrigger disabled={employee.position === 'Tanár'|| employee.position === "igazgato"} >
+                              <Button disabled={employee.position === 'Tanár' || employee.position === "igazgato"} variant="ghost"><X className="w-4 h-4 inline-block" /></Button>
                             </AlertDialogTrigger>
                             <AlertDialogContent>
                               <AlertDialogHeader>
                                 <AlertDialogTitle>Biztosan törölni szeretné az alkalmazottat?</AlertDialogTitle>
                                 <AlertDialogDescription>
-                                Ez a művelet nem vonható vissza. Az alkalmazott véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
+                                  Ez a művelet nem vonható vissza. Az alkalmazott véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
                                 </AlertDialogDescription>
                               </AlertDialogHeader>
                               <AlertDialogFooter>
