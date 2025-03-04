@@ -414,7 +414,7 @@ export default function AddEmployeePage() {
 
               </div>
 
-              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogTrigger asChild>
                   <Button variant="outline" className="ml-auto" ><CirclePlus /> Új alkalmazott hozzáadás</Button>
                 </DialogTrigger>
@@ -609,8 +609,8 @@ export default function AddEmployeePage() {
 
 
                           <AlertDialog>
-                            <AlertDialogTrigger>
-                              <Button variant="ghost"><X className="w-4 h-4 inline-block" /></Button>
+                            <AlertDialogTrigger disabled={employee.position === 'Tanár'} >
+                              <Button disabled={employee.position === 'Tanár'} variant="ghost"><X className="w-4 h-4 inline-block" /></Button>
                             </AlertDialogTrigger>
                             <AlertDialogContent>
                               <AlertDialogHeader>
