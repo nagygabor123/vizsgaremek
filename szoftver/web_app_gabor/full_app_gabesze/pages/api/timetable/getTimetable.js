@@ -3,7 +3,7 @@ import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
-    const teacherName = 'KiGI'; 
+    const teacherName = 'PaZo'; 
 
     let connection;
 

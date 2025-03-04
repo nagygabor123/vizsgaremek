@@ -10,8 +10,7 @@ export const config = {
 };
 
 const RESERVED_IDS = new Set(["OM11111", "OM22222", "OM33333", "OM44444"]);
-let baseID = 55555;
-
+let baseID = 7000;
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -49,49 +48,42 @@ export default async function handler(req, res) {
           return acc;
         }, {});
       
-        const lastName = rowData['Vezeteknev'];
-        const firstName = rowData['Utonev'];
-        const fullName = `${lastName} ${firstName}`;
+        const fullName = rowData['Nev'];
+        const studentClass = rowData['Osztalyok'];
       
-        // Javított split regex a csoportokhoz
-        let classGroups = rowData['Csoport']
-          ? rowData['Csoport']
-              .split(/[,\s]+/) // Vesszők ÉS szóközök szerint felbontás
-              .map(item => item.trim())
-              .filter(item => item.length > 0)
-          : [];
-      
-        if (studentMap.has(fullName)) {
-          const existingClassGroups = new Set(studentMap.get(fullName).class.split(','));
-          classGroups.forEach(group => existingClassGroups.add(group));
-          studentMap.get(fullName).class = Array.from(existingClassGroups).join(',');
-        } else {
+        if (!studentMap.has(fullName)) {
           studentMap.set(fullName, {
             student_id: generateStudentID(),
             full_name: fullName,
-            class: classGroups.join(','),
+            class: studentClass,
             rfid_tag: generateRFID(),
             access: 'zarva',
           });
         }
       });
-
-      const insertQuery = 'INSERT INTO students (student_id, full_name, class, rfid_tag, access) VALUES (?, ?, ?, ?, ?)';
       
-      for (const student of studentMap.values()) {
-        try {
-          await pool.execute(insertQuery, [
-            student.student_id,
-            student.full_name,
-            student.class,
-            student.rfid_tag,
-            student.access
-          ]);
-        } catch (dbError) {
-          console.error('Adatbázis hiba:', dbError);
-          return res.status(500).json({ error: 'Hiba történt az adatok mentésekor' });
-        }
-      }
+      console.log(`A diákok száma: ${studentMap.size}`);  // Ellenőrzés
+      
+     // INSERT lekérdezés előkészítése
+const insertQuery = 'INSERT INTO students (student_id, full_name, class, rfid_tag, access) VALUES (?, ?, ?, ?, ?)';
+
+for (const student of studentMap.values()) {
+  try {
+    // A diák beszúrása az adatbázisba
+    await pool.execute(insertQuery, [
+      student.student_id,
+      student.full_name,
+      student.class,
+      student.rfid_tag,
+      student.access,
+    ]);
+  } catch (dbError) {
+    console.error('Adatbázis hiba:', dbError);
+    return res.status(500).json({ error: 'Hiba történt az adatok mentésekor' });
+  }
+}
+
+      
 
       await checkStudentsInserted(pool, studentMap);
       await triggerUploadStudentGroups();
@@ -115,6 +107,7 @@ function generateStudentID() {
   return id;
 }
 
+
 function generateRFID() {
   return crypto.randomBytes(4).toString('hex').toUpperCase(); // 8 karakteres RFID
 }
@@ -130,7 +123,6 @@ async function checkStudentsInserted(pool, studentMap) {
     }
   }
 }
-
 
 async function triggerUploadStudentGroups() {
   try {
