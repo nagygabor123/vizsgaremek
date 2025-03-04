@@ -17,12 +17,15 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Csak a POST metódus használható' });
   }
 
-  const form = new multiparty.Form();
+  const form = new multiparty.Form({
+    maxFieldsSize: 20 * 1024 * 1024, // 20MB
+    maxFilesSize: 50 * 1024 * 1024,  // 50MB
+  });
 
   form.parse(req, async (err, fields, files) => {
     if (err) {
-      console.error('Hiba a CSV fájl feldolgozásakor:', err);
-      return res.status(500).json({ error: 'Hiba a CSV fájl feldolgozásakor' });
+      console.error('Hiba a fájl feldolgozásakor:', err);
+      return res.status(500).json({ error: 'Hiba a fájl feldolgozásakor' });
     }
 
     const file = files.file?.[0];
@@ -33,62 +36,57 @@ export default async function handler(req, res) {
     let pool;
     try {
       pool = await connectToDatabase();
-
       const filePath = file.path;
       const csvData = fs.readFileSync(filePath, 'utf8');
-      const rows = csvData.split('\n').filter(Boolean);
-      const header = rows.shift().split(';');
-      
-      const studentMap = new Map();
+
+      // Megfelelő sorok kinyerése
+      const rows = csvData.split(/\r?\n/).map(row => row.trim()).filter(row => row.length > 0);
+      if (rows.length < 2) {
+        return res.status(400).json({ error: 'Üres vagy érvénytelen CSV fájl' });
+      }
+
+      const header = rows.shift().split(';').map(h => h.trim());
+      const students = [];
 
       rows.forEach((row) => {
-        const values = row.split(';');
+        const values = row.split(';').map(v => v.trim());
         const rowData = header.reduce((acc, key, index) => {
-          acc[key.trim()] = values[index]?.trim();
+          acc[key] = values[index] || ''; 
           return acc;
         }, {});
-      
+
         const fullName = rowData['Nev'];
         const studentClass = rowData['Osztalyok'];
-      
-        if (!studentMap.has(fullName)) {
-          studentMap.set(fullName, {
-            student_id: generateStudentID(),
-            full_name: fullName,
-            class: studentClass,
-            rfid_tag: generateRFID(),
-            access: 'zarva',
-          });
+
+        if (!fullName || !studentClass) {
+          console.warn('Hiányzó adatok egy sorban:', rowData);
+          return; 
         }
+
+        students.push([
+          generateStudentID(),
+          fullName,
+          studentClass,
+          generateRFID(),
+          'zarva',
+        ]);
       });
-      
-      console.log(`A diákok száma: ${studentMap.size}`);  // Ellenőrzés
-      
-     // INSERT lekérdezés előkészítése
-const insertQuery = 'INSERT INTO students (student_id, full_name, class, rfid_tag, access) VALUES (?, ?, ?, ?, ?)';
 
-for (const student of studentMap.values()) {
-  try {
-    // A diák beszúrása az adatbázisba
-    await pool.execute(insertQuery, [
-      student.student_id,
-      student.full_name,
-      student.class,
-      student.rfid_tag,
-      student.access,
-    ]);
-  } catch (dbError) {
-    console.error('Adatbázis hiba:', dbError);
-    return res.status(500).json({ error: 'Hiba történt az adatok mentésekor' });
-  }
-}
+      console.log(`Összes diák: ${students.length}`);
 
-      
+      // **BATCH INSERT** - Egyetlen SQL parancs több beillesztéssel
+      if (students.length > 0) {
+        const placeholders = students.map(() => '(?, ?, ?, ?, ?)').join(', ');
+        const values = students.flat();
+        const insertQuery = `INSERT INTO students (student_id, full_name, class, rfid_tag, access) VALUES ${placeholders}`;
+        
+        await pool.execute(insertQuery, values);
+      }
 
-      await checkStudentsInserted(pool, studentMap);
+      await checkStudentsInserted(pool, students);
       await triggerUploadStudentGroups();
-      
-      return res.status(200).json({ message: 'A diákok sikeresen hozzáadva' });
+
+      return res.status(200).json({ message: `Sikeresen hozzáadva: ${students.length} diák` });
 
     } catch (error) {
       console.error('Hiba a fájl feldolgozása közben:', error);
@@ -107,19 +105,17 @@ function generateStudentID() {
   return id;
 }
 
-
 function generateRFID() {
-  return crypto.randomBytes(4).toString('hex').toUpperCase(); // 8 karakteres RFID
+  return crypto.randomBytes(4).toString('hex').toUpperCase();
 }
 
-async function checkStudentsInserted(pool, studentMap) {
-  const studentsInDb = await pool.execute('SELECT student_id FROM students');
-  const insertedStudentIDs = studentsInDb[0].map(student => student.student_id);
+async function checkStudentsInserted(pool, students) {
+  const [studentsInDb] = await pool.execute('SELECT student_id FROM students');
+  const insertedStudentIDs = studentsInDb.map(student => student.student_id);
 
-  // Ellenőrizzük, hogy minden diák felkerült-e
-  for (const student of studentMap.values()) {
-    if (!insertedStudentIDs.includes(student.student_id)) {
-      throw new Error(`A diák nem került fel az adatbázisba: ${student.student_id}`);
+  for (const student of students) {
+    if (!insertedStudentIDs.includes(student[0])) {
+      throw new Error(`A diák nem került fel az adatbázisba: ${student[0]}`);
     }
   }
 }
