@@ -89,13 +89,21 @@ export default async function handler(req, res) {
         'INSERT INTO students (student_id, full_name, class, rfid_tag) VALUES (?, ?, ?, ?)',
         [student_id, full_name, studentClass, rfid_tag]
       );
-      res.status(201).json({ message: 'Student created' });
+
+      const [maxLocker] = await db.query('SELECT MAX(locker_id) AS max_id FROM lockers;');
+      let nextLockerId = maxLocker[0].max_id ? maxLocker[0].max_id + 1 : 8;
+
+      await db.execute('INSERT INTO lockers (locker_id, status) VALUES (?, ?);', [nextLockerId, 'ki']);
+      await db.execute('INSERT INTO locker_relationships (rfid_tag, locker_id) VALUES (?, ?);', [rfid_tag, nextLockerId]);
+
+      res.status(201).json({ message: 'Student and locker relationship created', locker_id: nextLockerId });
     } catch (error) {
-      res.status(500).json({ message: 'Error creating student' });
+      res.status(500).json({ message: 'Error creating student and locker relationship', error: error.message });
     } finally {
-      await db.end(); // Close the database connection
+      await db.end(); 
     }
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });
   }
 }
+
