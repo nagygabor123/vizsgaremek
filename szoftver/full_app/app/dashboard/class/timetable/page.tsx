@@ -2,7 +2,7 @@
 
 
 import { AppSidebar } from "@/components/app-sidebar"
-import { ChevronRight, ChevronLeft, Slash} from "lucide-react"
+import { ChevronRight, ChevronLeft, Slash } from "lucide-react"
 
 
 import {
@@ -49,7 +49,7 @@ import {
 } from "@/components/ui/avatar"
 import Link from "next/link";
 
- 
+
 import {
   Select,
   SelectContent,
@@ -186,7 +186,7 @@ const Calendar: React.FC = () => {
         if (!response.ok) {
           throw new Error('Nem sikerült lekérni az összes diák órarendjét.');
         }
-  
+
         const data = await response.json();
         // Map the response to match the structure of your state
         const timetables = data.students.map((student: any) => ({
@@ -194,22 +194,23 @@ const Calendar: React.FC = () => {
           first_class_start: student.first_class_start,
           last_class_end: student.last_class_end,
         }));
-  
+
         setStudentTimetable(timetables);
       } catch (error) {
         console.error('Hiba történt az órarendek lekérésekor:', error);
       }
     };
-  
+
     if (students.length > 0) {
       fetchTimetables();
     }
   }, [students]);
 
+  const teacher = 'PaZo';
   useEffect(() => {
     async function fetchSchedule() {
       try {
-        const response = await fetch('http://localhost:3000/api/timetable/getTeacherTimetable');
+        const response = await fetch(`http://localhost:3000/api/timetable/getTeacherTimetable?teacherName=${teacher}`);
         const data = await response.json();
         const formattedData = data.map((lesson: any) => ({
           day: lesson.day_of_week,
@@ -269,7 +270,7 @@ const Calendar: React.FC = () => {
   };
   const isBreakDay = (date: Date) => {
     if (!breakdate || breakdate.length === 0) return false;
-    
+
     const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     return breakdate.some(({ start, end }) => {
       const startDate = new Date(start);
@@ -327,10 +328,10 @@ const Calendar: React.FC = () => {
     return students.filter((student) => {
       const studentClasses = student.class.split(',').map((item) => item.trim());
       const classNames = className.split(',').map((item) => item.trim());
-      
+
       console.log("Student classes:", studentClasses);
       console.log("Search classes:", classNames);
-  
+
       return studentClasses.some((cls) => classNames.includes(cls));
     });
   };
@@ -434,7 +435,7 @@ const Calendar: React.FC = () => {
               <span>{format(currentDate, 'yyyy MMMM', { locale: hu })}</span>
             </h2>
             <div className="calendar-controls">
-            <Select disabled>
+              <Select disabled>
                 <SelectTrigger>
                   <SelectValue placeholder="Osztály neve" />
                 </SelectTrigger>

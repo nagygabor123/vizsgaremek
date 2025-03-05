@@ -212,10 +212,11 @@ const Calendar: React.FC = () => {
   }, [students]);
 
 
+  const teacher = 'PaZo';
   useEffect(() => {
     async function fetchSchedule() {
       try {
-        const response = await fetch('http://localhost:3000/api/timetable/getTeacherTimetable');
+        const response = await fetch(`http://localhost:3000/api/timetable/getTeacherTimetable?teacherName=${teacher}`);
         const data = await response.json();
         const formattedData = data.map((lesson: any) => ({
           day: lesson.day_of_week,
@@ -233,7 +234,6 @@ const Calendar: React.FC = () => {
 
     fetchSchedule();
   }, []);
-
 
   useEffect(() => {
     const fetchAdditionalData = async () => {
@@ -739,15 +739,15 @@ const Calendar: React.FC = () => {
                                     <DialogHeader>
                                       <DialogTitle className="text-3xl">{modalInfo?.lesson}</DialogTitle>
                                       {/*  <DialogDescription className="text-xl"> {modalInfo?.className} {modalInfo?.time}</DialogDescription>*/}
-                                      
+
                                       <h3>{modalInfo?.time}</h3>
                                       <h3>{modalInfo?.className}</h3>
 
 
-                               
 
 
-                                
+
+
 
                                       <div className="rounded-md border mt-5">
                                         <table className="w-full">

@@ -24,12 +24,12 @@ export default async function handler(req, res) {
           JOIN student_groups sg ON sg.group_id = c.group_id
           JOIN students s ON s.student_id = sg.student_id
           JOIN admins a ON t.admin_id = a.admin_id
-          JOIN ring_times r ON t.start_time = r.start_time  -- vagy egy másik megfelelő összekötés!
+          JOIN ring_times r ON t.start_time = r.start_time  
           WHERE FIND_IN_SET(?, s.class) > 0
           GROUP BY 
               t.day_of_week, r.start_time, r.end_time, c.group_name, a.short_name
           ORDER BY 
-              FIELD(t.day_of_week, 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'),
+              FIELD(t.day_of_week,'monday', 'tuesday', 'wednesday', 'thursday', 'friday'),
               r.start_time;`,
         [className]
       );
