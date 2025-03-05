@@ -209,7 +209,7 @@ const Calendar: React.FC = () => {
   useEffect(() => {
     async function fetchSchedule() {
       try {
-        const response = await fetch('http://localhost:3000/api/timetable/getTimetable');
+        const response = await fetch('http://localhost:3000/api/timetable/getTeacherTimetable');
         const data = await response.json();
         const formattedData = data.map((lesson: any) => ({
           day: lesson.day_of_week,

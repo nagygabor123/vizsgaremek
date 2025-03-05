@@ -1,7 +1,7 @@
 // pages/api/timetable/admin.js
 /**
  * @swagger
- * /api/timetable/admin:
+ * /api/timetable/getTeacherTimetable:
  *   get:
  *     summary: Tanári órarend lekérése
  *     description: A GET kérés lekéri a megadott tanár órarendi adatait a napok és időpontok szerint, csoportok és diákok számára.
@@ -66,7 +66,7 @@ import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
-    const teacherName = 'PaZo'; 
+    const teacherName = 'KiGI'; 
 
     let connection;
 
@@ -74,30 +74,34 @@ export default async function handler(req, res) {
       connection = await connectToDatabase();
 
       const [results] = await connection.execute(
-        `SELECT DISTINCT
-            tg.day_of_week, 
-            tg.start_time, 
-            tg.end_time, 
-            \`groups\`.group_name, 
-            a.full_name AS teacher_name, 
-            s.class AS 'class'
+        `    
+          SELECT 
+              t.day_of_week,
+              t.start_time,
+              t.end_time,
+              GROUP_CONCAT(c.group_name ORDER BY c.group_name SEPARATOR ', ') AS class,
+              t.group_name AS group_name,
+              a.short_name AS teacher_name
           FROM 
-            timetables tg
+              timetables t
           JOIN 
-            \`groups\` ON tg.group_id = \`groups\`.group_id
+              group_relations gr ON t.timetable_id = gr.timetable_id
           JOIN 
-            admins a ON tg.admin_id = a.admin_id
+              csoportok c ON gr.group_id = c.group_id  
           JOIN 
-            student_groups sg ON \`groups\`.group_id = sg.group_id
-          JOIN 
-            students s ON sg.student_id = s.student_id
+              admins a ON t.admin_id = a.admin_id
           WHERE 
-            a.full_name = ?
+              a.short_name = ?
+          GROUP BY 
+              t.day_of_week, t.start_time, t.end_time, t.group_name, a.short_name
           ORDER BY 
-            tg.day_of_week, tg.start_time;`,
+              FIELD(t.day_of_week, 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'),
+              t.start_time;
+        `,
         [teacherName]
       );
-
+      
+      
       return res.status(200).json(results);
 
     } catch (error) {
