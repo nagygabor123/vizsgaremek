@@ -84,7 +84,8 @@ export default async function handler(req, res) {
       }
 
       await checkStudentsInserted(pool, students);
-      await triggerUploadStudentGroups();
+      await UploadStudentGroups();
+      await uploadLockerRelations();
 
       return res.status(200).json({ message: `Sikeresen hozzáadva: ${students.length} diák` });
 
@@ -120,9 +121,22 @@ async function checkStudentsInserted(pool, students) {
   }
 }
 
-async function triggerUploadStudentGroups() {
+async function UploadStudentGroups() {
   try {
     const response = await fetch('http://localhost:3000/api/upload/uploadStudentGroups', {
+      method: 'POST',
+    });
+    if (!response.ok) {
+      throw new Error('Hiba az uploadStudentGroups végpont meghívása közben');
+    }
+  } catch (error) {
+    console.error('Hiba az uploadStudentGroups hívásakor:', error);
+  }
+}
+
+async function uploadLockerRelations() {
+  try {
+    const response = await fetch('http://localhost:3000/api/upload/uploadStudLockRelations', {
       method: 'POST',
     });
     if (!response.ok) {

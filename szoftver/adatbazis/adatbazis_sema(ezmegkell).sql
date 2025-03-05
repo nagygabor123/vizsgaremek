@@ -102,7 +102,7 @@ INSERT INTO `admins` (`admin_id`, `full_name`, `password`, `position`,`osztalyfo
 (1, 'szalkai', 'piciakukija', 'senki','nincs','SSSS'),
 (2, 'nagy', 'nagyakukija', 'igazgató','nincs','GGGG');
 
-
+/*
 INSERT INTO `lockers` (`locker_id`, `status`) VALUES
 (2, 'ki'),
 (5, 'ki'),
@@ -122,7 +122,7 @@ INSERT INTO `locker_relationships` (`relationship_id`, `rfid_tag`, `locker_id`) 
 (2, '030FC70A', 6),
 (3, 'F7F59C7A', 7),
 (4, '53D00E3E', 5);
-
+*/
 
 INSERT INTO `system_status` (`id`, `status`) VALUES
 (1, 'nyitva');
