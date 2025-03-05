@@ -94,15 +94,58 @@ export default async function handler(req, res) {
 
     const db = await connectToDatabase();
     try {
-      await db.execute(
-        'UPDATE students SET full_name = ?, class = ?, rfid_tag = ? WHERE student_id = ?',
-        [full_name, studentClass, rfid_tag, student_id]
+      const [existingLocker] = await db.execute(
+        'SELECT relationship_id, locker_id FROM locker_relationships WHERE rfid_tag = ?',
+        [rfid_tag]
       );
-      res.status(200).json({ message: 'Student updated' });
+
+      if (existingLocker.length > 0) {
+        // Call the API to delete the student
+        const deleteResponse = await fetch(`http://localhost:3000/api/students/delete`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ student_id }),
+        });
+
+        if (!deleteResponse.ok) {
+          return res.status(500).json({ message: 'Failed to delete student' });
+        }
+      }
+
+      // Call the API to create the student again, preserving the locker relationship
+      const createResponse = await fetch(`http://localhost:3000/api/students/create`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          student_id,
+          full_name,
+          class: studentClass,
+          rfid_tag,
+        }),
+      });
+
+      if (!createResponse.ok) {
+        return res.status(500).json({ message: 'Failed to create student' });
+      }
+
+      // If locker relationship exists, update it to maintain the old locker_id
+      if (existingLocker.length > 0) {
+        await db.execute(
+          'INSERT INTO locker_relationships (locker_id, rfid_tag) VALUES (?, ?)',
+          [existingLocker[0].locker_id, rfid_tag]
+        );
+      }
+
+      res.status(200).json({ message: 'Student and locker relationship updated successfully' });
     } catch (error) {
-      res.status(500).json({ message: 'Error updating student' });
+      console.error('Error updating student:', error);  
+      res.status(500).json({ message: 'Error updating student and locker relationship' });
     } finally {
-      await db.end();  
+      await db.end();
     }
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });
