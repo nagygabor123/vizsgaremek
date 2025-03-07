@@ -1,4 +1,4 @@
-import { connectToDatabase } from '@/lib/db';
+import { neon } from '@neondatabase/serverless';
 import fs from 'fs';
 import multiparty from 'multiparty';
 import crypto from 'crypto';
@@ -33,9 +33,8 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Nincs fájl feltöltve' });
     }
 
-    let pool;
     try {
-      pool = await connectToDatabase();
+      const sql = neon(`${process.env.DATABASE_URL}`);
       const filePath = file.path;
       const csvData = fs.readFileSync(filePath, 'utf8');
 
@@ -76,14 +75,14 @@ export default async function handler(req, res) {
 
       // **BATCH INSERT** - Egyetlen SQL parancs több beillesztéssel
       if (students.length > 0) {
-        const placeholders = students.map(() => '(?, ?, ?, ?, ?)').join(', ');
+        const placeholders = students.map((_, i) => `($${i * 5 + 1}, $${i * 5 + 2}, $${i * 5 + 3}, $${i * 5 + 4}, $${i * 5 + 5})`).join(', ');
         const values = students.flat();
         const insertQuery = `INSERT INTO students (student_id, full_name, class, rfid_tag, access) VALUES ${placeholders}`;
         
-        await pool.execute(insertQuery, values);
+        await sql(insertQuery, values);
       }
 
-      await checkStudentsInserted(pool, students);
+      await checkStudentsInserted(sql, students);
       await UploadStudentGroups();
       await uploadLockerRelations();
 
@@ -110,8 +109,8 @@ function generateRFID() {
   return crypto.randomBytes(4).toString('hex').toUpperCase();
 }
 
-async function checkStudentsInserted(pool, students) {
-  const [studentsInDb] = await pool.execute('SELECT student_id FROM students');
+async function checkStudentsInserted(sql, students) {
+  const studentsInDb = await sql('SELECT student_id FROM students');
   const insertedStudentIDs = studentsInDb.map(student => student.student_id);
 
   for (const student of students) {
@@ -123,7 +122,7 @@ async function checkStudentsInserted(pool, students) {
 
 async function UploadStudentGroups() {
   try {
-    const response = await fetch('http://localhost:3000/api/upload/uploadStudentGroups', {
+    const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/upload/uploadStudentGroups', {
       method: 'POST',
     });
     if (!response.ok) {
@@ -136,7 +135,7 @@ async function UploadStudentGroups() {
 
 async function uploadLockerRelations() {
   try {
-    const response = await fetch('http://localhost:3000/api/upload/uploadStudLockRelations', {
+    const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/upload/uploadStudLockRelations', {
       method: 'POST',
     });
     if (!response.ok) {

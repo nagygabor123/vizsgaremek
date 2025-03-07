@@ -83,47 +83,58 @@
  *                   example: "Error updating student"
  */
 import { neon } from '@neondatabase/serverless';
-import fetch from 'node-fetch';
-
-const sql = neon(process.env.DATABASE_URL);
-
-async function fetchData(url, method, body) {
-  const response = await fetch(url, {
-    method,
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  });
-
-  if (!response.ok) {
-    const errorResponse = await response.json();
-    throw new Error(errorResponse.message || 'Request failed');
-  }
-
-  return response.json();
-}
 
 export default async function handler(req, res) {
   if (req.method === 'PUT') {
     const { student_id, full_name, class: studentClass, rfid_tag } = req.body;
 
-    if (!student_id || !full_name || !studentClass || !rfid_tag || typeof rfid_tag !== 'string' || rfid_tag.trim() === '') {
-      return res.status(400).json({ message: 'Missing or invalid required fields' });
+    if (!student_id || !full_name || !studentClass || !rfid_tag) {
+      return res.status(400).json({ message: 'Missing required fields' });
     }
 
-    try {
-      await sql('BEGIN');
+    const sql = neon(process.env.DATABASE_URL);
 
+    try {
+      // Ellenőrizzük, hogy létezik-e már locker kapcsolat a megadott rfid_tag-gel
       const existingLocker = await sql(
         'SELECT relationship_id, locker_id FROM locker_relationships WHERE rfid_tag = $1',
         [rfid_tag]
       );
 
       if (existingLocker.length > 0) {
-        await fetchData(`https://vizsgaremek-mocha.vercel.app/api/students/delete`, 'DELETE', { student_id });
+        // Töröljük a diákot
+        const deleteResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/delete`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ student_id }),
+        });
+
+        if (!deleteResponse.ok) {
+          return res.status(500).json({ message: 'Failed to delete student' });
+        }
       }
 
-      await fetchData(`https://vizsgaremek-mocha.vercel.app/api/students/create`, 'POST', { student_id, full_name, class: studentClass, rfid_tag });
+      // Újra létrehozzuk a diákot
+      const createResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/create`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          student_id,
+          full_name,
+          class: studentClass,
+          rfid_tag,
+        }),
+      });
 
+      if (!createResponse.ok) {
+        return res.status(500).json({ message: 'Failed to create student' });
+      }
+
+      // Ha létezik locker kapcsolat, frissítjük, hogy megtartsuk a régi locker_id-t
       if (existingLocker.length > 0) {
         await sql(
           'INSERT INTO locker_relationships (locker_id, rfid_tag) VALUES ($1, $2)',
@@ -131,12 +142,10 @@ export default async function handler(req, res) {
         );
       }
 
-      await sql('COMMIT');
       res.status(200).json({ message: 'Student and locker relationship updated successfully' });
     } catch (error) {
-      await sql('ROLLBACK');
-      console.error('Error:', error);
-      res.status(500).json({ message: error.message || 'Internal server error' });
+      console.error('Error updating student:', error);  
+      res.status(500).json({ message: 'Error updating student and locker relationship' });
     }
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });
