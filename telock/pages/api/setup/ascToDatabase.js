@@ -33,10 +33,16 @@ export default function handler(req, res) {
       const sql = neon(`${process.env.DATABASE_URL}`);
       const xmlData = fs.readFileSync(filePath, 'utf8');
       const parsedXml = await parseStringPromise(xmlData);
+      console.log('Feldolgozott XML adatok:', parsedXml);
+
       const ringing = extractRingingSchedule(parsedXml);
       const employees = extractTeachers(parsedXml);
       const schedule = extractSchedule(parsedXml);
       const groups = extractGroups(parsedXml);
+
+      console.log('Kinyert órarendi adatok:', schedule);
+      console.log('Kinyert tanárok:', employees);
+      console.log('Kinyert csoportok:', groups);
 
       const jsonData = JSON.stringify(schedule, null, 2);
       fs.writeFileSync('orarend.json', jsonData, 'utf8');
@@ -56,31 +62,13 @@ export default function handler(req, res) {
       });
     } catch (error) {
       console.error('Hiba az XML fájl feldolgozása közben:', error);
-      return res.status(500).json({ error: 'Hiba a fájl feldolgozása közben' });
+      return res.status(500).json({ 
+        error: 'Hiba a fájl feldolgozása közben',
+        details: error.message 
+      });
     }
   });
 }
-
-async function waitForDatabaseToBeReady(sql, table, minRows = 1, timeout = 5000) {
-  const startTime = Date.now();
-
-  while (Date.now() - startTime < timeout) {
-    const result = await sql(`SELECT COUNT(*) as count FROM ${table}`);
-    const count = result[0].count;
-
-    if (count >= minRows) {
-      console.log(`Adatbázis készen áll: ${table} (${count} sor)`);
-      return;
-    }
-
-    console.log(`Várakozás az adatbázisra: ${table} (${count} sor)`);
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Várunk 1 másodpercet
-  }
-
-  throw new Error(`Timeout: Az adatbázis (${table}) nem állt készen ${timeout / 1000} másodperc alatt.`);
-}
-
-// A többi függvény (extractRingingSchedule, extractTeachers, extractGroups, extractSchedule, sendRingingData, stb.) változatlan marad.
 
 
 function extractRingingSchedule(parsedXml) {
@@ -136,6 +124,25 @@ function extractGroups(parsedXml) {
         name: g.$.name,
       }))
   ];
+}
+
+async function waitForDatabaseToBeReady(sql, table, minRows = 1, timeout = 5000) {
+  const startTime = Date.now();
+
+  while (Date.now() - startTime < timeout) {
+    const result = await sql(`SELECT COUNT(*) as count FROM ${table}`);
+    const count = result[0].count;
+
+    if (count >= minRows) {
+      console.log(`Adatbázis készen áll: ${table} (${count} sor)`);
+      return;
+    }
+
+    console.log(`Várakozás az adatbázisra: ${table} (${count} sor)`);
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Várunk 1 másodpercet
+  }
+
+  throw new Error(`Timeout: Az adatbázis (${table}) nem állt készen ${timeout / 1000} másodperc alatt.`);
 }
 
 function extractSchedule(parsedXml) {
