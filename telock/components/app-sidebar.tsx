@@ -5,15 +5,15 @@ import { usePathname } from "next/navigation";
 import * as React from "react"
 import {
 
- // TriangleAlert,
+  TriangleAlert,
 
   Settings,
- // SlidersHorizontal,
+  SlidersHorizontal,
   ChevronDown,
- // GraduationCap,
- // FileClock,
+  GraduationCap,
+  FileClock,
   
- // BriefcaseBusiness,
+  BriefcaseBusiness,
   
   LogOut,
 
@@ -76,11 +76,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
 
   //const [students, setStudents] = useState<any[]>([]);
- // const [hasStudents, setHasStudents] = useState<boolean | null>(null);
- // const [loading, setLoading] = useState(true); // Betöltési állapot
+  const [hasStudents, setHasStudents] = useState<boolean | null>(null);
+  const [loading, setLoading] = useState(true); // Betöltési állapot
 
 
-/*  const fetchStudents = async () => {
+  const fetchStudents = async () => {
     try {
       const response = await fetch('/api/students/read');
       const data = await response.json();
@@ -92,11 +92,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       setLoading(false); // Lekérés vége
     }
   };
-  */
-/*
+  
+
   useEffect(() => {
     fetchStudents();
-  }, []);*/
+  }, []);
 
 
   useEffect(() => {
@@ -125,7 +125,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar variant="inset" className="border-r-0" {...props}>
       <SidebarHeader>
       <DropdownMenu >
-        <div>
+        
       <DropdownMenuTrigger asChild>
   <div> {/* Ezt adjuk hozzá a hiba elkerülése érdekében */}
     <SidebarMenuButton
@@ -144,7 +144,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     </SidebarMenuButton>
   </div> {/* Ezt adjuk hozzá a hiba elkerülése érdekében */}
 </DropdownMenuTrigger>
-</div>
+
           <DropdownMenuContent
             className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
             side={isMobile ? "bottom" : "right"}
@@ -164,17 +164,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-            <div>
+              
               <DropdownMenuItem asChild>
-                <div>
               <Link href="/dashboard/settings">
               <Settings/>
             
               <span>Beállítások</span>
               </Link> 
-              </div>
               </DropdownMenuItem>
-              </div>
               {/* <DropdownMenuItem asChild>
               <Link href="/dashboard/report">
               
@@ -203,17 +200,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
 
       <SidebarMenuItem>
-      <div> 
       <SidebarMenuButton asChild isActive={isActive("/dashboard/timetable")}>
-     <div>
+        
   <Link href="/dashboard/timetable">
   <CalendarHeart/>
     <span>Saját órák</span>
     
   </Link>
-  </div>
+ 
 </SidebarMenuButton>
-</div>
 </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
@@ -222,18 +217,129 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarGroupLabel>Osztályom</SidebarGroupLabel>
       <SidebarMenu>
       <SidebarMenuItem>
-      <div>
       <SidebarMenuButton asChild isActive={isActive("/dashboard/class/timetable")}>
-    <div>
   <Link href="/dashboard/class/timetable">
   <Calendar/>
     <span>Órarend</span>
   </Link>
-</div>
 </SidebarMenuButton>
-</div>
+</SidebarMenuItem>
+<SidebarMenuItem>
+<SidebarMenuButton asChild isActive={isActive("/dashboard/class/students")}>
+  <Link href="/dashboard/class/students">
+  <GraduationCap/>
+    <span>Tanulók</span>
+  </Link>
+</SidebarMenuButton>
+</SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarGroup>
+ 
+
+    <SidebarGroup>
+          <SidebarGroupLabel>Iskolai nyilvántartás</SidebarGroupLabel>
+      <SidebarMenu>
+
+{/*
+      <SidebarMenuItem>
+<SidebarMenuButton asChild>
+  <Link href="">
+<CalendarSync/>
+    <span>Helyettesítések</span>
+  </Link>
+</SidebarMenuButton>
+</SidebarMenuItem>*/}
+
+      <SidebarMenuItem>
+      <SidebarMenuButton asChild isActive={isActive("/dashboard/school/timetables")}>
+  <Link href="/dashboard/school/timetables">
+<Calendar/>
+    <span>Órarendek</span>
+  
+    {loading ? (
+     
+        <p></p>
+     
+    ) : (
+      <>
+        {!hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
+      </>
+    )}
+  </Link>
+</SidebarMenuButton>
 </SidebarMenuItem>
 
+
+
+<SidebarMenuItem>
+<SidebarMenuButton asChild isActive={isActive("/dashboard/school/students")}>
+  <Link href="/dashboard/school/students">
+  <GraduationCap/>
+    <span>Tanulók</span> 
+    {loading ? (
+     
+     <p></p>
+  
+ ) : (
+   <>
+     {!hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
+   </>
+ )}
+  </Link>
+  
+</SidebarMenuButton>
+</SidebarMenuItem>
+<SidebarMenuItem>
+<SidebarMenuButton asChild isActive={isActive("/dashboard/school/employees")}>
+  <Link href="/dashboard/school/employees">
+  <BriefcaseBusiness/>
+    <span>Munkatársak</span>
+    {loading ? (
+     
+     <p></p>
+  
+ ) : (
+   <>
+     {!hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
+   </>
+ )}
+  </Link>
+</SidebarMenuButton>
+</SidebarMenuItem>
+
+
+
+      </SidebarMenu>
+    </SidebarGroup>
+ 
+
+
+
+    <SidebarGroup>
+          <SidebarGroupLabel>Beállítások és naplózás</SidebarGroupLabel>
+      <SidebarMenu>
+
+      <SidebarMenuItem>
+      <SidebarMenuButton asChild isActive={isActive("/dashboard/school/settings")}>
+  <Link href="/dashboard/school/settings">
+<SlidersHorizontal/>
+    <span>Tanév beállításai</span>
+    {/*{isButtonVisible && (*/}
+   {/* <TriangleAlert className="ml-auto text-red-500" />*/}
+     {/* )}  */}
+  </Link> 
+</SidebarMenuButton>
+</SidebarMenuItem>
+
+
+<SidebarMenuItem>
+<SidebarMenuButton asChild isActive={isActive("/dashboard/school/logs")}>
+  <Link href="/dashboard/school/logs">
+  <FileClock/>
+    <span>Eseménynapló</span>
+  </Link>
+</SidebarMenuButton>
+</SidebarMenuItem>
 
       </SidebarMenu>
     </SidebarGroup>
