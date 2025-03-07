@@ -14,7 +14,7 @@ import {
   
   LogOut,
 
-  CalendarHeart,
+
 
  
 } from "lucide-react"
@@ -28,11 +28,10 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarGroup,
+
   SidebarMenu,
   SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarGroupLabel,
+ 
   useSidebar,
 
 } from "@/components/ui/sidebar"
@@ -60,11 +59,8 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const pathname = usePathname(); // ✅ Helyesen a komponens elején hívjuk meg!
-
-  const isActive = (path: string) => pathname === path;
-
  
+
  
  
   const { isMobile } = useSidebar()
@@ -101,10 +97,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     // variant="inset"
     <Sidebar variant="inset" className="border-r-0" {...props}>
       <SidebarHeader>
-      <DropdownMenu >
-        
-      <DropdownMenuTrigger asChild>
-  <> {/* Ezt adjuk hozzá a hiba elkerülése érdekében */}
+      <DropdownMenu>
+  <DropdownMenuTrigger asChild>
     <SidebarMenuButton
       size="lg"
       className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
@@ -113,138 +107,55 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <span className="text-s truncate">Kiskunfélegyházi Szent</span>
         <span className="text-s truncate">Benedek PG Középiskola</span>
       </div>
-
       <Avatar className="h-9 w-9 rounded-full">
         <AvatarFallback className="rounded-lg bg-lime-300">ViZs</AvatarFallback>
       </Avatar>
       <ChevronDown className="ml-auto size-4" />
     </SidebarMenuButton>
-  </> {/* Ezt adjuk hozzá a hiba elkerülése érdekében */}
-</DropdownMenuTrigger>
-
-          <DropdownMenuContent
-            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-            side={isMobile ? "bottom" : "right"}
-            align="start"
-            sideOffset={4}
-          >
-            <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-9 w-9 rounded-full">
-                  <AvatarFallback className="rounded-lg bg-lime-300">ViZs</AvatarFallback>
-                </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Vincze Zsolt</span>
-                  <span className="truncate text-xs">vincze.zsolt@szbi-pg.hu</span>
-                </div>
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              
-            <DropdownMenuItem asChild>
-  <Link href="/dashboard/settings">
-    <>
-      <Settings/>
-      <span>Beállítások</span>
-    </>
-  </Link> 
-</DropdownMenuItem>
-              {/* <DropdownMenuItem asChild>
-              <Link href="/dashboard/report">
-              
-              <Flag/>
-              <span>Probléma jelentése</span>
-              </Link>
-              </DropdownMenuItem> */}
-
-            </DropdownMenuGroup>
-            {/* <DropdownMenuSeparator /> */}
-            <DropdownMenuItem>
-            <LogOut/>
-            <span>Kijelentkezés</span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent
+    className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+    side={isMobile ? "bottom" : "right"}
+    align="start"
+    sideOffset={4}
+  >
+    <DropdownMenuLabel className="p-0 font-normal">
+      <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+        <Avatar className="h-9 w-9 rounded-full">
+          <AvatarFallback className="rounded-lg bg-lime-300">ViZs</AvatarFallback>
+        </Avatar>
+        <div className="grid flex-1 text-left text-sm leading-tight">
+          <span className="truncate font-semibold">Vincze Zsolt</span>
+          <span className="truncate text-xs">vincze.zsolt@szbi-pg.hu</span>
+        </div>
+      </div>
+    </DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuGroup>
+      <DropdownMenuItem asChild>
+        <div>
+          <Link href="/dashboard/settings">
+            <Settings />
+            <span>Beállítások</span>
+          </Link>
+        </div>
+      </DropdownMenuItem>
+    </DropdownMenuGroup>
+    <DropdownMenuItem>
+      <LogOut />
+      <span>Kijelentkezés</span>
+    </DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
 
         <Separator/>
       </SidebarHeader>
 
-      <SidebarContent>
+<SidebarContent>
 
-    
-    
- 
-
-    <SidebarGroup>
-          <SidebarGroupLabel>Iskolai nyilvántartás</SidebarGroupLabel>
-      <SidebarMenu>
-
-{/*
-      <SidebarMenuItem>
-<SidebarMenuButton asChild>
-  <Link href="">
-<CalendarSync/>
-    <span>Helyettesítések</span>
-  </Link>
-</SidebarMenuButton>
-</SidebarMenuItem>*/}
+</SidebarContent>
 
 
-
-<SidebarMenuButton asChild isActive={isActive("/dashboard/timetable")}>
-  <Link href="/dashboard/timetable">
-    <>
-      <CalendarHeart/>
-      <span>Saját órák</span>
-    </>
-  </Link>
-</SidebarMenuButton>
-
-
-
-      </SidebarMenu>
-    </SidebarGroup>
- 
-
-
-
-    <SidebarGroup>
-          <SidebarGroupLabel>Beállítások és naplózás</SidebarGroupLabel>
-      <SidebarMenu>
-
-      <SidebarMenuItem>
-      <SidebarMenuButton asChild isActive={isActive("/dashboard/timetable")}>
-  <Link href="/dashboard/timetable">
-    <>
-      <CalendarHeart/>
-      <span>Saját órák</span>
-    </>
-  </Link>
-</SidebarMenuButton>
-
-</SidebarMenuItem>
-
-
-<SidebarMenuItem>
-<SidebarMenuButton asChild isActive={isActive("/dashboard/timetable")}>
-  <Link href="/dashboard/timetable">
-    <>
-      <CalendarHeart/>
-      <span>Saját órák</span>
-    </>
-  </Link>
-</SidebarMenuButton>
-
-</SidebarMenuItem>
-
-      </SidebarMenu>
-    </SidebarGroup>
-
-
-
-
-      </SidebarContent>
       <SidebarFooter>
     
 
