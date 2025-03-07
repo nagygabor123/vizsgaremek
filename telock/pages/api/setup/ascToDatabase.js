@@ -230,7 +230,7 @@ function extractSchedule(parsedXml) {
 
 async function sendRingingData(ringing) {
   try {
-    const response = await fetch('http://localhost:3000/api/upload/uploadRinging', {
+    const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/upload/uploadRinging', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -250,7 +250,7 @@ async function sendRingingData(ringing) {
 
 async function sendEmployeesData(employees) {
   try {
-    const response = await fetch('http://localhost:3000/api/upload/uploadEmployees', {
+    const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/upload/uploadEmployees', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -270,7 +270,7 @@ async function sendEmployeesData(employees) {
 
 async function sendGroupsData(groups) {
   try {
-    const response = await fetch('http://localhost:3000/api/upload/uploadGroups', {
+    const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/upload/uploadGroups', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -290,7 +290,7 @@ async function sendGroupsData(groups) {
 
 async function sendScheduleData(schedule) {
   try {
-    const response = await fetch('http://localhost:3000/api/upload/uploadTimetables', {
+    const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/upload/uploadTimetables', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
