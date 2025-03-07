@@ -48,27 +48,51 @@
  *                   type: string
  *                   example: "Method Not Allowed"
  */
-import { connectToDatabase } from '../../../lib/db';
+// import { connectToDatabase } from '../../../lib/db';
+
+// export default async function handler(req, res) {
+//   if (req.method === 'GET') {
+//     let connection;
+//     try {
+//       connection = await connectToDatabase();
+//       const [rows] = await connection.execute('SELECT status FROM system_status WHERE id = 1');
+
+//       if (rows.length === 0) {
+//         return res.status(404).json({ error: 'System status not found' });
+//       }
+
+//       return res.status(200).json({ status: rows[0].status });
+//     } catch (error) {
+//       console.error('Database error:', error);
+//       return res.status(500).json({ error: 'Database connection error' });
+//     } finally {
+//       if (connection) {
+//         await connection.end();
+//       }
+//     }
+//   } else {
+//     return res.status(405).json({ error: 'Method Not Allowed' });
+//   }
+// }
+import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
-    let connection;
     try {
-      connection = await connectToDatabase();
-      const [rows] = await connection.execute('SELECT status FROM system_status WHERE id = 1');
+      // Connect to the Neon database
+      const sql = neon(process.env.DATABASE_URL);
 
-      if (rows.length === 0) {
+      // Query the system status
+      const result = await sql('SELECT status FROM system_status WHERE id = 1');
+
+      if (result.length === 0) {
         return res.status(404).json({ error: 'System status not found' });
       }
 
-      return res.status(200).json({ status: rows[0].status });
+      return res.status(200).json({ status: result[0].status });
     } catch (error) {
       console.error('Database error:', error);
       return res.status(500).json({ error: 'Database connection error' });
-    } finally {
-      if (connection) {
-        await connection.end();
-      }
     }
   } else {
     return res.status(405).json({ error: 'Method Not Allowed' });
