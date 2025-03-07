@@ -172,21 +172,31 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarGroup>
           <SidebarGroupLabel>Iskolai nyilvántartás</SidebarGroupLabel>
           <SidebarMenu>
+          
             <SidebarMenuItem>
-              <Link href="/dashboard/school/timetables" className="flex items-center">
-                <Calendar />
-                <span className="ml-2">Órarendek</span>
-                {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
-              </Link>
-            </SidebarMenuItem>
+  <SidebarMenuButton asChild isActive={isActive("/dashboard/school/timetables")}>
+    <Link href="/dashboard/school/timetables">
+      <>
+        <Calendar />
+        <span>Órarendek</span>
+        {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
+      </>
+    </Link>
+  </SidebarMenuButton>
+</SidebarMenuItem>
+
+     
             <SidebarMenuItem>
-              <Link href="/dashboard/school/students" className="flex items-center">
-                <GraduationCap />
-                <span className="ml-2">Tanulók</span>
-                {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
-              </Link>
-            </SidebarMenuItem>
-      
+  <SidebarMenuButton asChild isActive={isActive("/dashboard/school/students")}>
+    <Link href="/dashboard/school/students">
+      <>
+        <GraduationCap />
+        <span>Tanulók</span>
+        {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
+      </>
+    </Link>
+  </SidebarMenuButton>
+</SidebarMenuItem>
 
 
             <SidebarMenuItem>
@@ -208,14 +218,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarGroup>
           <SidebarGroupLabel>Beállítások és naplózás</SidebarGroupLabel>
           <SidebarMenu>
+       
             <SidebarMenuItem>
-              <Link href="/dashboard/school/settings" className="flex items-center">
-                <SlidersHorizontal />
-                <span className="ml-2">Tanév beállításai</span>
-              </Link>
-            </SidebarMenuItem>
+  <SidebarMenuButton asChild isActive={isActive("/dashboard/school/settings")}>
+    <Link href="/dashboard/school/settings">
+      <>
+        <SlidersHorizontal />
+        <span>Tanév beállításai</span>
+      </>
+    </Link>
+  </SidebarMenuButton>
+</SidebarMenuItem>
             <SidebarMenuItem>
-  <SidebarMenuButton asChild>
+  <SidebarMenuButton asChild isActive={isActive("/dashboard/school/logs")}>
     <Link href="/dashboard/school/logs">
       <>
         <FileClock />
