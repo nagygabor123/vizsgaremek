@@ -46,7 +46,7 @@ import { useState, useEffect } from "react";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
-  const isActive = (path: string) => pathname === path;
+  //const isActive = (path: string) => pathname === path;
   const { isMobile } = useSidebar();
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
   const [hasStudents, setHasStudents] = useState<boolean | null>(null);
