@@ -44,10 +44,10 @@ export default function handler(req, res) {
       console.log('Kinyert tanárok:', employees);
       console.log('Kinyert csoportok:', groups);
 
-      const jsonData = JSON.stringify(schedule, null, 2);
+      /*const jsonData = JSON.stringify(schedule, null, 2);
       fs.writeFileSync('orarend.json', jsonData, 'utf8');
       const jsonGroups = JSON.stringify(groups, null, 2);
-      fs.writeFileSync('groups.json', jsonGroups, 'utf8');
+      fs.writeFileSync('groups.json', jsonGroups, 'utf8');*/
 
       await sendRingingData(ringing);
       await sendEmployeesData(employees);
