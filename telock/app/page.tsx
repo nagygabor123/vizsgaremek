@@ -1,3 +1,5 @@
+'use client'
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -29,9 +31,9 @@ export default function Home() {
         <div className="flex gap-4">
           <Button className="">Tárolás indítása</Button>
           <Button variant="outline" className="">Tudj meg többet</Button>
-          <Button variant="outline" className="" onClick={() => window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}>
-            Demo videó megtekintése
-          </Button>
+          <Button variant="outline" className="">
+  Demo videó megtekintése
+</Button>
         </div>
       </main>
 
