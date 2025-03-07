@@ -1,7 +1,7 @@
 import fs from 'fs';
 import multiparty from 'multiparty';
 import { parseStringPromise } from 'xml2js';
-import { connectToDatabase } from '../../../lib/db';
+import { neon } from '@neondatabase/serverless';
 
 export const config = {
   api: {
@@ -30,14 +30,14 @@ export default function handler(req, res) {
     const filePath = file.path;
 
     try {
-      const db = await connectToDatabase();
+      const sql = neon(`${process.env.DATABASE_URL}`);
       const xmlData = fs.readFileSync(filePath, 'utf8');
       const parsedXml = await parseStringPromise(xmlData);
       const ringing = extractRingingSchedule(parsedXml);
       const employees = extractTeachers(parsedXml);
       const schedule = extractSchedule(parsedXml);
       const groups = extractGroups(parsedXml);
-      
+
       const jsonData = JSON.stringify(schedule, null, 2);
       fs.writeFileSync('orarend.json', jsonData, 'utf8');
       const jsonGroups = JSON.stringify(groups, null, 2);
@@ -46,7 +46,7 @@ export default function handler(req, res) {
       await sendRingingData(ringing);
       await sendEmployeesData(employees);
       await sendGroupsData(groups);
-      await waitForDatabaseToBeReady(db, 'admins', employees.length);
+      await waitForDatabaseToBeReady(sql, 'admins', employees.length);
       await sendScheduleData(schedule);
 
       return res.status(200).json({
@@ -61,23 +61,26 @@ export default function handler(req, res) {
   });
 }
 
-async function waitForDatabaseToBeReady(db, table, minRows = 1, timeout = 5000) {
+async function waitForDatabaseToBeReady(sql, table, minRows = 1, timeout = 5000) {
   const startTime = Date.now();
 
   while (Date.now() - startTime < timeout) {
-    const [rows] = await db.query(`SELECT COUNT(*) as count FROM ${table}`);
-    
-    if (rows[0].count >= minRows) {
-      console.log(`Adatbázis készen áll: ${table} (${rows[0].count} sor)`);
-      return; 
+    const result = await sql(`SELECT COUNT(*) as count FROM ${table}`);
+    const count = result[0].count;
+
+    if (count >= minRows) {
+      console.log(`Adatbázis készen áll: ${table} (${count} sor)`);
+      return;
     }
 
-    console.log(`Várakozás az adatbázisra: ${table} (${rows[0].count} sor)`);
+    console.log(`Várakozás az adatbázisra: ${table} (${count} sor)`);
     await new Promise(resolve => setTimeout(resolve, 1000)); // Várunk 1 másodpercet
   }
 
   throw new Error(`Timeout: Az adatbázis (${table}) nem állt készen ${timeout / 1000} másodperc alatt.`);
 }
+
+// A többi függvény (extractRingingSchedule, extractTeachers, extractGroups, extractSchedule, sendRingingData, stb.) változatlan marad.
 
 
 function extractRingingSchedule(parsedXml) {
