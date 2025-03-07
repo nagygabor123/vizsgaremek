@@ -63,6 +63,13 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const pathname = usePathname(); // ✅ Helyesen a komponens elején hívjuk meg!
+
+  const isActive = (path: string) => pathname === path;
+
+ 
+ 
+ 
   const { isMobile } = useSidebar()
   //const [isOverlayVisible, setOverlayVisible] = useState(false);
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
@@ -112,11 +119,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   if (isButtonVisible === null) {
     return null; // Várakozás a localStorage betöltésére
   }
-
-  const pathname = usePathname();
-
-  const isActive = (path: string) => pathname === path;
-
 
   return (
     // variant="inset"
