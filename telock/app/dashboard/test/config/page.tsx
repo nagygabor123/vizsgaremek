@@ -2,10 +2,16 @@
 
 import { useState, useRef } from 'react';
 
+interface ApiResponse {
+  success: boolean;
+  message?: string;
+  data?: any; // Replace `any` with a more specific type if possible
+}
+
 const Configuration = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [message, setMessage] = useState<string>('');
-  const [apiResponse, setApiResponse] = useState<any>(null);
+  const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
 
@@ -42,19 +48,19 @@ const Configuration = () => {
       setApiResponse(null);
       return;
     }
-
+  
     const formData = new FormData();
     formData.append('file', selectedFile);
-
+  
     try {
       const response = await fetch('http://localhost:3000/api/setup/studentsToDatabase', {
         method: 'POST',
         body: formData,
       });
-
-      const responseData = await response.json();
+  
+      const responseData: ApiResponse = await response.json();
       setApiResponse(responseData);
-
+  
       if (response.ok) {
         setMessage('File uploaded successfully!');
       } else {
