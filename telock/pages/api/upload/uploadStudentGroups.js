@@ -1,15 +1,15 @@
-import { connectToDatabase } from '../../../lib/db';
+import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const db = await connectToDatabase();
+    const sql = neon(`${process.env.DATABASE_URL}`);
 
     try {
       // Lekérjük az összes diákot
-      const [students] = await db.query(`SELECT student_id, class FROM students WHERE class IS NOT NULL;`);
+      const students = await sql('SELECT student_id, class FROM students WHERE class IS NOT NULL');
 
       // Lekérjük az összes csoportot
-      const [groups] = await db.query(`SELECT group_id, group_name FROM csoportok;`);
+      const groups = await sql('SELECT group_id, group_name FROM csoportok');
 
       // Felépítjük a beszúrási adatokat
       const insertValues = [];
@@ -26,9 +26,9 @@ export default async function handler(req, res) {
       });
 
       if (insertValues.length > 0) {
-        await db.query(
-          `INSERT IGNORE INTO student_groups (student_id, group_id) VALUES ?;`,
-          [insertValues]
+        // PostgreSQL-ben a `INSERT IGNORE` helyett `ON CONFLICT`-ot használunk
+        await sql('INSERT INTO student_groups (student_id, group_id) SELECT * FROM UNNEST($1::int[], $2::int[]) ON CONFLICT (student_id, group_id) DO NOTHING', 
+          [insertValues.map(iv => iv[0]), insertValues.map(iv => iv[1])]
         );
       }
 
@@ -36,8 +36,6 @@ export default async function handler(req, res) {
     } catch (error) {
       console.error('Error inserting student groups:', error);
       res.status(500).json({ message: 'Error inserting student groups', error: error.message });
-    } finally {
-      await db.end();
     }
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });
