@@ -51,14 +51,14 @@
  *                   type: string
  *                   example: "Method Not Allowed"
  */
-
-import { neon } from '@neondatabase/serverless';
+import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
-    const sql = neon(process.env.DATABASE_URL);
+    let db;
     try {
-      const students = await sql(
+      db = await connectToDatabase();
+      const [students] = await db.execute(
         `SELECT 
           students.*, 
           lockers.status AS status
@@ -69,13 +69,23 @@ export default async function handler(req, res) {
         LEFT JOIN 
           lockers ON locker_relationships.locker_id = lockers.locker_id`
       );
-      
+
       res.status(200).json(students);
     } catch (error) {
       console.error('Adatbázis hiba:', error);
       res.status(500).json({ message: 'Internal Server Error', error: error.message });
+    } finally {
+      // Ha a kapcsolat meg van nyitva, akkor zárjuk le
+      if (db) {
+        try {
+          await db.end();
+        } catch (closeError) {
+          console.error('Hiba a kapcsolat lezárásakor:', closeError);
+        }
+      }
     }
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });
   }
 }
+
