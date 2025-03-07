@@ -5,20 +5,17 @@ import { usePathname } from "next/navigation";
 import * as React from "react"
 import {
 
-  TriangleAlert,
+
 
   Settings,
-  SlidersHorizontal,
+
   ChevronDown,
-  GraduationCap,
-  FileClock,
-  
-  BriefcaseBusiness,
+
   
   LogOut,
 
   CalendarHeart,
-  Calendar,
+
  
 } from "lucide-react"
 
@@ -76,27 +73,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
 
   //const [students, setStudents] = useState<any[]>([]);
-  const [hasStudents, setHasStudents] = useState<boolean | null>(null);
-  const [loading, setLoading] = useState(true); // Betöltési állapot
 
-
-  const fetchStudents = async () => {
-    try {
-      const response = await fetch('/api/students/read');
-      const data = await response.json();
-     // setStudents(data);
-      setHasStudents(data.length > 0); // Ha van legalább egy diák, akkor true
-    } catch (error) {
-      console.error('Error fetching students', error);
-    } finally {
-      setLoading(false); // Lekérés vége
-    }
-  };
-  
-
-  useEffect(() => {
-    fetchStudents();
-  }, []);
 
 
   useEffect(() => {
@@ -124,53 +101,79 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     // variant="inset"
     <Sidebar variant="inset" className="border-r-0" {...props}>
       <SidebarHeader>
+      <DropdownMenu >
+        
+      <DropdownMenuTrigger asChild>
+  <> {/* Ezt adjuk hozzá a hiba elkerülése érdekében */}
+    <SidebarMenuButton
+      size="lg"
+      className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+    >
+      <div className="grid flex-1 text-left text-sm leading-tight">
+        <span className="text-s truncate">Kiskunfélegyházi Szent</span>
+        <span className="text-s truncate">Benedek PG Középiskola</span>
+      </div>
 
+      <Avatar className="h-9 w-9 rounded-full">
+        <AvatarFallback className="rounded-lg bg-lime-300">ViZs</AvatarFallback>
+      </Avatar>
+      <ChevronDown className="ml-auto size-4" />
+    </SidebarMenuButton>
+  </> {/* Ezt adjuk hozzá a hiba elkerülése érdekében */}
+</DropdownMenuTrigger>
+
+          <DropdownMenuContent
+            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+            side={isMobile ? "bottom" : "right"}
+            align="start"
+            sideOffset={4}
+          >
+            <DropdownMenuLabel className="p-0 font-normal">
+              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                <Avatar className="h-9 w-9 rounded-full">
+                  <AvatarFallback className="rounded-lg bg-lime-300">ViZs</AvatarFallback>
+                </Avatar>
+                <div className="grid flex-1 text-left text-sm leading-tight">
+                  <span className="truncate font-semibold">Vincze Zsolt</span>
+                  <span className="truncate text-xs">vincze.zsolt@szbi-pg.hu</span>
+                </div>
+              </div>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              
+            <DropdownMenuItem asChild>
+  <Link href="/dashboard/settings">
+    <>
+      <Settings/>
+      <span>Beállítások</span>
+    </>
+  </Link> 
+</DropdownMenuItem>
+              {/* <DropdownMenuItem asChild>
+              <Link href="/dashboard/report">
+              
+              <Flag/>
+              <span>Probléma jelentése</span>
+              </Link>
+              </DropdownMenuItem> */}
+
+            </DropdownMenuGroup>
+            {/* <DropdownMenuSeparator /> */}
+            <DropdownMenuItem>
+            <LogOut/>
+            <span>Kijelentkezés</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
 
         <Separator/>
       </SidebarHeader>
 
       <SidebarContent>
 
-      <SidebarGroup>
-      <SidebarMenu>
-
-
-
-      <SidebarMenuItem>
-      <SidebarMenuButton asChild isActive={isActive("/dashboard/timetable")}>
-        
-  <Link href="/dashboard/timetable">
-  
-    <span> <CalendarHeart/>Saját órák</span>
     
-  </Link>
- 
-</SidebarMenuButton>
-</SidebarMenuItem>
-      </SidebarMenu>
-    </SidebarGroup>
     
-          <SidebarGroup>
-          <SidebarGroupLabel>Osztályom</SidebarGroupLabel>
-      <SidebarMenu>
-      <SidebarMenuItem>
-      <SidebarMenuButton asChild isActive={isActive("/dashboard/class/timetable")}>
-  <Link href="/dashboard/class/timetable">
-  
-    <span> <Calendar/> Órarend</span>
-  </Link>
-</SidebarMenuButton>
-</SidebarMenuItem>
-<SidebarMenuItem>
-<SidebarMenuButton asChild isActive={isActive("/dashboard/class/students")}>
-  <Link href="/dashboard/class/students">
-
-    <span>   <GraduationCap/> Tanulók</span>
-  </Link>
-</SidebarMenuButton>
-</SidebarMenuItem>
-      </SidebarMenu>
-    </SidebarGroup>
  
 
     <SidebarGroup>
@@ -187,62 +190,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 </SidebarMenuButton>
 </SidebarMenuItem>*/}
 
-      <SidebarMenuItem>
-      <SidebarMenuButton asChild isActive={isActive("/dashboard/school/timetables")}>
-  <Link href="/dashboard/school/timetables">
 
-    <span> <Calendar/> Órarendek</span>
-  
-    {loading ? (
-     
-        <p></p>
-     
-    ) : (
-      <>
-        {!hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
-      </>
-    )}
+
+<SidebarMenuButton asChild isActive={isActive("/dashboard/timetable")}>
+  <Link href="/dashboard/timetable">
+    <>
+      <CalendarHeart/>
+      <span>Saját órák</span>
+    </>
   </Link>
 </SidebarMenuButton>
-</SidebarMenuItem>
-
-
-
-<SidebarMenuItem>
-<SidebarMenuButton asChild isActive={isActive("/dashboard/school/students")}>
-  <Link href="/dashboard/school/students">
- 
-    <span>  <GraduationCap/> Tanulók</span> 
-    {loading ? (
-     
-     <p></p>
-  
- ) : (
-   <>
-     {!hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
-   </>
- )}
-  </Link>
-  
-</SidebarMenuButton>
-</SidebarMenuItem>
-<SidebarMenuItem>
-<SidebarMenuButton asChild isActive={isActive("/dashboard/school/employees")}>
-  <Link href="/dashboard/school/employees">
- 
-    <span>  <BriefcaseBusiness/> Munkatársak</span>
-    {loading ? (
-     
-     <p></p>
-  
- ) : (
-   <>
-     {!hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
-   </>
- )}
-  </Link>
-</SidebarMenuButton>
-</SidebarMenuItem>
 
 
 
@@ -257,25 +214,28 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarMenu>
 
       <SidebarMenuItem>
-      <SidebarMenuButton asChild isActive={isActive("/dashboard/school/settings")}>
-  <Link href="/dashboard/school/settings">
-
-    <span><SlidersHorizontal/> Tanév beállításai</span>
-    {/*{isButtonVisible && (*/}
-   {/* <TriangleAlert className="ml-auto text-red-500" />*/}
-     {/* )}  */}
-  </Link> 
+      <SidebarMenuButton asChild isActive={isActive("/dashboard/timetable")}>
+  <Link href="/dashboard/timetable">
+    <>
+      <CalendarHeart/>
+      <span>Saját órák</span>
+    </>
+  </Link>
 </SidebarMenuButton>
+
 </SidebarMenuItem>
 
 
 <SidebarMenuItem>
-<SidebarMenuButton asChild isActive={isActive("/dashboard/school/logs")}>
-  <Link href="/dashboard/school/logs">
-
-    <span> <FileClock/> Eseménynapló</span>
+<SidebarMenuButton asChild isActive={isActive("/dashboard/timetable")}>
+  <Link href="/dashboard/timetable">
+    <>
+      <CalendarHeart/>
+      <span>Saját órák</span>
+    </>
   </Link>
 </SidebarMenuButton>
+
 </SidebarMenuItem>
 
       </SidebarMenu>
