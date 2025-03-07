@@ -92,7 +92,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
-    const sql = neon(`${process.env.DATABASE_URL}`);
+    const sql = neon(process.env.DATABASE_URL);
 
     try {
       // Ellenőrizzük, hogy létezik-e már locker kapcsolat a megadott rfid_tag-gel
@@ -103,7 +103,7 @@ export default async function handler(req, res) {
 
       if (existingLocker.length > 0) {
         // Töröljük a diákot
-        const deleteResponse = await fetch(`https://vizsgaremek-mocha.vercel.app//api/students/delete`, {
+        const deleteResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/delete`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',

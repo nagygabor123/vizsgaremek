@@ -82,7 +82,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
-    const sql = neon(`${process.env.DATABASE_URL}`);
+    const sql = neon(process.env.DATABASE_URL);
 
     try {
       // Insert the student into the students table
