@@ -1,8 +1,0 @@
-UTolsó elötti:
-    az órarendnél ha több csoport van az óránál akkor csak az elsőt veszi figyelmbe.
-
-
-UTolsó:
-    A diákok feltöltése után automatikusan legenerálni a szekrény-diák kapcsolatokat.
-    uj vegpont -> setStudentLucker.js
-
