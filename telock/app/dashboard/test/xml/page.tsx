@@ -30,7 +30,7 @@ export default function XmlUploadTest() {
     formData.append('file', file);
 
     try {
-      const response = await fetch('api/setup/ascToDatabase', {
+      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/setup/ascToDatabase', {
         method: 'POST',
         body: formData,
       });
