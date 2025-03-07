@@ -24,7 +24,7 @@ export async function connectToDatabase() {
 */
 
 
-
+/*
 import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
 
@@ -39,6 +39,19 @@ export async function connectToDatabase() {
   });
   return connection;
 }
+*/
+
+import { neon } from '@neondatabase/serverless';
+/*import dotenv from 'dotenv';
+
+dotenv.config();*/
+
+export async function connectToDatabase() {
+  const sql = neon(`${process.env.DATABASE_URL}`);
+  return sql;
+}
+
+
 /*
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
