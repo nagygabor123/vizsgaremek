@@ -44,11 +44,6 @@ export default function handler(req, res) {
       console.log('Kinyert tanárok:', employees);
       console.log('Kinyert csoportok:', groups);
 
-      /*const jsonData = JSON.stringify(schedule, null, 2);
-      fs.writeFileSync('orarend.json', jsonData, 'utf8');
-      const jsonGroups = JSON.stringify(groups, null, 2);
-      fs.writeFileSync('groups.json', jsonGroups, 'utf8');*/
-
       await sendRingingData(ringing);
       await sendEmployeesData(employees);
       await sendGroupsData(groups);
@@ -70,6 +65,24 @@ export default function handler(req, res) {
   });
 }
 
+async function waitForDatabaseToBeReady(sql, table, minRows = 1, timeout = 5000) {
+  const startTime = Date.now();
+
+  while (Date.now() - startTime < timeout) {
+    const result = await sql(`SELECT COUNT(*) as count FROM ${table}`);
+    const count = result[0].count;
+
+    if (count >= minRows) {
+      console.log(`Adatbázis készen áll: ${table} (${count} sor)`);
+      return;
+    }
+
+    console.log(`Várakozás az adatbázisra: ${table} (${count} sor)`);
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Várunk 1 másodpercet
+  }
+
+  throw new Error(`Timeout: Az adatbázis (${table}) nem állt készen ${timeout / 1000} másodperc alatt.`);
+}
 
 function extractRingingSchedule(parsedXml) {
   if (!parsedXml.timetable || !parsedXml.timetable.periods || !parsedXml.timetable.periods[0].period) {
