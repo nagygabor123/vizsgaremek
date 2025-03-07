@@ -139,25 +139,6 @@ function extractGroups(parsedXml) {
   ];
 }
 
-async function waitForDatabaseToBeReady(sql, table, minRows = 1, timeout = 5000) {
-  const startTime = Date.now();
-
-  while (Date.now() - startTime < timeout) {
-    const result = await sql(`SELECT COUNT(*) as count FROM ${table}`);
-    const count = result[0].count;
-
-    if (count >= minRows) {
-      console.log(`Adatbázis készen áll: ${table} (${count} sor)`);
-      return;
-    }
-
-    console.log(`Várakozás az adatbázisra: ${table} (${count} sor)`);
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Várunk 1 másodpercet
-  }
-
-  throw new Error(`Timeout: Az adatbázis (${table}) nem állt készen ${timeout / 1000} másodperc alatt.`);
-}
-
 function extractSchedule(parsedXml) {
   if (!parsedXml.timetable?.lessons?.[0]?.lesson || !parsedXml.timetable?.cards?.[0]?.card) return [];
 
@@ -250,7 +231,6 @@ function extractSchedule(parsedXml) {
   });
 }
 
-
 async function sendRingingData(ringing) {
   try {
     const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/upload/uploadRinging', {
@@ -330,4 +310,3 @@ async function sendScheduleData(schedule) {
     console.error('Error sending schedule data:', error);
   }
 }
-
