@@ -203,8 +203,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarMenuButton asChild isActive={isActive("/dashboard/timetable")}>
         
   <Link href="/dashboard/timetable">
-  <CalendarHeart/>
-    <span>Saját órák</span>
+  
+    <span> <CalendarHeart/>Saját órák</span>
     
   </Link>
  
@@ -219,16 +219,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarMenuItem>
       <SidebarMenuButton asChild isActive={isActive("/dashboard/class/timetable")}>
   <Link href="/dashboard/class/timetable">
-  <Calendar/>
-    <span>Órarend</span>
+  
+    <span> <Calendar/> Órarend</span>
   </Link>
 </SidebarMenuButton>
 </SidebarMenuItem>
 <SidebarMenuItem>
 <SidebarMenuButton asChild isActive={isActive("/dashboard/class/students")}>
   <Link href="/dashboard/class/students">
-  <GraduationCap/>
-    <span>Tanulók</span>
+
+    <span>   <GraduationCap/> Tanulók</span>
   </Link>
 </SidebarMenuButton>
 </SidebarMenuItem>
@@ -253,8 +253,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarMenuItem>
       <SidebarMenuButton asChild isActive={isActive("/dashboard/school/timetables")}>
   <Link href="/dashboard/school/timetables">
-<Calendar/>
-    <span>Órarendek</span>
+
+    <span> <Calendar/> Órarendek</span>
   
     {loading ? (
      
@@ -274,8 +274,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 <SidebarMenuItem>
 <SidebarMenuButton asChild isActive={isActive("/dashboard/school/students")}>
   <Link href="/dashboard/school/students">
-  <GraduationCap/>
-    <span>Tanulók</span> 
+ 
+    <span>  <GraduationCap/> Tanulók</span> 
     {loading ? (
      
      <p></p>
@@ -292,8 +292,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 <SidebarMenuItem>
 <SidebarMenuButton asChild isActive={isActive("/dashboard/school/employees")}>
   <Link href="/dashboard/school/employees">
-  <BriefcaseBusiness/>
-    <span>Munkatársak</span>
+ 
+    <span>  <BriefcaseBusiness/> Munkatársak</span>
     {loading ? (
      
      <p></p>
@@ -322,8 +322,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarMenuItem>
       <SidebarMenuButton asChild isActive={isActive("/dashboard/school/settings")}>
   <Link href="/dashboard/school/settings">
-<SlidersHorizontal/>
-    <span>Tanév beállításai</span>
+
+    <span><SlidersHorizontal/> Tanév beállításai</span>
     {/*{isButtonVisible && (*/}
    {/* <TriangleAlert className="ml-auto text-red-500" />*/}
      {/* )}  */}
@@ -335,8 +335,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 <SidebarMenuItem>
 <SidebarMenuButton asChild isActive={isActive("/dashboard/school/logs")}>
   <Link href="/dashboard/school/logs">
-  <FileClock/>
-    <span>Eseménynapló</span>
+
+    <span> <FileClock/> Eseménynapló</span>
   </Link>
 </SidebarMenuButton>
 </SidebarMenuItem>
