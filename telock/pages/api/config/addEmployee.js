@@ -72,7 +72,7 @@
  *                   example: "Method Not Allowed"
  */
 
-import { connectToDatabase } from '../../lib/db'; 
+import { connectToDatabase } from '../../../lib/db'; 
 import crypto from 'crypto';
 
 function generatePassword(length = 12) {
