@@ -1,5 +1,7 @@
 "use client"
 
+import { usePathname } from "next/navigation";
+
 import Link from 'next/link'; // Import the Link component
 import * as React from "react";
 import {
@@ -45,6 +47,12 @@ import {
 import { useState, useEffect } from "react";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+
+  const pathname = usePathname();
+
+  const isActive = (path: string) => pathname === path;
+
+
   const { isMobile } = useSidebar();
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
   const [hasStudents, setHasStudents] = useState<boolean | null>(null);
@@ -178,13 +186,22 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
               </Link>
             </SidebarMenuItem>
+      
+
+
             <SidebarMenuItem>
-              <Link href="/dashboard/school/employees" className="flex items-center">
-                <BriefcaseBusiness />
-                <span className="ml-2">Munkatársak</span>
-                {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
-              </Link>
-            </SidebarMenuItem>
+  <SidebarMenuButton asChild isActive={isActive("/dashboard/school/employees")}>
+    <Link href="/dashboard/school/employees">
+      <>
+        <BriefcaseBusiness />
+        <span>Munkatársak</span>
+        {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
+      </>
+    </Link>
+  </SidebarMenuButton>
+</SidebarMenuItem>
+
+
           </SidebarMenu>
         </SidebarGroup>
 
