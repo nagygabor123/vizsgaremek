@@ -164,7 +164,7 @@ export default function Page() {
     try {
       console.log('Küldött adatok:', { type, which_day: date });
 
-      const response = await fetch('http://localhost:3000/api/config/setYearStartEnd', {
+      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/setYearStartEnd', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
