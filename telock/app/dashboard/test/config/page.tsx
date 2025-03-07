@@ -52,7 +52,7 @@ const Configuration = () => {
     formData.append('file', selectedFile);
 
     try {
-      const response = await fetch('http://localhost:3000/api/setup/studentsToDatabase', {
+      const response = await fetch('api/setup/studentsToDatabase', {
         method: 'POST',
         body: formData,
       });
