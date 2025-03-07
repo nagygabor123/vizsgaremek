@@ -1,6 +1,6 @@
 "use client"
 
-import { usePathname } from "next/navigation";
+//import { usePathname } from "next/navigation";
 import * as React from "react";
 import {
   TriangleAlert,
@@ -45,7 +45,7 @@ import {
 import { useState, useEffect } from "react";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const pathname = usePathname();
+  //const pathname = usePathname();
   //const isActive = (path: string) => pathname === path;
   const { isMobile } = useSidebar();
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
