@@ -50,15 +50,17 @@
  *                   type: string
  *                   example: "Method Not Allowed"
  */
-import { connectToDatabase } from '../../../lib/db';
+//import { connectToDatabase } from '../../../lib/db';
+import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
-    const db = await connectToDatabase();
+    //const db = await connectToDatabase();
+    const sql = neon(process.env.DATABASE_URL);
 
     try {
-      const [rows] = await db.execute('SELECT admin_id, full_name,short_name, position,osztalyfonok FROM admins');
-      res.status(200).json(rows); 
+      const [sorok] = await sql('SELECT admin_id, full_name,short_name, position,osztalyfonok FROM admins');
+      res.status(200).json(sorok); 
     } catch (error) {
       console.error('Database error:', error);
       res.status(500).json({ message: 'Error fetching employees' });
