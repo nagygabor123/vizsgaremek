@@ -5,7 +5,7 @@ import { useState, useRef } from 'react';
 interface ApiResponse {
   success: boolean;
   message?: string;
-  data?: any; // Replace `any` with a more specific type if possible
+  data?: unknown; // Replace `unknown` with a more specific type if possible
 }
 
 const Configuration = () => {
@@ -65,8 +65,12 @@ const Configuration = () => {
       } else {
         setMessage('Error occurred during file upload.');
       }
-    } catch (error: any) {
-      setMessage(`Error: ${error.message}`);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setMessage(`Error: ${error.message}`);
+      } else {
+        setMessage('An unknown error occurred.');
+      }
       setApiResponse(null);
     }
   };
