@@ -148,7 +148,7 @@ function extractSchedule(parsedXml) {
 
   // 2. Napok dekódolása (`daysdef` alapján)
   const dayCodes = ["Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek"];
-  /*const daysMap = Object.fromEntries(
+  const daysMap = Object.fromEntries(
     parsedXml.timetable.daysdefs[0].daysdef.map(d => {
       const daysBinary = d.$.days.padStart(5, '0');
       const activeDays = daysBinary
@@ -158,7 +158,7 @@ function extractSchedule(parsedXml) {
       
       return [d.$.id.trim(), activeDays];
     })
-  );*/
+  );
 
   // 3. Tantárgyak és tanárok lekérése
   const subjects = Object.fromEntries(
