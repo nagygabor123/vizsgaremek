@@ -1,6 +1,6 @@
 {
     "functions": {
-      "api/setup/ascToDatabase.js": {
+      "pages/api/setup/ascToDatabase.js": {
         "maxDuration": 60
       }
     }
