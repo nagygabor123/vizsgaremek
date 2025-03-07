@@ -1,22 +1,71 @@
 "use client"
 
-//import { usePathname } from "next/navigation";
-import * as React from "react";
+import { usePathname } from "next/navigation";
+
+import * as React from "react"
 import {
+  BookOpen,
+  Bot,
+  Command,
+  CalendarDays,
+  Frame,
+  FileText,
+  Flag,
+  LifeBuoy,
+  Map,
+  ShieldHalf,
   TriangleAlert,
+  PieChart,
+  Send,
+  Settings2,
+  MessageCircleWarning,
+  MessageSquareWarning,
+  SquareTerminal,
+  GalleryVerticalEnd, 
+  Users,
+  SquareArrowOutUpRight,
+  Eye,
   Settings,
   SlidersHorizontal,
+  House,
+  Home,
+  CalendarSearch,
+  BellElectric,
+  ExternalLink,
+  ChevronsUpDown,
+  BookUser,
+  Bolt,
+  UserCog,
+  SquarePen,
+  UserRound,
+  UserRoundSearch,
   ChevronDown,
+  MessageCircleQuestion,
+  CircleUser,
+  CalendarCog,
+  Backpack,
   GraduationCap,
+  BookType,
+  CalendarSync,
   FileClock,
+  Shield,
   BriefcaseBusiness,
+  School,
   LogOut,
+  User,
+  UserSearch,
   CalendarHeart,
   Calendar,
-} from "lucide-react";
+  CircleAlert,
+  School2
+} from "lucide-react"
+
+
 
 import {
   Sidebar,
+  SidebarTrigger,
+  SidebarInset,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
@@ -26,9 +75,12 @@ import {
   SidebarMenuItem,
   SidebarGroupLabel,
   useSidebar,
-} from "@/components/ui/sidebar";
 
-import { Separator } from "@/components/ui/separator";
+} from "@/components/ui/sidebar"
+
+import { Separator } from "@/components/ui/separator"
+
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,63 +89,96 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu"
+
 import {
   Avatar,
   AvatarFallback,
-} from "@/components/ui/avatar";
+  AvatarImage,
+} from "@/components/ui/avatar"
+
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  //const pathname = usePathname();
-  //const isActive = (path: string) => pathname === path;
-  const { isMobile } = useSidebar();
+  const { isMobile } = useSidebar()
+  const [isOverlayVisible, setOverlayVisible] = useState(false);
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
+
+
+  const [students, setStudents] = useState<any[]>([]);
   const [hasStudents, setHasStudents] = useState<boolean | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // Betöltési állapot
+
 
   const fetchStudents = async () => {
     try {
       const response = await fetch('/api/students/read');
       const data = await response.json();
-      setHasStudents(data.length > 0);
+      setStudents(data);
+      setHasStudents(data.length > 0); // Ha van legalább egy diák, akkor true
     } catch (error) {
       console.error('Error fetching students', error);
     } finally {
-      setLoading(false);
+      setLoading(false); // Lekérés vége
     }
   };
+  
 
   useEffect(() => {
     fetchStudents();
   }, []);
+
 
   useEffect(() => {
     const hasClickedBefore = localStorage.getItem("hasClickedOverlayButton");
     setButtonVisible(hasClickedBefore !== "true");
   }, []);
 
+  // Gomb kattintás kezelése
+  const handleButtonClick = () => {
+    setOverlayVisible(true);
+  };
+
+  const handleConfirmClick = () => {
+    setOverlayVisible(false);
+    setButtonVisible(false);
+    localStorage.setItem("hasClickedOverlayButton", "true");
+  };
+
+  // Addig ne rendereljük a gombot, amíg nem töltöttük be az adatot
   if (isButtonVisible === null) {
-    return null;
+    return null; // Várakozás a localStorage betöltésére
   }
 
+  const pathname = usePathname();
+
+  const isActive = (path: string) => pathname === path;
+
+
   return (
+    // variant="inset"
     <Sidebar variant="inset" className="border-r-0" {...props}>
       <SidebarHeader>
-        <DropdownMenu>
+      <DropdownMenu >
+        
           <DropdownMenuTrigger asChild>
+            
             <SidebarMenuButton
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <div className="grid flex-1 text-left text-sm leading-tight">
+               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="text-s truncate">Kiskunfélegyházi Szent</span>
                 <span className="text-s truncate">Benedek PG Középiskola</span>
+                
               </div>
+           
               <Avatar className="h-9 w-9 rounded-full">
                 <AvatarFallback className="rounded-lg bg-lime-300">ViZs</AvatarFallback>
               </Avatar>
               <ChevronDown className="ml-auto size-4" />
+            
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -115,103 +200,201 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <a href="/dashboard/settings" className="flex items-center">
-                  <Settings />
-                  <span className="ml-2">Beállítások</span>
-                </a>
+              <DropdownMenuItem asChild>
+              <Link href="/dashboard/settings">
+              <Settings/>
+            
+              <span>Beállítások</span>
+              </Link> 
               </DropdownMenuItem>
+              {/* <DropdownMenuItem asChild>
+              <Link href="/dashboard/report">
+              
+              <Flag/>
+              <span>Probléma jelentése</span>
+              </Link>
+              </DropdownMenuItem> */}
+
             </DropdownMenuGroup>
+            {/* <DropdownMenuSeparator /> */}
             <DropdownMenuItem>
-              <div className="flex items-center">
-                <LogOut />
-                <span className="ml-2">Kijelentkezés</span>
-              </div>
+            <LogOut/>
+            <span>Kijelentkezés</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <Separator />
+
+        <Separator/>
       </SidebarHeader>
 
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <a href="/dashboard/timetable" className="flex items-center">
-                <CalendarHeart />
-                <span className="ml-2">Saját órák</span>
-              </a>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroup>
 
-        <SidebarGroup>
+      <SidebarGroup>
+      <SidebarMenu>
+
+
+
+      <SidebarMenuItem>
+      <SidebarMenuButton asChild isActive={isActive("/dashboard/timetable")}>
+        
+  <Link href="/dashboard/timetable">
+  <CalendarHeart/>
+    <span>Saját órák</span>
+    
+  </Link>
+ 
+</SidebarMenuButton>
+</SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarGroup>
+    
+          <SidebarGroup>
           <SidebarGroupLabel>Osztályom</SidebarGroupLabel>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <a href="/dashboard/class/timetable" className="flex items-center">
-                <Calendar />
-                <span className="ml-2">Órarend</span>
-              </a>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <a href="/dashboard/class/students" className="flex items-center">
-                <GraduationCap />
-                <span className="ml-2">Tanulók</span>
-              </a>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroup>
+      <SidebarMenu>
+      <SidebarMenuItem>
+      <SidebarMenuButton asChild isActive={isActive("/dashboard/class/timetable")}>
+  <Link href="/dashboard/class/timetable">
+  <Calendar/>
+    <span>Órarend</span>
+  </Link>
+</SidebarMenuButton>
+</SidebarMenuItem>
+<SidebarMenuItem>
+<SidebarMenuButton asChild isActive={isActive("/dashboard/class/students")}>
+  <Link href="/dashboard/class/students">
+  <GraduationCap/>
+    <span>Tanulók</span>
+  </Link>
+</SidebarMenuButton>
+</SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarGroup>
+ 
 
-        <SidebarGroup>
+    <SidebarGroup>
           <SidebarGroupLabel>Iskolai nyilvántartás</SidebarGroupLabel>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <a href="/dashboard/school/timetables" className="flex items-center">
-                <Calendar />
-                <span className="ml-2">Órarendek</span>
-                {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
-              </a>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <a href="/dashboard/school/students" className="flex items-center">
-                <GraduationCap />
-                <span className="ml-2">Tanulók</span>
-                {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
-              </a>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <a href="/dashboard/school/employees" className="flex items-center">
-                <BriefcaseBusiness />
-                <span className="ml-2">Munkatársak</span>
-                {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
-              </a>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroup>
+      <SidebarMenu>
 
-        <SidebarGroup>
+{/*
+      <SidebarMenuItem>
+<SidebarMenuButton asChild>
+  <Link href="">
+<CalendarSync/>
+    <span>Helyettesítések</span>
+  </Link>
+</SidebarMenuButton>
+</SidebarMenuItem>*/}
+
+      <SidebarMenuItem>
+      <SidebarMenuButton asChild isActive={isActive("/dashboard/school/timetables")}>
+  <Link href="/dashboard/school/timetables">
+<Calendar/>
+    <span>Órarendek</span>
+  
+    {loading ? (
+     
+        <p></p>
+     
+    ) : (
+      <>
+        {!hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
+      </>
+    )}
+  </Link>
+</SidebarMenuButton>
+</SidebarMenuItem>
+
+
+
+<SidebarMenuItem>
+<SidebarMenuButton asChild isActive={isActive("/dashboard/school/students")}>
+  <Link href="/dashboard/school/students">
+  <GraduationCap/>
+    <span>Tanulók</span> 
+    {loading ? (
+     
+     <p></p>
+  
+ ) : (
+   <>
+     {!hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
+   </>
+ )}
+  </Link>
+  
+</SidebarMenuButton>
+</SidebarMenuItem>
+<SidebarMenuItem>
+<SidebarMenuButton asChild isActive={isActive("/dashboard/school/employees")}>
+  <Link href="/dashboard/school/employees">
+  <BriefcaseBusiness/>
+    <span>Munkatársak</span>
+    {loading ? (
+     
+     <p></p>
+  
+ ) : (
+   <>
+     {!hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
+   </>
+ )}
+  </Link>
+</SidebarMenuButton>
+</SidebarMenuItem>
+
+
+
+      </SidebarMenu>
+    </SidebarGroup>
+ 
+
+
+
+    <SidebarGroup>
           <SidebarGroupLabel>Beállítások és naplózás</SidebarGroupLabel>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <a href="/dashboard/school/settings" className="flex items-center">
-                <SlidersHorizontal />
-                <span className="ml-2">Tanév beállításai</span>
-              </a>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <a href="/dashboard/school/logs" className="flex items-center">
-                <FileClock />
-                <span className="ml-2">Eseménynapló</span>
-              </a>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroup>
-      </SidebarContent>
+      <SidebarMenu>
 
+      <SidebarMenuItem>
+      <SidebarMenuButton asChild isActive={isActive("/dashboard/school/settings")}>
+  <Link href="/dashboard/school/settings">
+<SlidersHorizontal/>
+    <span>Tanév beállításai</span>
+    {/*{isButtonVisible && (*/}
+   {/* <TriangleAlert className="ml-auto text-red-500" />*/}
+     {/* )}  */}
+  </Link> 
+</SidebarMenuButton>
+</SidebarMenuItem>
+
+
+<SidebarMenuItem>
+<SidebarMenuButton asChild isActive={isActive("/dashboard/school/logs")}>
+  <Link href="/dashboard/school/logs">
+  <FileClock/>
+    <span>Eseménynapló</span>
+  </Link>
+</SidebarMenuButton>
+</SidebarMenuItem>
+
+      </SidebarMenu>
+    </SidebarGroup>
+
+
+
+
+      </SidebarContent>
       <SidebarFooter>
-        <span className="text-xs text-center">powered by teLock</span>
+    
+
+
+      <SidebarMenu className="mt-auto">
+
+
+      </SidebarMenu>
+
+    
+      <span className="text-xs text-center">powered by teLock</span>
       </SidebarFooter>
     </Sidebar>
-  );
+  )
 }
