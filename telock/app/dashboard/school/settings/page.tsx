@@ -12,13 +12,13 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import {
- 
+  Sidebar,
   SidebarTrigger,
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
-import {Trash2, CalendarPlus, CalendarIcon, SaveAll, Slash } from "lucide-react";
+import { TriangleAlert, Plus, Trash2, Trash, CalendarPlus, CalendarIcon, SaveAll, Slash } from "lucide-react";
 import Link from "next/link";
 
 import { Input } from "@/components/ui/input"
@@ -39,12 +39,14 @@ import {
 
 import * as React from "react"
 import { format } from "date-fns"
-
+import { addDays } from 'date-fns';
 
 import {
   DropdownMenu,
   DropdownMenuContent,
-
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
@@ -61,6 +63,7 @@ import {
 import { DateRange } from 'react-day-picker';
 
 
+import AppKonfig from '@/components/app-konfig';
 import {
   Select,
   SelectContent,
@@ -91,8 +94,8 @@ export default function Page() {
   const [date, setDate] = React.useState<DateRange | undefined>(undefined);
 
 
-  const [, setMessage] = useState<string>('');
-  //const [apiResponse, setApiResponse] = useState<any>(null);
+  const [message, setMessage] = useState<string>('');
+  const [apiResponse, setApiResponse] = useState<any>(null);
   const [yearSchedule, setYearSchedule] = useState<any>({
     plusDates: [],
     breakDates: [],
@@ -130,7 +133,7 @@ export default function Page() {
       const plusRes = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=plusznap');
       const szunetRes = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=szunet');
       const noschoolRes = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=tanitasnelkul');
-      const startRes = await fetch('api/config/getYearSchedule?type=kezd');
+      const startRes = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=kezd');
       const endRes = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=veg');
 
       const plusDates = await plusRes.json();
@@ -293,85 +296,85 @@ export default function Page() {
 
 
 
-  //const [dateRange] = React.useState<DateRange | undefined>(undefined);
+  const [dateRange, setDateRange] = React.useState<DateRange | undefined>(undefined);
   //const [date, setDate] = React.useState<Date>()
-  // const [saturdayClasses, setSaturdayClasses] = React.useState<Date[]>([]);
-  // const [nonTeachingDays, setNonTeachingDays] = React.useState<Date[]>([]);
- // const [, setBreaks] = React.useState<{ from: Date, to: Date }[]>([])
+  const [saturdayClasses, setSaturdayClasses] = React.useState<Date[]>([]);
+  const [nonTeachingDays, setNonTeachingDays] = React.useState<Date[]>([]);
+  const [breaks, setBreaks] = React.useState<{ from: Date, to: Date }[]>([])
   const [startDate, setStartDate] = React.useState<Date | undefined>();
   const [endDate, setEndDate] = React.useState<Date | undefined>();
-  // const [newSaturdayClass, setNewSaturdayClass] = React.useState<Date | undefined>();
-  // const [newNonTeachingDay, setNewNonTeachingDay] = React.useState<Date | undefined>();
+  const [newSaturdayClass, setNewSaturdayClass] = React.useState<Date | undefined>();
+  const [newNonTeachingDay, setNewNonTeachingDay] = React.useState<Date | undefined>();
   // const [newBreak, setNewBreak] = React.useState<Date | undefined>();
 
 
-  // const handleAddRange = () => {
-  //   if (dateRange?.from instanceof Date && dateRange?.to instanceof Date) {
-  //     setBreaks(prevBreaks => [
-  //       ...prevBreaks, // Fontos: ne töröljük az előző elemeket!
-  //       { from: dateRange.from as Date, to: dateRange.to as Date }
-  //     ]);
-  //   } else {
-  //     console.error("Invalid date range. Both 'from' and 'to' must be valid Date objects.");
-  //   }
-  // };
+  const handleAddRange = () => {
+    if (dateRange?.from instanceof Date && dateRange?.to instanceof Date) {
+      setBreaks(prevBreaks => [
+        ...prevBreaks, // Fontos: ne töröljük az előző elemeket!
+        { from: dateRange.from as Date, to: dateRange.to as Date }
+      ]);
+    } else {
+      console.error("Invalid date range. Both 'from' and 'to' must be valid Date objects.");
+    }
+  };
 
 
-  // const handleAddDate = (date: Date | undefined, setState: React.Dispatch<React.SetStateAction<Date[]>>, state: Date[]) => {
-  //   if (date) setState([...state, date]);
-  // };
+  const handleAddDate = (date: Date | undefined, setState: React.Dispatch<React.SetStateAction<Date[]>>, state: Date[]) => {
+    if (date) setState([...state, date]);
+  };
 
 
 
-  //const [, setOverlayVisible] = useState(false);
+  const [isOverlayVisible, setOverlayVisible] = useState(false);
   // const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
-  //const [step, setStep] = useState(1);
-  // const [formData, setFormData] = useState({
-  //   name: "",
-  //   email: "",
-  //   age: "",
-  //   city: "",
-  //   profession: "",
-  //   hobby: "",
-  //   experience: "",
-  //   feedback: "",
-  // });
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    age: "",
+    city: "",
+    profession: "",
+    hobby: "",
+    experience: "",
+    feedback: "",
+  });
 
   useEffect(() => {
     const hasClickedBefore = localStorage.getItem("hasClickedOverlayButton");
     setButtonVisible(hasClickedBefore !== "true");
   }, []);
 
-  // const handleButtonClick = () => {
-  //   setOverlayVisible(true);
-  // };
+  const handleButtonClick = () => {
+    setOverlayVisible(true);
+  };
 
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-  //   setFormData({
-  //     ...formData,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-  // const handleNext = () => {
-  //   if (step < 5) setStep(step + 1);
-  // };
+  const handleNext = () => {
+    if (step < 5) setStep(step + 1);
+  };
 
-  // const handleBack = () => {
-  //   if (step > 1) setStep(step - 1);
-  // };
+  const handleBack = () => {
+    if (step > 1) setStep(step - 1);
+  };
 
-  // const handleFormSubmit = () => {
-  //   console.log("Form Data:", formData);
-  //   setOverlayVisible(false);
-  //   setButtonVisible(false);
-  //   localStorage.setItem("hasClickedOverlayButton", "true");
-  //   window.location.reload();
-  // };
+  const handleFormSubmit = () => {
+    console.log("Form Data:", formData);
+    setOverlayVisible(false);
+    setButtonVisible(false);
+    localStorage.setItem("hasClickedOverlayButton", "true");
+    window.location.reload();
+  };
 
-  // const handleClose = () => {
-  //   setOverlayVisible(false);
-  // };
+  const handleClose = () => {
+    setOverlayVisible(false);
+  };
 
 
 
