@@ -124,70 +124,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     // variant="inset"
     <Sidebar variant="inset" className="border-r-0" {...props}>
       <SidebarHeader>
-      <DropdownMenu >
-        
-      <DropdownMenuTrigger asChild>
-  <div> {/* Ezt adjuk hozzá a hiba elkerülése érdekében */}
-    <SidebarMenuButton
-      size="lg"
-      className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-    >
-      <div className="grid flex-1 text-left text-sm leading-tight">
-        <span className="text-s truncate">Kiskunfélegyházi Szent</span>
-        <span className="text-s truncate">Benedek PG Középiskola</span>
-      </div>
 
-      <Avatar className="h-9 w-9 rounded-full">
-        <AvatarFallback className="rounded-lg bg-lime-300">ViZs</AvatarFallback>
-      </Avatar>
-      <ChevronDown className="ml-auto size-4" />
-    </SidebarMenuButton>
-  </div> {/* Ezt adjuk hozzá a hiba elkerülése érdekében */}
-</DropdownMenuTrigger>
-
-          <DropdownMenuContent
-            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-            side={isMobile ? "bottom" : "right"}
-            align="start"
-            sideOffset={4}
-          >
-            <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-9 w-9 rounded-full">
-                  <AvatarFallback className="rounded-lg bg-lime-300">ViZs</AvatarFallback>
-                </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Vincze Zsolt</span>
-                  <span className="truncate text-xs">vincze.zsolt@szbi-pg.hu</span>
-                </div>
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              
-              <DropdownMenuItem asChild>
-              <Link href="/dashboard/settings">
-              <Settings/>
-            
-              <span>Beállítások</span>
-              </Link> 
-              </DropdownMenuItem>
-              {/* <DropdownMenuItem asChild>
-              <Link href="/dashboard/report">
-              
-              <Flag/>
-              <span>Probléma jelentése</span>
-              </Link>
-              </DropdownMenuItem> */}
-
-            </DropdownMenuGroup>
-            {/* <DropdownMenuSeparator /> */}
-            <DropdownMenuItem>
-            <LogOut/>
-            <span>Kijelentkezés</span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
 
         <Separator/>
       </SidebarHeader>
