@@ -134,8 +134,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <DropdownMenuItem asChild>
         <>
           <Link href="/dashboard/settings">
-           
-            <span>  <Settings />Beállítások</span>
+          <Settings className="inline-block"/>
+            Beállítások
           </Link>
         </>
       </DropdownMenuItem>
