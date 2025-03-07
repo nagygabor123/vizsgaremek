@@ -64,11 +64,11 @@ import { useState, useEffect } from "react";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { isMobile } = useSidebar()
-  const [isOverlayVisible, setOverlayVisible] = useState(false);
+  //const [isOverlayVisible, setOverlayVisible] = useState(false);
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
 
 
-  const [students, setStudents] = useState<any[]>([]);
+  //const [students, setStudents] = useState<any[]>([]);
   const [hasStudents, setHasStudents] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(true); // Betöltési állapot
 
@@ -77,7 +77,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     try {
       const response = await fetch('/api/students/read');
       const data = await response.json();
-      setStudents(data);
+     // setStudents(data);
       setHasStudents(data.length > 0); // Ha van legalább egy diák, akkor true
     } catch (error) {
       console.error('Error fetching students', error);
@@ -98,15 +98,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   }, []);
 
   // Gomb kattintás kezelése
-  const handleButtonClick = () => {
+  /*const handleButtonClick = () => {
     setOverlayVisible(true);
-  };
+  };*/
 
-  const handleConfirmClick = () => {
+  /*const handleConfirmClick = () => {
     setOverlayVisible(false);
     setButtonVisible(false);
     localStorage.setItem("hasClickedOverlayButton", "true");
-  };
+  };*/
 
   // Addig ne rendereljük a gombot, amíg nem töltöttük be az adatot
   if (isButtonVisible === null) {
