@@ -126,25 +126,25 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader>
       <DropdownMenu >
         
-          <DropdownMenuTrigger asChild>
-            
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            >
-               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="text-s truncate">Kiskunfélegyházi Szent</span>
-                <span className="text-s truncate">Benedek PG Középiskola</span>
-                
-              </div>
-           
-              <Avatar className="h-9 w-9 rounded-full">
-                <AvatarFallback className="rounded-lg bg-lime-300">ViZs</AvatarFallback>
-              </Avatar>
-              <ChevronDown className="ml-auto size-4" />
-            
-            </SidebarMenuButton>
-          </DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>
+  <div> {/* Ezt adjuk hozzá a hiba elkerülése érdekében */}
+    <SidebarMenuButton
+      size="lg"
+      className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+    >
+      <div className="grid flex-1 text-left text-sm leading-tight">
+        <span className="text-s truncate">Kiskunfélegyházi Szent</span>
+        <span className="text-s truncate">Benedek PG Középiskola</span>
+      </div>
+
+      <Avatar className="h-9 w-9 rounded-full">
+        <AvatarFallback className="rounded-lg bg-lime-300">ViZs</AvatarFallback>
+      </Avatar>
+      <ChevronDown className="ml-auto size-4" />
+    </SidebarMenuButton>
+  </div> {/* Ezt adjuk hozzá a hiba elkerülése érdekében */}
+</DropdownMenuTrigger>
+
           <DropdownMenuContent
             className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
             side={isMobile ? "bottom" : "right"}
