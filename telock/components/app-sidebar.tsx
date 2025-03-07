@@ -1,6 +1,6 @@
 "use client"
 
-//import { usePathname } from "next/navigation";
+import Link from 'next/link'; // Import the Link component
 import * as React from "react";
 import {
   TriangleAlert,
@@ -45,8 +45,6 @@ import {
 import { useState, useEffect } from "react";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  //const pathname = usePathname();
-  //const isActive = (path: string) => pathname === path;
   const { isMobile } = useSidebar();
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
   const [hasStudents, setHasStudents] = useState<boolean | null>(null);
@@ -116,10 +114,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <a href="/dashboard/settings" className="flex items-center">
+                <Link href="/dashboard/settings" className="flex items-center">
                   <Settings />
                   <span className="ml-2">Beállítások</span>
-                </a>
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuItem>
@@ -137,10 +135,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarGroup>
           <SidebarMenu>
             <SidebarMenuItem>
-              <a href="/dashboard/timetable" className="flex items-center">
+              <Link href="/dashboard/timetable" className="flex items-center">
                 <CalendarHeart />
                 <span className="ml-2">Saját órák</span>
-              </a>
+              </Link>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
@@ -149,16 +147,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarGroupLabel>Osztályom</SidebarGroupLabel>
           <SidebarMenu>
             <SidebarMenuItem>
-              <a href="/dashboard/class/timetable" className="flex items-center">
+              <Link href="/dashboard/class/timetable" className="flex items-center">
                 <Calendar />
                 <span className="ml-2">Órarend</span>
-              </a>
+              </Link>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <a href="/dashboard/class/students" className="flex items-center">
+              <Link href="/dashboard/class/students" className="flex items-center">
                 <GraduationCap />
                 <span className="ml-2">Tanulók</span>
-              </a>
+              </Link>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
@@ -167,25 +165,25 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarGroupLabel>Iskolai nyilvántartás</SidebarGroupLabel>
           <SidebarMenu>
             <SidebarMenuItem>
-              <a href="/dashboard/school/timetables" className="flex items-center">
+              <Link href="/dashboard/school/timetables" className="flex items-center">
                 <Calendar />
                 <span className="ml-2">Órarendek</span>
                 {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
-              </a>
+              </Link>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <a href="/dashboard/school/students" className="flex items-center">
+              <Link href="/dashboard/school/students" className="flex items-center">
                 <GraduationCap />
                 <span className="ml-2">Tanulók</span>
                 {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
-              </a>
+              </Link>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <a href="/dashboard/school/employees" className="flex items-center">
+              <Link href="/dashboard/school/employees" className="flex items-center">
                 <BriefcaseBusiness />
                 <span className="ml-2">Munkatársak</span>
                 {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
-              </a>
+              </Link>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
@@ -194,16 +192,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarGroupLabel>Beállítások és naplózás</SidebarGroupLabel>
           <SidebarMenu>
             <SidebarMenuItem>
-              <a href="/dashboard/school/settings" className="flex items-center">
+              <Link href="/dashboard/school/settings" className="flex items-center">
                 <SlidersHorizontal />
                 <span className="ml-2">Tanév beállításai</span>
-              </a>
+              </Link>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <a href="/dashboard/school/logs" className="flex items-center">
+              <Link href="/dashboard/school/logs" className="flex items-center">
                 <FileClock />
                 <span className="ml-2">Eseménynapló</span>
-              </a>
+              </Link>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
@@ -215,3 +213,4 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     </Sidebar>
   );
 }
+
