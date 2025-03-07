@@ -72,7 +72,7 @@
  *                   type: string
  *                   example: "Method Not Allowed"
  */
-import { neon } from '@neondatabase/serverless';
+import { connectToDatabase } from '../../../lib/db';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -82,30 +82,28 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
-    const sql = neon(process.env.DATABASE_URL);
+    const db = await connectToDatabase();
 
     try {
-      // Insert the student into the students table
-      await sql('INSERT INTO students (student_id, full_name, class, rfid_tag) VALUES ($1, $2, $3, $4)', 
+      await db.execute(
+        'INSERT INTO students (student_id, full_name, class, rfid_tag) VALUES (?, ?, ?, ?)',
         [student_id, full_name, studentClass, rfid_tag]
       );
 
-      // Get the maximum locker_id from the lockers table
-      const maxLockerResult = await sql('SELECT MAX(locker_id) AS max_id FROM lockers');
-      const maxLocker = maxLockerResult[0].max_id;
-      let nextLockerId = maxLocker ? maxLocker + 1 : 8;
+      const [maxLocker] = await db.query('SELECT MAX(locker_id) AS max_id FROM lockers;');
+      let nextLockerId = maxLocker[0].max_id ? maxLocker[0].max_id + 1 : 8;
 
-      // Insert a new locker with the next available locker_id
-      await sql('INSERT INTO lockers (locker_id, status) VALUES ($1, $2)', [nextLockerId, 'ki']);
-
-      // Insert the relationship between the RFID tag and the locker_id
-      await sql('INSERT INTO locker_relationships (rfid_tag, locker_id) VALUES ($1, $2)', [rfid_tag, nextLockerId]);
+      await db.execute('INSERT INTO lockers (locker_id, status) VALUES (?, ?);', [nextLockerId, 'ki']);
+      await db.execute('INSERT INTO locker_relationships (rfid_tag, locker_id) VALUES (?, ?);', [rfid_tag, nextLockerId]);
 
       res.status(201).json({ message: 'Student and locker relationship created', locker_id: nextLockerId });
     } catch (error) {
       res.status(500).json({ message: 'Error creating student and locker relationship', error: error.message });
+    } finally {
+      await db.end(); 
     }
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });
   }
 }
+
