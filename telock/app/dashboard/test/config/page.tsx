@@ -14,7 +14,6 @@ const Configuration = () => {
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -48,19 +47,19 @@ const Configuration = () => {
       setApiResponse(null);
       return;
     }
-  
+
     const formData = new FormData();
     formData.append('file', selectedFile);
-  
+
     try {
       const response = await fetch('http://localhost:3000/api/setup/studentsToDatabase', {
         method: 'POST',
         body: formData,
       });
-  
+
       const responseData: ApiResponse = await response.json();
       setApiResponse(responseData);
-  
+
       if (response.ok) {
         setMessage('File uploaded successfully!');
       } else {
@@ -71,7 +70,7 @@ const Configuration = () => {
       setApiResponse(null);
     }
   };
-  
+
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
       <h1>Konfigurációs felület</h1>
