@@ -198,10 +198,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </Link>
             </SidebarMenuItem>
             <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+            <>
               <Link href="/dashboard/school/logs">
                 <FileClock />
                 <span>Eseménynapló</span>
               </Link>
+              </>
+              </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
