@@ -76,8 +76,7 @@ WHERE type = 'szunet';
  *       500:
  *         description: "Adatbázis csatlakozási hiba történt."
  */
-
-import { connectToDatabase } from '../../../lib/db';
+import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
@@ -87,33 +86,32 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Type paraméter szükséges' });
     }
 
-    let connection;
-    
+    const sql = neon(`${process.env.DATABASE_URL}`);
+
     try {
-      connection = await connectToDatabase();
-      
       let query = '';
       let values = [];
 
       if (type === 'plusznap') {
-        query = 'SELECT year_schedule_id,nev, which_day, replace_day FROM year_schedule WHERE type = ?';
+        query = 'SELECT year_schedule_id, nev, which_day, replace_day FROM year_schedule WHERE type = $1';
         values = ['plusznap'];
-      }else if (type === 'szunet') {
-        query = 'SELECT year_schedule_id,type, nev, which_day AS start, replace_day AS end FROM year_schedule WHERE type IN (?, ?)';
+      } else if (type === 'szunet') {
+        query = 'SELECT year_schedule_id, type, nev, which_day AS start, replace_day AS end FROM year_schedule WHERE type IN ($1, $2)';
         values = ['szunet', 'tanitasnelkul'];
-      }else if (type === 'tanitasnelkul') {
-        query = 'SELECT year_schedule_id, nev, which_day AS start, replace_day AS end FROM year_schedule WHERE type = ?';
+      } else if (type === 'tanitasnelkul') {
+        query = 'SELECT year_schedule_id, nev, which_day AS start, replace_day AS end FROM year_schedule WHERE type = $1';
         values = ['tanitasnelkul'];
       } else if (type === 'kezd') {
-        query = 'SELECT which_day AS start FROM year_schedule WHERE type = ? LIMIT 1';
+        query = 'SELECT which_day AS start FROM year_schedule WHERE type = $1 LIMIT 1';
         values = ['kezd'];
       } else if (type === 'veg') {
-        query = 'SELECT which_day AS end FROM year_schedule WHERE type = ? LIMIT 1';
+        query = 'SELECT which_day AS end FROM year_schedule WHERE type = $1 LIMIT 1';
         values = ['veg'];
       } else {
         return res.status(400).json({ error: 'Érvénytelen type paraméter' });
       }
-      const [rows] = await connection.execute(query, values);
+
+      const rows = await sql(query, values);
 
       if (rows.length > 0) {
         if (type === 'plusznap') {
@@ -127,7 +125,7 @@ export default async function handler(req, res) {
         } else if (type === 'szunet') {
           const breakDates_alap = rows.map(row => ({
             id: row.year_schedule_id, 
-            type:row.type,
+            type: row.type,
             name: row.nev,  
             start: row.start,
             end: row.end
@@ -141,7 +139,7 @@ export default async function handler(req, res) {
             end: row.end
           }));
           return res.status(200).json({ tanitasnelkul_alap });
-        }else if (type === 'kezd') {
+        } else if (type === 'kezd') {
           return res.status(200).json({ schoolYearStart: rows[0] });
         } else if (type === 'veg') {
           return res.status(200).json({ schoolYearEnd: rows[0] });
@@ -152,10 +150,6 @@ export default async function handler(req, res) {
     } catch (error) {
       console.error('Adatbázis hiba:', error);
       return res.status(500).json({ error: 'Adatbázis csatlakozási hiba' });
-    } finally {
-      if (connection) {
-        await connection.end();
-      }
     }
   } else {
     return res.status(405).json({ error: 'A módszer nem engedélyezett' });
