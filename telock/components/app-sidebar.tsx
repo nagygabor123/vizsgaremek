@@ -198,9 +198,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </Link>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <Link href="/dashboard/school/logs" className="flex items-center">
+              <Link href="/dashboard/school/logs">
                 <FileClock />
-                <span className="ml-2">Eseménynapló</span>
+                <span>Eseménynapló</span>
               </Link>
             </SidebarMenuItem>
           </SidebarMenu>
