@@ -31,7 +31,7 @@ export default async function handler(req, res) {
     const [groups] = await db.query('SELECT group_id, group_name FROM csoportok');
     const groupMap = new Map(groups.map(group => [group.group_name, group.group_id]));
   
-    const timetableInsertValues = [];
+  //  const timetableInsertValues = [];
     const groupRelationsInsertValues = [];
   
     for (const entry of schedule) {

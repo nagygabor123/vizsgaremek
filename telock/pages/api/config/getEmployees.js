@@ -60,6 +60,7 @@ export default async function handler(req, res) {
       const [rows] = await db.execute('SELECT admin_id, full_name,short_name, position,osztalyfonok FROM admins');
       res.status(200).json(rows); 
     } catch (error) {
+      console.error('Database error:', error);
       res.status(500).json({ message: 'Error fetching employees' });
     } finally {
       await db.end(); // Kapcsolat lezárása
