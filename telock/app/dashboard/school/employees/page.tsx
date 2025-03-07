@@ -134,7 +134,7 @@ export default function AddEmployeePage() {
 
   const fetchEmployees = async () => {
     try {
-      const response = await fetch('api/config/getEmployees');
+      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getEmployees');
       const data = await response.json();
       if (response.ok) {
         setEmployees(data);
@@ -271,11 +271,11 @@ export default function AddEmployeePage() {
     }
   };
 
-
+/*
   const filteredOsztalyfonok = osztalyfonokOptions.filter((osztalyfonok) =>
     osztalyfonok.toLowerCase().includes(searchOsztalyfonok.toLowerCase())
   );
-
+*/
 
 
   const PAGE_SIZE = 13;
