@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 
 const Configuration = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
