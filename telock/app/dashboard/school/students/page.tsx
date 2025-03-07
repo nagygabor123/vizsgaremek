@@ -109,7 +109,7 @@ export default function Home() {
 
   // Fetch system status from the database
   const fetchSystemStatus = async () => {
-    const response = await fetch('http://localhost:3000/api/system/status');
+    const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/system/status');
     if (response.ok) {
       const data = await response.json();
       setSystemClose(data.status === "nyithato" ? false : true);
@@ -134,7 +134,7 @@ export default function Home() {
     const fetchTimetables = async () => {
       try {
         // Fetch all students' timetable data at once from the new API endpoint
-        const response = await fetch('http://localhost:3000/api/timetable/allScheduleStart');
+        const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/timetable/allScheduleStart');
         if (!response.ok) {
           throw new Error('Nem sikerült lekérni az összes diák órarendjét.');
         }

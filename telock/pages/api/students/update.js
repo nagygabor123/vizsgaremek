@@ -82,7 +82,7 @@
  *                   type: string
  *                   example: "Error updating student"
  */
-import { connectToDatabase } from '../../../lib/db';
+import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'PUT') {
@@ -92,16 +92,18 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
-    const db = await connectToDatabase();
+    const sql = neon(`${process.env.DATABASE_URL}`);
+
     try {
-      const [existingLocker] = await db.execute(
-        'SELECT relationship_id, locker_id FROM locker_relationships WHERE rfid_tag = ?',
+      // Ellenőrizzük, hogy létezik-e már locker kapcsolat a megadott rfid_tag-gel
+      const existingLocker = await sql(
+        'SELECT relationship_id, locker_id FROM locker_relationships WHERE rfid_tag = $1',
         [rfid_tag]
       );
 
       if (existingLocker.length > 0) {
-        // Call the API to delete the student
-        const deleteResponse = await fetch(`http://localhost:3000/api/students/delete`, {
+        // Töröljük a diákot
+        const deleteResponse = await fetch(`vizsgaremek-mocha.vercel.app/api/students/delete`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
@@ -114,8 +116,8 @@ export default async function handler(req, res) {
         }
       }
 
-      // Call the API to create the student again, preserving the locker relationship
-      const createResponse = await fetch(`http://localhost:3000/api/students/create`, {
+      // Újra létrehozzuk a diákot
+      const createResponse = await fetch(`vizsgaremek-mocha.vercel.app/api/students/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -132,10 +134,10 @@ export default async function handler(req, res) {
         return res.status(500).json({ message: 'Failed to create student' });
       }
 
-      // If locker relationship exists, update it to maintain the old locker_id
+      // Ha létezik locker kapcsolat, frissítjük, hogy megtartsuk a régi locker_id-t
       if (existingLocker.length > 0) {
-        await db.execute(
-          'INSERT INTO locker_relationships (locker_id, rfid_tag) VALUES (?, ?)',
+        await sql(
+          'INSERT INTO locker_relationships (locker_id, rfid_tag) VALUES ($1, $2)',
           [existingLocker[0].locker_id, rfid_tag]
         );
       }
@@ -144,8 +146,6 @@ export default async function handler(req, res) {
     } catch (error) {
       console.error('Error updating student:', error);  
       res.status(500).json({ message: 'Error updating student and locker relationship' });
-    } finally {
-      await db.end();
     }
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });
