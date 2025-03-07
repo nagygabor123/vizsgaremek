@@ -12,14 +12,14 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import {
-  Sidebar,
+  //Sidebar,
   SidebarTrigger,
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Pen, X, ArrowUpDown, CirclePlus, ChevronLeft, ChevronRight, Slash, TriangleAlert } from "lucide-react"
+import { Pen, X, ArrowUpDown, CirclePlus, ChevronLeft, ChevronRight, Slash } from "lucide-react"
 
 import { Input } from "@/components/ui/input";
 import {
@@ -29,7 +29,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogFooter
+//DialogFooter
 } from "@/components/ui/dialog"
 import {
   Select,
@@ -37,8 +37,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-  SelectGroup,
-  SelectLabel
+ // SelectGroup,
+ // SelectLabel
 } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 import AppKonfig from '@/components/app-konfig';
