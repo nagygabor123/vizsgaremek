@@ -132,12 +132,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <DropdownMenuSeparator />
     <DropdownMenuGroup>
       <DropdownMenuItem asChild>
-        <div>
+        <>
           <Link href="/dashboard/settings">
-            <Settings />
-            <span>Beállítások</span>
+           
+            <span>  <Settings />Beállítások</span>
           </Link>
-        </div>
+        </>
       </DropdownMenuItem>
     </DropdownMenuGroup>
     <DropdownMenuItem>
