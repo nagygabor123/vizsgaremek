@@ -125,7 +125,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar variant="inset" className="border-r-0" {...props}>
       <SidebarHeader>
       <DropdownMenu >
-        
+        <div>
       <DropdownMenuTrigger asChild>
   <div> {/* Ezt adjuk hozzá a hiba elkerülése érdekében */}
     <SidebarMenuButton
@@ -144,7 +144,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     </SidebarMenuButton>
   </div> {/* Ezt adjuk hozzá a hiba elkerülése érdekében */}
 </DropdownMenuTrigger>
-
+</div>
           <DropdownMenuContent
             className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
             side={isMobile ? "bottom" : "right"}
@@ -201,15 +201,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
 
       <SidebarMenuItem>
+      <div> 
       <SidebarMenuButton asChild isActive={isActive("/dashboard/timetable")}>
-      <div>  
+     
   <Link href="/dashboard/timetable">
   <CalendarHeart/>
     <span>Saját órák</span>
     
   </Link>
-  </div>
+
 </SidebarMenuButton>
+</div>
 </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
@@ -218,142 +220,18 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarGroupLabel>Osztályom</SidebarGroupLabel>
       <SidebarMenu>
       <SidebarMenuItem>
-      <SidebarMenuButton asChild isActive={isActive("/dashboard/class/timetable")}>
       <div>
+      <SidebarMenuButton asChild isActive={isActive("/dashboard/class/timetable")}>
+    
   <Link href="/dashboard/class/timetable">
   <Calendar/>
     <span>Órarend</span>
   </Link>
-  </div>
-</SidebarMenuButton>
-</SidebarMenuItem>
-<SidebarMenuItem>
-<SidebarMenuButton asChild isActive={isActive("/dashboard/class/students")}>
-<div>
-  <Link href="/dashboard/class/students">
-  <GraduationCap/>
-    <span>Tanulók</span>
-  </Link>
-  </div>
-</SidebarMenuButton>
-</SidebarMenuItem>
-      </SidebarMenu>
-    </SidebarGroup>
- 
 
-    <SidebarGroup>
-          <SidebarGroupLabel>Iskolai nyilvántartás</SidebarGroupLabel>
-      <SidebarMenu>
-
-{/*
-      <SidebarMenuItem>
-<SidebarMenuButton asChild>
-  <Link href="">
-<CalendarSync/>
-    <span>Helyettesítések</span>
-  </Link>
 </SidebarMenuButton>
-</SidebarMenuItem>*/}
-
-      <SidebarMenuItem>
-      <SidebarMenuButton asChild isActive={isActive("/dashboard/school/timetables")}>
-      <div>
-  <Link href="/dashboard/school/timetables">
-<Calendar/>
-    <span>Órarendek</span>
-  
-    {loading ? (
-     
-        <p></p>
-     
-    ) : (
-      <>
-        {!hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
-      </>
-    )}
-  </Link>
-  </div>
-</SidebarMenuButton>
+</div>
 </SidebarMenuItem>
 
-
-
-<SidebarMenuItem>
-<SidebarMenuButton asChild isActive={isActive("/dashboard/school/students")}>
-<div>
-  <Link href="/dashboard/school/students">
-  <GraduationCap/>
-    <span>Tanulók</span> 
-    {loading ? (
-     
-     <p></p>
-  
- ) : (
-   <>
-     {!hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
-   </>
- )}
-  </Link>
-  </div>
-</SidebarMenuButton>
-</SidebarMenuItem>
-<SidebarMenuItem>
-<SidebarMenuButton asChild isActive={isActive("/dashboard/school/employees")}>
-<div>
-  <Link href="/dashboard/school/employees">
-  <BriefcaseBusiness/>
-    <span>Munkatársak</span>
-    {loading ? (
-     
-     <p></p>
-  
- ) : (
-   <>
-     {!hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
-   </>
- )}
-  </Link>
-  </div>
-</SidebarMenuButton>
-</SidebarMenuItem>
-
-
-
-      </SidebarMenu>
-    </SidebarGroup>
- 
-
-
-
-    <SidebarGroup>
-          <SidebarGroupLabel>Beállítások és naplózás</SidebarGroupLabel>
-      <SidebarMenu>
-
-      <SidebarMenuItem>
-      <SidebarMenuButton asChild isActive={isActive("/dashboard/school/settings")}>
-      <div>
-  <Link href="/dashboard/school/settings">
-<SlidersHorizontal/>
-    <span>Tanév beállításai</span>
-    {/*{isButtonVisible && (*/}
-   {/* <TriangleAlert className="ml-auto text-red-500" />*/}
-     {/* )}  */}
-  </Link> 
-  </div>
-</SidebarMenuButton>
-</SidebarMenuItem>
-
-
-<SidebarMenuItem>
-<SidebarMenuButton asChild isActive={isActive("/dashboard/school/logs")}>
-<div>
-  <Link href="/dashboard/school/logs">
-  <FileClock/>
-    <span>Eseménynapló</span>
-  </Link>
-  </div>
-</SidebarMenuButton>
-</SidebarMenuItem>
 
       </SidebarMenu>
     </SidebarGroup>
