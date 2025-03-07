@@ -16,6 +16,9 @@ export default async function handler(req, res) {
           lockers ON locker_relationships.locker_id = lockers.locker_id`
       );
       
+      // Lezárja az adatbázis kapcsolatot
+      await sql.close();
+
       res.status(200).json(students);
     } catch (error) {
       console.error('Adatbázis hiba:', error);
