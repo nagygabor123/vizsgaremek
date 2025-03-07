@@ -128,9 +128,9 @@ export default function Page() {
   const fetchYearSchedule = async () => {
     try {
       const plusRes = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=plusznap');
-      const szunetRes = await fetch('https://vizsgaremek-mocha.vercel.appapi/config/getYearSchedule?type=szunet');
+      const szunetRes = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=szunet');
       const noschoolRes = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=tanitasnelkul');
-      const startRes = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=kezd');
+      const startRes = await fetch('api/config/getYearSchedule?type=kezd');
       const endRes = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=veg');
 
       const plusDates = await plusRes.json();
