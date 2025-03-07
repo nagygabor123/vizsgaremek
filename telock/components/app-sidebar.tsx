@@ -5,15 +5,15 @@ import { usePathname } from "next/navigation";
 import * as React from "react"
 import {
 
-  TriangleAlert,
+ // TriangleAlert,
 
   Settings,
-  SlidersHorizontal,
+ // SlidersHorizontal,
   ChevronDown,
-  GraduationCap,
-  FileClock,
+ // GraduationCap,
+ // FileClock,
   
-  BriefcaseBusiness,
+ // BriefcaseBusiness,
   
   LogOut,
 
@@ -76,11 +76,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
 
   //const [students, setStudents] = useState<any[]>([]);
-  const [hasStudents, setHasStudents] = useState<boolean | null>(null);
-  const [loading, setLoading] = useState(true); // Betöltési állapot
+ // const [hasStudents, setHasStudents] = useState<boolean | null>(null);
+ // const [loading, setLoading] = useState(true); // Betöltési állapot
 
 
-  const fetchStudents = async () => {
+/*  const fetchStudents = async () => {
     try {
       const response = await fetch('/api/students/read');
       const data = await response.json();
@@ -92,11 +92,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       setLoading(false); // Lekérés vége
     }
   };
-  
-
+  */
+/*
   useEffect(() => {
     fetchStudents();
-  }, []);
+  }, []);*/
 
 
   useEffect(() => {
@@ -166,11 +166,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <DropdownMenuGroup>
             <div>
               <DropdownMenuItem asChild>
+                <div>
               <Link href="/dashboard/settings">
               <Settings/>
             
               <span>Beállítások</span>
               </Link> 
+              </div>
               </DropdownMenuItem>
               </div>
               {/* <DropdownMenuItem asChild>
@@ -203,13 +205,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarMenuItem>
       <div> 
       <SidebarMenuButton asChild isActive={isActive("/dashboard/timetable")}>
-     
+     <div>
   <Link href="/dashboard/timetable">
   <CalendarHeart/>
     <span>Saját órák</span>
     
   </Link>
-
+  </div>
 </SidebarMenuButton>
 </div>
 </SidebarMenuItem>
@@ -222,12 +224,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarMenuItem>
       <div>
       <SidebarMenuButton asChild isActive={isActive("/dashboard/class/timetable")}>
-    
+    <div>
   <Link href="/dashboard/class/timetable">
   <Calendar/>
     <span>Órarend</span>
   </Link>
-
+</div>
 </SidebarMenuButton>
 </div>
 </SidebarMenuItem>
