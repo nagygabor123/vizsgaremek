@@ -96,7 +96,7 @@ export default function Form(){
                 <div className="grid gap-2">
                   <Label htmlFor="short_name">Email</Label>
                   <Input
-                    id="short_name"
+                    name="short_name"
                     type="text"
                     placeholder="m@example.com"
                     required
@@ -112,7 +112,7 @@ export default function Form(){
                       Forgot your password?
                     </a> */}
                   </div>
-                  <Input id="password" type="password" required />
+                  <Input name="password" type="password" required />
                 </div>
                 <Button type="submit" className="w-full">
                   Login
