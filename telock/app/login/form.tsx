@@ -22,8 +22,10 @@ export default function Form(){
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const response = await signIn('credentials', {
-            short_name: formData.get('short_name'),
-            password: formData.get('password'),
+            // short_name: formData.get('short_name'),
+            // password: formData.get('password'),
+            short_name: formData.get('short_name') as string,
+            password: formData.get('password') as string,   
             redirect: false,
         });
 
