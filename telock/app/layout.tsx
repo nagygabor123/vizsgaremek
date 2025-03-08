@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 import Link from "next/link";
 import Logout from "./logout";
 import { SessionProvider } from "next-auth/react";
-import ClientLayout from "@/components/ClientLayout";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -23,7 +23,22 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const session = await getServerSession();
-  return 
-    <ClientLayout>{children}</ClientLayout>
-  ;
+  return (
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+           <nav>
+          {!!session && 
+          <Logout/>
+          }
+       
+          {!session && 
+          <Link href="/login">Login</Link>
+          }
+        </nav>
+        <SessionProvider>{children}</SessionProvider>
+      </body>
+    </html>
+  );
 }
