@@ -33,6 +33,7 @@ export const authOptions = {
           return {
             id: user.id,
             short_name: user.short_name,
+            full_name: user.full_name, // full_name hozzáadása
           };
         }
 
@@ -40,16 +41,19 @@ export const authOptions = {
       },
     }),
   ],
-  callbacks: {
+// app/api/auth/[...nextauth]/auth-options.ts
+callbacks: {
     async session({ session, token }: { session: Session; token: TokenSet }) {
-      if (session.user && token.short_name) {
+      if (session.user && token.short_name && token.full_name) {
         session.user.short_name = token.short_name as string;
+        session.user.full_name = token.full_name as string; // full_name hozzáadása
       }
       return session;
     },
     async jwt({ token, user }: { token: TokenSet; user?: User }) {
       if (user) {
         token.short_name = user.short_name;
+        token.full_name = user.full_name; // full_name hozzáadása
       }
       return token;
     },
