@@ -21,7 +21,7 @@ import {
 import { Label } from "@/components/ui/label"
 import Link from "next/link";
 
-import { Pen, X, ArrowUpDown, CirclePlus, CircleCheck, LockOpen, CircleAlert, CircleMinus, Lock, ChevronRight, ChevronLeft, Slash, } from "lucide-react"
+import { Pen, Trash2, ArrowUpDown, CirclePlus, CircleCheck, LockOpen, CircleAlert, CircleMinus, Lock, ChevronRight, ChevronLeft, Slash, } from "lucide-react"
 
 import {
   Dialog,
@@ -665,7 +665,7 @@ export default function Home() {
 
                               <AlertDialog>
                             <AlertDialogTrigger>
-                            <Button variant="ghost" ><X /></Button>
+                            <Button variant="ghost" ><Trash2 /></Button>
                             </AlertDialogTrigger>
                             <AlertDialogContent>
                               <AlertDialogHeader>

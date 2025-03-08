@@ -115,7 +115,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">Vincze Zsolt</span>
-                  <span className="truncate text-xs">vincze.zsolt@szbi-pg.hu</span>
+                  <span className="truncate text-xs">Tanár</span>
                 </div>
               </div>
             </DropdownMenuLabel>

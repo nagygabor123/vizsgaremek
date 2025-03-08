@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Pen, X, ArrowUpDown, CirclePlus, ChevronLeft, ChevronRight, Slash } from "lucide-react"
+import { Pen, Trash2, ArrowUpDown, CirclePlus, ChevronLeft, ChevronRight, Slash } from "lucide-react"
 
 import { Input } from "@/components/ui/input";
 import {
@@ -455,7 +455,7 @@ export default function AddEmployeePage() {
 
 
 
-                    <div className="grid gap-2">
+                    <div className="grid gap-2 w-full">
                       <Label htmlFor="position">Pozíció</Label>
                       <Select value={position} onValueChange={setPosition}>
                         <SelectTrigger className="col-span-3">
@@ -472,7 +472,7 @@ export default function AddEmployeePage() {
                     </div>
 
                     {/*{["tanar", "igazgato"].includes(position) && (*/}
-                    <div className="grid gap-2">
+                    <div className="grid gap-2 w-full">
                       <Label htmlFor="osztaly">Van osztálya?</Label>
 
 
@@ -627,7 +627,7 @@ export default function AddEmployeePage() {
 
                           <AlertDialog>
                             <AlertDialogTrigger disabled={employee.position === 'Tanár'|| employee.position === "igazgato"} >
-                              <Button disabled={employee.position === 'Tanár' || employee.position === "igazgato"} variant="ghost"><X className="w-4 h-4 inline-block" /></Button>
+                              <Button disabled={employee.position === 'Tanár' || employee.position === "igazgato"} variant="ghost"><Trash2 className="w-4 h-4 inline-block" /></Button>
                             </AlertDialogTrigger>
                             <AlertDialogContent>
                               <AlertDialogHeader>

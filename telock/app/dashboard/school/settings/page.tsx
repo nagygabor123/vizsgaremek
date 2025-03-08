@@ -824,7 +824,7 @@ variant="ghost"
                         </DropdownMenu>
                       </div>
 
-                      <div className="grid gap-2">
+                      <div className="grid gap-2 w-full">
                         <Label htmlFor="position">Helyettesítő nap</Label>
                         <Select
                           value={newPlusDate.replace_day}
