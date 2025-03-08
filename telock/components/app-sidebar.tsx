@@ -1,7 +1,8 @@
 "use client"
 
 import { usePathname } from "next/navigation";
-import { getServerSession } from "next-auth";
+import { useSession } from "next-auth/react";
+
 import Link from 'next/link'; // Import the Link component
 import * as React from "react";
 import {
@@ -50,7 +51,7 @@ import { signOut } from "next-auth/react";
 
 
 export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const session = await getServerSession();
+   const { data: session } = useSession();
   const pathname = usePathname();
 
   const isActive = (path: string) => pathname === path;
