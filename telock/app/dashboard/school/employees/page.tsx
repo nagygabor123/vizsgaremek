@@ -458,7 +458,8 @@ export default function AddEmployeePage() {
                     <div className="grid gap-2 w-full">
                       <Label htmlFor="position">Pozíció</Label>
                       <Select value={position} onValueChange={setPosition}>
-                        <SelectTrigger className="col-span-3">
+                        <SelectTrigger className="col-span-3 w-full">
+                   
                           <SelectValue placeholder="Válasszon..." />
                         </SelectTrigger>
                         <SelectContent>
@@ -472,14 +473,14 @@ export default function AddEmployeePage() {
                     </div>
 
                     {/*{["tanar", "igazgato"].includes(position) && (*/}
-                    <div className="grid gap-2 w-full">
+                    <div className="grid gap-2">
                       <Label htmlFor="osztaly">Van osztálya?</Label>
 
 
 
 
                       <Select value={osztaly} onValueChange={setOsztaly}>
-                        <SelectTrigger className="col-span-3">
+                        <SelectTrigger className="col-span-3 w-full">
                           <SelectValue placeholder="Válasszon..." />
                         </SelectTrigger>
                         <SelectContent>
@@ -574,7 +575,7 @@ export default function AddEmployeePage() {
                                 <div className="grid gap-2">
                                   <Label htmlFor="position">Pozíció</Label>
                                   <Select value={editPosition} onValueChange={setEditPosition}>
-                                    <SelectTrigger className="col-span-3"> {/** className="w-[180px]" */}
+                                    <SelectTrigger className="col-span-3 w-full"> {/** className="w-[180px]" */}
                                       <SelectValue placeholder="" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -591,7 +592,7 @@ export default function AddEmployeePage() {
                                 <div className="grid gap-2">
                                   <Label htmlFor="position">Van osztálya?</Label>
                                   <Select value={editOsztaly} onValueChange={setEditOsztaly}>
-                                    <SelectTrigger className="col-span-3">
+                                    <SelectTrigger className="col-span-3 w-full">
                                       <SelectValue placeholder="" />
                                     </SelectTrigger>
                                     <SelectContent>
