@@ -58,6 +58,9 @@ import {
 
 
 export default function AddEmployeePage() {
+  const [open, setOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
 
 
  // const [isDialogOpen2, setIsDialogOpen2] = useState(false);
@@ -73,7 +76,7 @@ export default function AddEmployeePage() {
   const [editPosition, setEditPosition] = useState('');
   const [editOsztaly, setEditOsztaly] = useState('');
 
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
 
   //const [open, setOpen] = useState(false);
 
@@ -203,7 +206,7 @@ export default function AddEmployeePage() {
     setEditOsztaly(employee.osztalyfonok);
   };
 
-  const [open, setOpen] = useState(false);
+
 
   const handleUpdate = async () => {
     if (!editId) return;
