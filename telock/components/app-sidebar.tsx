@@ -1,6 +1,9 @@
 "use client"
 
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
+
+import { signOut, useSession } from "next-auth/react";
 
 import Link from 'next/link'; // Import the Link component
 import * as React from "react";
@@ -44,15 +47,12 @@ import {
   Avatar,
   AvatarFallback,
 } from "@/components/ui/avatar";
-import { useState, useEffect } from "react";
-
-import { signOut } from "next-auth/react";
 
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   const pathname = usePathname();
-
+  const { data: session } = useSession();
   const isActive = (path: string) => pathname === path;
 
 
@@ -100,8 +100,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <span className="text-s truncate">Benedek PG Középiskola</span>
               </div>
               <Avatar className="h-9 w-9 rounded-full">
-                <AvatarFallback className="rounded-lg bg-lime-300">ViZs</AvatarFallback>
-              </Avatar>
+              <AvatarFallback className="rounded-lg bg-lime-300">
+  {session?.user?.short_name?.substring(0, 2).toUpperCase()}
+</AvatarFallback>
+            </Avatar>
               <ChevronDown className="ml-auto size-4" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
