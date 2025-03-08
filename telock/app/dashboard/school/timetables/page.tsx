@@ -159,7 +159,7 @@ const Calendar: React.FC = () => {
   useEffect(() => {
     const fetchLessonTimes = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/config/getRinging');
+        const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getRinging');
         if (!response.ok) {
           throw new Error('Nem sikerült lekérni a csengetési rendet.');
         }
@@ -178,7 +178,7 @@ const Calendar: React.FC = () => {
     const fetchTimetables = async () => {
       try {
         // Fetch all students' timetable data at once from the new API endpoint
-        const response = await fetch('http://localhost:3000/api/timetable/allScheduleStart');
+        const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/timetable/allScheduleStart');
         if (!response.ok) {
           throw new Error('Nem sikerült lekérni az összes diák órarendjét.');
         }
@@ -229,19 +229,19 @@ const Calendar: React.FC = () => {
   useEffect(() => {
     const fetchAdditionalData = async () => {
       try {
-        const plusResponse = await fetch('http://localhost:3000/api/config/getYearSchedule?type=plusznap');
+        const plusResponse = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=plusznap');
         const plusData = await plusResponse.json();
         setPlusdate(plusData.plusDates_alap);
 
-        const breakResponse = await fetch('http://localhost:3000/api/config/getYearSchedule?type=szunet');
+        const breakResponse = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=szunet');
         const breakData = await breakResponse.json();
         setBreakdate(breakData.breakDates_alap);
 
-        const startResponse = await fetch('http://localhost:3000/api/config/getYearSchedule?type=kezd');
+        const startResponse = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=kezd');
         const startData = await startResponse.json();
         setStartYear(startData.schoolYearStart.start);
 
-        const endResponse = await fetch('http://localhost:3000/api/config/getYearSchedule?type=veg');
+        const endResponse = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=veg');
         const endData = await endResponse.json();
         setEndYear(endData.schoolYearEnd.end);
       } catch (error) {
