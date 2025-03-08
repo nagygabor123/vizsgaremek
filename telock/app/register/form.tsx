@@ -11,7 +11,7 @@ export default function Form(){
         const response = await fetch(`/api/auth/register`, {
             method: "POST",
             body: JSON.stringify({
-                email: formData.get('email'),
+                short_name: formData.get('short_name'),
                 password: formData.get('password'),
             })
         })
@@ -20,7 +20,7 @@ export default function Form(){
 
     return (
         <form onSubmit={handleSubmit}>
-        <input name="email" className="border border-black text-black" type="email"/>
+        <input name="short_name" className="border border-black text-black" type="text"/>
         <input name="password" className="border border-black text-black" type="password"/>
         <button type="submit">
             Register

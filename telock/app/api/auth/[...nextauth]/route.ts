@@ -13,7 +13,7 @@ const handler = NextAuth({
     },
     providers: [CredentialsProvider({
         credentials: {
-            email: {},
+            short_name: {},
             password: {}
         },
         async authorize(credentials, req) {
@@ -22,7 +22,7 @@ const handler = NextAuth({
             'use server';
             const sql = neon(`${process.env.DATABASE_URL}`);
             const response = await sql`
-            SELECT * FROM users WHERE email=${credentials?.email}`;
+            SELECT * FROM admins WHERE short_name=${credentials?.short_name}`;
             const user = response[0];
             const passwordCorrect = await compare(
                 credentials?.password || "",
@@ -33,7 +33,7 @@ const handler = NextAuth({
             if (passwordCorrect) {
                 return {
                     id: user.id,
-                    email: user.email,
+                    short_name: user.short_name,
                 }
             }
 

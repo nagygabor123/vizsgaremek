@@ -6,17 +6,23 @@ export async function POST(request: Request) {
    try {
     'use server';
 
-    const {email, password} = await request.json();
+    const {short_name, password} = await request.json();
 
-    console.log({email, password});
+    const full_name = "a";
+    const osztalyfonok = "a";
+    const position = "a";
+
+
+
+    console.log({short_name, password});
 
     const hashedPassword = await hash(password, 10);
 
     const sql = neon(`${process.env.DATABASE_URL}`);
 
     const response = await sql`
-    INSERT INTO users (email, password)
-    VALUES (${email}, ${hashedPassword})
+    INSERT INTO admins (full_name, password, position, osztalyfonok, short_name)
+    VALUES (${full_name}, ${hashedPassword}, ${position}, ${osztalyfonok}, ${short_name})
     `;
 
 

@@ -46,6 +46,9 @@ import {
 } from "@/components/ui/avatar";
 import { useState, useEffect } from "react";
 
+import { signOut } from "next-auth/react";
+
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   const pathname = usePathname();
@@ -134,8 +137,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <DropdownMenuItem>
          
                 <LogOut />
-                <span>Kijelentkezés</span>
-          
+               
+                <span onClick={() => {
+            signOut();
+        }}>
+        Kijelentkezés
+        </span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
