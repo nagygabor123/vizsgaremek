@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import Image from "next/image";
+
 
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center text-center px-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900">
       <header className="w-full flex justify-between items-center p-4 max-w-6xl mx-auto">
         <div className="flex items-center gap-2">
-          <Image src="/logo.png" alt="Logó" width={32} height={32} className="dark:invert" />
+          {/* <Image src="/logo.png" alt="Logó" width={32} height={32} className="dark:invert" /> */}
           <span className="text-lg font-semibold">teLock</span>
         </div>
         <nav className="flex items-center">
