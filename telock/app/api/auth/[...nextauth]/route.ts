@@ -17,23 +17,27 @@ const handler = NextAuth({
             password: {}
         },
         async authorize(credentials, req) {
+
+
+            'use server';
             const sql = neon(`${process.env.DATABASE_URL}`);
             const response = await sql`
-                SELECT * FROM admins WHERE short_name=${credentials?.short_name}`;
+            SELECT * FROM admins WHERE short_name=${credentials?.short_name}`;
             const user = response[0];
-        
             const passwordCorrect = await compare(
                 credentials?.password || "",
-                user.password
-            );
-        
+                 user.password);
+
+                 console.log({passwordCorrect})
+
             if (passwordCorrect) {
                 return {
                     id: user.id,
-                    short_name: user.short_name, // Itt adjuk vissza a short_name-t
-                };
+                    short_name: user.short_name,
+                }
             }
-        
+
+
             return null;
         }
     })]
