@@ -50,7 +50,7 @@ import { useState, useEffect } from "react";
 import { signOut } from "next-auth/react";
 
 
-export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
    const { data: session } = useSession();
   const pathname = usePathname();
 
