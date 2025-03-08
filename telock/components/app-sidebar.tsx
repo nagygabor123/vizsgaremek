@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
 import { usePathname } from "next/navigation";
-import Link from 'next/link';
+import Link from "next/link";
 import * as React from "react";
 import {
   TriangleAlert,
@@ -46,44 +46,43 @@ import { useSession, signIn, signOut } from "next-auth/react";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: session, status } = useSession();
-  console.log("Session data:", session);
-
-  if (status === "loading") return <p>Betöltés...</p>;
-
   const pathname = usePathname();
-  const isActive = (path: string) => pathname === path;
+  const { isMobile } = useSidebar(); // Minden hook itt van
 
-  const { isMobile } = useSidebar(); // Nem feltételesen!
-  const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null); // Nem feltételesen!
-  const [hasStudents, setHasStudents] = useState<boolean | null>(null); // Nem feltételesen!
-  const [loading, setLoading] = useState(true); // Nem feltételesen!
+  // Állapotváltozók
+  const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
+  const [hasStudents, setHasStudents] = useState<boolean | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  // API hívás mindig a hookok után
+  // Az API hívások
   const fetchStudents = async () => {
     try {
-      const response = await fetch('/api/students/read');
+      const response = await fetch("/api/students/read");
       const data = await response.json();
       setHasStudents(data.length > 0);
     } catch (error) {
-      console.error('Error fetching students', error);
+      console.error("Error fetching students", error);
     } finally {
       setLoading(false);
     }
   };
 
+  // useEffect a komponens életciklusa alatt
   useEffect(() => {
     fetchStudents();
-  }, []); // API hívás a komponens inicializálása után, nem feltételesen!
+  }, []);
 
   useEffect(() => {
     const hasClickedBefore = localStorage.getItem("hasClickedOverlayButton");
     setButtonVisible(hasClickedBefore !== "true");
-  }, []); // Feltétel nélküli useEffect
+  }, []); 
 
-  // Ha az állapot null, akkor ne rendereljük a komponenst
+  // Ha az állapot null, akkor ne rendereljük
   if (isButtonVisible === null) {
     return null;
   }
+
+  const isActive = (path: string) => pathname === path;
 
   return (
     <Sidebar variant="inset" className="border-r-0" {...props}>
