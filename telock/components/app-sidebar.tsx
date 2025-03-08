@@ -47,11 +47,9 @@ import {
 import { useState, useEffect } from "react";
 
 import { signOut } from "next-auth/react";
-import { useSession } from "next-auth/react";
-
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { data: session, status } = useSession();
+
 
   const pathname = usePathname();
 
@@ -88,16 +86,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return null;
   }
 
-
-
-  // Ellenőrizd, hogy a session elérhető-e
-  if (status === "loading") {
-    return <div>Loading...</div>;
-  }
-
-  if (!session) {
-    return <div>Please sign in.</div>;
-  }
   return (
     <Sidebar variant="inset" className="border-r-0" {...props}>
       <SidebarHeader>
@@ -131,9 +119,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">Vincze Zsolt</span>
                   <span className="truncate text-xs">Tanár</span>
-                  <div>
-      <p>Welcome, {session.user.short_name}!</p>
-    </div>
+                  
                 </div>
               </div>
             </DropdownMenuLabel>
