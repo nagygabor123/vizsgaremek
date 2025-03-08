@@ -172,8 +172,8 @@ export default function AddEmployeePage() {
         setPosition('');
         setOsztaly('');
         fetchEmployees();
+        setOpen(false);
         setIsDialogOpen(false);
-        //setOpen(false);
       } else {
         setMessage(data.message || 'Error adding employee');
       }
@@ -225,8 +225,8 @@ export default function AddEmployeePage() {
         setEditPosition('');
         setEditOsztaly('');
         fetchEmployees();
-        setOpen(false);
-        //setIsDialogOpen2(false);
+  //      setOpen(false); //////////////////////////////////////////
+  
       } else {
         setMessage(data.message || 'Error updating employee');
       }
