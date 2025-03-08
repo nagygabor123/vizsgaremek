@@ -51,13 +51,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { data: session, status } = useSession();
-  console.log("Session data:", session);
-
-  if (status === "loading") return <p>Betöltés...</p>;
-
-
-
+  const { data: session } = useSession();
   const pathname = usePathname();
 
   const isActive = (path: string) => pathname === path;
@@ -126,14 +120,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">Vincze Zsolt</span>
                   <span className="truncate text-xs">Tanár</span>
-                  <div>
-      {session?.user ? (
-        <p>Bejelentkezve: {session.user.short_name || "Név nincs megadva"}</p>
-      ) : (
-        <p>Nincs bejelentkezve</p>
-      )}
-    </div>
-    <p>Bejelentkezve: {session?.user?.short_name || session?.user?.full_name || "Ismeretlen felhasználó"}</p>
+                  {session ? <p>Bejelentkezve: {session.user?.name}</p> : <p>Nincs bejelentkezve</p>}
 
                 </div>
               </div>
