@@ -1,25 +1,18 @@
-// dashboard/settings/page.js
-
-'use client';  // A komponens Client Component-ként fog működni
-
 import { useSession } from "next-auth/react";
 
-const SettingsPage = () => {
-  const { data: session, status } = useSession();
+const SomeComponent = () => {
+  const session = useSession();
 
-  if (status === "loading") {
-    return <div>Loading...</div>;
-  }
-
-  if (!session) {
-    return <div>Please sign in.</div>;
+  // Ellenőrizzük, hogy a session létezik
+  if (!session || !session.data) {
+    return <div>Loading or please sign in.</div>;
   }
 
   return (
     <div>
-      <p>Welcome, {session.user.short_name}!</p>
+      <p>Welcome, {session.data.user.short_name}!</p>
     </div>
   );
 };
 
-export default SettingsPage;
+export default SomeComponent;
