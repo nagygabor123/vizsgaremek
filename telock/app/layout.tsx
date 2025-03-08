@@ -1,7 +1,7 @@
 // app/layout.tsx
 import { SessionProvider } from "next-auth/react";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"; // Az authOptions importálása
+import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options"; // Az authOptions importálása
 
 export default async function RootLayout({
   children,
