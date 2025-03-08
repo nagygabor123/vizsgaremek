@@ -25,13 +25,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession();
+  // const session = await getServerSession();
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-           <nav>
+           {/* <nav>
           {!!session && 
           <Logout/>
           }
@@ -39,7 +39,7 @@ export default async function RootLayout({
           {!session && 
           <Link href="/login">Login</Link>
           }
-        </nav>
+        </nav> */}
         {children}
       </body>
     </html>

@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname } from "next/navigation";
-
+import { getServerSession } from "next-auth";
 import Link from 'next/link'; // Import the Link component
 import * as React from "react";
 import {
@@ -49,8 +49,8 @@ import { useState, useEffect } from "react";
 import { signOut } from "next-auth/react";
 
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-
+export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const session = await getServerSession();
   const pathname = usePathname();
 
   const isActive = (path: string) => pathname === path;
@@ -119,6 +119,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">Vincze Zsolt</span>
                   <span className="truncate text-xs">Tanár</span>
+                  <div>
+    <h1>Sidebar</h1>
+    {session?.user?.short_name ? (
+        <p>Üdvözöllek, {session.user.short_name}!</p>
+    ) : (
+        <p>Nincs bejelentkezve felhasználó.</p>
+    )}
+</div>
                 </div>
               </div>
             </DropdownMenuLabel>
