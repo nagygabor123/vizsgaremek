@@ -824,13 +824,13 @@ variant="ghost"
                         </DropdownMenu>
                       </div>
 
-                      <div className="grid gap-2 w-full">
+                      <div className="grid gap-2">
                         <Label htmlFor="position">Helyettesítő nap</Label>
                         <Select
                           value={newPlusDate.replace_day}
                           onValueChange={(value) => setNewPlusDate({ ...newPlusDate, replace_day: value })}
                         >
-                          <SelectTrigger>
+                          <SelectTrigger className="w-full">
                             <SelectValue placeholder="Válasszon..." />
                           </SelectTrigger>
                           <SelectContent>
