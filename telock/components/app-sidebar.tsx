@@ -51,10 +51,7 @@ import { useSession } from "next-auth/react";
 
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { data: session } = useSession();
-  if (session) {
-    console.log("User short_name:", session.user.short_name);
-  }
+
 
   const pathname = usePathname();
 
@@ -91,6 +88,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return null;
   }
 
+  const { data: session, status } = useSession();
+
+  // Ellenőrizd, hogy a session elérhető-e
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+
+  if (!session) {
+    return <div>Please sign in.</div>;
+  }
   return (
     <Sidebar variant="inset" className="border-r-0" {...props}>
       <SidebarHeader>
@@ -125,11 +132,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <span className="truncate font-semibold">Vincze Zsolt</span>
                   <span className="truncate text-xs">Tanár</span>
                   <div>
-      {session ? (
-        <p>Welcome, {session.user.short_name}!</p>
-      ) : (
-        <p>Please sign in.</p>
-      )}
+      <p>Welcome, {session.user.short_name}!</p>
     </div>
                 </div>
               </div>
