@@ -1,7 +1,8 @@
 "use client"
 
 import { usePathname } from "next/navigation";
-import Link from 'next/link';
+
+import Link from 'next/link'; // Import the Link component
 import * as React from "react";
 import {
   TriangleAlert,
@@ -15,6 +16,7 @@ import {
   CalendarHeart,
   Calendar,
 } from "lucide-react";
+
 import {
   Sidebar,
   SidebarContent,
@@ -27,6 +29,7 @@ import {
   SidebarGroupLabel,
   useSidebar,
 } from "@/components/ui/sidebar";
+
 import { Separator } from "@/components/ui/separator";
 import {
   DropdownMenu,
@@ -42,7 +45,10 @@ import {
   AvatarFallback,
 } from "@/components/ui/avatar";
 import { useState, useEffect } from "react";
+
+
 import { useSession, signIn, signOut } from "next-auth/react";
+
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: session, status } = useSession();
@@ -50,15 +56,18 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   if (status === "loading") return <p>Betöltés...</p>;
 
+
+
   const pathname = usePathname();
+
   const isActive = (path: string) => pathname === path;
 
-  const { isMobile } = useSidebar(); // Nem feltételesen!
-  const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null); // Nem feltételesen!
-  const [hasStudents, setHasStudents] = useState<boolean | null>(null); // Nem feltételesen!
-  const [loading, setLoading] = useState(true); // Nem feltételesen!
 
-  // API hívás mindig a hookok után
+  const { isMobile } = useSidebar();
+  const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
+  const [hasStudents, setHasStudents] = useState<boolean | null>(null);
+  const [loading, setLoading] = useState(true);
+
   const fetchStudents = async () => {
     try {
       const response = await fetch('/api/students/read');
@@ -73,14 +82,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   useEffect(() => {
     fetchStudents();
-  }, []); // API hívás a komponens inicializálása után, nem feltételesen!
+  }, []);
 
   useEffect(() => {
     const hasClickedBefore = localStorage.getItem("hasClickedOverlayButton");
     setButtonVisible(hasClickedBefore !== "true");
-  }, []); // Feltétel nélküli useEffect
+  }, []);
 
-  // Ha az állapot null, akkor ne rendereljük a komponenst
   if (isButtonVisible === null) {
     return null;
   }
@@ -119,28 +127,38 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <span className="truncate font-semibold">Vincze Zsolt</span>
                   <span className="truncate text-xs">Tanár</span>
                   <div>
-                    {session?.user ? (
-                      <p>Bejelentkezve: {session.user.short_name || "Név nincs megadva"}</p>
-                    ) : (
-                      <p>Nincs bejelentkezve</p>
-                    )}
-                  </div>
-                  <p>Bejelentkezve: {session?.user?.short_name || session?.user?.full_name || "Ismeretlen felhasználó"}</p>
+      {session?.user ? (
+        <p>Bejelentkezve: {session.user.short_name || "Név nincs megadva"}</p>
+      ) : (
+        <p>Nincs bejelentkezve</p>
+      )}
+    </div>
+    <p>Bejelentkezve: {session?.user?.short_name || session?.user?.full_name || "Ismeretlen felhasználó"}</p>
+
                 </div>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem asChild>
-                <Link href="/dashboard/settings">
-                  <Settings />
-                  <span>Beállítások</span>
-                </Link>
+            <DropdownMenuItem asChild>
+          
+              <Link href="/dashboard/settings">
+             
+              <Settings/>
+              <span>Beállítások</span>
+             
+              </Link> 
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuItem>
-              <LogOut />
-              <span onClick={() => signOut()}>Kijelentkezés</span>
+         
+                <LogOut />
+               
+                <span onClick={() => {
+            signOut();
+        }}>
+        Kijelentkezés
+        </span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -150,6 +168,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenu>
+
+
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={isActive("/dashboard/timetable")}>
                 <Link href="/dashboard/timetable">
@@ -166,6 +186,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarGroup>
           <SidebarGroupLabel>Osztályom</SidebarGroupLabel>
           <SidebarMenu>
+
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={isActive("/dashboard/class/timetable")}>
                 <Link href="/dashboard/class/timetable">
@@ -176,6 +197,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
+
+
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={isActive("/dashboard/class/students")}>
                 <Link href="/dashboard/class/students">
@@ -192,6 +215,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarGroup>
           <SidebarGroupLabel>Iskolai nyilvántartás</SidebarGroupLabel>
           <SidebarMenu>
+
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={isActive("/dashboard/school/timetables")}>
                 <Link href="/dashboard/school/timetables">
@@ -203,6 +227,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
+
+
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={isActive("/dashboard/school/students")}>
                 <Link href="/dashboard/school/students">
@@ -214,6 +240,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
+
+
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={isActive("/dashboard/school/employees")}>
                 <Link href="/dashboard/school/employees">
@@ -225,12 +253,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
+
+
           </SidebarMenu>
         </SidebarGroup>
 
         <SidebarGroup>
           <SidebarGroupLabel>Beállítások és naplózás</SidebarGroupLabel>
           <SidebarMenu>
+
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={isActive("/dashboard/school/settings")}>
                 <Link href="/dashboard/school/settings">
@@ -261,3 +292,4 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     </Sidebar>
   );
 }
+
