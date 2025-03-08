@@ -1,46 +1,21 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+// app/layout.tsx
+import { SessionProvider } from "next-auth/react";
 import { getServerSession } from "next-auth";
-import Link from "next/link";
-import Logout from "./logout";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "teLock",
-  description: "Mobiltelefon tároló rendszer vezérlőpult",
-};
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"; // Az authOptions importálása
 
 export default async function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  const session = await getServerSession();
+}) {
+  const session = await getServerSession(authOptions); // Session lekérése szerveroldalon
+
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-           <nav>
-          {!!session && 
-          <Logout/>
-          }
-       
-          {!session && 
-          <Link href="/login">Login</Link>
-          }
-        </nav>
-        {children}
+      <body>
+        <SessionProvider session={session}> {/* SessionProvider használata */}
+          {children}
+        </SessionProvider>
       </body>
     </html>
   );

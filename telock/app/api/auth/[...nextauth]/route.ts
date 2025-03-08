@@ -1,12 +1,13 @@
 // app/api/auth/[...nextauth]/route.ts
-import NextAuth from "next-auth";
+import NextAuth, { type Session, type TokenSet, type User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcrypt";
 import { neon } from '@neondatabase/serverless';
 
-const handler = NextAuth({
+// Az authOptions objektum létrehozása és exportálása
+export const authOptions = {
   session: {
-    strategy: "jwt",
+    strategy: "jwt" as const, // A strategy típusa legyen "jwt"
   },
   pages: {
     signIn: "/login",
@@ -41,21 +42,23 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async session({ session, token }) {
+    async session({ session, token }: { session: Session; token: TokenSet }) {
       // Ellenőrizzük, hogy a session.user létezik-e
       if (session.user && token.short_name) {
-        session.user.short_name = token.short_name as string; // Típuskényszerítés, ha szükséges
+        session.user.short_name = token.short_name as string;
       }
       return session;
     },
-    async jwt({ token, user }) {
-      // Ellenőrizzük, hogy a user létezik-e
+    async jwt({ token, user }: { token: TokenSet; user?: User }) {
       if (user) {
         token.short_name = user.short_name;
       }
       return token;
     },
   },
-});
+};
+
+// A NextAuth handler létrehozása
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
