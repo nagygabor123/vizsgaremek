@@ -4,7 +4,6 @@ import "./globals.css";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import Logout from "./logout";
-import { SessionProvider } from "next-auth/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,7 +20,11 @@ export const metadata: Metadata = {
   description: "Mobiltelefon tároló rendszer vezérlőpult",
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   const session = await getServerSession();
   return (
     <html lang="en">
@@ -37,7 +40,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Link href="/login">Login</Link>
           }
         </nav>
-        <SessionProvider>{children}</SessionProvider>
+        {children}
       </body>
     </html>
   );

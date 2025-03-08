@@ -46,12 +46,11 @@ import {
 } from "@/components/ui/avatar";
 import { useState, useEffect } from "react";
 
-
-import { useSession, signIn, signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { data: session } = useSession();
+
   const pathname = usePathname();
 
   const isActive = (path: string) => pathname === path;
@@ -120,8 +119,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">Vincze Zsolt</span>
                   <span className="truncate text-xs">Tanár</span>
-                  {session ? <p>Bejelentkezve: {session.user?.name}</p> : <p>Nincs bejelentkezve</p>}
-
                 </div>
               </div>
             </DropdownMenuLabel>
