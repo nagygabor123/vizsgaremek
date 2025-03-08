@@ -1,7 +1,7 @@
 // app/layout.tsx
-import { SessionProvider } from "next-auth/react";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options"; // Az authOptions importálása
+import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options";
+import Providers from "./providers"; // Importáld a Providers komponenst
 
 export default async function RootLayout({
   children,
@@ -13,9 +13,9 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        <SessionProvider session={session}> {/* SessionProvider használata */}
+        <Providers session={session}> {/* Providers használata */}
           {children}
-        </SessionProvider>
+        </Providers>
       </body>
     </html>
   );
