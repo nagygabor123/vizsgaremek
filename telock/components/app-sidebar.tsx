@@ -51,7 +51,7 @@ import { useSession } from "next-auth/react";
 
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { data: session, status } = useSession();
+
 
   const pathname = usePathname();
 
@@ -88,7 +88,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return null;
   }
 
-
+  const { data: session, status } = useSession();
 
   // Ellenőrizd, hogy a session elérhető-e
   if (status === "loading") {
