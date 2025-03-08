@@ -47,14 +47,9 @@ import {
 import { useState, useEffect } from "react";
 
 import { signOut } from "next-auth/react";
-import { useSession } from "next-auth/react";
 
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { data: session } = useSession();
-  if (session) {
-    console.log("User short_name:", session.user.short_name);
-  }
 
   const pathname = usePathname();
 
@@ -124,13 +119,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">Vincze Zsolt</span>
                   <span className="truncate text-xs">Tanár</span>
-                  <div>
-      {session ? (
-        <p>Welcome, {session.user.short_name}!</p>
-      ) : (
-        <p>Please sign in.</p>
-      )}
-    </div>
                 </div>
               </div>
             </DropdownMenuLabel>
