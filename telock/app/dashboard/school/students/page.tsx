@@ -70,6 +70,11 @@ interface Timetable {
 }
 
 export default function Home() {
+  const [open, setOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+
+
   const [students, setStudents] = useState<Student[]>([]);
   const [studentTimetable, setStudentTimetable] = useState<Timetable[]>([]);
   const [formData, setFormData] = useState<Student>({
@@ -88,8 +93,6 @@ export default function Home() {
 
   
 
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [open, setOpen] = useState(false);
 
   // Fetch students from the database
   const [loading, setLoading] = useState(true); // Betöltési állapot
