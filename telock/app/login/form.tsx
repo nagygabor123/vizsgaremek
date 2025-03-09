@@ -33,10 +33,10 @@ export default function Form() {
     });
 
     console.log({ response })
-    if (!response?.error) {
+    // if (!response?.error) {
       router.push("/dashboard");
       router.refresh();
-    }
+    // }
   }
 
   return (
