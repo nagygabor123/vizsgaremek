@@ -37,23 +37,15 @@ export default function Page() {
             <Breadcrumb>
   <BreadcrumbList>
     <BreadcrumbItem>
-      <BreadcrumbPage>Főoldal</BreadcrumbPage>
+      <BreadcrumbPage>Kezdőlap</BreadcrumbPage>
     </BreadcrumbItem>
   </BreadcrumbList>
 </Breadcrumb>
           </div>
-          <div className="ml-auto px-3">
-            {/* <NavActions /> */}
-            
-
-
-     
-  
-          </div>
         </header>
-mindenes
 
-
+        <div className="p-4">
+        </div>
 
 
 

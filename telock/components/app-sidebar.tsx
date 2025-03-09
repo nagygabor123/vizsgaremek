@@ -18,6 +18,7 @@ import {
   LogOut,
   CalendarHeart,
   Calendar,
+  House,
 } from "lucide-react";
 
 import {
@@ -155,7 +156,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarGroup>
           <SidebarMenu>
 
-
+          <SidebarMenuItem>
+              <SidebarMenuButton asChild isActive={isActive("/dashboard/timetable")}>
+                <Link href="/dashboard">
+                  <>
+                    <House />
+                    <span>Kezdőlap</span>
+                  </>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={isActive("/dashboard/timetable")}>
                 <Link href="/dashboard/timetable">

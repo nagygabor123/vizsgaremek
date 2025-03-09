@@ -17,7 +17,7 @@ export default async function RootLayout({
     <html lang="en">
       <body>
         <Providers session={session}> {/* Providers használata */}
-          <div className="min-h-screen bg-gray-100"> {/* Példa: Törzs stílusok */}
+          <div > {/* Példa: className="min-h-screen bg-gray-100" */}
             {children}
           </div>
         </Providers>
