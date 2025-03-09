@@ -11,8 +11,8 @@ export default function Home() {
         <div className="max-w-6xl mx-auto flex justify-between items-center p-4">
           <span className="text-lg font-semibold">teLock</span>
           <nav className="flex items-center">
-            <Link href="/dashboard">
-              <Button variant="ghost">Vezérlőpult</Button>
+            <Link href="/">
+              <Button variant="ghost">Kezdőlap</Button>
             </Link>
             <Link href="/login">
               <Button className="ml-2">Bejelentkezés</Button>
@@ -21,9 +21,16 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="flex-1 flex flex-col items-center justify-center mt-20 px-4">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+      <main className="flex-1 flex flex-col items-center justify-center mt-32 px-4 min-h-[80vh]">
+      <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+                duration: 0.8,
+                delay: 0.5,
+                ease: [0, 0.71, 0.2, 1.01],
+            }}
+        >          <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Biztonságos és automatikus <span className="text-blue-600">telefontárolás</span>
           </h1>
         </motion.div>
