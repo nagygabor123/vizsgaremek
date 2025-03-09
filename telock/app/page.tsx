@@ -14,7 +14,7 @@ export default async function IndexPage() {
   // const stars = await getGitHubStars()
   const session = await getServerSession();
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
+    <div className="flex min-h-screen flex-col">
 
       <header className="container z-40 bg-background">
         <div className="flex h-20 items-center justify-between py-6">
@@ -82,7 +82,7 @@ export default async function IndexPage() {
                 Biztonságos és kényelmes telefontárolás iskolák számára
               </h1>
               <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-                Csökkentsd a figyelemelterelést és biztosítsd a diákok számára a zavartalan tanulást!
+              Csökkentsük a figyelemelterelést és biztosítsuk a diákok számára a zavartalan tanulást!
               </p>
               <div className="space-x-4">
                 <Link href="/login" className={cn(buttonVariants({ size: "lg" }))}>
@@ -105,7 +105,7 @@ export default async function IndexPage() {
           >
             <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
               <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
-                Features
+              Funkciók
               </h2>
               <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
                 This project is an experiment to see how a modern app, with features
@@ -259,43 +259,7 @@ export default async function IndexPage() {
           <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
             {/* <Icons.logo /> */}
             <p className="text-center text-sm leading-loose md:text-left">
-              Built by{" "}
-              <a
-                href="{siteConfig.links.twitter}"
-                target="_blank"
-                rel="noreferrer"
-                className="font-medium underline underline-offset-4"
-              >
-                shadcn
-              </a>
-              . Hosted on{" "}
-              <a
-                href="https://vercel.com"
-                target="_blank"
-                rel="noreferrer"
-                className="font-medium underline underline-offset-4"
-              >
-                Vercel
-              </a>
-              . Illustrations by{" "}
-              <a
-                href="https://popsy.co"
-                target="_blank"
-                rel="noreferrer"
-                className="font-medium underline underline-offset-4"
-              >
-                Popsy
-              </a>
-              . The source code is available on{" "}
-              <a
-                href="{siteConfig.links.github}"
-                target="_blank"
-                rel="noreferrer"
-                className="font-medium underline underline-offset-4"
-              >
-                GitHub
-              </a>
-              .
+            Az oldal vizsgaprojektként készült. A fejlesztését Nagy Gábor és Szalkai-Szabó Ádám végezték.
             </p>
           </div>
           {/* <ModeToggle /> */}
