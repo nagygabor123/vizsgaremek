@@ -10,16 +10,32 @@ export default async function IndexPage() {
   const session = await getServerSession()
   return (
     <div className="flex min-h-screen flex-col">
-<header className="w-full flex justify-center items-center py-4 bg-gray-800">
-  <nav className="container flex justify-center items-center">
-    <ul className="flex space-x-8 text-white">
-      <li><Link href="/">Kezdőlap</Link></li>
-      <li><Link href="/about">Rólunk</Link></li>
-      <li><Link href="/services">Szolgáltatások</Link></li>
-      <li><Link href="/contact">Kapcsolat</Link></li>
-    </ul>
-  </nav>
-</header>
+      <header className="container z-40 bg-background">
+        <div className="flex h-20 items-center justify-between py-6">
+          <div className="flex gap-6 md:gap-10">
+            <Link href="/" className="hidden items-center space-x-2 md:flex">
+              <GalleryVerticalEnd />
+              <span className="hidden font-bold sm:inline-block">teLock</span>
+            </Link>
+            <nav className="hidden gap-4 md:flex">
+              <Button variant="link" className="text-muted-foreground" asChild>
+                <Link href="/dashboard">Vezérlőpult</Link>
+              </Button>
+              <Button variant="link" className="text-muted-foreground" asChild>
+                <Link href="/dashboard/school/logs">Dokumentáció</Link>
+              </Button>
+            </nav>
+          </div>
+          <nav>
+            {!!session && <Logout />}
+            {!session && (
+              <Button variant="secondary" asChild>
+                <Link href="/login">Bejelentkezés</Link>
+              </Button>
+            )}
+          </nav>
+        </div>
+      </header>
       <main className="flex-1 flex justify-center items-center flex-col">
   <section className="w-full flex justify-center items-center space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
     <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center">
