@@ -4,11 +4,12 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { GalleryVerticalEnd } from "lucide-react";
-
+import Logout from "./logout";
+import { getServerSession } from "next-auth";
 
 export default async function IndexPage() {
   // const stars = await getGitHubStars()
-
+  const session = await getServerSession();
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
 
@@ -55,15 +56,13 @@ export default async function IndexPage() {
       )} */}
     </div>
           <nav>
-            <Link
-              href="/login"
-              className={cn(
-                buttonVariants({ variant: "secondary", size: "sm" }),
-                "px-4"
-              )}
-            >
-              Bejelentkezés
-            </Link>
+          {!!session && 
+          <Logout/>
+          }
+       
+          {!session && 
+          <Link href="/login">Login</Link>
+          }
           </nav>
         </div>
       </header>
