@@ -99,7 +99,7 @@ export default function Form() {
                   Elfelejtette jelszavát?
                 </a>
               </div>
-              <Input id="password" type="password" required />
+              <Input name="password" type="password" required />
             </div>
 
           </div>
