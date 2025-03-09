@@ -10,7 +10,56 @@ export default async function IndexPage() {
   // const stars = await getGitHubStars()
 
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
+      <header className="container z-40 bg-background">
+        <div className="flex h-20 items-center justify-between py-6">
+        <div className="flex gap-6 md:gap-10">
+      <Link href="/" className="hidden items-center space-x-2 md:flex">
+        {/* <Icons.logo /> */}
+        <span className="hidden font-bold sm:inline-block">
+          {/* {siteConfig.name} */} CCCC
+        </span>
+      </Link>
+    
+        <nav className="hidden gap-6 md:flex">
+          
+            <Link href="/"
+   
+              className="flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm"
+             
+            >
+              fasz
+            </Link>
+         
+        </nav>
+   
+      {/* <button
+        className="flex items-center space-x-2 md:hidden"
+        onClick={() => setShowMobileMenu(!showMobileMenu)}
+      >
+        {showMobileMenu ? <Icons.close /> : <Icons.logo />}
+        <span className="font-bold">Menu</span>
+      </button>
+      {showMobileMenu && items && (
+        <MobileNav items={items}>{children}</MobileNav>
+      )} */}
+    </div>
+          <nav>
+            <Link
+              href="/login"
+              className={cn(
+                buttonVariants({ variant: "secondary", size: "sm" }),
+                "px-4"
+              )}
+            >
+              Login
+            </Link>
+          </nav>
+        </div>
+      </header>
+      <main className="flex-1">
+
+      <>
       <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
         <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center">
           <Link
@@ -196,5 +245,57 @@ export default async function IndexPage() {
         </div>
       </section>
     </>
+      </main>
+     <footer >  {/* className={cn(className)} */}
+      <div className="container flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
+        <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
+          {/* <Icons.logo /> */}
+          <p className="text-center text-sm leading-loose md:text-left">
+            Built by{" "}
+            <a
+              href="{siteConfig.links.twitter}"
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium underline underline-offset-4"
+            >
+              shadcn
+            </a>
+            . Hosted on{" "}
+            <a
+              href="https://vercel.com"
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium underline underline-offset-4"
+            >
+              Vercel
+            </a>
+            . Illustrations by{" "}
+            <a
+              href="https://popsy.co"
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium underline underline-offset-4"
+            >
+              Popsy
+            </a>
+            . The source code is available on{" "}
+            <a
+              href="{siteConfig.links.github}"
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium underline underline-offset-4"
+            >
+              GitHub
+            </a>
+            .
+          </p>
+        </div>
+        {/* <ModeToggle /> */}
+      </div>
+    </footer>
+    </div>
+
+
+   
   )
 }
