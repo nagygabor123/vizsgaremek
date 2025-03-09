@@ -5,6 +5,9 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { GalleryVerticalEnd, ChevronLeft } from "lucide-react";
+import Link from 'next/link'; // Import the Link component
+
 import {
   Card,
   CardContent,
@@ -16,27 +19,27 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 
-export default function Form(){
-    const router = useRouter()
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        const response = await signIn('credentials', {
-            // short_name: formData.get('short_name'),
-            // password: formData.get('password'),
-            short_name: formData.get('short_name') as string,
-            password: formData.get('password') as string,   
-            redirect: false,
-        });
+export default function Form() {
+  const router = useRouter()
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const response = await signIn('credentials', {
+      // short_name: formData.get('short_name'),
+      // password: formData.get('password'),
+      short_name: formData.get('short_name') as string,
+      password: formData.get('password') as string,
+      redirect: false,
+    });
 
-        console.log({response})
-        if(!response?.error){
-            router.push("/dashboard");
-            router.refresh();
-        }
+    console.log({ response })
+    if (!response?.error) {
+      router.push("/dashboard");
+      router.refresh();
     }
+  }
 
-    return (
+  return (
     //     <form onSubmit={handleSubmit}>
     //     <input name="short_name" className="border border-black text-black" type="text"/>
     //     <input name="password" className="border border-black text-black" type="password"/>
@@ -46,7 +49,15 @@ export default function Form(){
     // </form>
 
 
-<div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6">
+      <Button variant="ghost" className="absolute left-4 top-4 p-2" asChild>
+
+        <Link href="/">
+
+          <ChevronLeft /> Vissza
+
+        </Link>
+      </Button>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-6">
           <div className="flex flex-col items-center gap-2">
@@ -55,18 +66,18 @@ export default function Form(){
               className="flex flex-col items-center gap-2 font-medium"
             >
               <div className="flex h-8 w-8 items-center justify-center rounded-md">
-                {/* <GalleryVerticalEnd className="size-6" /> */}
+                <GalleryVerticalEnd className="size-6" />
               </div>
-              <span className="sr-only">Acme Inc.</span>
+              <span className="sr-only">teLock</span>
             </a>
-            <h1 className="text-xl font-bold">Üdv újra itt</h1>
-            <div className="text-center text-sm">
-              Enter your username to logins
+            <h1 className="text-2xl font-bold">Üdv újra itt</h1>
+            <div className="text-center text-base">
+              Adja meg felhasználónevét a fiókjába való bejelentkezéshez
               {/* Don&apos;t have an account?{" "}
               <a href="#" className="underline underline-offset-4">
                 Sign up
               </a>*/}
-            </div> 
+            </div>
           </div>
           <div className="flex flex-col gap-6">
             <div className="grid gap-2">
@@ -79,22 +90,22 @@ export default function Form(){
               />
             </div>
             <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password">Jelszó</Label>
-                  {/* <a
-                    href="#"
-                    className="ml-auto text-sm underline-offset-2 hover:underline"
-                  >
-                    Forgot your password?
-                  </a> */}
-                </div>
-                <Input id="password" type="password" required />
+              <div className="flex items-center">
+                <Label htmlFor="password">Jelszó</Label>
+                <a
+                  href="#"
+                  className="ml-auto text-sm underline-offset-2 hover:underline"
+                >
+                  Elfelejtette jelszavát?
+                </a>
               </div>
-             
+              <Input id="password" type="password" required />
+            </div>
+
           </div>
           <Button type="submit" className="w-full">
-                Bejelentkezés
-              </Button>
+            Bejelentkezés
+          </Button>
           {/* <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
             <span className="relative z-10 bg-background px-2 text-muted-foreground">
               Or
@@ -123,11 +134,10 @@ export default function Form(){
         </div>
       </form>
       <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary  ">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>.
+        <a href="#">Szeretné használni a rendszerünket? Kérjen tőlünk árajánlatot</a>
       </div>
     </div>
 
 
-    )
+  )
 }
