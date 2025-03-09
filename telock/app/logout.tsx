@@ -1,14 +1,15 @@
 'use client'
-
+import { Button } from "@/components/ui/button"
 import { signOut } from "next-auth/react";
 
 export default function Logout(){
 
     return(
-        <span onClick={() => {
+        <Button variant="secondary" onClick={() => {
             signOut();
         }}>
-        Logout
-        </span>
+        Kijelentkezés
+      </Button>
+     
     )
 }

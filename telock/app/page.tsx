@@ -7,7 +7,7 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { GalleryVerticalEnd } from "lucide-react";
-// import Logout from "./logout";
+ import Logout from "./logout";
 import { getServerSession } from "next-auth";
 import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button"
@@ -29,7 +29,7 @@ export default async function IndexPage() {
               </span>
             </Link>
 
-            <nav className="hidden gap-6 md:flex">
+            <nav className="hidden gap-4 md:flex">
 
 
             <Button variant="link" className="text-muted-foreground" asChild>
@@ -37,7 +37,7 @@ export default async function IndexPage() {
               </Button>
 
               <Button variant="link" className="text-muted-foreground" asChild>
-                <Link href="/dashboard">Dokumentáció</Link>
+                <Link href="/dashboard/school/logs">Dokumentáció</Link>
               </Button>
 
             </nav>
@@ -56,9 +56,7 @@ export default async function IndexPage() {
           <nav>
             {!!session &&
 
-              <Button variant="secondary" onClick={() => { signOut(); }}>
-                Kijelentkezés
-              </Button>
+<Logout/>
             }
 
             {!session &&
