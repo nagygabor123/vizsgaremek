@@ -3,7 +3,7 @@ import Link from "next/link"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
-
+import { GalleryVerticalEnd } from "lucide-react";
 
 
 export default async function IndexPage() {
@@ -17,20 +17,29 @@ export default async function IndexPage() {
         <div className="flex gap-6 md:gap-10">
       <Link href="/" className="hidden items-center space-x-2 md:flex">
         {/* <Icons.logo /> */}
+        <GalleryVerticalEnd />
         <span className="hidden font-bold sm:inline-block">
-          {/* {siteConfig.name} */} CCCC
+          {/* {siteConfig.name} */} teLock
         </span>
       </Link>
     
         <nav className="hidden gap-6 md:flex">
           
-            <Link href="/"
+            <Link href="/dashboard"
    
               className="flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm"
              
             >
-              fasz
+              Vezérlőpult
             </Link>
+
+            <Link href="/"
+   
+   className="flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm"
+  
+ >
+   Dokumentáció
+ </Link>
          
         </nav>
    
@@ -53,7 +62,7 @@ export default async function IndexPage() {
                 "px-4"
               )}
             >
-              Login
+              Bejelentkezés
             </Link>
           </nav>
         </div>
@@ -71,15 +80,14 @@ export default async function IndexPage() {
             Follow along on Twitter
           </Link>
           <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
-            An example app built using Next.js 13 server components.
+          Biztonságos és kényelmes telefontárolás iskolák számára
           </h1>
           <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-            I&apos;m building a web app with Next.js 13 and open sourcing
-            everything. Follow along as we figure this out together.
+          Csökkentsd a figyelemelterelést és biztosítsd a diákok számára a zavartalan tanulást!
           </p>
           <div className="space-x-4">
             <Link href="/login" className={cn(buttonVariants({ size: "lg" }))}>
-              Get Started
+              Kapcsolatfelvétel
             </Link>
             <Link
               href="a"
@@ -87,7 +95,7 @@ export default async function IndexPage() {
               rel="noreferrer"
               className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
             >
-              GitHub
+              Demo videó megtekintése
             </Link>
           </div>
         </div>

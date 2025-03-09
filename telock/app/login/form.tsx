@@ -72,7 +72,7 @@ export default function Form() {
             </a>
             <h1 className="text-2xl font-bold">Üdv újra itt</h1>
             <div className="text-center text-base">
-              Adja meg felhasználónevét a fiókjába való bejelentkezéshez
+              Adja meg felhasználónevét a bejelentkezéshez
               {/* Don&apos;t have an account?{" "}
               <a href="#" className="underline underline-offset-4">
                 Sign up
@@ -134,7 +134,7 @@ export default function Form() {
         </div>
       </form>
       <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary  ">
-        <a href="#">Szeretné használni a rendszerünket? Kérjen tőlünk árajánlatot</a>
+        <a href="#">Szeretné használni a rendszerünket? Kérjen tőlünk árajánlatot most</a>
       </div>
     </div>
 
