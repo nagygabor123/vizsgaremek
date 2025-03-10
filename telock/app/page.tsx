@@ -21,14 +21,14 @@ export default async function IndexPage() {
   // const stars = await getGitHubStars()
   const session = await getServerSession();
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
+    <div className="flex min-h-screen flex-col justify-center">
 
       <header className="container z-40 bg-background">
         <div className="flex h-20 items-center justify-between py-6">
           <div className="flex gap-6 md:gap-10">
             <Link href="/" className="hidden items-center space-x-2 md:flex">
               {/* <Icons.logo /> */}
-              <GalleryVerticalEnd />
+              {/* <GalleryVerticalEnd /> */}
               <span className={`${ZenDots.className} text-xl`}>
                 {/* {siteConfig.name} */} telock
               </span>
@@ -85,7 +85,7 @@ export default async function IndexPage() {
               >
                 Follow along on Twitter
               </Link> */}
-              <h1 className="font-heading text-3xl font-extrabold sm:text-5xl md:text-6xl lg:text-7xl">
+              <h1 className="font-heading text-3xl font-bold sm:text-5xl md:text-6xl lg:text-7xl">
                 Biztonságos és kényelmes telefontárolás iskolák számára
               </h1>
               <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
@@ -93,7 +93,7 @@ export default async function IndexPage() {
               </p>
               <div className="space-x-4">
                 <Link href="/login" className={cn(buttonVariants({ size: "lg" }))}>
-                  Kapcsolatfelvétel
+                Kapcsolatfelvétel
                 </Link>
                 <Link
                   href="/dashboard"
@@ -101,7 +101,7 @@ export default async function IndexPage() {
                   rel="noreferrer"
                   className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
                 >
-                  Demo videó megtekintése
+                  Bővebben
                 </Link>
               </div>
             </div>
@@ -111,7 +111,7 @@ export default async function IndexPage() {
             className="container space-y-6 bg-slate-50 py-8 dark:bg-transparent md:py-12 lg:py-24"
           >
             <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-              <h2 className="font-heading text-3xl font-extrabold leading-[1.1] sm:text-3xl md:text-6xl">
+              <h2 className="font-heading text-3xl font-bold leading-[1.1] sm:text-3xl md:text-6xl">
               Funkciók
               </h2>
               <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
@@ -266,15 +266,7 @@ export default async function IndexPage() {
           <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
             {/* <Icons.logo /> */}
             <p className="text-center text-sm leading-loose md:text-left">
-            Az oldal vizsgaprojektként készült, fejlesztését Nagy Gábor és Szalkai-Szabó Ádám végezték. A forráskód elérhető a
-            <a
-              href="https://github.com/nagygabor123/vizsgaremek.git"
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium underline underline-offset-4"
-            >
-              Github
-            </a>-on
+            Az oldal vizsgaprojektként készült, fejlesztését Nagy Gábor és Szalkai-Szabó Ádám végezték.
             </p>
           </div>
           {/* <ModeToggle /> */}
