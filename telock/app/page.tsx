@@ -9,6 +9,13 @@ import { GalleryVerticalEnd } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button"
+import localFont from "next/font/local";
+
+const ZenDots = localFont({
+  src: "./fonts/ZenDots-Regular.ttf",
+  variable: "--font-zen-dots",
+  weight: "100 900",
+});
 
 export default async function IndexPage() {
   // const stars = await getGitHubStars()
@@ -22,8 +29,8 @@ export default async function IndexPage() {
             <Link href="/" className="hidden items-center space-x-2 md:flex">
               {/* <Icons.logo /> */}
               <GalleryVerticalEnd />
-              <span className="hidden font-bold sm:inline-block">
-                {/* {siteConfig.name} */} teLock
+              <span className={`${ZenDots.className}`}>
+                {/* {siteConfig.name} */} telock
               </span>
             </Link>
 

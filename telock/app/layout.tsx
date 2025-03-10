@@ -27,8 +27,8 @@ export default async function RootLayout({
 }) {
   const session = await getServerSession(authOptions); // Session lekérése szerveroldalon
 
-  return (
-    <html lang="en" className={`${geistSans.className} ${geistMono.className}`}>
+  return ( //className={`${geistSans.className} ${geistMono.className}`}
+    <html lang="en" > 
       <body>
         <Providers session={session}> {/* Providers használata */}
           <div > {/* Példa: className="min-h-screen bg-gray-100" */}
