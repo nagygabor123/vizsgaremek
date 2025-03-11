@@ -29,14 +29,14 @@ export default async function handler(req, res) {
     if (!Array.isArray(admins)) {
       throw new Error('Invalid response from database for admins');
     }
-    const adminMap = new Map(admins.map(admin => [admin.full_name, admin.admin_id]));
+    const adminMap = new Map(admins.map(admin => [admin.full_name.trim(), admin.admin_id]));
 
     // Csoportok lekérdezése
     const groups = await sql('SELECT group_id, group_name FROM csoportok');
     if (!Array.isArray(groups)) {
       throw new Error('Invalid response from database for groups');
     }
-    const groupMap = new Map(groups.map(group => [group.group_name, group.group_id]));
+    const groupMap = new Map(groups.map(group => [group.group_name.trim(), group.group_id]));
 
     const timetableInsertValues = [];
     const groupRelationsInsertValues = [];
@@ -48,7 +48,7 @@ export default async function handler(req, res) {
         continue;
       }
 
-      // A helyes csoportok kinyerése (entry.group az eredeti JSON kulcs)
+      // A csoportok helyes lekérdezése (a JSON "group" mezőjéből)
       const groupNames = entry.group.split(',').map(name => name.trim());
       const groupIds = groupNames.map(name => groupMap.get(name)).filter(id => id !== undefined);
 
@@ -59,12 +59,17 @@ export default async function handler(req, res) {
 
       timetableInsertValues.push([
         teacherId,
-        entry.group_name, // Csak egy group_name kerül ide
+        entry.group_name, // Ez a 'timetables' táblába kerül
         dayMapping[entry.day] || 'monday',
         entry.start_time,
-        entry.end_time
+        entry.end_time,
       ]);
+
+      // Csoport azonosítókat is eltároljuk az entry mellé, hogy később összepárosíthassuk
+      groupRelationsInsertValues.push({ groupIds });
     }
+
+    let timetableIds = [];
 
     if (timetableInsertValues.length > 0) {
       const timetablePlaceholders = timetableInsertValues
@@ -75,30 +80,32 @@ export default async function handler(req, res) {
         INSERT INTO timetables 
           (admin_id, group_name, day_of_week, start_time, end_time) 
         VALUES ${timetablePlaceholders}
-        RETURNING timetable_id, group_name
+        RETURNING timetable_id
       `;
 
       const timetableParams = timetableInsertValues.flat();
       const timetableResult = await sql(timetableQuery, timetableParams);
+      timetableIds = timetableResult.map(row => row.timetable_id); // Az újonnan beszúrt ID-k lekérése
+    }
 
-      const timetableMap = new Map(timetableResult.map(row => [row.group_name, row.timetable_id]));
+    if (timetableIds.length !== groupRelationsInsertValues.length) {
+      console.error("HIBA: A timetable beszúrások száma nem egyezik a csoportkapcsolatok számával!");
+    }
 
-      for (const entry of schedule) {
-        const timetableId = timetableMap.get(entry.group_name);
-        if (!timetableId) continue;
+    const finalGroupRelationsInsertValues = [];
 
-        // A csoport azonosítókat az entry.group alapján nézzük
-        const groupNames = entry.group.split(',').map(name => name.trim());
-        const groupIds = groupNames.map(name => groupMap.get(name)).filter(id => id !== undefined);
+    // A timetable_id-kat párosítjuk a megfelelő csoportokkal
+    for (let i = 0; i < timetableIds.length; i++) {
+      const timetableId = timetableIds[i];
+      const { groupIds } = groupRelationsInsertValues[i];
 
-        for (const groupId of groupIds) {
-          groupRelationsInsertValues.push([timetableId, groupId]);
-        }
+      for (const groupId of groupIds) {
+        finalGroupRelationsInsertValues.push([timetableId, groupId]);
       }
     }
 
-    if (groupRelationsInsertValues.length > 0) {
-      const groupRelationsPlaceholders = groupRelationsInsertValues
+    if (finalGroupRelationsInsertValues.length > 0) {
+      const groupRelationsPlaceholders = finalGroupRelationsInsertValues
         .map((_, rowIndex) => `($${rowIndex * 2 + 1}, $${rowIndex * 2 + 2})`)
         .join(', ');
 
@@ -108,7 +115,7 @@ export default async function handler(req, res) {
         VALUES ${groupRelationsPlaceholders}
       `;
 
-      const groupRelationsParams = groupRelationsInsertValues.flat();
+      const groupRelationsParams = finalGroupRelationsInsertValues.flat();
       await sql(groupRelationsQuery, groupRelationsParams);
     }
 
