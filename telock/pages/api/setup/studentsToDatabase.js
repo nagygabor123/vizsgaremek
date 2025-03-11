@@ -1,4 +1,4 @@
-import { connectToDatabase } from '@/lib/db';
+import { neon } from '@neondatabase/serverless';
 import fs from 'fs';
 import multiparty from 'multiparty';
 import crypto from 'crypto';
@@ -33,9 +33,8 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Nincs fájl feltöltve' });
     }
 
-    let pool;
+    const sql = neon(`${process.env.DATABASE_URL}`);
     try {
-      pool = await connectToDatabase();
       const filePath = file.path;
       const csvData = fs.readFileSync(filePath, 'utf8');
 
@@ -80,7 +79,7 @@ export default async function handler(req, res) {
         const values = students.flat();
         const insertQuery = `INSERT INTO students (student_id, full_name, class, rfid_tag, access) VALUES ${placeholders}`;
         
-        await pool.execute(insertQuery, values);
+        await sql(insertQuery, values);
       }
 
       await checkStudentsInserted(pool, students);
@@ -111,7 +110,7 @@ function generateRFID() {
 }
 
 async function checkStudentsInserted(pool, students) {
-  const [studentsInDb] = await pool.execute('SELECT student_id FROM students');
+  const [studentsInDb] = await sql('SELECT student_id FROM students');
   const insertedStudentIDs = studentsInDb.map(student => student.student_id);
 
   for (const student of students) {
