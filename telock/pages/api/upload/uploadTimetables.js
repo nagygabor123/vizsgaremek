@@ -78,7 +78,7 @@ export default async function handler(req, res) {
           .filter(id => id !== undefined);
     
         for (const groupId of groupIds) {
-          groupRelationsInsertValues.push([timetableIds + i, groupId]); 
+          groupRelationsInsertValues.push([timetableIds + i, groupId]); // Az órarend azonosító növekményes
         }
       }
     }
@@ -93,7 +93,7 @@ export default async function handler(req, res) {
           (timetable_id, group_id) 
         VALUES ${groupRelationsPlaceholders}
       `;
-    
+
       const groupRelationsParams = groupRelationsInsertValues.flat();
       await sql(groupRelationsQuery, groupRelationsParams);
     }
