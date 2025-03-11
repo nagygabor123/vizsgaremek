@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import localFont from "next/font/local";
 
 const ZenDots = localFont({
-  src: "./fonts/ZenDots-Regular.ttf",
+  src: "../fonts/ZenDots-Regular.ttf",
   variable: "--font-zen-dots",
   weight: "100 900",
 });
