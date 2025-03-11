@@ -54,7 +54,7 @@ export default function handler(req, res) {
       await sendScheduleData(schedule);
       
 
-      return res.status(200).json({
+      return res.status(201).json({
         message: 'XML adatok sikeresen feldolgozva és továbbítva!',
         ringing,
         employees,
