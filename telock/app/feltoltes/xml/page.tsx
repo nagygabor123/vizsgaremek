@@ -42,9 +42,17 @@ export default function XmlUploadTest() {
   
       const responseData = await response.json();
       console.log('Szerver válasz:', responseData);
+      setMessage(`Szerver válasz: ${JSON.stringify(responseData)}`);
       return responseData;
     } catch (error) {
       console.error('Hiba a fájl feltöltése során:', error);
+
+      // Típusellenőrzés vagy típuskonverzió
+      if (error instanceof Error) {
+        setMessage(`Hiba történt: ${error.message}`);
+      } else {
+        setMessage(`Hiba történt: ${String(error)}`);
+      }
       throw error;
     }
   };
