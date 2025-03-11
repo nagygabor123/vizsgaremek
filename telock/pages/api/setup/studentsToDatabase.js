@@ -85,8 +85,8 @@ export default async function handler(req, res) {
         await sql(insertQuery, values);
       }
 
-      await checkStudentsInserted(sql, students);
-      await UploadStudentGroups();
+      await checkStudentsInserted(students);
+      //await UploadStudentGroups();
 
       return res.status(200).json({ message: `Sikeresen hozzáadva: ${students.length} diák` });
 
@@ -112,7 +112,7 @@ function generateRFID() {
   return crypto.randomBytes(4).toString('hex').toUpperCase();
 }
 
-async function checkStudentsInserted(pool, students) {
+async function checkStudentsInserted(students) {
   try {
     const studentsInDb = await sql('SELECT student_id FROM students');
     
