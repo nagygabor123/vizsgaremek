@@ -20,6 +20,11 @@ import "./globals.css";
 // import { GeistSans } from 'geist/font/sans';
 // import { GeistMono } from 'geist/font/mono';
 
+export const metadata: Metadata = {
+  title: "telock",
+  description: "Automatikus telefontároló rendszer",
+};
+
 export default async function RootLayout({
   children,
 }: {
