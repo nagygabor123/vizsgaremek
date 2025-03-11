@@ -51,7 +51,6 @@ export default function handler(req, res) {
       ]);
       
       await waitForDatabaseToBeReady(sql, 'admins', employees.length);
-      await waitForDatabaseToBeReady(sql, 'groups', groups.length);
       await sendScheduleData(schedule);
       
 
