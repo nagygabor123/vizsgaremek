@@ -13,32 +13,38 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: 'Invalid or empty employees array' });
     }
 
-    const sql = neon(`${process.env.DATABASE_URL}`);
+    const sql = neon(process.env.DATABASE_URL);
 
     try {
-
       const lastAdmin = await sql('SELECT admin_id FROM admins ORDER BY admin_id DESC LIMIT 1');
       
-      let nextAdminId = 3;
+      let nextAdminId = 1;
       if (lastAdmin.length > 0) {
         nextAdminId = lastAdmin[0].admin_id + 1;
-      } 
-      
+      }
+
       const insertValues = employees.map(employee => [
-        nextAdminId++, 
-        employee.full_name, 
-        generatePassword(), 
-        employee.position, 
-        employee.osztalyfonok || 'nincs', 
-        employee.short_name || null 
+        nextAdminId++,
+        employee.full_name,
+        generatePassword(),
+        employee.position,
+        employee.osztalyfonok || 'nincs',
+        employee.short_name || null
       ]);
 
-      
-        await sql(
-          'INSERT INTO admins (admin_id, full_name, password, position, osztalyfonok, short_name) VALUES ($1, $2, $3, $4, $5, $6)',
-          [insertValues]
-        );
-      
+      const placeholders = insertValues.map(
+        (_, rowIndex) => `($${rowIndex * 6 + 1}, $${rowIndex * 6 + 2}, $${rowIndex * 6 + 3}, $${rowIndex * 6 + 4}, $${rowIndex * 6 + 5}, $${rowIndex * 6 + 6})`
+      ).join(', ');
+
+      const query = `
+        INSERT INTO admins 
+          (admin_id, full_name, password, position, osztalyfonok, short_name)
+        VALUES ${placeholders}
+      `;
+
+      const params = insertValues.flat();
+
+      await sql(query, params);
 
       res.status(201).json({ message: 'Admins uploaded successfully' });
     } catch (error) {
