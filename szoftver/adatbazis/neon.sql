@@ -78,7 +78,6 @@ CREATE TABLE ring_times (
   end_time TIME NOT NULL
 );
 
--- INSERTING DEFAULT DATA
 INSERT INTO admins (full_name, password, position, osztalyfonok, short_name) VALUES
 ('szalkai', 'piciakukija', 'senki', 'nincs', 'SSSS'),
 ('nagy', 'nagyakukija', 'igazgató', 'nincs', 'GGGG');

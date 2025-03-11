@@ -50,7 +50,7 @@ export default function handler(req, res) {
         sendGroupsData(groups),
       ]);
       
-      await waitForDatabaseToBeReady(sql, 'teachers', employees.length);
+      await waitForDatabaseToBeReady(sql, 'admins', employees.length);
       await waitForDatabaseToBeReady(sql, 'groups', groups.length);
       await sendScheduleData(schedule);
       
