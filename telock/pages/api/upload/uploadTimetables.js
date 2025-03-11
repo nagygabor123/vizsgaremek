@@ -64,7 +64,7 @@ export default async function handler(req, res) {
 
       timetableInsertValues.push([
         teacherId,
-        entry.group,
+        entry.group_name,
         dayMapping[entry.day] || 'monday',
         entry.start_time,
         entry.end_time
