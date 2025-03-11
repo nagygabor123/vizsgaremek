@@ -4,12 +4,13 @@ import { FormEvent, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button"
-import { GalleryVerticalEnd, ChevronLeft } from "lucide-react";
+import { ChevronLeft, AlertCircle, CircleCheck  } from "lucide-react";
 import Link from 'next/link';
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
-import { cn } from "@/lib/utils"
+
 
 import {
   Card,
@@ -59,9 +60,9 @@ export default function Form() {
 </Button>
       <Card>
         <CardHeader className="text-center">
-          <CardTitle className="text-xl">Welcome back</CardTitle>
+          <CardTitle className="text-xl">Üdv újra itt!</CardTitle>
           <CardDescription>
-            Login with your Apple or Google account
+          Jelentkezzen be a fiókjába a felhasználónevének megadásával
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -69,7 +70,7 @@ export default function Form() {
             <div className="grid gap-6">
               <div className="grid gap-6">
                 <div className="grid gap-2">
-                  <Label htmlFor="short_name">Email</Label>
+                  <Label htmlFor="short_name">Felhasználónév</Label>
                   <Input
                     name="short_name"
                     type="text"
@@ -79,27 +80,44 @@ export default function Form() {
                 </div>
                 <div className="grid gap-2">
                   <div className="flex items-center">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password">Jelszó</Label>
                     <a
                       href="#"
                       className="ml-auto text-sm underline-offset-4 hover:underline"
                     >
-                      Forgot your password?
+                      Elfelejtette jelszavát? 
                     </a>
                   </div>
                   <Input name="password" type="password" required />
                 </div>
                 <Button type="submit" className="w-full">
-                  Login
+                  Bejelentkezés
                 </Button>
 
-                {error && <p className="text-red-500 text-center">{error}</p>}
-                {success && <p className="text-green-500 text-center">Sikeres bejelentkezés!</p>}
+                {error && 
+                <Alert variant="destructive">
+      <AlertCircle className="h-4 w-4" />
+      <AlertTitle>Sikeretlen bejelentkezés</AlertTitle>
+      <AlertDescription>
+        {error}
+      </AlertDescription>
+    </Alert>}
+                {success && 
+                
+                <Alert variant="siker">
+      <CircleCheck className="h-4 w-4" />
+      <AlertTitle>Sikeres bejelentkezés</AlertTitle>
+      <AlertDescription>
+      Nem sokára átirányítunk a vezérlőpultra.
+      </AlertDescription>
+    </Alert>
+                
+                }
               </div>
               <div className="text-center text-sm">
-                Don&apos;t have an account?{" "}
+                Nincsnek fiókja?{" "} 
                 <a href="#" className="underline underline-offset-4">
-                  Sign up
+                  Vegye fel velünk a kapcsolatot
                 </a>
               </div>
             </div>
