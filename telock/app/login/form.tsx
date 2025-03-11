@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, AlertCircle, CircleCheck } from "lucide-react";
+import { ChevronLeft, AlertCircle, CircleCheck  } from "lucide-react";
 import Link from 'next/link';
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -50,19 +50,19 @@ export default function Form() {
 
   return (
     <div className="flex flex-col gap-6">
-      <Button variant="ghost" className="absolute left-4 top-4 p-2" asChild>
+        <Button variant="ghost" className="absolute left-4 top-4 p-2" asChild>
 
-        <Link href="/">
+<Link href="/">
 
-          <ChevronLeft /> Vissza
+  <ChevronLeft /> Vissza
 
-        </Link>
-      </Button>
+</Link>
+</Button>
       <Card>
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Üdv újra itt!</CardTitle>
           <CardDescription>
-            Jelentkezzen be a fiókjába a felhasználónevének megadásával
+          Jelentkezzen be a fiókjába a felhasználónevének megadásával
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -70,25 +70,6 @@ export default function Form() {
             <div className="grid gap-6">
               <div className="grid gap-6">
                 <div className="grid gap-2">
-                  {error &&
-                    <Alert variant="destructive">
-                      <AlertCircle className="h-4 w-4" />
-                      <AlertTitle>Sikeretlen bejelentkezés</AlertTitle>
-                      <AlertDescription>
-                        {error}
-                      </AlertDescription>
-                    </Alert>}
-                  {success &&
-
-                    <Alert variant="siker">
-                      <CircleCheck className="h-4 w-4" />
-                      <AlertTitle>Sikeres bejelentkezés</AlertTitle>
-                      <AlertDescription>
-                        Nem sokára átirányítunk a vezérlőpultra.
-                      </AlertDescription>
-                    </Alert>
-
-                  }
                   <Label htmlFor="short_name">Felhasználónév</Label>
                   <Input
                     name="short_name"
@@ -104,7 +85,7 @@ export default function Form() {
                       href="#"
                       className="ml-auto text-sm underline-offset-4 hover:underline"
                     >
-                      Elfelejtette jelszavát?
+                      Elfelejtette jelszavát? 
                     </a>
                   </div>
                   <Input name="password" type="password" required />
@@ -113,12 +94,30 @@ export default function Form() {
                   Bejelentkezés
                 </Button>
 
-
+                {error && 
+                <Alert variant="destructive">
+      <AlertCircle className="h-4 w-4" />
+      <AlertTitle>Sikeretlen bejelentkezés</AlertTitle>
+      <AlertDescription>
+        {error}
+      </AlertDescription>
+    </Alert>}
+                {success && 
+                
+                <Alert variant="siker">
+      <CircleCheck className="h-4 w-4" />
+      <AlertTitle>Sikeres bejelentkezés</AlertTitle>
+      <AlertDescription>
+      Nem sokára átirányítunk a vezérlőpultra.
+      </AlertDescription>
+    </Alert>
+                
+                }
               </div>
               <div className="text-center text-sm">
-                Nincsnek fiókja?{" "}
+              Szeretné használni a rendszerünket?{" "} 
                 <a href="#" className="underline underline-offset-4">
-                  Vegye fel velünk a kapcsolatot
+                Lépjen velünk kapcsolatba
                 </a>
               </div>
             </div>

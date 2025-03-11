@@ -2,6 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+.background {
+  width: 500px;
+  height: 500px;
+padding: 90px;
+
+  position: absolute  ;
+}
+
+.background .pie {
+  width: 30%;
+  height: 30%;
+  background: white;
+  border-top-left-radius: 100%;
+  position: absolute;
+  transform-origin: bottom right;
+  filter: blur(40px);
+}
+
+.background .pie.wineberry {
+  transform: rotate(81deg);
+  background: radial-gradient(circle at bottom right, white, #3586ff 40%);
+}
+
+.background .pie.cello {
+  transform: rotate(116deg);
+  background: radial-gradient(circle at bottom right, white, #4ca7fc 40%);
+}
+
+.background .pie.greenpea {
+  transform: rotate(202deg);
+  background: radial-gradient(circle at bottom right, white, #1d68f3 40%);
+}
+
+.background .pie.greenpea2 {
+  transform: rotate(287deg);
+}
+
+.background .pie.astronaut {
+  transform: rotate(13deg);
+  background: radial-gradient(circle at bottom right, white, #30a2ff 40%);
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
