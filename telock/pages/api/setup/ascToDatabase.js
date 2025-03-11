@@ -44,13 +44,16 @@ export default function handler(req, res) {
       console.log('Kinyert tanárok:', employees);
       console.log('Kinyert csoportok:', groups);
 
-      // Párhuzamos API hívások
       await Promise.all([
         sendRingingData(ringing),
         sendEmployeesData(employees),
         sendGroupsData(groups),
-        sendScheduleData(schedule)
       ]);
+      
+      await waitForDatabaseToBeReady(sql, 'teachers', employees.length);
+      await waitForDatabaseToBeReady(sql, 'groups', groups.length);
+      await sendScheduleData(schedule);
+      
 
       return res.status(200).json({
         message: 'XML adatok sikeresen feldolgozva és továbbítva!',
@@ -67,7 +70,6 @@ export default function handler(req, res) {
   });
 }
 
-// A többi függvény (extractRingingSchedule, extractTeachers, extractGroups, extractSchedule, sendRingingData, stb.) változatlan marad.
 
 async function waitForDatabaseToBeReady(sql, table, minRows = 1, timeout = 5000) {
   const startTime = Date.now();

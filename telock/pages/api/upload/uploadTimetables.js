@@ -25,7 +25,7 @@ export default async function handler(req, res) {
 
   try {
     // Lekérdezzük az adminokat és a csoportokat
-    const admins = await sql('SELECT admin_id, full_name FROM admins');
+    const admins = await sql('SELECT admin_id, TRIM(full_name) FROM admins;');
     const adminMap = new Map(admins.map(admin => [admin.full_name, admin.admin_id]));
 
     const groups = await sql('SELECT group_id, group_name FROM csoportok');
