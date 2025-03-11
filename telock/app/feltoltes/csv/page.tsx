@@ -52,7 +52,7 @@ const Configuration = () => {
     formData.append('file', selectedFile);
 
     try {
-      const response = await fetch('api/setup/studentsToDatabase', {
+      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/setup/studentsToDatabase', {
         method: 'POST',
         body: formData,
       });
