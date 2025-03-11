@@ -24,70 +24,89 @@ export default async function handler(req, res) {
   const sql = neon(`${process.env.DATABASE_URL}`);
 
   try {
-    const [admins] = await sql('SELECT admin_id, full_name FROM admins');
+    // Adminok lekérdezése
+    const admins = await sql('SELECT admin_id, full_name FROM admins');
+    console.log('Admins:', admins);
+
+    if (!Array.isArray(admins)) {
+      throw new Error('Invalid response from database for admins');
+    }
+
     const adminMap = new Map(admins.map(admin => [admin.full_name, admin.admin_id]));
-    
-    const [groups] = await sql('SELECT group_id, group_name FROM csoportok');
+
+    // Csoportok lekérdezése
+    const groups = await sql('SELECT group_id, group_name FROM csoportok');
+    console.log('Groups:', groups);
+
+    if (!Array.isArray(groups)) {
+      throw new Error('Invalid response from database for groups');
+    }
+
     const groupMap = new Map(groups.map(group => [group.group_name, group.group_id]));
-    
+
     const timetableInsertValues = [];
     const groupRelationsInsertValues = [];
-    
+
     for (const entry of schedule) {
       const teacherId = adminMap.get(entry.teacher.trim());
       if (!teacherId) {
         console.warn(`Tanár nem található: ${entry.teacher}`);
         continue;
       }
-    
+
       const groupNames = entry.group.split(',').map(name => name.trim());
       const groupIds = groupNames.map(name => groupMap.get(name)).filter(id => id !== undefined);
-    
+
       if (groupIds.length === 0) {
         console.warn(`Csoport nem található: ${entry.group}`);
         continue;
       }
-    
+
       timetableInsertValues.push([
         teacherId,
-        entry.group_name,
+        entry.group,
         dayMapping[entry.day] || 'monday',
         entry.start_time,
         entry.end_time
       ]);
     }
-    
+
     if (timetableInsertValues.length > 0) {
       const timetablePlaceholders = timetableInsertValues
         .map((_, rowIndex) => `($${rowIndex * 5 + 1}, $${rowIndex * 5 + 2}, $${rowIndex * 5 + 3}, $${rowIndex * 5 + 4}, $${rowIndex * 5 + 5})`)
         .join(', ');
-    
+
       const timetableQuery = `
         INSERT INTO timetables 
           (admin_id, group_name, day_of_week, start_time, end_time) 
         VALUES ${timetablePlaceholders}
+        RETURNING timetable_id
       `;
-    
+
       const timetableParams = timetableInsertValues.flat();
-      const [timetableResult] = await sql(timetableQuery, timetableParams);
-      const timetableIds = timetableResult.insertId;
-    
+      const timetableResult = await sql(timetableQuery, timetableParams);
+      console.log('Timetable Insert Result:', timetableResult);
+
+      const timetableIds = timetableResult.map(row => row.timetable_id);
+
       for (let i = 0; i < timetableInsertValues.length; i++) {
-        const groupIds = groupNames
+        const groupIds = timetableInsertValues[i][1]
+          .split(',')
+          .map(name => name.trim())
           .map(name => groupMap.get(name))
           .filter(id => id !== undefined);
-    
+
         for (const groupId of groupIds) {
-          groupRelationsInsertValues.push([timetableIds + i, groupId]); // Az órarend azonosító növekményes
+          groupRelationsInsertValues.push([timetableIds[i], groupId]);
         }
       }
     }
-    
+
     if (groupRelationsInsertValues.length > 0) {
       const groupRelationsPlaceholders = groupRelationsInsertValues
         .map((_, rowIndex) => `($${rowIndex * 2 + 1}, $${rowIndex * 2 + 2})`)
         .join(', ');
-    
+
       const groupRelationsQuery = `
         INSERT INTO group_relations 
           (timetable_id, group_id) 
@@ -97,9 +116,8 @@ export default async function handler(req, res) {
       const groupRelationsParams = groupRelationsInsertValues.flat();
       await sql(groupRelationsQuery, groupRelationsParams);
     }
-    
-    res.status(201).json({ message: 'Órarend sikeresen feltöltve' });
 
+    res.status(201).json({ message: 'Órarend sikeresen feltöltve' });
 
   } catch (error) {
     console.error('Hiba az órarend feltöltésekor:', error);
