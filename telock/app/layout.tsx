@@ -1,5 +1,7 @@
 // app/layout.tsx
 import { getServerSession } from "next-auth";
+import type { Metadata } from "next";
+
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options";
 // import localFont from "next/font/local";
 import Providers from "./providers"; // Importáld a Providers komponenst

@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button";
 import { BadgeCheck } from "lucide-react";
 import { motion } from "motion/react";
 import { useEffect } from "react";
+import { Separator } from "@/components/ui/separator"
+import Image from "next/image";
+
 import "./globals.css";
 
 export default function Home() {
@@ -34,7 +37,7 @@ export default function Home() {
       </header>
       <main className="flex-1">
         <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
-        <div className="background">
+     <div className="background">
   <div className="pie astronaut"> </div>
   <div className="pie greenpea"> </div>
   <div className="pie greenpea greenpea2"> </div>
@@ -42,12 +45,14 @@ export default function Home() {
   <div className="pie wineberry"> </div>
 </div>
           <div className="container mx-auto flex max-w-[64rem] flex-col items-center gap-4 text-center">
-            <h1 className="font-heading text-3xl font-bold sm:text-5xl md:text-6xl lg:text-7xl">
-              Biztonságos és kényelmes telefontárolás iskoláknak
-            </h1>
+          <h1 className="font-heading text-3xl font-bold sm:text-5xl md:text-6xl lg:text-7xl">
+  Biztonságos és kényelmes <span className="text-blue-500">telefontárolás</span> iskoláknak
+</h1>
+
             <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
               Csökkentsük a figyelemelterelést és biztosítsuk a diákok számára a zavartalan tanulást!
             </p>
+            
             <div className="space-x-4">
               <Link href="/login" className={cn(buttonVariants({ size: "lg" }))}>
                 Kapcsolatfelvétel
@@ -60,13 +65,15 @@ export default function Home() {
               >
                 Bővebben
               </Link>
+              
             </div>
           </div>
         </section>
+        <Separator />
 
         <section
           id="features"
-          className="space-y-6 bg-slate-50 py-8 dark:bg-transparent md:py-12 lg:py-24"
+          className="space-y-6 bg-slate-50 py-8 md:py-12 bg-white lg:py-24"
         >
           <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
             <h2 className="font-heading text-3xl font-bold leading-[1.1] sm:text-3xl md:text-6xl">
@@ -154,8 +161,21 @@ export default function Home() {
             </p>
           </div>
         </section>
+        <Separator />
 
         <section id="open-source" className=" py-8 md:py-12 lg:py-24">
+        <div className="flex flex-col items-center gap-6 p-6 sm:flex-row sm:justify-center">
+      <img
+        src="https://mockuphone.com/images/devices_picture/apple-macbookpro14-front.png"
+        alt="MacBook Pro 14"
+        className="w-[300px] sm:w-[500px]"
+      />
+      <img
+        src="https://mockuphone.com/images/devices_picture/apple-iphone13-blue-portrait.png"
+        alt="iPhone 13 Blue"
+        className="w-[150px] sm:w-[200px]"
+      />
+    </div>
           <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
             <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
               Proudly Open Source
