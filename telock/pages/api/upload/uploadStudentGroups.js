@@ -30,7 +30,7 @@ export default async function handler(req, res) {
         const groupIds = insertValues.map(iv => iv[1]);
       
         await sql(
-          'INSERT INTO student_groups (student_id, group_id) SELECT * FROM UNNEST($1::text[], $2::int[]) ON CONFLICT (student_id, group_id) DO NOTHING',
+          'INSERT INTO student_groups (student_id, group_id) SELECT * FROM UNNEST($1::text[], $2::int[])',
           [studentIds, groupIds]
         );
       }
