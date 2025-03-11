@@ -3,10 +3,8 @@
 @tailwind utilities;
 
 .background {
-  width: 500px;
-  height: 500px;
-padding: 90px;
-
+  width: 400px;
+  height: 400px;
   position: absolute  ;
 }
 
@@ -27,7 +25,7 @@ padding: 90px;
 
 .background .pie.cello {
   transform: rotate(116deg);
-  background: radial-gradient(circle at bottom right, white, #4ca7fc 40%);
+  background: radial-gradient(circle at bottom right, white, #1b77ce 40%);
 }
 
 .background .pie.greenpea {
@@ -43,6 +41,13 @@ padding: 90px;
   transform: rotate(13deg);
   background: radial-gradient(circle at bottom right, white, #30a2ff 40%);
 }
+
+@media (max-width: 768px) {
+  .background {
+    display: none;
+  }
+}
+
 
 @layer utilities {
   .text-balance {

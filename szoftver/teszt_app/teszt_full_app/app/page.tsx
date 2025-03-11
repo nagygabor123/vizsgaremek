@@ -12,7 +12,8 @@ import "./globals.css";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col justify-center">
+    <div className="container w-full max-w-none px-4 sm:px-6 lg:px-8">
+      
       <header className="container z-40 bg-background mx-auto">
         <div className="flex h-20 items-center justify-between py-6">
           <div className="flex gap-6 md:gap-10">
