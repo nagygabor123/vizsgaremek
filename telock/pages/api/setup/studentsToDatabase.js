@@ -86,7 +86,7 @@ export default async function handler(req, res) {
       }
 
       await checkStudentsInserted(students);
-      //await UploadStudentGroups();
+      await UploadStudentGroups();
 
       return res.status(200).json({ message: `Sikeresen hozzáadva: ${students.length} diák` });
 
