@@ -18,8 +18,8 @@ export default async function handler(req, res) {
   }
 
   const form = new multiparty.Form({
-    maxFieldsSize: 20 * 1024 * 1024, // 20MB
-    maxFilesSize: 50 * 1024 * 1024,  // 50MB
+    maxFieldsSize: 20 * 1024 * 1024,
+    maxFilesSize: 50 * 1024 * 1024,
   });
 
   form.parse(req, async (err, fields, files) => {
@@ -38,7 +38,6 @@ export default async function handler(req, res) {
       const filePath = file.path;
       const csvData = fs.readFileSync(filePath, 'utf8');
 
-      // Megfelelő sorok kinyerése
       const rows = csvData.split(/\r?\n/).map(row => row.trim()).filter(row => row.length > 0);
       if (rows.length < 2) {
         return res.status(400).json({ error: 'Üres vagy érvénytelen CSV fájl' });
@@ -73,18 +72,20 @@ export default async function handler(req, res) {
 
       console.log(`Összes diák: ${students.length}`);
 
-      // **BATCH INSERT** - Egyetlen SQL parancs több beillesztéssel
+      // **BATCH INSERT - HELYES FORMÁTUM**
       if (students.length > 0) {
-        const placeholders = students.map(() => '(?, ?, ?, ?, ?)').join(', ');
         const values = students.flat();
+        const placeholders = students
+          .map((_, i) => `($${i * 5 + 1}, $${i * 5 + 2}, $${i * 5 + 3}, $${i * 5 + 4}, $${i * 5 + 5})`)
+          .join(', ');
+
         const insertQuery = `INSERT INTO students (student_id, full_name, class, rfid_tag, access) VALUES ${placeholders}`;
         
         await sql(insertQuery, values);
       }
 
-      await checkStudentsInserted(pool, students);
+      await checkStudentsInserted(sql, students);
       await UploadStudentGroups();
-      //await uploadLockerRelations();
 
       return res.status(200).json({ message: `Sikeresen hozzáadva: ${students.length} diák` });
 
@@ -94,6 +95,7 @@ export default async function handler(req, res) {
     }
   });
 }
+
 
 function generateStudentID() {
   while (RESERVED_IDS.has(`OM${baseID}`)) {
