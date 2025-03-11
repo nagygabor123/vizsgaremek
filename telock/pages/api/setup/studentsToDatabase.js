@@ -11,6 +11,8 @@ export const config = {
 
 const RESERVED_IDS = new Set(["OM11111", "OM22222", "OM33333", "OM44444"]);
 let baseID = 7000;
+const sql = neon(`${process.env.DATABASE_URL}`);
+
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -33,7 +35,6 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Nincs fájl feltöltve' });
     }
 
-    const sql = neon(`${process.env.DATABASE_URL}`);
     try {
       const filePath = file.path;
       const csvData = fs.readFileSync(filePath, 'utf8');
