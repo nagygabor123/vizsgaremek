@@ -26,9 +26,12 @@ export default async function handler(req, res) {
       });
 
       if (insertValues.length > 0) {
-        // PostgreSQL-ben a `INSERT IGNORE` helyett `ON CONFLICT`-ot használunk
-        await sql('INSERT INTO student_groups (student_id, group_id) SELECT * FROM UNNEST($1::int[], $2::int[]) ON CONFLICT (student_id, group_id) DO NOTHING', 
-          [insertValues.map(iv => iv[0]), insertValues.map(iv => iv[1])]
+        const studentIds = insertValues.map(iv => iv[0]);
+        const groupIds = insertValues.map(iv => iv[1]);
+      
+        await sql(
+          'INSERT INTO student_groups (student_id, group_id) SELECT * FROM UNNEST($1::text[], $2::int[])',
+          [studentIds, groupIds]
         );
       }
 

@@ -85,8 +85,9 @@ export default async function handler(req, res) {
         await sql(insertQuery, values);
       }
 
-      await checkStudentsInserted(sql, students);
+      await checkStudentsInserted(students);
       await UploadStudentGroups();
+      await uploadLockerRelations();
 
       return res.status(200).json({ message: `Sikeresen hozzáadva: ${students.length} diák` });
 
@@ -112,14 +113,26 @@ function generateRFID() {
   return crypto.randomBytes(4).toString('hex').toUpperCase();
 }
 
-async function checkStudentsInserted(pool, students) {
-  const [studentsInDb] = await sql('SELECT student_id FROM students');
-  const insertedStudentIDs = studentsInDb.map(student => student.student_id);
+async function checkStudentsInserted(students) {
+  try {
+    const studentsInDb = await sql('SELECT student_id FROM students');
+    
+    console.log('Visszakapott adatok:', studentsInDb); // Logolás
 
-  for (const student of students) {
-    if (!insertedStudentIDs.includes(student[0])) {
-      throw new Error(`A diák nem került fel az adatbázisba: ${student[0]}`);
+    if (!Array.isArray(studentsInDb)) {
+      throw new Error('Az adatbázisból visszakapott eredmény nem egy tömb');
     }
+
+    const insertedStudentIDs = studentsInDb.map(student => student.student_id);
+
+    for (const student of students) {
+      if (!insertedStudentIDs.includes(student[0])) {
+        throw new Error(`A diák nem került fel az adatbázisba: ${student[0]}`);
+      }
+    }
+  } catch (error) {
+    console.error('Hiba az adatbázis lekérdezés közben:', error);
+    throw error;
   }
 }
 
