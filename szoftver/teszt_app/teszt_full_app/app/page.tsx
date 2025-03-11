@@ -3,11 +3,19 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Button } from "@/components/ui/button";
 import { BadgeCheck } from "lucide-react";
-import { motion } from "motion/react";
+
 import { useEffect } from "react";
 import { Separator } from "@/components/ui/separator"
 import Image from "next/image";
+import { motion } from "framer-motion";
 
+const circles = [
+  { size: 150, x: "-20%", y: "10%", gradient: "radial-gradient(circle at bottom right, white, #30a2ff 40%)" },
+  { size: 250, x: "90%", y: "30%", gradient: "radial-gradient(circle at bottom right, white, #1d68f3 40%)" },
+  { size: 180, x: "25%", y: "70%", gradient: "radial-gradient(circle at bottom right, white, #2563eb 40%)" },
+  { size: 220, x: "60%", y: "85%", gradient: "radial-gradient(circle at bottom right, white, #1d4ed8 40%)" },
+  { size: 200, x: "-10%", y: "50%", gradient: "radial-gradient(circle at bottom right, white, #3b82f6 40%)" },
+];
 import "./globals.css";
 
 export default function Home() {
@@ -15,6 +23,7 @@ export default function Home() {
     <div className="container w-full max-w-none px-4 sm:px-6 lg:px-8">
       
       <header className="container z-40 bg-background mx-auto">
+        
         <div className="flex h-20 items-center justify-between py-6">
           <div className="flex gap-6 md:gap-10">
             <Link href="/" className="hidden items-center space-x-2 md:flex">
@@ -37,40 +46,42 @@ export default function Home() {
         </div>
       </header>
       <main className="flex-1">
-        <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
-     <div className="background">
-  <div className="pie astronaut"> </div>
-  <div className="pie greenpea"> </div>
-  <div className="pie greenpea greenpea2"> </div>
-  <div className="pie cello"> </div>
-  <div className="pie wineberry"> </div>
-</div>
-          <div className="container mx-auto flex max-w-[64rem] flex-col items-center gap-4 text-center">
-          <h1 className="font-heading text-3xl font-bold sm:text-5xl md:text-6xl lg:text-7xl">
-  Biztonságos és kényelmes <span className="text-blue-500">telefontárolás</span> iskoláknak
-</h1>
+      <section className="relative space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32 overflow-visible">
+  {/* Blurred Colorful Circles */}
+  <div className="absolute inset-0 pointer-events-none">
+    {circles.map((circle, index) => (
+      <div
+        key={index}
+        className="absolute rounded-full"
+        style={{
+          width: circle.size,
+          height: circle.size,
+          top: circle.y,
+          left: circle.x,
+          background: circle.gradient,
+          filter: 'blur(40px)', // Apply blur effect
+        }}
+      />
+    ))}
+  </div>
 
-            <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-              Csökkentsük a figyelemelterelést és biztosítsuk a diákok számára a zavartalan tanulást!
-            </p>
-            
-            <div className="space-x-4">
-              <Link href="/login" className={cn(buttonVariants({ size: "lg" }))}>
-                Kapcsolatfelvétel
-              </Link>
-              <Link
-                href="/dashboard"
-                target="_blank"
-                rel="noreferrer"
-                className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
-              >
-                Bővebben
-              </Link>
-              
-            </div>
-          </div>
-        </section>
-        <Separator />
+  <div className="container mx-auto flex max-w-[64rem] flex-col items-center gap-4 text-center relative z-10">
+    <h1 className="font-heading text-3xl font-bold sm:text-5xl md:text-6xl lg:text-7xl">
+      Biztonságos és kényelmes <span className="text-blue-500">telefontárolás</span> iskoláknak
+    </h1>
+    <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
+      Csökkentsük a figyelemelterelést és biztosítsuk a diákok számára a zavartalan tanulást!
+    </p>
+    <div className="space-x-4">
+      <Link href="/login">Kapcsolatfelvétel</Link>
+      <Link href="/dashboard" target="_blank" rel="noreferrer">
+        Bővebben
+      </Link>
+    </div>
+  </div>
+</section>
+
+        {/* <Separator /> */}
 
         <section
           id="features"
