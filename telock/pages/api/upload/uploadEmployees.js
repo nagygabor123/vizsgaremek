@@ -16,28 +16,29 @@ export default async function handler(req, res) {
     const sql = neon(`${process.env.DATABASE_URL}`);
 
     try {
-      // Lekérdezzük az utolsó admin_id-t
+
       const lastAdmin = await sql('SELECT admin_id FROM admins ORDER BY admin_id DESC LIMIT 1');
       
       let nextAdminId = 3;
       if (lastAdmin.length > 0) {
         nextAdminId = lastAdmin[0].admin_id + 1;
-      }
+      } 
+      
+      const insertValues = employees.map(employee => [
+        nextAdminId++, 
+        employee.full_name, 
+        generatePassword(), 
+        employee.position, 
+        employee.osztalyfonok || 'nincs', 
+        employee.short_name || null 
+      ]);
 
-      // Beszúrási értékek előkészítése
-      for (const employee of employees) {
+      
         await sql(
           'INSERT INTO admins (admin_id, full_name, password, position, osztalyfonok, short_name) VALUES ($1, $2, $3, $4, $5, $6)',
-          [
-            nextAdminId++, 
-            employee.full_name, 
-            generatePassword(), 
-            employee.position, 
-            employee.osztalyfonok || 'nincs', // Ha null, akkor "nincs"
-            employee.short_name || null // Adding short_name to the insert values
-          ]
+          [insertValues]
         );
-      }
+      
 
       res.status(201).json({ message: 'Admins uploaded successfully' });
     } catch (error) {
