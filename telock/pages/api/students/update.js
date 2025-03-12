@@ -110,11 +110,11 @@ export default async function handler(req, res) {
 
       if (existingLocker.length > 0) {
         const latestStudent = await sql('SELECT MAX(student_id) AS max_id FROM students');
-        const newStudentId = latestStudent[0].max_id + 1;  // Növeljük eggyel
+        const newStudentId = latestStudent[0].max_id + 1;  
 
         await sql(
           'INSERT INTO students (student_id, full_name, class, rfid_tag, access) VALUES ($1, $2, $3, $4, $5);',
-          [newStudentId, full_name, studentClass, rfid_tag, 'zarva'] // Alapértelmezett 'zarva' access érték
+          [newStudentId, full_name, studentClass, rfid_tag, 'zarva'] 
         );
 
         await sql(
@@ -122,15 +122,8 @@ export default async function handler(req, res) {
           [rfid_tag, existingLocker[0].relationship_id]
         );
 
-        const deleteResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/delete`, {
-          method: 'DELETE',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ student_id }),
-        });
-
-        if (!deleteResponse.ok) {
-          return res.status(500).json({ message: 'Failed to delete old student' });
-        }
+        await deleteStudent(student_id);
+        await generateStudentGroups(student_id, studentClass);
 
         res.status(200).json({ message: 'Student and locker relationship updated successfully' });
       } else {
@@ -145,6 +138,26 @@ export default async function handler(req, res) {
   }
 }
 
+async function deleteStudent(student_id) {
+  const deleteResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/delete`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ student_id }),
+  });
 
-//Szűcs Viktória
-//88D5497A
+  if (!deleteResponse.ok) {
+    throw new Error('Failed to delete old student');
+  }
+}
+
+async function generateStudentGroups(student_id, studentClass) {
+  const generateGroups = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/setStudentGroups`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ student_id, studentClass }),
+  });
+
+  if (!generateGroups.ok) {
+    throw new Error('Failed to generate student groups');
+  }
+}
