@@ -114,30 +114,28 @@ export default async function handler(req, res) {
       }
       
 
-      const createResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/create`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ student_id, full_name, class: studentClass, rfid_tag }),
-      });
-
-      const createData = await createResponse.json();
-      if (!createResponse.ok) {
-        return res.status(500).json({ message: 'Failed to create student', error: createData });
-      }
-
-      if (existingLocker.length > 0) {
-        const lockerExists = await sql(
-          'SELECT 1 FROM locker_relationships WHERE locker_id = $1 AND rfid_tag = $2',
-          [existingLocker[0].locker_id, rfid_tag]
-        );
+      const existingStudent = await sql(
+        'SELECT 1 FROM students WHERE student_id = $1',
+        [student_id]
+      );
       
-        if (lockerExists.length === 0) {
-          await sql(
-            'INSERT INTO locker_relationships (locker_id, rfid_tag) VALUES ($1, $2);',
-            [existingLocker[0].locker_id, rfid_tag]
-          );
+      if (existingStudent.length === 0) {
+        const createResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/create`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            student_id,
+            full_name,
+            class: studentClass,
+            rfid_tag,
+          }),
+        });
+      
+        if (!createResponse.ok) {
+          return res.status(500).json({ message: 'Failed to create student' });
         }
       }
+      
       
 
       res.status(200).json({ message: 'Student and locker relationship updated successfully' });
