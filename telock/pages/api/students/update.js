@@ -105,36 +105,20 @@ export default async function handler(req, res) {
         return res.status(404).json({ message: 'Student not found' });
       }
 
-      // Ha az RFID változott, frissítjük a students táblát
+      // Ha az RFID változott, frissítjük a locker_relationships táblát
       if (existingStudent[0].rfid_tag !== rfid_tag) {
-        // Frissítjük a diák RFID-jét a students táblában
+        // Frissítjük az RFID-t a locker_relationships táblában
         await sql(
-          'UPDATE students SET rfid_tag = $1 WHERE student_id = $2',
-          [rfid_tag, student_id]
+          'UPDATE locker_relationships SET rfid_tag = $1 WHERE rfid_tag = $2',
+          [rfid_tag, existingStudent[0].rfid_tag]
         );
       }
 
       // Frissítjük a diák nevét és osztályát a students táblában
       await sql(
-        'UPDATE students SET full_name = $1, class = $2 WHERE student_id = $3',
-        [full_name, studentClass, student_id]
+        'UPDATE students SET full_name = $1, class = $2, rfid_tag = $3 WHERE student_id = $4',
+        [full_name, studentClass, rfid_tag, student_id]
       );
-
-      // Ha az RFID változott, frissítjük a locker_relationships táblát
-      if (existingStudent[0].rfid_tag !== rfid_tag) {
-        const existingLocker = await sql(
-          'SELECT relationship_id, locker_id FROM locker_relationships WHERE rfid_tag = $1',
-          [existingStudent[0].rfid_tag]
-        );
-
-        // Ha van kapcsolódó locker, akkor frissítjük az RFID-t a locker_relationships táblában
-        if (existingLocker.length > 0) {
-          await sql(
-            'UPDATE locker_relationships SET rfid_tag = $1 WHERE rfid_tag = $2',
-            [rfid_tag, existingStudent[0].rfid_tag]
-          );
-        }
-      }
 
       res.status(200).json({ message: 'Student and locker relationship updated successfully' });
     } catch (error) {
@@ -145,4 +129,5 @@ export default async function handler(req, res) {
     res.status(405).json({ message: 'Method Not Allowed' });
   }
 }
+
 
