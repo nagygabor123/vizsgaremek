@@ -94,11 +94,13 @@ export default async function handler(req, res) {
 
     const sql = neon(process.env.DATABASE_URL);
     try {
+      await dataCheck(rfid_tag);
+
       const studentData = await sql(
         'SELECT rfid_tag FROM students WHERE student_id = $1',
         [student_id]
       );
-
+    
       if (studentData.length === 0) {
         return res.status(404).json({ message: 'Student not found' });
       }
@@ -110,11 +112,11 @@ export default async function handler(req, res) {
 
       if (existingLocker.length > 0) {
         const latestStudent = await sql('SELECT MAX(student_id) AS max_id FROM students');
-        const newStudentId = latestStudent[0].max_id + 1;  
+        const newStudentId = latestStudent[0].max_id + 1;
 
         await sql(
           'INSERT INTO students (student_id, full_name, class, rfid_tag, access) VALUES ($1, $2, $3, $4, $5);',
-          [newStudentId, full_name, studentClass, rfid_tag, 'zarva'] 
+          [newStudentId, full_name, studentClass, rfid_tag, 'zarva']
         );
 
         await sql(
@@ -138,6 +140,18 @@ export default async function handler(req, res) {
   }
 }
 
+async function dataCheck(student_id, rfid_tag) {
+  const existingRfid = await sql(
+    'SELECT student_id FROM students WHERE rfid_tag = $1',
+    [rfid_tag]
+  );
+
+  if (existingRfid.length > 0 && existingRfid[0].student_id !== student_id) { 
+    return res.status(400).json({ message: 'Duplicate RFID tag' });
+  }
+
+}
+
 async function deleteStudent(student_id) {
   const deleteResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/delete`, {
     method: 'DELETE',
@@ -152,7 +166,7 @@ async function deleteStudent(student_id) {
 
 async function generateStudentGroups(student_id, studentClass) {
   const generateGroups = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/setStudentGroups`, {
-    method: 'DELETE',
+    method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ student_id, studentClass }),
   });
@@ -161,3 +175,5 @@ async function generateStudentGroups(student_id, studentClass) {
     throw new Error('Failed to generate student groups');
   }
 }
+
+//30F822A9
