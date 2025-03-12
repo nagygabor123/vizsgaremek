@@ -296,24 +296,25 @@ const Calendar: React.FC = () => {
   // };
 
   const parseDate = (dateString: string) => {
-    const [year, month, day] = dateString.split("-").map(Number);
-    return new Date(year, month - 1, day); // hónapokat 0-indexelten tárolja a JS
+    return new Date(dateString); // ISO 8601 formátumot automatikusan kezeli
   };
-
+  
   const isBreakDay = (date: Date) => {
     if (!breakdate || breakdate.length === 0) return false;
-
-    const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-
+  
+    const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()); // Idő rész nélkül
+  
     return breakdate.some(({ start, end }) => {
       const startDate = parseDate(start);
       const endDate = parseDate(end);
-
-      return targetDate >= startDate && targetDate <= endDate;
+  
+      // Dátumok összehasonlítása idő rész nélkül
+      const startDateOnly = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+      const endDateOnly = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
+  
+      return targetDate >= startDateOnly && targetDate <= endDateOnly;
     });
   };
-
-
 
 
   // const fetchStudentTimetable = async (student_id: string) => {
