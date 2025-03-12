@@ -106,13 +106,10 @@ export default async function handler(req, res) {
           body: JSON.stringify({ student_id }),
         });
 
-        // **Várjuk meg, hogy a törlés tényleg befejeződjön**
         const deleteData = await deleteResponse.json();
         if (!deleteResponse.ok) {
           return res.status(500).json({ message: 'Failed to delete student', error: deleteData });
         }
-
-        // **Várjunk egy kis időt, hogy az adatbázis tényleg frissüljön**
         await new Promise(resolve => setTimeout(resolve, 500));
       }
 
@@ -128,11 +125,19 @@ export default async function handler(req, res) {
       }
 
       if (existingLocker.length > 0) {
-        await sql(
-          'INSERT INTO locker_relationships (locker_id, rfid_tag) VALUES ($1, $2) ON CONFLICT (locker_id) DO NOTHING;',
+        const lockerExists = await sql(
+          'SELECT 1 FROM locker_relationships WHERE locker_id = $1 AND rfid_tag = $2',
           [existingLocker[0].locker_id, rfid_tag]
         );
+      
+        if (lockerExists.length === 0) {
+          await sql(
+            'INSERT INTO locker_relationships (locker_id, rfid_tag) VALUES ($1, $2);',
+            [existingLocker[0].locker_id, rfid_tag]
+          );
+        }
       }
+      
 
       res.status(200).json({ message: 'Student and locker relationship updated successfully' });
     } catch (error) {
