@@ -507,25 +507,29 @@ const Calendar: React.FC = () => {
         </div>
 
         <div className="calendar-container">
+          {/* <span>{tanevkezdes}</span>
+  <span>{tanevvege}</span> */}
           <div className="calendar-header">
             <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
               <span>{format(currentDate, 'yyyy MMMM', { locale: hu })}</span>
             </h2>
             <div className="calendar-controls">
-              <Select disabled>
+              <Select>
                 <SelectTrigger>
-                  <SelectValue placeholder="Osztály neve" />
+                  <SelectValue placeholder="Válasszon..." />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Osztályok</SelectLabel>
                     <SelectItem value="13i">13.I</SelectItem>
+                    <SelectLabel>Tanárok</SelectLabel>
+                    <SelectItem value="kisPista">Kis Pista</SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>
               <Button onClick={goToToday} variant="outline">Mai nap</Button>
-              <Button variant="ghost" onClick={goToPrevious}>{isMobileView ? <ChevronLeft /> : <ChevronLeft />}</Button>
-              <Button variant="ghost" onClick={goToNext}>{isMobileView ? <ChevronRight /> : <ChevronRight />}</Button>
+              <Button variant="ghost" onClick={goToPrevious}><ChevronLeft /></Button>
+              <Button variant="ghost" onClick={goToNext}><ChevronRight /></Button>
             </div>
           </div>
 
@@ -533,12 +537,16 @@ const Calendar: React.FC = () => {
             {isMobileView ? (
               <div>
                 <div className="calendar-day">
-                  {format(currentDate, 'eeee d', { locale: hu })}
+                  {format(currentDate, "eeee d", { locale: hu })}
                 </div>
-                {isBreakDay(currentDate) ? (
-                  <div className="no-lessons">Ma nincs tanítás!</div>
-                ) : dailyLessons.length === 0 ? (
-                  <div className="no-lessons">Ma nincs tanítás!</div>
+                {isBreakDay(currentDate) ||
+                  dailyLessons.length === 0 ||
+                  (tanevkezdesDate &&
+                    tanevvegeDate &&
+                    (currentDate < tanevkezdesDate || currentDate > tanevvegeDate)) ? (
+                  <div className="flex items-center justify-center h-dvh text-base text-gray-500 col-span-full">
+                    Nincsenek tanórák ezen a napon
+                  </div>
                 ) : (
                   lessonTimes.map((time, lessonIndex) => {
                     const lessonsAtSameTime = dailyLessons.filter(
@@ -551,7 +559,6 @@ const Calendar: React.FC = () => {
                       <div key={lessonIndex} className="calendar-cell">
                         {lessonsAtSameTime.map((lesson, index) => {
                           const isCurrent = isCurrentLesson(lesson);
-
                           return (
                             <Dialog key={`${index}`}>
                               <DialogTrigger asChild>
@@ -564,45 +571,70 @@ const Calendar: React.FC = () => {
                                       fetchSystemStatus();
                                     }}
                                   >
-                                    <div className="lesson-index">{lessonIndex + 1}</div>
+                                    <div className="flex justify-between items-center w-full text-xs pb-4">
+                                      <div className="">{lessonIndex + 1}</div>
+                                      <div className="">{lesson.teacher}</div>
+                                    </div>
                                     <div className="lesson-name">{lesson.subject}</div>
                                     <div className="lesson-class">{lesson.class}</div>
+
                                   </div>
                                 ) : (
                                   <div
                                     className="lesson-card disabled-lesson"
                                   >
-                                    <div className="lesson-index">{lessonIndex + 1}</div>
+                                    <div className="flex justify-between items-center w-full text-xs pb-4">
+                                      <div className="">{lessonIndex + 1}</div>
+                                      <div className="">{lesson.teacher}</div>
+                                    </div>
                                     <div className="lesson-name">{lesson.subject}</div>
                                     <div className="lesson-class">{lesson.class}</div>
+
                                   </div>
                                 )}
                               </DialogTrigger>
 
                               {isToday(currentDate) && isCurrentLesson(lesson) && (
-                                <DialogContent>
+                                <DialogContent className="sm:max-w-[800px]">
                                   <DialogHeader>
-                                    <DialogTitle>{modalInfo?.lesson}</DialogTitle>
-                                    <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
+                                    <DialogTitle>{modalInfo?.lesson} </DialogTitle>
+                                    <DialogDescription>Időpont: {modalInfo?.time} {modalInfo?.className}</DialogDescription>
                                     <h3>Osztály: {modalInfo?.className}</h3>
                                     <div>
                                       <h4>Diákok:</h4>
-                                      {getStudentsByClass(modalInfo?.className || '').map((student) => {
-                                        const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
-                                        const currentTime = new Date().toTimeString().slice(0, 5);
-                                        const canUnlockStudent = systemClose || studentTimetableData &&
-                                          currentTime >= studentTimetableData.first_class_start &&
-                                          currentTime <= studentTimetableData.last_class_end;
-                                        return (
-                                          <div key={student.student_id} className="student-info">
-                                            <p>{student.full_name} ({student.status})</p>
-                                            <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>Feloldás</Button>
-                                          </div>
-                                        );
-                                      })}
+                                      <table className="table-auto w-full border-collapse border border-gray-300">
+                                        <thead>
+                                          <tr className="bg-gray-200">
+                                            <th className="border border-gray-300 px-4 py-2">Név</th>
+                                            <th className="border border-gray-300 px-4 py-2">Állapot</th>
+                                            <th className="border border-gray-300 px-4 py-2">Művelet</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          {getStudentsByClass(modalInfo?.className || '').map((student) => {
+                                            const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
+                                            const currentTime = new Date().toTimeString().slice(0, 5);
+                                            const canUnlockStudent = systemClose || studentTimetableData &&
+                                              currentTime >= studentTimetableData.first_class_start &&
+                                              currentTime <= studentTimetableData.last_class_end;
+                                            return (
+                                              <tr key={student.student_id} className="border border-gray-300">
+                                                <td className="border border-gray-300 px-4 py-2">{student.full_name}</td>
+                                                <td className="border border-gray-300 px-4 py-2">{student.status}</td>
+                                                <td className="border border-gray-300 px-4 py-2">
+                                                  <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>
+                                                    Feloldás
+                                                  </Button>
+                                                </td>
+                                              </tr>
+                                            );
+                                          })}
+                                        </tbody>
+                                      </table>
                                     </div>
                                   </DialogHeader>
                                 </DialogContent>
+
                               )}
                             </Dialog>
                           );
@@ -616,8 +648,8 @@ const Calendar: React.FC = () => {
               <>
                 <div className="calendar-day"></div>
                 {daysOfWeek.map((day, index) => (
-                  <div className={`calendar-day ${isToday(day) ? 'current-day' : ''}`} key={index}>
-                    {format(day, 'EEE d', { locale: hu })}
+                  <div className={`calendar-day ${isToday(day) ? "current-day" : ""}`} key={index}>
+                    {format(day, "EEE d", { locale: hu })}
                   </div>
                 ))}
 
@@ -627,22 +659,34 @@ const Calendar: React.FC = () => {
                       <span className="time-start">{time.start}</span>
                       <span className="time-end">{time.end}</span>
                     </div>
+
+
                     {daysOfWeek.map((day, dayIndex) => {
+                      if (
+                        tanevkezdesDate &&
+                        tanevvegeDate &&
+                        (day < tanevkezdesDate || day > tanevvegeDate)
+                      ) {
+                        return (
+                          <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell empty" />
+                        );
+                      }
+
+
+
                       const dayName = getReplacedDayName(day);
                       const dailyLessons = schedule.filter((lesson) => lesson.day === dayName);
                       const lessonsAtSameTime = dailyLessons.filter(
-                        (l) => l.start === time.start && l.end === time.end,
+                        (l) => l.start === time.start && l.end === time.end
                       );
 
-                      const isBreak = isBreakDay(day);
-                      if (lessonsAtSameTime.length === 0 || isBreak) {
+                      if (lessonsAtSameTime.length === 0 || isBreakDay(day)) {
                         return <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell empty" />;
                       }
 
                       return (
                         <div key={`${lessonIndex}-${dayIndex}`} className="calendar-cell">
                           {lessonsAtSameTime.map((lesson, index) => {
-
                             const isCurrent = isToday(day) && isCurrentLesson(lesson);
                             return (
                               <Dialog key={`${lessonIndex}-${dayIndex}-${index}`}>
@@ -656,41 +700,76 @@ const Calendar: React.FC = () => {
                                         fetchSystemStatus();
                                       }}
                                     >
-                                      <div className="lesson-index">{lessonIndex + 1}</div>
+                                      <div className="flex justify-between items-center w-full text-xs pb-4">
+                                        <div className="">{lessonIndex + 1}</div>
+                                        <div className="">{lesson.teacher}</div>
+                                      </div>
+
                                       <div className="lesson-name">{lesson.subject}</div>
                                       <div className="lesson-class">{lesson.class}</div>
+
+
                                     </div>
                                   ) : (
                                     <div
                                       className="lesson-card disabled-lesson"
                                     >
-                                      <div className="lesson-index">{lessonIndex + 1}</div>
+                                      <div className="flex justify-between items-center w-full text-xs pb-4">
+                                        <div className="">{lessonIndex + 1}</div>
+                                        <div className="">{lesson.teacher}</div>
+                                      </div>
+
                                       <div className="lesson-name">{lesson.subject}</div>
+
                                       <div className="lesson-class">{lesson.class}</div>
                                     </div>
                                   )}
                                 </DialogTrigger>
                                 {isToday(day) && isCurrentLesson(lesson) && (
-                                  <DialogContent>
+                                  <DialogContent className="sm:max-w-[800px]">
                                     <DialogHeader>
-                                      <DialogTitle>{modalInfo?.lesson}</DialogTitle>
-                                      <DialogDescription>Időpont: {modalInfo?.time}</DialogDescription>
-                                      <h3>Osztály: {modalInfo?.className}</h3>
-                                      <div>
-                                        <h4>Diákok:</h4>
-                                        {getStudentsByClass(modalInfo?.className || '').map((student) => {
-                                          const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
-                                          const currentTime = new Date().toTimeString().slice(0, 5);
-                                          const canUnlockStudent = systemClose || studentTimetableData &&
-                                            currentTime >= studentTimetableData.first_class_start &&
-                                            currentTime <= studentTimetableData.last_class_end;
-                                          return (
-                                            <div key={student.student_id} className="student-info">
-                                              <p>{student.full_name} ({student.status})</p>
-                                              <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>Feloldás</Button>
-                                            </div>
-                                          );
-                                        })}
+                                      <DialogTitle className="text-3xl">{modalInfo?.lesson}</DialogTitle>
+                                      {/*  <DialogDescription className="text-xl"> {modalInfo?.className} {modalInfo?.time}</DialogDescription>*/}
+
+                                      <h3>{modalInfo?.time}</h3>
+                                      <h3>{modalInfo?.className}</h3>
+
+
+
+
+
+
+
+                                      <div className="rounded-md border mt-5">
+                                        <table className="w-full">
+                                          <thead className="text-center text-sm text-neutral-500">
+                                            <tr >
+                                              <th className="p-2 font-normal">Név</th>
+                                              <th className="p-2 font-normal">Állapot</th>
+                                              <th className="p-2 font-normal">Művelet</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            {getStudentsByClass(modalInfo?.className || '').map((student) => {
+                                              const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
+                                              const currentTime = new Date().toTimeString().slice(0, 5);
+                                              const canUnlockStudent = systemClose || studentTimetableData &&
+                                                currentTime >= studentTimetableData.first_class_start &&
+                                                currentTime <= studentTimetableData.last_class_end;
+                                              return (
+                                                <tr key={student.student_id} className="text-center text-sm border-t">
+                                                  <td className="p-1">{student.full_name}</td>
+                                                  <td className="p-1">{student.status}</td>
+                                                  <td className="p-1">
+                                                    <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>
+                                                      Feloldás
+                                                    </Button>
+                                                  </td>
+                                                </tr>
+                                              );
+                                            })}
+                                          </tbody>
+                                        </table>
                                       </div>
                                     </DialogHeader>
                                   </DialogContent>
@@ -704,10 +783,10 @@ const Calendar: React.FC = () => {
                     })}
                   </React.Fragment>
                 ))}
-
               </>
             )}
           </div>
+
         </div>
 
       </SidebarInset>
