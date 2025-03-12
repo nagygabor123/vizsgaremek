@@ -105,13 +105,14 @@ export default async function handler(req, res) {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ student_id }),
         });
-
-        const deleteData = await deleteResponse.json();
+      
         if (!deleteResponse.ok) {
-          return res.status(500).json({ message: 'Failed to delete student', error: deleteData });
+          return res.status(500).json({ message: 'Failed to delete student' });
         }
-        await new Promise(resolve => setTimeout(resolve, 500));
+      
+        await new Promise(resolve => setTimeout(resolve, 500)); 
       }
+      
 
       const createResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/create`, {
         method: 'POST',
