@@ -94,7 +94,7 @@ export default async function handler(req, res) {
 
     const sql = neon(process.env.DATABASE_URL);
     try {
-      await dataCheck(rfid_tag);
+      await dataCheck(sql,rfid_tag);
 
       const studentData = await sql(
         'SELECT rfid_tag FROM students WHERE student_id = $1',
@@ -140,7 +140,7 @@ export default async function handler(req, res) {
   }
 }
 
-async function dataCheck(student_id, rfid_tag) {
+async function dataCheck(sql, rfid_tag) {
   const existingRfid = await sql(
     'SELECT student_id FROM students WHERE rfid_tag = $1',
     [rfid_tag]
