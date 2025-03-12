@@ -98,37 +98,33 @@ export default async function handler(req, res) {
         'SELECT relationship_id, locker_id FROM locker_relationships WHERE rfid_tag = $1',
         [rfid_tag]
       );
-      
 
       if (existingLocker.length > 0) {
         const deleteResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/delete`, {
           method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ student_id }),
         });
 
+        // **Várjuk meg, hogy a törlés tényleg befejeződjön**
+        const deleteData = await deleteResponse.json();
         if (!deleteResponse.ok) {
-          return res.status(500).json({ message: 'Failed to delete student' });
+          return res.status(500).json({ message: 'Failed to delete student', error: deleteData });
         }
+
+        // **Várjunk egy kis időt, hogy az adatbázis tényleg frissüljön**
+        await new Promise(resolve => setTimeout(resolve, 500));
       }
 
       const createResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/create`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          student_id,
-          full_name,
-          class: studentClass,
-          rfid_tag,
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ student_id, full_name, class: studentClass, rfid_tag }),
       });
 
+      const createData = await createResponse.json();
       if (!createResponse.ok) {
-        return res.status(500).json({ message: 'Failed to create student' });
+        return res.status(500).json({ message: 'Failed to create student', error: createData });
       }
 
       if (existingLocker.length > 0) {
@@ -137,11 +133,11 @@ export default async function handler(req, res) {
           [existingLocker[0].locker_id, rfid_tag]
         );
       }
-      
+
       res.status(200).json({ message: 'Student and locker relationship updated successfully' });
     } catch (error) {
-      console.error('Error updating student:', error);  
-      res.status(500).json({ message: 'Error updating student and locker relationship' });
+      console.error('Error updating student:', error);
+      res.status(500).json({ message: 'Error updating student and locker relationship', error: error.message });
     }
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });
