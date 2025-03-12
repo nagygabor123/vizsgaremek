@@ -90,7 +90,7 @@ export default async function handler(req, res) {
         [student_id, full_name, studentClass, rfid_tag]
       );
 
-      const [maxLocker] = await db.query('SELECT MAX(locker_id) AS max_id FROM lockers;');
+      const [maxLocker] = await sql('SELECT MAX(locker_id) AS max_id FROM lockers;');
       let nextLockerId = maxLocker[0].max_id ? maxLocker[0].max_id + 1 : 8;
 
       await sql('INSERT INTO lockers (locker_id, status) VALUES ($1, $2);', [nextLockerId, 'ki']);
