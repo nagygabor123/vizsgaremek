@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     try {
       const { student_id, classNames } = req.body;
 
-      if (!student_id || !classNames || !Array.isArray(classNames)) {
+      if (!student_id || !classNames) {
         return res.status(400).json({ message: 'Student ID and class names are required.' });
       }
 
