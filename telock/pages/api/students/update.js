@@ -94,51 +94,40 @@ export default async function handler(req, res) {
 
     const sql = neon(process.env.DATABASE_URL);
     try {
+      // Lekérjük a diák régi szekrény kapcsolatát a student_id alapján
       const existingLocker = await sql(
-        'SELECT relationship_id, locker_id FROM locker_relationships WHERE rfid_tag = $1',
-        [rfid_tag]
+        'SELECT relationship_id, locker_id FROM locker_relationships WHERE student_id = $1',
+        [student_id]
       );
 
       if (existingLocker.length > 0) {
+        // Új diákot hozunk létre a kapott student_id-vel
+        await sql(
+          'INSERT INTO students (student_id, full_name, class, rfid_tag, access) VALUES ($1, $2, $3, $4, $5);',
+          [student_id, full_name, studentClass, rfid_tag, 'zarva'] // Alapértelmezett 'zarva' access érték
+        );
+
+        // Szekrény kapcsolat frissítése az új rfid_tag-el
+        await sql(
+          'UPDATE locker_relationships SET rfid_tag = $1 WHERE relationship_id = $2',
+          [rfid_tag, existingLocker[0].relationship_id]
+        );
+
+        // Töröljük a régi diákot
         const deleteResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/delete`, {
           method: 'DELETE',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ student_id }),
         });
-      
+
         if (!deleteResponse.ok) {
-          return res.status(500).json({ message: 'Failed to delete student' });
+          return res.status(500).json({ message: 'Failed to delete old student' });
         }
-      
-        await new Promise(resolve => setTimeout(resolve, 500)); 
-      }
-      
 
-      const existingStudent = await sql(
-        'SELECT 1 FROM students WHERE student_id = $1',
-        [student_id]
-      );
-      
-      if (existingStudent.length === 0) {
-        const createResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/create`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            student_id,
-            full_name,
-            class: studentClass,
-            rfid_tag,
-          }),
-        });
-      
-        if (!createResponse.ok) {
-          return res.status(500).json({ message: 'Failed to create student' });
-        }
+        res.status(200).json({ message: 'Student and locker relationship updated successfully' });
+      } else {
+        return res.status(404).json({ message: 'Locker relationship not found for the student' });
       }
-      
-      
-
-      res.status(200).json({ message: 'Student and locker relationship updated successfully' });
     } catch (error) {
       console.error('Error updating student:', error);
       res.status(500).json({ message: 'Error updating student and locker relationship', error: error.message });
