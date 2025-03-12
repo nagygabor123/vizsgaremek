@@ -101,7 +101,7 @@ export default async function handler(req, res) {
       
 
       if (existingLocker.length > 0) {
-        const deleteResponse = await fetch(`vizsgaremek-mocha.vercel.app/api/students/delete`, {
+        const deleteResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/delete`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ export default async function handler(req, res) {
         }
       }
 
-      const createResponse = await fetch(`vizsgaremek-mocha.vercel.app/api/students/create`, {
+      const createResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
