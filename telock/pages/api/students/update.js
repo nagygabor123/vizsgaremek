@@ -82,7 +82,7 @@
  *                   type: string
  *                   example: "Error updating student"
  */
-import { connectToDatabase } from '../../../lib/db';
+import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'PUT') {
@@ -92,15 +92,15 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
-    const db = await connectToDatabase();
+    const sql = neon(process.env.DATABASE_URL);
     try {
-      const [existingLocker] = await db.execute(
-        'SELECT relationship_id, locker_id FROM locker_relationships WHERE rfid_tag = ?',
+      const existingLocker = await sql(
+        'SELECT relationship_id, locker_id FROM locker_relationships WHERE rfid_tag = $1',
         [rfid_tag]
       );
+      
 
       if (existingLocker.length > 0) {
-        // Call the API to delete the student
         const deleteResponse = await fetch(`vizsgaremek-mocha.vercel.app/api/students/delete`, {
           method: 'DELETE',
           headers: {
@@ -114,7 +114,6 @@ export default async function handler(req, res) {
         }
       }
 
-      // Call the API to create the student again, preserving the locker relationship
       const createResponse = await fetch(`vizsgaremek-mocha.vercel.app/api/students/create`, {
         method: 'POST',
         headers: {
@@ -132,20 +131,17 @@ export default async function handler(req, res) {
         return res.status(500).json({ message: 'Failed to create student' });
       }
 
-      // If locker relationship exists, update it to maintain the old locker_id
       if (existingLocker.length > 0) {
-        await db.execute(
-          'INSERT INTO locker_relationships (locker_id, rfid_tag) VALUES (?, ?)',
+        await sql(
+          'INSERT INTO locker_relationships (locker_id, rfid_tag) VALUES ($1, $2) ON CONFLICT (locker_id) DO NOTHING;',
           [existingLocker[0].locker_id, rfid_tag]
         );
       }
-
+      
       res.status(200).json({ message: 'Student and locker relationship updated successfully' });
     } catch (error) {
       console.error('Error updating student:', error);  
       res.status(500).json({ message: 'Error updating student and locker relationship' });
-    } finally {
-      await db.end();
     }
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });
