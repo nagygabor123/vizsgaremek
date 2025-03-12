@@ -72,7 +72,7 @@
  *                   type: string
  *                   example: "Method Not Allowed"
  */
-import { connectToDatabase } from '../../../lib/db';
+import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -82,10 +82,10 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
-    const db = await connectToDatabase();
+    const sql = neon(process.env.DATABASE_URL);
 
     try {
-      await db.execute(
+      await sql(
         'INSERT INTO students (student_id, full_name, class, rfid_tag) VALUES (?, ?, ?, ?)',
         [student_id, full_name, studentClass, rfid_tag]
       );
@@ -93,8 +93,8 @@ export default async function handler(req, res) {
       const [maxLocker] = await db.query('SELECT MAX(locker_id) AS max_id FROM lockers;');
       let nextLockerId = maxLocker[0].max_id ? maxLocker[0].max_id + 1 : 8;
 
-      await db.execute('INSERT INTO lockers (locker_id, status) VALUES (?, ?);', [nextLockerId, 'ki']);
-      await db.execute('INSERT INTO locker_relationships (rfid_tag, locker_id) VALUES (?, ?);', [rfid_tag, nextLockerId]);
+      await sql('INSERT INTO lockers (locker_id, status) VALUES (?, ?);', [nextLockerId, 'ki']);
+      await sql('INSERT INTO locker_relationships (rfid_tag, locker_id) VALUES (?, ?);', [rfid_tag, nextLockerId]);
 
       res.status(201).json({ message: 'Student and locker relationship created', locker_id: nextLockerId });
     } catch (error) {
