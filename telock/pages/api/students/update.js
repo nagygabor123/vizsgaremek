@@ -94,30 +94,34 @@ export default async function handler(req, res) {
 
     const sql = neon(process.env.DATABASE_URL);
     try {
-      // Lekérjük a diák régi szekrény kapcsolatát a student_id alapján
-      const existingLocker = await sql(
-        'SELECT relationship_id, locker_id FROM locker_relationships WHERE student_id = $1',
+      const studentData = await sql(
+        'SELECT rfid_tag FROM students WHERE student_id = $1',
         [student_id]
       );
 
+      if (studentData.length === 0) {
+        return res.status(404).json({ message: 'Student not found' });
+      }
+
+      const existingLocker = await sql(
+        'SELECT relationship_id, locker_id FROM locker_relationships WHERE rfid_tag = $1',
+        [studentData[0].rfid_tag]
+      );
+
       if (existingLocker.length > 0) {
-        // Lekérjük az adatbázisból a legnagyobb student_id-t
         const latestStudent = await sql('SELECT MAX(student_id) AS max_id FROM students');
         const newStudentId = latestStudent[0].max_id + 1;  // Növeljük eggyel
 
-        // Új diákot hozunk létre a kapott új student_id-vel
         await sql(
           'INSERT INTO students (student_id, full_name, class, rfid_tag, access) VALUES ($1, $2, $3, $4, $5);',
           [newStudentId, full_name, studentClass, rfid_tag, 'zarva'] // Alapértelmezett 'zarva' access érték
         );
 
-        // Szekrény kapcsolat frissítése az új rfid_tag-el
         await sql(
           'UPDATE locker_relationships SET rfid_tag = $1 WHERE relationship_id = $2',
           [rfid_tag, existingLocker[0].relationship_id]
         );
 
-        /*
         const deleteResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/delete`, {
           method: 'DELETE',
           headers: { 'Content-Type': 'application/json' },
@@ -126,7 +130,7 @@ export default async function handler(req, res) {
 
         if (!deleteResponse.ok) {
           return res.status(500).json({ message: 'Failed to delete old student' });
-        }*/
+        }
 
         res.status(200).json({ message: 'Student and locker relationship updated successfully' });
       } else {
@@ -140,6 +144,7 @@ export default async function handler(req, res) {
     res.status(405).json({ message: 'Method Not Allowed' });
   }
 }
+
 
 //Szűcs Viktória
 //88D5497A
