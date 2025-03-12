@@ -99,7 +99,7 @@ export default function Home() {
 
   const fetchStudents = async () => {
     try {
-      const response = await fetch('/api/students/read');
+      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/students/read');
       const data = await response.json();
       setStudents(data);
       setHasStudents(data.length > 0); // Ha van legalább egy diák, akkor true
