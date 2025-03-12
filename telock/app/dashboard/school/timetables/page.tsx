@@ -295,6 +295,24 @@ const Calendar: React.FC = () => {
   //   });
   // };
 
+  // const parseDate = (dateString: string) => {
+  //   const [year, month, day] = dateString.split("-").map(Number);
+  //   return new Date(year, month - 1, day); // hónapokat 0-indexelten tárolja a JS
+  // };
+
+  // const isBreakDay = (date: Date) => {
+  //   if (!breakdate || breakdate.length === 0) return false;
+
+  //   const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+  //   return breakdate.some(({ start, end }) => {
+  //     const startDate = parseDate(start);
+  //     const endDate = parseDate(end);
+
+  //     return targetDate >= startDate && targetDate <= endDate;
+  //   });
+  // };
+
   const parseDate = (dateString: string) => {
     return new Date(dateString); // ISO 8601 formátumot automatikusan kezeli
   };
@@ -323,11 +341,23 @@ const Calendar: React.FC = () => {
   //   return data;
   // };
 
-  const getReplacedDayName = (date: Date): string => {
-    const formattedDate = format(date, 'yyyy-MM-dd');
-    // const replacement = plusdate.find((entry) => entry.date === formattedDate);
-    const replacement = (plusdate || []).find((entry) => entry.date === formattedDate);
+  // const getReplacedDayName = (date: Date): string => {
+  //   const formattedDate = format(date, 'yyyy-MM-dd');
+  //   // const replacement = plusdate.find((entry) => entry.date === formattedDate);
+  //   const replacement = (plusdate || []).find((entry) => entry.date === formattedDate);
 
+  //   return replacement ? replacement.replaceDay : getDayName(date);
+  // };
+
+  const getReplacedDayName = (date: Date): string => {
+    const formattedDate = format(date, 'yyyy-MM-dd'); // Például: "2024-12-21"
+  
+    // Az ISO dátumot (pl. "2024-12-21T00:00:00.000Z") alakítsuk át "YYYY-MM-DD" formátumra
+    const replacement = (plusdate || []).find((entry) => {
+      const entryDateFormatted = format(new Date(entry.date), 'yyyy-MM-dd'); // ISO dátum átalakítása
+      return entryDateFormatted === formattedDate;
+    });
+  
     return replacement ? replacement.replaceDay : getDayName(date);
   };
 
