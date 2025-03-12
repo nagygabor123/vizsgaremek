@@ -117,7 +117,7 @@ export default async function handler(req, res) {
           [rfid_tag, existingLocker[0].relationship_id]
         );
 
-        // Töröljük a régi diákot
+        /*
         const deleteResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/delete`, {
           method: 'DELETE',
           headers: { 'Content-Type': 'application/json' },
@@ -126,7 +126,7 @@ export default async function handler(req, res) {
 
         if (!deleteResponse.ok) {
           return res.status(500).json({ message: 'Failed to delete old student' });
-        }
+        }*/
 
         res.status(200).json({ message: 'Student and locker relationship updated successfully' });
       } else {
