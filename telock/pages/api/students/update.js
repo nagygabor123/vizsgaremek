@@ -105,6 +105,21 @@ export default async function handler(req, res) {
         return res.status(404).json({ message: 'Student not found' });
       }
 
+      // Ha az RFID változott, frissítjük a students táblát
+      if (existingStudent[0].rfid_tag !== rfid_tag) {
+        // Frissítjük a diák RFID-jét a students táblában
+        await sql(
+          'UPDATE students SET rfid_tag = $1 WHERE student_id = $2',
+          [rfid_tag, student_id]
+        );
+      }
+
+      // Frissítjük a diák nevét és osztályát a students táblában
+      await sql(
+        'UPDATE students SET full_name = $1, class = $2 WHERE student_id = $3',
+        [full_name, studentClass, student_id]
+      );
+
       // Ha az RFID változott, frissítjük a locker_relationships táblát
       if (existingStudent[0].rfid_tag !== rfid_tag) {
         const existingLocker = await sql(
@@ -121,12 +136,6 @@ export default async function handler(req, res) {
         }
       }
 
-      // Frissítjük a diák adatokat
-      await sql(
-        'UPDATE students SET full_name = $1, class = $2, rfid_tag = $3 WHERE student_id = $4',
-        [full_name, studentClass, rfid_tag, student_id]
-      );
-
       res.status(200).json({ message: 'Student and locker relationship updated successfully' });
     } catch (error) {
       console.error('Error updating student:', error);
@@ -136,3 +145,4 @@ export default async function handler(req, res) {
     res.status(405).json({ message: 'Method Not Allowed' });
   }
 }
+
