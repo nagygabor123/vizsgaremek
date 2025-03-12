@@ -15,13 +15,38 @@ import {
 } from "@/components/ui/breadcrumb"
 import { Separator } from "@/components/ui/separator"
 import {
+  Sidebar,
   SidebarTrigger,
   SidebarInset,
-
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
   SidebarProvider,
- 
+  SidebarGroup,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarGroupLabel,
+  useSidebar,
+
 } from "@/components/ui/sidebar"
 
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
 import Link from "next/link";
 
 
@@ -49,10 +74,6 @@ import {
 } from 'date-fns';
 import { hu } from 'date-fns/locale';
 import '../../../globals.css';
-
-import AppKonfig from '@/components/app-konfig';
-
-
 
 import { Button } from '@/components/ui/button';
 import {
@@ -121,22 +142,6 @@ const Calendar: React.FC = () => {
   const [tanevvege, setEndYear] = useState<string | null>(null);
   const [lessonTimes, setLessonTimes] = useState<lessonTimes[]>([]);
 
-
-
-
-
-  const [hasStudents, setHasStudents] = useState<boolean | null>(null);
-
-
-  const [loading, setLoading] = useState(true); // Betöltési állapot
-
-
-  const [tanevkezdesDate, setTanevkezdesDate] = useState<Date | null>(null);
-  const [tanevvegeDate, setTanevvegeDate] = useState<Date | null>(null);
-
-
-
-
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentDate(new Date());
@@ -173,7 +178,6 @@ const Calendar: React.FC = () => {
     fetchLessonTimes();
   }, []);
 
-
   useEffect(() => {
     const fetchTimetables = async () => {
       try {
@@ -202,7 +206,6 @@ const Calendar: React.FC = () => {
     }
   }, [students]);
 
-
   const teacher = 'PaZo';
   useEffect(() => {
     async function fetchSchedule() {
@@ -226,6 +229,7 @@ const Calendar: React.FC = () => {
     fetchSchedule();
   }, []);
 
+
   useEffect(() => {
     const fetchAdditionalData = async () => {
       try {
@@ -247,7 +251,6 @@ const Calendar: React.FC = () => {
       } catch (error) {
         console.error('Error fetching additional data:', error);
       }
-
     };
 
     fetchAdditionalData();
@@ -261,66 +264,26 @@ const Calendar: React.FC = () => {
   console.log('Tanévkezdes:', tanevkezdes);
   console.log('Tanevvege:', tanevvege);
 
-
-
-
-  useEffect(() => {
-    if (tanevkezdes && tanevvege) {
-      const kezdes = new Date(tanevkezdes);
-      const vege = new Date(tanevvege);
-
-      kezdes.setHours(0, 0, 0, 0);
-      vege.setHours(23, 59, 59, 999);
-
-      setTanevkezdesDate(kezdes);
-      setTanevvegeDate(vege);
-      setLoading(false); // Ha az adatok beálltak, kikapcsoljuk a betöltést
-    }
-  }, [tanevkezdes, tanevvege]); // Figyeljük a változásukat
-
-
-
   const getDayName = (date: Date): string => {
     const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     return dayNames[getDay(date)];
   };
-  // const isBreakDay = (date: Date) => {
-  //   if (!breakdate || breakdate.length === 0) return false;
-
-  //   const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-  //   return breakdate.some(({ start, end }) => {
-  //     const startDate = new Date(start);
-  //     const endDate = new Date(end);
-  //     return targetDate >= startDate && targetDate <= endDate;
-  //   });
-  // };
-
-  const parseDate = (dateString: string) => {
-    const [year, month, day] = dateString.split("-").map(Number);
-    return new Date(year, month - 1, day); // hónapokat 0-indexelten tárolja a JS
-  };
-
   const isBreakDay = (date: Date) => {
     if (!breakdate || breakdate.length === 0) return false;
 
     const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-
     return breakdate.some(({ start, end }) => {
-      const startDate = parseDate(start);
-      const endDate = parseDate(end);
-
+      const startDate = new Date(start);
+      const endDate = new Date(end);
       return targetDate >= startDate && targetDate <= endDate;
     });
   };
 
-
-
-
-  // const fetchStudentTimetable = async (student_id: string) => {
-  //   const response = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${student_id}`);
-  //   const data = await response.json();
-  //   return data;
-  // };
+  const fetchStudentTimetable = async (student_id: string) => {
+    const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/scheduleStart?student=${student_id}`);
+    const data = await response.json();
+    return data;
+  };
 
   const getReplacedDayName = (date: Date): string => {
     const formattedDate = format(date, 'yyyy-MM-dd');
@@ -357,9 +320,9 @@ const Calendar: React.FC = () => {
     setModalInfo({ lesson, time, className });
   };
 
-  // const closeModal = () => {
-  //   setModalInfo(null);
-  // };
+  const closeModal = () => {
+    setModalInfo(null);
+  };
 
   const getStudentsByClass = (className: string) => {
     return students.filter((student) => {
@@ -372,9 +335,6 @@ const Calendar: React.FC = () => {
       return studentClasses.some((cls) => classNames.includes(cls));
     });
   };
-
-
-
   const weekStart = startOfWeek(currentDate, { weekStartsOn: 1 });
   const daysOfWeek = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
 
@@ -384,7 +344,7 @@ const Calendar: React.FC = () => {
 
   const handleStudentOpen = async (student_id: string) => {
     try {
-      const scheduleResponse = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${student_id}`);
+      const scheduleResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/scheduleStart?student=${student_id}`);
 
       if (!scheduleResponse.ok) {
         console.error('Nem sikerült lekérni a diák órarendjét.');
@@ -399,7 +359,7 @@ const Calendar: React.FC = () => {
 
       // Ellenőrizzük, hogy az aktuális idő az órarendi időintervallumba esik-e
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
-        const response = await fetch(`http://localhost:3000/api/system/studentAccess?student=${student_id}`, {
+        const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/system/studentAccess?student=${student_id}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
         });
@@ -416,46 +376,19 @@ const Calendar: React.FC = () => {
   };
 
   const fetchStudents = async () => {
-    try {
-      const response = await fetch('/api/students/read');
-      const data = await response.json();
-      setStudents(data);
-      setHasStudents(data.length > 0); // Ha van legalább egy diák, akkor true
-    } catch (error) {
-      console.error('Error fetching students', error);
-    } //finally {
-    //   setLoading(false); // Lekérés vége
-    // }
+    const response = await fetch('/api/students/read');
+    const data = await response.json();
+    setStudents(data);
   };
 
-
-
-  useEffect(() => {
-    fetchStudents();
-  }, []);
-
-
   const fetchSystemStatus = async () => {
-    const response = await fetch('http://localhost:3000/api/system/status');
+    const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/system/status');
     if (response.ok) {
       const data = await response.json();
       setSystemClose(data.status === "nyitva" ? false : true);
 
     }
   };
-
-
-  const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    const hasClickedBefore = localStorage.getItem("hasClickedOverlayButton");
-    setButtonVisible(hasClickedBefore !== "true");
-  }, []);
-
-  if (isButtonVisible === null) {
-    return null;
-  }
-
 
   return (
     <SidebarProvider>
@@ -476,36 +409,26 @@ const Calendar: React.FC = () => {
                   <Slash />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Iskolai nyilvántartás</BreadcrumbPage>
+                  <BreadcrumbPage>Osztályom</BreadcrumbPage>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
                   <Slash />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Órarendek</BreadcrumbPage>
+                  <BreadcrumbPage>Órarend</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
           </div>
+          <div className="ml-auto px-3">
+            {/* <NavActions /> */}
 
+
+
+
+
+          </div>
         </header>
-
-
-
-
-        <div>
-          {loading ? (
-            <div className="flex items-center justify-center min-h-screen">
-              <p className="text-lg font-semibold">Betöltés...</p>
-            </div>
-          ) : (
-            <>
-              {!hasStudents && <AppKonfig />}
-              {/* <p>{hasStudents ? "Már vannak diákok az adatbázisban." : "Nincsenek diákok."}</p> */}
-            </>
-          )}
-        </div>
-
         <div className="calendar-container">
           <div className="calendar-header">
             <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
@@ -709,7 +632,6 @@ const Calendar: React.FC = () => {
             )}
           </div>
         </div>
-
       </SidebarInset>
     </SidebarProvider>
   );
