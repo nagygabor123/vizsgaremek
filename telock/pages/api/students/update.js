@@ -94,7 +94,11 @@ export default async function handler(req, res) {
 
     const sql = neon(process.env.DATABASE_URL);
     try {
-      await dataCheck(sql,rfid_tag);
+      // Hívjuk a dataCheck-et az RFID ellenőrzésére
+      const duplicateRfidError = await dataCheck(sql, rfid_tag, student_id);
+      if (duplicateRfidError) {
+        return res.status(400).json(duplicateRfidError);
+      }
 
       const studentData = await sql(
         'SELECT rfid_tag FROM students WHERE student_id = $1',
@@ -140,16 +144,18 @@ export default async function handler(req, res) {
   }
 }
 
-async function dataCheck(sql, rfid_tag) {
+async function dataCheck(sql, rfid_tag, student_id) {
   const existingRfid = await sql(
     'SELECT student_id FROM students WHERE rfid_tag = $1',
     [rfid_tag]
   );
 
-  if (existingRfid.length > 0 && existingRfid[0].student_id !== student_id) { 
-    return res.status(400).json({ message: 'Duplicate RFID tag' });
+  // Ellenőrizzük, hogy a RFID már szerepel-e másik diákhoz
+  if (existingRfid.length > 0 && existingRfid[0].student_id !== student_id) {
+    return { message: 'Duplicate RFID tag' };
   }
 
+  return null;  // Ha nincs hiba, akkor null-t adunk vissza
 }
 
 async function deleteStudent(student_id) {
@@ -175,5 +181,3 @@ async function generateStudentGroups(student_id, studentClass) {
     throw new Error('Failed to generate student groups');
   }
 }
-
-//30F822A9
