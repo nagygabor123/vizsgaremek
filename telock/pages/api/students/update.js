@@ -94,49 +94,38 @@ export default async function handler(req, res) {
 
     const sql = neon(process.env.DATABASE_URL);
     try {
-      const existingLocker = await sql(
-        'SELECT relationship_id, locker_id FROM locker_relationships WHERE rfid_tag = $1',
-        [rfid_tag]
-      );
-
-      if (existingLocker.length > 0) {
-        const deleteResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/delete`, {
-          method: 'DELETE',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ student_id }),
-        });
-      
-        if (!deleteResponse.ok) {
-          return res.status(500).json({ message: 'Failed to delete student' });
-        }
-      
-        await new Promise(resolve => setTimeout(resolve, 500)); 
-      }
-      
-
+      // Lekérdezzük, hogy létezik-e a diák a rendszerben
       const existingStudent = await sql(
-        'SELECT 1 FROM students WHERE student_id = $1',
+        'SELECT * FROM students WHERE student_id = $1',
         [student_id]
       );
-      
+
+      // Ha a diák nem található
       if (existingStudent.length === 0) {
-        const createResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/create`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            student_id,
-            full_name,
-            class: studentClass,
-            rfid_tag,
-          }),
-        });
-      
-        if (!createResponse.ok) {
-          return res.status(500).json({ message: 'Failed to create student' });
+        return res.status(404).json({ message: 'Student not found' });
+      }
+
+      // Ha az RFID változott, frissítjük a locker_relationships táblát
+      if (existingStudent[0].rfid_tag !== rfid_tag) {
+        const existingLocker = await sql(
+          'SELECT relationship_id, locker_id FROM locker_relationships WHERE rfid_tag = $1',
+          [existingStudent[0].rfid_tag]
+        );
+
+        // Ha van kapcsolódó locker, akkor frissítjük az RFID-t a locker_relationships táblában
+        if (existingLocker.length > 0) {
+          await sql(
+            'UPDATE locker_relationships SET rfid_tag = $1 WHERE rfid_tag = $2',
+            [rfid_tag, existingStudent[0].rfid_tag]
+          );
         }
       }
-      
-      
+
+      // Frissítjük a diák adatokat
+      await sql(
+        'UPDATE students SET full_name = $1, class = $2, rfid_tag = $3 WHERE student_id = $4',
+        [full_name, studentClass, rfid_tag, student_id]
+      );
 
       res.status(200).json({ message: 'Student and locker relationship updated successfully' });
     } catch (error) {
