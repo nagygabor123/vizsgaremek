@@ -101,10 +101,14 @@ export default async function handler(req, res) {
       );
 
       if (existingLocker.length > 0) {
-        // Új diákot hozunk létre a kapott student_id-vel
+        // Lekérjük az adatbázisból a legnagyobb student_id-t
+        const latestStudent = await sql('SELECT MAX(student_id) AS max_id FROM students');
+        const newStudentId = latestStudent[0].max_id + 1;  // Növeljük eggyel
+
+        // Új diákot hozunk létre a kapott új student_id-vel
         await sql(
           'INSERT INTO students (student_id, full_name, class, rfid_tag, access) VALUES ($1, $2, $3, $4, $5);',
-          [student_id, full_name, studentClass, rfid_tag, 'zarva'] // Alapértelmezett 'zarva' access érték
+          [newStudentId, full_name, studentClass, rfid_tag, 'zarva'] // Alapértelmezett 'zarva' access érték
         );
 
         // Szekrény kapcsolat frissítése az új rfid_tag-el
@@ -136,3 +140,6 @@ export default async function handler(req, res) {
     res.status(405).json({ message: 'Method Not Allowed' });
   }
 }
+
+//Szűcs Viktória
+//88D5497A
