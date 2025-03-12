@@ -12,7 +12,7 @@ import { motion } from "framer-motion";
 const circles = [
   { size: 150, x: "55%", y: "-5%", gradient: "radial-gradient(circle at bottom right, white, #3b82f6 40%)" },
   // { size: 150, x: "-20%", y: "10%", gradient: "radial-gradient(circle at bottom right, white, #30a2ff 40%)" },
-  { size: 250, x: "90%", y: "30%", gradient: "radial-gradient(circle at bottom right, white, #1d68f3 40%)" },
+  { size: 100, x: "90%", y: "30%", gradient: "radial-gradient(circle at bottom right, white, #1d68f3 40%)" },
   { size: 180, x: "25%", y: "70%", gradient: "radial-gradient(circle at bottom right, white, #2563eb 40%)" },
   { size: 220, x: "60%", y: "85%", gradient: "radial-gradient(circle at bottom right, white, #1d4ed8 40%)" },
   { size: 300, x: "-10%", y: "50%", gradient: "radial-gradient(circle at bottom right, white, #3b82f6 40%)" },
