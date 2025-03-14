@@ -39,7 +39,7 @@ export default async function handler(req, res) {
                 WHEN 'sunday' THEN 7
             END,
             t.start_time;`,
-        [`${className}%`] 
+        ['${className}%'] 
       );
       
       console.log('Query Results:', results);
