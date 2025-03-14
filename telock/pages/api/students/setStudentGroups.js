@@ -7,14 +7,18 @@ export default async function handler(req, res) {
     try {
       const { student_id, classNames } = req.body;
 
-      if (!student_id || !Array.isArray(classNames) || classNames.length === 0) {
+      if (!student_id || typeof classNames !== 'string' || classNames.trim() === '') {
         return res.status(400).json({ message: 'Student ID and class names are required.' });
       }
 
+      // Az osztálynevek feldolgozása: vessző mentén bontás és szóközök eltávolítása
+      const classList = classNames.split(',').map(c => c.trim());
+
       // Lekérdezzük az összes csoportot
       const groups = await sql('SELECT group_id, group_name FROM csoportok');
-      
-      const insertValues = classNames
+
+      // Keresés az osztálynevek között
+      const insertValues = classList
         .map(className => {
           const group = groups.find(g => g.group_name === className);
           return group ? [student_id, group.group_id] : null;
