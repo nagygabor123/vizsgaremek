@@ -39,7 +39,7 @@ export default async function IndexPage() {
               </Button>
             </nav>
           </div>
-          <nav>
+          <nav className="flex items-center gap-2">
             {!!session &&
              <>
   <Button variant="secondary" size="icon" className="flex items-center"  asChild>
