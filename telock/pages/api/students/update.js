@@ -85,99 +85,76 @@
 import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
-  if (req.method === 'PUT') {
-    const { student_id, full_name, class: studentClass, rfid_tag } = req.body;
+  if (req.method !== 'PUT') {
+    return res.status(405).json({ message: 'Method Not Allowed' });
+  }
 
-    if (!student_id || !full_name || !studentClass || !rfid_tag) {
-      return res.status(400).json({ message: 'Missing required fields' });
+  const { student_id, full_name, class: studentClass, rfid_tag } = req.body;
+
+  if (!student_id || !full_name || !studentClass || !rfid_tag) {
+    return res.status(400).json({ message: 'Missing required fields' });
+  }
+
+  const sql = neon(process.env.DATABASE_URL);
+  try {
+    // Lekérjük a meglévő diákot
+    const studentData = await sql(
+      'SELECT rfid_tag FROM students WHERE student_id = $1',
+      [student_id]
+    );
+
+    if (studentData.length === 0) {
+      return res.status(404).json({ message: 'Student not found' });
     }
 
-    const sql = neon(process.env.DATABASE_URL);
-    try {
-      // Hívjuk a dataCheck-et az RFID ellenőrzésére
-      const duplicateRfidError = await dataCheck(sql, rfid_tag, student_id);
-      if (duplicateRfidError) {
-        return res.status(400).json(duplicateRfidError);
-      }
+    const currentRfidTag = studentData[0].rfid_tag;
 
-      const studentData = await sql(
-        'SELECT rfid_tag FROM students WHERE student_id = $1',
-        [student_id]
-      );
-    
-      if (studentData.length === 0) {
-        return res.status(404).json({ message: 'Student not found' });
-      }
-
-      const existingLocker = await sql(
-        'SELECT relationship_id, locker_id FROM locker_relationships WHERE rfid_tag = $1',
-        [studentData[0].rfid_tag]
+    // Ha az RFID tag nem változott, csak frissítjük az adatokat
+    if (currentRfidTag === rfid_tag) {
+      await sql(
+        'UPDATE students SET full_name = $1, class = $2 WHERE student_id = $3',
+        [full_name, studentClass, student_id]
       );
 
-      if (existingLocker.length > 0) {
-        const latestStudent = await sql('SELECT MAX(student_id) AS max_id FROM students');
-        const newStudentId = latestStudent[0].max_id + 1;
-
-        await sql(
-          'INSERT INTO students (student_id, full_name, class, rfid_tag, access) VALUES ($1, $2, $3, $4, $5);',
-          [newStudentId, full_name, studentClass, rfid_tag, 'zarva']
-        );
-
-        await sql(
-          'UPDATE locker_relationships SET rfid_tag = $1 WHERE relationship_id = $2',
-          [rfid_tag, existingLocker[0].relationship_id]
-        );
-
-        await deleteStudent(student_id);
-        await generateStudentGroups(student_id, studentClass);
-
-        res.status(200).json({ message: 'Student and locker relationship updated successfully' });
-      } else {
-        return res.status(404).json({ message: 'Locker relationship not found for the student' });
-      }
-    } catch (error) {
-      console.error('Error updating student:', error);
-      res.status(500).json({ message: 'Error updating student and locker relationship', error: error.message });
+      return res.status(200).json({ message: 'Student updated successfully' });
     }
-  } else {
-    res.status(405).json({ message: 'Method Not Allowed' });
-  }
-}
 
-async function dataCheck(sql, rfid_tag, student_id) {
-  const existingRfid = await sql(
-    'SELECT student_id FROM students WHERE rfid_tag = $1',
-    [rfid_tag]
-  );
+    // Ha az RFID tag változik, ellenőrizzük, hogy másik diákhoz tartozik-e
+    const duplicateRfidError = await dataCheck(sql, rfid_tag, student_id);
+    if (duplicateRfidError) {
+      return res.status(400).json(duplicateRfidError);
+    }
 
-  // Ellenőrizzük, hogy a RFID már szerepel-e másik diákhoz
-  if (existingRfid.length > 0 && existingRfid[0].student_id !== student_id) {
-    return { message: 'Duplicate RFID tag' };
-  }
+    // Ellenőrizzük, van-e hozzá rendelt szekrény
+    const existingLocker = await sql(
+      'SELECT relationship_id FROM locker_relationships WHERE rfid_tag = $1',
+      [currentRfidTag]
+    );
 
-  return null;  // Ha nincs hiba, akkor null-t adunk vissza
-}
+    if (existingLocker.length > 0) {
+      const latestStudent = await sql('SELECT MAX(student_id) AS max_id FROM students');
+      const newStudentId = latestStudent[0].max_id + 1;
 
-async function deleteStudent(student_id) {
-  const deleteResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/delete`, {
-    method: 'DELETE',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ student_id }),
-  });
+      await sql(
+        'INSERT INTO students (student_id, full_name, class, rfid_tag, access) VALUES ($1, $2, $3, $4, $5)',
+        [newStudentId, full_name, studentClass, rfid_tag, 'zarva']
+      );
 
-  if (!deleteResponse.ok) {
-    throw new Error('Failed to delete old student');
-  }
-}
+      await sql(
+        'UPDATE locker_relationships SET rfid_tag = $1 WHERE relationship_id = $2',
+        [rfid_tag, existingLocker[0].relationship_id]
+      );
 
-async function generateStudentGroups(student_id, studentClass) {
-  const generateGroups = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/setStudentGroups`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ student_id, studentClass }),
-  });
+      await deleteStudent(student_id);
+      await generateStudentGroups(newStudentId, studentClass);
 
-  if (!generateGroups.ok) {
-    throw new Error('Failed to generate student groups');
+      return res.status(200).json({ message: 'Student and locker relationship updated successfully' });
+    }
+
+    return res.status(404).json({ message: 'Locker relationship not found for the student' });
+
+  } catch (error) {
+    console.error('Error updating student:', error);
+    res.status(500).json({ message: 'Error updating student and locker relationship', error: error.message });
   }
 }
