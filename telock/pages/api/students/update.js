@@ -155,6 +155,19 @@ export default async function handler(req, res) {
   }
 }
 
+async function dataCheck(sql, rfid_tag, student_id) {
+  const existingRfid = await sql(
+    'SELECT student_id FROM students WHERE rfid_tag = $1',
+    [rfid_tag]
+  );
+
+  if (existingRfid.length > 0 && existingRfid[0].student_id !== student_id) {
+    return { message: 'Duplicate RFID tag' };
+  }
+
+  return null;  // Ha nincs hiba, akkor null-t adunk vissza
+}
+
 async function deleteStudent(student_id) {
   const deleteResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/delete`, {
     method: 'DELETE',
