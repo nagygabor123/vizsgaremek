@@ -142,7 +142,7 @@ export default async function handler(req, res) {
       );
 
       await deleteStudent(student_id);
-      await generateStudentGroups(newStudentId, studentClass);
+      //await generateStudentGroups(newStudentId, studentClass);
 
       return res.status(200).json({ message: 'Student and locker relationship updated successfully' });
     }
