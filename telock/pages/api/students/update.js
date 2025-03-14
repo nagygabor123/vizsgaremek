@@ -154,3 +154,25 @@ export default async function handler(req, res) {
     res.status(500).json({ message: 'Error updating student and locker relationship', error: error.message });
   }
 }
+
+async function deleteStudent(student_id) {
+  const deleteResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/delete`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ student_id }),
+  });
+  if (!deleteResponse.ok) {
+    throw new Error('Failed to delete old student');
+  }
+}
+
+async function generateStudentGroups(student_id, studentClass) {
+  const generateGroups = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/setStudentGroups`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ student_id, studentClass }),
+  });
+  if (!generateGroups.ok) {
+    throw new Error('Failed to generate student groups');
+  } 
+}
