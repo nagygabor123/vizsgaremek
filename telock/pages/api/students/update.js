@@ -97,7 +97,6 @@ export default async function handler(req, res) {
 
   const sql = neon(process.env.DATABASE_URL);
   try {
-    // Lekérjük a meglévő diákot
     const studentData = await sql(
       'SELECT rfid_tag FROM students WHERE student_id = $1',
       [student_id]
@@ -109,7 +108,6 @@ export default async function handler(req, res) {
 
     const currentRfidTag = studentData[0].rfid_tag;
 
-    // Ha az RFID tag nem változott, csak frissítjük az adatokat
     if (currentRfidTag === rfid_tag) {
       await sql(
         'UPDATE students SET full_name = $1, class = $2 WHERE student_id = $3',
@@ -119,13 +117,11 @@ export default async function handler(req, res) {
       return res.status(200).json({ message: 'Student updated successfully' });
     }
 
-    // Ha az RFID tag változik, ellenőrizzük, hogy másik diákhoz tartozik-e
     const duplicateRfidError = await dataCheck(sql, rfid_tag, student_id);
     if (duplicateRfidError) {
       return res.status(400).json(duplicateRfidError);
     }
 
-    // Ellenőrizzük, van-e hozzá rendelt szekrény
     const existingLocker = await sql(
       'SELECT relationship_id FROM locker_relationships WHERE rfid_tag = $1',
       [currentRfidTag]
