@@ -42,8 +42,7 @@ export default async function handler(req, res) {
         [`${className}%`] 
       );
       
-      
-
+      console.log('Query Results:', results);
       return res.status(200).json(results);
     } catch (error) {
       console.error('Database error:', error);
