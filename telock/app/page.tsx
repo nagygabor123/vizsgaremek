@@ -4,7 +4,7 @@ import Link from "next/link"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
-import { BadgeCheck } from "lucide-react";
+import { BadgeCheck, LayoutGrid } from "lucide-react";
  import Logout from "./logout";
 import { getServerSession } from "next-auth";
 import { signOut } from "next-auth/react";
@@ -32,17 +32,21 @@ export default async function IndexPage() {
             </Link>
             <nav className="hidden gap-4 md:flex">
               <Button variant="link" className="text-muted-foreground" asChild>
-                <Link href="/dashboard">Vezérlőpult</Link>
+                <Link href="#features">Funkciók</Link>
               </Button>
               <Button variant="link" className="text-muted-foreground" asChild>
-                <Link href="/dashboard/school/logs">Dokumentáció</Link>
+                <Link href="#">Dokumentáció</Link>
               </Button>
             </nav>
           </div>
           <nav>
             {!!session &&
-
+             <>
+  <Button variant="secondary" size="icon" className="flex items-center"  asChild>
+  <Link href="/dashboard"><LayoutGrid/></Link>
+</Button>
               <Logout />
+              </>
             }
 
             {!session &&

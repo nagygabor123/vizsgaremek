@@ -2,7 +2,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Button } from "@/components/ui/button";
-import { BadgeCheck } from "lucide-react";
+import { BadgeCheck, LayoutGrid } from "lucide-react";
 
 import { useEffect } from "react";
 import { Separator } from "@/components/ui/separator"
@@ -10,13 +10,17 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 const circles = [
-  { size: 150, x: "55%", y: "-5%", gradient: "radial-gradient(circle at bottom right, white, #3b82f6 40%)" },
-  // { size: 150, x: "-20%", y: "10%", gradient: "radial-gradient(circle at bottom right, white, #30a2ff 40%)" },
-  { size: 100, x: "90%", y: "30%", gradient: "radial-gradient(circle at bottom right, white, #1d68f3 40%)" },
-  { size: 180, x: "25%", y: "70%", gradient: "radial-gradient(circle at bottom right, white, #2563eb 40%)" },
-  { size: 220, x: "60%", y: "85%", gradient: "radial-gradient(circle at bottom right, white, #1d4ed8 40%)" },
-  { size: 300, x: "-10%", y: "50%", gradient: "radial-gradient(circle at bottom right, white, #3b82f6 40%)" },
+  { size: 150, x: "55%", y: "-5%" },
+  { size: 100, x: "90%", y: "30%" },
+  { size: 180, x: "25%", y: "70%" },
+  { size: 220, x: "60%", y: "80%" },
+  { size: 300, x: "-10%", y: "50%" },
+
 ];
+
+
+
+
 import "./globals.css";
 
 export default function Home() {
@@ -32,43 +36,40 @@ export default function Home() {
             </Link>
             <nav className="hidden gap-4 md:flex">
               <Button variant="link" className="text-muted-foreground" asChild>
-                <Link href="/dashboard">Vezérlőpult</Link>
+                <Link href="#features">Funciók</Link>
               </Button>
               <Button variant="link" className="text-muted-foreground" asChild>
-                <Link href="/dashboard/school/logs">Dokumentáció</Link>
+                <Link href="#">Dokumentáció</Link>
               </Button>
             </nav>
           </div>
-          <nav>
-            <Button variant="secondary" asChild>
-              <Link href="/login">Bejelentkezés</Link>
-            </Button>
-          </nav>
+          <nav className="flex items-center gap-4">
+  <Button variant="secondary" size="icon" className="flex items-center"  asChild>
+    <Link href="/dashboard"><LayoutGrid/></Link>
+  </Button>
+  <Button variant="secondary" asChild>
+    <Link href="/login">Bejelentkezés</Link>
+  </Button>
+  
+</nav>
+
         </div>
       </header>
       <main className="flex-1">
       <section className="relative space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32 overflow-visible">
-  {/* Blurred Colorful Circles */}
-  <div className="absolute inset-0 pointer-events-none">
-    {circles.map((circle, index) => (
-      <div
-        key={index}
-        className="absolute rounded-full"
-        style={{
-          width: circle.size,
-          height: circle.size,
-          top: circle.y,
-          left: circle.x,
-          background: circle.gradient,
-          filter: 'blur(40px)', // Apply blur effect
-        }}
-      />
+      <div className="absolute inset-0 pointer-events-none">
+  <div className="background">
+    {[...Array(10)].map((_, index) => (
+      <div key={index} className={`pie ${["astronaut", "greenpea", "greenpea2", "cello", "wineberry"][index % 5]}`}></div>
     ))}
   </div>
+</div>
+
+
 
   <div className="container mx-auto flex max-w-[64rem] flex-col items-center gap-4 text-center relative z-10">
     <h1 className="font-heading text-3xl font-bold sm:text-5xl md:text-6xl lg:text-7xl">
-      Biztonságos és kényelmes <span className="text-blue-500">telefontárolás</span> iskoláknak
+      Biztonságos és kényelmes <span className="text-blue-600">telefontárolás</span> iskoláknak
     </h1>
     <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
       Csökkentsük a figyelemelterelést és biztosítsuk a diákok számára a zavartalan tanulást!
