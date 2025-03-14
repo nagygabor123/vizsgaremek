@@ -7,31 +7,29 @@ export default async function handler(req, res) {
     try {
       const { student_id, classNames } = req.body;
 
-      if (!student_id || !classNames) {
+      if (!student_id || !Array.isArray(classNames) || classNames.length === 0) {
         return res.status(400).json({ message: 'Student ID and class names are required.' });
       }
 
+      // Lekérdezzük az összes csoportot
       const groups = await sql('SELECT group_id, group_name FROM csoportok');
-      const insertValues = [];
+      
+      const insertValues = classNames
+        .map(className => {
+          const group = groups.find(g => g.group_name === className);
+          return group ? [student_id, group.group_id] : null;
+        })
+        .filter(Boolean); // Eltávolítja a null értékeket, ha nincs megfelelő csoport
 
-        students.forEach(student => {
-        const studentClasses = student.class ? student.class.split(',').map(c => c.trim()) : [];
-
-        studentClasses.forEach(className => {
-            const group = groups.find(g => g.group_name === className);
-            if (group) {
-            insertValues.push([student.student_id, group.group_id]);
-            }
-        });
-        });
-        
       if (insertValues.length > 0) {
         const groupIds = insertValues.map(iv => iv[1]);
 
+        // Először töröljük a régi kapcsolatokat a student_groups táblából
         await sql('DELETE FROM student_groups WHERE student_id = $1', [student_id]);
 
+        // Beszúrjuk az új csoportokat
         await sql(
-          'INSERT INTO student_groups (student_id, group_id) SELECT * FROM UNNEST($1::text[], $2::int[])',
+          'INSERT INTO student_groups (student_id, group_id) SELECT * FROM UNNEST($1::int[], $2::int[])',
           [Array(insertValues.length).fill(student_id), groupIds]
         );
       }
