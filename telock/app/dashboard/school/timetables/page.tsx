@@ -205,11 +205,11 @@ const Calendar: React.FC = () => {
 //https://vizsgaremek-mocha.vercel.app/api/timetable/getClassTimetable?className=13.I
 //https://vizsgaremek-mocha.vercel.app/api/timetable/getTeacherTimetable?teacherName=${teacher}
 //PaZo
-  const teacher = '13.I';
+  const teacher = 'PaZo';
   useEffect(() => {
     async function fetchSchedule() {
       try {
-        const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/getClassTimetable?className=${teacher}`);
+        const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/getTeacherTimetable?teacherName=${teacher}`);
         const data = await response.json();
         const formattedData = data.map((lesson: any) => ({
           day: lesson.day_of_week,
