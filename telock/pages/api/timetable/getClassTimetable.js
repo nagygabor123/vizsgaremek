@@ -11,28 +11,39 @@ export default async function handler(req, res) {
     try {
 
       const [results] = await sql(
-        `SELECT DISTINCT
-    t.day_of_week,
-    r.start_time,
-    r.end_time,
-    c.group_name,
-    a.short_name AS teacher_name
-FROM timetables t
-JOIN group_relations gr ON t.timetable_id = gr.timetable_id
-JOIN csoportok c ON gr.group_id = c.group_id
-JOIN student_groups sg ON sg.group_id = c.group_id
-JOIN students s ON s.student_id = sg.student_id
-JOIN admins a ON t.admin_id = a.admin_id
-JOIN ring_times r ON t.start_time = r.start_time  
-WHERE s.class && string_to_array($1, ',')  -- PostgreSQL formátum
-GROUP BY 
-    t.day_of_week, r.start_time, r.end_time, c.group_name, a.short_name
-ORDER BY 
-    FIELD(t.day_of_week,'monday', 'tuesday', 'wednesday', 'thursday', 'friday'),
-    r.start_time;
-`,
-        [className]
+        `SELECT 
+          t.day_of_week,
+          t.start_time,
+          t.end_time,
+          STRING_AGG(c.group_name, ', ' ORDER BY c.group_name) AS classes,
+          t.group_name AS group_name,
+          a.short_name AS teacher_name
+        FROM 
+          timetables t
+        JOIN 
+          group_relations gr ON t.timetable_id = gr.timetable_id
+        JOIN 
+          csoportok c ON gr.group_id = c.group_id  
+        JOIN 
+          admins a ON t.admin_id = a.admin_id
+        WHERE 
+          c.group_name LIKE $1  
+        GROUP BY 
+          t.day_of_week, t.start_time, t.end_time, t.group_name, a.short_name
+        ORDER BY 
+          CASE t.day_of_week
+              WHEN 'monday' THEN 1
+              WHEN 'tuesday' THEN 2
+              WHEN 'wednesday' THEN 3
+              WHEN 'thursday' THEN 4
+              WHEN 'friday' THEN 5
+              WHEN 'saturday' THEN 6
+              WHEN 'sunday' THEN 7
+          END,
+          t.start_time;`,
+        [`${className}%`] 
       );
+      
 
       return res.status(200).json(results);
     } catch (error) {
