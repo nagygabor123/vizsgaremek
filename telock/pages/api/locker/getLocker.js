@@ -56,7 +56,7 @@
 import { neon } from '@neondatabase/serverless';
 
 async function getLockerByRFID(rfid, sql) {
-  const [lockerRelationship] = await sql(
+  const lockerRelationship = await sql(
     'SELECT locker_id FROM locker_relationships WHERE rfid_tag = $1',
     [rfid]
   );
@@ -66,7 +66,7 @@ async function getLockerByRFID(rfid, sql) {
   }
 
   const lockerId = lockerRelationship[0].locker_id;
-  const [locker] = await sql(
+  const locker = await sql(
     'SELECT * FROM lockers WHERE locker_id = $1',
     [lockerId]
   );
@@ -89,7 +89,7 @@ export default async function handler(req, res) {
     try {
       const sql = neon(process.env.DATABASE_URL);
 
-      const [student] = await sql(
+      const student = await sql(
         'SELECT student_id,access FROM students WHERE rfid_tag = $1',
         [rfid]
       );
