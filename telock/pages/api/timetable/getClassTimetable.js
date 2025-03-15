@@ -38,7 +38,8 @@ export default async function handler(req, res) {
                 WHEN 'saturday' THEN 6
                 WHEN 'sunday' THEN 7
             END,
-            t.start_time;`,
+            t.start_time
+            a.short_name ASC;`,
         [`${className}%`] 
       );
       
