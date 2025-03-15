@@ -79,10 +79,7 @@ import { neon } from '@neondatabase/serverless';
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
-      // Connect to the Neon database
       const sql = neon(process.env.DATABASE_URL);
-
-      // Query the system status
       const result = await sql('SELECT status FROM system_status WHERE id = 1');
 
       if (result.length === 0) {
