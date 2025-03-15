@@ -30,7 +30,7 @@ JOIN (
 JOIN csoportok c ON split_classes.class_group = c.group_name 
 JOIN group_relations gr ON c.group_id = gr.group_id 
 JOIN timetables t ON gr.timetable_id = t.timetable_id 
-WHERE s.student_id = ?
+WHERE s.student_id = $1
 AND t.day_of_week = LOWER(DAYNAME(CURDATE())) 
 GROUP BY s.student_id, s.full_name;
 
@@ -39,8 +39,6 @@ GROUP BY s.student_id, s.full_name;
   try {
     const sql = neon(`${process.env.DATABASE_URL}`);
     const [rows] = await sql(query, [student]);
-
-    await connection.end();
 
     if (rows.length === 0) {
       return res.status(404).json({ error: "No timetable found for the student on today's date." });
