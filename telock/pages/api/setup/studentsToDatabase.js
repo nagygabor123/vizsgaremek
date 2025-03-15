@@ -73,7 +73,6 @@ export default async function handler(req, res) {
 
       console.log(`Összes diák: ${students.length}`);
 
-      // **BATCH INSERT - HELYES FORMÁTUM**
       if (students.length > 0) {
         const values = students.flat();
         const placeholders = students

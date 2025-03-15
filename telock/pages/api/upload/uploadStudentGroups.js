@@ -5,15 +5,10 @@ export default async function handler(req, res) {
     const sql = neon(`${process.env.DATABASE_URL}`);
 
     try {
-      // Lekérjük az összes diákot
       const students = await sql('SELECT student_id, class FROM students WHERE class IS NOT NULL');
       console.log('Students:', students);
-
-      // Lekérjük az összes csoportot
       const groups = await sql('SELECT group_id, group_name FROM csoportok');
       console.log('Groups:', groups);
-
-      // Felépítjük a beszúrási adatokat
       const insertValues = [];
 
       students.forEach(student => {
@@ -36,7 +31,7 @@ export default async function handler(req, res) {
         const groupIds = insertValues.map(iv => iv[1]);
 
         await sql(
-          'INSERT INTO student_groups (student_id, group_id) SELECT * FROM UNNEST($1::int[], $2::int[])',
+          'INSERT INTO student_groups (student_id, group_id) SELECT * FROM UNNEST($1::text[], $2::int[])',
           [studentIds, groupIds]
         );
 
