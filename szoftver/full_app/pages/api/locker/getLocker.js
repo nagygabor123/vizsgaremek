@@ -53,31 +53,28 @@
  *                   type: string
  *                   example: "Adatbázis csatlakozási hiba"
  */
-import { connectToDatabase } from '../../../lib/db';
+import { neon } from '@neondatabase/serverless';
 
-async function getLockerByRFID(rfid, connection) {
-  const [lockerRelationship] = await connection.execute(
-    'SELECT locker_id FROM locker_relationships WHERE rfid_tag = ?',
-    [rfid]
-  );
+const sql = neon(process.env.DATABASE_URL);
+
+async function getLockerByRFID(rfid) {
+  const lockerRelationship = await sql`
+    SELECT locker_id FROM locker_relationships WHERE rfid_tag = ${rfid}
+  `;
 
   if (lockerRelationship.length === 0) {
-    connection.end(); // Kapcsolat lezárása
     return { error: 'Nem található szekrény_id ehhez az RFID-hez', status: 404 };
   }
 
   const lockerId = lockerRelationship[0].locker_id;
-  const [locker] = await connection.execute(
-    'SELECT * FROM lockers WHERE locker_id = ?',
-    [lockerId]
-  );
+  const locker = await sql`
+    SELECT * FROM lockers WHERE locker_id = ${lockerId}
+  `;
 
   if (locker.length === 0) {
-    connection.end(); // Kapcsolat lezárása
     return { error: 'Nem található a szekrény', status: 404 };
   }
 
-  connection.end(); // Kapcsolat lezárása
   return { lockerId: locker[0].locker_id.toString(), status: 200 };
 }
 
@@ -90,24 +87,19 @@ export default async function handler(req, res) {
     }
 
     try {
-      const connection = await connectToDatabase();
-
-      const [student] = await connection.execute(
-        'SELECT student_id,access FROM students WHERE rfid_tag = ?',
-        [rfid]
-      );
+      const student = await sql`
+        SELECT student_id, access FROM students WHERE rfid_tag = ${rfid}
+      `;
 
       if (student.length === 0) {
-        connection.end(); // Kapcsolat lezárása
         return res.status(200).send("nincs");
       }
 
       const studentid = student[0].student_id;
       const studentaccess = student[0].access;
 
-      const scheduleResponse = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${studentid}`);
+      const scheduleResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/scheduleStart?student=${studentid}`);
       if (!scheduleResponse.ok) {
-        connection.end(); // Kapcsolat lezárása
         return res.status(500).json({ error: 'Nem sikerült lekérni a diák órarendjét.' });
       }
 
@@ -117,19 +109,19 @@ export default async function handler(req, res) {
       const currentTime = new Date().toTimeString().slice(0, 5); // HH:MM
 
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
-        if (studentaccess === "nyithato"){
-          const lockerResult = await getLockerByRFID(rfid, connection);
+        if (studentaccess === "nyithato") {
+          const lockerResult = await getLockerByRFID(rfid);
 
           if (lockerResult.error) {
             return res.status(lockerResult.status).json({ error: lockerResult.error });
           }
 
           return res.status(200).send(lockerResult.lockerId);
-        } else{
+        } else {
           return res.status(200).send("zarva");
         }
       } else {
-        const lockerResult = await getLockerByRFID(rfid, connection);
+        const lockerResult = await getLockerByRFID(rfid);
 
         if (lockerResult.error) {
           return res.status(lockerResult.status).json({ error: lockerResult.error });
