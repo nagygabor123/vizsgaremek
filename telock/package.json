@@ -31,6 +31,7 @@
     "multiparty": "^4.2.3",
     "next": "15.2.1",
     "next-auth": "^4.24.11",
+    "node-cron": "^3.0.3",
     "react": "^18.3.1",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18.3.1",
