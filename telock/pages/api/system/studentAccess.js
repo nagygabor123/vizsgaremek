@@ -25,7 +25,8 @@ export default async function handler(req, res) {
 
     setTimeout(async () => {
       try {
-        await sql("UPDATE students SET access = 'zarva' WHERE student_id = $1", [student]);
+        const sql2 = neon(process.env.DATABASE_URL); 
+        await sql2("UPDATE students SET access = 'zarva' WHERE student_id = $1", [student]);
         console.log(`Access reset for student ${student}`);
       } catch (error) {
         console.error("Error resetting access state:", error);
