@@ -14,8 +14,11 @@ export default async function handler(req, res) {
   const sql = neon(process.env.DATABASE_URL);
 
   try {
+    // Beállítjuk az "access" mezőt "nyithato"-ra és az "expires_at"-ot 5 perccel későbbre
     const updateResult = await sql(
-      'UPDATE students SET access = $1 WHERE student_id = $2',
+      `UPDATE students 
+       SET access = $1, expires_at = NOW() + INTERVAL '3 minutes' 
+       WHERE student_id = $2`,
       ['nyithato', student]
     );
 
@@ -23,17 +26,9 @@ export default async function handler(req, res) {
       return res.status(404).json({ message: "Student not found" });
     }
 
-    setTimeout(async () => {
-      try {
-        const sql2 = neon(process.env.DATABASE_URL); 
-        await sql2("UPDATE students SET access = 'zarva' WHERE student_id = $1", [student]);
-        console.log(`Access reset for student ${student}`);
-      } catch (error) {
-        console.error("Error resetting access state:", error);
-      }
-    }, 300000); 
-
-    return res.status(200).json({ message: `Student ${student} access updated to nyithato. It will be reset in 5 minutes.` });
+    return res.status(200).json({ 
+      message: `Student ${student} access updated to nyithato. It will be reset in 5 minutes.` 
+    });
   } catch (error) {
     console.error("Error updating access state:", error);
     return res.status(500).json({ message: "Failed to update access state" });
