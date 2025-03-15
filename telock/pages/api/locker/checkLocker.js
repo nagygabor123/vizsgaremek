@@ -69,7 +69,7 @@
  *                   type: string
  *                   example: "A módszer nem engedélyezett"
  */
-import { connectToDatabase } from '../../../lib/db';
+import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
@@ -79,11 +79,10 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'RFID szükséges' });
     }
 
-    let connection;
+    const sql = neon(process.env.DATABASE_URL);
 
     try {
-      connection = await connectToDatabase();
-      const [rows] = await connection.execute('SELECT access FROM students WHERE rfid_tag = ?', [rfid]);
+      const [rows] = await sql('SELECT access FROM students WHERE rfid_tag = $1', [rfid]);
 
       if (rows.length > 0) {
        // const access = rows[0].access;
@@ -94,11 +93,7 @@ export default async function handler(req, res) {
     } catch (error) {
       console.error('Adatbazis hiba:', error);
       return res.status(500).json({ error: 'Adatbázis csatlakozási hiba' });
-    } finally {
-      if (connection) {
-        await connection.end(); // kapcsolat lezárása
-      }
-    }
+    } 
   } else {
     return res.status(405).json({ error: 'A módszer nem engedélyezett' });
   }
