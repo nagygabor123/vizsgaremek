@@ -25,7 +25,8 @@
  *         description: Hiba történt az adatbázis frissítése vagy az esemény létrehozása közben.
  */
 
-import { connectToDatabase } from '../../../lib/db';
+import { neon } from '@neondatabase/serverless';
+import cron from 'node-cron';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -38,26 +39,26 @@ export default async function handler(req, res) {
     return res.status(400).json({ message: "Missing student identifier" });
   }
 
-  const db = await connectToDatabase();
+  const sql = neon(process.env.DATABASE_URL);
 
   try {
-    const [result] = await db.query('UPDATE students SET access = "nyithato" WHERE student_id = ?', [student]);
-    
-    if (result.affectedRows === 0) {
+    const updateResult = await sql(
+      'UPDATE students SET access = $1 WHERE student_id = $2',
+      ['nyithato', student]
+    );
+
+    if (updateResult.rowCount === 0) {
       return res.status(404).json({ message: "Student not found" });
     }
 
-    const eventName = `student_access_${student}`;
-    await db.query(`CREATE EVENT ??
-                    ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL 10 MINUTE
-                    DO UPDATE students SET access = 'zarva' WHERE student_id = ?`, [eventName, student]);
-    
-    await db.end();
+    cron.schedule('*/3 * * * *', async () => {
+      await sql("UPDATE students SET access = 'zarva' WHERE student_id = $1", [student]);
+      console.log(`Access reset for student ${student}`);
+    });
 
-    return res.status(200).json({ message: `Student ${student} access updated to nyithato and reset event created` });
+    return res.status(200).json({ message: `Student ${student} access updated to nyithato. A reset task has been scheduled.` });
   } catch (error) {
     console.error("Error updating access state:", error);
-    await db.end();
-    return res.status(500).json({ message: "Failed to update access state and create reset event" });
+    return res.status(500).json({ message: "Failed to update access state" });
   }
 }
