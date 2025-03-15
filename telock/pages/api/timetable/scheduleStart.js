@@ -1,4 +1,4 @@
-import { connectToDatabase } from '../../../lib/db';
+import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   const { student } = req.query;
@@ -37,8 +37,8 @@ GROUP BY s.student_id, s.full_name;
   `;
 
   try {
-    const connection = await connectToDatabase();
-    const [rows] = await connection.execute(query, [student]);
+    const sql = neon(`${process.env.DATABASE_URL}`);
+    const [rows] = await sql(query, [student]);
 
     await connection.end();
 
