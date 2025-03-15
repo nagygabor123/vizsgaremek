@@ -38,13 +38,13 @@ SELECT
 
   try {
     const sql = neon(`${process.env.DATABASE_URL}`);
-    const [rows] = await sql(query, [student]);
+    const rows = await sql(query, [student]);
 
     if (rows.length === 0) {
       return res.status(404).json({ error: "No timetable found for the student on today's date." });
     }
 
-    res.status(200).json(rows[0]);
+    res.status(200).json(rows);
 
   } catch (error) {
     console.error("Database error:", error);
