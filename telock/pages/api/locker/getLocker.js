@@ -90,12 +90,11 @@ export default async function handler(req, res) {
       const sql = neon(process.env.DATABASE_URL);
 
       const student = await sql(
-        'SELECT student_id,access FROM students WHERE rfid_tag = $1',
+        'SELECT student_id, access FROM students WHERE rfid_tag = $1',
         [rfid]
       );
 
       if (student.length === 0) {
-        connection.end(); 
         return res.status(200).send("nincs");
       }
 
@@ -110,10 +109,10 @@ export default async function handler(req, res) {
       const schedule = await scheduleResponse.json();
       const { first_class_start, last_class_end } = schedule;
 
-      const currentTime = new Date().toTimeString().slice(0, 5); // HH:MM
+      const currentTime = new Date().toTimeString().slice(0, 5);
 
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
-        if (studentaccess === "nyithato"){
+        if (studentaccess === "nyithato") {
           const lockerResult = await getLockerByRFID(rfid, sql);
 
           if (lockerResult.error) {
@@ -121,7 +120,7 @@ export default async function handler(req, res) {
           }
 
           return res.status(200).send(lockerResult.lockerId);
-        } else{
+        } else {
           return res.status(200).send("zarva");
         }
       } else {
