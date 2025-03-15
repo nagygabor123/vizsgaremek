@@ -26,7 +26,6 @@
  */
 
 import { neon } from '@neondatabase/serverless';
-import cron from 'node-cron';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -51,12 +50,16 @@ export default async function handler(req, res) {
       return res.status(404).json({ message: "Student not found" });
     }
 
-    cron.schedule('*/3 * * * *', async () => {
-      await sql("UPDATE students SET access = 'zarva' WHERE student_id = $1", [student]);
-      console.log(`Access reset for student ${student}`);
-    });
+    setTimeout(async () => {
+      try {
+        await sql("UPDATE students SET access = 'zarva' WHERE student_id = $1", [student]);
+        console.log(`Access reset for student ${student}`);
+      } catch (error) {
+        console.error("Error resetting access state:", error);
+      }
+    }, 300000); 
 
-    return res.status(200).json({ message: `Student ${student} access updated to nyithato. A reset task has been scheduled.` });
+    return res.status(200).json({ message: `Student ${student} access updated to nyithato. It will be reset in 5 minutes.` });
   } catch (error) {
     console.error("Error updating access state:", error);
     return res.status(500).json({ message: "Failed to update access state" });
