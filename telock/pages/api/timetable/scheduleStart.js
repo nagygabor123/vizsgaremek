@@ -30,7 +30,7 @@ SELECT
     JOIN csoportok c ON split_classes.class_group = c.group_name 
     JOIN group_relations gr ON c.group_id = gr.group_id 
     JOIN timetables t ON gr.timetable_id = t.timetable_id 
-    WHERE t.day_of_week = LOWER(TRIM(TO_CHAR(CURRENT_DATE, 'Day'))) 
+    WHERE t.day_of_week = 'monday'
       AND s.student_id = $1
     GROUP BY s.student_id, s.full_name;
 
