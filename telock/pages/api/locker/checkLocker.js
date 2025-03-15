@@ -82,7 +82,7 @@ export default async function handler(req, res) {
     const sql = neon(process.env.DATABASE_URL);
 
     try {
-      const [rows] = await sql('SELECT access FROM students WHERE rfid_tag = $1', [rfid]);
+      const rows = await sql('SELECT access FROM students WHERE rfid_tag = $1', [rfid]);
 
       if (rows.length > 0) {
        // const access = rows[0].access;
