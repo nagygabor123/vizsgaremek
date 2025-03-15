@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     const sql = neon(`${process.env.DATABASE_URL}`);
     try {
 
-      const [results] = await sql(
+      const results = await sql(
         `SELECT 
             t.day_of_week,
             t.start_time,
