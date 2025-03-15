@@ -60,7 +60,7 @@
  *                   type: string
  *                   example: "Nem sikerült frissíteni az 'access' és 'status' állapotot"
  */
-import { connectToDatabase } from '../../../lib/db';
+import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -70,13 +70,12 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: "Érvénytelen 'action'" });
     }
 
-    const db = await connectToDatabase();
+    const sql = neon(process.env.DATABASE_URL);
     const newAccessState = action === 'close' ? 'zarva' : 'nyithato';
 
     try {
-      await db.query('UPDATE students SET access = ?', [newAccessState]);
-      await db.query('UPDATE system_status SET status = ? WHERE id = 1', [newAccessState]);
-      await db.end();
+      await sql('UPDATE students SET access = $1', [newAccessState]);
+      await sql('UPDATE system_status SET status = $1 WHERE id = 1', [newAccessState]);
 
       return res.status(200).json({ message: `Az összes diák 'access' mezője és a 'status' ${newAccessState} (-ra) frissítve` });
     } catch (error) {
