@@ -58,18 +58,14 @@ import { neon } from '@neondatabase/serverless';
 const sql = neon(process.env.DATABASE_URL);
 
 async function getLockerByRFID(rfid) {
-  const lockerRelationship = await sql`
-    SELECT locker_id FROM locker_relationships WHERE rfid_tag = ${rfid}
-  `;
+  const lockerRelationship = await sql('SELECT locker_id FROM locker_relationships WHERE rfid_tag = $1',[rfid]);
 
   if (lockerRelationship.length === 0) {
     return { error: 'Nem található szekrény_id ehhez az RFID-hez', status: 404 };
   }
 
   const lockerId = lockerRelationship[0].locker_id;
-  const locker = await sql`
-    SELECT * FROM lockers WHERE locker_id = ${lockerId}
-  `;
+  const locker = await sql('SELECT * FROM lockers WHERE locker_id = $1',[lockerId]);
 
   if (locker.length === 0) {
     return { error: 'Nem található a szekrény', status: 404 };
@@ -87,9 +83,7 @@ export default async function handler(req, res) {
     }
 
     try {
-      const student = await sql`
-        SELECT student_id, access FROM students WHERE rfid_tag = ${rfid}
-      `;
+      const student = await sql('SELECT student_id, access FROM students WHERE rfid_tag = $1',[rfid]);
 
       if (student.length === 0) {
         return res.status(200).send("nincs");
