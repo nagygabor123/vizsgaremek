@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   const sql = neon(process.env.DATABASE_URL);
 
   try {
-    // Beállítjuk az "access" mezőt "nyithato"-ra és az "expires_at"-ot 5 perccel későbbre
+    // Beállítjuk az "access" mezőt "nyithato"-ra és az "expires_at"-ot 3 perccel későbbre
     const updateResult = await sql(
       `UPDATE students 
        SET access = $1, expires_at = NOW() + INTERVAL '3 minutes' 
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
     }
 
     return res.status(200).json({ 
-      message: `Student ${student} access updated to nyithato. It will be reset in 5 minutes.` 
+      message: `Student ${student} access updated to nyithato. It will reset to zarvara in 3 minutes.` 
     });
   } catch (error) {
     console.error("Error updating access state:", error);
