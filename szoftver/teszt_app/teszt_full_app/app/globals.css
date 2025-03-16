@@ -2,11 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .background {
-  width: 400px;
-  height: 400px;
+  left: -200px;
+  top: 311px;
+  width: 900px;
+  height: 900px;
   position: absolute  ;
 }
+
 
 .background .pie {
   width: 30%;
