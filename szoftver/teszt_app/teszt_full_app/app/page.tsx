@@ -28,7 +28,7 @@ export default function Home() {
       
       {/* Hero Section */}
       <section className="w-full max-w-6xl text-center my-12 px-4">
-        <h2 className="text-3xl md:text-6xl font-bold">Biztonságos és kényelmes <span className="text-blue-500">telefontárolás</span> iskoláknak</h2>
+        <h2 className="text-3xl md:text-6xl font-bold">Biztonságos és kényelmes <span className="text-blue-600">telefontárolás</span> iskoláknak</h2>
      
         <p className="mt-4 text-gray-600 max-w-2xl mx-auto text-sm md:text-base text-muted-foreground">
           Hurree centralizes data from your entire tech stack and database creating one clea.
