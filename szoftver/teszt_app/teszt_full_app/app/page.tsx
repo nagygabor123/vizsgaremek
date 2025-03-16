@@ -9,14 +9,6 @@ import { Separator } from "@/components/ui/separator"
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-// const circles = [
-//   { size: 150, x: "55%", y: "-5%" },
-//   { size: 100, x: "90%", y: "30%" },
-//   { size: 180, x: "25%", y: "70%" },
-//   { size: 220, x: "60%", y: "80%" },
-//   { size: 300, x: "-10%", y: "50%" },
-
-// ];
 
 
 export default function Home() {
@@ -24,43 +16,133 @@ export default function Home() {
     <div className="min-h-screen bg-gray-50 flex flex-col items-center p-6">
       {/* Header */}
       <header className="w-full max-w-6xl flex flex-wrap justify-between items-center py-6 px-4">
-        <h1 className="text-xl font-bold">heexo</h1>
-        <nav className="hidden md:flex space-x-6">
+        <h1 className="text-xl font-bold">telock</h1>
+        <nav className="hidden md:flex space-x-6 text-muted-foreground">
           <Link href="#">Why heexo?</Link>
           <Link href="#">Platform</Link>
           <Link href="#">Solutions</Link>
           <Link href="#">Changelog</Link>
         </nav>
-        <button className="border px-4 py-2 rounded-lg">Book a demo</button>
+        <Button variant="outline" className="px-4 py-2">Bejelentkezés</Button>
       </header>
       
       {/* Hero Section */}
       <section className="w-full max-w-6xl text-center my-12 px-4">
-        <h2 className="text-3xl md:text-5xl font-bold">The database for modern applications dmfkdf dfmlsdmfk d fsdmfklmdsl lkdm lms kd</h2>
+        <h2 className="text-3xl md:text-6xl font-bold">Biztonságos és kényelmes <span className="text-blue-500">telefontárolás</span> iskoláknak</h2>
      
-        <p className="mt-4 text-gray-600 max-w-2xl mx-auto text-sm md:text-base">
-          Hurree centralizes data from your entire tech stack and database creating one clear view of performance.
+        <p className="mt-4 text-gray-600 max-w-2xl mx-auto text-sm md:text-base text-muted-foreground">
+          Hurree centralizes data from your entire tech stack and database creating one clea.
         </p>
-        <button className="mt-6 bg-gray-900 text-white px-6 py-3 rounded-lg">Start 14-day trial</button>
+        <Button className="mt-6 px-6 py-3">Kapcsolatfelvétel</Button>
       </section>
       
       {/* Illustration */}
-      <div className="w-full max-w-5xl bg-gradient-to-r from-blue-100 to-white p-4 md:p-8 rounded-lg shadow">
+      <div className="w-full max-w-5xl bg-gradient-to-r from-blue-100 to-white p-4 md:p-8 rounded-xl shadow">
       <Image src="/example.png" alt="Illustration" width={800} height={400} className="w-full h-auto" priority />
 
       </div>
       
       {/* Features */}
-      <section className="w-full max-w-6xl mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
-        <div className="p-6 bg-white rounded-lg shadow">
-          <h3 className="text-lg font-bold">Use Database with your stack</h3>
-          <p className="text-gray-600 mt-2 text-sm md:text-base">We offer client and server libraries in everything from React and Ruby to iOS.</p>
-        </div>
-        <div className="p-6 bg-white rounded-lg shadow">
-          <h3 className="text-lg font-bold">Security & privacy</h3>
-          <p className="text-gray-600 mt-2 text-sm md:text-base">Database supports PII data encrypted with AES-256 at rest or explicit user consent flows.</p>
-        </div>
-      </section>
+               <section
+          id="features"
+          className="space-y-6 bg-slate-50 py-8 md:py-12 lg:py-24"
+        >
+          <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
+            <h2 className="font-heading text-2xl font-bold leading-[1.1] sm:text-2xl md:text-4xl">
+              Funkciók
+            </h2>
+            <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
+              This project is an experiment to see how a modern app, with features
+              like auth, subscriptions, API routes, and static pages would work in
+              Next.js 13 app dir.
+            </p>
+          </div>
+          <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-[64rem] md:grid-cols-3">
+            <div className="relative overflow-hidden rounded-lg border bg-background p-2">
+              <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
+                <BadgeCheck className="w-12 h-12 text-blue-500" />
+                <div className="space-y-2">
+                  <h3 className="font-bold">Next.js 13</h3>
+                  <p className="text-sm text-muted-foreground">
+                    App dir, Routing, Layouts, Loading UI and API routes.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="relative overflow-hidden rounded-lg border bg-background p-2">
+              <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
+                <BadgeCheck className="w-12 h-12 text-blue-500" />
+                <div className="space-y-2">
+                  <h3 className="font-bold">React 18</h3>
+                  <p className="text-sm">
+                    Server and Client Components. Use hook.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="relative overflow-hidden rounded-lg border bg-background p-2">
+              <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
+                <BadgeCheck className="w-12 h-12 text-blue-500" />
+                <div className="space-y-2">
+                  <h3 className="font-bold">Database</h3>
+                  <p className="text-sm text-muted-foreground">
+                    ORM using Prisma and deployed on PlanetScale.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="relative overflow-hidden rounded-lg border bg-background p-2">
+              <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
+                <BadgeCheck className="w-12 h-12 text-blue-500" />
+                <div className="space-y-2">
+                  <h3 className="font-bold">Components</h3>
+                  <p className="text-sm text-muted-foreground">
+                    UI components built using Radix UI and styled with Tailwind
+                    CSS.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="relative overflow-hidden rounded-lg border bg-background p-2">
+              <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
+                <BadgeCheck className="w-12 h-12 text-blue-500" />
+                <div className="space-y-2">
+                  <h3 className="font-bold">Authentication</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Authentication using NextAuth.js and middlewares.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="relative overflow-hidden rounded-lg border bg-background p-2">
+              <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
+                <BadgeCheck className="w-12 h-12 text-blue-500" />
+                <div className="space-y-2">
+                  <h3 className="font-bold">Subscriptions</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Free and paid subscriptions using Stripe.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="mx-auto text-center md:max-w-[58rem]">
+            <p className="leading-normal text-muted-foreground sm:text-lg sm:leading-7">
+              Taxonomy also includes a blog and a full-featured documentation site
+              built using Contentlayer and MDX.
+            </p>
+          </div>
+        </section>
+
+
+        <footer>
+         <div className="container mx-auto flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
+           <p className="text-center text-sm leading-loose md:text-left">
+             Az oldal vizsgaprojektként készült, fejlesztését Nagy Gábor és Szalkai-Szabó Ádám végezték.
+           </p>
+           <p className="text-sm md:text-right">© 2025</p>
+         </div>
+       </footer>
     </div>
   );
 }
