@@ -44,7 +44,7 @@ export default async function Home() {
       
         {!!session &&
              <>
-  <Button variant="outline" size="icon" className="px-4 py-2"  asChild>
+  <Button variant="outline" className="px-4 py-2"  asChild>
   <Link href="/dashboard">Vezérlőpult</Link>
 </Button>
               {/* <Logout /> */}
