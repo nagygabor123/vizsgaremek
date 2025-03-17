@@ -603,159 +603,138 @@ export default function Page() {
 
           <Separator />
           <div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
-            {/* Cím és leírás */}
-            <div className="sm:w-1/4 w-full">
-              <h2 className="text-lg font-semibold">Tanítás nélküli munkanapok</h2>
-              <p className="text-sm text-neutral-500">
-                Itt láthatóak azok a napok, amikor nincs tanítás.
-              </p>
-            </div>
+  {/* Cím és leírás */}
+  <div className="sm:w-1/4 w-full">
+    <h2 className="text-lg font-semibold">Tanítás nélküli munkanapok</h2>
 
-            {/* Táblázat és gomb */}
-            <div className="sm:w-3/4 w-full">
-              {/* Gomb a táblázat felett */}
-              <div className="flex justify-start sm:justify-end mb-3">
-                <Dialog
-                  open={isDialogOpen3}
-                  onOpenChange={(isOpen) => {
-                    setIsDialogOpen3(isOpen);
-                    if (!isOpen) {
-                      setSelectedDate(null);
-                    }
-                  }}
-                >
-                  <DialogTrigger asChild>
-                    <Button variant="outline">
-                      <CalendarPlus className="w-4 h-4 inline-block mr-2" /> Új nap hozzáadás
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent
-                    className="sm:max-w-[425px]"
+  </div>
 
+  {/* Táblázat és gomb */}
+  <div className="w-full"> {/* Teljes szélességű tároló */}
+    {/* Gomb a táblázat felett */}
+    <div className="flex justify-start sm:justify-end mb-3">
+      <Dialog
+        open={isDialogOpen3}
+        onOpenChange={(isOpen) => {
+          setIsDialogOpen3(isOpen);
+          if (!isOpen) {
+            setSelectedDate(null);
+          }
+        }}
+      >
+        <DialogTrigger asChild>
+          <Button variant="outline">
+            <CalendarPlus className="w-4 h-4 inline-block mr-2" /> Új nap hozzáadás
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Tanítás nélküli munkanap hozzáadása</DialogTitle>
+            <DialogDescription>
+              Aliquam metus eros, tristique nec semper id, congue eget metus
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="grid items-start gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="fullName">Dátum</Label>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className={cn(
+                      " justify-start text-left font-normal",
+                      !selectedDate && "text-muted-foreground"
+                    )}
                   >
-                    <DialogHeader>
-                      <DialogTitle>Tanítás nélküli munkanap hozzáadása</DialogTitle>
-                      <DialogDescription>
-                        Aliquam metus eros, tristique nec semper id, congue eget metus
-                      </DialogDescription>
-                    </DialogHeader>
-
-                    <div className="grid items-start gap-4">
-                      <div className="grid gap-2">
-                        <Label htmlFor="fullName">Dátum</Label>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              variant="outline"
-                              className={cn(
-                                " justify-start text-left font-normal",
-                                !selectedDate && "text-muted-foreground"
-                              )}
-                            >
-                              <CalendarIcon />
-                              {selectedDate ? format(new Date(selectedDate), "PPP") : (
-                                <span>2025. május 20.</span>
-                              )}
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent className="w-auto p-0" align="start">
-                            <Calendar
-                              mode="single"
-                              selected={selectedDate ? new Date(selectedDate) : undefined}
-                              onSelect={(date) => {
-                                if (!date) return;
-                              
-                                const originalDate = format(date, "yyyy-MM-dd"); 
-                                const whichDay = originalDate; // Nem vonunk le egy napot!
-                                // const replaceDayDate = parseDate(originalDate);
-                                // const replaceDay = replaceDayDate.toISOString().split("T")[0];
-                              
-                                setSelectedDate(originalDate);
-                                setNewNo({
-                                  ...newNo,
-                                  which_day: whichDay, // Marad ugyanaz a nap
-                                  replace_day: whichDay,
-                                  nev: whichDay
-                                });
-                              }}
-                              
-                              initialFocus
-                            />
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </div>
-
-
-                    </div>
-
-                    <DialogFooter>
-
-                      <Button className="w-full" onClick={handleAddNoSchool}>Mentés </Button>
-
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog>
-              </div>
-
-              {/* Görgethető táblázat kis képernyőn */}
-              <div className="rounded-xl border overflow-x-auto">
-                {yearSchedule?.noSchool?.length > 0 ? (
-                  <table className="w-full min-w-max">
-                    <thead className="text-center text-sm text-neutral-500">
-                      <tr>
-                        <th className="p-2 cursor-pointer font-normal">Dátum</th>
-                        <th className="p-2 cursor-pointer font-normal">Művelet</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {yearSchedule.noSchool.map((noSchoolPeriod: any) => (
-                        <tr key={noSchoolPeriod.id} className="text-center border-t">
-                          <td className="p-1">{noSchoolPeriod.end}</td>
-                          <td className="p-1">
-                          <AlertDialog>
-                            <AlertDialogTrigger>
-                            <Button
-
-variant="ghost"
-
->
-<Trash2 className="w-4 h-4 inline-block" />
-</Button>
-                            </AlertDialogTrigger>
-                            <AlertDialogContent>
-                              <AlertDialogHeader>
-                                <AlertDialogTitle>Biztosan törölni szeretné ezt a napot?</AlertDialogTitle>
-                                <AlertDialogDescription>
-                                Ez a művelet nem vonható vissza. A tanítási nélküli munkanap véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
-                                </AlertDialogDescription>
-                              </AlertDialogHeader>
-                              <AlertDialogFooter>
-                                <AlertDialogCancel>Mégse</AlertDialogCancel>
-                                <AlertDialogAction onClick={() => handleDeletePlusBreak(noSchoolPeriod.id)}>Véglegesítés</AlertDialogAction>
-                              </AlertDialogFooter>
-                            </AlertDialogContent>
-                          </AlertDialog>
-                            {/* <Button
-
-                              variant="ghost"
-                              onClick={() => handleDeletePlusBreak(noSchoolPeriod.id)}
-                            >
-                              <Trash2 className="w-4 h-4 inline-block" />
-                            </Button> */}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                ) : (
-                  <div className="text-center p-3 text-neutral-500">
-                    Nincs megjelenítendő tanítási nélküli munkanap
-                  </div>
-                )}
-              </div>
+                    <CalendarIcon />
+                    {selectedDate ? format(new Date(selectedDate), "PPP") : (
+                      <span>2025. május 20.</span>
+                    )}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={selectedDate ? new Date(selectedDate) : undefined}
+                    onSelect={(date) => {
+                      if (!date) return;
+                    
+                      const originalDate = format(date, "yyyy-MM-dd"); 
+                      const whichDay = originalDate; // Nem vonunk le egy napot!
+                      // const replaceDayDate = parseDate(originalDate);
+                      // const replaceDay = replaceDayDate.toISOString().split("T")[0];
+                    
+                      setSelectedDate(originalDate);
+                      setNewNo({
+                        ...newNo,
+                        which_day: whichDay, // Marad ugyanaz a nap
+                        replace_day: whichDay,
+                        nev: whichDay
+                      });
+                    }}
+                    
+                    initialFocus
+                  />
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
 
+          <DialogFooter>
+            <Button className="w-full" onClick={handleAddNoSchool}>Mentés </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
+
+    {/* Görgethető táblázat kis képernyőn */}
+    <div className="rounded-xl border overflow-x-auto w-full">
+      {yearSchedule?.noSchool?.length > 0 ? (
+        <table className="w-full min-w-max">
+          <thead className="text-center text-sm text-neutral-500">
+            <tr>
+              <th className="p-2 cursor-pointer font-normal w-1/2">Dátum</th>
+              <th className="p-2 cursor-pointer font-normal w-1/2">Művelet</th>
+            </tr>
+          </thead>
+          <tbody>
+            {yearSchedule.noSchool.map((noSchoolPeriod: any) => (
+              <tr key={noSchoolPeriod.id} className="text-center border-t">
+                <td className="p-1 w-1/2">{noSchoolPeriod.end}</td>
+                <td className="p-1 w-1/2">
+                  <AlertDialog>
+                    <AlertDialogTrigger>
+                      <Button variant="ghost">
+                        <Trash2 className="w-4 h-4 inline-block" />
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Biztosan törölni szeretné ezt a napot?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                          Ez a művelet nem vonható vissza. A tanítási nélküli munkanap véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Mégse</AlertDialogCancel>
+                        <AlertDialogAction onClick={() => handleDeletePlusBreak(noSchoolPeriod.id)}>Véglegesítés</AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <div className="text-center p-3 text-neutral-500">
+          Nincs megjelenítendő tanítási nélküli munkanap
+        </div>
+      )}
+    </div>
+  </div>
+</div>
 
 
 
