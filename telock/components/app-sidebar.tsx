@@ -88,7 +88,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   }
 
   return (
-    <Sidebar className="m-2"  {...props}> {/**collapsible="icon" variant="inset" */}
+    <Sidebar className="ml-2 mb-2 "  {...props}> {/**collapsible="icon" variant="inset" */}
       <SidebarHeader>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
