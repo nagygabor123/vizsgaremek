@@ -14,11 +14,21 @@ export default async function handler(req, res) {
   const sql = neon(process.env.DATABASE_URL);
 
   try {
+    const now = new Date();
+    const budapestTime = new Date(
+      now.toLocaleString('en-US', { timeZone: 'Europe/Budapest' })
+    );
+
+    budapestTime.setMinutes(budapestTime.getMinutes() + 5);
+    const expiresAt = budapestTime.toLocaleTimeString('hu-HU', { hour12: false }).slice(0, 5);
+    console.log(expiresAt); // Pl.: "13:25"
+
+  
     const updateResult = await sql(
       `UPDATE students 
-       SET access = $1, expires_at = TO_CHAR(NOW() + INTERVAL '5 minutes', 'HH24:MI') 
-       WHERE student_id = $2`,
-      ['nyithato', student]
+       SET access = $1, expires_at = $2 
+       WHERE student_id = $3`,
+      ['nyithato', expiresAt, student]
     );
   
     if (updateResult.rowCount === 0) {
@@ -26,11 +36,12 @@ export default async function handler(req, res) {
     }
   
     return res.status(200).json({ 
-      message: `Student ${student} access updated to nyithato. It will reset to zarva in 5 minutes.` 
+      message: `Student ${student} access updated to nyithato. It will reset to zarva at ${expiresAt}.` 
     });
   } catch (error) {
     console.error("Error updating access state:", error);
     return res.status(500).json({ message: "Failed to update access state" });
   }
+  
   
 }
