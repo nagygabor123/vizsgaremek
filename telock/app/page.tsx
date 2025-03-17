@@ -29,7 +29,7 @@ const ZenDots = localFont({
 export default async function Home() {
   const session = await getServerSession();
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center p-6">
+    <div className="min-h-screen bg-zinc-50 flex flex-col items-center p-6">
       {/* Header */}
       <header className="w-full max-w-6xl flex flex-wrap justify-between items-center py-6 px-4">
       <span className={`${ZenDots.className} text-xl`}>
