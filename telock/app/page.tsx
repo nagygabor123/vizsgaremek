@@ -36,10 +36,9 @@ export default async function Home() {
                 telock
               </span>
         <nav className="hidden md:flex space-x-6 text-muted-foreground">
-          <Link href="#">Why heexo?</Link>
-          <Link href="#">Platform</Link>
-          <Link href="#">Solutions</Link>
-          <Link href="#">Changelog</Link>
+          <Link href="#">Miért telock?</Link>
+          <Link href="#">Funkciók</Link>
+          <Link href="#">Dokumentáció</Link>
         </nav>
       
         {!!session &&

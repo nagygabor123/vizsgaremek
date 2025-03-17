@@ -157,7 +157,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenu>
 
           <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={isActive("/dashboard/timetable")}>
+              <SidebarMenuButton asChild isActive={isActive("/dashboard")}>
                 <Link href="/dashboard">
                   <>
                     <House />
