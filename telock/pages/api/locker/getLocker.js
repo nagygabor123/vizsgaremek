@@ -36,7 +36,7 @@ export default async function handler(req, res) {
 
 
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
-        if (studentaccess === "nyithato" && (!expiresAt || currentTime <= expiresAt)) {
+        if (studentaccess === "nyithato" &&  currentTime <= expiresAt) {
           const lockerResult = await getLockerByRFID(rfid, sql);
 
           if (lockerResult.error) {
