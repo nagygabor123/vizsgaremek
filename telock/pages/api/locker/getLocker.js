@@ -33,12 +33,11 @@ export default async function handler(req, res) {
       console.log(schedule);
       const currentTime = new Date().toLocaleTimeString('hu-HU', { timeZone: 'Europe/Budapest', hour12: false }).slice(0, 5);
       console.log(currentTime);
-      const expiresTime = expiresAt ? new Date(expiresAt).toTimeString().slice(0, 5) : null;
       console.log(expiresTime);
 
 
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
-        if (studentaccess === "nyithato" && (!expiresTime || currentTime <= expiresTime)) {
+        if (studentaccess === "nyithato" && (!expiresAt || currentTime <= expiresAt)) {
           const lockerResult = await getLockerByRFID(rfid, sql);
 
           if (lockerResult.error) {

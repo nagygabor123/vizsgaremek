@@ -12,7 +12,9 @@ CREATE TABLE students (
   full_name VARCHAR(255) NOT NULL,
   class VARCHAR(255) NOT NULL,
   rfid_tag VARCHAR(50) UNIQUE NOT NULL,
-  access VARCHAR(50) NOT NULL
+  access VARCHAR(50) NOT NULL,
+  expires_at VARCHAR(20)
+
 );
 
 CREATE TABLE lockers (
