@@ -879,157 +879,139 @@ export default function Page() {
 
 
           <Separator />
-          <div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
-            <div className="sm:w-1/4 w-full">
-              <h2 className="text-lg font-semibold">Tanítási szünetek</h2>
-              <p className="text-sm text-neutral-500">Az iskola hivatalos szünetei és időtartamuk.</p>
+          <div className="mt-5 mb-5 flex flex-col gap-3 sm:gap-3">
+  <div className="flex justify-between items-start">
+    <div className="w-full sm:w-1/2">
+      <h2 className="text-lg font-semibold">Tanítási szünetek</h2>
+      <p className="text-sm text-muted-foreground">Az iskola hivatalos szünetei és időtartamuk.</p>
+    </div>
+    <div>
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogTrigger asChild>
+          <Button variant="outline">
+            <CalendarPlus className="w-4 h-4 inline-block" /> Új szünet hozzáadás
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Szünet hozzáadása</DialogTitle>
+            <DialogDescription>Adja meg a szünet nevét és időtartamát.</DialogDescription>
+          </DialogHeader>
+          <div className="grid items-start gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="fullName">Név</Label>
+              <Input
+                type="text"
+                placeholder="Tavaszi szünet"
+                value={newBreak.nev}
+                onChange={(e) => setNewBreak({ ...newBreak, nev: e.target.value })}
+              />
             </div>
-
-            <div className="sm:w-3/4 w-full">
-              <div className="flex justify-start sm:justify-end mb-3">
-
-                <Dialog open={isDialogOpen} onOpenChange={(isOpen) => setIsDialogOpen(isOpen)}>
-                  <DialogTrigger asChild>
-                    <Button variant="outline">
-                      <CalendarPlus className="w-4 h-4 inline-block mr-2" /> Új szünet hozzáadás
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent
-                    className="sm:max-w-[425px]"
-
+            <div className="grid gap-2">
+              <Label htmlFor="date">Dátum</Label>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    id="date"
+                    variant="outline"
+                    className={cn("justify-start text-left font-normal", !date && "text-muted-foreground")}
                   >
-                    <DialogHeader>
-                      <DialogTitle>Szünet hozzáadása</DialogTitle>
-                      <DialogDescription>
-                        Aliquam metus eros, tristique nec semper id, congue eget metus
-                      </DialogDescription>
-                    </DialogHeader>
-
-                    <div className="grid items-start gap-4">
-                      <div className="grid gap-2">
-                        <Label htmlFor="fullName">Név</Label>
-                        <Input
-                          type="text"
-                          placeholder="Tavaszi szünet"
-                          value={newBreak.nev}
-                          onChange={(e) => setNewBreak({ ...newBreak, nev: e.target.value })}
-                        />
-                      </div>
-
-                      <div className="grid gap-2">
-                        <Label htmlFor="position">Dátum</Label>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              id="date"
-                              variant={"outline"}
-                              className={cn(
-                                "justify-start text-left font-normal",
-                                !date && "text-muted-foreground"
-                              )}
-                            >
-                              <CalendarIcon />
-                              {date?.from ? (
-                                date.to ? (
-                                  <>
-                                    {format(date.from, "LLL dd, y")} -{" "}
-                                    {format(date.to, "LLL dd, y")}
-                                  </>
-                                ) : (
-                                  format(date.from, "LLL dd, y")
-                                )
-                              ) : (
-                                <span>2025. április 14. - 2025. máju 20.</span>
-                              )}
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent className="w-auto p-0" align="start">
-                            <Calendar
-                              initialFocus
-                              mode="range"
-                              defaultMonth={date?.from}
-                              selected={date}
-                              onSelect={(selected) => {
-                                setDate(selected);
-                                setNewBreak((prev) => ({
-                                  ...prev,
-                                  which_day: selected?.from
-                                    ? format(selected.from, "yyyy-MM-dd")
-                                    : "",
-                                  replace_day: selected?.to
-                                    ? format(selected.to, "yyyy-MM-dd")
-                                    : "",
-                                }));
-                              }}
-                              numberOfMonths={2}
-                            />
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-
-                      </div>
-                    </div>
-
-                    <DialogFooter>
-                      <Button className="w-full" onClick={handleAddBreak}>Mentés</Button>
-
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog>
-
-              </div>
-
-              <div className="rounded-xl border overflow-x-auto max-w-full">
-                {yearSchedule?.breakDates?.filter((breakPeriod: any) => breakPeriod.type === "szunet").length > 0 ? (
-                  <table className="min-w-full table-auto">
-                    <thead className="text-center text-sm text-neutral-500">
-                      <tr>
-                        <th className="p-2 cursor-pointer font-normal">Név</th>
-                        <th className="p-2 cursor-pointer font-normal">Időtartam</th>
-                        <th className="p-2 cursor-pointer font-normal">Művelet</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {yearSchedule.breakDates
-                        .filter((breakPeriod: any) => breakPeriod.type === "szunet")
-                        .map((breakPeriod: any) => (
-                          <tr key={breakPeriod.id} className="text-center border-t">
-                            <td className="p-1 truncate">{breakPeriod.name}</td>
-                            <td className="p-1">{breakPeriod.start} - {breakPeriod.end}</td>
-                            <td className="p-1">
-                            <AlertDialog>
-                            <AlertDialogTrigger>
-                            <Button variant="ghost">
-                                <Trash2 className="w-4 h-4 inline-block" />
-                              </Button> 
-                            </AlertDialogTrigger>
-                            <AlertDialogContent>
-                              <AlertDialogHeader>
-                                <AlertDialogTitle>Biztosan törölni szeretné ezt a szünetet</AlertDialogTitle>
-                                <AlertDialogDescription>
-                                Ez a művelet nem vonható vissza. A szünet véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
-                                </AlertDialogDescription>
-                              </AlertDialogHeader>
-                              <AlertDialogFooter>
-                                <AlertDialogCancel>Mégse</AlertDialogCancel>
-                                <AlertDialogAction onClick={() => handleDeletePlusBreak(breakPeriod.id)}>Véglegesítés</AlertDialogAction>
-                              </AlertDialogFooter>
-                            </AlertDialogContent>
-                          </AlertDialog>
-                              {/* <Button variant="ghost" onClick={() => handleDeletePlusBreak(breakPeriod.id)}>
-                                <Trash2 className="w-4 h-4 inline-block" />
-                              </Button> */}
-                            </td>
-                          </tr>
-                        ))}
-                    </tbody>
-                  </table>
-                ) : (
-                  <div className="text-center p-3 text-neutral-500">Nincs megjelenítendő tanítási szünet</div>
-
-                )}
-              </div>
+                    <CalendarIcon />
+                    {date?.from ? (
+                      date.to ? (
+                        <>
+                          {format(date.from, "LLL dd, y")} - {format(date.to, "LLL dd, y")}
+                        </>
+                      ) : (
+                        format(date.from, "LLL dd, y")
+                      )
+                    ) : (
+                      <span>Válasszon dátumot</span>
+                    )}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-auto p-0" align="start">
+                  <Calendar
+                    initialFocus
+                    mode="range"
+                    defaultMonth={date?.from}
+                    selected={date}
+                    onSelect={(selected) => {
+                      setDate(selected);
+                      setNewBreak((prev) => ({
+                        ...prev,
+                        which_day: selected?.from ? format(selected.from, "yyyy-MM-dd") : "",
+                        replace_day: selected?.to ? format(selected.to, "yyyy-MM-dd") : "",
+                      }));
+                    }}
+                    numberOfMonths={2}
+                  />
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
+          <DialogFooter>
+            <Button className="w-full" onClick={handleAddBreak}>
+              Mentés
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
+  </div>
+
+  <div className="rounded-xl border overflow-x-auto w-full">
+    {yearSchedule?.breakDates?.filter((breakPeriod: any) => breakPeriod.type === "szunet").length > 0 ? (
+      <table className="min-w-full table-auto">
+        <thead className="text-center text-sm text-neutral-500">
+          <tr>
+            <th className="p-2 font-normal">Név</th>
+            <th className="p-2 font-normal">Időtartam</th>
+            <th className="p-2 font-normal">Művelet</th>
+          </tr>
+        </thead>
+        <tbody>
+          {yearSchedule.breakDates
+            .filter((breakPeriod: any) => breakPeriod.type === "szunet")
+            .map((breakPeriod: any) => (
+              <tr key={breakPeriod.id} className="text-center border-t">
+                <td className="p-1 truncate">{breakPeriod.name}</td>
+                <td className="p-1">
+                  {breakPeriod.start} - {breakPeriod.end}
+                </td>
+                <td className="p-1">
+                  <AlertDialog>
+                    <AlertDialogTrigger>
+                      <Button variant="ghost">
+                        <Trash2 className="w-4 h-4 inline-block" />
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Biztosan törölni szeretné ezt a szünetet?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                          Ez a művelet nem vonható vissza. A szünet véglegesen törlésre kerül.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Mégse</AlertDialogCancel>
+                        <AlertDialogAction onClick={() => handleDeletePlusBreak(breakPeriod.id)}>
+                          Véglegesítés
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
+    ) : (
+      <div className="text-center p-3 text-neutral-500">Nincs megjelenítendő tanítási szünet</div>
+    )}
+  </div>
+</div>
+
 
         </div>
 
