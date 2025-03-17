@@ -466,7 +466,7 @@ export default function Page() {
           <button onClick={() => updateSchoolYear('kezd', schoolStartEdit)}>Mentés</button> */}
 
 
-<h1 className="text-2xl mb-10 font-semibold">Aktív tanév: 2024/2025</h1>
+{/*<h1 className="text-2xl mb-10 font-semibold">Aktív tanév: 2024/2025</h1>*/}
 
 
 
