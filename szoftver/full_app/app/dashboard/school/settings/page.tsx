@@ -469,137 +469,126 @@ export default function Page() {
 <h1 className="text-2xl mb-10 font-semibold">Aktív tanév: 2024/2025</h1>
 
 
+<div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
 
-          <div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
+  {/* Tanítási év első napja */}
+  <div className="sm:w-1/2 w-full">
+    <h2 className="text-lg font-semibold">Tanítási év első napja</h2>
+    <p className="text-sm text-muted-foreground">
+      Válassza ki a tanév első napját, majd mentse el.
+    </p>
+    <div className="space-y-3">
+      <div className="space-y-2">
+        <div className="space-y-1">
+          <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className={cn(
+                    "justify-start text-left font-normal w-full sm:w-auto",
+                    !startDate && "text-muted-foreground"
+                  )}
+                >
+                  <CalendarIcon />
+                  {startDate
+                    ? format(startDate, "PPP")
+                    : schoolStartEdit
+                      ? format(schoolStartEdit, "PPP")
+                      : <span>Válasszon egy dátumot</span>}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={startDate}
+                  onSelect={(date) => setStartDate(date ?? undefined)}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
 
-      
-
-            <div className="sm:w-1/4 w-full">
-              <h2 className="text-lg font-semibold">Tanítási év első napja</h2>
-              <p className="text-sm text-neutral-500">
-                Válassza ki a tanév első napját, majd mentse el.
-              </p>
-            </div>
-
-
-            <div className="sm:w-3/4 w-full space-y-3">
-              <div className="space-y-2">
-                <div className="space-y-1">
-                  <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
-
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <Button
-                          variant="outline"
-                          className={cn(
-                            " justify-start text-left font-normal w-full sm:w-auto ",
-                            !startDate && "text-muted-foreground"
-                          )}
-                        >
-                          <CalendarIcon />
-                          {startDate
-                            ? format(startDate, "PPP")
-                            : schoolStartEdit
-                              ? format(schoolStartEdit, "PPP")
-                              : <span>Válasszon egy dátumot</span>}
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={startDate}
-                          onSelect={(date) => setStartDate(date ?? undefined)}
-                          initialFocus
-                        />
-                      </PopoverContent>
-                    </Popover>
-
-
-                    <Button
-                      onClick={async () => {
-                        if (!startDate) return;
-                        const formattedDate = format(startDate, "yyyy-MM-dd");
-                        await updateSchoolYear("kezd", formattedDate);
-                        await fetchYearSchedule();  // Újra lekéri az adatokat a szerverről
-                        setStartDate(undefined);    // Visszaállítja a kiválasztott dátumot
-                      }}
-                      disabled={!startDate}
-                      variant="outline"
-                      size="icon"
-                    >
-                      <SaveAll className="w-4 h-4 inline-block" />
-                    </Button>
-
-
-
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Button
+              onClick={async () => {
+                if (!startDate) return;
+                const formattedDate = format(startDate, "yyyy-MM-dd");
+                await updateSchoolYear("kezd", formattedDate);
+                await fetchYearSchedule();
+                setStartDate(undefined);
+              }}
+              disabled={!startDate}
+              variant="outline"
+              size="icon"
+            >
+              <SaveAll className="w-4 h-4 inline-block" />
+            </Button>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-          <Separator />
-          <div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
+  {/* Függőleges elválasztó */}
+  <Separator orientation="vertical" className="h-auto mx-4" />
 
-            <div className="sm:w-1/4 w-full">
-              <h2 className="text-lg font-semibold">Tanítási év utolsó napja</h2>
-              <p className="text-sm text-neutral-500">
-                Válassza ki a tanév utolsó napját, majd mentse el.
-              </p>
-            </div>
+  {/* Tanítási év utolsó napja */}
+  <div className="sm:w-1/2 w-full">
+    <h2 className="text-lg font-semibold">Tanítási év utolsó napja</h2>
+    <p className="text-sm text-neutral-500">
+      Válassza ki a tanév utolsó napját, majd mentse el.
+    </p>
+    <div className="space-y-3">
+      <div className="space-y-2">
+        <div className="space-y-1">
+          <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className={cn(
+                    "justify-start text-left font-normal w-full sm:w-auto",
+                    !endDate && "text-muted-foreground"
+                  )}
+                >
+                  <CalendarIcon />
+                  {endDate
+                    ? format(endDate, "PPP")
+                    : schoolEndEdit
+                      ? format(schoolEndEdit, "PPP")
+                      : <span>Válasszon egy dátumot</span>}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={endDate}
+                  onSelect={(date) => setEndDate(date ?? undefined)}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
 
-            <div className="sm:w-3/4 w-full space-y-3">
-              <div className="space-y-2">
-                <div className="space-y-1">
-                  <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
-
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <Button
-                          variant="outline"
-                          className={cn(
-                            "justify-start text-left font-normal w-full sm:w-auto",
-                            !endDate && "text-muted-foreground"
-                          )}
-                        >
-                          <CalendarIcon />
-                          {endDate
-                            ? format(endDate, "PPP")
-                            : schoolEndEdit
-                              ? format(schoolEndEdit, "PPP")
-                              : <span>Válasszon egy dátumot</span>}
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={endDate}
-                          onSelect={(date) => setEndDate(date ?? undefined)}
-                          initialFocus
-                        />
-                      </PopoverContent>
-                    </Popover>
-
-
-                    <Button
-                      onClick={async () => {
-                        if (!endDate) return;
-                        const formattedDate = format(endDate, "yyyy-MM-dd");
-                        await updateSchoolYear("veg", formattedDate);
-                        await fetchYearSchedule();  // Újra lekéri az adatokat a szerverről
-                        setEndDate(undefined);    // Visszaállítja a kiválasztott dátumot
-                      }}
-                      disabled={!endDate}
-                      variant="outline"
-                      size="icon"
-                    >
-                      <SaveAll className="w-4 h-4 inline-block" />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Button
+              onClick={async () => {
+                if (!endDate) return;
+                const formattedDate = format(endDate, "yyyy-MM-dd");
+                await updateSchoolYear("veg", formattedDate);
+                await fetchYearSchedule();
+                setEndDate(undefined);
+              }}
+              disabled={!endDate}
+              variant="outline"
+              size="icon"
+            >
+              <SaveAll className="w-4 h-4 inline-block" />
+            </Button>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
           <Separator />
           <div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">

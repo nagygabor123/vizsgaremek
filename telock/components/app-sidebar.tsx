@@ -283,7 +283,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
 
       <SidebarFooter>
-        <span className="text-xs text-center">telock által működtetve</span>
+        <span className="text-xs text-center">© 2025 telock</span>
       </SidebarFooter>
     </Sidebar>
   );
