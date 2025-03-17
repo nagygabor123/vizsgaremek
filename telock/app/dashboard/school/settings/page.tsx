@@ -612,7 +612,7 @@ export default function Page() {
             </div>
 
             {/* Táblázat és gomb */}
-            <div className="sm:w-3/4 w-full">
+            <div className=" w-full">
               {/* Gomb a táblázat felett */}
               <div className="flex justify-start sm:justify-end mb-3">
                 <Dialog
@@ -771,7 +771,7 @@ variant="ghost"
                 Itt láthatóak a rendkívüli tanítási napok és a helyettesítő napok.
               </p>
             </div>
-            <div className="sm:w-3/4 w-full">
+            <div className=" w-full">
 
               <div className="flex justify-start sm:justify-end mb-3">
                 <Dialog open={isDialogOpen2} onOpenChange={(isOpen) => setIsDialogOpen2(isOpen)}>
@@ -917,7 +917,7 @@ variant="ghost"
               <p className="text-sm text-neutral-500">Az iskola hivatalos szünetei és időtartamuk.</p>
             </div>
 
-            <div className="sm:w-3/4 w-full">
+            <div className=" w-full">
               <div className="flex justify-start sm:justify-end mb-3">
 
                 <Dialog open={isDialogOpen} onOpenChange={(isOpen) => setIsDialogOpen(isOpen)}>
