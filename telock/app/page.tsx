@@ -70,7 +70,7 @@ export default async function Home() {
       
       {/* Illustration */}
       <div className="w-full max-w-5xl bg-gradient-to-r from-blue-100 to-white p-4 md:p-8 rounded-xl shadow">
-      <Image src="/example.png" alt="Illustration"  className="w-full h-auto" priority /> {/*width={800} height={400} */}
+      <Image src="/example.png" alt="Illustration" width={800} height={400} className="w-full h-auto" priority /> {/*width={800} height={400} */}
 
       </div>
       

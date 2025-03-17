@@ -87,8 +87,8 @@
   transition: background-color 0.3s ease;
   flex: 1 1 calc(33% - 10px); 
   padding: 8px; 
-  background-color: #bedcff;
-  border: 1px solid #e4e8ef;
+  background-color: #fffbfb;
+  border: 1px solid #ececec;
   color: rgb(85, 85, 85);
   border-radius: 8px;
   margin: 0; 
@@ -102,14 +102,14 @@
   /* justify-content: center; */
 }
 
-/*
+
 .lesson-card:hover {
   transition: background-color 0.3s ease;
   background-color: #ebf0ff;
-  border: 1px solid #e4e8ef;
+  border: 1px solid #98b3ff;
   color: #668aee;
   cursor: pointer; 
-}*/
+}
 
 .lesson-card.current-lesson {
   transition: background-color 0.3s ease;
@@ -158,7 +158,16 @@
   font-weight: bold;
 }
 
-
+.lesson-index {
+  text-align: left;
+  position: relative;
+  /* top: 8px;
+  left: 8px; */
+  font-size: 12px; 
+  padding-bottom: 0.5rem;
+  /* font-weight: bold; */
+  /* line-height: 200%; */
+}
 
 .lesson-name {
   font-weight: bold;
@@ -226,7 +235,7 @@
   text-align: center;
   font-weight: bold;
  
-   border-bottom: 1px solid #e4e8ef;
+   border-bottom: 1px solid #ddd;
  /* border-left: 1px solid #ddd;*/
 }
 
@@ -336,10 +345,11 @@
   .calendar-cell {
     /*height: 40px;*/
     border: none;
-    border-bottom: 1px solid hsl(213, 100%, 89%);
+    border-bottom: 1px solid #ddd;
     font-size: 1rem;
   }
 }
+
 
 
 
