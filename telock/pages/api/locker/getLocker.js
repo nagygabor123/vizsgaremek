@@ -112,8 +112,10 @@ export default async function handler(req, res) {
       const currentTime = new Date().toTimeString().slice(0, 5);
       const expiresTime = expiresAt ? new Date(expiresAt).toTimeString().slice(0, 5) : null;
 
+      // Ellenőrizd, hogy az aktuális időpont beleesik-e az órarendbe
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
-        if (studentaccess === "nyithato" && currentTime <= expiresTime) {
+        // Ha az access nyitható és nem telt le az expires_at, akkor engedélyezd a szekrényhez való hozzáférést
+        if (studentaccess === "nyithato" && (!expiresTime || currentTime <= expiresTime)) {
           const lockerResult = await getLockerByRFID(rfid, sql);
 
           if (lockerResult.error) {
@@ -122,9 +124,11 @@ export default async function handler(req, res) {
 
           return res.status(200).send({ lockerId: lockerResult.lockerId });
         } else {
+          // Ha az expires_at lejárt, vagy nem nyitható, akkor zárva van
           return res.status(200).send("zarva");
         }
       } else {
+        // Ha az órarend alapján kívül esik az időszak, akkor mindig a szekrényhez hozzáférés adása
         const lockerResult = await getLockerByRFID(rfid, sql);
 
         if (lockerResult.error) {
