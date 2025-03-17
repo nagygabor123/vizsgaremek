@@ -101,7 +101,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <span className="text-s truncate">Benedek PG Középiskola</span>
               </div>
               <Avatar className="h-9 w-9 rounded-full">
-              <AvatarFallback className="rounded-lg bg-blue-300">
+              <AvatarFallback className="rounded-lg bg-blue-100">
   {session?.user?.short_name?.substring(0, 2).toUpperCase()}
 </AvatarFallback>
             </Avatar>
@@ -117,7 +117,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                  <Avatar className="h-9 w-9 rounded-full">
-                  <AvatarFallback className="rounded-lg bg-blue-300"> {session?.user?.short_name?.substring(0, 2).toUpperCase()}</AvatarFallback>
+                  <AvatarFallback className="rounded-lg bg-blue-100"> {session?.user?.short_name?.substring(0, 2).toUpperCase()}</AvatarFallback>
                 </Avatar> 
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">{session?.user?.full_name}</span>
@@ -283,7 +283,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
 
       <SidebarFooter>
-        <span className="text-xs text-center">powered by teLock</span>
+        <span className="text-xs text-center">telock által működtetve</span>
       </SidebarFooter>
     </Sidebar>
   );

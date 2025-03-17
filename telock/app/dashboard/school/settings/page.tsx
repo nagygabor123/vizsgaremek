@@ -606,7 +606,7 @@ export default function Page() {
             {/* Cím és leírás */}
             <div className="sm:w-1/4 w-full">
               <h2 className="text-lg font-semibold">Tanítás nélküli munkanapok</h2>
-              <p className="text-sm text-neutral-500">
+              <p className="text-sm text-muted-foreground">
                 Itt láthatóak azok a napok, amikor nincs tanítás.
               </p>
             </div>
@@ -767,7 +767,7 @@ variant="ghost"
           <div className="mt-5 mb-5 flex flex-col items-start">
             <div className="sm:w-1/4 w-full">
               <h2 className="text-lg font-semibold">Szombati tanítási napok</h2>
-              <p className="text-sm text-neutral-500">
+              <p className="text-sm text-muted-foreground">
                 Itt láthatóak a rendkívüli tanítási napok és a helyettesítő napok.
               </p>
             </div>
@@ -914,7 +914,7 @@ variant="ghost"
           <div className="mt-5 mb-5 flex flex-col items-start">
             <div className="sm:w-1/4 w-full">
               <h2 className="text-lg font-semibold">Tanítási szünetek</h2>
-              <p className="text-sm text-neutral-500">Az iskola hivatalos szünetei és időtartamuk.</p>
+              <p className="text-sm text-muted-foreground">Az iskola hivatalos szünetei és időtartamuk.</p>
             </div>
 
             <div className=" w-full">

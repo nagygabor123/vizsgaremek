@@ -175,7 +175,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </div>
            
               <Avatar className="h-9 w-9 rounded-full">
-                <AvatarFallback className="rounded-lg bg-lime-300">ViZs</AvatarFallback>
+                <AvatarFallback className="rounded-lg bg-blue-200">ViZs</AvatarFallback>
               </Avatar>
               <ChevronDown className="ml-auto size-4" />
             
