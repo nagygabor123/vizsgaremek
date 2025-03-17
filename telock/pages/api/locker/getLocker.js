@@ -33,7 +33,6 @@ export default async function handler(req, res) {
       console.log(schedule);
       const currentTime = new Date().toLocaleTimeString('hu-HU', { timeZone: 'Europe/Budapest', hour12: false }).slice(0, 5);
       console.log(currentTime);
-      console.log(expiresTime);
 
 
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
