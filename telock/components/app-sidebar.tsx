@@ -101,7 +101,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <span className="text-s truncate">Benedek PG Középiskola</span>
               </div>
               <Avatar className="h-9 w-9 rounded-full">
-              <AvatarFallback className="rounded-lg bg-amber-300">
+              <AvatarFallback className="rounded-lg bg-blue-300">
   {session?.user?.short_name?.substring(0, 2).toUpperCase()}
 </AvatarFallback>
             </Avatar>
