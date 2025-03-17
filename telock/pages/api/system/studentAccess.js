@@ -16,7 +16,7 @@ export default async function handler(req, res) {
   try {
     const updateResult = await sql(
       `UPDATE students 
-       SET access = $1, expires_at = TO_CHAR(NOW() + INTERVAL '5 minutes', 'HH24:MI') 
+       SET access = $1, expires_at = NOW() + INTERVAL '5 minutes' 
        WHERE student_id = $2`,
       ['nyithato', student]
     );
