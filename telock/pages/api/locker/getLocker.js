@@ -21,7 +21,7 @@ export default async function handler(req, res) {
 
       const studentid = student[0].student_id;
       const studentaccess = student[0].access;
-      const expiresAt = student[0].expires_at;
+      const expiresAt = student[0].expires_at; // Assuming expiresAt is a string like '12:35'
 
       const scheduleResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/scheduleStart?student=${studentid}`);
       if (!scheduleResponse.ok) {
@@ -31,12 +31,21 @@ export default async function handler(req, res) {
       const schedule = await scheduleResponse.json();
       const { first_class_start, last_class_end } = schedule;
       console.log(schedule);
+
       const currentTime = new Date().toLocaleTimeString('hu-HU', { timeZone: 'Europe/Budapest', hour12: false }).slice(0, 5);
       console.log(currentTime);
 
+      // Convert expiresAt (string) and currentTime to date objects for comparison
+      const expiresAtDate = new Date(`1970-01-01T${expiresAt}:00Z`);
+      const currentTimeDate = new Date(`1970-01-01T${currentTime}:00Z`);
+
+      // Compare expiresAt and current time
+      if (currentTimeDate >= expiresAtDate) {
+        return res.status(200).send("zarva");
+      }
 
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
-        if (studentaccess === "nyithato" &&  currentTime <= expiresAt) {
+        if (studentaccess === "nyithato") {
           const lockerResult = await getLockerByRFID(rfid, sql);
 
           if (lockerResult.error) {
@@ -58,6 +67,8 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'A módszer nem engedélyezett' });
   }
 }
+
+
 
 async function getLockerByRFID(rfid, sql) {
   const lockerRelationship = await sql(
