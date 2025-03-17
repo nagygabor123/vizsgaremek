@@ -31,7 +31,7 @@ export default async function handler(req, res) {
       const schedule = await scheduleResponse.json();
       const { first_class_start, last_class_end } = schedule;
       console.log(schedule);
-      const currentTime = new Date().toLocaleTimeString('hu-HU', { hour12: false }).slice(0, 5);
+      const currentTime = new Date().toLocaleTimeString('hu-HU', { timeZone: 'Europe/Budapest', hour12: false }).slice(0, 5);
       console.log(currentTime);
       const expiresTime = expiresAt ? new Date(expiresAt).toTimeString().slice(0, 5) : null;
       console.log(expiresTime);
