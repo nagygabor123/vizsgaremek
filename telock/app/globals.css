@@ -67,7 +67,7 @@
 }
 
 .calendar-cell.empty {
-  background-color: #eff7ffa6; /* opcionális: üres cellák kiemelése */
+  background-color: #f0f6fc; /* opcionális: üres cellák kiemelése */
 }
 
 
@@ -383,7 +383,7 @@
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0); 
+  --sidebar-accent: oklch(0.97 0.01 248); 
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
