@@ -94,7 +94,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              className=""
             >
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="text-s truncate">Kiskunfélegyházi Szent</span>
