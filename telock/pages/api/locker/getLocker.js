@@ -30,12 +30,13 @@ export default async function handler(req, res) {
 
       const schedule = await scheduleResponse.json();
       const { first_class_start, last_class_end } = schedule;
+      console.log(schedule);
       const currentTime = new Date().toTimeString().slice(0, 5);
       console.log(currentTime);
       const expiresTime = expiresAt ? new Date(expiresAt).toTimeString().slice(0, 5) : null;
       console.log(expiresTime);
 
-      
+
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
         if (studentaccess === "nyithato" && (!expiresTime || currentTime <= expiresTime)) {
           const lockerResult = await getLockerByRFID(rfid, sql);
