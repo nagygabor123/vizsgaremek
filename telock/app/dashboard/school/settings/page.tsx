@@ -466,7 +466,7 @@ export default function Page() {
           <button onClick={() => updateSchoolYear('kezd', schoolStartEdit)}>Mentés</button> */}
 
 
-{/*<h1 className="text-2xl mb-10 font-semibold">Aktív tanév: 2024/2025</h1>*/}
+<h1 className="text-2xl mb-10 font-semibold">Aktív tanév: 2024/2025</h1>
 
 
 
@@ -476,7 +476,7 @@ export default function Page() {
 
             <div className="sm:w-1/4 w-full">
               <h2 className="text-lg font-semibold">Tanítási év első napja</h2>
-              <p className="text-sm text-neutral-500">
+              <p className="text-sm text-muted-foreground">
                 Válassza ki a tanév első napját, majd mentse el.
               </p>
             </div>
@@ -602,13 +602,18 @@ export default function Page() {
           </div>
 
           <Separator />
-          <div className="mt-5 mb-5 flex flex-col items-start">
+          <div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
             {/* Cím és leírás */}
             <div className="sm:w-1/4 w-full">
               <h2 className="text-lg font-semibold">Tanítás nélküli munkanapok</h2>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-neutral-500">
                 Itt láthatóak azok a napok, amikor nincs tanítás.
               </p>
+            </div>
+
+            {/* Táblázat és gomb */}
+            <div className="sm:w-3/4 w-full">
+              {/* Gomb a táblázat felett */}
               <div className="flex justify-start sm:justify-end mb-3">
                 <Dialog
                   open={isDialogOpen3}
@@ -691,12 +696,6 @@ export default function Page() {
                   </DialogContent>
                 </Dialog>
               </div>
-            </div>
-
-            {/* Táblázat és gomb */}
-            <div className=" w-full">
-              {/* Gomb a táblázat felett */}
-        
 
               {/* Görgethető táblázat kis képernyőn */}
               <div className="rounded-xl border overflow-x-auto">
@@ -765,14 +764,14 @@ variant="ghost"
 
 
           <Separator />
-          <div className="mt-5 mb-5 flex flex-col items-start">
+          <div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
             <div className="sm:w-1/4 w-full">
               <h2 className="text-lg font-semibold">Szombati tanítási napok</h2>
               <p className="text-sm text-muted-foreground">
                 Itt láthatóak a rendkívüli tanítási napok és a helyettesítő napok.
               </p>
             </div>
-            <div className=" w-full">
+            <div className="sm:w-3/4 w-full">
 
               <div className="flex justify-start sm:justify-end mb-3">
                 <Dialog open={isDialogOpen2} onOpenChange={(isOpen) => setIsDialogOpen2(isOpen)}>
@@ -912,13 +911,13 @@ variant="ghost"
 
 
           <Separator />
-          <div className="mt-5 mb-5 flex flex-col items-start">
+          <div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
             <div className="sm:w-1/4 w-full">
               <h2 className="text-lg font-semibold">Tanítási szünetek</h2>
               <p className="text-sm text-muted-foreground">Az iskola hivatalos szünetei és időtartamuk.</p>
             </div>
 
-            <div className=" w-full">
+            <div className="sm:w-3/4 w-full">
               <div className="flex justify-start sm:justify-end mb-3">
 
                 <Dialog open={isDialogOpen} onOpenChange={(isOpen) => setIsDialogOpen(isOpen)}>
