@@ -88,9 +88,8 @@ export default async function handler(req, res) {
     const sql = neon(process.env.DATABASE_URL);
 
     try {
-
       const student = await sql(
-        'SELECT student_id, access FROM students WHERE rfid_tag = $1',
+        'SELECT student_id, access, expires_at FROM students WHERE rfid_tag = $1',
         [rfid]
       );
 
@@ -100,8 +99,9 @@ export default async function handler(req, res) {
 
       const studentid = student[0].student_id;
       const studentaccess = student[0].access;
+      const expiresAt = student[0].expires_at;
 
-      const scheduleResponse = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${studentid}`);
+      const scheduleResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/scheduleStart?student=${studentid}`);
       if (!scheduleResponse.ok) {
         return res.status(500).json({ error: 'Nem sikerült lekérni a diák órarendjét.' });
       }
@@ -110,16 +110,17 @@ export default async function handler(req, res) {
       const { first_class_start, last_class_end } = schedule;
 
       const currentTime = new Date().toTimeString().slice(0, 5);
+      const expiresTime = expiresAt ? new Date(expiresAt).toTimeString().slice(0, 5) : null;
 
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
-        if (studentaccess === "nyithato") {
+        if (studentaccess === "nyithato" && currentTime <= expiresTime) {
           const lockerResult = await getLockerByRFID(rfid, sql);
 
           if (lockerResult.error) {
             return res.status(lockerResult.status).json({ error: lockerResult.error });
           }
 
-          return res.status(200).send(lockerResult.lockerId);
+          return res.status(200).send({ lockerId: lockerResult.lockerId });
         } else {
           return res.status(200).send("zarva");
         }
@@ -130,7 +131,7 @@ export default async function handler(req, res) {
           return res.status(lockerResult.status).json({ error: lockerResult.error });
         }
 
-        return res.status(200).send(lockerResult.lockerId);
+        return res.status(200).send({ lockerId: lockerResult.lockerId });
       }
     } catch (error) {
       console.error('Adatbazis error:', error);
