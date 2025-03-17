@@ -609,11 +609,6 @@ export default function Page() {
               <p className="text-sm text-muted-foreground">
                 Itt láthatóak azok a napok, amikor nincs tanítás.
               </p>
-            </div>
-
-            {/* Táblázat és gomb */}
-            <div className=" w-full">
-              {/* Gomb a táblázat felett */}
               <div className="flex justify-start sm:justify-end mb-3">
                 <Dialog
                   open={isDialogOpen3}
@@ -696,6 +691,12 @@ export default function Page() {
                   </DialogContent>
                 </Dialog>
               </div>
+            </div>
+
+            {/* Táblázat és gomb */}
+            <div className=" w-full">
+              {/* Gomb a táblázat felett */}
+        
 
               {/* Görgethető táblázat kis képernyőn */}
               <div className="rounded-xl border overflow-x-auto">
