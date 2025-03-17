@@ -750,7 +750,7 @@ export default function Page() {
                 Itt láthatóak a rendkívüli tanítási napok és a helyettesítő napok.
               </p>
             </div>
-            <div className="sm:w-3/4 w-full">
+            <div className="w-full">
 
               <div className="flex justify-start sm:justify-end mb-3">
                 <Dialog open={isDialogOpen2} onOpenChange={(isOpen) => setIsDialogOpen2(isOpen)}>
