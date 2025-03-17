@@ -94,7 +94,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className=""
+              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="text-s truncate">Kiskunfélegyházi Szent</span>
@@ -118,7 +118,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                  <Avatar className="h-9 w-9 rounded-full">
                   <AvatarFallback className="rounded-lg bg-amber-300"> {session?.user?.short_name?.substring(0, 2).toUpperCase()}</AvatarFallback>
-                </Avatar> *
+                </Avatar> 
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">{session?.user?.full_name}</span>
                   <span className="truncate text-xs">Tanár</span>

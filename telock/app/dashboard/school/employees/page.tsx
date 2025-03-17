@@ -381,14 +381,14 @@ export default function AddEmployeePage() {
                 <Input
                   type="text"
                   placeholder="Keresés név szerint..."
-                  className="border p-2 rounded"
+                  className="border p-2 rounded-lg"
                   value={searchName}
                   onChange={(e) => setSearchName(e.target.value)}
                 />
                 <Input
                   type="text"
                   placeholder="Keresés pozíció szerint..."
-                  className="border p-2 rounded"
+                  className="border p-2 rounded-lg"
                   value={searchPosition}
                   onChange={(e) => setSearchPosition(e.target.value)}
                 />
