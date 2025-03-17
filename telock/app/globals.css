@@ -345,11 +345,11 @@
 
 :root {
   --background: oklch(1 0 0);/**/
-  --foreground: oklch(0.13 0.04 265);
+  --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);/**/
-  --card-foreground: oklch(0.13 0.04 265);
+  --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);/**/
-  --popover-foreground: oklch(0.13 0.04 265);
+  --popover-foreground: oklch(0.145 0 0);
   --primary: oklch(0.55 0.22 263);/**/
   --primary-foreground: oklch(0.98 0.00 248);  /**/
   --secondary: oklch(0.97 0.01 248); /**/
