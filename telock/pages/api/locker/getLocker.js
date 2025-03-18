@@ -40,7 +40,7 @@ export default async function handler(req, res) {
       const currentTime = aktido.toTimeString().slice(0, 5);
 
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
-        if (studentaccess === "nyithato") {
+        if (studentaccess == "nyithato") {
           //if (aktido <= expiresAt) {
             const lockerResult = await getLockerByRFID(rfid, sql);
 
