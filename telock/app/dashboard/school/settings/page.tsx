@@ -529,7 +529,7 @@ export default function Page() {
             </div>
 
             {/* Függőleges elválasztó */}
-            <div className="hidden sm:block mx-6 border-l border-slate-500 h-auto self-stretch"></div>
+            <div className="hidden sm:block mx-6 border-l border-muted-foreground h-auto self-stretch"></div>
 
             {/* Tanítási év utolsó napja */}
             <div className="sm:w-1/2 w-full">
