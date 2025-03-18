@@ -997,6 +997,7 @@ variant="ghost"
                 </Dialog>
 
               </div>
+              </div>
 
               <div className="rounded-xl border overflow-x-auto max-w-full">
                 {yearSchedule?.breakDates?.filter((breakPeriod: any) => breakPeriod.type === "szunet").length > 0 ? (
@@ -1048,7 +1049,7 @@ variant="ghost"
 
                 )}
               </div>
-            </div>
+           
           </div>
 
         </div>
