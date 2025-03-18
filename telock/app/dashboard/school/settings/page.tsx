@@ -534,7 +534,7 @@ export default function Page() {
   {/* Tanítási év utolsó napja */}
   <div className="sm:w-1/2 w-full">
     <h2 className="text-lg font-semibold">Tanítási év utolsó napja</h2>
-    <p className="text-sm text-neutral-500">
+    <p className="text-sm text-muted-foreground">
       Válassza ki a tanév utolsó napját, majd mentse el.
     </p>
     <div className="space-y-3">
@@ -595,7 +595,7 @@ export default function Page() {
           <div className="flex justify-between items-start">
           <div className="w-full sm:w-1/2">
               <h2 className="text-lg font-semibold">Tanítás nélküli munkanapok</h2>
-              <p className="text-sm text-neutral-500">
+              <p className="text-sm text-muted-foreground">
                 Itt láthatóak azok a napok, amikor nincs tanítás.
               </p>
             </div>
@@ -612,7 +612,7 @@ export default function Page() {
                 >
                   <DialogTrigger asChild>
                     <Button variant="outline">
-                      <CalendarPlus className="w-4 h-4 inline-block mr-2" /> Új nap hozzáadás
+                      <CalendarPlus className="w-4 h-4 inline-block" /> Új nap hozzáadás
                     </Button>
                   </DialogTrigger>
                   <DialogContent
@@ -741,7 +741,7 @@ variant="ghost"
                 )}
               </div>
             </div>
-          </div>
+          
 
 
 
@@ -765,7 +765,7 @@ variant="ghost"
                 <Dialog open={isDialogOpen2} onOpenChange={(isOpen) => setIsDialogOpen2(isOpen)}>
                   <DialogTrigger asChild>
                     <Button variant="outline">
-                      <CalendarPlus className="w-4 h-4 inline-block mr-2" /> Új nap hozzáadás
+                      <CalendarPlus className="w-4 h-4 inline-block" /> Új nap hozzáadás
                     </Button>
                   </DialogTrigger>
                   <DialogContent
@@ -1054,7 +1054,7 @@ variant="ghost"
            
           </div>
 
-
+          </div>
 
       </SidebarInset>
     </SidebarProvider>
