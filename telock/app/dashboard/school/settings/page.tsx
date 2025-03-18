@@ -591,7 +591,7 @@ export default function Page() {
 
 
           <Separator />
-          <div className="mt-5 mb-5 flex flex-col  items-start">
+          <div className="mt-5 mb-5 flex flex-col gap-3 sm:gap-3">
           <div className="flex justify-between items-start">
           <div className="w-full sm:w-1/2">
               <h2 className="text-lg font-semibold">Tanítás nélküli munkanapok</h2>
@@ -682,9 +682,10 @@ export default function Page() {
                   </DialogContent>
                 </Dialog>
               </div>
+              </div>
 
               {/* Görgethető táblázat kis képernyőn */}
-              <div className="rounded-xl border overflow-x-auto">
+              <div className="rounded-xl border overflow-x-auto w-full">
                 {yearSchedule?.noSchool?.length > 0 ? (
                   <table className="w-full min-w-max">
                     <thead className="text-center text-sm text-neutral-500">
@@ -750,7 +751,7 @@ variant="ghost"
 
 
           <Separator />
-          <div className="mt-5 mb-5 flex flex-col  items-start">
+          <div className="mt-5 mb-5 flex flex-col gap-3 sm:gap-3">
           <div className="flex justify-between items-start">
           <div className="w-full sm:w-1/2">
               <h2 className="text-lg font-semibold">Szombati tanítási napok</h2>
@@ -838,9 +839,10 @@ variant="ghost"
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
+    
               </div>
 
-              <div className="rounded-xl border overflow-x-auto">
+              <div className="rounded-xl border overflow-x-auto w-full">
                 {yearSchedule?.plusDates?.length > 0 ? (
                   <table className="w-full min-w-max">
                     <thead className="text-center text-sm text-neutral-500">
@@ -999,7 +1001,7 @@ variant="ghost"
               </div>
               </div>
 
-              <div className="rounded-xl border overflow-x-auto max-w-full">
+              <div className="rounded-xl border overflow-x-auto w-full">
                 {yearSchedule?.breakDates?.filter((breakPeriod: any) => breakPeriod.type === "szunet").length > 0 ? (
                   <table className="min-w-full table-auto">
                     <thead className="text-center text-sm text-neutral-500">
@@ -1052,7 +1054,7 @@ variant="ghost"
            
           </div>
 
-        </div>
+
 
       </SidebarInset>
     </SidebarProvider>
