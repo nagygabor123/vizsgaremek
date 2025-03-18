@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-
 import {
   Sheet,
   SheetContent,
@@ -9,21 +8,19 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Paperclip } from "lucide-react";
-
-
-import { TriangleAlert } from "lucide-react"
+import { Paperclip, TriangleAlert } from "lucide-react";
 
 const SheetComponent: React.FC = () => {
- // const [isOverlayVisible, setOverlayVisible] = useState(false);
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [message, setMessage] = useState<React.ReactNode>("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [step, setStep] = useState(1);
+  const [csvFile, setCsvFile] = useState<File | null>(null);
+  const [csvMessage, setCsvMessage] = useState<string>('');
 
   const fileInputRef = useRef<HTMLInputElement>(null);
-
+  const csvFileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const savedStep = localStorage.getItem("currentStep");
@@ -53,11 +50,6 @@ const SheetComponent: React.FC = () => {
       }
     }
   };
-
- /* const handlePrev = () => {
-    setStep((prev) => Math.max(prev - 1, 1));
-    localStorage.setItem("currentStep", String(step - 1)); 
-  };*/
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -96,15 +88,11 @@ const SheetComponent: React.FC = () => {
     }
   };
 
-/*
-  const handleButtonClick = () => {
-    setOverlayVisible(true);
-  };
-*/
-  const handleConfirmClick = () => {
-   // setOverlayVisible(false);
+  const handleConfirmClick = async () => {
+    if (csvFile) {
+      await handleCsvUpload();
+    }
     setButtonVisible(false);
-    //localStorage.setItem("hasClickedOverlayButton", "true");
     window.location.reload();
   };
 
@@ -125,6 +113,45 @@ const SheetComponent: React.FC = () => {
             <Paperclip className="w-4 h-4 inline-block text-sm" /> {selectedFile.name}
           </span>
         );
+      }
+    }
+  };
+
+  const handleCsvFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const selectedFile = e.target.files[0];
+      setCsvFile(selectedFile);
+      setCsvMessage(`Selected file: ${selectedFile.name}`);
+    }
+  };
+
+  const handleCsvUpload = async () => {
+    if (!csvFile) {
+      setCsvMessage('Please select a CSV file first!');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', csvFile);
+
+    try {
+      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/setup/studentsToDatabase', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const responseData = await response.json();
+
+      if (response.ok) {
+        setCsvMessage('File uploaded successfully!');
+      } else {
+        setCsvMessage('Error occurred during file upload.');
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setCsvMessage(`Error: ${error.message}`);
+      } else {
+        setCsvMessage('An unknown error occurred.');
       }
     }
   };
@@ -166,24 +193,21 @@ const SheetComponent: React.FC = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-      <div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
-            <div className="grid auto-rows-min gap-4 w-full">
+        <div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
+          <div className="grid auto-rows-min gap-4 w-full">
             {isButtonVisible && ( 
               <div className="min-h-[60px] rounded-xl bg-red-100 flex items-center px-4 w-full box-border overflow-hidden">
                 <TriangleAlert className="text-red-500" />
                 <p className="text-sm truncate ml-3 text-red-500">
-                A rendszer nincs beállítva. Kérjük, végezze el a szükséges konfigurációt!
+                  A rendszer nincs beállítva. Kérjük, végezze el a szükséges konfigurációt!
                 </p>
                 <Button className="ml-auto" variant="destructive">
-          Konfigurálás most
-        </Button>
-            
+                  Konfigurálás most
+                </Button>
               </div>
             )} 
-             
-            </div>
           </div>
-    
+        </div>
       </SheetTrigger>
       <SheetContent side="bottom">
         <SheetHeader>
@@ -231,30 +255,28 @@ const SheetComponent: React.FC = () => {
 
         {step === 2 && (
           <div>
-            <div>
-              <div
-                //onDragOver={handleDragOver}
-                //onDrop={handleDrop}
-                //onClick={handleClick}
-                className="mt-5 border-dashed border-2 border-blue-400 rounded-md p-4 flex flex-col items-center justify-center min-h-[250px] cursor-pointer hover:bg-zinc-50 transition text-center"
-              >
-                <img
-                  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNsb3VkLXVwbG9hZCI+PHBhdGggZD0iTTEyIDEzdjgiLz48cGF0aCBkPSJNNCAxNC44OTlBNyA3IDAgMSAxIDE1LjcxIDhoMS43OWE0LjUgNC41IDAgMCAxIDIuNSA4LjI0MiIvPjxwYXRoIGQ9Im04IDE3IDQtNCA0IDQiLz48L3N2Zz4="
-                  alt="Upload Icon"
-                  className="w-12 h-12 opacity-75 mx-auto"
-                />
-                {/* {selectedFile ? selectedFile.name :*/} <p className="text-zinc-700 font-semibold mt-3">Válassza ki a feltölteni kívánt CSV-fájlt</p> {/*}*/}
-                {/*{selectedFile ? selectedFile.name :*/} <p className="text-base text-gray-500">vagy húzza ide a fájlt</p> {/*}*/}
-                {/* {message && <p className="mt-5">{message}</p>}*/}
-              </div>
-              <input
-                type="file"
-                accept=".csv"
-                //ref={fileInputRef}
-                //onChange={handleFileChange}
-                style={{ display: "none" }}
+            <div
+              onDragOver={handleDragOver}
+              onDrop={handleDrop}
+              onClick={() => csvFileInputRef.current?.click()}
+              className="mt-5 border-dashed border-2 border-blue-400 rounded-md p-4 flex flex-col items-center justify-center min-h-[250px] cursor-pointer hover:bg-zinc-50 transition text-center"
+            >
+              <img
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNsb3VkLXVwbG9hZCI+PHBhdGggZD0iTTEyIDEzdjgiLz48cGF0aCBkPSJNNCAxNC44OTlBNyA3IDAgMSAxIDE1LjcxIDhoMS43OWE0LjUgNC41IDAgMCAxIDIuNSA4LjI0MiIvPjxwYXRoIGQ9Im04IDE3IDQtNCA0IDQiLz48L3N2Zz4="
+                alt="Upload Icon"
+                className="w-12 h-12 opacity-75 mx-auto"
               />
+              {csvFile ? csvFile.name : <p className="text-zinc-700 font-semibold mt-3">Válassza ki a feltölteni kívánt CSV-fájlt</p>}
+              {csvFile ? csvFile.name : <p className="text-base text-gray-500">vagy húzza ide a fájlt</p>}
+              {csvMessage && <p className="mt-5">{csvMessage}</p>}
             </div>
+            <input
+              type="file"
+              accept=".csv"
+              ref={csvFileInputRef}
+              onChange={handleCsvFileChange}
+              style={{ display: "none" }}
+            />
           </div>
         )}
 
