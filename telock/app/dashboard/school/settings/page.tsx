@@ -393,19 +393,8 @@ export default function Page() {
 
   {/*console.log("BreakDates:", yearSchedule?.breakDates);*/ }
 
-  useEffect(() => {
-    if (loading) {
-      document.body.classList.add('no-scroll');
-    } else {
-      document.body.classList.remove('no-scroll');
-    }
 
-    // Tisztítás a komponens unmountolásakor
-    return () => {
-      document.body.classList.remove('no-scroll');
-    };
-  }, [loading]);
-  
+
   return (
     <SidebarProvider>
       <AppSidebar />
