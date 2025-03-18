@@ -362,9 +362,9 @@ export default function AddEmployeePage() {
 
           <div>
             {loading2 ? (
-            <div className="fixed inset-0 flex items-center justify-center bg-white">
-            <div className="animate-spin rounded-full h-8 w-8 border-2 border-gray-300 border-t-blue-500"></div>
-          </div>
+         <div className="flex items-center justify-center min-h-screen">
+         <div className="animate-spin rounded-full h-8 w-8 border border-slate-200 border-t-blue-500"></div>
+       </div>
             ) : (
               <>
                 {!hasStudents && <AppKonfig />}
