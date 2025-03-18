@@ -25,7 +25,8 @@ export default async function handler(req, res) {
       const aktido = new Date(
         new Date().toLocaleString('en-US', { timeZone: 'Europe/Budapest' })
       );
-
+      console.log(`Aktuális id: ${studentid}`);
+      console.log(`Aktuális access: ${studentaccess}`);
       console.log(`Aktuális idő: ${aktido}`);
       console.log(`Lejárati idő: ${expiresAt}`);
 
