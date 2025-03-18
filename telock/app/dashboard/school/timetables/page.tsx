@@ -105,6 +105,14 @@ interface lessonTimes {
   end: string;
 }
 
+const getWeekStartAndEnd = (date: Date) => {
+  const startOfWeek2 = new Date(date);
+  startOfWeek2.setDate(date.getDate() - date.getDay() + (date.getDay() === 0 ? -6 : 1)); // Hétfővel kezdjük a hetet
+  const endOfWeek = new Date(startOfWeek2);
+  endOfWeek.setDate(startOfWeek2.getDate() + 6);
+
+  return { startOfWeek2, endOfWeek };
+};
 
 const Calendar: React.FC = () => {
   const [systemClose, setSystemClose] = useState<boolean>(false);
@@ -597,6 +605,8 @@ const Calendar: React.FC = () => {
     return null;
   }
 
+  const { startOfWeek2, endOfWeek } = getWeekStartAndEnd(currentDate);
+
 
   return (
     <SidebarProvider>
@@ -652,9 +662,11 @@ const Calendar: React.FC = () => {
           {/* <span>{tanevkezdes}</span>
   <span>{tanevvege}</span> */}
           <div className="calendar-header">
-            <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-              <span>{format(currentDate, 'yyyy MMMM', { locale: hu })}</span>
-            </h2>
+          <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+      <span>
+        {format(startOfWeek2, 'yyyy MMMM dd', { locale: hu })} - {format(endOfWeek, 'yyyy MMMM dd', { locale: hu })}
+      </span>
+    </h2>
             <div className="calendar-controls">
 
 
