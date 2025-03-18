@@ -266,7 +266,7 @@ const Calendar: React.FC = () => {
 
   // Tanárok kinyerése
   const teacherOptions = useMemo(() => {
-    return Array.from(new Set(employees.map((employee) => employee.teacher_name)));
+    return Array.from(new Set(employees.map((employee) => employee.short_name)));
   }, [employees]);
 
 
