@@ -472,7 +472,7 @@ export default function Page() {
 <div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
 
   {/* Tanítási év első napja */}
-  <div className="sm:w-1/2 w-full">
+  <div className="sm:w-1/2 w-full gap-3 sm:gap-3">
     <h2 className="text-lg font-semibold">Tanítási év első napja</h2>
     <p className="text-sm text-muted-foreground">
       Válassza ki a tanév első napját, majd mentse el.
@@ -760,8 +760,8 @@ variant="ghost"
               </p>
             </div>
          
-            <div className="w-full">  {/**<div className="w-full"> */}
-            <div className="flex justify-between items-start">{/**    <div className="flex justify-start sm:justify-end mb-3"> */}
+            <div >  {/**<div className="w-full"> */}
+            {/* <div className="flex justify-start sm:justify-end mb-3"> */}
                 <Dialog open={isDialogOpen2} onOpenChange={(isOpen) => setIsDialogOpen2(isOpen)}>
                   <DialogTrigger asChild>
                     <Button variant="outline">
@@ -895,7 +895,7 @@ variant="ghost"
                 )}
               </div>
             </div>
-          </div>
+          {/* </div> */}
 
 
 
