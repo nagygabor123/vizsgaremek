@@ -22,9 +22,7 @@ export default async function handler(req, res) {
       const studentid = student[0].student_id;
       const studentaccess = student[0].access;
       const expiresAt = new Date(student[0].expires_at); 
-      const aktido = new Date(
-        new Date().toLocaleString('en-US', { timeZone: 'Europe/Budapest' })
-      );
+      const aktido = new Date();
       console.log(`Aktuális id: ${studentid}`);
       console.log(`Aktuális access: ${studentaccess}`);
       console.log(`Aktuális idő: ${aktido}`);
@@ -38,20 +36,25 @@ export default async function handler(req, res) {
       const schedule = await scheduleResponse.json();
       const { first_class_start, last_class_end } = schedule;
       console.log(schedule);
-      const currentTime = aktido.toTimeString().slice(0, 5);
-      if (currentTime >= first_class_start && currentTime <= last_class_end) {
+
+      // Az aktuális időt és az órarendben szereplő időket is HH:MM:SS formátumra hozzuk
+      const currentTime = aktido.toLocaleTimeString('en-US', { hour12: false, timeZone: 'Europe/Budapest' });
+      const firstClassStartTime = first_class_start;
+      const lastClassEndTime = last_class_end;
+
+      console.log(`Aktuális idő: ${currentTime}`);
+      console.log(`Első óra kezdete: ${firstClassStartTime}`);
+      console.log(`Utolsó óra vége: ${lastClassEndTime}`);
+
+      if (currentTime >= firstClassStartTime && currentTime <= lastClassEndTime) {
         if (studentaccess == "nyithato" && expiresAt >= aktido) {
-          //if (aktido <= expiresAt) {
-            const lockerResult = await getLockerByRFID(rfid, sql);
+          const lockerResult = await getLockerByRFID(rfid, sql);
 
-            if (lockerResult.error) {
-              return res.status(lockerResult.status).json({ error: lockerResult.error });
-            }
+          if (lockerResult.error) {
+            return res.status(lockerResult.status).json({ error: lockerResult.error });
+          }
 
-            return res.status(200).send({ lockerId: lockerResult.lockerId });
-          /*} else{
-            return res.status(200).send("zarva");
-          }*/
+          return res.status(200).send({ lockerId: lockerResult.lockerId });
         } else {
           return res.status(200).send("zarva");
         }
