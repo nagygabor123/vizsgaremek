@@ -393,7 +393,17 @@ export default function Page() {
 
   {/*console.log("BreakDates:", yearSchedule?.breakDates);*/ }
 
-
+  useEffect(() => {
+    if (loading) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+  
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+    };
+  }, [loading]);
 
   return (
     <SidebarProvider>
