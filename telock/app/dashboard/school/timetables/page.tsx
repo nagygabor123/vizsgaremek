@@ -234,8 +234,11 @@ const Calendar: React.FC = () => {
 
 
   const [employees, setEmployees] = useState<any[]>([]);
-  const [selectedClass, setSelectedClass] = useState<string>('');
-  const [selectedTeacher, setSelectedTeacher] = useState<string>('');
+  //const [selectedClass, setSelectedClass] = useState<string>('');
+ // const [selectedTeacher, setSelectedTeacher] = useState<string>('');
+
+  const [selectedValue, setSelectedValue] = useState<string>('');
+
   const [schedule, setSchedule] = useState<any[]>([]);
 
   // Dolgozók (tanárok és osztályfőnökök) lekérése
@@ -273,14 +276,17 @@ const Calendar: React.FC = () => {
 
 
 
-
   useEffect(() => {
-    if (selectedClass) {
-      fetchClassTimetable(selectedClass);
-    } else if (selectedTeacher) {
-      fetchTeacherTimetable(selectedTeacher);
+    if (selectedValue) {
+      if (classOptions.includes(selectedValue)) {
+        // Ha az osztályok között van a kiválasztott érték
+        fetchClassTimetable(selectedValue);
+      } else if (teacherOptions.includes(selectedValue)) {
+        // Ha a tanárok között van a kiválasztott érték
+        fetchTeacherTimetable(selectedValue);
+      }
     }
-  }, [selectedClass, selectedTeacher]);
+  }, [selectedValue]);
 
   // Osztály órarendjének lekérése
   const fetchClassTimetable = async (className: string) => {
@@ -319,7 +325,6 @@ const Calendar: React.FC = () => {
       console.error('Error fetching teacher timetable:', error);
     }
   };
-
 
 
 
@@ -668,30 +673,25 @@ const Calendar: React.FC = () => {
                   </SelectGroup>
                 </SelectContent>
               </Select>*/}
-
-
-<Select value={selectedClass} onValueChange={setSelectedClass}>
-          <SelectTrigger className="col-span-3">
-            <SelectValue placeholder="Válasszon osztályt..." />
+ <Select value={selectedValue} onValueChange={setSelectedValue}>
+          <SelectTrigger>
+            <SelectValue placeholder="Válasszon..." />
           </SelectTrigger>
           <SelectContent>
-            {classOptions.map((className, index) => (
-              <SelectItem key={index} value={className}>
-                {className}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-<Select value={selectedTeacher} onValueChange={setSelectedTeacher}>
-          <SelectTrigger className="col-span-3">
-            <SelectValue placeholder="Válasszon tanárt..." />
-          </SelectTrigger>
-          <SelectContent>
-            {teacherOptions.map((teacherName, index) => (
-              <SelectItem key={index} value={teacherName}>
-                {teacherName}
-              </SelectItem>
-            ))}
+            <SelectGroup>
+              <SelectLabel>Osztályok</SelectLabel>
+              {classOptions.map((className, index) => (
+                <SelectItem key={index} value={className}>
+                  {className}
+                </SelectItem>
+              ))}
+              <SelectLabel>Tanárok</SelectLabel>
+              {teacherOptions.map((teacherName, index) => (
+                <SelectItem key={index} value={teacherName}>
+                  {teacherName}
+                </SelectItem>
+              ))}
+            </SelectGroup>
           </SelectContent>
         </Select>
 
