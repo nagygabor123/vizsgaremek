@@ -529,7 +529,7 @@ export default function Page() {
             </div>
 
             {/* Függőleges elválasztó */}
-            <div className="hidden sm:block mx-6 border-l border-muted-foreground h-auto self-stretch"></div>
+            <div className="hidden sm:block mx-4 h-auto self-stretch custom-thin-border"></div>
 
             {/* Tanítási év utolsó napja */}
             <div className="sm:w-1/2 w-full">
@@ -915,7 +915,7 @@ export default function Page() {
                 <Dialog open={isDialogOpen} onOpenChange={(isOpen) => setIsDialogOpen(isOpen)}>
                   <DialogTrigger asChild>
                     <Button variant="outline">
-                      <CalendarPlus className="w-4 h-4 inline-block mr-2" /> Új szünet hozzáadás
+                      <CalendarPlus className="w-4 h-4 inline-block" /> Új szünet hozzáadás
                     </Button>
                   </DialogTrigger>
                   <DialogContent
