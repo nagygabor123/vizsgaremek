@@ -205,6 +205,7 @@ const Calendar: React.FC = () => {
 //https://vizsgaremek-mocha.vercel.app/api/timetable/getTeacherTimetable?teacherName=${teacher}
 
 //PaZo
+/*
   const teacher = 'PaZo';
   useEffect(() => {
     async function fetchSchedule() {
@@ -228,7 +229,7 @@ const Calendar: React.FC = () => {
 
     fetchSchedule();
   }, []);
-
+*/
 
 
 
@@ -626,50 +627,7 @@ const Calendar: React.FC = () => {
         </header>
 
 
-        <div>
-      <div>
-        <h3>Válassz osztályt:</h3>
-        <Select value={selectedClass} onValueChange={setSelectedClass}>
-          <SelectTrigger className="col-span-3">
-            <SelectValue placeholder="Válassz osztályt..." />
-          </SelectTrigger>
-          <SelectContent>
-            {classOptions.map((className, index) => (
-              <SelectItem key={index} value={className}>
-                {className}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div>
-        <h3>Válassz tanárt:</h3>
-        <Select value={selectedTeacher} onValueChange={setSelectedTeacher}>
-          <SelectTrigger className="col-span-3">
-            <SelectValue placeholder="Válassz tanárt..." />
-          </SelectTrigger>
-          <SelectContent>
-            {teacherOptions.map((teacherName, index) => (
-              <SelectItem key={index} value={teacherName}>
-                {teacherName}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div>
-        <h2>Órarend</h2>
-        <ul>
-          {schedule.map((lesson, index) => (
-            <li key={index}>
-              {lesson.day} {lesson.start}-{lesson.end}: {lesson.subject} ({lesson.teacher}, {lesson.class})
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+  
 
 
         <div>
@@ -693,7 +651,11 @@ const Calendar: React.FC = () => {
               <span>{format(currentDate, 'yyyy MMMM', { locale: hu })}</span>
             </h2>
             <div className="calendar-controls">
-              <Select>
+
+
+
+
+              {/*<Select>
                 <SelectTrigger>
                   <SelectValue placeholder="Válasszon..." />
                 </SelectTrigger>
@@ -705,7 +667,36 @@ const Calendar: React.FC = () => {
                     <SelectItem value="kisPista">Kis Pista</SelectItem>
                   </SelectGroup>
                 </SelectContent>
-              </Select>
+              </Select>*/}
+
+
+<Select value={selectedClass} onValueChange={setSelectedClass}>
+          <SelectTrigger className="col-span-3">
+            <SelectValue placeholder="Válasszon osztályt..." />
+          </SelectTrigger>
+          <SelectContent>
+            {classOptions.map((className, index) => (
+              <SelectItem key={index} value={className}>
+                {className}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+<Select value={selectedTeacher} onValueChange={setSelectedTeacher}>
+          <SelectTrigger className="col-span-3">
+            <SelectValue placeholder="Válasszon tanárt..." />
+          </SelectTrigger>
+          <SelectContent>
+            {teacherOptions.map((teacherName, index) => (
+              <SelectItem key={index} value={teacherName}>
+                {teacherName}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
+
+
               <Button onClick={goToToday} variant="outline">Mai nap</Button>
               <Button variant="ghost" onClick={goToPrevious}><ChevronLeft /></Button>
               <Button variant="ghost" onClick={goToNext}><ChevronRight /></Button>
