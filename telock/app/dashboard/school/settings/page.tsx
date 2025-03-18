@@ -839,7 +839,7 @@ variant="ghost"
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
-                </div>
+             
               </div>
 
               <div className="rounded-xl border overflow-x-auto w-full">
@@ -1054,7 +1054,7 @@ variant="ghost"
            
           </div>
 
-          
+          </div>
 
       </SidebarInset>
     </SidebarProvider>
