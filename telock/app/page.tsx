@@ -12,7 +12,6 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { BadgeCheck, LayoutGrid } from "lucide-react";
- import Logout from "./logout";
 import { getServerSession } from "next-auth";
 import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button"
