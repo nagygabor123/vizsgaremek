@@ -469,12 +469,12 @@ export default function Page() {
           {/* <h1 className="text-2xl mb-10 font-semibold">Aktív tanév: 2024/2025</h1> */}
 
 
-          <div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
+          <div className="mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
 
             {/* Tanítási év első napja */}
-            <div className="sm:w-1/2 w-full gap-3 sm:gap-3">
+            <div className="sm:w-1/2 w-full">
               <h2 className="text-lg font-semibold">Tanítási év első napja</h2>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-muted-foreground mb-3">
                 Válassza ki a tanév első napját, majd mentse el.
               </p>
               <div className="space-y-3">
@@ -529,12 +529,12 @@ export default function Page() {
             </div>
 
             {/* Függőleges elválasztó */}
-            <Separator orientation="vertical" className="h-auto mx-4" />
+            <div className="hidden sm:block mx-4 border-l border-muted-foreground h-auto self-stretch"></div>
 
             {/* Tanítási év utolsó napja */}
             <div className="sm:w-1/2 w-full">
               <h2 className="text-lg font-semibold">Tanítási év utolsó napja</h2>
-              <p className="text-sm text-neutral-500">
+              <p className="text-sm text-muted-foreground mb-3">
                 Válassza ki a tanév utolsó napját, majd mentse el.
               </p>
               <div className="space-y-3">
@@ -756,7 +756,7 @@ export default function Page() {
               <div className="w-full sm:w-1/2">
                 <h2 className="text-lg font-semibold">Szombati tanítási napok</h2>
                 <p className="text-sm text-muted-foreground">
-                  Itt láthatóak a rendkívüli tanítási napok és.
+                  Itt láthatóak a szombati tanítási napok.
                 </p>
               </div>
 
@@ -813,7 +813,7 @@ export default function Page() {
                       </div>
 
                       <div className="grid gap-2">
-                        <Label htmlFor="position">Helyettesítő nap</Label>
+                        <Label htmlFor="position">Órarendi nap</Label>
                         <Select
                           value={newPlusDate.replace_day}
                           onValueChange={(value) => setNewPlusDate({ ...newPlusDate, replace_day: value })}
@@ -849,7 +849,7 @@ export default function Page() {
                     <thead className="text-center text-sm text-neutral-500">
                       <tr>
                         <th className="p-2 cursor-pointer font-normal">Dátum</th>
-                        <th className="p-2 cursor-pointer font-normal">Helyettesítő nap</th>
+                        <th className="p-2 cursor-pointer font-normal">Órarendi nap</th>
                         <th className="p-2 cursor-pointer font-normal">Művelet</th>
                       </tr>
                     </thead>
