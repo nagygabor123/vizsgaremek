@@ -756,7 +756,7 @@ variant="ghost"
           <div className="w-full sm:w-1/2">
               <h2 className="text-lg font-semibold">Szombati tanítási napok</h2>
               <p className="text-sm text-muted-foreground">
-                Itt láthatóak a rendkívüli tanítási napok és a helyettesítő napok.
+                Itt láthatóak a rendkívüli tanítási napok és.
               </p>
             </div>
          
@@ -894,6 +894,7 @@ variant="ghost"
                   </div>
                 )}
               </div>
+            </div>
             </div>
           {/* </div> */}
 
@@ -1054,7 +1055,7 @@ variant="ghost"
            
           </div>
 
-          </div>
+         
           </div >
       </SidebarInset>
     </SidebarProvider>
