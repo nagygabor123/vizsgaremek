@@ -760,8 +760,8 @@ variant="ghost"
               </p>
             </div>
          
-            <div > {/**<div className="w-full"> */}
-              <div > {/**    <div className="flex justify-start sm:justify-end mb-3"> */}
+            <div className="w-full">  {/**<div className="w-full"> */}
+            <div className="flex justify-start sm:justify-end mb-3">{/**    <div className="flex justify-start sm:justify-end mb-3"> */}
                 <Dialog open={isDialogOpen2} onOpenChange={(isOpen) => setIsDialogOpen2(isOpen)}>
                   <DialogTrigger asChild>
                     <Button variant="outline">
