@@ -46,19 +46,18 @@
 }
 
 
-@keyframes progress {
+@keyframes smooth-spin {
   0% {
-    width: 0%;
+    transform: rotate(0deg);
   }
   100% {
-    width: 100%;
+    transform: rotate(360deg);
   }
 }
 
-.animate-progress {
-  animation: progress 2s linear infinite;
+.animate-smooth-spin {
+  animation: smooth-spin 1.5s linear infinite;
 }
-
 
 .custom-thin-border {
  

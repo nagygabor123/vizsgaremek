@@ -374,12 +374,9 @@ export default function Home() {
         
         <div>
     {loading ? (
-        <div className="flex flex-col items-center justify-center min-h-screen space-y-4">
-        <div className="w-64 h-2 bg-gray-200 rounded-full overflow-hidden">
-          <div className="h-full bg-blue-500 rounded-full animate-progress"></div>
-        </div>
-        <p className="text-lg font-semibold">Betöltés...</p>
-      </div>
+       <div className="flex items-center justify-center min-h-screen">
+       <div className="h-16 w-16 border-4 border-gray-300 border-t-blue-500 rounded-full animate-smooth-spin"></div>
+     </div>
     ) : (
       <>
         {!hasStudents && <AppKonfig />}
