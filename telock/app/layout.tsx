@@ -22,6 +22,11 @@ import "./globals.css";
 // import { GeistSans } from 'geist/font/sans';
 // import { GeistMono } from 'geist/font/mono';
 
+
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
+
+
 export const metadata: Metadata = {
   title: "telock",
   description: "Automatikus telefontároló rendszer",
@@ -35,7 +40,7 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions); // Session lekérése szerveroldalon
 
   return ( //className={`${geistSans.className} ${geistMono.className}`}
-    <html lang="en" > 
+    <html lang="en"className={`${GeistSans.variable} ${GeistMono.variable}`} > 
       <body>
         <Providers session={session}> {/* Providers használata */}
           <div > {/* Példa: className="min-h-screen bg-gray-100" */}
