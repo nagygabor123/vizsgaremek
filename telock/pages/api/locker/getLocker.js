@@ -22,6 +22,8 @@ export default async function handler(req, res) {
       const studentid = student[0].student_id;
       const studentaccess = student[0].access;
       const expiresAt = new Date(student[0].expires_at); 
+      const now = new Date();
+
       const budapestTime = new Date(
         now.toLocaleString('en-US', { timeZone: 'Europe/Budapest' })
       );
