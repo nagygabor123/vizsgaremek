@@ -34,6 +34,7 @@ export const authOptions = {
             id: user.id,
             short_name: user.short_name,
             full_name: user.full_name, // full_name hozzáadása
+            position: user.position,
           };
         }
 
@@ -44,9 +45,10 @@ export const authOptions = {
 // app/api/auth/[...nextauth]/auth-options.ts
 callbacks: {
     async session({ session, token }: { session: Session; token: TokenSet }) {
-      if (session.user && token.short_name && token.full_name) {
+      if (session.user && token.short_name && token.full_name && token.position) {
         session.user.short_name = token.short_name as string;
-        session.user.full_name = token.full_name as string; // full_name hozzáadása
+        session.user.full_name = token.full_name as string; 
+        session.user.position = token.position as string; 
       }
       return session;
     },
@@ -54,6 +56,7 @@ callbacks: {
       if (user) {
         token.short_name = user.short_name;
         token.full_name = user.full_name; // full_name hozzáadása
+        token.position = user.position; 
       }
       return token;
     },

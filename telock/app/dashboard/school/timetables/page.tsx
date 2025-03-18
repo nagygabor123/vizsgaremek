@@ -664,7 +664,7 @@ const Calendar: React.FC = () => {
           <div className="calendar-header">
           <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
       <span>
-        {format(startOfWeek2, 'yyyy MMMM dd', { locale: hu })} - {format(endOfWeek, 'yyyy MMMM dd', { locale: hu })}
+        {format(startOfWeek2, 'yyyy MMMM dd', { locale: hu })}. - {format(endOfWeek, 'yyyy MMMM dd', { locale: hu })}.
       </span>
     </h2>
             <div className="calendar-controls">

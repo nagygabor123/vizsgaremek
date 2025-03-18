@@ -121,12 +121,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </Avatar> 
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">{session?.user?.full_name}</span>
-                  <span className="truncate text-xs">Tanár</span>
+                  <span className="truncate text-xs">{session?.user?.position}</span>
                 </div>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuGroup>
+           {/* <DropdownMenuGroup>
             <DropdownMenuItem asChild>
           
               <Link href="/dashboard/settings">
@@ -136,7 +136,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
              
               </Link> 
               </DropdownMenuItem>
-            </DropdownMenuGroup>
+            </DropdownMenuGroup>*/}
             <DropdownMenuItem>
          
                 <LogOut />
@@ -268,7 +268,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
-            <SidebarMenuItem>
+          {/*  <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={isActive("/dashboard/school/logs")}>
                 <Link href="/dashboard/school/logs">
                   <>
@@ -277,7 +277,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   </>
                 </Link>
               </SidebarMenuButton>
-            </SidebarMenuItem>
+            </SidebarMenuItem>*/}
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
