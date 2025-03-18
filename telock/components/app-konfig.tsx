@@ -18,6 +18,7 @@ const SheetComponent: React.FC = () => {
   const [step, setStep] = useState(1);
   const [csvFile, setCsvFile] = useState<File | null>(null);
   const [csvMessage, setCsvMessage] = useState<string>('');
+  const [isSheetOpen, setIsSheetOpen] = useState(false); // Új állapot az ablak nyitás/zárás kezelésére
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const csvFileInputRef = useRef<HTMLInputElement>(null);
@@ -93,6 +94,7 @@ const SheetComponent: React.FC = () => {
       await handleCsvUpload();
     }
     setButtonVisible(false);
+    setIsSheetOpen(false); // Bezárjuk az ablakot
     window.location.reload();
   };
 
@@ -168,30 +170,31 @@ const SheetComponent: React.FC = () => {
     formData.append("file", file);
 
     try {
-      const response = await fetch("api/setup/ascToDatabase", {
+      const response = await fetch("https://vizsgaremek-mocha.vercel.app/api/setup/ascToDatabase", {
         method: "POST",
         body: formData,
       });
 
-      const result = await response.json();
-
-      if (result.error) {
-        setMessage("Hiba: " + result.error);
-      } else {
-        setMessage(result.message || "Sikeres feltöltés");
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Szerver hiba: ${response.status} - ${errorText}`);
       }
 
+      const result = await response.json();
+      setMessage(result.message || "Sikeres feltöltés");
       console.log("Feltöltési válasz:", result);
     } catch (error) {
-      setMessage("Hiba történt a feltöltés során");
+      if (error instanceof Error) {
+        setMessage(`Hiba történt: ${error.message}`);
+      } else {
+        setMessage("Hiba történt a feltöltés során");
+      }
       console.error("Hiba:", error);
     }
-
-    console.log("Fájl:", file);
   };
 
   return (
-    <Sheet>
+    <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
       <SheetTrigger asChild>
         <div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
           <div className="grid auto-rows-min gap-4 w-full">
@@ -201,7 +204,7 @@ const SheetComponent: React.FC = () => {
                 <p className="text-sm truncate ml-3 text-red-500">
                   A rendszer nincs beállítva. Kérjük, végezze el a szükséges konfigurációt!
                 </p>
-                <Button className="ml-auto" variant="destructive">
+                <Button className="ml-auto" variant="destructive" onClick={() => setIsSheetOpen(true)}>
                   Konfigurálás most
                 </Button>
               </div>
@@ -235,7 +238,7 @@ const SheetComponent: React.FC = () => {
               className="mt-5 border-dashed border-2 border-blue-400 rounded-md p-4 flex flex-col items-center justify-center min-h-[250px] cursor-pointer hover:bg-zinc-50 transition text-center"
             >
               <img
-                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNsb3VkLXVwbG9hZCI+PHBhdGggZD0iTTEyIDEzdjgiLz48cGF0aCBkPSJNNCAxNC44OTlBNyA3IDAgMSAxIDE1LjcxIDhoMS43OWE0LjUgNC41IDAgMCAxIDIuNSA4LjI0MiIvPjxwYXRoIGQ9Im04IDE3IDQtNCA0IDQiLz48L3N2Zz4="
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNsb3VkLXVwbG9hZCI+PHBhdGggZD0iTTEyIDEzdjgiLz48cGF0aCBkPSJNNCAxNC44OTlBNyA3IDAgMSAxIDE1LjcxIDhoMS43OWE0LjUgNC41IDAgMCAxIDIuNSA4LjI0"
                 alt="Upload Icon"
                 className="w-12 h-12 opacity-75 mx-auto"
               />
@@ -262,7 +265,7 @@ const SheetComponent: React.FC = () => {
               className="mt-5 border-dashed border-2 border-blue-400 rounded-md p-4 flex flex-col items-center justify-center min-h-[250px] cursor-pointer hover:bg-zinc-50 transition text-center"
             >
               <img
-                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNsb3VkLXVwbG9hZCI+PHBhdGggZD0iTTEyIDEzdjgiLz48cGF0aCBkPSJNNCAxNC44OTlBNyA3IDAgMSAxIDE1LjcxIDhoMS43OWE0LjUgNC41IDAgMCAxIDIuNSA4LjI0MiIvPjxwYXRoIGQ9Im04IDE3IDQtNCA0IDQiLz48L3N2Zz4="
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNsb3VkLXVwbG9hZCI+PHBhdGggZD0iTTEyIDEzdjgiLz48cGF0aCBkPSJNNCAxNC44OTlBNyA3IDAgMSAxIDE1LjcxIDhoMS43OWE0LjUgNC41IDAgMCAxIDIuNSA4LjI0"
                 alt="Upload Icon"
                 className="w-12 h-12 opacity-75 mx-auto"
               />
