@@ -898,7 +898,7 @@ variant="ghost"
 
 
           <Separator />
-          <div className="mt-5 mb-5 flex flex-col items-start">
+          <div className="mt-5 mb-5 flex flex-col gap-3 sm:gap-3">
           <div className="flex justify-between items-start">
             <div className="w-full sm:w-1/2">
               <h2 className="text-lg font-semibold">Tanítási szünetek</h2>
