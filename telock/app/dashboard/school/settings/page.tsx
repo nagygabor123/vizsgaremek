@@ -469,9 +469,9 @@ export default function Page() {
           {/* <h1 className="text-2xl mb-10 font-semibold">Aktív tanév: 2024/2025</h1> */}
 
 
-          <div className="mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
+          <div className="mb-5 flex flex-col sm:flex-row items-start"> 
 
-            {/* Tanítási év első napja */}
+            {/* gap-6 sm:gap-10 */}
             <div className="sm:w-1/2 w-full">
               <h2 className="text-lg font-semibold">Tanítási év első napja</h2>
               <p className="text-sm text-muted-foreground mb-3">
@@ -529,7 +529,7 @@ export default function Page() {
             </div>
 
             {/* Függőleges elválasztó */}
-            <div className="hidden sm:block mx-4 border-l border-muted-foreground h-auto self-stretch"></div>
+            <div className="hidden sm:block mx-10 border border-slate-500 h-auto self-stretch"></div>
 
             {/* Tanítási év utolsó napja */}
             <div className="sm:w-1/2 w-full">
