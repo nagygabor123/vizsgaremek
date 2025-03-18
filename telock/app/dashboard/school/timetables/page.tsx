@@ -647,9 +647,9 @@ const Calendar: React.FC = () => {
 
         <div>
           {loading ? (
-        <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-8 w-8 border border-slate-200 border-t-blue-500"></div>
-      </div>
+     <div className="flex items-center justify-center min-h-screen">
+     <div className="animate-spin rounded-full h-8 w-8 border border-gray-300 border-t-blue-500"></div>
+   </div>
           ) : (
             <>
               {!hasStudents && <AppKonfig />}
