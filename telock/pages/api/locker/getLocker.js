@@ -41,7 +41,7 @@ export default async function handler(req, res) {
 
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
         if (studentaccess === "nyithato") {
-          if (aktido <= expiresAt) {
+          //if (aktido <= expiresAt) {
             const lockerResult = await getLockerByRFID(rfid, sql);
 
             if (lockerResult.error) {
@@ -49,9 +49,9 @@ export default async function handler(req, res) {
             }
 
             return res.status(200).send({ lockerId: lockerResult.lockerId });
-          } else{
+          /*} else{
             return res.status(200).send("zarva");
-          }
+          }*/
         } else {
           return res.status(200).send("zarva");
         }
