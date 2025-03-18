@@ -18,18 +18,17 @@ export default async function handler(req, res) {
     const budapestTime = new Date(
       now.toLocaleString('en-US', { timeZone: 'Europe/Budapest' })
     );
-
+    
     budapestTime.setMinutes(budapestTime.getMinutes() + 5);
-    const expiresAt = budapestTime.toLocaleTimeString('hu-HU', { hour12: false }).slice(0, 5);
-    console.log(expiresAt); // Pl.: "13:25"
-
-  
+    const expiresAt = budapestTime.toISOString().slice(0, 19).replace("T", " ");
+    
     const updateResult = await sql(
       `UPDATE students 
        SET access = $1, expires_at = $2 
        WHERE student_id = $3`,
       ['nyithato', expiresAt, student]
     );
+    
   
     if (updateResult.rowCount === 0) {
       return res.status(404).json({ message: "Student not found" });
