@@ -469,7 +469,7 @@ export default function Page() {
 {/* <h1 className="text-2xl mb-10 font-semibold">Aktív tanév: 2024/2025</h1> */}
 
 
-<div className="mt-5 mb-5 flex flex-col  items-start">
+<div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
 
   {/* Tanítási év első napja */}
   <div className="sm:w-1/2 w-full">
@@ -534,7 +534,7 @@ export default function Page() {
   {/* Tanítási év utolsó napja */}
   <div className="sm:w-1/2 w-full">
     <h2 className="text-lg font-semibold">Tanítási év utolsó napja</h2>
-    <p className="text-sm text-muted-foreground">
+    <p className="text-sm text-neutral-500">
       Válassza ki a tanév utolsó napját, majd mentse el.
     </p>
     <div className="space-y-3">
@@ -839,7 +839,7 @@ variant="ghost"
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
-    
+                </div>
               </div>
 
               <div className="rounded-xl border overflow-x-auto w-full">
@@ -1054,7 +1054,7 @@ variant="ghost"
            
           </div>
 
-          </div>
+          
 
       </SidebarInset>
     </SidebarProvider>
