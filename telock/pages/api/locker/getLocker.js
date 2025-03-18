@@ -39,14 +39,13 @@ export default async function handler(req, res) {
 
       // Az aktuális időt és az órarendben szereplő időket is HH:MM:SS formátumra hozzuk
       const currentTime = aktido.toLocaleTimeString('en-US', { hour12: false, timeZone: 'Europe/Budapest' });
-      const firstClassStartTime = first_class_start;
-      const lastClassEndTime = last_class_end;
+
 
       console.log(`Aktuális idő: ${currentTime}`);
-      console.log(`Első óra kezdete: ${firstClassStartTime}`);
-      console.log(`Utolsó óra vége: ${lastClassEndTime}`);
+      console.log(`Első óra kezdete: ${first_class_start}`);
+      console.log(`Utolsó óra vége: ${last_class_end}`);
 
-      if (currentTime >= firstClassStartTime && currentTime <= lastClassEndTime) {
+      if (currentTime >= first_class_start && currentTime <= last_class_end) {
         if (studentaccess === "nyithato" && expiresAt > aktido) {
           const lockerResult = await getLockerByRFID(rfid, sql);
 
