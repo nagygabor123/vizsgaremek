@@ -86,7 +86,7 @@ import {
 
 
 export default function Page() {
-
+  const [loading, setLoading] = useState(true); // Betöltési állapot
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDialogOpen2, setIsDialogOpen2] = useState(false);
   const [isDialogOpen3, setIsDialogOpen3] = useState(false);
@@ -153,6 +153,8 @@ export default function Page() {
       setSchoolEndEdit(schoolEnd.schoolYearEnd.end);
     } catch (error) {
       console.error('Error fetching year schedule:', error);
+    } finally {
+      setLoading(false); // Lekérés vége
     }
   };
 
@@ -441,6 +443,18 @@ export default function Page() {
 
           </div>
         </div>*/}
+
+<div>
+  {loading ? (
+    <div className="flex items-center justify-center min-h-screen">
+      <p className="text-lg font-semibold">Betöltés...</p>
+    </div>
+  ) : (
+    <>
+      {/* Üres tartalom, semmi nem jelenik meg a betöltés után */}
+    </>
+  )}
+</div>
 
         <div className="p-4">
 
