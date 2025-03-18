@@ -760,7 +760,7 @@ variant="ghost"
               </p>
             </div>
          
-
+            <div >
               <div >
                 <Dialog open={isDialogOpen2} onOpenChange={(isOpen) => setIsDialogOpen2(isOpen)}>
                   <DialogTrigger asChild>
@@ -1055,7 +1055,7 @@ variant="ghost"
           </div>
 
           </div>
-
+          </div >
       </SidebarInset>
     </SidebarProvider>
   );
