@@ -35,7 +35,7 @@ export default async function handler(req, res) {
 
       const schedule = await scheduleResponse.json();
       const { first_class_start, last_class_end } = schedule[0] || {};
-      const currentTime = new Date(aktido).toLocaleTimeString('en-US', { hour12: false, timeZone: 'Europe/Budapest', hour: '2-digit', minute: '2-digit' });
+      const currentTime = aktido;
       console.log(schedule);
       console.log(`Aktuális idő: ${currentTime}`);
       console.log(`Első óra kezdete: ${schedule.first_class_start}`);
