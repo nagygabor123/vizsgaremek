@@ -45,6 +45,21 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+
+@keyframes progress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.animate-progress {
+  animation: progress 2s linear infinite;
+}
+
+
 .custom-thin-border {
  
   border-left: 1px solid #e4e8ef;
