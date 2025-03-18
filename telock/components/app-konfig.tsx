@@ -171,10 +171,10 @@ const SheetComponent: React.FC = () => {
             {isButtonVisible && ( 
               <div className="min-h-[60px] rounded-xl bg-red-100 flex items-center px-4 w-full box-border overflow-hidden">
                 <TriangleAlert className="text-red-500" />
-                <p className="text-sm truncate ml-3">
+                <p className="text-sm truncate ml-3 text-red-500">
                 A rendszer nincs beállítva. Kérjük, végezze el a szükséges konfigurációt!
                 </p>
-                <Button className="ml-auto" variant="link">
+                <Button className="ml-auto" variant="destructive">
           Konfigurálás most
         </Button>
             
