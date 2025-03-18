@@ -38,8 +38,8 @@ export default async function handler(req, res) {
       const currentTime = aktido.toLocaleTimeString('en-US', { hour12: false, timeZone: 'Europe/Budapest', hour: '2-digit', minute: '2-digit' });
       console.log(schedule);
       console.log(`Aktuális idő: ${currentTime}`);
-      console.log(`Első óra kezdete: ${first_class_start}`);
-      console.log(`Utolsó óra vége: ${last_class_end}`);
+      console.log(`Első óra kezdete: ${schedule.first_class_start}`);
+      console.log(`Utolsó óra vége: ${schedule.last_class_end}`);
 
       // && expiresAt > aktido
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
