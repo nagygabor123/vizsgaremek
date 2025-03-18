@@ -22,15 +22,7 @@ export default async function handler(req, res) {
       const studentid = student[0].student_id;
       const studentaccess = student[0].access;
       const expiresAt = new Date(student[0].expires_at); 
-      const now = new Date();
-
-      const budapestTime = new Date(
-        now.toLocaleString('en-US', { timeZone: 'Europe/Budapest' })
-      );
-      
-      budapestTime.setMinutes(budapestTime.getMinutes() + 5);
-      const aktido = budapestTime.toISOString().slice(0, 19).replace("T", " ");
-
+      const aktido = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Budapest' }));
       console.log(`Aktuális id: ${studentid}`);
       console.log(`Aktuális access: ${studentaccess}`);
       console.log(`Aktuális idő: ${aktido.toISOString()}`);
@@ -43,7 +35,7 @@ export default async function handler(req, res) {
 
       const schedule = await scheduleResponse.json();
       const { first_class_start, last_class_end } = schedule;
-      const currentTime = aktido;
+      const currentTime = aktido.toLocaleTimeString('en-US', { hour12: false, timeZone: 'Europe/Budapest', hour: '2-digit', minute: '2-digit' });
       console.log(schedule);
       console.log(`Aktuális idő: ${currentTime}`);
       console.log(`Első óra kezdete: ${first_class_start}`);
