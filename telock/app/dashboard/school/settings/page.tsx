@@ -466,139 +466,139 @@ export default function Page() {
           <button onClick={() => updateSchoolYear('kezd', schoolStartEdit)}>Mentés</button> */}
 
 
-{/* <h1 className="text-2xl mb-10 font-semibold">Aktív tanév: 2024/2025</h1> */}
+          {/* <h1 className="text-2xl mb-10 font-semibold">Aktív tanév: 2024/2025</h1> */}
 
 
-<div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
+          <div className="mt-5 mb-5 flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
 
-  {/* Tanítási év első napja */}
-  <div className="sm:w-1/2 w-full gap-3 sm:gap-3">
-    <h2 className="text-lg font-semibold">Tanítási év első napja</h2>
-    <p className="text-sm text-muted-foreground">
-      Válassza ki a tanév első napját, majd mentse el.
-    </p>
-    <div className="space-y-3">
-      <div className="space-y-2">
-        <div className="space-y-1">
-          <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className={cn(
-                    "justify-start text-left font-normal w-full sm:w-auto",
-                    !startDate && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon />
-                  {startDate
-                    ? format(startDate, "PPP")
-                    : schoolStartEdit
-                      ? format(schoolStartEdit, "PPP")
-                      : <span>Válasszon egy dátumot</span>}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={startDate}
-                  onSelect={(date) => setStartDate(date ?? undefined)}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
+            {/* Tanítási év első napja */}
+            <div className="sm:w-1/2 w-full gap-3 sm:gap-3">
+              <h2 className="text-lg font-semibold">Tanítási év első napja</h2>
+              <p className="text-sm text-muted-foreground">
+                Válassza ki a tanév első napját, majd mentse el.
+              </p>
+              <div className="space-y-3">
+                <div className="space-y-2">
+                  <div className="space-y-1">
+                    <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant="outline"
+                            className={cn(
+                              "justify-start text-left font-normal w-full sm:w-auto",
+                              !startDate && "text-muted-foreground"
+                            )}
+                          >
+                            <CalendarIcon />
+                            {startDate
+                              ? format(startDate, "PPP")
+                              : schoolStartEdit
+                                ? format(schoolStartEdit, "PPP")
+                                : <span>Válasszon egy dátumot</span>}
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={startDate}
+                            onSelect={(date) => setStartDate(date ?? undefined)}
+                            initialFocus
+                          />
+                        </PopoverContent>
+                      </Popover>
 
-            <Button
-              onClick={async () => {
-                if (!startDate) return;
-                const formattedDate = format(startDate, "yyyy-MM-dd");
-                await updateSchoolYear("kezd", formattedDate);
-                await fetchYearSchedule();
-                setStartDate(undefined);
-              }}
-              disabled={!startDate}
-              variant="outline"
-              size="icon"
-            >
-              <SaveAll className="w-4 h-4 inline-block" />
-            </Button>
+                      <Button
+                        onClick={async () => {
+                          if (!startDate) return;
+                          const formattedDate = format(startDate, "yyyy-MM-dd");
+                          await updateSchoolYear("kezd", formattedDate);
+                          await fetchYearSchedule();
+                          setStartDate(undefined);
+                        }}
+                        disabled={!startDate}
+                        variant="outline"
+                        size="icon"
+                      >
+                        <SaveAll className="w-4 h-4 inline-block" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Függőleges elválasztó */}
+            <Separator orientation="vertical" className="h-auto mx-4" />
+
+            {/* Tanítási év utolsó napja */}
+            <div className="sm:w-1/2 w-full">
+              <h2 className="text-lg font-semibold">Tanítási év utolsó napja</h2>
+              <p className="text-sm text-neutral-500">
+                Válassza ki a tanév utolsó napját, majd mentse el.
+              </p>
+              <div className="space-y-3">
+                <div className="space-y-2">
+                  <div className="space-y-1">
+                    <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant="outline"
+                            className={cn(
+                              "justify-start text-left font-normal w-full sm:w-auto",
+                              !endDate && "text-muted-foreground"
+                            )}
+                          >
+                            <CalendarIcon />
+                            {endDate
+                              ? format(endDate, "PPP")
+                              : schoolEndEdit
+                                ? format(schoolEndEdit, "PPP")
+                                : <span>Válasszon egy dátumot</span>}
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={endDate}
+                            onSelect={(date) => setEndDate(date ?? undefined)}
+                            initialFocus
+                          />
+                        </PopoverContent>
+                      </Popover>
+
+                      <Button
+                        onClick={async () => {
+                          if (!endDate) return;
+                          const formattedDate = format(endDate, "yyyy-MM-dd");
+                          await updateSchoolYear("veg", formattedDate);
+                          await fetchYearSchedule();
+                          setEndDate(undefined);
+                        }}
+                        disabled={!endDate}
+                        variant="outline"
+                        size="icon"
+                      >
+                        <SaveAll className="w-4 h-4 inline-block" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  {/* Függőleges elválasztó */}
-  <Separator orientation="vertical" className="h-auto mx-4" />
-
-  {/* Tanítási év utolsó napja */}
-  <div className="sm:w-1/2 w-full">
-    <h2 className="text-lg font-semibold">Tanítási év utolsó napja</h2>
-    <p className="text-sm text-neutral-500">
-      Válassza ki a tanév utolsó napját, majd mentse el.
-    </p>
-    <div className="space-y-3">
-      <div className="space-y-2">
-        <div className="space-y-1">
-          <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className={cn(
-                    "justify-start text-left font-normal w-full sm:w-auto",
-                    !endDate && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon />
-                  {endDate
-                    ? format(endDate, "PPP")
-                    : schoolEndEdit
-                      ? format(schoolEndEdit, "PPP")
-                      : <span>Válasszon egy dátumot</span>}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={endDate}
-                  onSelect={(date) => setEndDate(date ?? undefined)}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
-
-            <Button
-              onClick={async () => {
-                if (!endDate) return;
-                const formattedDate = format(endDate, "yyyy-MM-dd");
-                await updateSchoolYear("veg", formattedDate);
-                await fetchYearSchedule();
-                setEndDate(undefined);
-              }}
-              disabled={!endDate}
-              variant="outline"
-              size="icon"
-            >
-              <SaveAll className="w-4 h-4 inline-block" />
-            </Button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 
           <Separator />
           <div className="mt-5 mb-5 flex flex-col gap-3 sm:gap-3">
-          <div className="flex justify-between items-start">
-          <div className="w-full sm:w-1/2">
-              <h2 className="text-lg font-semibold">Tanítás nélküli munkanapok</h2>
-              <p className="text-sm text-muted-foreground">
-                Itt láthatóak azok a napok, amikor nincs tanítás.
-              </p>
-            </div>
+            <div className="flex justify-between items-start">
+              <div className="w-full sm:w-1/2">
+                <h2 className="text-lg font-semibold">Tanítás nélküli munkanapok</h2>
+                <p className="text-sm text-muted-foreground">
+                  Itt láthatóak azok a napok, amikor nincs tanítás.
+                </p>
+              </div>
 
               <div>
                 <Dialog
@@ -650,12 +650,12 @@ export default function Page() {
                               selected={selectedDate ? new Date(selectedDate) : undefined}
                               onSelect={(date) => {
                                 if (!date) return;
-                              
-                                const originalDate = format(date, "yyyy-MM-dd"); 
+
+                                const originalDate = format(date, "yyyy-MM-dd");
                                 const whichDay = originalDate; // Nem vonunk le egy napot!
                                 // const replaceDayDate = parseDate(originalDate);
                                 // const replaceDay = replaceDayDate.toISOString().split("T")[0];
-                              
+
                                 setSelectedDate(originalDate);
                                 setNewNo({
                                   ...newNo,
@@ -664,7 +664,7 @@ export default function Page() {
                                   nev: whichDay
                                 });
                               }}
-                              
+
                               initialFocus
                             />
                           </DropdownMenuContent>
@@ -682,38 +682,38 @@ export default function Page() {
                   </DialogContent>
                 </Dialog>
               </div>
-              </div>
+            </div>
 
-              {/* Görgethető táblázat kis képernyőn */}
-              <div className="rounded-xl border overflow-x-auto w-full">
-                {yearSchedule?.noSchool?.length > 0 ? (
-                  <table className="w-full min-w-max">
-                    <thead className="text-center text-sm text-neutral-500">
-                      <tr>
-                        <th className="p-2 cursor-pointer font-normal">Dátum</th>
-                        <th className="p-2 cursor-pointer font-normal">Művelet</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {yearSchedule.noSchool.map((noSchoolPeriod: any) => (
-                        <tr key={noSchoolPeriod.id} className="text-center border-t">
-                          <td className="p-1">{noSchoolPeriod.end}</td>
-                          <td className="p-1">
+            {/* Görgethető táblázat kis képernyőn */}
+            <div className="rounded-xl border overflow-x-auto w-full">
+              {yearSchedule?.noSchool?.length > 0 ? (
+                <table className="w-full min-w-max">
+                  <thead className="text-center text-sm text-neutral-500">
+                    <tr>
+                      <th className="p-2 cursor-pointer font-normal">Dátum</th>
+                      <th className="p-2 cursor-pointer font-normal">Művelet</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {yearSchedule.noSchool.map((noSchoolPeriod: any) => (
+                      <tr key={noSchoolPeriod.id} className="text-center border-t">
+                        <td className="p-1">{noSchoolPeriod.end}</td>
+                        <td className="p-1">
                           <AlertDialog>
                             <AlertDialogTrigger>
-                            <Button
+                              <Button
 
-variant="ghost"
+                                variant="ghost"
 
->
-<Trash2 className="w-4 h-4 inline-block" />
-</Button>
+                              >
+                                <Trash2 className="w-4 h-4 inline-block" />
+                              </Button>
                             </AlertDialogTrigger>
                             <AlertDialogContent>
                               <AlertDialogHeader>
                                 <AlertDialogTitle>Biztosan törölni szeretné ezt a napot?</AlertDialogTitle>
                                 <AlertDialogDescription>
-                                Ez a művelet nem vonható vissza. A tanítási nélküli munkanap véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
+                                  Ez a művelet nem vonható vissza. A tanítási nélküli munkanap véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
                                 </AlertDialogDescription>
                               </AlertDialogHeader>
                               <AlertDialogFooter>
@@ -722,26 +722,26 @@ variant="ghost"
                               </AlertDialogFooter>
                             </AlertDialogContent>
                           </AlertDialog>
-                            {/* <Button
+                          {/* <Button
 
                               variant="ghost"
                               onClick={() => handleDeletePlusBreak(noSchoolPeriod.id)}
                             >
                               <Trash2 className="w-4 h-4 inline-block" />
                             </Button> */}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                ) : (
-                  <div className="text-center p-3 text-neutral-500">
-                    Nincs megjelenítendő tanítási nélküli munkanap
-                  </div>
-                )}
-              </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <div className="text-center p-3 text-neutral-500">
+                  Nincs megjelenítendő tanítási nélküli munkanap
+                </div>
+              )}
             </div>
-          
+          </div>
+
 
 
 
@@ -752,16 +752,16 @@ variant="ghost"
 
           <Separator />
           <div className="mt-5 mb-5 flex flex-col gap-3 sm:gap-3">
-          <div className="flex justify-between items-start">
-          <div className="w-full sm:w-1/2">
-              <h2 className="text-lg font-semibold">Szombati tanítási napok</h2>
-              <p className="text-sm text-muted-foreground">
-                Itt láthatóak a rendkívüli tanítási napok és.
-              </p>
-            </div>
-         
-            <div >  {/**<div className="w-full"> */}
-            {/* <div className="flex justify-start sm:justify-end mb-3"> */}
+            <div className="flex justify-between items-start">
+              <div className="w-full sm:w-1/2">
+                <h2 className="text-lg font-semibold">Szombati tanítási napok</h2>
+                <p className="text-sm text-muted-foreground">
+                  Itt láthatóak a rendkívüli tanítási napok és.
+                </p>
+              </div>
+
+              <div >  {/**<div className="w-full"> */}
+                {/* <div className="flex justify-start sm:justify-end mb-3"> */}
                 <Dialog open={isDialogOpen2} onOpenChange={(isOpen) => setIsDialogOpen2(isOpen)}>
                   <DialogTrigger asChild>
                     <Button variant="outline">
@@ -839,7 +839,8 @@ variant="ghost"
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
-             
+
+              </div>
               </div>
 
               <div className="rounded-xl border overflow-x-auto w-full">
@@ -860,25 +861,25 @@ variant="ghost"
                           <td className="p-1">
 
 
-                          <AlertDialog>
-                            <AlertDialogTrigger>
-                            <Button variant="ghost">
-                              <Trash2 className="w-4 h-4 inline-block" />
-                            </Button>
-                            </AlertDialogTrigger>
-                            <AlertDialogContent>
-                              <AlertDialogHeader>
-                                <AlertDialogTitle>Biztosan törölni szeretné ezt a napot?</AlertDialogTitle>
-                                <AlertDialogDescription>
-                                Ez a művelet nem vonható vissza. A szombati tanítási nap véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
-                                </AlertDialogDescription>
-                              </AlertDialogHeader>
-                              <AlertDialogFooter>
-                                <AlertDialogCancel>Mégse</AlertDialogCancel>
-                                <AlertDialogAction onClick={() => handleDeletePlusBreak(plusDate.id)}>Véglegesítés</AlertDialogAction>
-                              </AlertDialogFooter>
-                            </AlertDialogContent>
-                          </AlertDialog>
+                            <AlertDialog>
+                              <AlertDialogTrigger>
+                                <Button variant="ghost">
+                                  <Trash2 className="w-4 h-4 inline-block" />
+                                </Button>
+                              </AlertDialogTrigger>
+                              <AlertDialogContent>
+                                <AlertDialogHeader>
+                                  <AlertDialogTitle>Biztosan törölni szeretné ezt a napot?</AlertDialogTitle>
+                                  <AlertDialogDescription>
+                                    Ez a művelet nem vonható vissza. A szombati tanítási nap véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
+                                  </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                  <AlertDialogCancel>Mégse</AlertDialogCancel>
+                                  <AlertDialogAction onClick={() => handleDeletePlusBreak(plusDate.id)}>Véglegesítés</AlertDialogAction>
+                                </AlertDialogFooter>
+                              </AlertDialogContent>
+                            </AlertDialog>
 
                             {/* <Button variant="ghost" onClick={() => handleDeletePlusBreak(plusDate.id)}>
                               <Trash2 className="w-4 h-4 inline-block" />
@@ -895,20 +896,20 @@ variant="ghost"
                 )}
               </div>
             </div>
-            </div>
+       
           {/* </div> */}
 
 
 
           <Separator />
           <div className="mt-5 mb-5 flex flex-col gap-3 sm:gap-3">
-          <div className="flex justify-between items-start">
-            <div className="w-full sm:w-1/2">
-              <h2 className="text-lg font-semibold">Tanítási szünetek</h2>
-              <p className="text-sm text-muted-foreground">Az iskola hivatalos szünetei és időtartamuk.</p>
-            </div>
+            <div className="flex justify-between items-start">
+              <div className="w-full sm:w-1/2">
+                <h2 className="text-lg font-semibold">Tanítási szünetek</h2>
+                <p className="text-sm text-muted-foreground">Az iskola hivatalos szünetei és időtartamuk.</p>
+              </div>
 
-           
+
               <div >
 
                 <Dialog open={isDialogOpen} onOpenChange={(isOpen) => setIsDialogOpen(isOpen)}>
@@ -1000,63 +1001,63 @@ variant="ghost"
                 </Dialog>
 
               </div>
-              </div>
+            </div>
 
-              <div className="rounded-xl border overflow-x-auto w-full">
-                {yearSchedule?.breakDates?.filter((breakPeriod: any) => breakPeriod.type === "szunet").length > 0 ? (
-                  <table className="min-w-full table-auto">
-                    <thead className="text-center text-sm text-neutral-500">
-                      <tr>
-                        <th className="p-2 cursor-pointer font-normal">Név</th>
-                        <th className="p-2 cursor-pointer font-normal">Időtartam</th>
-                        <th className="p-2 cursor-pointer font-normal">Művelet</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {yearSchedule.breakDates
-                        .filter((breakPeriod: any) => breakPeriod.type === "szunet")
-                        .map((breakPeriod: any) => (
-                          <tr key={breakPeriod.id} className="text-center border-t">
-                            <td className="p-1 truncate">{breakPeriod.name}</td>
-                            <td className="p-1">{breakPeriod.start} - {breakPeriod.end}</td>
-                            <td className="p-1">
+            <div className="rounded-xl border overflow-x-auto w-full">
+              {yearSchedule?.breakDates?.filter((breakPeriod: any) => breakPeriod.type === "szunet").length > 0 ? (
+                <table className="min-w-full table-auto">
+                  <thead className="text-center text-sm text-neutral-500">
+                    <tr>
+                      <th className="p-2 cursor-pointer font-normal">Név</th>
+                      <th className="p-2 cursor-pointer font-normal">Időtartam</th>
+                      <th className="p-2 cursor-pointer font-normal">Művelet</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {yearSchedule.breakDates
+                      .filter((breakPeriod: any) => breakPeriod.type === "szunet")
+                      .map((breakPeriod: any) => (
+                        <tr key={breakPeriod.id} className="text-center border-t">
+                          <td className="p-1 truncate">{breakPeriod.name}</td>
+                          <td className="p-1">{breakPeriod.start} - {breakPeriod.end}</td>
+                          <td className="p-1">
                             <AlertDialog>
-                            <AlertDialogTrigger>
-                            <Button variant="ghost">
-                                <Trash2 className="w-4 h-4 inline-block" />
-                              </Button> 
-                            </AlertDialogTrigger>
-                            <AlertDialogContent>
-                              <AlertDialogHeader>
-                                <AlertDialogTitle>Biztosan törölni szeretné ezt a szünetet</AlertDialogTitle>
-                                <AlertDialogDescription>
-                                Ez a művelet nem vonható vissza. A szünet véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
-                                </AlertDialogDescription>
-                              </AlertDialogHeader>
-                              <AlertDialogFooter>
-                                <AlertDialogCancel>Mégse</AlertDialogCancel>
-                                <AlertDialogAction onClick={() => handleDeletePlusBreak(breakPeriod.id)}>Véglegesítés</AlertDialogAction>
-                              </AlertDialogFooter>
-                            </AlertDialogContent>
-                          </AlertDialog>
-                              {/* <Button variant="ghost" onClick={() => handleDeletePlusBreak(breakPeriod.id)}>
+                              <AlertDialogTrigger>
+                                <Button variant="ghost">
+                                  <Trash2 className="w-4 h-4 inline-block" />
+                                </Button>
+                              </AlertDialogTrigger>
+                              <AlertDialogContent>
+                                <AlertDialogHeader>
+                                  <AlertDialogTitle>Biztosan törölni szeretné ezt a szünetet</AlertDialogTitle>
+                                  <AlertDialogDescription>
+                                    Ez a művelet nem vonható vissza. A szünet véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
+                                  </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                  <AlertDialogCancel>Mégse</AlertDialogCancel>
+                                  <AlertDialogAction onClick={() => handleDeletePlusBreak(breakPeriod.id)}>Véglegesítés</AlertDialogAction>
+                                </AlertDialogFooter>
+                              </AlertDialogContent>
+                            </AlertDialog>
+                            {/* <Button variant="ghost" onClick={() => handleDeletePlusBreak(breakPeriod.id)}>
                                 <Trash2 className="w-4 h-4 inline-block" />
                               </Button> */}
-                            </td>
-                          </tr>
-                        ))}
-                    </tbody>
-                  </table>
-                ) : (
-                  <div className="text-center p-3 text-neutral-500">Nincs megjelenítendő tanítási szünet</div>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              ) : (
+                <div className="text-center p-3 text-neutral-500">Nincs megjelenítendő tanítási szünet</div>
 
-                )}
-              </div>
-           
+              )}
+            </div>
+
           </div>
 
-         
-          </div >
+
+        </div >
       </SidebarInset>
     </SidebarProvider>
   );
