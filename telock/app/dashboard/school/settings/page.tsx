@@ -393,7 +393,19 @@ export default function Page() {
 
   {/*console.log("BreakDates:", yearSchedule?.breakDates);*/ }
 
+  useEffect(() => {
+    if (loading) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
 
+    // Tisztítás a komponens unmountolásakor
+    return () => {
+      document.body.classList.remove('no-scroll');
+    };
+  }, [loading]);
+  
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -446,9 +458,9 @@ export default function Page() {
 
 <div>
   {loading ? (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="animate-spin rounded-full h-16 w-16 border-4 border-gray-300 border-t-blue-500"></div>
-    </div>
+  <div className="flex items-center justify-center min-h-screen">
+  <div className="animate-spin rounded-full h-8 w-8 border-2 border-gray-300 border-t-blue-500"></div>
+</div>
   ) : (
     <>
       {/* Üres tartalom, semmi nem jelenik meg a betöltés után */}
