@@ -55,7 +55,13 @@ export default async function handler(req, res) {
           return res.status(200).send("zarva");
         }
       } else {
-        return res.status(200).send("zarva");
+        const lockerResult = await getLockerByRFID(rfid, sql);
+
+          if (lockerResult.error) {
+            return res.status(lockerResult.status).json({ error: lockerResult.error });
+          }
+          return res.status(200).send({ lockerId: lockerResult.lockerId });
+
       }
     } catch (error) {
       console.error('Adatbazis error:', error);
