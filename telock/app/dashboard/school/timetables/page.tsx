@@ -4,7 +4,6 @@
 import { AppSidebar } from "@/components/app-sidebar"
 import { ChevronRight, ChevronLeft, Slash } from "lucide-react"
 
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -35,7 +34,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   format,
   startOfWeek,
@@ -111,7 +110,7 @@ const Calendar: React.FC = () => {
   const [systemClose, setSystemClose] = useState<boolean>(false);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isMobileView, setIsMobileView] = useState(false);
-  const [schedule, setSchedule] = useState<TimetableEntry[]>([]);
+  //const [schedule, setSchedule] = useState<TimetableEntry[]>([]);
   const [students, setStudents] = useState<Student[]>([]);
   const [modalInfo, setModalInfo] = useState<{ lesson: string; time: string; className: string } | null>(null);
   const [studentTimetable, setStudentTimetable] = useState<Timetable[]>([]);
@@ -204,6 +203,7 @@ const Calendar: React.FC = () => {
 
 //https://vizsgaremek-mocha.vercel.app/api/timetable/getClassTimetable?className=13.I
 //https://vizsgaremek-mocha.vercel.app/api/timetable/getTeacherTimetable?teacherName=${teacher}
+
 //PaZo
   const teacher = 'PaZo';
   useEffect(() => {
@@ -228,6 +228,107 @@ const Calendar: React.FC = () => {
 
     fetchSchedule();
   }, []);
+
+
+
+
+  const [employees, setEmployees] = useState<any[]>([]);
+  const [selectedClass, setSelectedClass] = useState<string>('');
+  const [selectedTeacher, setSelectedTeacher] = useState<string>('');
+  const [schedule, setSchedule] = useState<any[]>([]);
+
+  // Dolgozók (tanárok és osztályfőnökök) lekérése
+  const fetchEmployees = async () => {
+    try {
+      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getEmployees');
+      const data = await response.json();
+      if (response.ok) {
+        setEmployees(data);
+      } else {
+        console.error('Error fetching employees');
+      }
+    } catch (error) {
+      console.error('Error connecting to the server');
+    }
+  };
+
+  useEffect(() => {
+    fetchEmployees();
+  }, []);
+
+
+
+
+  // Osztályok kinyerése
+  const classOptions = useMemo(() => {
+    return Array.from(new Set(employees.map((employee) => employee.osztalyfonok)));
+  }, [employees]);
+
+  // Tanárok kinyerése
+  const teacherOptions = useMemo(() => {
+    return Array.from(new Set(employees.map((employee) => employee.teacher_name)));
+  }, [employees]);
+
+
+
+
+
+  useEffect(() => {
+    if (selectedClass) {
+      fetchClassTimetable(selectedClass);
+    } else if (selectedTeacher) {
+      fetchTeacherTimetable(selectedTeacher);
+    }
+  }, [selectedClass, selectedTeacher]);
+
+  // Osztály órarendjének lekérése
+  const fetchClassTimetable = async (className: string) => {
+    try {
+      const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/getClassTimetable?className=${className}`);
+      const data = await response.json();
+      const formattedData = data.map((lesson: any) => ({
+        day: lesson.day_of_week,
+        start: lesson.start_time.slice(0, 5),
+        end: lesson.end_time.slice(0, 5),
+        subject: lesson.group_name,
+        teacher: lesson.teacher_name,
+        class: lesson.class
+      }));
+      setSchedule(formattedData);
+    } catch (error) {
+      console.error('Error fetching class timetable:', error);
+    }
+  };
+
+  // Tanár órarendjének lekérése
+  const fetchTeacherTimetable = async (teacherName: string) => {
+    try {
+      const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/getTeacherTimetable?teacherName=${teacherName}`);
+      const data = await response.json();
+      const formattedData = data.map((lesson: any) => ({
+        day: lesson.day_of_week,
+        start: lesson.start_time.slice(0, 5),
+        end: lesson.end_time.slice(0, 5),
+        subject: lesson.group_name,
+        teacher: lesson.teacher_name,
+        class: lesson.class
+      }));
+      setSchedule(formattedData);
+    } catch (error) {
+      console.error('Error fetching teacher timetable:', error);
+    }
+  };
+
+
+
+
+
+
+
+
+
+
+
 
   useEffect(() => {
     const fetchAdditionalData = async () => {
@@ -525,6 +626,50 @@ const Calendar: React.FC = () => {
         </header>
 
 
+        <div>
+      <div>
+        <h3>Válassz osztályt:</h3>
+        <Select value={selectedClass} onValueChange={setSelectedClass}>
+          <SelectTrigger className="col-span-3">
+            <SelectValue placeholder="Válassz osztályt..." />
+          </SelectTrigger>
+          <SelectContent>
+            {classOptions.map((className, index) => (
+              <SelectItem key={index} value={className}>
+                {className}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div>
+        <h3>Válassz tanárt:</h3>
+        <Select value={selectedTeacher} onValueChange={setSelectedTeacher}>
+          <SelectTrigger className="col-span-3">
+            <SelectValue placeholder="Válassz tanárt..." />
+          </SelectTrigger>
+          <SelectContent>
+            {teacherOptions.map((teacherName, index) => (
+              <SelectItem key={index} value={teacherName}>
+                {teacherName}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div>
+        <h2>Órarend</h2>
+        <ul>
+          {schedule.map((lesson, index) => (
+            <li key={index}>
+              {lesson.day} {lesson.start}-{lesson.end}: {lesson.subject} ({lesson.teacher}, {lesson.class})
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
 
 
         <div>
