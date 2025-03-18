@@ -35,17 +35,15 @@ export default async function handler(req, res) {
 
       const schedule = await scheduleResponse.json();
       const { first_class_start, last_class_end } = schedule;
-      console.log(schedule);
-
-      // Az aktuális időt Budapest időzónában számoljuk
       const currentTime = aktido.toLocaleTimeString('en-US', { hour12: false, timeZone: 'Europe/Budapest' });
+      console.log(schedule);
       console.log(`Aktuális idő: ${currentTime}`);
       console.log(`Első óra kezdete: ${first_class_start}`);
       console.log(`Utolsó óra vége: ${last_class_end}`);
 
-      // Időintervallum ellenőrzése
+      // && expiresAt > aktido
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
-        if (studentaccess === "nyithato" && expiresAt > aktido) {
+        if (studentaccess === "nyithato") {
           const lockerResult = await getLockerByRFID(rfid, sql);
 
           if (lockerResult.error) {
