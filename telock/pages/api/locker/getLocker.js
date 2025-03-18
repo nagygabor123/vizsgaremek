@@ -21,7 +21,13 @@ export default async function handler(req, res) {
 
       const studentid = student[0].student_id;
       const studentaccess = student[0].access;
-      const expiresAt = student[0].expires_at; // Assuming expiresAt is a string like '12:35'
+      const expiresAt = new Date(student[0].expires_at); 
+      const aktido = new Date(
+        new Date().toLocaleString('en-US', { timeZone: 'Europe/Budapest' })
+      );
+
+      console.log(`Aktuális idő: ${aktido}`);
+      console.log(`Lejárati idő: ${expiresAt}`);
 
       const scheduleResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/scheduleStart?student=${studentid}`);
       if (!scheduleResponse.ok) {
@@ -31,28 +37,21 @@ export default async function handler(req, res) {
       const schedule = await scheduleResponse.json();
       const { first_class_start, last_class_end } = schedule;
       console.log(schedule);
-
-      const currentTime = new Date().toLocaleTimeString('hu-HU', { timeZone: 'Europe/Budapest', hour12: false }).slice(0, 5);
-      console.log(currentTime);
-
-      // Convert expiresAt (string) and currentTime to date objects for comparison
-      const expiresAtDate = new Date(`1970-01-01T${expiresAt}:00Z`);
-      const currentTimeDate = new Date(`1970-01-01T${currentTime}:00Z`);
-
-      // Compare expiresAt and current time
-      if (currentTimeDate >= expiresAtDate) {
-        return res.status(200).send("zarva");
-      }
+      const currentTime = aktido.toTimeString().slice(0, 5);
 
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
         if (studentaccess === "nyithato") {
-          const lockerResult = await getLockerByRFID(rfid, sql);
+          if (aktido <= expiresAt) {
+            const lockerResult = await getLockerByRFID(rfid, sql);
 
-          if (lockerResult.error) {
-            return res.status(lockerResult.status).json({ error: lockerResult.error });
+            if (lockerResult.error) {
+              return res.status(lockerResult.status).json({ error: lockerResult.error });
+            }
+
+            return res.status(200).send({ lockerId: lockerResult.lockerId });
+          } else{
+            return res.status(200).send("zarva");
           }
-
-          return res.status(200).send({ lockerId: lockerResult.lockerId });
         } else {
           return res.status(200).send("zarva");
         }
@@ -67,8 +66,6 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'A módszer nem engedélyezett' });
   }
 }
-
-
 
 async function getLockerByRFID(rfid, sql) {
   const lockerRelationship = await sql(
