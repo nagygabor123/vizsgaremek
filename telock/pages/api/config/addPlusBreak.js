@@ -57,7 +57,7 @@
  *       500:
  *         description: "Adatbázis csatlakozási hiba."
  */
-import { connectToDatabase } from '../../../lib/db';
+import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -71,15 +71,12 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Csak a szünetet illetve a plusznapokat lehet feltölteni' });
     }
 
-    let connection;
+    const sql = neon(`${process.env.DATABASE_URL}`);
 
     try {
-      connection = await connectToDatabase();
-
-      let query = 'INSERT INTO year_schedule (type, nev, which_day, replace_day) VALUES (?, ?, ?, ?);';
+      let query = 'INSERT INTO year_schedule (type, nev, which_day, replace_day) VALUES ($1, $2, $3, $4);';
       let values = [type, nev, which_day, replace_day];
-
-      const [result] = await connection.execute(query, values);
+      const [result] = await sql(query, values);
 
       if (result.affectedRows > 0) {
         return res.status(200).json({ message: 'Sikeres frissítés', updatedType: type, updatedDate: which_day });
@@ -89,10 +86,6 @@ export default async function handler(req, res) {
     } catch (error) {
       console.error('Adatbázis hiba:', error);
       return res.status(500).json({ error: 'Adatbázis csatlakozási hiba' });
-    } finally {
-      if (connection) {
-        await connection.end(); // Kapcsolat lezárása
-      }
     }
   } else {
     return res.status(405).json({ error: 'A módszer nem engedélyezett' });
