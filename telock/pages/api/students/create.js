@@ -73,6 +73,8 @@
  *                   example: "Method Not Allowed"
  */
 import { neon } from '@neondatabase/serverless';
+    
+const sql = neon(process.env.DATABASE_URL);
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -81,8 +83,6 @@ export default async function handler(req, res) {
     if (!student_id || !full_name || !studentClass || !rfid_tag) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
-
-    const sql = neon(process.env.DATABASE_URL);
 
     try {
       await sql(
@@ -96,7 +96,8 @@ export default async function handler(req, res) {
 
       await sql('INSERT INTO lockers (locker_id, status) VALUES ($1, $2);', [nextLockerId, 'ki']);
       await sql('INSERT INTO locker_relationships (rfid_tag, locker_id) VALUES ($1, $2);', [rfid_tag, nextLockerId]);
-
+      const result = await setStudentGroups(student_id);
+      console.log('Student groups: ', result);
       res.status(201).json({ message: 'Student and locker relationship created', locker_id: nextLockerId });
     } catch (error) {
       console.error('Database error:', error);
@@ -107,4 +108,28 @@ export default async function handler(req, res) {
   }
 }
 
+
+async function setStudentGroups(student_id) {
+  const url = `https://vizsgaremek-mocha.vercel.app/api/students/setStudentGroups?student_id=${student_id}`;
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST', // A kérés metódusa POST
+      headers: {
+        'Content-Type': 'application/json', // A kérés fejléce
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json(); // A válasz JSON formátumban
+    console.log('Response:', data);
+    return data; // Visszaadjuk a választ
+  } catch (error) {
+    console.error('Error calling setStudentGroups:', error);
+    throw error; // Hibát dobunk, ha valami elromlik
+  }
+}
 
