@@ -28,13 +28,14 @@ export default async function handler(req, res) {
 
       const schedule = await scheduleResponse.json();
       const { first_class_start, last_class_end } = schedule;
-
-      const currentTime = new Date().toLocaleTimeString('hu-HU', {
+      const currentTime = new Date().toLocaleString('hu-HU', {
+        timeZone: 'Europe/Budapest',
         hour: '2-digit',
         minute: '2-digit',
         hour12: false
       });
       
+
       console.log(studentid); 
       console.log(studentaccess); 
       console.log(scheduleResponse); 
