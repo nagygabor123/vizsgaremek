@@ -74,15 +74,10 @@ export default async function handler(req, res) {
     const sql = neon(`${process.env.DATABASE_URL}`);
 
     try {
-      let query = 'INSERT INTO year_schedule (type, nev, which_day, replace_day) VALUES ($1, $2, $3, $4);';
-      let values = [type, nev, which_day, replace_day];
-      const result = await sql(query, values);
-
-      if (result.affectedRows > 0) {
-        return res.status(200).json({ message: 'Sikeres frissítés', updatedType: type, updatedDate: which_day });
-      } else {
-        return res.status(404).json({ error: 'Nem található a megfelelő rekord' });
-      }
+      const query = 'INSERT INTO year_schedule (type, nev, which_day, replace_day) VALUES ($1, $2, $3, $4);';
+      const values = [type, nev, which_day, replace_day];
+      await sql(query, values);
+      return res.status(200).json({ message: 'Sikeres frissítés', updatedType: type, updatedDate: which_day });
     } catch (error) {
       console.error('Adatbázis hiba:', error);
       return res.status(500).json({ error: 'Adatbázis csatlakozási hiba' });
