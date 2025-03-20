@@ -20,7 +20,9 @@ export default async function handler(req, res) {
 
       console.log('Student:', student[0]);
 
-      // Lekérdezzük az összes csoportot
+      await sql('DELETE FROM student_groups WHERE student_id = $1', [student_id]);
+      console.log(`Deleted existing entries for student_id: ${student_id}`);
+
       const groups = await sql('SELECT group_id, group_name FROM csoportok');
       console.log('Groups:', groups);
 
