@@ -14,19 +14,11 @@ export default async function handler(req, res) {
   const sql = neon(process.env.DATABASE_URL);
 
   try {
-    const now = new Date();
-    const budapestTime = new Date(
-      now.toLocaleString('en-US', { timeZone: 'Europe/Budapest' })
-    );
-    
-    budapestTime.setMinutes(budapestTime.getMinutes() + 5);
-    const expiresAt = budapestTime.toISOString().slice(0, 19).replace("T", " ");
-    
     const updateResult = await sql(
       `UPDATE students 
-       SET access = $1, expires_at = $2 
-       WHERE student_id = $3`,
-      ['nyithato', expiresAt, student]
+       SET access = $1, 
+       WHERE student_id = $2`,
+      ['nyithato', student]
     );
     
   
@@ -35,7 +27,7 @@ export default async function handler(req, res) {
     }
   
     return res.status(200).json({ 
-      message: `Student ${student} access updated to nyithato. It will reset to zarva at ${expiresAt}.` 
+      message: `Student ${student} access updated to nyithato.` 
     });
   } catch (error) {
     console.error("Error updating access state:", error);

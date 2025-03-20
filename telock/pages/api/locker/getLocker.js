@@ -29,7 +29,12 @@ export default async function handler(req, res) {
       const schedule = await scheduleResponse.json();
       const { first_class_start, last_class_end } = schedule;
 
-      const currentTime = new Date().toTimeString().slice(0, 5); 
+      const currentTime = new Date().toLocaleTimeString('hu-HU', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      });
+      
       console.log(studentid); 
       console.log(studentaccess); 
       console.log(scheduleResponse); 
