@@ -20,7 +20,7 @@ export default async function handler(req, res) {
       const currentStatus = rows[0].status;
       const newStatus = currentStatus === 'be' ? 'ki' : 'be';
       const [result] = await sql(
-        'UPDATE lockers SET status = ? WHERE locker_id = $1',
+        'UPDATE lockers SET status = $1 WHERE locker_id = $2',
         [newStatus, lockerId]
       );
 
