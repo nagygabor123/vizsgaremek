@@ -16,16 +16,15 @@ export default async function handler(req, res) {
   try {
     const updateResult = await sql(
       `UPDATE students 
-       SET access = $1, 
+       SET access = $1 
        WHERE student_id = $2`,
       ['nyithato', student]
     );
-    
-  
-    if (updateResult.rowCount === 0) {
+
+    if (updateResult.length === 0) {
       return res.status(404).json({ message: "Student not found" });
     }
-  
+
     return res.status(200).json({ 
       message: `Student ${student} access updated to nyithato.` 
     });
@@ -33,6 +32,4 @@ export default async function handler(req, res) {
     console.error("Error updating access state:", error);
     return res.status(500).json({ message: "Failed to update access state" });
   }
-  
-  
 }
