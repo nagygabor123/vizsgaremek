@@ -76,7 +76,7 @@ export default async function handler(req, res) {
     try {
       let query = 'INSERT INTO year_schedule (type, nev, which_day, replace_day) VALUES ($1, $2, $3, $4);';
       let values = [type, nev, which_day, replace_day];
-      const [result] = await sql(query, values);
+      const result = await sql(query, values);
 
       if (result.affectedRows > 0) {
         return res.status(200).json({ message: 'Sikeres frissítés', updatedType: type, updatedDate: which_day });
