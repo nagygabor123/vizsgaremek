@@ -90,7 +90,7 @@ export default async function handler(req, res) {
         return res.status(404).json({ error: 'Nem található rekord ezzel az ID-val.' });
       }
 
-      await sql`DELETE FROM year_schedule WHERE year_schedule_id = ${year_schedule_id}`;
+      await sql('DELETE FROM year_schedule WHERE year_schedule_id = ${year_schedule_id}');
 
       return res.status(200).json({ message: 'Sikeres törlés', deletedId: year_schedule_id });
     } catch (error) {

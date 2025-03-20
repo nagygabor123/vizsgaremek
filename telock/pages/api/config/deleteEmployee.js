@@ -92,7 +92,7 @@ export default async function handler(req, res) {
         return res.status(404).json({ error: 'Nem található adminisztrátor ezzel az ID-val.' });
       }
 
-      const result = await sql('DELETE FROM admins WHERE admin_id = $1 ', [admin_id]);
+      await sql('DELETE FROM admins WHERE admin_id = $1 ', [admin_id]);
       return res.status(200).json({ message: 'Sikeres törlés', deletedId: admin_id });
     } catch (error) {
       console.error('Adatbázis hiba:', error);
