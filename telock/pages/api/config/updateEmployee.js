@@ -75,7 +75,7 @@
  *                   example: "Method Not Allowed"
  */
 
-import { connectToDatabase } from '../../../lib/db';
+import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'PUT') {
@@ -85,18 +85,16 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
-    const db = await connectToDatabase();
+    const sql = neon(`${process.env.DATABASE_URL}`);
     try {
-      await db.execute(
-        'UPDATE admins SET full_name = ?, position = ?, osztalyfonok = ? WHERE admin_id = ?',
-        [full_name, position, osztalyfonok, admin_id] // <-- Helyes sorrend
+      await sql(
+        'UPDATE admins SET full_name = $1, position = $2, osztalyfonok = $3 WHERE admin_id = $4',
+        [full_name, position, osztalyfonok, admin_id] 
       );
       res.status(200).json({ message: 'Admin updated' });
     } catch (error) {
       res.status(500).json({ message: 'Error updating admin', error: error.message });
-    } finally {
-      await db.end();
-    }
+    } 
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });
   }

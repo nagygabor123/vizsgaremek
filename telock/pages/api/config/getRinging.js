@@ -80,13 +80,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Connect to the Neon database
     const sql = neon(`${process.env.DATABASE_URL}`);
-
-    // Execute the query
     const rows = await sql('SELECT start_time as "start", end_time as "end" FROM ring_times');
-
-    // Format the result
     const result = rows.map(row => ({
       start: row.start.slice(0, 5),  
       end: row.end.slice(0, 5)        
