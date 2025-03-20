@@ -72,7 +72,7 @@
  *                   example: "Method Not Allowed"
  */
 
-import { connectToDatabase } from '../../../lib/db'; 
+import { neon } from '@neondatabase/serverless';
 import crypto from 'crypto';
 
 function generatePassword(length = 12) {
@@ -88,21 +88,17 @@ export default async function handler(req, res) {
     }
 
     const password = generatePassword(); 
-    const db = await connectToDatabase();
+    const sql = neon(`${process.env.DATABASE_URL}`);
 
     try {
-      // Lekérdezzük az utolsó admin_id-t
-      const [lastAdmin] = await db.execute('SELECT admin_id FROM admins ORDER BY admin_id DESC LIMIT 1');
-      
-      // Ha nincs admin (első admin), kezdjük 3-tól
+      const lastAdmin = await sql('SELECT MAX(admin_id) AS max_id FROM admins');
       let nextAdminId = 3;
       if (lastAdmin.length > 0) {
-        nextAdminId = lastAdmin[0].admin_id + 1; // A legutolsó admin_id-hoz hozzáadunk 1-et
+        nextAdminId = lastAdmin[0].admin_id + 1; 
       }
 
-      // Az admin hozzáadása az új admin_id-val
-      await db.execute(
-        'INSERT INTO admins (admin_id, full_name, password, position,osztalyfonok,short_name) VALUES (?, ?, ?, ?, ?,?)',
+      await sql(
+        'INSERT INTO admins (admin_id, full_name, password, position,osztalyfonok,short_name) VALUES ($1, $2, $3, $4, $5,$6)',
         [nextAdminId, full_name, password, position,osztalyfonok,short_name]
       );
       
