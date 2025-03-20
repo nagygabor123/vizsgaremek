@@ -13,8 +13,6 @@ CREATE TABLE students (
   class VARCHAR(255) NOT NULL,
   rfid_tag VARCHAR(50) UNIQUE NOT NULL,
   access VARCHAR(50) NOT NULL,
-  expires_at TIMESTAMP
-
 );
 
 CREATE TABLE lockers (
