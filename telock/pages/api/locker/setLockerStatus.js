@@ -1,74 +1,7 @@
-/**
- * @swagger
- * /api/locker/setLockerStatus:
- *   patch:
- *     summary: Zár állapotának frissítése
- *     description: Frissíti a zár állapotát (be/ki) állapotra, a jelenlegi állapottól függően.
- *     parameters:
- *       - in: query
- *         name: id
- *         required: true
- *         description: A zár azonosítója, amelyet módosítani szeretnénk. Az értéknek 1 és 99 között kell lennie.
- *         schema:
- *           type: integer
- *           enum: [2, 5, 6, 7]
- *     tags:
- *       - Locker
- *     responses:
- *       200:
- *         description: A zár állapota sikeresen frissítve lett.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Szekrény 2 státusza frissítve 'be' (-re)"
- *       400:
- *         description: Ha a zár azonosítója nem érvényes (nem szám vagy kívül esik az engedélyezett tartományon).
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Érvénytelen szekrény Id"
- *       404:
- *         description: Ha a zár nem található az adatbázisban.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "A szekrény nem található"
- *       500:
- *         description: >
- *           Ha hiba történt az adatbázis kapcsolat vagy a zár állapotának frissítése során vagy "Sikertelen szekrény státusz frissétés".
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Szerver hiba"
- *       405:
- *         description: Ha nem PATCH metódust használunk.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "A módszer nem engedélyezett"
- */
-import { connectToDatabase } from '../../../lib/db';
 
+import { neon } from '@neondatabase/serverless';
+
+const sql = neon(process.env.DATABASE_URL);
 export default async function handler(req, res) {
   if (req.method === 'PATCH') {
     const { id } = req.query;
@@ -77,10 +10,8 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: 'Érvénytelen szekrény Id' });
     }
 
-    let db;
     try {
-      db = await connectToDatabase();
-      const [rows] = await db.execute('SELECT status FROM lockers WHERE locker_id = ?', [lockerId]);
+      const [rows] = await sql('SELECT status FROM lockers WHERE locker_id = $1', [lockerId]);
 
       if (rows.length === 0) {
         return res.status(404).json({ message: 'Szekrény nem található' });
@@ -88,8 +19,8 @@ export default async function handler(req, res) {
 
       const currentStatus = rows[0].status;
       const newStatus = currentStatus === 'be' ? 'ki' : 'be';
-      const [result] = await db.execute(
-        'UPDATE lockers SET status = ? WHERE locker_id = ?',
+      const [result] = await sql(
+        'UPDATE lockers SET status = ? WHERE locker_id = $1',
         [newStatus, lockerId]
       );
 
@@ -101,11 +32,7 @@ export default async function handler(req, res) {
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Szerver hiba' });
-    } finally {
-      if (db) {
-        await db.end(); // Az adatbázis kapcsolat lezárása
-      }
-    }
+    } 
   } else {
     res.status(405).json({ message: 'A módszer nem engedélyezett' });
   }
