@@ -106,9 +106,7 @@ export default async function handler(req, res) {
     } catch (error) {
       console.error('Error creating admin:', error);  
       res.status(500).json({ message: 'Error creating admin', error: error.message });
-    } finally {
-      await db.end(); 
-    }
+    } 
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });
   }
