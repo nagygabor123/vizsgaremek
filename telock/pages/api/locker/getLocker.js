@@ -1,5 +1,8 @@
 import { neon } from '@neondatabase/serverless';
 
+const sql = neon(process.env.DATABASE_URL);
+
+
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     const { rfid } = req.query;
@@ -7,13 +10,9 @@ export default async function handler(req, res) {
     if (!rfid) {
       return res.status(400).json({ error: 'RFID szükséges' });
     }
-    const sql = neon(process.env.DATABASE_URL);
 
     try {
-      const student = await sql(
-        'SELECT student_id, access, expires_at FROM students WHERE rfid_tag = $1',
-        [rfid]
-      );
+      const student = await sql('SELECT student_id, access FROM students WHERE rfid_tag = $1',[rfid]);
 
       if (student.length === 0) {
         return res.status(200).send("nincs");
@@ -21,12 +20,6 @@ export default async function handler(req, res) {
 
       const studentid = student[0].student_id;
       const studentaccess = student[0].access;
-      const expiresAt = new Date(student[0].expires_at); 
-      const aktido = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Budapest' }));
-      console.log(`Aktuális id: ${studentid}`);
-      console.log(`Aktuális access: ${studentaccess}`);
-      console.log(`Aktuális idő: ${aktido.toISOString()}`);
-      console.log(`Lejárati idő: ${expiresAt.toISOString()}`);
 
       const scheduleResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/scheduleStart?student=${studentid}`);
       if (!scheduleResponse.ok) {
@@ -34,34 +27,35 @@ export default async function handler(req, res) {
       }
 
       const schedule = await scheduleResponse.json();
-      const { first_class_start, last_class_end } = schedule[0] || {};
-      const currentTime = aktido;
-      console.log(schedule);
-      console.log(`Aktuális idő: ${currentTime}`);
-      console.log(`Első óra kezdete: ${schedule.first_class_start}`);
-      console.log(`Utolsó óra vége: ${schedule.last_class_end}`);
+      const { first_class_start, last_class_end } = schedule;
 
-      // && expiresAt > aktido
+      const currentTime = new Date().toTimeString().slice(0, 5); 
+      console.log(studentid); 
+      console.log(studentaccess); 
+      console.log(scheduleResponse); 
+      console.log(currentTime); 
+
+
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
-        if (studentaccess === "nyithato" ) {
-          const lockerResult = await getLockerByRFID(rfid, sql);
+        if (studentaccess === "nyithato") {
+          const lockerResult = await getLockerByRFID(rfid);
 
           if (lockerResult.error) {
             return res.status(lockerResult.status).json({ error: lockerResult.error });
           }
 
-          return res.status(200).send({ lockerId: lockerResult.lockerId });
+          return res.status(200).send(lockerResult.lockerId);
         } else {
           return res.status(200).send("zarva");
         }
       } else {
-        const lockerResult = await getLockerByRFID(rfid, sql);
+        const lockerResult = await getLockerByRFID(rfid);
 
-          if (lockerResult.error) {
-            return res.status(lockerResult.status).json({ error: lockerResult.error });
-          }
-          return res.status(200).send({ lockerId: lockerResult.lockerId });
+        if (lockerResult.error) {
+          return res.status(lockerResult.status).json({ error: lockerResult.error });
+        }
 
+        return res.status(200).send(lockerResult.lockerId);
       }
     } catch (error) {
       console.error('Adatbazis error:', error);
@@ -72,21 +66,15 @@ export default async function handler(req, res) {
   }
 }
 
-async function getLockerByRFID(rfid, sql) {
-  const lockerRelationship = await sql(
-    'SELECT locker_id FROM locker_relationships WHERE rfid_tag = $1',
-    [rfid]
-  );
+async function getLockerByRFID(rfid) {
+  const lockerRelationship = await sql('SELECT locker_id FROM locker_relationships WHERE rfid_tag = $1',[rfid]);
 
   if (lockerRelationship.length === 0) {
     return { error: 'Nem található szekrény_id ehhez az RFID-hez', status: 404 };
   }
 
   const lockerId = lockerRelationship[0].locker_id;
-  const locker = await sql(
-    'SELECT * FROM lockers WHERE locker_id = $1',
-    [lockerId]
-  );
+  const locker = await sql('SELECT * FROM lockers WHERE locker_id = $1',[lockerId]);
 
   if (locker.length === 0) {
     return { error: 'Nem található a szekrény', status: 404 };
