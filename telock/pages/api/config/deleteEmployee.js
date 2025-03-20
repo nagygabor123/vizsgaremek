@@ -93,12 +93,7 @@ export default async function handler(req, res) {
       }
 
       const result = await sql('DELETE FROM admins WHERE admin_id = $1 ', [admin_id]);
-
-      if (result.affectedRows > 0) {
-        return res.status(200).json({ message: 'Sikeres törlés', deletedId: admin_id });
-      } else {
-        return res.status(500).json({ error: 'Nem sikerült törölni az adminisztrátort.' });
-      }
+      return res.status(200).json({ message: 'Sikeres törlés', deletedId: admin_id });
     } catch (error) {
       console.error('Adatbázis hiba:', error);
       return res.status(500).json({ error: 'Adatbázis csatlakozási hiba' });

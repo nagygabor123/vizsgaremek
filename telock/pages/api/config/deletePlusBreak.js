@@ -84,19 +84,15 @@ export default async function handler(req, res) {
 
     const sql = neon(`${process.env.DATABASE_URL}`);
     try {
-      const record = await sql('SELECT * FROM year_schedule WHERE year_schedule_id = $1', [year_schedule_id]);
+      const record = await sql`SELECT * FROM year_schedule WHERE year_schedule_id = ${year_schedule_id}`;
       
       if (record.length === 0) {
         return res.status(404).json({ error: 'Nem található rekord ezzel az ID-val.' });
       }
 
-      const result = await sql('DELETE FROM year_schedule WHERE year_schedule_id = $1', [year_schedule_id]);
+      await sql`DELETE FROM year_schedule WHERE year_schedule_id = ${year_schedule_id}`;
 
-      if (result.rowCount > 0) {
-        return res.status(200).json({ message: 'Sikeres törlés', deletedId: year_schedule_id });
-      } else {
-        return res.status(500).json({ error: 'Nem sikerült törölni a rekordot.' });
-      }
+      return res.status(200).json({ message: 'Sikeres törlés', deletedId: year_schedule_id });
     } catch (error) {
       console.error('Adatbázis hiba:', error.message, error.stack);
       return res.status(500).json({ error: 'Adatbázis hiba: ' + error.message });
@@ -105,3 +101,4 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'A módszer nem engedélyezett' });
   }
 }
+
