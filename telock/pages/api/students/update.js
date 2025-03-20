@@ -113,7 +113,7 @@ export default async function handler(req, res) {
         'UPDATE students SET full_name = $1, class = $2 WHERE student_id = $3',
         [full_name, studentClass, student_id]
       );
-
+      await setStudentGroups(newStudentId);
       return res.status(200).json({ message: 'Student updated successfully' });
     }
 
