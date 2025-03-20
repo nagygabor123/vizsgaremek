@@ -197,7 +197,7 @@ export default function Page() {
 
   const handleAddBreak = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/config/addPlusBreak', {
+      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/addPlusBreak', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type: 'szunet', ...newBreak })
@@ -221,7 +221,7 @@ export default function Page() {
 
   const handleAddNoSchool = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/config/addPlusBreak', {
+      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/addPlusBreak', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type: 'tanitasnelkul', ...newNo })
@@ -248,7 +248,7 @@ export default function Page() {
 
   const handleAddPlusDate = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/config/addPlusBreak', {
+      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/addPlusBreak', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type: 'plusznap', ...newPlusDate })
@@ -274,7 +274,7 @@ export default function Page() {
 
   const handleDeletePlusBreak = async (id: number) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/config/deletePlusBreak?year_schedule_id=${id}`, {
+      const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/config/deletePlusBreak?year_schedule_id=${id}`, {
         method: 'DELETE',
       });
 
