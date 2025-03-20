@@ -2,7 +2,7 @@ import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { student_id } = req.body;
+    const { student_id } = req.query;  
 
     if (!student_id) {
       return res.status(400).json({ message: 'Student ID is required' });
