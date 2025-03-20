@@ -14,16 +14,12 @@ export default async function handler(req, res) {
   const sql = neon(process.env.DATABASE_URL);
 
   try {
-    const updateResult = await sql(
+    await sql(
       `UPDATE students 
        SET access = $1 
        WHERE student_id = $2`,
       ['nyithato', student]
     );
-
-    if (updateResult.length === 0) {
-      return res.status(404).json({ message: "Student not found" });
-    }
 
     return res.status(200).json({ 
       message: `Student ${student} access updated to nyithato.` 
