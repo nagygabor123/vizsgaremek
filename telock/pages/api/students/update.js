@@ -142,8 +142,7 @@ export default async function handler(req, res) {
       );
 
       await deleteStudent(student_id);
-      const result = await setStudentGroups(newStudentId);
-      console.log('Student groups: ', result);
+      await setStudentGroups(newStudentId);
       return res.status(200).json({ message: 'Student and locker relationship updated successfully' });
     }
 
