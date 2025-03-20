@@ -2,46 +2,59 @@ import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
+    const { student_id } = req.body;
+
+    if (!student_id) {
+      return res.status(400).json({ message: 'Student ID is required' });
+    }
+
     const sql = neon(`${process.env.DATABASE_URL}`);
 
     try {
-      const { student_id, classNames } = req.body;
-
-      if (!student_id || typeof classNames !== 'string' || classNames.trim() === '') {
-        return res.status(400).json({ message: 'Student ID and class names are required.' });
+      // Lekérdezzük a megadott diákot
+      const student = await sql('SELECT student_id, class FROM students WHERE student_id = $1', [student_id]);
+      
+      if (student.length === 0) {
+        return res.status(404).json({ message: 'Student not found' });
       }
 
-      // Az osztálynevek feldolgozása: vessző mentén bontás és szóközök eltávolítása
-      const classList = classNames.split(',').map(c => c.trim());
+      console.log('Student:', student[0]);
 
       // Lekérdezzük az összes csoportot
       const groups = await sql('SELECT group_id, group_name FROM csoportok');
+      console.log('Groups:', groups);
 
-      // Keresés az osztálynevek között
-      const insertValues = classList
-        .map(className => {
-          const group = groups.find(g => g.group_name === className);
-          return group ? [student_id, group.group_id] : null;
-        })
-        .filter(Boolean); // Eltávolítja a null értékeket, ha nincs megfelelő csoport
+      const insertValues = [];
+
+      const studentClasses = student[0].class ? student[0].class.split(',').map(c => c.trim()) : [];
+
+      studentClasses.forEach(className => {
+        const group = groups.find(g => g.group_name === className);
+        console.log(`Checking className: ${className}, Found group:`, group);
+        if (group) {
+          insertValues.push([student[0].student_id, group.group_id]);
+        }
+      });
+
+      console.log('Insert values:', insertValues);
 
       if (insertValues.length > 0) {
+        const studentIds = insertValues.map(iv => iv[0]);
         const groupIds = insertValues.map(iv => iv[1]);
 
-        // Először töröljük a régi kapcsolatokat a student_groups táblából
-        await sql('DELETE FROM student_groups WHERE student_id = $1', [student_id]);
-
-        // Beszúrjuk az új csoportokat
         await sql(
-          'INSERT INTO student_groups (student_id, group_id) SELECT * FROM UNNEST($1::int[], $2::int[])',
-          [Array(insertValues.length).fill(student_id), groupIds]
+          'INSERT INTO student_groups (student_id, group_id) SELECT * FROM UNNEST($1::text[], $2::int[])',
+          [studentIds, groupIds]
         );
+
+        res.status(201).json({ message: 'Student groups uploaded successfully', inserted: insertValues.length });
+      } else {
+        res.status(200).json({ message: 'No matching student groups found, nothing inserted.', inserted: 0 });
       }
 
-      res.status(200).json({ message: 'Student groups updated successfully', inserted: insertValues.length });
     } catch (error) {
-      console.error('Error updating student groups:', error);
-      res.status(500).json({ message: 'Error updating student groups', error: error.message });
+      console.error('Error inserting student groups:', error);
+      res.status(500).json({ message: 'Error inserting student groups', error: error.message });
     }
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });
