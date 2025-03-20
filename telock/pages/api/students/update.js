@@ -142,8 +142,8 @@ export default async function handler(req, res) {
       );
 
       await deleteStudent(student_id);
-      //await generateStudentGroups(newStudentId, studentClass);
-
+      const result = await setStudentGroups(newStudentId);
+      console.log('Student groups: ', result);
       return res.status(200).json({ message: 'Student and locker relationship updated successfully' });
     }
 
@@ -179,13 +179,26 @@ async function deleteStudent(student_id) {
   }
 }
 
-async function generateStudentGroups(student_id, studentClass) {
-  const generateGroups = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/setStudentGroups`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ student_id, studentClass }),
-  });
-  if (!generateGroups.ok) {
-    throw new Error('Failed to generate student groups');
-  } 
+async function setStudentGroups(student_id) {
+  const url = `https://vizsgaremek-mocha.vercel.app/api/students/setStudentGroups?student_id=${student_id}`;
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST', // A kérés metódusa POST
+      headers: {
+        'Content-Type': 'application/json', // A kérés fejléce
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json(); // A válasz JSON formátumban
+    console.log('Response:', data);
+    return data; // Visszaadjuk a választ
+  } catch (error) {
+    console.error('Error calling setStudentGroups:', error);
+    throw error; // Hibát dobunk, ha valami elromlik
+  }
 }
