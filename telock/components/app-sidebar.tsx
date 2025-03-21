@@ -251,9 +251,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         <>
                           <item.icon />
                           <span>{item.label}</span>
-                          {!loading && !hasStudents && (
-                            <TriangleAlert className="ml-auto text-red-600" />
-                          )}
                         </>
                       </Link>
                     </SidebarMenuButton>
@@ -270,9 +267,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         <>
                           <item.icon />
                           <span>{item.label}</span>
-                          {!loading && !hasStudents && (
-                            <TriangleAlert className="ml-auto text-red-600" />
-                          )}
                         </>
                       </Link>
                     </SidebarMenuButton>
