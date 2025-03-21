@@ -243,10 +243,14 @@ export default function Home() {
       const schedule = await scheduleResponse.json();
       const { first_class_start, last_class_end } = schedule;
 
-      // Az aktuális idő HH:MM formátumban
-      const currentTime = new Date().toTimeString().slice(0, 5);
+      const currentTime = new Date().toLocaleString('hu-HU', {
+        timeZone: 'Europe/Budapest',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      });
+      console.log(currentTime);
 
-      // Ellenőrizzük, hogy az aktuális idő az órarendi időintervallumba esik-e
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
         const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/system/studentAccess?student=${student_id}`, {
           method: 'POST',
