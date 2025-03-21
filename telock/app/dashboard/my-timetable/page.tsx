@@ -47,7 +47,7 @@ import {
   isBefore,
 } from 'date-fns';
 import { hu } from 'date-fns/locale';
-import '../../../globals.css';
+import '../../globals.css';
 
 import AppKonfig from '@/components/app-konfig';
 
