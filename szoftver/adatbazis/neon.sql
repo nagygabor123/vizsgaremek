@@ -79,7 +79,7 @@ CREATE TABLE ring_times (
 );
 
 INSERT INTO admins (full_name, password, position, osztalyfonok, short_name) VALUES
-('Admin', 'admin', 'Rendszergazda', 'nincs', 'admin'),
+('Admin', 'admin', 'Rendszergazda', 'nincs', 'admin');
 
 
 INSERT INTO system_status (status) VALUES

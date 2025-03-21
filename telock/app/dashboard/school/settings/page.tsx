@@ -874,7 +874,7 @@ export default function Page() {
                       {yearSchedule.plusDates.map((plusDate: any) => (
                         <tr key={plusDate.id} className="text-center border-t">
                           <td className="p-1">{new Date(plusDate.date).toLocaleDateString("hu-HU")}</td>
-                          {days.find((day) => day.value === plusDate.replaceDay)?.label || plusDate.replaceDay}
+                          <td className="p-1">{days.find((day) => day.value === plusDate.replaceDay)?.label || plusDate.replaceDay}</td>
                           <td className="p-1">
 
 
