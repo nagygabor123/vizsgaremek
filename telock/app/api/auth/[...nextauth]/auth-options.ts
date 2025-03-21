@@ -1,12 +1,11 @@
 // app/api/auth/[...nextauth]/auth-options.ts
 import { type Session, type TokenSet, type User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { compare } from "bcrypt";
-import { neon } from '@neondatabase/serverless';
+import { authorize } from "@/app/api/auth/authorize"; // Új import
 
 export const authOptions = {
   session: {
-    strategy: "jwt" as const, // A strategy típusa legyen "jwt"
+    strategy: "jwt" as const,
   },
   pages: {
     signIn: "/login",
@@ -18,48 +17,26 @@ export const authOptions = {
         password: {},
       },
       async authorize(credentials, req) {
-        'use server';
-        const sql = neon(`${process.env.DATABASE_URL}`);
-        const response = await sql`
-          SELECT * FROM admins WHERE short_name=${credentials?.short_name}`;
-        const user = response[0];
-
-        const passwordCorrect = await compare(
-          credentials?.password || "",
-          user.password
-        );
-
-        if (passwordCorrect) {
-          return {
-            id: user.id,
-            short_name: user.short_name,
-            full_name: user.full_name, // full_name hozzáadása
-            position: user.position,
-            osztalyfonok: user.osztalyfonok,
-          };
-        }
-
-        return null;
+        return await authorize(credentials); // Külön szerveroldali függvény meghívása
       },
     }),
   ],
-// app/api/auth/[...nextauth]/auth-options.ts
-callbacks: {
+  callbacks: {
     async session({ session, token }: { session: Session; token: TokenSet }) {
       if (session.user && token.short_name && token.full_name && token.position && token.osztalyfonok) {
         session.user.short_name = token.short_name as string;
-        session.user.full_name = token.full_name as string; 
-        session.user.position = token.position as string; 
-        session.user.osztalyfonok = token.osztalyfonok as string; 
+        session.user.full_name = token.full_name as string;
+        session.user.position = token.position as string;
+        session.user.osztalyfonok = token.osztalyfonok as string;
       }
       return session;
     },
     async jwt({ token, user }: { token: TokenSet; user?: User }) {
       if (user) {
         token.short_name = user.short_name;
-        token.full_name = user.full_name; // full_name hozzáadása
-        token.position = user.position; 
-        token.osztalyfonok = user.osztalyfonok; 
+        token.full_name = user.full_name;
+        token.position = user.position;
+        token.osztalyfonok = user.osztalyfonok;
       }
       return token;
     },
