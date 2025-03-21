@@ -87,11 +87,11 @@ export default function Home() {
   const [editing, setEditing] = useState<boolean>(false);
   const [, setEditStudentId] = useState<string | null>(null); //editStudentId,
   const [systemClose, setSystemClose] = useState<boolean>(false);
-
+  const [unlockedStudents, setUnlockedStudents] = useState(new Set());
   const [hasStudents, setHasStudents] = useState<boolean | null>(null);
-  
 
-  
+
+
 
 
   // Fetch students from the database
@@ -120,11 +120,11 @@ export default function Home() {
   };
 
   // Fetch timetable for each student
-//   const fetchStudentTimetable = async (student_id: string) => {
-//     const response = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${student_id}`);
-//     const data = await response.json();
-//     return data;
-//   };
+  //   const fetchStudentTimetable = async (student_id: string) => {
+  //     const response = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${student_id}`);
+  //     const data = await response.json();
+  //     return data;
+  //   };
 
   // Call fetchStudents and fetchSystemStatus on initial load
   useEffect(() => {
@@ -141,7 +141,7 @@ export default function Home() {
         if (!response.ok) {
           throw new Error('Nem sikerült lekérni az összes diák órarendjét.');
         }
-  
+
         const data = await response.json();
         // Map the response to match the structure of your state
         const timetables = data.students.map((student: any) => ({
@@ -149,26 +149,26 @@ export default function Home() {
           first_class_start: student.first_class_start,
           last_class_end: student.last_class_end,
         }));
-  
+
         setStudentTimetable(timetables);
       } catch (error) {
         console.error('Hiba történt az órarendek lekérésekor:', error);
       }
     };
-  
+
     if (students.length > 0) {
       fetchTimetables();
     }
   }, [students]);
 
   // Handle form input changes
-//   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-//     const { name, value } = e.target;
-//     setFormData({
-//       ...formData,
-//       [name]: value,
-//     });
-//   };
+  //   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //     const { name, value } = e.target;
+  //     setFormData({
+  //       ...formData,
+  //       [name]: value,
+  //     });
+  //   };
 
   // Handle form submission for creating or updating students
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -233,19 +233,18 @@ export default function Home() {
 
   const handleStudentOpen = async (student_id: string) => {
     try {
-      
-        const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/system/studentAccess?student=${student_id}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-        });
+      const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/system/studentAccess?student=${student_id}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
 
-        if (!response.ok) {
-          console.error('Hiba történt a zárolás feloldásakor:', await response.text());
-        } else {
-          const data = await response.json();
-          console.log(data.message);
-        }
-      
+      if (!response.ok) {
+        console.error('Hiba történt a zárolás feloldásakor:', await response.text());
+      } else {
+        const data = await response.json();
+        console.log(data.message);
+        setUnlockedStudents(prev => new Set(prev).add(student_id)); // Ne engedje újra megnyomni
+      }
     } catch (error) {
       console.error('Hiba történt a kérés során:', error);
     }
@@ -356,19 +355,19 @@ export default function Home() {
 
 
 
-        
-        <div>
-    {loading ? (
-        <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-100 border-t-blue-500"></div>
-       </div>
-    ) : (
-      <>
-        {!hasStudents && <AppKonfig />}
-        {/* <p>{hasStudents ? "Már vannak diákok az adatbázisban." : "Nincsenek diákok."}</p> */}
-      </>
-    )}
-  </div>
+
+          <div>
+            {loading ? (
+              <div className="flex items-center justify-center min-h-screen">
+                <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-100 border-t-blue-500"></div>
+              </div>
+            ) : (
+              <>
+                {!hasStudents && <AppKonfig />}
+                {/* <p>{hasStudents ? "Már vannak diákok az adatbázisban." : "Nincsenek diákok."}</p> */}
+              </>
+            )}
+          </div>
 
           <div className="p-4">
 
@@ -559,10 +558,10 @@ export default function Home() {
 
                     students.length === 0 ? (
                       <tr>
-                     <td colSpan={5} className="text-center p-6 h-dvh text-base text-gray-500">
-                     Nem szerepel tanuló a rendszerben
-                     </td>
-                   </tr>
+                        <td colSpan={5} className="text-center p-6 h-dvh text-base text-gray-500">
+                          Nem szerepel tanuló a rendszerben
+                        </td>
+                      </tr>
                     ) : (
 
 
@@ -575,7 +574,7 @@ export default function Home() {
                           hour12: false
                         });
                         //console.log(currentTime); 
-                  
+
                         const canUnlockStudent = systemClose || (studentTimetableData &&
                           currentTime >= studentTimetableData.first_class_start &&
                           currentTime <= studentTimetableData.last_class_end);
@@ -592,8 +591,13 @@ export default function Home() {
                             {/* <td className="p-1">{student.rfid_tag}</td> */}
                             <td className="p-1">
 
-                              <Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}> <LockOpen className="w-4 h-4 inline-block" /> {/* {canUnlockStudent ? <LockOpen className="w-4 h-4 inline-block" /> : <LockOpen className="w-4 h-4 inline-block" />}*/}</Button>
-                              <Dialog open={open} onOpenChange={setOpen}>
+                            <Button 
+  variant="ghost" 
+  onClick={() => handleStudentOpen(student.student_id)} 
+  disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}
+> 
+  <LockOpen className="w-4 h-4 inline-block" />
+</Button>                              <Dialog open={open} onOpenChange={setOpen}>
                                 <DialogTrigger asChild>
                                   <Button variant="ghost" onClick={() => handleEdit(student)}><Pen /></Button>
                                 </DialogTrigger>
@@ -659,22 +663,22 @@ export default function Home() {
 
 
                               <AlertDialog>
-                            <AlertDialogTrigger>
-                            <Button variant="ghost" ><Trash2 /></Button>
-                            </AlertDialogTrigger>
-                            <AlertDialogContent>
-                              <AlertDialogHeader>
-                                <AlertDialogTitle>Biztosan törölni szeretné a tanulót?</AlertDialogTitle>
-                                <AlertDialogDescription>
-                                Ez a művelet nem vonható vissza. A tanuló véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
-                                </AlertDialogDescription>
-                              </AlertDialogHeader>
-                              <AlertDialogFooter>
-                                <AlertDialogCancel>Mégse</AlertDialogCancel>
-                                <AlertDialogAction onClick={() => handleDelete(student.student_id)}>Véglegesítés</AlertDialogAction>
-                              </AlertDialogFooter>
-                            </AlertDialogContent>
-                          </AlertDialog>
+                                <AlertDialogTrigger>
+                                  <Button variant="ghost" ><Trash2 /></Button>
+                                </AlertDialogTrigger>
+                                <AlertDialogContent>
+                                  <AlertDialogHeader>
+                                    <AlertDialogTitle>Biztosan törölni szeretné a tanulót?</AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                      Ez a művelet nem vonható vissza. A tanuló véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
+                                    </AlertDialogDescription>
+                                  </AlertDialogHeader>
+                                  <AlertDialogFooter>
+                                    <AlertDialogCancel>Mégse</AlertDialogCancel>
+                                    <AlertDialogAction onClick={() => handleDelete(student.student_id)}>Véglegesítés</AlertDialogAction>
+                                  </AlertDialogFooter>
+                                </AlertDialogContent>
+                              </AlertDialog>
 
                               {/* <Button variant="ghost" onClick={() => handleDelete(student.student_id)}><X /></Button> */}
                             </td>
