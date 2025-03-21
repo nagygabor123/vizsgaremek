@@ -219,37 +219,47 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
 
       <SidebarContent>
-        {sidebarConfig.map((group: SidebarGroupConfig, groupIndex: number) => (
-          <SidebarGroup key={groupIndex}>
-            {/* Csoport cím renderelése (ha van) */}
-            {group.groupLabel && <SidebarGroupLabel>{group.groupLabel}</SidebarGroupLabel>}
+  {sidebarConfig.map((group: SidebarGroupConfig, groupIndex: number) => {
+    // Ellenőrizzük, hogy a csoportban van-e látható menüelem
+    const hasVisibleItems = group.items.some((item) =>
+      item.allowedPositions.includes(session?.user?.position || "")
+    );
 
-            {/* Menüelemek renderelése */}
-            <SidebarMenu>
-              {group.items.map((item: SidebarItem) => {
-                if (item.allowedPositions.includes(session?.user?.position || "")) {
-                  return (
-                    <SidebarMenuItem key={item.path}>
-                      <SidebarMenuButton asChild isActive={isActive(item.path)}>
-                        <Link href={item.path}>
-                          <>
-                            <item.icon />
-                            <span>{item.label}</span>
-                            {loading && item.path.includes("school") && !hasStudents && (
-                              <TriangleAlert className="ml-auto text-red-600" />
-                            )}
-                          </>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  );
-                }
-                return null;
-              })}
-            </SidebarMenu>
-          </SidebarGroup>
-        ))}
-      </SidebarContent>
+    // Ha nincs látható menüelem, akkor kihagyjuk a csoportot
+    if (!hasVisibleItems) return null;
+
+    return (
+      <SidebarGroup key={groupIndex}>
+        {/* Csoport cím renderelése (ha van) */}
+        {group.groupLabel && <SidebarGroupLabel>{group.groupLabel}</SidebarGroupLabel>}
+
+        {/* Menüelemek renderelése */}
+        <SidebarMenu>
+          {group.items.map((item: SidebarItem) => {
+            if (item.allowedPositions.includes(session?.user?.position || "")) {
+              return (
+                <SidebarMenuItem key={item.path}>
+                  <SidebarMenuButton asChild isActive={isActive(item.path)}>
+                    <Link href={item.path}>
+                      <>
+                        <item.icon />
+                        <span>{item.label}</span>
+                        {loading && item.path.includes("school") && !hasStudents && (
+                          <TriangleAlert className="ml-auto text-red-600" />
+                        )}
+                      </>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              );
+            }
+            return null;
+          })}
+        </SidebarMenu>
+      </SidebarGroup>
+    );
+  })}
+</SidebarContent>
 
       <SidebarFooter>
         <span className="text-xs text-center">© 2025 telock</span>
