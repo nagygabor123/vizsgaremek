@@ -35,12 +35,11 @@ export default async function handler(req, res) {
       });
       console.log(schedule);
       console.log(`Aktuális idő: ${currentTime}`);
-      console.log(`Első óra kezdete: ${scheduleResponse.first_class_start}`);
-      console.log(`Utolsó óra vége: ${scheduleResponse.last_class_end}`);
+      console.log(`Első óra kezdete: ${first_class_start}`);
+      console.log(`Utolsó óra vége: ${last_class_end}`);
 
-      // && expiresAt > aktido
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
-        if (studentaccess === "nyithato" ) {
+        if (studentaccess === "nyithato") {
           const lockerResult = await getLockerByRFID(rfid, sql);
 
           if (lockerResult.error) {
@@ -52,14 +51,15 @@ export default async function handler(req, res) {
           return res.status(200).send("zarva");
         }
       } else {
-        //return res.status(200).send("zarva");
+        // Ha az aktuális idő NEM esik az órarendben meghatározott időintervallumon belülre,
+        // akkor is visszaadjuk a szekrény azonosítót
         const lockerResult = await getLockerByRFID(rfid, sql);
 
-          if (lockerResult.error) {
-            return res.status(lockerResult.status).json({ error: lockerResult.error });
-          }
-          return res.status(200).send({ lockerId: lockerResult.lockerId });
+        if (lockerResult.error) {
+          return res.status(lockerResult.status).json({ error: lockerResult.error });
+        }
 
+        return res.status(200).send({ lockerId: lockerResult.lockerId });
       }
     } catch (error) {
       console.error('Adatbazis error:', error);
