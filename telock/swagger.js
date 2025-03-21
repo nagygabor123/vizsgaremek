@@ -1,25 +1,24 @@
-const swaggerJSDoc = require('swagger-jsdoc');
-
-const swaggerDefinition = {
-  openapi: '3.0.0',
-  info: {
-    title: 'TELOCK API Dokumentáció',
-    version: '1.0.0',
-    description: 'API dokumentáció a TELOCK szoftverhez',
-  },
-  servers: [
-    {
-      url: 'https://vizsgaremek-mocha.vercel.app/',
-      description: 'Fejlesztői szerver',
-    },
-  ],
-};
+// swagger.js
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
 const options = {
-  swaggerDefinition,
-  apis: ['./pages/api/**/*.js']
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Vizsgaremek API',
+      version: '1.0.0',
+      description: 'API dokumentáció a vizsgaremekhez',
+    },
+    servers: [
+      {
+        url: 'https://vizsgaremek-mocha.vercel.app',
+      },
+    ],
+  },
+  apis: ['./pages/api/**/*.js'], 
 };
 
-const swaggerSpec = swaggerJSDoc(options);
+const specs = swaggerJsDoc(options);
 
-module.exports = swaggerSpec;
+module.exports = { specs, swaggerUi };
