@@ -1,3 +1,5 @@
+'use client'
+
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { signOut, useSession } from "next-auth/react";
