@@ -1,56 +1,29 @@
 // app/dashboard/school/timetables/page.tsx
-import { GetServerSidePropsContext } from 'next';
-import { getSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/app/api/auth/[...nextauth]/auth-options'; // Az authOptions importálása
+import { redirect } from 'next/navigation';
 
-// Session típus definiálása
-interface Session {
-  user: {
-    role: string;
-    email: string;
-    // További felhasználói adatok...
-  };
-}
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getSession(context);
+export default async function TimetablePage() {
+  // Session lekérése szerveroldalon
+  const session = await getServerSession(authOptions);
 
   // Ha nincs bejelentkezve a felhasználó, átirányítás a bejelentkezési oldalra
   if (!session) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    };
+    redirect('/login');
   }
 
   // Ellenőrizd a felhasználó szerepkörét
-  if (session.user?.position !== 'igazgató') {
+  if (session.user?.position !== 'igazgato') {
     // Ha a felhasználó nem "igazgató", átirányítás egy másik oldalra (pl. dashboard főoldal)
-    return {
-      redirect: {
-        destination: '/dashboard',
-        permanent: false,
-      },
-    };
+    redirect('/dashboard');
   }
 
   // Ha a felhasználó "igazgató", engedélyezd az oldal megjelenítését
-  return {
-    props: { session },
-  };
-}
-
-interface TimetablePageProps {
-  session: Session;
-}
-
-export default function TimetablePage({ session }: TimetablePageProps) {
   return (
     <div>
       <h1>Órarend</h1>
       <p>Csak az igazgatók láthatják ezt az oldalt.</p>
-      <p>Bejelentkezve mint: {session.user.email}</p>
+      <p>Bejelentkezve mint</p>
     </div>
   );
 }
