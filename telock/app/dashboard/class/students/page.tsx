@@ -1,5 +1,7 @@
 "use client";
 
+import {useSession } from "next-auth/react";
+
 import { AppSidebar } from "@/components/app-sidebar";
 import {
   Breadcrumb,
@@ -70,6 +72,8 @@ interface Timetable {
 }
 
 export default function Home() {
+  const { data: session } = useSession();
+
   const [open, setOpen] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -257,8 +261,9 @@ export default function Home() {
   const [sortField, setSortField] = useState<"full_name" | "class" | null>(null);
 
   const [sortOrder, setSortOrder] = useState("asc");
-  const [searchName, setSearchName] = useState("");
-  const [searchClass, setSearchClass] = useState("13.I");
+  //const [searchName, setSearchName] = useState("");
+ // const [searchClass, setSearchClass] = useState({session?.user?.osztalyfonok});
+  
 
 
 
@@ -271,11 +276,15 @@ export default function Home() {
     return sortOrder === "asc" ? fieldA.localeCompare(fieldB, "hu") : fieldB.localeCompare(fieldA, "hu");
   });
 
+  const [searchName, setSearchName] = useState("");
+  const [searchClass, setSearchClass] = useState(session?.user?.osztalyfonok || "");
+  
   // Szűrés
   const filteredStudents = sortedStudents.filter(student =>
     student.full_name.toLowerCase().includes(searchName.toLowerCase()) &&
     student.class.toLowerCase().includes(searchClass.toLowerCase())
   );
+  
 
   // Rendezés váltása adott mező szerint
   const toggleSort = (field: "full_name" | "class") => {
@@ -402,10 +411,13 @@ export default function Home() {
                 </SelectContent>
               </Select> */}
 
-                <Button variant="outline" onClick={handleSystemClose} > 
-                  {systemClose ? <LockOpen /> : <Lock />}
-                  {systemClose ? 'Összes feloldás' : 'Összes zárolás'}
+                <Button variant="outline"  > 
+                {/*  
+                onClick={handleSystemClose}
 
+                {systemClose ? <LockOpen /> : <Lock />}
+                  {systemClose ? 'Összes feloldás' : 'Összes zárolás'}
+*/}
                 </Button>
               </div>
 
