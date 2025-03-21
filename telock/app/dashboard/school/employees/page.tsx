@@ -111,7 +111,7 @@ export default function AddEmployeePage() {
   const positions = [
     { label: 'Igazgató', value: 'igazgato' },
     // { label: 'Osztályfőnök', value: 'osztalyfonok' },
-    { label: 'Tanár', value: 'tanar' },
+   // { label: 'Tanár', value: 'tanar' },
     { label: 'Portás', value: 'portas' },
     { label: 'Rendszergazda', value: 'rendszergazda' },
   ];
@@ -440,19 +440,19 @@ export default function AddEmployeePage() {
                         className="col-span-3"
                         id="fullName"
                         type="text"
-                        placeholder="Teszt elek"
+                        placeholder="Teszt Elek"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                       />
                     </div>
 
                     <div className="grid gap-2">
-                      <Label htmlFor="fullName">Felhasználónév</Label>
+                      <Label htmlFor="shortName">Rövidített név (felhasználónév)</Label>
                       <Input
                         className="col-span-3"
-                        id="fullName"
+                        id="shortName"
                         type="text"
-                        placeholder=""
+                        placeholder="TeEl"
                         value={shortname}
                         onChange={(e) => setShortName(e.target.value)}
                       />
@@ -478,7 +478,7 @@ export default function AddEmployeePage() {
                     </div>
 
                     {/*{["tanar", "igazgato"].includes(position) && (*/}
-                    <div className="grid gap-2">
+                 {/*   <div className="grid gap-2">
                       <Label htmlFor="osztaly">Van osztálya?</Label>
 
 
@@ -491,12 +491,12 @@ export default function AddEmployeePage() {
                         <SelectContent>
                           {osztalyfonokOptions.map((osztalyfonok) => (
                             <SelectItem key={osztalyfonok} value={osztalyfonok}>
-                              {osztalyfonok} {/* Itt az osztályfőnök nevét jelenítjük meg */}
+                              {osztalyfonok}
                             </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
-                    </div>
+                    </div>*/}
                     {/*)}*/}
 
 
@@ -522,8 +522,8 @@ export default function AddEmployeePage() {
               <table className="w-full">
                 <thead className="text-center text-sm text-neutral-500">
                   <tr>
-                    <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Név  <ArrowUpDown className="w-4 h-4 inline-block" /></th>
-                    <th className="p-2  font-normal">Felhasználónév</th>
+                    <th className="p-2  font-normal">Rövidített név (felhasználónév)</th>
+                    <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Név  <ArrowUpDown className="w-4 h-4 inline-block" /></th>   
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("position")}>Pozíció  <ArrowUpDown className="w-4 h-4 inline-block" /></th>
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("osztalyfonok")}>Osztály <ArrowUpDown className="w-4 h-4 inline-block" /></th>
                     <th className="p-2 cursor-pointer font-normal">Műveletek</th>
@@ -594,7 +594,7 @@ export default function AddEmployeePage() {
                                 </div>
 
 
-                                <div className="grid gap-2">
+                              {/*  <div className="grid gap-2">
                                   <Label htmlFor="position">Van osztálya?</Label>
                                   <Select value={editOsztaly} onValueChange={setEditOsztaly}>
                                     <SelectTrigger className="col-span-3 w-full">
@@ -603,12 +603,12 @@ export default function AddEmployeePage() {
                                     <SelectContent>
                                       {osztalyfonokOptions.map((osztalyfonok) => (
                                         <SelectItem key={osztalyfonok} value={osztalyfonok}>
-                                          {osztalyfonok} {/* Itt az osztályfőnök nevét jelenítjük meg */}
+                                          {osztalyfonok}
                                         </SelectItem>
                                       ))}
                                     </SelectContent>
                                   </Select>
-                                </div>
+                                </div>*/}
 
 
 
