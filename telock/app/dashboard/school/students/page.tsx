@@ -233,25 +233,7 @@ export default function Home() {
 
   const handleStudentOpen = async (student_id: string) => {
     try {
-      const scheduleResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/scheduleStart?student=${student_id}`);
-
-      if (!scheduleResponse.ok) {
-        console.error('Nem sikerült lekérni a diák órarendjét.');
-        return;
-      }
-
-      const schedule = await scheduleResponse.json();
-      const { first_class_start, last_class_end } = schedule;
-
-      const currentTime = new Date().toLocaleString('hu-HU', {
-        timeZone: 'Europe/Budapest',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-      });
-      console.log(currentTime);
-
-      if (currentTime >= first_class_start && currentTime <= last_class_end) {
+      
         const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/system/studentAccess?student=${student_id}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -263,9 +245,7 @@ export default function Home() {
           const data = await response.json();
           console.log(data.message);
         }
-      } else {
-        console.warn('A diák jelenleg nincs órán, nem lehet feloldani.');
-      }
+      
     } catch (error) {
       console.error('Hiba történt a kérés során:', error);
     }
@@ -594,7 +574,7 @@ export default function Home() {
                           minute: '2-digit',
                           hour12: false
                         });
-                        console.log(currentTime); 
+                        //console.log(currentTime); 
                   
                         const canUnlockStudent = systemClose || (studentTimetableData &&
                           currentTime >= studentTimetableData.first_class_start &&
