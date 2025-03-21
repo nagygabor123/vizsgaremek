@@ -752,7 +752,7 @@ export default function Page() {
                   </tbody>
                 </table>
               ) : (
-                <div className="text-center p-3 text-neutral-500">
+                <div className="text-center p-3 text-muted-foreground">
                   Nincs megjelenítendő tanítási nélküli munkanap
                 </div>
               )}
@@ -907,7 +907,7 @@ export default function Page() {
                     </tbody>
                   </table>
                 ) : (
-                  <div className="text-center p-3 text-neutral-500">
+                  <div className="text-center p-3 text-muted-foreground">
                     Nincs megjelenítendő szombati tanítási nap
                   </div>
                 )}
@@ -1069,7 +1069,7 @@ export default function Page() {
                   </tbody>
                 </table>
               ) : (
-                <div className="text-center p-3 text-neutral-500">Nincs megjelenítendő tanítási szünet</div>
+                <div className="text-center p-3 text-muted-foreground">Nincs megjelenítendő tanítási szünet</div>
 
               )}
             </div>

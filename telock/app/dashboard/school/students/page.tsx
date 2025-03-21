@@ -558,7 +558,7 @@ export default function Home() {
 
                     students.length === 0 ? (
                       <tr>
-                        <td colSpan={5} className="text-center p-6 h-dvh text-base text-gray-500">
+                        <td colSpan={5} className="text-center p-6 h-dvh text-base text-muted-foreground">
                           Nem szerepel tanuló a rendszerben
                         </td>
                       </tr>
