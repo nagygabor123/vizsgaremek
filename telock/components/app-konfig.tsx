@@ -222,7 +222,7 @@ const SheetComponent: React.FC = () => {
 
         <div className="flex justify-center space-x-4 my-4">
           <span className={step === 1 ? "font-bold" : "text-gray-500"}>
-            1. ASC órarend feltöltés
+            1. ASC órarend feltöltése
           </span>
           <span className={step === 2 ? "font-bold" : "text-gray-500"}>
             2. Diákok feltöltése
@@ -240,9 +240,9 @@ const SheetComponent: React.FC = () => {
              <img
                 src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNsb3VkLXVwbG9hZCI+PHBhdGggZD0iTTEyIDEzdjgiLz48cGF0aCBkPSJNNCAxNC44OTlBNyA3IDAgMSAxIDE1LjcxIDhoMS43OWE0LjUgNC41IDAgMCAxIDIuNSA4LjI0MiIvPjxwYXRoIGQ9Im04IDE3IDQtNCA0IDQiLz48L3N2Zz4="
                 alt="Upload Icon"
-                className="w-12 h-12 opacity-75 mx-auto"
+                className="w-12 h-12 mx-auto"
               />
-              {selectedFile ? selectedFile.name : <p className="text-zinc-700 font-semibold mt-3">Válassza ki a feltölteni kívánt XML-fájlt</p>}
+              {selectedFile ? selectedFile.name : <p className="text-gray-950 font-semibold mt-3">Válassza ki a feltölteni kívánt XML-fájlt</p>}
               {selectedFile ? selectedFile.name : <p className="text-base text-gray-500">vagy húzza ide a fájlt</p>}
               {message && <p className="mt-5">{message}</p>}
             </div>
@@ -267,9 +267,9 @@ const SheetComponent: React.FC = () => {
              <img
                 src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNsb3VkLXVwbG9hZCI+PHBhdGggZD0iTTEyIDEzdjgiLz48cGF0aCBkPSJNNCAxNC44OTlBNyA3IDAgMSAxIDE1LjcxIDhoMS43OWE0LjUgNC41IDAgMCAxIDIuNSA4LjI0MiIvPjxwYXRoIGQ9Im04IDE3IDQtNCA0IDQiLz48L3N2Zz4="
                 alt="Upload Icon"
-                className="w-12 h-12 opacity-75 mx-auto"
+                className="w-12 h-12 mx-auto"
               />
-              {csvFile ? csvFile.name : <p className="text-zinc-700 font-semibold mt-3">Válassza ki a feltölteni kívánt CSV-fájlt</p>}
+              {csvFile ? csvFile.name : <p className="text-gray-900 font-semibold mt-3">Válassza ki a feltölteni kívánt CSV-fájlt</p>}
               {csvFile ? csvFile.name : <p className="text-base text-gray-500">vagy húzza ide a fájlt</p>}
               {csvMessage && <p className="mt-5">{csvMessage}</p>}
             </div>
