@@ -11,7 +11,7 @@ export async function POST(request: Request) {
 
     const full_name = "Szalkai Adam";
     const osztalyfonok = "nincs";
-    const position = "igazgato";
+    const position = "Tanár";
 
 
 
