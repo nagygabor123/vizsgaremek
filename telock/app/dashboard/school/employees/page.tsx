@@ -110,6 +110,7 @@ export default function AddEmployeePage() {
 
   const positions = [
     { label: 'Igazgató', value: 'igazgato' },
+    { label: 'Igazgatóhelyettes', value: 'igazgatohelyettes' },
     // { label: 'Osztályfőnök', value: 'osztalyfonok' },
     // { label: 'Tanár', value: 'tanar' },
     { label: 'Portás', value: 'portas' },
@@ -172,8 +173,9 @@ export default function AddEmployeePage() {
         setPosition('');
         setOsztaly('');
         fetchEmployees();
-        setOpen(false);
         setIsDialogOpen(false);
+        setOpen(false);
+   
       } else {
         setMessage(data.message || 'Error adding employee');
       }
@@ -571,7 +573,7 @@ export default function AddEmployeePage() {
 
                               <div className="grid items-start gap-4">
 
-                                <div className="grid gap-2">
+                               {/* <div className="grid gap-2">
                                   <Label htmlFor="shortName">Rövidített név (felhasználónév)</Label>
                                   <Input
                                    disabled 
@@ -582,7 +584,7 @@ export default function AddEmployeePage() {
                                     
 
                                   />
-                                </div>
+                                </div>*/}
 
                                 <div className="grid gap-2">
                                   <Label htmlFor="fullName">Teljes név</Label>
@@ -597,8 +599,8 @@ export default function AddEmployeePage() {
                                 </div>
 
                                 <div className="grid gap-2">
-                                  <Label htmlFor="position">Pozíció</Label>
-                                  <Select value={editPosition} onValueChange={setEditPosition}>
+                                  <Label htmlFor="position">Pozíció</Label> {/** value={editPosition} */}
+                                  <Select onValueChange={setEditPosition}>
                                     <SelectTrigger className="col-span-3 w-full"> {/** className="w-[180px]" */}
                                       <SelectValue placeholder="Válasszon..." />
                                     </SelectTrigger>
@@ -651,8 +653,8 @@ export default function AddEmployeePage() {
 
 
                           <AlertDialog>
-                            <AlertDialogTrigger disabled={employee.position === 'Tanár' || employee.position === "igazgato"} >
-                              <Button disabled={employee.position === 'Tanár' || employee.position === "igazgato"} variant="ghost"><Trash2 className="w-4 h-4 inline-block" /></Button>
+                            <AlertDialogTrigger disabled={employee.position === 'Tanár' || employee.position === "igazgato" || employee.position === "igazgatohelyettes"} >
+                              <Button disabled={employee.position === 'Tanár' || employee.position === "igazgato" || employee.position === "igazgatohelyettes"} variant="ghost"><Trash2 className="w-4 h-4 inline-block" /></Button>
                             </AlertDialogTrigger>
                             <AlertDialogContent>
                               <AlertDialogHeader>
