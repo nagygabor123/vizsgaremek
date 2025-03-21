@@ -397,7 +397,7 @@ export default function AddEmployeePage() {
                   value={searchOsztalyfonok}
                   onValueChange={setSearchOsztalyfonok}
                 >
-                  <SelectTrigger className="col-span-3" id="searchOsztalyfonok"> {/* Id itt a Trigger elemhez */}
+                  <SelectTrigger className="col-span-3 w-full" id="searchOsztalyfonok"> {/* Id itt a Trigger elemhez */}
                     <SelectValue placeholder="Keresés osztály szerint..." />
                   </SelectTrigger>
                   <SelectContent>
