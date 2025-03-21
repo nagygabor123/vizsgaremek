@@ -397,7 +397,7 @@ export default function AddEmployeePage() {
                   value={searchOsztalyfonok}
                   onValueChange={setSearchOsztalyfonok}
                 >
-                  <SelectTrigger className="col-span-3 w-full" id="searchOsztalyfonok"> {/* Id itt a Trigger elemhez */}
+                  <SelectTrigger className="col-span-3" id="searchOsztalyfonok"> {/* Id itt a Trigger elemhez */}
                     <SelectValue placeholder="Keresés osztály szerint..." />
                   </SelectTrigger>
                   <SelectContent>
@@ -544,7 +544,7 @@ export default function AddEmployeePage() {
 
                     paginatedEmployees.map((employee) => (
                       <tr key={employee.admin_id} className="text-center border-t">
-                        <td className="p-1">{employee.short_name}</td>
+                      
                         <td className="p-1">{employee.full_name}</td>
                         <td className="p-1">
                           {positions.find((pos) => pos.value === employee.position)?.label || employee.position}
@@ -578,8 +578,8 @@ export default function AddEmployeePage() {
                                     className="col-span-3"
                                     id="shortName"
                                     type="text"
-                                    placeholder=""
-                                    value={shortname}
+                                    placeholder={shortname}
+                                    
 
                                   />
                                 </div>
