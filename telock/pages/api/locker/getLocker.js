@@ -28,7 +28,7 @@ export default async function handler(req, res) {
         return res.status(500).json({ error: 'Nem sikerült lekérni a diák órarendjét.' });
       }
       const schedule = await scheduleResponse.json();
-      const { first_class_start, last_class_end } = schedule[0] || {};
+      const { first_class_start, last_class_end } = schedule;
       const currentTime = new Date().toLocaleTimeString('hu-HU', {
         timeZone: 'Europe/Budapest',
         hour12: false
@@ -51,8 +51,6 @@ export default async function handler(req, res) {
           return res.status(200).send("zarva");
         }
       } else {
-        // Ha az aktuális idő NEM esik az órarendben meghatározott időintervallumon belülre,
-        // akkor is visszaadjuk a szekrény azonosítót
         const lockerResult = await getLockerByRFID(rfid, sql);
 
         if (lockerResult.error) {
