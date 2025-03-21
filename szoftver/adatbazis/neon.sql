@@ -79,8 +79,8 @@ CREATE TABLE ring_times (
 );
 
 INSERT INTO admins (full_name, password, position, osztalyfonok, short_name) VALUES
-('szalkai', 'piciakukija', 'senki', 'nincs', 'SSSS'),
-('nagy', 'nagyakukija', 'igazgató', 'nincs', 'GGGG');
+('Admin', 'admin', 'Rendszergazda', 'nincs', 'admin'),
+
 
 INSERT INTO system_status (status) VALUES
 ('nyithato');
