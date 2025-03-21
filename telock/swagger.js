@@ -1,6 +1,5 @@
-// swagger.js
-const swaggerJsDoc = require('swagger-jsdoc');
-const swaggerUi = require('swagger-ui-express');
+import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
 
 const options = {
   definition: {
@@ -8,17 +7,24 @@ const options = {
     info: {
       title: 'Vizsgaremek API',
       version: '1.0.0',
-      description: 'API dokumentáció a vizsgaremekhez',
+      description: 'API dokumentáció a vizsgaremek alkalmazáshoz.',
     },
     servers: [
       {
-        url: 'https://vizsgaremek-mocha.vercel.app',
+        url: 'https://vizsgaremek-mocha.vercel.app/api',
       },
     ],
   },
-  apis: ['./pages/api/**/*.js'], 
+  apis: ['./pages/api/**/*.js'], // Az összes API fájlt beolvassa a mappából
 };
 
-const specs = swaggerJsDoc(options);
+const swaggerSpec = swaggerJsdoc(options);
 
-module.exports = { specs, swaggerUi };
+export default function handler(req, res) {
+  if (req.method === 'GET') {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(swaggerSpec);
+  } else {
+    res.status(405).send({ message: 'Method Not Allowed' });
+  }
+}

@@ -1,11 +1,11 @@
-// pages/api/index.js
-import express from 'express';
-import { swaggerUi, specs } from '../../../swagger';
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from './swagger';
 
-const app = express();
+export default function handler(req, res) {
+  if (req.method === 'GET') {
+    swaggerUi.setup(swaggerSpec)(req, res);
+  } else {
+    res.status(405).send({ message: 'Method Not Allowed' });
+  }
+}
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
-
-// További API végpontok itt...
-
-export default app;
