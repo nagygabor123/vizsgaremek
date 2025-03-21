@@ -1,5 +1,6 @@
 'use client';
 
+import {useSession } from "next-auth/react";
 
 import { AppSidebar } from "@/components/app-sidebar"
 import { ChevronRight, ChevronLeft, Slash } from "lucide-react"
@@ -115,6 +116,8 @@ const getWeekStartAndEnd = (date: Date) => {
 };
 
 const Calendar: React.FC = () => {
+  const { data: session } = useSession();
+
   const [systemClose, setSystemClose] = useState<boolean>(false);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isMobileView, setIsMobileView] = useState(false);
@@ -213,12 +216,12 @@ const Calendar: React.FC = () => {
 //https://vizsgaremek-mocha.vercel.app/api/timetable/getTeacherTimetable?teacherName=${teacher}
 
 //PaZo
-/*
-  const teacher = 'PaZo';
+
+  //const teacher = 'PaZo';
   useEffect(() => {
     async function fetchSchedule() {
       try {
-        const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/getTeacherTimetable?teacherName=${teacher}
+        const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/getTeacherTimetable?teacherName=${session?.user?.short_name}
 `);
         const data = await response.json();
         const formattedData = data.map((lesson: any) => ({
@@ -237,7 +240,7 @@ const Calendar: React.FC = () => {
 
     fetchSchedule();
   }, []);
-*/
+
 
 
 
@@ -283,7 +286,7 @@ const Calendar: React.FC = () => {
 
 
 
-
+{/*
   useEffect(() => {
     if (selectedValue) {
       if (classOptions.includes(selectedValue)) {
@@ -336,7 +339,7 @@ const Calendar: React.FC = () => {
 
 
 
-
+*/}
 
 
 
@@ -685,7 +688,7 @@ const Calendar: React.FC = () => {
                   </SelectGroup>
                 </SelectContent>
               </Select>*/}
- <Select value={selectedValue} onValueChange={setSelectedValue}>
+{/* <Select value={selectedValue} onValueChange={setSelectedValue}>
           <SelectTrigger>
             <SelectValue placeholder="Válasszon..." />
           </SelectTrigger>
@@ -706,7 +709,7 @@ const Calendar: React.FC = () => {
             </SelectGroup>
           </SelectContent>
         </Select>
-
+*/}
 
 
               <Button onClick={goToToday} variant="outline">Mai nap</Button>

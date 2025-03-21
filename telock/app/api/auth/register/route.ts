@@ -9,8 +9,8 @@ export async function POST(request: Request) {
 
     const {short_name, password} = await request.json();
 
-    const full_name = "Szalkai-Szabó ÁDám";
-    const osztalyfonok = "13.I";
+    const full_name = "PaZo";
+    const osztalyfonok = "11.I";
     const position = "Tanár";
 
 
