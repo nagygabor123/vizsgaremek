@@ -1,5 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar"
-
+import { signOut, useSession } from "next-auth/react";
 
 import {
   Breadcrumb,
@@ -30,9 +30,11 @@ import {
 import { Button } from "@/components/ui/button"
 
 
-import { User, Phone, UploadCloud, ClipboardList } from "lucide-react";
+import { User, Phone, UploadCloud, ClipboardList, Megaphone } from "lucide-react";
 
 export default function Page() {
+  const { data: session } = useSession();
+
 
   return (
     <SidebarProvider>
@@ -52,22 +54,21 @@ export default function Page() {
           </div>
         </header>
 
-        <div className="p-6 space-y-6">
+        <div className="p-4 space-y-4">
           {/* Üdvözlés */}
        
-            <Card className="bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg">
-              <CardHeader>
-                <CardTitle className="text-xl flex items-center gap-2">
-                  <User className="w-6 h-6" />
-                  Üdvözöllek a telefontároló rendszerben!
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-white/90">
-                  Itt kezelheted a diákok telefonjainak tárolását és visszaadását.
+          <div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
+          <div className="grid auto-rows-min gap-4 w-full">
+              <div className="min-h-[60px] rounded-xl bg-blue-100 flex items-center px-4 w-full box-border overflow-hidden">
+                <Megaphone className="text-blue-500" />
+                <p className="text-sm truncate ml-3 text-blue-500">
+                Üdvözöljük a Telock vezérlőpultjában, {session?.user?.full_name}!
                 </p>
-              </CardContent>
-            </Card>
+               
+              </div>
+          
+          </div>
+        </div>
       
 
           {/* Statisztikák */}
@@ -82,25 +83,29 @@ export default function Page() {
                     <p className="text-2xl font-bold">sdf</p>
                   </CardContent>
                 </Card>
+                
+                <Card className="shadow-md border">
+                  <CardHeader className="flex items-center gap-2">
+                    <User className="w-5 h-5 text-blue-600" />
+                    <CardTitle className="text-lg">sdf</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-2xl font-bold">sdf</p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="shadow-md border">
+                  <CardHeader className="flex items-center gap-2">
+                    <User className="w-5 h-5 text-blue-600" />
+                    <CardTitle className="text-lg">sdf</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-2xl font-bold">sdf</p>
+                  </CardContent>
+                </Card>
          
           </div>
 
-          {/* Gyakori műveletek */}
-      
-            <Card className="shadow-md">
-              <CardHeader>
-                <CardTitle>Gyakori műveletek</CardTitle>
-              </CardHeader>
-              <CardContent className="flex gap-3">
-                <Button variant="outline" className="flex items-center gap-2">
-                  <Phone className="w-4 h-4" /> Új telefon tárolása
-                </Button>
-                <Button variant="outline" className="flex items-center gap-2">
-                  <UploadCloud className="w-4 h-4" /> Telefon visszaadása
-                </Button>
-              </CardContent>
-            </Card>
-         
         </div>
       </SidebarInset>
     </SidebarProvider>
