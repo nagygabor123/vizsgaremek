@@ -69,47 +69,13 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="p-4 space-y-4">
-          {/* Üdvözlés */}
-       
-       
-      
-
-          {/* Statisztikák */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-
-                <Card >
-                  <CardHeader className="flex items-center gap-2">
-                    <User className="w-5 h-5 text-blue-600" />
-                    <CardTitle className="text-lg">sdf</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-2xl font-bold">sdf</p>
-                  </CardContent>
-                </Card>
-                
-                <Card >
-                  <CardHeader className="flex items-center gap-2">
-                    <User className="w-5 h-5 text-blue-600" />
-                    <CardTitle className="text-lg">sdf</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-2xl font-bold">sdf</p>
-                  </CardContent>
-                </Card>
-                
-                <Card >
-                  <CardHeader className="flex items-center gap-2">
-                    <User className="w-5 h-5 text-blue-600" />
-                    <CardTitle className="text-lg">sdf</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-2xl font-bold">sdf</p>
-                  </CardContent>
-                </Card>
-         
+        <div className="flex flex-1 flex-col gap-4 p-4">
+          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
+            <div className="aspect-video rounded-xl bg-muted/50" />
+            <div className="aspect-video rounded-xl bg-muted/50" />
+            <div className="aspect-video rounded-xl bg-muted/50" />
           </div>
-
+          <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
         </div>
       </SidebarInset>
     </SidebarProvider>

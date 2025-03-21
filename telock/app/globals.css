@@ -73,7 +73,7 @@
 }
 
 .calendar-cell.empty {
-  background-color: #dbeafe; /* opcionális: üres cellák kiemelése */
+  background-color: #f0f6fc; /* opcionális: üres cellák kiemelése */
 }
 
 
