@@ -4,5 +4,5 @@ import 'swagger-ui-react/swagger-ui.css';
 const SwaggerUI = dynamic(() => import('swagger-ui-react'), { ssr: false });
 
 export default function ApiDocs() {
-  return <SwaggerUI url="/api/docs" />;
+  return <SwaggerUI url="https://vizsgaremek-mocha.vercel.app/api/docs" />;
 }
