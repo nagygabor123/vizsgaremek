@@ -1,5 +1,3 @@
-'use client'
-
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { signOut, useSession } from "next-auth/react";
@@ -47,58 +45,83 @@ interface SidebarItem {
   label: string;
   icon: React.ComponentType<any>;
   path: string;
-  allowedPositions: string[]; // allowedRoles helyett allowedPositions
+  allowedPositions: string[];
+}
+
+// Sidebar csoportok típusa
+interface SidebarGroupConfig {
+  groupLabel?: string; // Csoport cím (opcionális)
+  items: SidebarItem[]; // A csoporthoz tartozó menüelemek
 }
 
 // Sidebar konfiguráció
-const sidebarConfig: SidebarItem[] = [
+const sidebarConfig: SidebarGroupConfig[] = [
   {
-    label: "Kezdőlap",
-    icon: House,
-    path: "/dashboard",
-    allowedPositions: ["Tanár", "igazgato"], // Mindenki láthatja
+    items: [
+      {
+        label: "Kezdőlap",
+        icon: House,
+        path: "/dashboard",
+        allowedPositions: ["Tanár", "igazgato"],
+      },
+      {
+        label: "Saját órák",
+        icon: CalendarHeart,
+        path: "/dashboard/my-timetable",
+        allowedPositions: ["Tanár", "megcsinalni"],
+      },
+    ],
   },
   {
-    label: "Saját órák",
-    icon: CalendarHeart,
-    path: "/dashboard/my-timetable",
-    allowedPositions: ["Tanár"], // Csak tanárok és diákok
+    groupLabel: "Osztályom", // Csoport cím
+    items: [
+      {
+        label: "Órarend",
+        icon: Calendar,
+        path: "/dashboard/class/timetable",
+        allowedPositions: ["megcsinalni"],
+      },
+      {
+        label: "Tanulók",
+        icon: GraduationCap,
+        path: "/dashboard/class/students",
+        allowedPositions: ["megcsinalni"],
+      },
+    ],
   },
   {
-    label: "Órarend",
-    icon: Calendar,
-    path: "/dashboard/class/timetable",
-    allowedPositions: ["teacher"], // Csak tanárok
+    groupLabel: "Iskolai nyilvántartás", // Csoport cím
+    items: [
+      {
+        label: "Órarendek",
+        icon: Calendar,
+        path: "/dashboard/school/timetables",
+        allowedPositions: ["igazgato"],
+      },
+      {
+        label: "Tanulók",
+        icon: GraduationCap,
+        path: "/dashboard/school/students",
+        allowedPositions: ["igazgato"],
+      },
+      {
+        label: "Munkatársak",
+        icon: BriefcaseBusiness,
+        path: "/dashboard/school/employees",
+        allowedPositions: ["igazgato"],
+      },
+    ],
   },
   {
-    label: "Tanulók",
-    icon: GraduationCap,
-    path: "/dashboard/class/students",
-    allowedPositions: ["teacher"], // Csak tanárok
-  },
-  {
-    label: "Órarendek",
-    icon: Calendar,
-    path: "/dashboard/school/timetables",
-    allowedPositions: ["igazgato"], // Csak adminok
-  },
-  {
-    label: "Tanulók",
-    icon: GraduationCap,
-    path: "/dashboard/school/students",
-    allowedPositions: ["igazgato"], // Csak adminok
-  },
-  {
-    label: "Munkatársak",
-    icon: BriefcaseBusiness,
-    path: "/dashboard/school/employees",
-    allowedPositions: ["igazgato"], // Csak adminok
-  },
-  {
-    label: "Tanév beállításai",
-    icon: SlidersHorizontal,
-    path: "/dashboard/school/settings",
-    allowedPositions: ["igazgato"], // Csak adminok
+    groupLabel: "Beállítások és naplózás", // Csoport cím
+    items: [
+      {
+        label: "Tanév beállításai",
+        icon: SlidersHorizontal,
+        path: "/dashboard/school/settings",
+        allowedPositions: ["igazgato"],
+      },
+    ],
   },
 ];
 
@@ -194,31 +217,36 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
 
       <SidebarContent>
-        {sidebarConfig.map((item: SidebarItem) => {
-          // Default érték használata
-          if (item.allowedPositions.includes(session?.user?.position || "")) {
-            return (
-              <SidebarGroup key={item.path}>
-                <SidebarMenu>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={isActive(item.path)}>
-                      <Link href={item.path}>
-                        <>
-                          <item.icon />
-                          <span>{item.label}</span>
-                          {loading && item.path.includes("school") && !hasStudents && (
-                            <TriangleAlert className="ml-auto text-red-600" />
-                          )}
-                        </>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                </SidebarMenu>
-              </SidebarGroup>
-            );
-          }
-          return null;
-        })}
+        {sidebarConfig.map((group: SidebarGroupConfig, groupIndex: number) => (
+          <SidebarGroup key={groupIndex}>
+            {/* Csoport cím renderelése (ha van) */}
+            {group.groupLabel && <SidebarGroupLabel>{group.groupLabel}</SidebarGroupLabel>}
+
+            {/* Menüelemek renderelése */}
+            <SidebarMenu>
+              {group.items.map((item: SidebarItem) => {
+                if (item.allowedPositions.includes(session?.user?.position || "")) {
+                  return (
+                    <SidebarMenuItem key={item.path}>
+                      <SidebarMenuButton asChild isActive={isActive(item.path)}>
+                        <Link href={item.path}>
+                          <>
+                            <item.icon />
+                            <span>{item.label}</span>
+                            {loading && item.path.includes("school") && !hasStudents && (
+                              <TriangleAlert className="ml-auto text-red-600" />
+                            )}
+                          </>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                }
+                return null;
+              })}
+            </SidebarMenu>
+          </SidebarGroup>
+        ))}
       </SidebarContent>
 
       <SidebarFooter>
