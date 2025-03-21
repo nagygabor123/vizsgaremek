@@ -72,23 +72,17 @@ export default function Page() {
 
           {/* Statisztikák */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[
-              { label: "Tárolt telefonok", value: 23, icon: Phone },
-              { label: "Mai visszaadások", value: 12, icon: UploadCloud },
-              { label: "Heti összes", value: 78, icon: ClipboardList },
-            ].map((stat, index) => (
-        
+
                 <Card className="shadow-md border">
                   <CardHeader className="flex items-center gap-2">
-                    <stat.icon className="w-5 h-5 text-blue-600" />
-                    <CardTitle className="text-lg">{stat.label}</CardTitle>
+                    <User className="w-5 h-5 text-blue-600" />
+                    <CardTitle className="text-lg">sdf</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-2xl font-bold">{stat.value}</p>
+                    <p className="text-2xl font-bold">sdf</p>
                   </CardContent>
                 </Card>
-              
-            ))}
+         
           </div>
 
           {/* Gyakori műveletek */}
