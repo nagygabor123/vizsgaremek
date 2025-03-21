@@ -655,7 +655,7 @@ export default function Page() {
                             >
                               <CalendarIcon />
                               {selectedDate ? format(new Date(selectedDate), "PPP") : (
-                                <span>2025. május 20.</span>
+                                <span>May 20th, 2025</span>
                               )}
                             </Button>
                           </DropdownMenuTrigger>
@@ -810,7 +810,7 @@ export default function Page() {
                             >
                               <CalendarIcon />
                               {newPlusDate.which_day ? format(new Date(newPlusDate.which_day), "PPP") : (
-                                <span>2025. április 14.</span>
+                                <span>April 14th, 2025</span>
                               )}
                             </Button>
                           </DropdownMenuTrigger>
@@ -874,7 +874,7 @@ export default function Page() {
                       {yearSchedule.plusDates.map((plusDate: any) => (
                         <tr key={plusDate.id} className="text-center border-t">
                           <td className="p-1">{new Date(plusDate.date).toLocaleDateString("hu-HU")}</td>
-                          <td className="p-1">{plusDate.replaceDay}</td>
+                          {days.find((day) => day.value === plusDate.replaceDay)?.label || plusDate.replaceDay}
                           <td className="p-1">
 
 
@@ -923,7 +923,7 @@ export default function Page() {
             <div className="flex justify-between items-start">
               <div className="w-full sm:w-1/2">
                 <h2 className="text-lg font-semibold">Tanítási szünetek</h2>
-                <p className="text-sm text-muted-foreground">Az iskola hivatalos szünetei és időtartamuk.</p>
+                <p className="text-sm text-muted-foreground">Az iskola tanítási szünetei és időtartamuk.</p>
               </div>
 
 
@@ -980,7 +980,7 @@ export default function Page() {
                                   format(date.from, "LLL dd, y")
                                 )
                               ) : (
-                                <span>2025. április 14. - 2025. máju 20.</span>
+                                <span>April 14th, 2025 - May 20th, 2025</span>
                               )}
                             </Button>
                           </DropdownMenuTrigger>

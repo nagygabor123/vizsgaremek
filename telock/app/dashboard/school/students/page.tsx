@@ -448,12 +448,12 @@ export default function Home() {
                       />
                     </div>
                     <div className="grid gap-2">
-                      <Label htmlFor="class">Osztály</Label>
+                      <Label htmlFor="class">Osztály és csoportok</Label>
                       <Input
                         className="col-span-3"
                         type="text"
                         name="class"
-                        placeholder="9.I"
+                        placeholder="9.I,9.I-A2"
                         // value={formData.class}
                         onChange={e => setFormData({ ...formData, class: e.target.value })}
                       />
