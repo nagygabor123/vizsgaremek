@@ -233,7 +233,7 @@ export default function Home() {
 
   const handleStudentOpen = async (student_id: string) => {
     try {
-      const scheduleResponse = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${student_id}`);
+      const scheduleResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/scheduleStart?student=${student_id}`);
 
       if (!scheduleResponse.ok) {
         console.error('Nem sikerült lekérni a diák órarendjét.');
@@ -248,7 +248,7 @@ export default function Home() {
 
       // Ellenőrizzük, hogy az aktuális idő az órarendi időintervallumba esik-e
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
-        const response = await fetch(`http://localhost:3000/api/system/studentAccess?student=${student_id}`, {
+        const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/system/studentAccess?student=${student_id}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
         });
