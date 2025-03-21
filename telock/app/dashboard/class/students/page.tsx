@@ -392,13 +392,13 @@ export default function Home() {
                   value={searchName}
                   onChange={(e) => setSearchName(e.target.value)}
                 />
-                {/*  <Input
+                 <Input
                   type="text"
-                  placeholder="Keresés osztály szerint..."
+                  placeholder="Keresés csoport szerint..."
                   className="border p-2 rounded-md"
                   value={searchClass}
                   onChange={(e) => setSearchClass(e.target.value)}
-                />*/}
+                />
                 {/* <Select>
                 <SelectTrigger > 
                   <SelectValue placeholder="Keresés osztály szerint..." />
@@ -412,6 +412,7 @@ export default function Home() {
               </Select> */}
 
                 <Button variant="outline"  > 
+                <LockOpen/> Összes feloldás
                 {/*  
                 onClick={handleSystemClose}
 

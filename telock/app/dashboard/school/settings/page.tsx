@@ -636,9 +636,9 @@ export default function Page() {
                   >
                     <DialogHeader>
                       <DialogTitle>Tanítás nélküli munkanap hozzáadása</DialogTitle>
-                      <DialogDescription>
+                      {/* <DialogDescription>
                         Aliquam metus eros, tristique nec semper id, congue eget metus
-                      </DialogDescription>
+                      </DialogDescription> */}
                     </DialogHeader>
 
                     <div className="grid items-start gap-4">
@@ -791,9 +791,9 @@ export default function Page() {
                   >
                     <DialogHeader>
                       <DialogTitle>Szombati tanítási nap hozzáadása</DialogTitle>
-                      <DialogDescription>
+                      {/* <DialogDescription>
                         Aliquam metus eros, tristique nec semper id, congue eget metus
-                      </DialogDescription>
+                      </DialogDescription> */}
                     </DialogHeader>
 
                     <div className="grid items-start gap-4">
@@ -941,9 +941,9 @@ export default function Page() {
                   >
                     <DialogHeader>
                       <DialogTitle>Szünet hozzáadása</DialogTitle>
-                      <DialogDescription>
+                      {/* <DialogDescription>
                         Aliquam metus eros, tristique nec semper id, congue eget metus
-                      </DialogDescription>
+                      </DialogDescription> */}
                     </DialogHeader>
 
                     <div className="grid items-start gap-4">
