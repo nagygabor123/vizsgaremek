@@ -712,7 +712,9 @@ export default function Page() {
                   <tbody>
                     {yearSchedule.noSchool.map((noSchoolPeriod: any) => (
                       <tr key={noSchoolPeriod.id} className="text-center border-t">
-                        <td className="p-1">{noSchoolPeriod.end}</td>
+                        <td className="p-1">
+                           {new Date(noSchoolPeriod.end).toLocaleDateString("hu-HU")}</td>
+                        
                         <td className="p-1">
                           <AlertDialog>
                             <AlertDialogTrigger>
@@ -871,7 +873,7 @@ export default function Page() {
                     <tbody>
                       {yearSchedule.plusDates.map((plusDate: any) => (
                         <tr key={plusDate.id} className="text-center border-t">
-                          <td className="p-1">{plusDate.date}</td>
+                          <td className="p-1">{new Date(plusDate.date).toLocaleDateString("hu-HU")}</td>
                           <td className="p-1">{plusDate.replaceDay}</td>
                           <td className="p-1">
 
@@ -1034,7 +1036,10 @@ export default function Page() {
                       .map((breakPeriod: any) => (
                         <tr key={breakPeriod.id} className="text-center border-t">
                           <td className="p-1 truncate">{breakPeriod.name}</td>
-                          <td className="p-1">{breakPeriod.start} - {breakPeriod.end}</td>
+                          <td className="p-1">
+  {new Date(breakPeriod.start).toLocaleDateString("hu-HU")} - {new Date(breakPeriod.end).toLocaleDateString("hu-HU")}
+</td>
+
                           <td className="p-1">
                             <AlertDialog>
                               <AlertDialogTrigger>
