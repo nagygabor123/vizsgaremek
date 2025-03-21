@@ -121,7 +121,7 @@
   transition: background-color 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #f0f6fc;
-  border: 1px solid #2563eb;
+  border: 2px solid #2563eb;
   color: #2563eb;
   font-weight: bold;
   cursor: pointer; 
@@ -130,7 +130,7 @@
 .lesson-card.current-lesson:hover {
   transition: background-color 0.3s ease;
   background-color: #bfdbfe;
-  border: 1px solid #0f4efc;
+  border: 2px solid #0f4efc;
   color: #0f4efc;
 }
 

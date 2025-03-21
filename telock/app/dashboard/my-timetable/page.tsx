@@ -221,7 +221,7 @@ const Calendar: React.FC = () => {
   useEffect(() => {
     async function fetchSchedule() {
       try {
-        const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/getTeacherTimetable?teacherName=DoPe
+        const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/getTeacherTimetable?teacherName=PaZo
 `);
         const data = await response.json();
         const formattedData = data.map((lesson: any) => ({

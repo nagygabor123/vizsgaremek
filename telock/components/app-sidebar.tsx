@@ -100,9 +100,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <span className="text-s truncate">Kiskunfélegyházi Szent</span>
                 <span className="text-s truncate">Benedek PG Középiskola</span>
               </div>
-              <Avatar className="h-9 w-9 rounded-full border border-blue-600">
-  <AvatarFallback className="text-blue-600">
-    {session?.user?.short_name?.substring(0, 2).toUpperCase()} {/**?.substring(0, 2).toUpperCase() */}
+              <Avatar className="h-9 w-9 rounded-full border-2 border-blue-600">
+  <AvatarFallback className="text-blue-600 text-xs">
+    {session?.user?.short_name} {/**?.substring(0, 2).toUpperCase() */}
   </AvatarFallback>
 </Avatar>
 
@@ -117,9 +117,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                 <Avatar className="h-9 w-9 rounded-full">
-                  <AvatarFallback className="rounded-lg bg-blue-100"> {session?.user?.short_name?.substring(0, 2).toUpperCase()}</AvatarFallback>
-                </Avatar> 
+              <Avatar className="h-9 w-9 rounded-full border-2 border-blue-600">
+  <AvatarFallback className="text-blue-600">
+    {session?.user?.short_name?.substring(0, 2).toUpperCase()} {/**?.substring(0, 2).toUpperCase() */}
+  </AvatarFallback>
+</Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">{session?.user?.full_name}</span>
                   <span className="truncate text-xs">{session?.user?.position}</span>
