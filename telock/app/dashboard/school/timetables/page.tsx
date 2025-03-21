@@ -66,6 +66,7 @@ import {
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/auth-options'; // Az authOptions importálása
 import { redirect } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 
 
@@ -120,22 +121,27 @@ const getWeekStartAndEnd = (date: Date) => {
   return { startOfWeek2, endOfWeek };
 };
 
-const Calendar: React.FC = async () => {
+const Calendar: React.FC = () => {
+  const router = useRouter();
+  useEffect(() => {
+    const checkSession = async () => {
+      const session = await getServerSession(authOptions);
 
-    // Session lekérése szerveroldalon
-    const session = await getServerSession(authOptions);
-  
-    // Ha nincs bejelentkezve a felhasználó, átirányítás a bejelentkezési oldalra
-    if (!session) {
-      redirect('/login');
-    }
-  
-    // Ellenőrizd a felhasználó szerepkörét
-    if (session.user?.position !== 'igazgato') {
-      // Ha a felhasználó nem "igazgató", átirányítás egy másik oldalra (pl. dashboard főoldal)
-      redirect('/dashboard');
-    }
+      if (!session) {
+        router.push("/login");
+        return;
+      }
 
+      if (session.user?.position !== "igazgato") {
+        router.push("/dashboard");
+        return;
+      }
+
+      setLoading(false);
+    };
+
+    checkSession();
+  }, [router]);
 
 
   const [systemClose, setSystemClose] = useState<boolean>(false);
