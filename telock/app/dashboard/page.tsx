@@ -56,14 +56,11 @@ export default function Page() {
           </div>
         </header>
 
-        <div className="p-4 space-y-4">
-          {/* Üdvözlés */}
-       
-          <div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
+        <div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
           <div className="grid auto-rows-min gap-4 w-full">
               <div className="min-h-[60px] rounded-xl bg-blue-50 flex items-center px-4 w-full box-border overflow-hidden">
-                <Megaphone className="text-blue-500" />
-                <p className="text-sm truncate ml-3 text-blue-500">
+                <Megaphone className="text-blue-600" />
+                <p className="text-sm truncate ml-3 text-blue-600">
                 Üdvözöljük a Telock vezérlőpultjában, {session?.user?.full_name}!
                 </p>
                
@@ -71,12 +68,17 @@ export default function Page() {
           
           </div>
         </div>
+
+        <div className="p-4 space-y-4">
+          {/* Üdvözlés */}
+       
+       
       
 
           {/* Statisztikák */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-                <Card className="shadow-md border">
+                <Card >
                   <CardHeader className="flex items-center gap-2">
                     <User className="w-5 h-5 text-blue-600" />
                     <CardTitle className="text-lg">sdf</CardTitle>
@@ -86,7 +88,7 @@ export default function Page() {
                   </CardContent>
                 </Card>
                 
-                <Card className="shadow-md border">
+                <Card >
                   <CardHeader className="flex items-center gap-2">
                     <User className="w-5 h-5 text-blue-600" />
                     <CardTitle className="text-lg">sdf</CardTitle>
@@ -96,7 +98,7 @@ export default function Page() {
                   </CardContent>
                 </Card>
                 
-                <Card className="shadow-md border">
+                <Card >
                   <CardHeader className="flex items-center gap-2">
                     <User className="w-5 h-5 text-blue-600" />
                     <CardTitle className="text-lg">sdf</CardTitle>

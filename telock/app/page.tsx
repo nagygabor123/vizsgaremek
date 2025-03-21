@@ -68,7 +68,7 @@ export default async function Home() {
       </section>
       
       {/* Illustration */}
-      <div className="w-full max-w-5xl bg-gradient-to-r from-blue-100 to-white p-4 md:p-8 rounded-xl shadow">
+      <div className="w-full max-w-5xl bg-gradient-to-r from-blue-50 to-white p-4 md:p-8 rounded-xl shadow">
       <Image src="/example.png" alt="Illustration" width={800} height={400} className="w-full h-auto" priority /> {/*width={800} height={400} */}
 
       </div>
@@ -91,7 +91,7 @@ export default async function Home() {
           <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-[64rem] md:grid-cols-3">
             <div className="relative overflow-hidden rounded-lg border bg-background p-2">
               <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
-                <BadgeCheck className="w-12 h-12 text-blue-500" />
+                <BadgeCheck className="w-12 h-12 text-blue-600" />
                 <div className="space-y-2">
                   <h3 className="font-bold">Next.js 13</h3>
                   <p className="text-sm text-muted-foreground">
@@ -102,7 +102,7 @@ export default async function Home() {
             </div>
             <div className="relative overflow-hidden rounded-lg border bg-background p-2">
               <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
-                <BadgeCheck className="w-12 h-12 text-blue-500" />
+                <BadgeCheck className="w-12 h-12 text-blue-600" />
                 <div className="space-y-2">
                   <h3 className="font-bold">React 18</h3>
                   <p className="text-sm">
@@ -113,7 +113,7 @@ export default async function Home() {
             </div>
             <div className="relative overflow-hidden rounded-lg border bg-background p-2">
               <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
-                <BadgeCheck className="w-12 h-12 text-blue-500" />
+                <BadgeCheck className="w-12 h-12 text-blue-600" />
                 <div className="space-y-2">
                   <h3 className="font-bold">Database</h3>
                   <p className="text-sm text-muted-foreground">
@@ -124,7 +124,7 @@ export default async function Home() {
             </div>
             <div className="relative overflow-hidden rounded-lg border bg-background p-2">
               <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
-                <BadgeCheck className="w-12 h-12 text-blue-500" />
+                <BadgeCheck className="w-12 h-12 text-blue-600" />
                 <div className="space-y-2">
                   <h3 className="font-bold">Components</h3>
                   <p className="text-sm text-muted-foreground">
@@ -136,7 +136,7 @@ export default async function Home() {
             </div>
             <div className="relative overflow-hidden rounded-lg border bg-background p-2">
               <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
-                <BadgeCheck className="w-12 h-12 text-blue-500" />
+                <BadgeCheck className="w-12 h-12 text-blue-600" />
                 <div className="space-y-2">
                   <h3 className="font-bold">Authentication</h3>
                   <p className="text-sm text-muted-foreground">
@@ -147,7 +147,7 @@ export default async function Home() {
             </div>
             <div className="relative overflow-hidden rounded-lg border bg-background p-2">
               <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
-                <BadgeCheck className="w-12 h-12 text-blue-500" />
+                <BadgeCheck className="w-12 h-12 text-blue-600" />
                 <div className="space-y-2">
                   <h3 className="font-bold">Subscriptions</h3>
                   <p className="text-sm text-muted-foreground">
