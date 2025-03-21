@@ -588,7 +588,14 @@ export default function Home() {
 
                       paginatedStudents.map((student) => {
                         const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
-                        const currentTime = new Date().toTimeString().slice(0, 5);
+                        const currentTime = new Date().toLocaleString('hu-HU', {
+                          timeZone: 'Europe/Budapest',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                          hour12: false
+                        });
+                        console.log(currentTime); 
+                  
                         const canUnlockStudent = systemClose || (studentTimetableData &&
                           currentTime >= studentTimetableData.first_class_start &&
                           currentTime <= studentTimetableData.last_class_end);
