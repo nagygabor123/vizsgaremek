@@ -221,7 +221,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <>
                     <Calendar />
                     <span>Órarendek</span>
-                    {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-560" />}
+                    {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-600" />}
                   </>
                 </Link>
               </SidebarMenuButton>
