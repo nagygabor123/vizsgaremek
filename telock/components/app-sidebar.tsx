@@ -168,7 +168,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={isActive("/dashboard/timetable")}>
-                <Link href="/dashboard/timetable">
+                <Link href="/dashboard/my-timetable">
                   <>
                     <CalendarHeart />
                     <span>Saját órák</span>
@@ -218,7 +218,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <>
                     <Calendar />
                     <span>Órarendek</span>
-                    {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
+                    {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-560" />}
                   </>
                 </Link>
               </SidebarMenuButton>
@@ -231,7 +231,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <>
                     <GraduationCap />
                     <span>Tanulók</span>
-                    {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
+                    {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-600" />}
                   </>
                 </Link>
               </SidebarMenuButton>
@@ -244,7 +244,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <>
                     <BriefcaseBusiness />
                     <span>Munkatársak</span>
-                    {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-500" />}
+                    {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-600" />}
                   </>
                 </Link>
               </SidebarMenuButton>
