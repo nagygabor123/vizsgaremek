@@ -344,7 +344,7 @@ export default function Home() {
                   <Slash />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Iskolai nyilvántartás</BreadcrumbPage>
+                  <BreadcrumbPage>Osztályom</BreadcrumbPage>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
                   <Slash />

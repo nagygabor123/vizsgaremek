@@ -627,13 +627,13 @@ const Calendar: React.FC = () => {
                   <Slash />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Iskolai nyilvántartás</BreadcrumbPage>
+                  <BreadcrumbPage>Osztályom</BreadcrumbPage>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
                   <Slash />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Órarendek</BreadcrumbPage>
+                  <BreadcrumbPage>Órarend</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
