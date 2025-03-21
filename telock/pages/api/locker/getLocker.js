@@ -35,8 +35,8 @@ export default async function handler(req, res) {
       });
       console.log(schedule);
       console.log(`Aktuális idő: ${currentTime}`);
-      console.log(`Első óra kezdete: ${schedule.first_class_start}`);
-      console.log(`Utolsó óra vége: ${schedule.last_class_end}`);
+      console.log(`Első óra kezdete: ${scheduleResponse.first_class_start}`);
+      console.log(`Utolsó óra vége: ${scheduleResponse.last_class_end}`);
 
       // && expiresAt > aktido
       if (currentTime >= first_class_start && currentTime <= last_class_end) {
