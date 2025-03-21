@@ -18,7 +18,7 @@ const swaggerDefinition = {
 
 const options = {
   swaggerDefinition,
-  apis: ['./pages/api/**/*.js'], // Az API route-ok helye
+  apis: ["./pages/api/**/*.js"],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
