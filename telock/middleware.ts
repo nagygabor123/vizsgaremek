@@ -7,14 +7,14 @@ export default withAuth(
     const token = req.nextauth.token;
 
     // Példa: Csak az "igazgató" pozícióval rendelkező felhasználók férhetnek hozzá a /dashboard/school/timetable oldalhoz
-    if (req.nextUrl.pathname.startsWith("/dashboard/school/:path*")) {
+    if (req.nextUrl.pathname.startsWith("/dashboard/school")) {
       if (token?.position !== "igazgato") {
         return NextResponse.redirect(new URL("/dashboard", req.url));
       }
     }
 
     // Példa: Csak az osztályfőnökök férhetnek hozzá a /dashboard/class route-hoz
-    if (req.nextUrl.pathname.startsWith("/dashboard/class/:path*")) {
+    if (req.nextUrl.pathname.startsWith("/dashboard/class")) {
       if (token?.osztalyfonok == "nincs") {
         return NextResponse.redirect(new URL("/dashboard", req.url));
       }
