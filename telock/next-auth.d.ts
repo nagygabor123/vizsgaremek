@@ -6,6 +6,7 @@ declare module "next-auth" {
     short_name?: string;
     full_name?: string; // full_name hozzáadása
     position?: string;
+    osztalyfonok?: string;
   }
 
   interface Session {
