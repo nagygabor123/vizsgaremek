@@ -17,7 +17,9 @@ const SheetComponent: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [step, setStep] = useState(1);
   const [csvFile, setCsvFile] = useState<File | null>(null);
-  const [csvMessage, setCsvMessage] = useState<string>('');
+  const [csvMessage, setCsvMessage] = useState<React.ReactNode>(null);
+
+  
   const [isSheetOpen, setIsSheetOpen] = useState(false); // Új állapot az ablak nyitás/zárás kezelésére
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -123,13 +125,18 @@ const SheetComponent: React.FC = () => {
     if (e.target.files && e.target.files.length > 0) {
       const selectedFile = e.target.files[0];
       setCsvFile(selectedFile);
-      setCsvMessage(`Selected file: ${selectedFile.name}`);
+      setCsvMessage(
+        <span>
+        <Paperclip className="w-4 h-4 inline-block text-sm" /> {selectedFile.name}
+      </span>
+
+      );
     }
   };
 
   const handleCsvUpload = async () => {
     if (!csvFile) {
-      setCsvMessage('Please select a CSV file first!');
+      <div className="text-red-600 text-sm">Nincs fájl kiválasztva</div>
       return;
     }
 
@@ -242,8 +249,9 @@ const SheetComponent: React.FC = () => {
                 alt="Upload Icon"
                 className="w-12 h-12 mx-auto"
               />
-              {selectedFile ? selectedFile.name : <p className="text-gray-950 font-semibold mt-3">Válassza ki a feltölteni kívánt XML-fájlt</p>}
-              {selectedFile ? selectedFile.name : <p className="text-am text-muted-foreground">vagy húzza ide a fájlt</p>}
+              {/* {selectedFile ? selectedFile.name :  }*/}
+              <p className="text-gray-950 font-semibold mt-3">Válassza ki a feltölteni kívánt XML-fájlt</p>
+              {/* {selectedFile ? selectedFile.name : <p className="text-am text-muted-foreground">vagy húzza ide a fájlt</p>} */}
               {message && <p className="mt-5">{message}</p>}
             </div>
             <input
@@ -269,8 +277,9 @@ const SheetComponent: React.FC = () => {
                 alt="Upload Icon"
                 className="w-12 h-12 mx-auto"
               />
-              {csvFile ? csvFile.name : <p className="text-gray-900 font-semibold mt-3">Válassza ki a feltölteni kívánt CSV-fájlt</p>}
-              {csvFile ? csvFile.name : <p className="text-base text-gray-500">vagy húzza ide a fájlt</p>}
+             {/*  {csvFile ? csvFile.name :  }*/}
+             <p className="text-gray-900 font-semibold mt-3">Válassza ki a feltölteni kívánt CSV-fájlt</p>
+              {/* {csvFile ? csvFile.name : <p className="text-base text-gray-500">vagy húzza ide a fájlt</p>} */}
               {csvMessage && <p className="mt-5">{csvMessage}</p>}
             </div>
             <input
