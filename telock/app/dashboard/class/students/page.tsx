@@ -402,8 +402,8 @@ export default function Home() {
                 </SelectContent>
               </Select> */}
 
-                <Button variant="outline" onClick={handleSystemClose} > {/*className="ml-auto" */}
-                  {systemClose ? <LockOpen /> : <Lock />} {/*   Keyhole  */}
+                <Button variant="outline" onClick={handleSystemClose} > 
+                  {systemClose ? <LockOpen /> : <Lock />}
                   {systemClose ? 'Összes feloldás' : 'Összes zárolás'}
 
                 </Button>
@@ -537,13 +537,13 @@ export default function Home() {
                             {/* <td className="p-1">{student.rfid_tag}</td> */}
                             <td className="p-1">
 
-                              {/*               <Button 
+                                             <Button 
   variant="ghost" 
   onClick={() => handleStudentOpen(student.student_id)} 
   disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}
 > 
   <LockOpen className="w-4 h-4 inline-block" />
-</Button>  */}
+</Button>  
 
                              {/* <Dialog open={open} onOpenChange={setOpen}>
                                 <DialogTrigger asChild>
@@ -603,7 +603,7 @@ export default function Home() {
 
 
 
-                              <AlertDialog>
+                              {/*<AlertDialog>
                                 <AlertDialogTrigger>
                                   <Button variant="ghost" ><Trash2 /></Button>
                                 </AlertDialogTrigger>
@@ -619,7 +619,7 @@ export default function Home() {
                                     <AlertDialogAction onClick={() => handleDelete(student.student_id)}>Véglegesítés</AlertDialogAction>
                                   </AlertDialogFooter>
                                 </AlertDialogContent>
-                              </AlertDialog>
+                              </AlertDialog>*/}
 
                               {/* <Button variant="ghost" onClick={() => handleDelete(student.student_id)}><X /></Button> */}
                             </td>
