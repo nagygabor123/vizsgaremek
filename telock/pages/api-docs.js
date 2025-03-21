@@ -1,8 +1,11 @@
-import dynamic from 'next/dynamic';
-import 'swagger-ui-react/swagger-ui.css';
+// pages/api/index.js
+import express from 'express';
+import { swaggerUi, specs } from '../../../swagger';
 
-const SwaggerUI = dynamic(() => import('swagger-ui-react'), { ssr: false });
+const app = express();
 
-export default function ApiDocs() {
-  return <SwaggerUI url="/api/docs" />;
-}
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+
+// További API végpontok itt...
+
+export default app;
