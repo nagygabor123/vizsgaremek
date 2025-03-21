@@ -600,7 +600,7 @@ export default function AddEmployeePage() {
                                   <Label htmlFor="position">Pozíció</Label>
                                   <Select value={editPosition} onValueChange={setEditPosition}>
                                     <SelectTrigger className="col-span-3 w-full"> {/** className="w-[180px]" */}
-                                      <SelectValue placeholder="" />
+                                      <SelectValue placeholder="Válasszon..." />
                                     </SelectTrigger>
                                     <SelectContent>
                                       {positions.map((pos) => (
