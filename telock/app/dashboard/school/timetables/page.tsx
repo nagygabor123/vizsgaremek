@@ -122,6 +122,22 @@ const getWeekStartAndEnd = (date: Date) => {
 
 const Calendar: React.FC = async () => {
 
+    // Session lekérése szerveroldalon
+    const session = await getServerSession(authOptions);
+  
+    // Ha nincs bejelentkezve a felhasználó, átirányítás a bejelentkezési oldalra
+    if (!session) {
+      redirect('/login');
+    }
+  
+    // Ellenőrizd a felhasználó szerepkörét
+    if (session.user?.position !== 'igazgato') {
+      // Ha a felhasználó nem "igazgató", átirányítás egy másik oldalra (pl. dashboard főoldal)
+      redirect('/dashboard');
+    }
+
+
+
   const [systemClose, setSystemClose] = useState<boolean>(false);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isMobileView, setIsMobileView] = useState(false);
@@ -611,22 +627,9 @@ const Calendar: React.FC = async () => {
   if (isButtonVisible === null) {
     return null;
   }
-
   const { startOfWeek2, endOfWeek } = getWeekStartAndEnd(currentDate);
 
-    // Session lekérése szerveroldalon
-    const session = await getServerSession(authOptions);
-  
-    // Ha nincs bejelentkezve a felhasználó, átirányítás a bejelentkezési oldalra
-    if (!session) {
-      redirect('/login');
-    }
-  
-    // Ellenőrizd a felhasználó szerepkörét
-    if (session.user?.position !== 'igazgato') {
-      // Ha a felhasználó nem "igazgató", átirányítás egy másik oldalra (pl. dashboard főoldal)
-      redirect('/dashboard');
-    }
+
   return (
     <SidebarProvider>
       <AppSidebar />
