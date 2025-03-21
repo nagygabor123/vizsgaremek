@@ -703,7 +703,7 @@ export default function Page() {
             <div className="rounded-xl border overflow-x-auto w-full">
               {yearSchedule?.noSchool?.length > 0 ? (
                 <table className="w-full min-w-max">
-                  <thead className="text-center text-sm text-neutral-500">
+                  <thead className="text-center text-sm text-muted-foreground">
                     <tr>
                       <th className="p-2 cursor-pointer font-normal">Dátum</th>
                       <th className="p-2 cursor-pointer font-normal">Művelet</th>
@@ -863,7 +863,7 @@ export default function Page() {
               <div className="rounded-xl border overflow-x-auto w-full">
                 {yearSchedule?.plusDates?.length > 0 ? (
                   <table className="w-full min-w-max">
-                    <thead className="text-center text-sm text-neutral-500">
+                    <thead className="text-center text-sm text-muted-foreground">
                       <tr>
                         <th className="p-2 cursor-pointer font-normal">Dátum</th>
                         <th className="p-2 cursor-pointer font-normal">Órarendi nap</th>
@@ -1023,7 +1023,7 @@ export default function Page() {
             <div className="rounded-xl border overflow-x-auto w-full">
               {yearSchedule?.breakDates?.filter((breakPeriod: any) => breakPeriod.type === "szunet").length > 0 ? (
                 <table className="min-w-full table-auto">
-                  <thead className="text-center text-sm text-neutral-500">
+                  <thead className="text-center text-sm text-muted-foreground">
                     <tr>
                       <th className="p-2 cursor-pointer font-normal">Név</th>
                       <th className="p-2 cursor-pointer font-normal">Időtartam</th>

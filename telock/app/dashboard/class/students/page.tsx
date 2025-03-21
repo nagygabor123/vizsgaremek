@@ -392,13 +392,13 @@ export default function Home() {
                   value={searchName}
                   onChange={(e) => setSearchName(e.target.value)}
                 />
-                 <Input
+                 {/* <Input
                   type="text"
                   placeholder="Keresés csoport szerint..."
                   className="border p-2 rounded-md"
                   value={searchClass}
                   onChange={(e) => setSearchClass(e.target.value)}
-                />
+                /> */}
                 {/* <Select>
                 <SelectTrigger > 
                   <SelectValue placeholder="Keresés osztály szerint..." />
@@ -502,7 +502,7 @@ export default function Home() {
 
             <div className="rounded-md border mt-5">
               <table className="w-full">
-                <thead className="text-center text-sm text-neutral-500">
+                <thead className="text-center text-sm text-muted-foreground">
                   <tr>
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Teljes név <ArrowUpDown className="w-4 h-4 inline-block" /></th>
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("class")}>Osztály és csoportok<ArrowUpDown className="w-4 h-4 inline-block" /></th>

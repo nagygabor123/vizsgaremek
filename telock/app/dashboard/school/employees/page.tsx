@@ -526,8 +526,8 @@ export default function AddEmployeePage() {
 
             <div className="rounded-md border mt-5">
               <table className="w-full">
-                <thead className="text-center text-sm text-neutral-500">
-                  <tr>
+                <thead className="text-center text-sm text-muted-foreground">
+                  <tr >
 
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Név  <ArrowUpDown className="w-4 h-4 inline-block" /></th>
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("position")}>Pozíció  <ArrowUpDown className="w-4 h-4 inline-block" /></th>

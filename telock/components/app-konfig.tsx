@@ -221,10 +221,10 @@ const SheetComponent: React.FC = () => {
         </SheetHeader>
 
         <div className="flex justify-center space-x-4 my-4">
-          <span className={step === 1 ? "font-bold" : "text-gray-500"}>
+          <span className={step === 1 ? "font-bold" : "text-muted-foreground"}>
             1. ASC órarend feltöltése
           </span>
-          <span className={step === 2 ? "font-bold" : "text-gray-500"}>
+          <span className={step === 2 ? "font-bold" : "text-muted-foreground"}>
             2. Diákok feltöltése
           </span>
         </div>
@@ -243,7 +243,7 @@ const SheetComponent: React.FC = () => {
                 className="w-12 h-12 mx-auto"
               />
               {selectedFile ? selectedFile.name : <p className="text-gray-950 font-semibold mt-3">Válassza ki a feltölteni kívánt XML-fájlt</p>}
-              {selectedFile ? selectedFile.name : <p className="text-base text-gray-500">vagy húzza ide a fájlt</p>}
+              {selectedFile ? selectedFile.name : <p className="text-am text-muted-foreground">vagy húzza ide a fájlt</p>}
               {message && <p className="mt-5">{message}</p>}
             </div>
             <input
