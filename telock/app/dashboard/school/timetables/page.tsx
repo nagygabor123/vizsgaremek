@@ -16,7 +16,7 @@ const Calendar = () => {
 
   return (
     <div>
-      <AuthCheck /> {/* Szerveroldali ellenőrzés */}
+      <AuthCheck /> {/* Ez szerverkomponens, így nem dob hibát */}
       <h1>Naptár oldal</h1>
     </div>
   );
