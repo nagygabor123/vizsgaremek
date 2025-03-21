@@ -28,7 +28,7 @@ export default async function handler(req, res) {
         return res.status(500).json({ error: 'Nem sikerült lekérni a diák órarendjét.' });
       }
       const schedule = await scheduleResponse.json();
-      const { first_class_start, last_class_end } = schedule;
+      const { first_class_start, last_class_end } = schedule[0] || {};
       const currentTime = new Date().toLocaleTimeString('hu-HU', {
         timeZone: 'Europe/Budapest',
         hour12: false
