@@ -29,7 +29,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-//DialogFooter
+  //DialogFooter
 } from "@/components/ui/dialog"
 import {
   Select,
@@ -37,8 +37,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
- // SelectGroup,
- // SelectLabel
+  // SelectGroup,
+  // SelectLabel
 } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 import AppKonfig from '@/components/app-konfig';
@@ -63,12 +63,12 @@ export default function AddEmployeePage() {
 
 
 
- // const [isDialogOpen2, setIsDialogOpen2] = useState(false);
+  // const [isDialogOpen2, setIsDialogOpen2] = useState(false);
   const [fullName, setFullName] = useState('');
   const [position, setPosition] = useState('');
   const [osztaly, setOsztaly] = useState('');
   const [, setMessage] = useState('');
- // const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [employees, setEmployees] = useState<any[]>([]);
   const [editId, setEditId] = useState<number | null>(null);
   const [editName, setEditName] = useState('');
@@ -90,7 +90,7 @@ export default function AddEmployeePage() {
     try {
       const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/students/read');
       const data = await response.json();
-     // setStudents(data);
+      // setStudents(data);
       setHasStudents(data.length > 0); // Ha van legalább egy diák, akkor true
     } catch (error) {
       console.error('Error fetching students', error);
@@ -111,7 +111,7 @@ export default function AddEmployeePage() {
   const positions = [
     { label: 'Igazgató', value: 'igazgato' },
     // { label: 'Osztályfőnök', value: 'osztalyfonok' },
-   // { label: 'Tanár', value: 'tanar' },
+    // { label: 'Tanár', value: 'tanar' },
     { label: 'Portás', value: 'portas' },
     { label: 'Rendszergazda', value: 'rendszergazda' },
   ];
@@ -155,7 +155,7 @@ export default function AddEmployeePage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-   // setLoading(true);
+    // setLoading(true);
     setMessage('');
 
     try {
@@ -227,8 +227,8 @@ export default function AddEmployeePage() {
         fetchEmployees();
         setOpen(false);
         setIsDialogOpen(false);
-  //      setOpen(false); //////////////////////////////////////////
-  
+        //      setOpen(false); //////////////////////////////////////////
+
       } else {
         setMessage(data.message || 'Error updating employee');
       }
@@ -276,11 +276,11 @@ export default function AddEmployeePage() {
     }
   };
 
-/*
-  const filteredOsztalyfonok = osztalyfonokOptions.filter((osztalyfonok) =>
-    osztalyfonok.toLowerCase().includes(searchOsztalyfonok.toLowerCase())
-  );
-*/
+  /*
+    const filteredOsztalyfonok = osztalyfonokOptions.filter((osztalyfonok) =>
+      osztalyfonok.toLowerCase().includes(searchOsztalyfonok.toLowerCase())
+    );
+  */
 
 
   const PAGE_SIZE = 13;
@@ -362,9 +362,9 @@ export default function AddEmployeePage() {
 
           <div>
             {loading2 ? (
-         <div className="flex items-center justify-center min-h-screen">
-         <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-100 border-t-blue-500"></div>
-        </div>
+              <div className="flex items-center justify-center min-h-screen">
+                <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-100 border-t-blue-500"></div>
+              </div>
             ) : (
               <>
                 {!hasStudents && <AppKonfig />}
@@ -397,7 +397,7 @@ export default function AddEmployeePage() {
                   value={searchOsztalyfonok}
                   onValueChange={setSearchOsztalyfonok}
                 >
-                  <SelectTrigger className="col-span-3" id="searchOsztalyfonok"> {/* Id itt a Trigger elemhez */}
+                  <SelectTrigger className="col-span-3 w-full" id="searchOsztalyfonok"> {/* Id itt a Trigger elemhez */}
                     <SelectValue placeholder="Keresés osztály szerint..." />
                   </SelectTrigger>
                   <SelectContent>
@@ -434,19 +434,8 @@ export default function AddEmployeePage() {
                   </DialogHeader>
 
                   <form onSubmit={handleSubmit} className="grid items-start gap-4">
-                    <div className="grid gap-2">
-                      <Label htmlFor="fullName">Teljes név</Label>
-                      <Input
-                        className="col-span-3"
-                        id="fullName"
-                        type="text"
-                        placeholder="Teszt Elek"
-                        value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
-                      />
-                    </div>
 
-                    <div className="grid gap-2">
+                  <div className="grid gap-2">
                       <Label htmlFor="shortName">Rövidített név (felhasználónév)</Label>
                       <Input
                         className="col-span-3"
@@ -459,12 +448,27 @@ export default function AddEmployeePage() {
                     </div>
 
 
+                    <div className="grid gap-2">
+                      <Label htmlFor="fullName">Teljes név</Label>
+                      <Input
+                        className="col-span-3"
+                        id="fullName"
+                        type="text"
+                        placeholder="Teszt Elek"
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
+                      />
+                    </div>
+
+             
+
+
 
                     <div className="grid gap-2 w-full">
                       <Label htmlFor="position">Pozíció</Label>
                       <Select value={position} onValueChange={setPosition}>
                         <SelectTrigger className="col-span-3 w-full">
-                   
+
                           <SelectValue placeholder="Válasszon..." />
                         </SelectTrigger>
                         <SelectContent>
@@ -478,7 +482,7 @@ export default function AddEmployeePage() {
                     </div>
 
                     {/*{["tanar", "igazgato"].includes(position) && (*/}
-                 {/*   <div className="grid gap-2">
+                    {/*   <div className="grid gap-2">
                       <Label htmlFor="osztaly">Van osztálya?</Label>
 
 
@@ -522,8 +526,8 @@ export default function AddEmployeePage() {
               <table className="w-full">
                 <thead className="text-center text-sm text-neutral-500">
                   <tr>
-                    <th className="p-2  font-normal">Rövidített név (felhasználónév)</th>
-                    <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Név  <ArrowUpDown className="w-4 h-4 inline-block" /></th>   
+
+                    <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Név  <ArrowUpDown className="w-4 h-4 inline-block" /></th>
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("position")}>Pozíció  <ArrowUpDown className="w-4 h-4 inline-block" /></th>
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("osztalyfonok")}>Osztály <ArrowUpDown className="w-4 h-4 inline-block" /></th>
                     <th className="p-2 cursor-pointer font-normal">Műveletek</th>
@@ -564,7 +568,22 @@ export default function AddEmployeePage() {
 
 
 
+
                               <div className="grid items-start gap-4">
+
+                                <div className="grid gap-2">
+                                  <Label htmlFor="shortName">Rövidített név (felhasználónév)</Label>
+                                  <Input
+                                   disabled 
+                                    className="col-span-3"
+                                    id="shortName"
+                                    type="text"
+                                    placeholder=""
+                                    value={shortname}
+
+                                  />
+                                </div>
+
                                 <div className="grid gap-2">
                                   <Label htmlFor="fullName">Teljes név</Label>
                                   <Input
@@ -594,7 +613,7 @@ export default function AddEmployeePage() {
                                 </div>
 
 
-                              {/*  <div className="grid gap-2">
+                                {/*  <div className="grid gap-2">
                                   <Label htmlFor="position">Van osztálya?</Label>
                                   <Select value={editOsztaly} onValueChange={setEditOsztaly}>
                                     <SelectTrigger className="col-span-3 w-full">
@@ -632,7 +651,7 @@ export default function AddEmployeePage() {
 
 
                           <AlertDialog>
-                            <AlertDialogTrigger disabled={employee.position === 'Tanár'|| employee.position === "igazgato"} >
+                            <AlertDialogTrigger disabled={employee.position === 'Tanár' || employee.position === "igazgato"} >
                               <Button disabled={employee.position === 'Tanár' || employee.position === "igazgato"} variant="ghost"><Trash2 className="w-4 h-4 inline-block" /></Button>
                             </AlertDialogTrigger>
                             <AlertDialogContent>
