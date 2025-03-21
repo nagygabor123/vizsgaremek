@@ -1,3 +1,5 @@
+"use client";
+
 import { AppSidebar } from "@/components/app-sidebar"
 import { signOut, useSession } from "next-auth/react";
 
@@ -59,7 +61,7 @@ export default function Page() {
        
           <div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
           <div className="grid auto-rows-min gap-4 w-full">
-              <div className="min-h-[60px] rounded-xl bg-blue-100 flex items-center px-4 w-full box-border overflow-hidden">
+              <div className="min-h-[60px] rounded-xl bg-blue-50 flex items-center px-4 w-full box-border overflow-hidden">
                 <Megaphone className="text-blue-500" />
                 <p className="text-sm truncate ml-3 text-blue-500">
                 Üdvözöljük a Telock vezérlőpultjában, {session?.user?.full_name}!
