@@ -1,4 +1,3 @@
-// app/api/auth/[...nextauth]/auth-options.ts
 import { type Session, type TokenSet, type User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { authorize } from "@/app/api/auth/authorize"; // Új import
