@@ -632,8 +632,18 @@ const Calendar: React.FC = () => {
 
   
 
-
         <div>
+  {loading ? (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-100 border-t-blue-600"></div>
+    </div>
+  ) : (
+    <>
+      {/* Ide kerülhet más tartalom, ha szükséges */}
+    </>
+  )}
+</div>
+        {/* <div>
           {loading ? (
    <div className="flex items-center justify-center min-h-screen">
    <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-100 border-t-blue-600"></div>
@@ -641,10 +651,10 @@ const Calendar: React.FC = () => {
           ) : (
             <>
               {!hasStudents && <AppKonfig />}
-              {/* <p>{hasStudents ? "Már vannak diákok az adatbázisban." : "Nincsenek diákok."}</p> */}
+            
             </>
           )}
-        </div>
+        </div> */}
 
         <div className="calendar-container">
           {/* <span>{tanevkezdes}</span>
