@@ -221,9 +221,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
   {sidebarConfig.map((group: SidebarGroupConfig, groupIndex: number) => {
     // Ellenőrizzük, hogy a csoportban van-e látható menüelem
-    const hasVisibleItems = group.items.some((item) =>
-      item.allowedPositions.includes(session?.user?.position || "")
-    );
+    const hasVisibleItems = group.items.some((item) => {
+      // Ha a csoport cím "Osztályom", akkor a session?.user?.osztalyfonok értékét figyeljük
+      if (group.groupLabel === "Osztályom") {
+        return session?.user?.osztalyfonok !== "nincs";
+      }
+      // Egyéb esetben a position alapján ellenőrizzük
+      return item.allowedPositions.includes(session?.user?.position || "");
+    });
 
     // Ha nincs látható menüelem, akkor kihagyjuk a csoportot
     if (!hasVisibleItems) return null;
@@ -236,22 +241,44 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         {/* Menüelemek renderelése */}
         <SidebarMenu>
           {group.items.map((item: SidebarItem) => {
-            if (item.allowedPositions.includes(session?.user?.position || "")) {
-              return (
-                <SidebarMenuItem key={item.path}>
-                  <SidebarMenuButton asChild isActive={isActive(item.path)}>
-                    <Link href={item.path}>
-                      <>
-                        <item.icon />
-                        <span>{item.label}</span>
-                        {loading && item.path.includes("school") && !hasStudents && (
-                          <TriangleAlert className="ml-auto text-red-600" />
-                        )}
-                      </>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              );
+            // Ha a csoport cím "Osztályom", akkor a session?.user?.osztalyfonok értékét figyeljük
+            if (group.groupLabel === "Osztályom") {
+              if (session?.user?.osztalyfonok !== "nincs") {
+                return (
+                  <SidebarMenuItem key={item.path}>
+                    <SidebarMenuButton asChild isActive={isActive(item.path)}>
+                      <Link href={item.path}>
+                        <>
+                          <item.icon />
+                          <span>{item.label}</span>
+                          {loading && item.path.includes("school") && !hasStudents && (
+                            <TriangleAlert className="ml-auto text-red-600" />
+                          )}
+                        </>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              }
+            } else {
+              // Egyéb esetben a position alapján ellenőrizzük
+              if (item.allowedPositions.includes(session?.user?.position || "")) {
+                return (
+                  <SidebarMenuItem key={item.path}>
+                    <SidebarMenuButton asChild isActive={isActive(item.path)}>
+                      <Link href={item.path}>
+                        <>
+                          <item.icon />
+                          <span>{item.label}</span>
+                          {loading && item.path.includes("school") && !hasStudents && (
+                            <TriangleAlert className="ml-auto text-red-600" />
+                          )}
+                        </>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              }
             }
             return null;
           })}
