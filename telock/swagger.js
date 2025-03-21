@@ -1,4 +1,3 @@
-// swagger.js
 const swaggerJSDoc = require('swagger-jsdoc');
 
 const swaggerDefinition = {
@@ -18,7 +17,7 @@ const swaggerDefinition = {
 
 const options = {
   swaggerDefinition,
-  apis: ["./pages/api/**/*.js"],
+  apis: ['./pages/api/**/*.js']
 };
 
 const swaggerSpec = swaggerJSDoc(options);
