@@ -1,11 +1,7 @@
-"use client"
-
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-
 import { signOut, useSession } from "next-auth/react";
-
-import Link from 'next/link'; // Import the Link component
+import Link from "next/link";
 import * as React from "react";
 import {
   TriangleAlert,
@@ -20,7 +16,6 @@ import {
   Calendar,
   House,
 } from "lucide-react";
-
 import {
   Sidebar,
   SidebarContent,
@@ -33,7 +28,6 @@ import {
   SidebarGroupLabel,
   useSidebar,
 } from "@/components/ui/sidebar";
-
 import { Separator } from "@/components/ui/separator";
 import {
   DropdownMenu,
@@ -44,18 +38,72 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  Avatar,
-  AvatarFallback,
-} from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
+// Sidebar elemek típusa
+interface SidebarItem {
+  label: string;
+  icon: React.ComponentType<any>;
+  path: string;
+  allowedPositions: string[]; // allowedRoles helyett allowedPositions
+}
+
+// Sidebar konfiguráció
+const sidebarConfig: SidebarItem[] = [
+  {
+    label: "Kezdőlap",
+    icon: House,
+    path: "/dashboard",
+    allowedPositions: ["Tanár", "igazgato"], // Mindenki láthatja
+  },
+  {
+    label: "Saját órák",
+    icon: CalendarHeart,
+    path: "/dashboard/my-timetable",
+    allowedPositions: ["Tanár"], // Csak tanárok és diákok
+  },
+  {
+    label: "Órarend",
+    icon: Calendar,
+    path: "/dashboard/class/timetable",
+    allowedPositions: ["teacher"], // Csak tanárok
+  },
+  {
+    label: "Tanulók",
+    icon: GraduationCap,
+    path: "/dashboard/class/students",
+    allowedPositions: ["teacher"], // Csak tanárok
+  },
+  {
+    label: "Órarendek",
+    icon: Calendar,
+    path: "/dashboard/school/timetables",
+    allowedPositions: ["igazgato"], // Csak adminok
+  },
+  {
+    label: "Tanulók",
+    icon: GraduationCap,
+    path: "/dashboard/school/students",
+    allowedPositions: ["igazgato"], // Csak adminok
+  },
+  {
+    label: "Munkatársak",
+    icon: BriefcaseBusiness,
+    path: "/dashboard/school/employees",
+    allowedPositions: ["igazgato"], // Csak adminok
+  },
+  {
+    label: "Tanév beállításai",
+    icon: SlidersHorizontal,
+    path: "/dashboard/school/settings",
+    allowedPositions: ["igazgato"], // Csak adminok
+  },
+];
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-
   const pathname = usePathname();
   const { data: session } = useSession();
   const isActive = (path: string) => pathname === path;
-
 
   const { isMobile } = useSidebar();
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
@@ -64,11 +112,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   const fetchStudents = async () => {
     try {
-      const response = await fetch('/api/students/read');
+      const response = await fetch("/api/students/read");
       const data = await response.json();
       setHasStudents(data.length > 0);
     } catch (error) {
-      console.error('Error fetching students', error);
+      console.error("Error fetching students", error);
     } finally {
       setLoading(false);
     }
@@ -88,7 +136,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   }
 
   return (
-    <Sidebar {...props}> {/**collapsible="icon" variant="inset" */}
+    <Sidebar {...props}>
       <SidebarHeader>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -101,11 +149,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <span className="text-s truncate">Benedek PG Középiskola</span>
               </div>
               <Avatar className="h-9 w-9 rounded-full border-2 border-blue-600">
-  <AvatarFallback className="text-blue-600 text-xs">
-    {session?.user?.short_name} {/**?.substring(0, 2).toUpperCase() */}
-  </AvatarFallback>
-</Avatar>
-
+                <AvatarFallback className="text-blue-600 text-xs">
+                  {session?.user?.short_name}
+                </AvatarFallback>
+              </Avatar>
               <ChevronDown className="ml-auto size-4" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
@@ -117,11 +164,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-              <Avatar className="h-9 w-9 rounded-full border-2 border-blue-600">
-  <AvatarFallback className="text-blue-600 text-xs">
-    {session?.user?.short_name} {/**?.substring(0, 2).toUpperCase() */}
-  </AvatarFallback>
-</Avatar>
+                <Avatar className="h-9 w-9 rounded-full border-2 border-blue-600">
+                  <AvatarFallback className="text-blue-600 text-xs">
+                    {session?.user?.short_name}
+                  </AvatarFallback>
+                </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">{session?.user?.full_name}</span>
                   <span className="truncate text-xs">{session?.user?.position}</span>
@@ -129,26 +176,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-           {/* <DropdownMenuGroup>
-            <DropdownMenuItem asChild>
-          
-              <Link href="/dashboard/settings">
-             
-              <Settings/>
-              <span>Beállítások</span>
-             
-              </Link> 
-              </DropdownMenuItem>
-            </DropdownMenuGroup>*/}
             <DropdownMenuItem>
-         
-                <LogOut />
-               
-                <span onClick={() => {
-            signOut();
-        }}>
-        Kijelentkezés
-        </span>
+              <LogOut />
+              <span
+                onClick={() => {
+                  signOut();
+                }}
+              >
+                Kijelentkezés
+              </span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -156,133 +192,31 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
 
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarMenu>
-
-          <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={isActive("/dashboard")}>
-                <Link href="/dashboard">
-                  <>
-                    <House />
-                    <span>Kezdőlap</span>
-                  </>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={isActive("/dashboard/timetable")}>
-                <Link href="/dashboard/my-timetable">
-                  <>
-                    <CalendarHeart />
-                    <span>Saját órák</span>
-                  </>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroup>
-
-        <SidebarGroup>
-          <SidebarGroupLabel>Osztályom</SidebarGroupLabel>
-          <SidebarMenu>
-
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={isActive("/dashboard/class/timetable")}>
-                <Link href="/dashboard/class/timetable">
-                  <>
-                    <Calendar />
-                    <span>Órarend</span>
-                  </>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-
-
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={isActive("/dashboard/class/students")}>
-                <Link href="/dashboard/class/students">
-                  <>
-                    <GraduationCap />
-                    <span>Tanulók</span>
-                  </>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroup>
-
-        <SidebarGroup>
-          <SidebarGroupLabel>Iskolai nyilvántartás</SidebarGroupLabel>
-          <SidebarMenu>
-
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={isActive("/dashboard/school/timetables")}>
-                <Link href="/dashboard/school/timetables">
-                  <>
-                    <Calendar />
-                    <span>Órarendek</span>
-                    {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-600" />}
-                  </>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-
-
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={isActive("/dashboard/school/students")}>
-                <Link href="/dashboard/school/students">
-                  <>
-                    <GraduationCap />
-                    <span>Tanulók</span>
-                    {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-600" />}
-                  </>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-
-
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={isActive("/dashboard/school/employees")}>
-                <Link href="/dashboard/school/employees">
-                  <>
-                    <BriefcaseBusiness />
-                    <span>Munkatársak</span>
-                    {loading ? null : !hasStudents && <TriangleAlert className="ml-auto text-red-600" />}
-                  </>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-
-
-          </SidebarMenu>
-        </SidebarGroup>
-
-        <SidebarGroup>
-          <SidebarGroupLabel>Beállítások és naplózás</SidebarGroupLabel>
-          <SidebarMenu>
-
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={isActive("/dashboard/school/settings")}>
-                <Link href="/dashboard/school/settings">
-                  <>
-                    <SlidersHorizontal />
-                    <span>Tanév beállításai</span>
-                  </>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          {/*  <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={isActive("/dashboard/school/logs")}>
-                <Link href="/dashboard/school/logs">
-                  <>
-                    <FileClock />
-                    <span>Eseménynapló</span>
-                  </>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>*/}
-          </SidebarMenu>
-        </SidebarGroup>
+        {sidebarConfig.map((item: SidebarItem) => {
+          // Default érték használata
+          if (item.allowedPositions.includes(session?.user?.position || "")) {
+            return (
+              <SidebarGroup key={item.path}>
+                <SidebarMenu>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild isActive={isActive(item.path)}>
+                      <Link href={item.path}>
+                        <>
+                          <item.icon />
+                          <span>{item.label}</span>
+                          {loading && item.path.includes("school") && !hasStudents && (
+                            <TriangleAlert className="ml-auto text-red-600" />
+                          )}
+                        </>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </SidebarMenu>
+              </SidebarGroup>
+            );
+          }
+          return null;
+        })}
       </SidebarContent>
 
       <SidebarFooter>
@@ -291,4 +225,3 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     </Sidebar>
   );
 }
-
