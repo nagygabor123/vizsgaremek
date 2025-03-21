@@ -38,7 +38,7 @@ export default async function handler(req, res) {
 
       console.log(studentid); 
       console.log(studentaccess); 
-      console.log(scheduleResponse); 
+      console.log(schedule); 
       console.log(currentTime); 
 
 
