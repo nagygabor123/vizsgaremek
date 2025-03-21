@@ -1,9 +1,14 @@
-// components/AuthCheck.tsx (szerverkomponens)
+
+
+
+// components/AuthCheck.tsx (Szerverkomponens)
 import { getServerSession } from "next-auth";
 import { authOptions } from '@/app/api/auth/[...nextauth]/auth-options';
 import { redirect } from "next/navigation";
 
 export default async function AuthCheck() {
+  "use server"; // Jelöljük, hogy ez egy szerverkomponens
+
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -14,5 +19,5 @@ export default async function AuthCheck() {
     redirect("/dashboard");
   }
 
-  return null; // Ez a komponens nem jelenít meg semmit, csak ellenőriz
+  return null; // Nem jelenít meg semmit, csak ellenőriz
 }

@@ -1,12 +1,12 @@
 "use client";
+import { useState, useEffect } from "react";
 import AuthCheck from "@/components/AuthCheck"; // Importáljuk a szerverkomponenst
-import { useEffect, useState } from "react";
 
 const Calendar = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Itt maradhat minden más useEffect-alapú klienslogika
+    // Példa: itt maradhat a kliensoldali logika
     setTimeout(() => setLoading(false), 500);
   }, []);
 
