@@ -1,6 +1,7 @@
 'use client';
 
 
+import {useSession } from "next-auth/react";
 import { AppSidebar } from "@/components/app-sidebar"
 import { ChevronRight, ChevronLeft, Slash } from "lucide-react"
 
@@ -115,6 +116,9 @@ const getWeekStartAndEnd = (date: Date) => {
 };
 
 const Calendar: React.FC = () => {
+
+  const { data: session } = useSession();
+
   const [systemClose, setSystemClose] = useState<boolean>(false);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isMobileView, setIsMobileView] = useState(false);
@@ -213,12 +217,12 @@ const Calendar: React.FC = () => {
 //https://vizsgaremek-mocha.vercel.app/api/timetable/getTeacherTimetable?teacherName=${teacher}
 
 //PaZo
-/*
-  const teacher = 'PaZo';
+
+
   useEffect(() => {
     async function fetchSchedule() {
       try {
-        const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/getTeacherTimetable?teacherName=${teacher}
+        const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/getClassTimetable?className=${session?.user?.osztalyfonok}
 `);
         const data = await response.json();
         const formattedData = data.map((lesson: any) => ({
@@ -237,7 +241,7 @@ const Calendar: React.FC = () => {
 
     fetchSchedule();
   }, []);
-*/
+
 
 
 
@@ -270,13 +274,12 @@ const Calendar: React.FC = () => {
 
 
 
+/*
 
-  // Osztályok kinyerése
   const classOptions = useMemo(() => {
     return Array.from(new Set(employees.map((employee) => employee.osztalyfonok)));
   }, [employees]);
 
-  // Tanárok kinyerése
   const teacherOptions = useMemo(() => {
     return Array.from(new Set(employees.map((employee) => employee.short_name)));
   }, [employees]);
@@ -287,35 +290,20 @@ const Calendar: React.FC = () => {
   useEffect(() => {
     if (selectedValue) {
       if (classOptions.includes(selectedValue)) {
-        // Ha az osztályok között van a kiválasztott érték
+       
         fetchClassTimetable(selectedValue);
       } else if (teacherOptions.includes(selectedValue)) {
-        // Ha a tanárok között van a kiválasztott érték
+       
         fetchTeacherTimetable(selectedValue);
       }
     }
-  }, [selectedValue]);
+  }, [selectedValue]);*/
 
   // Osztály órarendjének lekérése
-  const fetchClassTimetable = async (className: string) => {
-    try {
-      const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/getClassTimetable?className=${className}`);
-      const data = await response.json();
-      const formattedData = data.map((lesson: any) => ({
-        day: lesson.day_of_week,
-        start: lesson.start_time.slice(0, 5),
-        end: lesson.end_time.slice(0, 5),
-        subject: lesson.group_name,
-        teacher: lesson.teacher_name,
-        class: lesson.class
-      }));
-      setSchedule(formattedData);
-    } catch (error) {
-      console.error('Error fetching class timetable:', error);
-    }
-  };
 
-  // Tanár órarendjének lekérése
+
+
+/*
   const fetchTeacherTimetable = async (teacherName: string) => {
     try {
       const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/getTeacherTimetable?teacherName=${teacherName}`);
@@ -333,7 +321,7 @@ const Calendar: React.FC = () => {
       console.error('Error fetching teacher timetable:', error);
     }
   };
-
+*/
 
 
 
@@ -685,7 +673,7 @@ const Calendar: React.FC = () => {
                   </SelectGroup>
                 </SelectContent>
               </Select>*/}
- <Select value={selectedValue} onValueChange={setSelectedValue}>
+ {/*<Select value={selectedValue} onValueChange={setSelectedValue}>
           <SelectTrigger>
             <SelectValue placeholder="Válasszon..." />
           </SelectTrigger>
@@ -705,7 +693,7 @@ const Calendar: React.FC = () => {
               ))}
             </SelectGroup>
           </SelectContent>
-        </Select>
+        </Select>*/}
 
 
 
