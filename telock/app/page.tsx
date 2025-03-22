@@ -69,23 +69,24 @@ export default async function Home() {
 
       </div>
 
-      <Separator />
+   
 
 
-      <section id="miert" className="space-y-2 py-4 md:py-6 lg:py-8 mt-6">
+      <section id="miert" className="space-y-2 py-4 md:py-6 lg:py-8 mt-8">
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
           <h2 className="font-heading text-2xl font-bold leading-[1.1] sm:text-2xl md:text-4xl"> Miért mi? </h2>
           <p className="max-w-[85%] leading-normal text-muted-foreground text-sm md:text-base"> Mert innovatív megoldásainkkal biztosítjuk a diákok számára a biztonságos és kényelmes telefontárolást, miközben segítjük az iskolákat a modern kihívások kezelésében. Rendszerünk egyszerűen kezelhető, megbízható, és hozzájárul a zavartalan oktatási folyamatokhoz. Válasszon minket, ha hatékony és diákbarát megoldásra vágyik!
           </p>
         </div>
       </section>
-      <Separator />
+    
 
 
       <section
         id="funkciok"
         className="space-y-2 py-4 md:py-6 lg:py-8"
       >
+          <Separator />
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
           <h2 className="font-heading text-2xl font-bold leading-[1.1] sm:text-2xl md:text-4xl">
             Funkciók
@@ -163,12 +164,13 @@ export default async function Home() {
           </div>
         </div>
       </section>
-      <Separator />
+     
 
       <section
         id="dokumentaciok"
         className="space-y-2 py-4 md:py-6 lg:py-8"
       >
+         <Separator />
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
           <h2 className="font-heading text-2xl font-bold leading-[1.1] sm:text-2xl md:text-4xl">
             Dokumentációk
@@ -185,8 +187,9 @@ export default async function Home() {
             </Button>
           </div>
         </div>
+        <Separator />
       </section>
-      <Separator />
+     
 
       <footer>
         <div className="container mx-auto flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
