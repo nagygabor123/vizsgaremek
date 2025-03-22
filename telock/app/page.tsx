@@ -35,9 +35,9 @@ export default async function Home() {
                 telock
               </span>
         <nav className="hidden md:flex space-x-6 text-muted-foreground">
-          <Link href="#">Miért telock?</Link>
+          <Link href="#miert">Miért mi?</Link>
           <Link href="#funkciok">Funkciók</Link>
-          <Link href="#">Dokumentáció</Link>
+          <Link href="#dokumentaciok">Dokumentációk</Link>
         </nav>
       
         {!!session &&
@@ -62,27 +62,35 @@ export default async function Home() {
         <h2 className="text-3xl md:text-6xl font-bold">Biztonságos és kényelmes <span className="text-blue-600">telefontárolás</span> iskoláknak</h2>
      
         <p className="mt-4 text-gray-600 max-w-2xl mx-auto text-sm md:text-base text-muted-foreground">
-          Hurree centralizes data from your entire tech stack and database creating one clea.
+        elefontároló rendszerünk biztosítja, hogy az iskolák diákjai biztonságosan és kényelmesen tárolhassák mobiltelefonjaikat az oktatási időszak alatt, miközben csökkentik a zavaró tényezőket az órákon.
         </p>
         <Button className="mt-6 px-6 py-3">Kapcsolatfelvétel</Button>
       </section>
       
       {/* Illustration */}
-      <div className="w-full max-w-5xl bg-gradient-to-r from-blue-50 to-white p-4 md:p-8 rounded-xl shadow">
+      <div className="w-full max-w-5xl bg-gradient-to-r from-blue-600 to-white p-4 md:p-8 rounded-xl shadow">
       <Image src="/example.png" alt="Illustration" width={800} height={400} className="w-full h-auto" priority /> {/*width={800} height={400} */}
 
       </div>
-      
-      {/* Features */}
-               <section
-          id="funkciok"
-          className="space-y-6 py-8 md:py-12 lg:py-24"
-        >
-          <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-            <h2 className="font-heading text-2xl font-bold leading-[1.1] sm:text-2xl md:text-4xl">
-              Funkciók
-            </h2>
-            <p className="max-w-[85%] leading-normal text-muted-foreground text-sm">
+
+      <section id="miert" className="space-y-6 py-8 md:py-12 lg:py-24">
+        <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
+          <h2 className="font-heading text-2xl font-bold leading-[1.1] sm:text-2xl md:text-4xl"> Miért mi? </h2>
+          <p className="max-w-[85%] leading-normal text-muted-foreground text-sm md:text-base"> Mert innovatív megoldásainkkal biztosítjuk a diákok számára a biztonságos és kényelmes telefontárolást, miközben segítjük az iskolákat a modern kihívások kezelésében. Rendszerünk egyszerűen kezelhető, megbízható, és hozzájárul a zavartalan oktatási folyamatokhoz. Válasszon minket, ha hatékony és diákbarát megoldásra vágyik!
+          </p>
+        </div>
+      </section>
+
+
+      <section
+        id="funkciok"
+        className="space-y-6 py-8 md:py-12 lg:py-24"
+      >
+        <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
+          <h2 className="font-heading text-2xl font-bold leading-[1.1] sm:text-2xl md:text-4xl">
+            Funkciók
+          </h2>
+          <p className="max-w-[85%] leading-normal text-muted-foreground text-sm md:text-base">
             Itt megismerheti a rendszer főbb funkcióit, amelyek biztosítják a telefonok biztonságos tárolását és kezelését az iskolákban.
             </p>
           </div>
@@ -135,7 +143,7 @@ export default async function Home() {
               <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
                 <RefreshCw className="w-12 h-12 text-blue-600" />
                 <div className="space-y-2">
-                  <h3 className="font-bold">Szoftverfrissítések és biztonsági mentések</h3>
+                  <h3 className="font-bold">Szoftverfrissítések</h3>
                   <p className="text-sm text-muted-foreground">
                   A rendszer mindig a legújabb funkciókat és biztonsági javításokat biztosítsa.
                   </p>
@@ -148,19 +156,35 @@ export default async function Home() {
                 <div className="space-y-2">
                   <h3 className="font-bold">Több tárolóhely támogatása</h3>
                   <p className="text-sm text-muted-foreground">
-                  A rendszer lehetőséget ad arra, hogy több fiókot telepítsenek az iskola különböző pontjaira.
+                  Lehetőség van arra, hogy több fiókot telepítsenek az iskola különböző pontjaira.
                   </p>
                 </div>
               </div>
             </div>
           </div>
-          <div className="mx-auto text-center md:max-w-[58rem]">
-            <p className="leading-normal text-muted-foreground text-sm">
-            Biztonságos és átlátható megoldás a telefonok tárolására, csökkentve a zavaró tényezőket az oktatásban. Gyors hozzáférés, modern azonosítás, teljes intézményi kontroll.
-            </p>
-          </div>
         </section>
 
+        <section
+  id="dokumentaciok"
+  className="space-y-6 py-8 md:py-12 lg:py-24"
+>
+  <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
+    <h2 className="font-heading text-2xl font-bold leading-[1.1] sm:text-2xl md:text-4xl">
+      Dokumentációk
+    </h2>
+    <p className="max-w-[85%] leading-normal text-muted-foreground text-sm md:text-base">
+      Itt megtalálhatja a rendszerünkhöz kapcsolódó dokumentációkat, fejlesztői és felhasználói részről egyaránt.
+    </p>
+    <div className="flex gap-4 mt-6">
+      <Button className="px-6 py-3">
+        Fejlesztői dokumentáció
+      </Button>
+      <Button className="px-6 py-3">
+      Felhasználói dokumentáció
+      </Button>
+    </div>
+  </div>
+</section>
 
         <footer>
          <div className="container mx-auto flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
