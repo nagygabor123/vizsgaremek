@@ -62,7 +62,7 @@ export default function Form() {
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Üdv újra itt!</CardTitle>
           <CardDescription>
-          Jelentkezzen be a fiókjába a felhasználónevének megadásával
+          Jelentkezzen be a fiókjába a felhasználónevének és jelszavának megadásával
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -74,7 +74,7 @@ export default function Form() {
                   <Input
                     name="short_name"
                     type="text"
-                    placeholder="naGa"
+                    placeholder="TeEl"
                     required
                   />
                 </div>
@@ -114,20 +114,21 @@ export default function Form() {
                 
                 }
               </div>
-              <div className="text-center text-sm">
+              {/* <div className="text-center text-sm">
               Szeretné használni a rendszerünket?{" "} 
                 <a href="#" className="underline underline-offset-4">
                 Lépjen velünk kapcsolatba
                 </a>
-              </div>
+              </div> */}
             </div>
           </form>
         </CardContent>
       </Card>
-      {/*<div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary  ">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>.
-      </div>*/}
+      <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary  ">
+      Az adatai biztonságban vannak, kizárólag azonosításra használjuk.
+        {/* <a href="#">Terms of Service</a>{" "}
+        and <a href="#">Privacy Policy</a>. */}
+      </div>
     </div>
   );
 }
