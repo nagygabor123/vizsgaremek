@@ -1,9 +1,3 @@
-
-
-
-
-
-
 import { useEffect } from "react";
 import { Separator } from "@/components/ui/separator"
 import Image from "next/image";
@@ -16,6 +10,8 @@ import { getServerSession } from "next-auth";
 import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button"
 import localFont from "next/font/local";
+
+
 
 const ZenDots = localFont({
   src: "./fonts/ZenDots-Regular.ttf",
@@ -73,13 +69,17 @@ export default async function Home() {
 
       </div>
 
-      <section id="miert" className="space-y-2 py-4 md:py-6 lg:py-8">
+      <Separator />
+
+
+      <section id="miert" className="space-y-2 py-4 md:py-6 lg:py-8 mt-6">
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
           <h2 className="font-heading text-2xl font-bold leading-[1.1] sm:text-2xl md:text-4xl"> Miért mi? </h2>
           <p className="max-w-[85%] leading-normal text-muted-foreground text-sm md:text-base"> Mert innovatív megoldásainkkal biztosítjuk a diákok számára a biztonságos és kényelmes telefontárolást, miközben segítjük az iskolákat a modern kihívások kezelésében. Rendszerünk egyszerűen kezelhető, megbízható, és hozzájárul a zavartalan oktatási folyamatokhoz. Válasszon minket, ha hatékony és diákbarát megoldásra vágyik!
           </p>
         </div>
       </section>
+      <Separator />
 
 
       <section
@@ -163,6 +163,7 @@ export default async function Home() {
           </div>
         </div>
       </section>
+      <Separator />
 
       <section
         id="dokumentaciok"
@@ -175,7 +176,7 @@ export default async function Home() {
           <p className="max-w-[85%] leading-normal text-muted-foreground text-sm md:text-base">
             Minden, amire szüksége van a rendszer hatékony használatához. A felhasználói dokumenctáció segít a könnyű navigálásban, míg a fejlesztői technikai leírásokat tartalmaz.
           </p>
-          <div className="flex gap-4 mt-6">
+          <div className="flex gap-4 mt-3">
             <Button className="">
               Fejlesztői dokumentáció
             </Button>
@@ -185,6 +186,7 @@ export default async function Home() {
           </div>
         </div>
       </section>
+      <Separator />
 
       <footer>
         <div className="container mx-auto flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
