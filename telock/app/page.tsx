@@ -64,7 +64,7 @@ export default async function Home() {
         <p className="mt-4 text-gray-600 max-w-2xl mx-auto text-sm md:text-base text-muted-foreground">
         elefontároló rendszerünk biztosítja, hogy az iskolák diákjai biztonságosan és kényelmesen tárolhassák mobiltelefonjaikat az oktatási időszak alatt, miközben csökkentik a zavaró tényezőket az órákon.
         </p>
-        <Button className="mt-6 px-6 py-3">Kapcsolatfelvétel</Button>
+        <Button className="mt-6">Kapcsolatfelvétel</Button>
       </section>
       
       {/* Illustration */}
@@ -173,13 +173,13 @@ export default async function Home() {
       Dokumentációk
     </h2>
     <p className="max-w-[85%] leading-normal text-muted-foreground text-sm md:text-base">
-      Itt megtalálhatja a rendszerünkhöz kapcsolódó dokumentációkat, fejlesztői és felhasználói részről egyaránt.
+    Minden, amire szüksége van a rendszer hatékony használatához. A felhasználói dokumenctáció segít a könnyű navigálásban, míg a fejlesztői technikai leírásokat tartalmaz.
     </p>
     <div className="flex gap-4 mt-6">
-      <Button className="px-6 py-3">
+      <Button className="">
         Fejlesztői dokumentáció
       </Button>
-      <Button className="px-6 py-3">
+      <Button className="">
       Felhasználói dokumentáció
       </Button>
     </div>
