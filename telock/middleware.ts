@@ -6,19 +6,9 @@ export default withAuth(
   function middleware(req) {
     const token = req.nextauth.token;
 
-    // Példa: Csak az "igazgató" pozícióval rendelkező felhasználók férhetnek hozzá a /dashboard/school/timetable oldalhoz
     if (req.nextUrl.pathname.startsWith("/dashboard/school")) {
-      if (token?.position !== "igazgato") {
-        return NextResponse.redirect(new URL("/dashboard", req.url));
-      }
-    }
-    if (req.nextUrl.pathname.startsWith("/dashboard/school")) {
-      if ( token?.position !== "igazgatohelyettes") {
-        return NextResponse.redirect(new URL("/dashboard", req.url));
-      }
-    }
-    if (req.nextUrl.pathname.startsWith("/dashboard/school")) {
-      if (token?.position !== "rendszergazda" ) {
+      const allowedPositions = ["igazgato", "igazgatohelyettes", "rendszergazda"];
+      if (typeof token?.position === "string" && !allowedPositions.includes(token.position)) {
         return NextResponse.redirect(new URL("/dashboard", req.url));
       }
     }
