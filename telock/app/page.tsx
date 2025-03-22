@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
-import { FileClock, Zap, ChartColumnBig, ShieldCheck } from "lucide-react";
+import { FileClock, Zap, ChartColumnBig, ShieldCheck,  RefreshCw, Server } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button"
@@ -82,7 +82,7 @@ export default async function Home() {
             <h2 className="font-heading text-2xl font-bold leading-[1.1] sm:text-2xl md:text-4xl">
               Funkciók
             </h2>
-            <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
+            <p className="max-w-[85%] leading-normal text-muted-foreground text-sm">
             Itt megismerheti a rendszer főbb funkcióit, amelyek biztosítják a telefonok biztonságos tárolását és kezelését az iskolákban.
             </p>
           </div>
@@ -131,31 +131,31 @@ export default async function Home() {
                 </div>
               </div>
             </div>
-            {/* <div className="relative overflow-hidden rounded-lg border bg-background p-2">
+            <div className="relative overflow-hidden rounded-lg border bg-background p-2">
               <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
-                <BadgeCheck className="w-12 h-12 text-blue-600" />
+                <RefreshCw className="w-12 h-12 text-blue-600" />
                 <div className="space-y-2">
-                  <h3 className="font-bold">Authentication</h3>
+                  <h3 className="font-bold">Szoftverfrissítések és biztonsági mentések</h3>
                   <p className="text-sm text-muted-foreground">
-                    Authentication using NextAuth.js and middlewares.
+                  A rendszer mindig a legújabb funkciókat és biztonsági javításokat biztosítsa.
                   </p>
                 </div>
               </div>
             </div>
             <div className="relative overflow-hidden rounded-lg border bg-background p-2">
               <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
-                <BadgeCheck className="w-12 h-12 text-blue-600" />
+                <Server className="w-12 h-12 text-blue-600" />
                 <div className="space-y-2">
-                  <h3 className="font-bold">Subscriptions</h3>
+                  <h3 className="font-bold">Több tárolóhely támogatása</h3>
                   <p className="text-sm text-muted-foreground">
-                    Free and paid subscriptions using Stripe.
+                  A rendszer lehetőséget ad arra, hogy több fiókot telepítsenek az iskola különböző pontjaira.
                   </p>
                 </div>
               </div>
-            </div> */}
+            </div>
           </div>
           <div className="mx-auto text-center md:max-w-[58rem]">
-            <p className="leading-normal text-muted-foreground sm:text-lg sm:leading-7">
+            <p className="leading-normal text-muted-foreground text-sm">
             Biztonságos és átlátható megoldás a telefonok tárolására, csökkentve a zavaró tényezőket az oktatásban. Gyors hozzáférés, modern azonosítás, teljes intézményi kontroll.
             </p>
           </div>
