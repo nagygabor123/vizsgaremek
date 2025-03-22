@@ -1,0 +1,25 @@
+{
+    "openapi": "3.0.0", 
+    "path":{
+        "api/user": {
+            "get": {
+                "summary": "Get user",
+                "description": "Get user",
+                "operationId": "getUser",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "User object",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }   
+    }
+}
