@@ -25,7 +25,7 @@ export default async function Home() {
   const session = await getServerSession();
   return (
     <div className="min-h-screen bg-zinc-50 flex flex-col items-center p-6">
-      {/* Header */}
+      
       <header className="w-full max-w-6xl flex flex-wrap justify-between items-center py-6 px-4">
         <span className={`${ZenDots.className} text-xl`}>
           telock
@@ -41,7 +41,7 @@ export default async function Home() {
             <Button variant="outline" className="px-4 py-2" asChild>
               <Link href="/dashboard">Vezérlőpult</Link>
             </Button>
-            {/* <Logout /> */}
+           
           </>
         }
 
@@ -53,7 +53,6 @@ export default async function Home() {
         }
       </header>
 
-      {/* Hero Section */}
       <section className="w-full max-w-6xl text-center my-12 px-4">
         <h2 className="text-3xl md:text-6xl font-bold">Biztonságos és kényelmes <span className="text-blue-600">telefontárolás</span> iskoláknak</h2>
 
@@ -63,11 +62,36 @@ export default async function Home() {
         <Button className="mt-6">Kapcsolatfelvétel</Button>
       </section>
 
-      {/* Illustration */}
-      <div className="w-full max-w-5xl bg-gradient-to-r from-blue-600 to-white p-4 md:p-8 rounded-xl shadow">
-        <Image src="/example.png" alt="Illustration" width={800} height={400} className="w-full h-auto" priority /> {/*width={800} height={400} */}
 
-      </div>
+      <div className="w-full max-w-5xl flex flex-col md:flex-row gap-6">  {/* Flex container */}
+  {/* Első div: Kisebb kép */}
+  <div className="w-full md:w-1/2 bg-gradient-to-r from-blue-600 to-white p-4 md:p-6 rounded-xl shadow">
+    <Image 
+      src="/example.png" 
+      alt="Illustration" 
+      width={400} 
+      height={200} 
+      className="w-full h-auto" 
+      priority 
+    />
+  </div>
+
+  {/* Második div: Mobil nézet */}
+  <div className="w-full md:w-1/2 bg-gradient-to-r from-blue-600 to-white p-4 md:p-6 rounded-xl shadow">
+    <div className="relative mx-auto border-2 border-gray-800 rounded-3xl w-48 h-96">  {/* Mobil keret */}
+      <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gray-800 rounded-full"></div>  {/* Kamera */}
+      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gray-800 rounded-full"></div>  {/* Hangszóró */}
+      <Image 
+        src="/mobile-example.png"  
+        alt="Mobile Illustration" 
+        width={200}  
+        height={400} 
+        className="w-full h-full object-cover rounded-2xl" 
+        priority 
+      />
+    </div>
+  </div>
+</div>
 
    
 
@@ -86,7 +110,7 @@ export default async function Home() {
         id="funkciok"
         className="space-y-2 py-4 md:py-6 lg:py-8"
       >
-          <Separator />
+          
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
           <h2 className="font-heading text-2xl font-bold leading-[1.1] sm:text-2xl md:text-4xl">
             Funkciók
@@ -170,7 +194,7 @@ export default async function Home() {
         id="dokumentaciok"
         className="space-y-2 py-4 md:py-6 lg:py-8"
       >
-         <Separator />
+         
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
           <h2 className="font-heading text-2xl font-bold leading-[1.1] sm:text-2xl md:text-4xl">
             Dokumentációk
@@ -187,7 +211,7 @@ export default async function Home() {
             </Button>
           </div>
         </div>
-        <Separator />
+        
       </section>
      
 
