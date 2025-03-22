@@ -1,7 +1,11 @@
 {
-    "openapi": "3.0.0", 
-    "path":{
-        "api/user": {
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Documentation",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/user": {
             "get": {
                 "summary": "Get user",
                 "description": "Get user",
@@ -20,6 +24,28 @@
                     }
                 }
             }
-        }   
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "johndoe@example.com"
+                    }
+                }
+            }
+        }
     }
 }
