@@ -23,6 +23,12 @@ export default withAuth(
       if (token?.osztalyfonok === "nincs") {
         return NextResponse.redirect(new URL("/dashboard", req.url));
       }
+    } else if (req.nextUrl.pathname.startsWith("/dashboard/my-timetable")) {
+     
+      const allowedPositions = ["igazgato", "igazgatohelyettes", "Tanár"];
+      if (typeof token?.position === "string" && !allowedPositions.includes(token.position)) {
+        return NextResponse.redirect(new URL("/dashboard", req.url));
+      }
     }
 
     // Egyéb útvonalak kezelése
