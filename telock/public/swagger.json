@@ -5,26 +5,6 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/user": {
-            "get": {
-                "summary": "Get user",
-                "description": "Get user",
-                "operationId": "getUser",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "User object",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/api/students/create": {
             "post": {
                 "summary": "Új diák létrehozása",
@@ -37,118 +17,99 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "student_id": {
-                                        "type": "string",
-                                        "description": "A diák azonosítója.",
-                                        "example": "OM56555"
-                                    },
-                                    "full_name": {
-                                        "type": "string",
-                                        "description": "A diák teljes neve.",
-                                        "example": "fasz kalap"
-                                    },
-                                    "class": {
-                                        "type": "string",
-                                        "description": "A diák osztálya.",
-                                        "example": "12.A"
-                                    },
-                                    "rfid_tag": {
-                                        "type": "string",
-                                        "description": "A diák RFID címkéje.",
-                                        "example": "58D90E3E"
-                                    }
+                                    "student_id": {"type": "string", "example": "OM56555"},
+                                    "full_name": {"type": "string", "example": "fasz kalap"},
+                                    "class": {"type": "string", "example": "12.A"},
+                                    "rfid_tag": {"type": "string", "example": "58D90E3E"}
                                 }
                             }
                         }
                     }
                 },
                 "responses": {
-                    "201": {
-                        "description": "Sikeresen létrehozott diák",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Student created"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Hiányzó kötelező mezők",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Missing required fields"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Hiba a diák létrehozása során",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Error creating student"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "405": {
-                        "description": "A HTTP metódus nem engedélyezett",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Method Not Allowed"
-                                        }
-                                    }
+                    "201": {"description": "Sikeresen létrehozott diák"},
+                    "400": {"description": "Hiányzó kötelező mezők"},
+                    "500": {"description": "Hiba a diák létrehozása során"},
+                    "405": {"description": "A HTTP metódus nem engedélyezett"}
+                }
+            }
+        },
+        "/api/students/read": {
+            "get": {
+                "summary": "Diákok lekérése",
+                "description": "A diákok adatainak lekérése.",
+                "tags": ["Students"],
+                "responses": {
+                    "200": {"description": "Sikeres lekérés"},
+                    "405": {"description": "A HTTP metódus nem engedélyezett"}
+                }
+            }
+        },
+        "/api/students/update": {
+            "put": {
+                "summary": "Diák adatainak frissítése",
+                "description": "A diák adatainak frissítésére szolgáló API végpont.",
+                "tags": ["Students"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "student_id": {"type": "string", "example": "OM44444"},
+                                    "full_name": {"type": "string", "example": "Pál Edvin"},
+                                    "class": {"type": "string", "example": "13.D"},
+                                    "rfid_tag": {"type": "string", "example": "53D00E3E"}
                                 }
                             }
                         }
                     }
+                },
+                "responses": {
+                    "200": {"description": "Sikeres frissítés"},
+                    "400": {"description": "Hiányzó vagy érvénytelen mezők"},
+                    "404": {"description": "A diák nem található"},
+                    "500": {"description": "Hiba történt a diák adatainak frissítése során"}
+                }
+            }
+        },
+        "/api/students/delete": {
+            "delete": {
+                "summary": "Diák törlése",
+                "description": "A diák törlésére szolgáló API végpont.",
+                "tags": ["Students"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "student_id": {"type": "string", "example": "OM56555"}
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {"description": "Sikeres törlés"},
+                    "400": {"description": "Hiányzó student_id"},
+                    "404": {"description": "A diák nem található"},
+                    "500": {"description": "Hiba történt a diák törlése során"}
                 }
             }
         }
+       
     },
     "components": {
         "schemas": {
             "User": {
                 "type": "object",
                 "properties": {
-                    "id": {
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "name": {
-                        "type": "string",
-                        "example": "John Doe"
-                    },
-                    "email": {
-                        "type": "string",
-                        "format": "email",
-                        "example": "johndoe@example.com"
-                    }
+                    "id": {"type": "integer", "example": 1},
+                    "name": {"type": "string", "example": "John Doe"},
+                    "email": {"type": "string", "format": "email", "example": "johndoe@example.com"}
                 }
             }
         }
