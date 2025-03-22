@@ -4,7 +4,7 @@ const page = () => {
     return (
         <div>
             <h1>API Documentation</h1>
-            <SwaggerUI url="/api-docs/swagger.json" />  
+            <SwaggerUI url="swagger.json" />  
         </div>
     );  
 };
