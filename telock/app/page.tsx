@@ -62,8 +62,8 @@ export default async function Home() {
         <Button className="mt-6">Kapcsolatfelvétel</Button>
       </section>
 
+      <div className="w-full max-w-2xl bg-gradient-to-r from-blue-600 to-white p-4 md:p-8 rounded-xl shadow">
 
-      <div className="w-full max-w-5xl bg-gradient-to-r from-blue-600 to-white p-4 md:p-8 rounded-xl shadow">
         <Image src="/example.png" alt="Illustration" width={800} height={400} className="w-full h-auto rounded-xl" priority /> {/*width={800} height={400} */}
 
       </div>
