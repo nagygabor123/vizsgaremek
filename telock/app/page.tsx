@@ -93,7 +93,7 @@ export default async function Home() {
                 <div className="space-y-2">
                   <h3 className="font-bold">Biztonságos tárolás</h3>
                   <p className="text-sm text-muted-foreground">
-                  A diákok telefonjai zárt, egyedi azonosítóval ellátott fiókokban kerülnek tárolásra.
+                  A diákok telefonjai zárt fiókokban kerülnek tárolásra.
                   </p>
                 </div>
               </div>
@@ -103,7 +103,7 @@ export default async function Home() {
                 <Zap className="w-12 h-12 text-blue-600" />
                 <div className="space-y-2">
                   <h3 className="font-bold">Gyors kiadás és visszavétel</h3>
-                  <p className="text-sm">
+                  <p className="text-sm text-muted-foreground">
                   RFID segítségével gyorsan kiadható és visszavehető a készülék.
                   </p>
                 </div>
@@ -115,7 +115,7 @@ export default async function Home() {
                 <div className="space-y-2">
                   <h3 className="font-bold">Események naplózása</h3>
                   <p className="text-sm text-muted-foreground">
-                 A rendszer naplózza a telefonok leadását és kivételét, biztosítva az átláthatóságot.
+                 A rendszer naplózza a telefonok leadását és kivételét.
                   </p>
                 </div>
               </div>
@@ -126,7 +126,7 @@ export default async function Home() {
                 <div className="space-y-2">
                   <h3 className="font-bold">Adminisztrátori felügyelet</h3>
                   <p className="text-sm text-muted-foreground">
-                  Az iskola vezetése valós időben ellenőrizheti a fiókok állapotát és a használati statisztikákat.
+                  Az iskola vezetése valós időben ellenőrizheti a fiókok állapotát.
                   </p>
                 </div>
               </div>
