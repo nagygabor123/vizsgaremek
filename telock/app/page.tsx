@@ -67,7 +67,7 @@ export default async function Home() {
   {/* Asztali kép */}
   <div className="w-full md:w-1/2 bg-gradient-to-r from-blue-600 to-white p-4 md:p-6 rounded-xl shadow">
     <Image 
-      src="/desktop-example.png" 
+      src="/example.png" 
       alt="Desktop Illustration" 
       width={400} 
       height={200} 
