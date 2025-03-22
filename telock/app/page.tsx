@@ -63,30 +63,28 @@ export default async function Home() {
       </section>
 
 
-      <div className="w-full max-w-5xl flex flex-col md:flex-row gap-6">  {/* Flex container */}
-  {/* Első div: Kisebb kép */}
+      <div className="w-full max-w-5xl flex flex-col md:flex-row gap-6">
+  {/* Asztali kép */}
   <div className="w-full md:w-1/2 bg-gradient-to-r from-blue-600 to-white p-4 md:p-6 rounded-xl shadow">
     <Image 
-      src="/example.png" 
-      alt="Illustration" 
+      src="/desktop-example.png" 
+      alt="Desktop Illustration" 
       width={400} 
       height={200} 
-      className="w-full h-auto" 
+      className="w-full h-auto rounded-lg" 
       priority 
     />
   </div>
 
-  {/* Második div: Mobil nézet */}
+  {/* Telefon doboz */}
   <div className="w-full md:w-1/2 bg-gradient-to-r from-blue-600 to-white p-4 md:p-6 rounded-xl shadow">
-    <div className="relative mx-auto border-2 border-gray-800 rounded-3xl w-48 h-96">  {/* Mobil keret */}
-      <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gray-800 rounded-full"></div>  {/* Kamera */}
-      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gray-800 rounded-full"></div>  {/* Hangszóró */}
+    <div className="w-full h-auto">
       <Image 
-        src="/mobile-example.png"  
+        src="/mobile-example.png" 
         alt="Mobile Illustration" 
-        width={200}  
+        width={200} 
         height={400} 
-        className="w-full h-full object-cover rounded-2xl" 
+        className="w-full h-auto rounded-lg" 
         priority 
       />
     </div>
