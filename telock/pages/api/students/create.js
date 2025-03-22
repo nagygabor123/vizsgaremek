@@ -1,77 +1,3 @@
-
-/**
- * @swagger
- * /api/students/create:
- *   post:
- *     summary: Új diák létrehozása
- *     description: Létrehoz egy új diákot a megadott adatokkal.
- *     tags:
- *       - Students
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               student_id:
- *                 type: string
- *                 description: A diák azonosítója.
- *                 example: "OM56555"
- *               full_name:
- *                 type: string
- *                 description: A diák teljes neve.
- *                 example: "fasz kalap"
- *               class:
- *                 type: string
- *                 description: A diák osztálya.
- *                 example: "12.A"
- *               rfid_tag:
- *                 type: string
- *                 description: A diák RFID címkéje.
- *                 example: "58D90E3E"
- *     responses:
- *       201:
- *         description: Sikeresen létrehozott diák
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Student created"
- *       400:
- *         description: Hiányzó kötelező mezők
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Missing required fields"
- *       500:
- *         description: Hiba a diák létrehozása során
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Error creating student"
- *       405:
- *         description: A HTTP metódus nem engedélyezett
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Method Not Allowed"
- */
 import { neon } from '@neondatabase/serverless';
     
 const sql = neon(process.env.DATABASE_URL);
@@ -87,7 +13,7 @@ export default async function handler(req, res) {
     try {
       await sql(
         'INSERT INTO students (student_id, full_name, class, rfid_tag, access) VALUES ($1, $2, $3, $4, $5);', 
-        [student_id, full_name, studentClass, rfid_tag, 'zarva'] // Ide adj megfelelő alapértelmezett értéket
+        [student_id, full_name, studentClass, rfid_tag, 'zarva'] 
       );
       
 
@@ -114,9 +40,9 @@ async function setStudentGroups(student_id) {
 
   try {
     const response = await fetch(url, {
-      method: 'POST', // A kérés metódusa POST
+      method: 'POST', 
       headers: {
-        'Content-Type': 'application/json', // A kérés fejléce
+        'Content-Type': 'application/json', 
       },
     });
 
@@ -124,12 +50,12 @@ async function setStudentGroups(student_id) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data = await response.json(); // A válasz JSON formátumban
+    const data = await response.json(); 
     console.log('Response:', data);
-    return data; // Visszaadjuk a választ
+    return data;
   } catch (error) {
     console.error('Error calling setStudentGroups:', error);
-    throw error; // Hibát dobunk, ha valami elromlik
+    throw error; 
   }
 }
 

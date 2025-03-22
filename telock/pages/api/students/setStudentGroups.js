@@ -2,34 +2,24 @@ import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { student_id } = req.query;  
-
+    const { student_id } = req.query;
     if (!student_id) {
       return res.status(400).json({ message: 'Student ID is required' });
     }
 
     const sql = neon(`${process.env.DATABASE_URL}`);
-
     try {
-      // Lekérdezzük a megadott diákot
       const student = await sql('SELECT student_id, class FROM students WHERE student_id = $1', [student_id]);
-      
       if (student.length === 0) {
         return res.status(404).json({ message: 'Student not found' });
       }
-
       console.log('Student:', student[0]);
-
       await sql('DELETE FROM student_groups WHERE student_id = $1', [student_id]);
       console.log(`Deleted existing entries for student_id: ${student_id}`);
-
       const groups = await sql('SELECT group_id, group_name FROM csoportok');
       console.log('Groups:', groups);
-
       const insertValues = [];
-
       const studentClasses = student[0].class ? student[0].class.split(',').map(c => c.trim()) : [];
-
       studentClasses.forEach(className => {
         const group = groups.find(g => g.group_name === className);
         console.log(`Checking className: ${className}, Found group:`, group);
@@ -37,23 +27,18 @@ export default async function handler(req, res) {
           insertValues.push([student[0].student_id, group.group_id]);
         }
       });
-
       console.log('Insert values:', insertValues);
-
       if (insertValues.length > 0) {
         const studentIds = insertValues.map(iv => iv[0]);
         const groupIds = insertValues.map(iv => iv[1]);
-
         await sql(
           'INSERT INTO student_groups (student_id, group_id) SELECT * FROM UNNEST($1::text[], $2::int[])',
           [studentIds, groupIds]
         );
-
         res.status(201).json({ message: 'Student groups uploaded successfully', inserted: insertValues.length });
       } else {
         res.status(200).json({ message: 'No matching student groups found, nothing inserted.', inserted: 0 });
       }
-
     } catch (error) {
       console.error('Error inserting student groups:', error);
       res.status(500).json({ message: 'Error inserting student groups', error: error.message });

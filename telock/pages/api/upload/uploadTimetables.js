@@ -24,20 +24,16 @@ export default async function handler(req, res) {
   const sql = neon(`${process.env.DATABASE_URL}`);
 
   try {
-    // Adminok lekérdezése
     const admins = await sql('SELECT admin_id, full_name FROM admins');
     if (!Array.isArray(admins)) {
       throw new Error('Invalid response from database for admins');
     }
     const adminMap = new Map(admins.map(admin => [admin.full_name.trim(), admin.admin_id]));
-
-    // Csoportok lekérdezése
     const groups = await sql('SELECT group_id, group_name FROM csoportok');
     if (!Array.isArray(groups)) {
       throw new Error('Invalid response from database for groups');
     }
     const groupMap = new Map(groups.map(group => [group.group_name.trim(), group.group_id]));
-
     const timetableInsertValues = [];
     const groupRelationsInsertValues = [];
 
@@ -48,7 +44,6 @@ export default async function handler(req, res) {
         continue;
       }
 
-      // A csoportok helyes lekérdezése (a JSON "group" mezőjéből)
       const groupNames = entry.group.split(',').map(name => name.trim());
       const groupIds = groupNames.map(name => groupMap.get(name)).filter(id => id !== undefined);
 
@@ -59,13 +54,12 @@ export default async function handler(req, res) {
 
       timetableInsertValues.push([
         teacherId,
-        entry.group_name, // Ez a 'timetables' táblába kerül
+        entry.group_name, 
         dayMapping[entry.day] || 'monday',
         entry.start_time,
         entry.end_time,
       ]);
 
-      // Csoport azonosítókat is eltároljuk az entry mellé, hogy később összepárosíthassuk
       groupRelationsInsertValues.push({ groupIds });
     }
 
@@ -85,7 +79,7 @@ export default async function handler(req, res) {
 
       const timetableParams = timetableInsertValues.flat();
       const timetableResult = await sql(timetableQuery, timetableParams);
-      timetableIds = timetableResult.map(row => row.timetable_id); // Az újonnan beszúrt ID-k lekérése
+      timetableIds = timetableResult.map(row => row.timetable_id); 
     }
 
     if (timetableIds.length !== groupRelationsInsertValues.length) {
@@ -94,7 +88,6 @@ export default async function handler(req, res) {
 
     const finalGroupRelationsInsertValues = [];
 
-    // A timetable_id-kat párosítjuk a megfelelő csoportokkal
     for (let i = 0; i < timetableIds.length; i++) {
       const timetableId = timetableIds[i];
       const { groupIds } = groupRelationsInsertValues[i];
