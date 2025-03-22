@@ -63,34 +63,41 @@ export default async function Home() {
       </section>
 
 
-      <div className="w-full max-w-5xl flex flex-col md:flex-row gap-6">
+      <div className="w-full max-w-5xl mx-auto flex flex-col md:flex-row gap-8">
   {/* Asztali kép */}
-  <div className="w-full md:w-1/2 bg-gradient-to-r from-blue-600 to-white p-4 md:p-6 rounded-xl shadow">
-    <Image 
-      src="/example.png" 
-      alt="Desktop Illustration" 
-      width={400} 
-      height={200} 
-      className="w-full h-auto rounded-lg" 
-      priority 
-    />
+  <div className="w-full md:w-1/2 bg-gradient-to-r from-blue-600 to-white p-6 rounded-xl shadow-lg">
+    <div className="relative">
+      {/* Asztali kép keret */}
+      <div className="bg-white p-4 rounded-lg shadow-inner">
+        <Image
+          src="/example.png" 
+          alt="Desktop Illustration"
+          width={600}  
+          height={400} 
+          className="w-full h-auto rounded-md"
+          priority
+        />
+      </div>
+    </div>
   </div>
 
-  {/* Telefon doboz */}
-  <div className="w-full md:w-1/2 bg-gradient-to-r from-blue-600 to-white p-4 md:p-6 rounded-xl shadow">
-    <div className="w-full h-auto">
-      <Image 
-        src="/mobile-example.png" 
-        alt="Mobile Illustration" 
-        width={200} 
-        height={400} 
-        className="w-full h-auto rounded-lg" 
-        priority 
-      />
+  {/* Mobilos kép */}
+  <div className="w-full md:w-1/2 bg-gradient-to-r from-blue-600 to-white p-6 rounded-xl shadow-lg">
+    <div className="relative mx-auto w-48">
+      {/* Mobilos kép keret */}
+      <div className="bg-white p-3 rounded-2xl shadow-inner">
+        <Image
+          src="/mobile-example.png" 
+          alt="Mobile Illustration"
+          width={200}  
+          height={400} 
+          className="w-full h-auto rounded-lg"
+          priority
+        />
+      </div>
     </div>
   </div>
 </div>
-
    
 
 
