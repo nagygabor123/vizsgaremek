@@ -98,7 +98,6 @@ export default async function Home() {
     </div>
   </div>
 </div>
-   
 
 
       <section id="miert" className="space-y-2 py-4 md:py-6 lg:py-8 mt-8">
