@@ -8,7 +8,8 @@ export default withAuth(
 
     if (req.nextUrl.pathname === "/dashboard/school/students") {
       // Csak a "portas" pozícióval rendelkező felhasználók férhetnek hozzá
-      if (token?.position !== "portas") {
+      const allowedPositions = ["igazgato", "igazgatohelyettes", "rendszergazda", "portas"];
+      if (typeof token?.position === "string" && !allowedPositions.includes(token.position)) {
         return NextResponse.redirect(new URL("/dashboard", req.url));
       }
     } else if (req.nextUrl.pathname.startsWith("/dashboard/school")) {

@@ -547,7 +547,7 @@ export default function AddEmployeePage() {
                     paginatedEmployees.map((employee) => (
                       <tr key={employee.admin_id} className="text-center border-t">
                       
-                        <td className="p-1">{employee.full_name}</td>
+                        <td className="p-1">{employee.full_name} ({employee.short_name})</td>
                         <td className="p-1">
                           {positions.find((pos) => pos.value === employee.position)?.label || employee.position}
                         </td>
