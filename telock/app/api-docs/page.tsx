@@ -4,7 +4,7 @@ const page = () => {
     return (
         <div>
             <h1>API Documentation</h1>
-            <SwaggerUI url="./swagger.json" />  
+            <SwaggerUI url="telock\app\api-docs\swagger.json" />  
         </div>
     );  
 };
