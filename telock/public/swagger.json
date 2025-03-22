@@ -99,6 +99,33 @@
                     "500": {"description": "Hiba történt a diák törlése során"}
                 }
             }
+        }, "/api/students/setStudentGroups": {
+            "post": {
+                "summary": "Egy diák csoportokba rendezése",
+                "description": "Új diák létrehozásánál vagy egy meglévő diák adatainak frissítésekor, ez a végpont csoportokba rendezi a diákot.",
+                "tags": ["Students"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "student_id": {"type": "string", "example": "OM56555"}
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{"description": "Nem találtam csoport egyezést"},    
+                    "201": {"description": "Sikeres csoportba rendezés"},
+                    "400": {"description": "A student_id hiányzik"},
+                    "404": {"description": "A diák nem található"},   
+                    "500": {"description": "Hiba az adatok feltöltésekor"},
+                    "405": {"description": "A metódus nem követhető"}
+                }
+            }
         }
        
     },
