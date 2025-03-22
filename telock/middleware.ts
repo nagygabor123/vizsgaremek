@@ -8,10 +8,16 @@ export default withAuth(
 
     // Példa: Csak az "igazgató" pozícióval rendelkező felhasználók férhetnek hozzá a /dashboard/school/timetable oldalhoz
     if (req.nextUrl.pathname.startsWith("/dashboard/school")) {
-      if (token?.position !== "igazgato") {
+      if (token?.position !== "igazgato" || "igazgatohelyettes" || "rendszergazda" ) {
         return NextResponse.redirect(new URL("/dashboard", req.url));
       }
     }
+    if (req.nextUrl.pathname.startsWith("/dashboard/school/students")) {
+      if (token?.position !== "portas" ) {
+        return NextResponse.redirect(new URL("/dashboard", req.url));
+      }
+    }
+
 
     // Példa: Csak az osztályfőnökök férhetnek hozzá a /dashboard/class route-hoz
     if (req.nextUrl.pathname.startsWith("/dashboard/class")) {
