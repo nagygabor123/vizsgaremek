@@ -881,7 +881,7 @@
                 }
             }
         },
-        "/api/admins/updateEmployee": {
+        "/api/config/updateEmployee": {
             "put": {
                 "summary": "Alkalmazottak frissítése",
                 "description": "Ez az API végpont lehetővé teszi egy adminisztrátor adatainak frissítését a megadott adatokkal. Az adminisztrátor frissítése során meg kell adni az adminisztrátor egyedi azonosítóját (admin_id), teljes nevét, pozícióját és osztályfőnökét. A sikeres frissítés után a rendszer válaszol a frissített adatokkal. Amennyiben bármelyik kötelező mező hiányzik, a szerver hibát ad vissza. Ha a frissítés sikeres, a válaszban visszaküldi a frissített adminisztrátor adatait.",
@@ -951,7 +951,7 @@
                 }
             }
         },
-        "/api/admins/deleteEmployee": {
+        "/api/config/deleteEmployee": {
             "delete": {
                 "summary": "Alkalmazottak törlése",
                 "description": "Ez az API végpont lehetővé teszi egy adminisztrátor törlését az admin ID alapján. Az admin ID paramétert a kérés query paramétereként kell megadni. Az ID értéke nem lehet 1 (illetve egyéb esetekben a kódba hardkódolt tiltott ID-k). Ha az ID nem található az adatbázisban, a rendszer hibaüzenetet ad vissza.",
