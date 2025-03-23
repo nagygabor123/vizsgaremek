@@ -11,7 +11,7 @@ export const config = {
 
 export default function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Csak a POST metódus használható' });
+    return res.status(405).json({ error: 'A metódus nem követhető' });
   }
 
   const form = new multiparty.Form();
@@ -23,7 +23,7 @@ export default function handler(req, res) {
     }
 
     if (!files || !files.file || files.file.length === 0) {
-      return res.status(400).json({ error: 'Nincs fájl feltöltve' });
+      return res.status(400).json({ error: 'Nincs fájl feltöltve!' });
     }
 
     const file = files.file[0];

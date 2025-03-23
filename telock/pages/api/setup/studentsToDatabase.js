@@ -16,7 +16,7 @@ const sql = neon(`${process.env.DATABASE_URL}`);
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Csak a POST metódus használható' });
+    return res.status(405).json({ error: 'A metódus nem követhető' });
   }
 
   const form = new multiparty.Form({
@@ -26,8 +26,8 @@ export default async function handler(req, res) {
 
   form.parse(req, async (err, fields, files) => {
     if (err) {
-      console.error('Hiba a fájl feldolgozásakor:', err);
-      return res.status(500).json({ error: 'Hiba a fájl feldolgozásakor' });
+      console.error('Hiba a fájl feldolgozása közben:', err);
+      return res.status(500).json({ error: 'Hiba a fájl feldolgozása közben' });
     }
 
     const file = files.file?.[0];
