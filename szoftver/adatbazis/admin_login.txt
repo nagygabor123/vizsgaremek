@@ -1,0 +1,2 @@
+felhasználónév: AdAd
+jelszó: $2b$10$O5qBB4FhkxxTT9LBvuopzuA9y2L5.qrQxYjLOsLyYY8ofYCCJW1HW

@@ -12,7 +12,9 @@ CREATE TABLE students (
   full_name VARCHAR(255) NOT NULL,
   class VARCHAR(255) NOT NULL,
   rfid_tag VARCHAR(50) UNIQUE NOT NULL,
-  access VARCHAR(50) NOT NULL
+  access VARCHAR(50) NOT NULL,
+  expires_at TIMESTAMP
+
 );
 
 CREATE TABLE lockers (
@@ -88,3 +90,4 @@ INSERT INTO system_status (status) VALUES
 INSERT INTO year_schedule (type, nev, which_day, replace_day) VALUES
 ('kezd', 'Tanévkezdés', '2024-09-02', ''),
 ('veg', 'Tanévzárás', '2025-06-13', '');
+
