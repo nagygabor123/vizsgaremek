@@ -813,7 +813,7 @@
                 }
             }
         },
-        "/api/config/getRining": {
+        "/api/config/getRinging": {
             "get": {
                 "summary": "Csengetési rend lekérdezése",
                 "description": "Ez az API végpont lehetővé teszi a csengetési rend lekérdezését a rendszerben. A válaszban a csengetési időpontok kerülnek visszaküldésre, azaz a kezdési és befejezési időpontok formázott órák és percek szerint. A válasz formátuma tartalmazza a kezdési és befejezési időpontokat az 'HH:mm' formátumban.",
