@@ -1208,7 +1208,7 @@
                                         "description": "A beosztás típusa (kezd vagy veg)"
                                     },
                                     "which_day": {
-                                        "type": "string",
+                                        "type": "date",
                                         "example": "2025-03-01",
                                         "description": "A frissített nap dátuma"
                                     }
