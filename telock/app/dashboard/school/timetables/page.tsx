@@ -127,7 +127,9 @@ const Calendar: React.FC = () => {
   const [tanevkezdes, setStartYear] = useState<string | null>(null);
   const [tanevvege, setEndYear] = useState<string | null>(null);
   const [lessonTimes, setLessonTimes] = useState<lessonTimes[]>([]);
-
+  const { startOfWeek2, endOfWeek } = getWeekStartAndEnd(currentDate);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5; // Oldalanként megjelenítendő diákok száma
 
 
 
@@ -605,9 +607,7 @@ const Calendar: React.FC = () => {
     return null;
   }
 
-  const { startOfWeek2, endOfWeek } = getWeekStartAndEnd(currentDate);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5; // Oldalanként megjelenítendő diákok száma
+
   
   const getPaginatedStudents = (className: string, page: number) => {
     const allStudents = getStudentsByClass(className);
