@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   const { student } = req.query;
 
   if (!student) {
-    return res.status(400).json({ error: 'Student ID is required' });
+    return res.status(400).json({ error: 'Hiányzó "student_id"!' });
   }
 
   const query = `
