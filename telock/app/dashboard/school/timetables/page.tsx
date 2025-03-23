@@ -608,6 +608,36 @@ const Calendar: React.FC = () => {
   const { startOfWeek2, endOfWeek } = getWeekStartAndEnd(currentDate);
 
 
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const studentsPerPage = 5;
+
+  // Kiválasztott oldal alapján kiszűrjük a tanulókat
+
+  const indexOfLastStudent = currentPage * studentsPerPage;
+  const indexOfFirstStudent = indexOfLastStudent - studentsPerPage;
+  const currentStudents = students.slice(indexOfFirstStudent, indexOfLastStudent);
+
+  // Oldalszámok kezelése
+  const totalPages = Math.ceil(students.length / studentsPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+
+
+
+  
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -780,35 +810,46 @@ const Calendar: React.FC = () => {
                           <h3>Osztály: {modalInfo?.className}</h3>
                           <div>
                             <h4>Diákok:</h4>
-                            <table className="table-auto w-full border-collapse border border-gray-300">
-                              <thead>
-                                <tr className="bg-gray-200">
-                                  <th className="border border-gray-300 px-4 py-2">Név</th>
-                                  <th className="border border-gray-300 px-4 py-2">Állapot</th>
-                                  <th className="border border-gray-300 px-4 py-2">Művelet</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {getStudentsByClass(modalInfo?.className || '').map((student) => {
-                                  const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
-                                  const currentTime = new Date().toTimeString().slice(0, 5);
-                                  const canUnlockStudent = systemClose || studentTimetableData &&
-                                    currentTime >= studentTimetableData.first_class_start &&
-                                    currentTime <= studentTimetableData.last_class_end;
-                                  return (
-                                    <tr key={student.student_id} className="border border-gray-300">
-                                      <td className="border border-gray-300 px-4 py-2">{student.full_name}</td>
-                                      <td className="border border-gray-300 px-4 py-2">{student.status}</td>
-                                      <td className="border border-gray-300 px-4 py-2">
-                                        <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>
-                                          Feloldás
-                                        </Button>
-                                      </td>
-                                    </tr>
-                                  );
-                                })}
-                              </tbody>
-                            </table>
+                            <div>
+      <table className="table-auto w-full border-collapse border border-gray-300">
+        <thead>
+          <tr className="bg-gray-200">
+            <th className="border border-gray-300 px-4 py-2">Név</th>
+            <th className="border border-gray-300 px-4 py-2">Állapot</th>
+            <th className="border border-gray-300 px-4 py-2">Művelet</th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentStudents.map((student) => {
+            const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
+            const currentTime = new Date().toTimeString().slice(0, 5);
+            const canUnlockStudent = systemClose || (studentTimetableData &&
+              currentTime >= studentTimetableData.first_class_start &&
+              currentTime <= studentTimetableData.last_class_end);
+            return (
+              <tr key={student.student_id} className="border border-gray-300">
+                <td className="border border-gray-300 px-4 py-2">{student.full_name}</td>
+                <td className="border border-gray-300 px-4 py-2">{student.status}</td>
+                <td className="border border-gray-300 px-4 py-2">
+                  <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>
+                    Feloldás
+                  </Button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+
+      <div className="flex justify-between mt-4">
+        <button onClick={handlePrevPage} disabled={currentPage === 1} className="px-4 py-2 bg-blue-500 text-white">
+          Előző
+        </button>
+        <button onClick={handleNextPage} disabled={currentPage === totalPages} className="px-4 py-2 bg-blue-500 text-white">
+          Következő
+        </button>
+      </div>
+    </div>
                           </div>
                         </DialogHeader>
                       </DialogContent>

@@ -591,13 +591,13 @@ export default function Home() {
                             {/* <td className="p-1">{student.rfid_tag}</td> */}
                             <td className="p-1">
 
-                            <Button 
-  variant="ghost" 
-  onClick={() => handleStudentOpen(student.student_id)} 
-  disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}
-> 
-  <LockOpen className="w-4 h-4 inline-block" />
-</Button>                              <Dialog open={open} onOpenChange={setOpen}>
+                              <Button
+                                variant="ghost"
+                                onClick={() => handleStudentOpen(student.student_id)}
+                                disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}
+                              >
+                                <LockOpen className="w-4 h-4 inline-block" />
+                              </Button>                              <Dialog open={open} onOpenChange={setOpen}>
                                 <DialogTrigger asChild>
                                   <Button variant="ghost" onClick={() => handleEdit(student)}><Pen /></Button>
                                 </DialogTrigger>
