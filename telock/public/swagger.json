@@ -211,45 +211,45 @@
             }
         },
         "/api/setup/ascToDatabase": {
-            "post": {
-                "summary": "Az asc órarend tervező program xml fájljából az adatok kinyerése és feltöltése az adatbázisba",
-                "description": "A következő adatokat nyeri ki az xml-ből: csengetési rend, tanárok, osztályok/csoportok és maga az órarend. Az adatokat feltölti az adatbázisba.",
-                "tags": [
-                    "Setup"
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "file": {
-                                        "type": "string",
-                                        "format": "binary",
-                                        "description": "Az asc órarend tervező XML fájlja"
-                                    }
-                                }
+    "post": {
+        "summary": "Az asc órarend tervező program xml fájljából az adatok kinyerése és feltöltése az adatbázisba",
+        "description": "Ez az API végpont az ASC órarend tervező szoftver XML fájljából nyeri ki az órarendi adatokat, majd azokat feltölti az adatbázisba. A feldolgozás során az alábbi információk kerülnek kinyerésre és tárolásra:\n\n- **Csengetési rend**: Az egyes tanórák kezdési és befejezési időpontjai.\n- **Tanárok**: A pedagógusok neve, rövidítése, valamint az osztályfőnöki szerepkör (ha elérhető).\n- **Osztályok és csoportok**: A teljes osztályok és kisebb tanulócsoportok listája.\n- **Órarend**: A tantárgyak, tanárok, időpontok és osztályok/csoportok kapcsolatai.\n\nA végpont egy `multipart/form-data` kérést fogad el, amelyben a feltöltött XML fájlt dolgozza fel. A sikeres feldolgozás után az adatok továbbításra kerülnek az adatbázisba, és egy JSON választ küld vissza a mentett adatokkal.",
+        "tags": [
+            "Setup"
+        ],
+        "requestBody": {
+            "required": true,
+            "content": {
+                "multipart/form-data": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "file": {
+                                "type": "string",
+                                "format": "binary",
+                                "description": "Az asc órarend tervező XML fájlja"
                             }
                         }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "XML adatok sikeresen feldolgozva és továbbítva!"
-                    },
-                    "400": {
-                        "description": "Hiba a fájl feltöltésekor! VAGY Nincs fájl feltöltve!"
-                    },
-                    "500": {
-                        "description": "Hiba a fájl feldolgozása közben"
-                    },
-                    "405": {
-                        "description": "A metódus nem követhető"
                     }
                 }
             }
         },
+        "responses": {
+            "201": {
+                "description": "XML adatok sikeresen feldolgozva és továbbítva!"
+            },
+            "400": {
+                "description": "Hiba a fájl feltöltésekor! VAGY Nincs fájl feltöltve!"
+            },
+            "500": {
+                "description": "Hiba a fájl feldolgozása közben"
+            },
+            "405": {
+                "description": "A metódus nem követhető"
+            }
+        }
+    }
+},
         "/api/setup/studentsToDatabase": {
             "post": {
                 "summary": "Diákok feltöltése az adatbázisba egy CSV fájlból",

@@ -32,7 +32,7 @@ export default async function handler(req, res) {
 
     const file = files.file?.[0];
     if (!file) {
-      return res.status(400).json({ error: 'Nincs fájl feltöltve' });
+      return res.status(400).json({ error: 'Hiba a fájl feltöltésekor!' });
     }
 
     try {
@@ -41,7 +41,7 @@ export default async function handler(req, res) {
 
       const rows = csvData.split(/\r?\n/).map(row => row.trim()).filter(row => row.length > 0);
       if (rows.length < 2) {
-        return res.status(400).json({ error: 'Üres vagy érvénytelen CSV fájl' });
+        return res.status(400).json({ error: 'Üres vagy érvénytelen CSV fájl!' });
       }
 
       const header = rows.shift().split(';').map(h => h.trim());
