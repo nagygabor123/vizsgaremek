@@ -41,6 +41,19 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
+
 
 // Sidebar elemek típusa
 interface SidebarItem {
@@ -203,6 +216,40 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
+  
+            <Dialog>
+      <DialogTrigger>
+      <DropdownMenuItem asChild>
+            <Link href="/settings">Profil beállítások</Link>
+            </DropdownMenuItem>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Profil beállítások</DialogTitle>
+          <DialogDescription>
+          Itt módosíthatja profilját. Kattintson a Mentés gombra, ha végzett.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="name" className="text-right">
+              Name
+            </Label>
+            <Input id="name" value="Pedro Duarte" className="col-span-3" />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="username" className="text-right">
+              Username
+            </Label>
+            <Input id="username" value="@peduarte" className="col-span-3" />
+          </div>
+        </div>
+        <DialogFooter>
+          <Button type="submit">Mentés</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+
             <DropdownMenuItem>
               <LogOut />
               <span
@@ -282,9 +329,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   })}
 </SidebarContent>
 
-      <SidebarFooter>
-        <span className="text-xs text-center">© 2025 telock</span>
-      </SidebarFooter>
+<SidebarFooter>
+  <span className="text-xs text-center">
+    © {new Date().getFullYear()} telock
+  </span>
+</SidebarFooter>
     </Sidebar>
   );
 }
