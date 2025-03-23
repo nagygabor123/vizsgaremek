@@ -217,41 +217,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
 
-            <Dialog>
-              <DialogTrigger>
-                <DropdownMenuItem asChild>
-                  <LogOut />
-                  <span >
-                    Profil beállítások
-                  </span>
-                </DropdownMenuItem>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                  <DialogTitle>Profil beállítások</DialogTitle>
-                  <DialogDescription>
-                    Itt módosíthatja profilját. Kattintson a Mentés gombra, ha végzett.
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="grid gap-4 py-4">
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="name" className="text-right">
-                      Name
-                    </Label>
-                    <Input id="name" value="Pedro Duarte" className="col-span-3" />
-                  </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="username" className="text-right">
-                      Username
-                    </Label>
-                    <Input id="username" value="@peduarte" className="col-span-3" />
-                  </div>
-                </div>
-                <DialogFooter>
-                  <Button type="submit">Mentés</Button>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
+  
 
             <DropdownMenuItem>
               <LogOut />
