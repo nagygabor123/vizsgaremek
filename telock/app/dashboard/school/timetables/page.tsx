@@ -786,7 +786,7 @@ const Calendar: React.FC = () => {
                       <DialogContent className="sm:max-w-[800px]">
                         <DialogHeader>
                           <DialogTitle>{modalInfo?.lesson}</DialogTitle>
-                          <DialogDescription>Időpont: {modalInfo?.time} {modalInfo?.className}</DialogDescription>
+                          <DialogDescription>{modalInfo?.time}</DialogDescription>
                           <h3>Osztály: {modalInfo?.className}</h3>
                           <div>
                             <h4>Diákok:</h4>
@@ -908,10 +908,10 @@ const Calendar: React.FC = () => {
                         )}
                       </DialogTrigger>
                       {isToday(day) && isCurrentLesson(lesson) && (
-                      <DialogContent className="sm:max-w-[800px]">
+                      <DialogContent className="sm:w-[800px]">
   <DialogHeader>
     <DialogTitle>{modalInfo?.lesson}</DialogTitle>
-    <DialogDescription>Időpont: {modalInfo?.time} {modalInfo?.className}</DialogDescription>
+    <DialogDescription>{modalInfo?.time}</DialogDescription>
     <h3>Osztály: {modalInfo?.className}</h3>
     <div>
 
@@ -962,7 +962,7 @@ const Calendar: React.FC = () => {
           onClick={() => setCurrentPage((prev) => prev + 1)}
           disabled={getPaginatedStudents(modalInfo?.className || '', currentPage + 1).length === 0}
         >
-          <ChevronLeft /> Következő
+           Következő <ChevronRight />
         </Button>
       </div>
     </div>
