@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     const { employees } = req.body;
     
     if (!Array.isArray(employees) || employees.length === 0) {
-      return res.status(400).json({ message: 'Invalid or empty employees array' });
+      return res.status(400).json({ message: 'Érvénytelen vagy hamis mezők' });
     }
 
     const sql = neon(process.env.DATABASE_URL);
@@ -55,12 +55,12 @@ export default async function handler(req, res) {
 
       await sql(query, params);
 
-      res.status(201).json({ message: 'Admins uploaded successfully' });
+      res.status(201).json({ message: 'Tanárok sikeresen feltöltve' });
     } catch (error) {
-      console.error('Error uploading admins:', error);
-      res.status(500).json({ message: 'Error uploading admins', error: error.message });
+      console.error('Hiba az adatok feltöltésekor:', error);
+      res.status(500).json({ message: 'ErrorHiba az adatok feltöltésekor uploading admins', error: error.message });
     }
   } else {
-    res.status(405).json({ message: 'Method Not Allowed' });
+    res.status(405).json({ message: 'A HTTP metódus nem engedélyezett' });
   }
 }

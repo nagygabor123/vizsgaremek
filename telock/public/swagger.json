@@ -136,6 +136,57 @@
                 }
             }
         },
+        "/api/upload/uploadEmployees": {
+            "post": {
+                "summary": "Tanárok feltöltése",
+                "description": "Ez az API végpont a tanárok adatainak feltöltésére szolgál. Az adatokat egy tömb formájában várja, amely tartalmazza a tanárok nevét, pozícióját, osztályfőnökét, rövid nevét, és egy alapértelmezett jelszót generál. Ha bármelyik adat hiányzik vagy hibás, a rendszer figyelmeztetést ad, és a hibás sort kihagyja.",
+                "tags": [
+                    "Upload"
+                ],
+                "requestBody": {
+                    "description": "A feltöltendő tanárok adatai",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "full_name": {
+                                        "type": "string",
+                                        "description": "A tanár teljes neve"
+                                    },
+                                    "position": {
+                                        "type": "string",
+                                        "description": "A tanár pozíciója"
+                                    },
+                                    "osztalyfonok": {
+                                        "type": "string",
+                                        "description": "Az osztályfőnök neve (opcionális)"
+                                    },
+                                    "short_name": {
+                                        "type": "string",
+                                        "description": "A tanár rövid neve (opcionális)"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tanárok sikeresen feltöltve!"
+                    },
+                    "400": {
+                        "description": "Az employees tömb üres vagy hibás"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    },
+                    "500": {
+                        "description": "Hiba az adatok feltöltésekor"
+                    }
+                }
+            }
+        },
         "/api/students/create": {
             "post": {
                 "summary": "Új diák létrehozása",
