@@ -21,9 +21,9 @@ export default async function handler(req, res) {
       return res.status(200).json({ message: 'Sikeres frissítés', updatedType: type, updatedDate: which_day });
     } catch (error) {
       console.error('Adatbázis hiba:', error);
-      return res.status(500).json({ error: 'Adatbázis csatlakozási hiba' });
+      return res.status(500).json({ error: 'Hiba a hozzáadás során' });
     }
   } else {
-    return res.status(405).json({ error: 'A módszer nem engedélyezett' });
+    return res.status(405).json({ error: 'A HTTP metódus nem engedélyezett' });
   }
 }

@@ -1097,6 +1097,306 @@
                     }
                 }
             }
+        },
+        "api/config/getYearSchedule": {
+            "get": {
+                "summary": "Évkezdési és évzárási információk lekérdezése",
+                "description": "Ez az API végpont lehetővé teszi az év kezdési és zárási időpontjainak, valamint a szünnapok és plusznapok adatainak lekérdezését. Az API a megadott típusú adatokat adja vissza a lekérdezés alapján. Támogatott típusok: 'plusznap', 'szunet', 'tanitasnelkul', 'kezd', 'veg'. A válasz formátuma a típusnak megfelelően változik.",
+                "tags": [
+                    "Config"
+                ],
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "required": true,
+                        "description": "A lekérdezés típusa. Lehet: 'plusznap', 'szunet', 'tanitasnelkul', 'kezd', 'veg'.",
+                        "schema": {
+                            "type": "string",
+                            "example": "plusznap"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sikeres lekérdezés",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "tanitasnelkul_alap": {
+                                            "type": "array",
+                                            "description": "A tanítás nélküli napok listája",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 3
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Szünet"
+                                                    },
+                                                    "start": {
+                                                        "type": "string",
+                                                        "example": "2025-02-01"
+                                                    },
+                                                    "end": {
+                                                        "type": "string",
+                                                        "example": "2025-02-03"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "schoolYearStart": {
+                                            "type": "object",
+                                            "properties": {
+                                                "start": {
+                                                    "type": "string",
+                                                    "example": "2024-09-01"
+                                                }
+                                            }
+                                        },
+                                        "schoolYearEnd": {
+                                            "type": "object",
+                                            "properties": {
+                                                "end": {
+                                                    "type": "string",
+                                                    "example": "2025-06-15"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Hiányzó kötelező paraméter"
+                    },
+                    "404": {
+                        "description": "Nincs találat a lekérdezéshez"
+                    },
+                    "500": {
+                        "description": "Hiba a lekérdezés során"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    }
+                }
+            }
+        },
+        "/api/config/setYearStartEnd": {
+            "post": {
+                "summary": "Évfolyam beosztás frissítése",
+                "description": "Ez az API végpont lehetővé teszi az évfolyam beosztásának frissítését a megadott típus (kezd vagy veg) és nap (which_day) alapján. A típusnak 'kezd' vagy 'veg' kell lennie, és a napnak érvényes dátumnak kell lennie. Ha a frissítés sikeres, a rendszer visszaküldi a frissített típust és napot.",
+                "tags": [
+                    "Config"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "type": {
+                                        "type": "string",
+                                        "example": "kezd",
+                                        "description": "A beosztás típusa (kezd vagy veg)"
+                                    },
+                                    "which_day": {
+                                        "type": "string",
+                                        "example": "2025-03-01",
+                                        "description": "A frissített nap dátuma"
+                                    }
+                                },
+                                "required": [
+                                    "type",
+                                    "which_day"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sikeres frissítés",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sikeres frissítés"
+                                        },
+                                        "updatedType": {
+                                            "type": "string",
+                                            "example": "kezd"
+                                        },
+                                        "updatedDate": {
+                                            "type": "string",
+                                            "example": "2025-03-01"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Hiányzó kötelező paraméterek vagy érvénytelen típus"
+                    },
+                    "404": {
+                        "description": "A megfelelő rekord nem található"
+                    },
+                    "500": {
+                        "description": "Hiba a frissítés során"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    }
+                }
+            }
+        },
+        "/api/config/addPlusBreak": {
+            "post": {
+                "summary": "Új évszak bejegyzés hozzáadása",
+                "description": "Ez az API végpont lehetővé teszi egy új évszak bejegyzés (szünet, plusznap vagy tanítás nélküli nap) hozzáadását a rendszerhez. A bejegyzés hozzáadásához meg kell adni a típusát, nevét, az érintett napot és az azt helyettesítő napot. A sikeres hozzáadás után a válasz tartalmazza a frissített adatokat.",
+                "tags": [
+                    "Config"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "type": {
+                                        "type": "string",
+                                        "description": "A bejegyzés típusa. Értékek: 'szunet', 'plusznap', 'tanitasnelkul'.",
+                                        "example": "szunet"
+                                    },
+                                    "nev": {
+                                        "type": "string",
+                                        "description": "A bejegyzés neve vagy leírása (pl. 'Karácsonyi szünet').",
+                                        "example": "Karácsonyi szünet"
+                                    },
+                                    "which_day": {
+                                        "type": "string",
+                                        "description": "A dátum, amely a bejegyzéshez kapcsolódik (pl. '2024-12-21').",
+                                        "example": "2024-12-21"
+                                    },
+                                    "replace_day": {
+                                        "type": "string",
+                                        "description": "Az a nap, amelyik a bejegyzést helyettesíti (pl. 'monday').",
+                                        "example": "monday"
+                                    }
+                                },
+                                "required": [
+                                    "type",
+                                    "nev",
+                                    "which_day",
+                                    "replace_day"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sikeres frissítés",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sikeres frissítés"
+                                        },
+                                        "updatedType": {
+                                            "type": "string",
+                                            "example": "szunet"
+                                        },
+                                        "updatedDate": {
+                                            "type": "string",
+                                            "example": "2024-12-21"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Hiányzó paraméterek vagy érvénytelen típus"
+                    },
+                    "500": {
+                        "description": "Hiba a hozzáadás során"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    }
+                }
+            }
+        },
+        "/api/config/deletePlusBreak": {
+            "delete": {
+                "summary": "Évterv törlése",
+                "description": "Ez az API végpont lehetővé teszi egy évterv törlését a megadott azonosító alapján. A törlés előtt ellenőrzi, hogy a megadott ID létezik-e, és nem lehet 1 vagy 2. Ha a törlés sikeres, a válaszban visszaküldi a törölt ID-t.",
+                "tags": [
+                    "Config"
+                ],
+                "parameters": [
+                    {
+                        "name": "year_schedule_id",
+                        "in": "query",
+                        "required": true,
+                        "description": "Az évterv azonosítója, amelyet törölni szeretnénk.",
+                        "schema": {
+                            "type": "string",
+                            "example": "3"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sikeres törlés",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sikeres törlés"
+                                        },
+                                        "deletedId": {
+                                            "type": "string",
+                                            "example": "3"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Hiányzó ID paraméter vagy érvénytelen ID"
+                    },
+                    "404": {
+                        "description": "Nem található rekord ezzel az ID-val"
+                    },
+                    "500": {
+                        "description": "Hiba a törlés során"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    }
+                }
+            }
         }
     },
     "components": {

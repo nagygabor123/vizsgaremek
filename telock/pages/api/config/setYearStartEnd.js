@@ -13,13 +13,9 @@ export default async function handler(req, res) {
     }
 
     try {
-      // Connect to the Neon database
       const sql = neon(`${process.env.DATABASE_URL}`);
-
-      // Update the record in the database
       const query = 'UPDATE year_schedule SET which_day = $1 WHERE type = $2';
       const values = [which_day, type];
-
       const result = await sql(query, values);
 
       if (result.rowCount > 0) {
@@ -28,10 +24,10 @@ export default async function handler(req, res) {
         return res.status(404).json({ error: 'Nem található a megfelelő rekord' });
       }
     } catch (error) {
-      console.error('Adatbázis hiba:', error);
-      return res.status(500).json({ error: 'Adatbázis csatlakozási hiba' });
+      console.error('Hiba a frissítés során:', error);
+      return res.status(500).json({ error: 'Hiba a frissítés során' });
     }
   } else {
-    return res.status(405).json({ error: 'A módszer nem engedélyezett' });
+    return res.status(405).json({ error: 'A HTTP metódus nem engedélyezett' });
   }
 }

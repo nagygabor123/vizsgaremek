@@ -71,10 +71,10 @@ export default async function handler(req, res) {
       }
     } catch (error) {
       console.error('Adatbázis hiba:', error);
-      return res.status(500).json({ error: 'Adatbázis csatlakozási hiba' });
+      return res.status(500).json({ error: 'Hiba a lekérdezés során' });
     }
   } else {
-    return res.status(405).json({ error: 'A módszer nem engedélyezett' });
+    return res.status(405).json({ error: 'A HTTP metódus nem engedélyezett' });
   }
 }
 

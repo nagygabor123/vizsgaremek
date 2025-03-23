@@ -24,10 +24,10 @@ export default async function handler(req, res) {
       return res.status(200).json({ message: 'Sikeres törlés', deletedId: year_schedule_id });
     } catch (error) {
       console.error('Adatbázis hiba:', error.message, error.stack);
-      return res.status(500).json({ error: 'Adatbázis hiba: ' + error.message });
+      return res.status(500).json({ error: 'Hiba a törlés során: ' + error.message });
     } 
   } else {
-    return res.status(405).json({ error: 'A módszer nem engedélyezett' });
+    return res.status(405).json({ error: 'A HTTP metódus nem engedélyezett' });
   }
 }
 
