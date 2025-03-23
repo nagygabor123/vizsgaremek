@@ -2,13 +2,13 @@ import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ message: "Method Not Allowed" });
+    return res.status(405).json({ message: "A HTTP metódus nem engedélyezett" });
   }
 
   const { student } = req.query;
 
   if (!student) {
-    return res.status(400).json({ message: "Missing student identifier" });
+    return res.status(400).json({ message: "'student_id' hiányzik" });
   }
 
   const sql = neon(process.env.DATABASE_URL);
@@ -22,10 +22,10 @@ export default async function handler(req, res) {
     );
 
     return res.status(200).json({ 
-      message: `Student ${student} access updated to nyithato.` 
+      message: `${student} diák 'access' frissítve nyithato-ra` 
     });
   } catch (error) {
-    console.error("Error updating access state:", error);
-    return res.status(500).json({ message: "Failed to update access state" });
+    console.error("Hiba az adatok feltöltésekor:", error);
+    return res.status(500).json({ message: "Hiba az adatok feltöltésekor" });
   }
 }

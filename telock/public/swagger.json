@@ -324,31 +324,34 @@
         "/api/system/closeOpen": {
             "post": {
                 "summary": "Rendszer hozzáférési állapotának frissítése",
-                "description": "Ez az API végpont lehetővé teszi a felhasználó számára, hogy frissítse a rendszer hozzáférési állapotát (nyitott vagy zárt). Ha az 'action' értéke 'close', akkor a rendszer státusza 'zarva' (zárt) lesz, ha pedig 'open', akkor 'nyithato' (nyitható). A végpont a 'system_status' táblában található 'status' mezőt frissíti. Az 'action' paraméter a kérés body-jában kerül átadásra egy előre definiált listából ('open', 'close') kiválasztva. Amennyiben az 'action' értéke nem 'close' vagy 'open', hibaüzenet kerül visszaküldésre. A végpont csak POST kéréseket fogad.",
+                "description": "Ez az API végpont lehetővé teszi a felhasználó számára, hogy frissítse a rendszer hozzáférési állapotát (nyitott vagy zárt). Ha az 'action' értéke 'close', akkor a rendszer státusza 'zarva' (zárt) lesz, ha pedig 'open', akkor 'nyithato' (nyitható). A végpont a 'system_status' táblában található 'status' mezőt frissíti. Az 'action' paraméter a kérés body-jában kerül átadásra. Amennyiben az 'action' értéke nem 'close' vagy 'open', hibaüzenet kerül visszaküldésre. A végpont csak POST kéréseket fogad.",
                 "tags": [
                     "System"
                 ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "body",
-                        "required": true,
-                        "description": "A szekrény azonosítója, amelynek a státuszát módosítani szeretnénk."
-                    },
-                    {
-                        "name": "action",
-                        "in": "body",
-                        "required": true,
-                        "description": "A rendszer új állapota, amely az alábbi előre meghatározott értékek közül választható: 'open', 'close'.",
-                        "schema": {
-                            "type": "string",
-                            "enum": [
-                                "open",
-                                "close"
-                            ]
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "action": {
+                                        "type": "string",
+                                        "enum": [
+                                            "close",
+                                            "open"
+                                        ],
+                                        "description": "Az 'action' mező értéke 'close' vagy 'open' lehet. 'close' esetén a rendszer státusza 'zarva', 'open' esetén 'nyithato'."
+                                    }
+                                },
+                                "example": {
+                                    "action": "close"
+                                }
+                            }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
                         "description": "Az összes diák 'access' mezője és a 'status' nyithato/zarva (-ra) frissítve"
@@ -361,6 +364,60 @@
                     },
                     "500": {
                         "description": "Nem sikerült frissíteni az 'access' és 'status' állapotot"
+                    }
+                }
+            }
+        },
+        "/api/system/status": {
+            "get": {
+                "summary": "A rendszer státuszának lekérdezése",    
+"description": "Ez az API végpont a rendszer aktuális státuszának lekérdezésére szolgál. A végpont egyetlen rekordot olvas ki a 'system_status' táblából, amely a rendszer állapotát tárolja. A lekérdezés az adott státuszt (például 'zarva' vagy 'nyithato') adja vissza. A lekérdezés sikeressége esetén a rendszer egy JSON választ küld, amely tartalmazza a státusz értékét. Ha az adatbázisban nincs elérhető státusz, akkor a végpont egy 404-es hibát küld vissza. Ha a lekérdezés során hiba történik (például adatbázis-kapcsolati probléma), akkor egy 500-as hibaüzenetet kap a kliens. A végpont kizárólag GET metódussal érhető el, más HTTP metódusok használata esetén 405-ös hibakódot ad vissza.",                "tags": [
+                    "System"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "'zarva' vagy 'nyithato' státusz visszaküldve"   
+                    },
+                    "400": {
+                        "description": "A rendszer státusza nem található"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    },
+                    "500": {
+                        "description": "Hiba az adatok lekérdezésekor"
+                    }
+                }
+            }
+        },
+
+        "/api/system/studentAccess": {
+            "get": {
+                "summary": "Szekrény nyitása RFID címkével",
+                "description": "Ez az API végpont lehetővé teszi a felhasználó számára, hogy ellenőrizze, hogy egy adott RFID címke hozzáféréssel rendelkezik-e egy szekrényhez. A végpont lekéri az adott RFID címkéhez tartozó adatokat az adatbázisból, és visszaadja, hogy a felhasználónak van-e engedélyezett hozzáférése, vagy ha a hozzáférés zárolt. Ezen kívül ellenőrzi a diák órarendjét is, és ha az aktuális idő tartozik az órák közé, a zár nyitva marad. Ha az RFID címke nem található, vagy nincs hozzáférése a szekrényhez, a rendszer egy hibát jelez. A végpont csak GET kéréseket fogad, és az RFID címkét a query paraméterben várja.",
+                "tags": [
+                    "System"
+                ],
+                "parameters": [
+                    {
+                        "name": "student",
+                        "in": "query",
+                        "required": true,
+                        "description": "Az RFID címke, amelynek a szekrényét nyitni szeretnénk."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "'xy' diák 'access' frissítve nyithato-ra"
+                    },
+                    "400": {
+                        "description": "'student_id' hiányzik"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    },
+                    "500": {
+                        "description": "Hiba az adatok feltöltésekor"
                     }
                 }
             }

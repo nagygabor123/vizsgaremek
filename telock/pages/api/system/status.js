@@ -7,15 +7,15 @@ export default async function handler(req, res) {
       const result = await sql('SELECT status FROM system_status WHERE id = 1');
 
       if (result.length === 0) {
-        return res.status(404).json({ error: 'System status not found' });
+        return res.status(404).json({ error: 'A rendszer státusza nem található' });
       }
 
       return res.status(200).json({ status: result[0].status });
     } catch (error) {
-      console.error('Database error:', error);
-      return res.status(500).json({ error: 'Database connection error' });
+      console.error('Hiba az adatok lekérdezésekor:', error);
+      return res.status(500).json({ error: 'Hiba az adatok lekérdezésekor' });
     }
   } else {
-    return res.status(405).json({ error: 'Method Not Allowed' });
+    return res.status(405).json({ error: 'A HTTP metódus nem engedélyezett.' });
   }
 }
