@@ -392,7 +392,7 @@
         },
 
         "/api/system/studentAccess": {
-            "get": {
+            "post": {
                 "summary": "Szekrény nyitása RFID címkével",
                 "description": "Ez az API végpont lehetővé teszi a felhasználó számára, hogy ellenőrizze, hogy egy adott RFID címke hozzáféréssel rendelkezik-e egy szekrényhez. A végpont lekéri az adott RFID címkéhez tartozó adatokat az adatbázisból, és visszaadja, hogy a felhasználónak van-e engedélyezett hozzáférése, vagy ha a hozzáférés zárolt. Ezen kívül ellenőrzi a diák órarendjét is, és ha az aktuális idő tartozik az órák közé, a zár nyitva marad. Ha az RFID címke nem található, vagy nincs hozzáférése a szekrényhez, a rendszer egy hibát jelez. A végpont csak GET kéréseket fogad, és az RFID címkét a query paraméterben várja.",
                 "tags": [
