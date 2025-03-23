@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       }
     } catch (error) {
       console.error('Adatbazis hiba:', error);
-      return res.status(500).json({ error: 'Hiba az adatok feltöltéseko' });
+      return res.status(500).json({ error: 'Hiba az adatok lekérdezésekor' });
     } 
   } else {
     return res.status(405).json({ error: 'A HTTP metódus nem engedélyezett' });
