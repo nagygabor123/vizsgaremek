@@ -321,6 +321,53 @@
                 }
             }
         },
+        "/api/system/closeOpen": {
+            "post": {
+                "summary": "Rendszer hozzáférési állapotának frissítése",
+                "description": "Ez az API végpont lehetővé teszi a felhasználó számára, hogy frissítse a rendszer hozzáférési állapotát (nyitott vagy zárt). Ha az 'action' értéke 'close', akkor a rendszer státusza 'zarva' (zárt) lesz, ha pedig 'open', akkor 'nyithato' (nyitható). A végpont a 'system_status' táblában található 'status' mezőt frissíti. Az 'action' paraméter a kérés body-jában kerül átadásra. Amennyiben az 'action' értéke nem 'close' vagy 'open', hibaüzenet kerül visszaküldésre. A végpont csak POST kéréseket fogad.",
+                "tags": [
+                    "System"
+                ],
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "action": {
+                                        "type": "string",
+                                        "enum": [
+                                            "close",
+                                            "open"
+                                        ],
+                                        "description": "Az 'action' mező értéke 'close' vagy 'open' lehet. 'close' esetén a rendszer státusza 'zarva', 'open' esetén 'nyithato'."
+                                    }
+                                },
+                                "example": {
+                                    "action": "close"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Az összes diák 'access' mezője és a 'status' nyithato/zarva (-ra) frissítve"
+                    },
+                    "400": {
+                        "description": "Érvénytelen 'action'. Az 'action' csak 'close' vagy 'open' értéket fogadhat el."
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett. Csak POST kérés engedélyezett."
+                    },
+                    "500": {
+                        "description": "Nem sikerült frissíteni az 'access' és 'status' állapotot"
+                    }
+                }
+            }
+        },
         "/api/students/create": {
             "post": {
                 "summary": "Új diák létrehozása",

@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     const { action } = req.body;  
 
     if (action !== 'close' && action !== 'open') {
-      return res.status(400).json({ message: "Érvénytelen 'action'" });
+      return res.status(400).json({ message: "Érvénytelen 'action'. Az 'action' csak 'close' vagy 'open' értéket fogadhat el." });
     }
 
     const sql = neon(process.env.DATABASE_URL);
@@ -17,10 +17,10 @@ export default async function handler(req, res) {
 
       return res.status(200).json({ message: `Az összes diák 'access' mezője és a 'status' ${newAccessState} (-ra) frissítve` });
     } catch (error) {
-      console.error("Error updating access state:", error);
+      console.error("Nem sikerült frissíteni az 'access' és 'status' állapotot:", error);
       return res.status(500).json({ message: "Nem sikerült frissíteni az 'access' és 'status' állapotot" });
     }
   } else {
-    res.status(405).json({ message: "A módszer nem engedélyezett" });
+    res.status(405).json({ message: "A HTTP metódus nem engedélyezett" });
   }
 }
