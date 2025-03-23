@@ -84,7 +84,7 @@
         "/api/upload/uploadRinging": {
             "post": {
                 "summary": "Csengetési rend feltöltése",
-                "description": "Ez az API végpont a csengetési rend adatainak feltöltésére szolgál. Az adatokat egy tömb formájában várja, amelyben a csengetési időpontok kezdő és végidőpontja szerepel. Az adatokat az `INSERT INTO ring_times` SQL lekérdezéssel helyezi el az adatbázisban. Ha bármelyik adat hiányzik vagy hibás, a rendszer figyelmeztetést ad, és azt a sort kihagyja.",
+                "description": "Ez az API végpont a csengetési rend adatainak feltöltésére szolgál. Az adatokat egy tömb formájában várja, amelyben a csengetési időpontok kezdő és végidőpontja szerepel. Ha bármelyik adat hiányzik vagy hibás, a rendszer figyelmeztetést ad, és azt a sort kihagyja.",
                 "tags": [
                     "Upload"
                 ],
@@ -102,11 +102,11 @@
                                             "properties": {
                                                 "start_time": {
                                                     "type": "string",
-                                                    "format": "date-time"
+                                                    "format": "7:15"
                                                 },
                                                 "end_time": {
                                                     "type": "string",
-                                                    "format": "date-time"
+                                                    "format": "8:00"
                                                 }
                                             },
                                             "required": [
@@ -115,10 +115,7 @@
                                             ]
                                         }
                                     }
-                                },
-                                "required": [
-                                    "ringing"
-                                ]
+                                }
                             }
                         }
                     }
