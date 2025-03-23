@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     const lockerId = parseInt(id);
 
     if (isNaN(lockerId) || lockerId < 1 || lockerId > 99) {
-      return res.status(400).json({ message: 'Érvénytelen szekrény Id' });
+      return res.status(400).json({ message: 'Érvénytelen locker_id' });
     }
 
     try {
@@ -54,7 +54,7 @@ export default async function handler(req, res) {
       });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Szerver hiba' });
+      res.status(500).json({ message: 'Hiba az adatok feltöltésekor' });
     }
   } else {
     res.status(405).json({ message: 'A módszer nem engedélyezett' });

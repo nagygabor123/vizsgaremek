@@ -253,6 +253,74 @@
                 }
             }
         },
+        "/api/locker/getLocker": {
+            "get": {
+                "summary": "Szekrény nyitása RFID címkével",
+                "description": "Ez az API végpont lehetővé teszi a felhasználó számára, hogy ellenőrizze, hogy egy adott RFID címke hozzáféréssel rendelkezik-e egy szekrényhez. A végpont lekéri az adott RFID címkéhez tartozó adatokat az adatbázisból, és visszaadja, hogy a felhasználónak van-e engedélyezett hozzáférése, vagy ha a hozzáférés zárolt. Ezen kívül ellenőrzi a diák órarendjét is, és ha az aktuális idő tartozik az órák közé, a zár nyitva marad. Ha az RFID címke nem található, vagy nincs hozzáférése a szekrényhez, a rendszer egy hibát jelez. A végpont csak GET kéréseket fogad, és az RFID címkét a query paraméterben várja.",
+                "tags": [
+                    "Locker"
+                ],
+                "parameters": [
+                    {
+                        "name": "rfid",
+                        "in": "query",
+                        "required": true,
+                        "description": "Az RFID címke, amelynek a szekrényét nyitni szeretnénk."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sikeres lekérdezés, a zár nyitva van, vagy a szekrényhez tartozó információk visszaadása."
+                    },
+                    "400": {
+                        "description": "RFID szükséges"
+                    },
+                    "404": {
+                        "description": "RFID nem található VAGY Nem található szekrény_id ehhez az RFID-hez VAGY Nem található a szekrény"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    },
+                    "500": {
+                        "description": "Hiba az adatok lekérdezésekor"
+                    }
+                }
+            }
+        },
+        "/api/locker/setLockerSatus": {
+            "get": {
+                "summary": "Szekrény státuszának frissítése és diák hozzáférés módosítása",
+                "description": "Ez az API végpont lehetővé teszi a felhasználó számára, hogy frissítse egy adott szekrény státuszát (nyitva vagy zárva). Ha a szekrény státusza 'be', akkor a rendszer a státuszt 'ki'-ra változtatja, és fordítva. A végpont emellett frissíti a diák hozzáférését a szekrényhez (pl. 'zarva'). Ha a szekrényhez nincs társított diák, vagy ha a státusz frissítése nem sikerült, hibaüzenet kerül visszaküldésre. A végpont csak PATCH kéréseket fogad, és a szekrény azonosítóját (id) query paraméterként várja.",
+                "tags": [
+                    "Locker"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "description": "A szekrény azonosítója, amelynek a státuszát módosítani szeretnénk."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sikeres státusz frissítés, a szekrény státusza és a diák hozzáférése frissítve lett."
+                    },
+                    "400": {
+                        "description": "Érvénytelen locker_id"
+                    },
+                    "404": {
+                        "description": "Szekrény nem található VAGY Nincs társított diák ehhez a szekrényhez"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    },
+                    "500": {
+                        "description": "Hiba az adatok feltöltésekor VAGY Sikertelen szekrény státusz frissítés VAGY Sikertelen diák access frissítés"
+                    }
+                }
+            }
+        },
         "/api/students/create": {
             "post": {
                 "summary": "Új diák létrehozása",
