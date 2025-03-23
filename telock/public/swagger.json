@@ -813,58 +813,98 @@
                 }
             }
         },
+        "/api/config/getRining": {
+            "get": {
+                "summary": "Csengetési rend lekérdezése",
+                "description": "Ez az API végpont lehetővé teszi a csengetési rend lekérdezését a rendszerben. A válaszban a csengetési időpontok kerülnek visszaküldésre, azaz a kezdési és befejezési időpontok formázott órák és percek szerint. A válasz formátuma tartalmazza a kezdési és befejezési időpontokat az 'HH:mm' formátumban.",
+                "tags": [
+                    "Config"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A csengetési rend sikeresen lekérdezve",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "start": {
+                                                "type": "string",
+                                                "example": "07:15"
+                                            },
+                                            "end": {
+                                                "type": "string",
+                                                "example": "08:00"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Hiba a csengetési rend lekérdezésekor"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    }
+                }
+            }
+        },
         "/api/config/getEmployees": {
             "get": {
                 "summary": "Admin alkalmazottak lekérdezése",
                 "description": "Ez az API végpont lehetővé teszi az adminisztrátorok adatainak lekérdezését a rendszerből. A lekérdezés visszaadja az adminisztrátorok listáját, amely tartalmazza az adminisztrátorok azonosítóját, teljes nevét, rövid nevét, pozícióját és osztályfőnöküket. A válasz sikeres végrehajtása esetén egy JSON objektumot ad vissza, amely tartalmazza az összes adminisztrátor adatait.",
                 "tags": [
-                  "Config"
+                    "Config"
                 ],
                 "responses": {
-                  "200": {
-                    "description": "Sikeresen lekérdezett adminisztrátorok",
-                    "content": {
-                      "application/json": {
-                        "schema": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "admin_id": {
-                                "type": "string",
-                                "example": "admin123"
-                              },
-                              "full_name": {
-                                "type": "string",
-                                "example": "Nagy János"
-                              },
-                              "short_name": {
-                                "type": "string",
-                                "example": "Jani"
-                              },
-                              "position": {
-                                "type": "string",
-                                "example": "Rendszergazda"
-                              },
-                              "osztalyfonok": {
-                                "type": "string",
-                                "example": "12.A"
-                              }
+                    "200": {
+                        "description": "Sikeresen lekérdezett adminisztrátorok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "admin_id": {
+                                                "type": "string",
+                                                "example": "admin123"
+                                            },
+                                            "full_name": {
+                                                "type": "string",
+                                                "example": "Nagy János"
+                                            },
+                                            "short_name": {
+                                                "type": "string",
+                                                "example": "Jani"
+                                            },
+                                            "position": {
+                                                "type": "string",
+                                                "example": "Rendszergazda"
+                                            },
+                                            "osztalyfonok": {
+                                                "type": "string",
+                                                "example": "12.A"
+                                            }
+                                        }
+                                    }
+                                }
                             }
-                          }
                         }
-                      }
+                    },
+                    "500": {
+                        "description": "Hiba az adminisztrátorok lekérdezése során"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
                     }
-                  },
-                  "500": {
-                    "description": "Hiba az adminisztrátorok lekérdezése során"
-                  },
-                  "405": {
-                    "description": "A HTTP metódus nem engedélyezett"
-                  }
                 }
-              }
-            },
+            }
+        },
         "/api/config/addEmployee": {
             "post": {
                 "summary": "Új alkalmazott létrehozása",
