@@ -172,10 +172,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="text-s truncate">asKiskunfélegyházi Szent</span>
+                <span className="text-s truncate">Kiskunfélegyházi Szent</span>
                 <span className="text-s truncate">Benedek PG Középiskola</span>
               </div>
-              <Avatar className="h-9 w-9 rounded-full border-2 border-blue-600 bg-red-100">
+              <Avatar className="h-9 w-9 rounded-full border-2 border-blue-600">
                 <AvatarFallback className="text-blue-600 text-xs">
                   {session?.user?.short_name}
                 </AvatarFallback>
