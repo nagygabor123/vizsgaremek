@@ -752,8 +752,112 @@ const Calendar: React.FC = () => {
               {lessonsAtSameTime.map((lesson, index) => {
                 const isCurrent = isCurrentLesson(lesson);
                 return (
-                  <Dialog key={`${index}`}>
-                    <DialogTrigger asChild>
+                  // <Dialog key={`${index}`}>
+                  //   <DialogTrigger asChild>
+                  //     {isToday(currentDate) && isCurrentLesson(lesson) ? (
+                  //       <div
+                  //         className={`lesson-card ${isCurrent ? 'current-lesson' : ''}`}
+                  //         onClick={() => {
+                  //           openModal(lesson.subject, `${lesson.start} - ${lesson.end}`, lesson.class);
+                  //           fetchStudents();
+                  //           fetchSystemStatus();
+                  //         }}
+                  //       >
+                  //         <div className="flex justify-between items-center w-full text-xs pb-4">
+                  //           <div className="">{lessonIndex + 1}</div>
+                  //           <div className="">{lesson.teacher}</div>
+                  //         </div>
+                  //         <div className="lesson-name">{lesson.subject}</div>
+                  //         <div className="lesson-class">{lesson.class}</div>
+                  //       </div>
+                  //     ) : (
+                  //       <div className="lesson-card disabled-lesson">
+                  //         <div className="flex justify-between items-center w-full text-xs pb-4">
+                  //           <div className="">{lessonIndex + 1}</div>
+                  //           <div className="">{lesson.teacher}</div>
+                  //         </div>
+                  //         <div className="lesson-name">{lesson.subject}</div>
+                  //         <div className="lesson-class">{lesson.class}</div>
+                  //       </div>
+                  //     )}
+                  //   </DialogTrigger>
+
+                  //   {isToday(currentDate) && isCurrentLesson(lesson) && (
+                  //     <DialogContent className="sm:max-w-[800px]">
+                  //       <DialogHeader>
+                  //         <DialogTitle>{modalInfo?.lesson}</DialogTitle>
+                  //         <DialogDescription>{modalInfo?.time}</DialogDescription>
+                  //         <h3>Osztály: {modalInfo?.className}</h3>
+                  //         <div>
+                  //           <h4>Diákok:</h4>
+                  //           <table className="table-auto w-full border-collapse border border-gray-300">
+                  //             <thead>
+                  //               <tr className="bg-gray-200">
+                  //                 <th className="border border-gray-300 px-4 py-2">Név</th>
+                  //                 <th className="border border-gray-300 px-4 py-2">Állapot</th>
+                  //                 <th className="border border-gray-300 px-4 py-2">Művelet</th>
+                  //               </tr>
+                  //             </thead>
+                  //             <tbody>
+                  //               {getStudentsByClass(modalInfo?.className || '').map((student) => {
+                  //                 const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
+                  //                 const currentTime = new Date().toTimeString().slice(0, 5);
+                  //                 const canUnlockStudent = systemClose || studentTimetableData &&
+                  //                   currentTime >= studentTimetableData.first_class_start &&
+                  //                   currentTime <= studentTimetableData.last_class_end;
+                  //                 return (
+                  //                   <tr key={student.student_id} className="border border-gray-300">
+                  //                     <td className="border border-gray-300 px-4 py-2">{student.full_name}</td>
+                  //                     <td className="border border-gray-300 px-4 py-2">{student.status}</td>
+                  //                     <td className="border border-gray-300 px-4 py-2">
+                  //                       <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>
+                  //                         Feloldás
+                  //                       </Button>
+                  //                     </td>
+                  //                   </tr>
+                  //                 );
+                  //               })}
+                  //             </tbody>
+                  //           </table>
+                  //         </div>
+                  //       </DialogHeader>
+                  //     </DialogContent>
+                  //   )}
+                  // </Dialog>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<Dialog onOpenChange={(isOpen) => {
+  if (!isOpen) {
+    setCurrentPage(1); // Alaphelyzetbe állítjuk a lapszámot, ha a dialógus bezárul
+  }
+}}
+key={`${index}`}>
+     <DialogTrigger asChild>
                       {isToday(currentDate) && isCurrentLesson(lesson) ? (
                         <div
                           className={`lesson-card ${isCurrent ? 'current-lesson' : ''}`}
@@ -781,49 +885,72 @@ const Calendar: React.FC = () => {
                         </div>
                       )}
                     </DialogTrigger>
+  {isToday(currentDate) && isCurrentLesson(lesson) && (
+  <DialogContent className="sm:max-w-[800px]">
+<DialogHeader>
+<DialogTitle>{modalInfo?.lesson} ({modalInfo?.time})</DialogTitle>
+<DialogDescription>{modalInfo?.className}</DialogDescription>
 
-                    {isToday(currentDate) && isCurrentLesson(lesson) && (
-                      <DialogContent className="sm:max-w-[800px]">
-                        <DialogHeader>
-                          <DialogTitle>{modalInfo?.lesson}</DialogTitle>
-                          <DialogDescription>{modalInfo?.time}</DialogDescription>
-                          <h3>Osztály: {modalInfo?.className}</h3>
-                          <div>
-                            <h4>Diákok:</h4>
-                            <table className="table-auto w-full border-collapse border border-gray-300">
-                              <thead>
-                                <tr className="bg-gray-200">
-                                  <th className="border border-gray-300 px-4 py-2">Név</th>
-                                  <th className="border border-gray-300 px-4 py-2">Állapot</th>
-                                  <th className="border border-gray-300 px-4 py-2">Művelet</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {getStudentsByClass(modalInfo?.className || '').map((student) => {
-                                  const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
-                                  const currentTime = new Date().toTimeString().slice(0, 5);
-                                  const canUnlockStudent = systemClose || studentTimetableData &&
-                                    currentTime >= studentTimetableData.first_class_start &&
-                                    currentTime <= studentTimetableData.last_class_end;
-                                  return (
-                                    <tr key={student.student_id} className="border border-gray-300">
-                                      <td className="border border-gray-300 px-4 py-2">{student.full_name}</td>
-                                      <td className="border border-gray-300 px-4 py-2">{student.status}</td>
-                                      <td className="border border-gray-300 px-4 py-2">
-                                        <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>
-                                          Feloldás
-                                        </Button>
-                                      </td>
-                                    </tr>
-                                  );
-                                })}
-                              </tbody>
-                            </table>
-                          </div>
-                        </DialogHeader>
-                      </DialogContent>
-                    )}
-                  </Dialog>
+<div>
+<div className="rounded-md border mt-5">
+<table className="w-full">
+<thead className="text-center text-sm text-muted-foreground">
+<tr>
+<th className="p-2 font-normal">Teljes név</th>
+<th className="p-2 font-normal">Státusz</th>
+<th className="p-2 font-normal">Művelet</th>
+</tr>
+</thead>
+<tbody>
+{getPaginatedStudents(modalInfo?.className || '', currentPage).map((student) => {
+const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
+const currentTime = new Date().toTimeString().slice(0, 5);
+const canUnlockStudent = systemClose || studentTimetableData &&
+currentTime >= studentTimetableData.first_class_start &&
+currentTime <= studentTimetableData.last_class_end;
+return (
+<tr key={student.student_id} className="text-center text-sm border-t">
+<td className="p-1">{student.full_name}</td>
+<td className="p-1">
+          {student.status === "ki" ? <span className="text-gray-500"><CircleMinus className="w-4 h-4 inline-block" /></span> : student.status === "be" ? <span className="text-green-500"><CircleCheck className="w-4 h-4 inline-block" /></span> : <span className="text-red-500"><CircleAlert className="w-4 h-4 inline-block" /></span>}
+
+
+        </td>
+<td className="p-1">
+<Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>
+
+<LockOpen className="w-4 h-4 inline-block" />
+</Button>
+</td>
+</tr>
+);
+})}
+</tbody>
+</table>
+</div>
+<div className="flex justify-between mt-4">
+<Button variant="ghost"
+onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+disabled={currentPage === 1}
+>
+<ChevronLeft /> Előző
+</Button>
+<Button variant="ghost"
+onClick={() => setCurrentPage((prev) => prev + 1)}
+disabled={getPaginatedStudents(modalInfo?.className || '', currentPage + 1).length === 0}
+>
+Következő <ChevronRight />
+</Button>
+</div>
+</div>
+</DialogHeader>
+</DialogContent>
+  )}
+</Dialog>
+
+
+
+
                 );
               })}
             </div>
