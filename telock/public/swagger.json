@@ -130,7 +130,8 @@
         "/api/upload/uploadGroups": {
             "post": {
                 "summary": "Csoportok feltöltése",
-                "description": "Ez az API végpont a csoportok adatainak feltöltésére szolgál. A POST kérés egy tömb formájában várja a csoportok neveit, és az adatokat a 'csoportok' táblába tölti fel. Ha a 'groups' tömb üres vagy hibás, a rendszer 400-as hibával válaszol. A csoportok sikeres feltöltésekor 201-es státuszkódot küld vissza a válaszban.",                "tags": [
+                "description": "Ez az API végpont a csoportok adatainak feltöltésére szolgál. A POST kérés egy tömb formájában várja a csoportok neveit, és az adatokat a 'csoportok' táblába tölti fel. Ha a 'groups' tömb üres vagy hibás, a rendszer 400-as hibával válaszol. A csoportok sikeres feltöltésekor 201-es státuszkódot küld vissza a válaszban.",
+                "tags": [
                     "Upload"
                 ],
                 "responses": {
@@ -152,7 +153,8 @@
         "/api/upload/uploadTimetables": {
             "post": {
                 "summary": "Órarend feltöltése",
-                "description": "Ez az API végpont az órarend adatainak feltöltésére szolgál. Az adatokat egy tömb formájában várja, amely tartalmazza a tanárok nevét, csoportjaikat, napokat, kezdési és befejezési időpontokat. Az adatok között szerepelhetnek több csoportok is, és ha bármelyik adat hiányzik vagy hibás, a rendszer figyelmeztetést ad és kihagyja a hibás bejegyzéseket. Az órarend sikeres feltöltése után a kapcsolódó csoportok is mentésre kerülnek.",                "tags": [
+                "description": "Ez az API végpont az órarend adatainak feltöltésére szolgál. Az adatokat egy tömb formájában várja, amely tartalmazza a tanárok nevét, csoportjaikat, napokat, kezdési és befejezési időpontokat. Az adatok között szerepelhetnek több csoportok is, és ha bármelyik adat hiányzik vagy hibás, a rendszer figyelmeztetést ad és kihagyja a hibás bejegyzéseket. Az órarend sikeres feltöltése után a kapcsolódó csoportok is mentésre kerülnek.",
+                "tags": [
                     "Upload"
                 ],
                 "responses": {
@@ -171,53 +173,86 @@
                 }
             }
         },
-"/api/upload/uploadStudLockRelations": {
-  "post": {
-    "summary": "Diák-szekrény kapcsolat létrehozása",
-    "description": "Ez az API végpont felelős a diákok RFID-címkéjeinek és szekrényeik hozzárendelésének kezeléséért. A végpont először lekéri az összes diák RFID-címkéjét, majd hozzáadja azokat a szekrényeket a rendszerhez, amelyek a diákok számára rendelhetők. Ha nincs RFID-címke egyetlen diáknál sem, akkor hibát jelez. A szekrények és a diákok közötti kapcsolatok sikeresen feltöltésre kerülnek az adatbázisba. Ha a szekrények száma már elérte a maximális értéket, a rendszer új szekrényekhez rendeli a diákokat.",
-    "tags": [
-      "Upload"
-    ],
-    "responses": {
-      "201": {
-        "description": "Diák-szekrény kapcsolatok sikeresen feltöltve!"
-      },
-      "400": {
-        "description": "Nem találtak RFID-címkével rendelkező diákokat"
-      },
-      "405": {
-        "description": "A HTTP metódus nem engedélyezett"
-      },
-      "500": {
-        "description": "Hiba az adatok feltöltésekor"
-      }
-    }
-  }
-},
-"/api/upload/uploadStudentGroups": {
-  "post": {
-    "summary": "Diák-csoportok  létrehozása",
-    "description": "Ez az API végpont a diákok és csoportjaik közötti kapcsolatok létrehozására szolgál. A végpont először lekéri a diákok listáját, majd összeveti a diákok osztályait a meglévő csoportokkal. Ha a diák osztálya egyezik egy csoport nevével, a kapcsolatot rögzíti a 'student_groups' táblában. A sikeres művelet után a diák-csoport kapcsolatok mentésre kerülnek. Ha nem található egyező csoport, vagy ha nincs mit beilleszteni, a rendszer egy figyelmeztetést küld. A végpont csak POST kéréseket fogad.",    "tags": [
-      "Upload"
-    ],
-    "responses": {
-      "201": {
-        "description": "Diák-csoport kapcsolatok sikeresen feltöltve!"
-      },
-      "400": {
-        "description": "Nem találtak megfelelő diákcsoportokat, semmi sem került beillesztésre."
-      },
-      "405": {
-        "description": "A HTTP metódus nem engedélyezett"
-      },
-      "500": {
-        "description": "Hiba az adatok feltöltésekor"
-      }
-    }
-  }
-},
-
-
+        "/api/upload/uploadStudLockRelations": {
+            "post": {
+                "summary": "Diák-szekrény kapcsolat létrehozása",
+                "description": "Ez az API végpont felelős a diákok RFID-címkéjeinek és szekrényeik hozzárendelésének kezeléséért. A végpont először lekéri az összes diák RFID-címkéjét, majd hozzáadja azokat a szekrényeket a rendszerhez, amelyek a diákok számára rendelhetők. Ha nincs RFID-címke egyetlen diáknál sem, akkor hibát jelez. A szekrények és a diákok közötti kapcsolatok sikeresen feltöltésre kerülnek az adatbázisba. Ha a szekrények száma már elérte a maximális értéket, a rendszer új szekrényekhez rendeli a diákokat.",
+                "tags": [
+                    "Upload"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Diák-szekrény kapcsolatok sikeresen feltöltve!"
+                    },
+                    "400": {
+                        "description": "Nem találtak RFID-címkével rendelkező diákokat"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    },
+                    "500": {
+                        "description": "Hiba az adatok feltöltésekor"
+                    }
+                }
+            }
+        },
+        "/api/upload/uploadStudentGroups": {
+            "post": {
+                "summary": "Diák-csoportok  létrehozása",
+                "description": "Ez az API végpont a diákok és csoportjaik közötti kapcsolatok létrehozására szolgál. A végpont először lekéri a diákok listáját, majd összeveti a diákok osztályait a meglévő csoportokkal. Ha a diák osztálya egyezik egy csoport nevével, a kapcsolatot rögzíti a 'student_groups' táblában. A sikeres művelet után a diák-csoport kapcsolatok mentésre kerülnek. Ha nem található egyező csoport, vagy ha nincs mit beilleszteni, a rendszer egy figyelmeztetést küld. A végpont csak POST kéréseket fogad.",
+                "tags": [
+                    "Upload"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Diák-csoport kapcsolatok sikeresen feltöltve!"
+                    },
+                    "400": {
+                        "description": "Nem találtak megfelelő diákcsoportokat, semmi sem került beillesztésre."
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    },
+                    "500": {
+                        "description": "Hiba az adatok feltöltésekor"
+                    }
+                }
+            }
+        },
+        "/api/locker/checkLocker": {
+            "get": {
+                "summary": "RFID ellenőrzés a zárhoz",
+                "description": "Ez az API végpont lehetővé teszi a felhasználó számára, hogy ellenőrizze, hogy egy adott RFID címke hozzáféréssel rendelkezik-e. A végpont lekéri az adott RFID címkéhez tartozó adatokat az adatbázisból, és visszaadja, hogy a felhasználónak van-e engedélyezett hozzáférése. Ha a RFID címke nem található az adatbázisban, a rendszer egy hibát jelez. A végpont csak GET kéréseket fogad, és az RFID címkét a query paraméterben várja.",
+                "tags": [
+                    "Locker"
+                ],
+                "parameters": [
+                    {
+                        "name": "rfid",
+                        "in": "query",
+                        "required": true,
+                        "description": "Az RFID címke, amelyet ellenőrizni szeretnénk."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sikeres lekérdezés"
+                    },
+                    "400": {
+                        "description": "RFID szükséges"
+                    },
+                    "404": {
+                        "description": "RFID nem található"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    },
+                    "500": {
+                        "description": "Hiba az adatok lekérdezésekor"
+                    }
+                }
+            }
+        },
         "/api/students/create": {
             "post": {
                 "summary": "Új diák létrehozása",

@@ -15,15 +15,15 @@ export default async function handler(req, res) {
 
       if (rows.length > 0) {
        // const access = rows[0].access;
-        return res.status(200).json(rows);
+        return res.status(200).json({ message: 'Sikeres lekérdezés', data: rows });
       } else {
         return res.status(404).json({ error: 'RFID nem található' });
       }
     } catch (error) {
       console.error('Adatbazis hiba:', error);
-      return res.status(500).json({ error: 'Adatbázis csatlakozási hiba' });
+      return res.status(500).json({ error: 'Hiba az adatok feltöltéseko' });
     } 
   } else {
-    return res.status(405).json({ error: 'A módszer nem engedélyezett' });
+    return res.status(405).json({ error: 'A HTTP metódus nem engedélyezett' });
   }
 }
