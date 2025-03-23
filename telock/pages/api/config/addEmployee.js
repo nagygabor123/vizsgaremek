@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     const { full_name, position, osztalyfonok, short_name } = req.body;
 
     if (!full_name || !position || !osztalyfonok || !short_name) {
-      return res.status(400).json({ message: 'Missing required fields' });
+      return res.status(400).json({ message: 'Hiányzó kötelező mezők' });
     }
 
     const password = generatePassword();
@@ -28,12 +28,12 @@ export default async function handler(req, res) {
         [nextAdminId, full_name, password, position, osztalyfonok, short_name]
       );
 
-      res.status(201).json({ message: 'Admin created', password });
+      res.status(201).json({ message: 'Sikeresen hozzáadott alkalmazott!', password });
     } catch (error) {
-      console.error('Error creating admin:', error);
-      res.status(500).json({ message: 'Error creating admin', error: error.message });
+      console.error('Hiba a hozzáadás során:', error);
+      res.status(500).json({ message: 'Hiba a hozzáadás során', error: error.message });
     }
   } else {
-    res.status(405).json({ message: 'Method Not Allowed' });
+    res.status(405).json({ message: 'A HTTP metódus nem engedélyezett' });
   }
 }

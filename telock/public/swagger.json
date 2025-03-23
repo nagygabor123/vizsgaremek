@@ -812,6 +812,250 @@
                     }
                 }
             }
+        },
+        "/api/students/create": {
+            "post": {
+                "summary": "Új diák létrehozása",
+                "description": "Ez az API végpont lehetővé teszi egy új diák hozzáadását a rendszerhez a megadott adatokkal. A diák regisztrálása során meg kell adni az egyedi azonosítóját (OM szám), teljes nevét, osztályát és RFID címkéjét. A sikeres regisztráció után a rendszer automatikusan létrehoz egy szekrényt a diáknak, és hozzárendeli azt az RFID címkéjéhez. Emellett a diák hozzáadódik a megfelelő csoportokhoz az API hívás révén. Amennyiben bármelyik kötelező mező hiányzik, a szerver hibát ad vissza. Ha a regisztráció sikeres, a válaszban visszaküldi a diák azonosítóját és a hozzá tartozó szekrény számát.",
+                "tags": [
+                    "Students"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "student_id": {
+                                        "type": "string",
+                                        "example": "OM56555"
+                                    },
+                                    "full_name": {
+                                        "type": "string",
+                                        "example": "Kiss Péter"
+                                    },
+                                    "class": {
+                                        "type": "string",
+                                        "example": "12.A"
+                                    },
+                                    "rfid_tag": {
+                                        "type": "string",
+                                        "example": "58D90E3E"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Sikeresen létrehozott diák"
+                    },
+                    "400": {
+                        "description": "Hiányzó kötelező mezők"
+                    },
+                    "500": {
+                        "description": "Hiba a diák létrehozása során"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    }
+                }
+            }
+        },
+        "/api/config/addEmployee": {
+            "post": {
+                "summary": "Új alkalmazott létrehozása",
+                "description": "Ez az API végpont lehetővé teszi egy új alkalmazott hozzáadását a rendszerhez a megadott adatokkal. Az alkalmazott regisztrálása során meg kell adni a teljes nevét, pozícióját, osztályfőnöki státuszát és rövid nevét. A sikeres regisztráció után a rendszer automatikusan generál egy jelszót az alkalmazott számára, amely a válaszban is visszaküldésre kerül. Ha bármelyik kötelező mező hiányzik, a szerver hibát ad vissza. Ha a regisztráció sikeres, a válaszban visszaküldi a sikeres hozzáadást és a generált jelszót.",
+                "tags": [
+                    "Config"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "full_name": {
+                                        "type": "string",
+                                        "example": "Kiss Péter"
+                                    },
+                                    "position": {
+                                        "type": "string",
+                                        "example": "Fejlesztő"
+                                    },
+                                    "osztalyfonok": {
+                                        "type": "string",
+                                        "example": "Nincs"
+                                    },
+                                    "short_name": {
+                                        "type": "string",
+                                        "example": "pppp"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Sikeresen hozzáadott alkalmazott!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sikeresen hozzáadott alkalmazott!"
+                                        },
+                                        "password": {
+                                            "type": "string",
+                                            "example": "a1b2c3d4e5f6g7h8"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Hiányzó kötelező mezők"
+                    },
+                    "500": {
+                        "description": "Hiba a hozzáadás során"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    }
+                }
+            }
+        },
+        "/api/admins/updateEmployee": {
+            "put": {
+                "summary": "Alkalmazottak frissítése",
+                "description": "Ez az API végpont lehetővé teszi egy adminisztrátor adatainak frissítését a megadott adatokkal. Az adminisztrátor frissítése során meg kell adni az adminisztrátor egyedi azonosítóját (admin_id), teljes nevét, pozícióját és osztályfőnökét. A sikeres frissítés után a rendszer válaszol a frissített adatokkal. Amennyiben bármelyik kötelező mező hiányzik, a szerver hibát ad vissza. Ha a frissítés sikeres, a válaszban visszaküldi a frissített adminisztrátor adatait.",
+                "tags": [
+                    "Config"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "admin_id": {
+                                        "type": "string",
+                                        "example": "123"
+                                    },
+                                    "full_name": {
+                                        "type": "string",
+                                        "example": "Kovács Gábor"
+                                    },
+                                    "position": {
+                                        "type": "string",
+                                        "example": "Rendszergazda"
+                                    },
+                                    "osztalyfonok": {
+                                        "type": "string",
+                                        "example": "12.B"
+                                    }
+                                },
+                                "required": [
+                                    "admin_id",
+                                    "full_name",
+                                    "position",
+                                    "osztalyfonok"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sikeres frissítés",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sikeres frissítés"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Hiányzó kötelező mezők"
+                    },
+                    "500": {
+                        "description": "Hiba a frissítés során"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    }
+                }
+            }
+        },
+        "/api/admins/deleteEmployee": {
+            "delete": {
+                "summary": "Alkalmazottak törlése",
+                "description": "Ez az API végpont lehetővé teszi egy adminisztrátor törlését az admin ID alapján. Az admin ID paramétert a kérés query paramétereként kell megadni. Az ID értéke nem lehet 1 (illetve egyéb esetekben a kódba hardkódolt tiltott ID-k). Ha az ID nem található az adatbázisban, a rendszer hibaüzenetet ad vissza.",
+                "tags": [
+                    "Config"
+                ],
+                "parameters": [
+                    {
+                        "name": "admin_id",
+                        "in": "query",
+                        "required": true,
+                        "description": "Az adminisztrátor egyedi azonosítója, amelyet törölni kívánunk.",
+                        "schema": {
+                            "type": "string",
+                            "example": "2"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sikeresen törölt adminisztrátor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sikeres törlés"
+                                        },
+                                        "deletedId": {
+                                            "type": "string",
+                                            "example": "2"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Hiányzó ID paraméter vagy tiltott ID érték"
+                    },
+                    "404": {
+                        "description": "Nem található adminisztrátor az adott ID-val"
+                    },
+                    "500": {
+                        "description": "Hiba a törlés során"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    }
+                }
+            }
         }
     },
     "components": {
