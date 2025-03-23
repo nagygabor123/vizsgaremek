@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Paperclip, TriangleAlert } from "lucide-react";
+import { Loader2 } from "lucide-react"
 
 const SheetComponent: React.FC = () => {
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
@@ -18,7 +19,7 @@ const SheetComponent: React.FC = () => {
   const [step, setStep] = useState(1);
   const [csvFile, setCsvFile] = useState<File | null>(null);
   const [csvMessage, setCsvMessage] = useState<React.ReactNode>(null);
-
+  const [isLoading, setIsLoading] = useState(false);
   
   const [isSheetOpen, setIsSheetOpen] = useState(false); // Új állapot az ablak nyitás/zárás kezelésére
 
@@ -36,22 +37,26 @@ const SheetComponent: React.FC = () => {
   }, []);
 
   const handleNext = async () => {
+    setIsLoading(true); // Betöltés indítása
     if (step === 1) {
       if (!file) {
         setMessage(
           <div className="text-red-600 text-sm">Nincs fájl kiválasztva</div>
         );
+        setIsLoading(false); // Betöltés leállítása
         return;
       }
-
+  
       await handleUpload();
-
+  
       if (message && message !== "Sikeres feltöltés") {
         setStep((prev) => Math.min(prev + 1, 3));
         localStorage.setItem("currentStep", String(step + 1)); 
+        setIsLoading(false); // Betöltés leállítása
         return;
       }
     }
+    setIsLoading(false); // Betöltés leállítása
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -92,11 +97,13 @@ const SheetComponent: React.FC = () => {
   };
 
   const handleConfirmClick = async () => {
+    setIsLoading(true); // Betöltés indítása
     if (csvFile) {
       await handleCsvUpload();
     }
     setButtonVisible(false);
     setIsSheetOpen(false); // Bezárjuk az ablakot
+    setIsLoading(false); // Betöltés leállítása
     window.location.reload();
   };
 
@@ -293,13 +300,21 @@ const SheetComponent: React.FC = () => {
           </div>
         )}
 
-        <div className="flex justify-end mt-6">
-          {step < 2 ? (
-            <Button onClick={handleNext}>Mentés & Tovább</Button>
-          ) : (
-            <Button onClick={handleConfirmClick}>Mentés & Megerősítés</Button>
-          )}
-        </div>
+<div className="flex justify-end mt-6">
+  <Button
+    onClick={step < 2 ? handleNext : handleConfirmClick}
+    disabled={isLoading}
+  >
+    {isLoading ? (
+      <>
+        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+        Kérjük, várjon...
+      </>
+    ) : (
+      step < 2 ? "Mentés & Tovább" : "Mentés & Megerősítés"
+    )}
+  </Button>
+</div>
       </SheetContent>
     </Sheet>
   );

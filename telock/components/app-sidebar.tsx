@@ -204,11 +204,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-              <Avatar className="h-9 w-9 rounded-full border border-blue-600">
-                <AvatarFallback className="text-blue-600 text-[0.625rem]">
-                  {session?.user?.short_name}
-                </AvatarFallback>
-              </Avatar>
+                <Avatar className="h-9 w-9 rounded-full border border-blue-600">
+                  <AvatarFallback className="text-blue-600 text-[0.625rem]">
+                    {session?.user?.short_name}
+                  </AvatarFallback>
+                </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">{session?.user?.full_name}</span>
                   <span className="truncate text-xs">{session?.user?.position}</span>
@@ -216,39 +216,42 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-  
+
             <Dialog>
-      <DialogTrigger>
-      <DropdownMenuItem asChild>
-            <Link href="/settings">Profil beállítások</Link>
-            </DropdownMenuItem>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Profil beállítások</DialogTitle>
-          <DialogDescription>
-          Itt módosíthatja profilját. Kattintson a Mentés gombra, ha végzett.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input id="name" value="Pedro Duarte" className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
-          </div>
-        </div>
-        <DialogFooter>
-          <Button type="submit">Mentés</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+              <DialogTrigger>
+                <DropdownMenuItem asChild>
+                  <LogOut />
+                  <span >
+                    Profil beállítások
+                  </span>
+                </DropdownMenuItem>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                  <DialogTitle>Profil beállítások</DialogTitle>
+                  <DialogDescription>
+                    Itt módosíthatja profilját. Kattintson a Mentés gombra, ha végzett.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="grid gap-4 py-4">
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="name" className="text-right">
+                      Name
+                    </Label>
+                    <Input id="name" value="Pedro Duarte" className="col-span-3" />
+                  </div>
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="username" className="text-right">
+                      Username
+                    </Label>
+                    <Input id="username" value="@peduarte" className="col-span-3" />
+                  </div>
+                </div>
+                <DialogFooter>
+                  <Button type="submit">Mentés</Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
 
             <DropdownMenuItem>
               <LogOut />
@@ -266,74 +269,74 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
 
       <SidebarContent>
-  {sidebarConfig.map((group: SidebarGroupConfig, groupIndex: number) => {
-    // Ellenőrizzük, hogy a csoportban van-e látható menüelem
-    const hasVisibleItems = group.items.some((item) => {
-      // Ha a csoport cím "Osztályom", akkor a session?.user?.osztalyfonok értékét figyeljük
-      if (group.groupLabel === "Osztályom") {
-        return session?.user?.osztalyfonok !== "nincs";
-      }
-      // Egyéb esetben a position alapján ellenőrizzük
-      return item.allowedPositions.includes(session?.user?.position || "");
-    });
-
-    // Ha nincs látható menüelem, akkor kihagyjuk a csoportot
-    if (!hasVisibleItems) return null;
-
-    return (
-      <SidebarGroup key={groupIndex}>
-        {/* Csoport cím renderelése (ha van) */}
-        {group.groupLabel && <SidebarGroupLabel>{group.groupLabel}</SidebarGroupLabel>}
-
-        {/* Menüelemek renderelése */}
-        <SidebarMenu>
-          {group.items.map((item: SidebarItem) => {
+        {sidebarConfig.map((group: SidebarGroupConfig, groupIndex: number) => {
+          // Ellenőrizzük, hogy a csoportban van-e látható menüelem
+          const hasVisibleItems = group.items.some((item) => {
             // Ha a csoport cím "Osztályom", akkor a session?.user?.osztalyfonok értékét figyeljük
             if (group.groupLabel === "Osztályom") {
-              if (session?.user?.osztalyfonok !== "nincs") {
-                return (
-                  <SidebarMenuItem key={item.path}>
-                    <SidebarMenuButton asChild isActive={isActive(item.path)}>
-                      <Link href={item.path}>
-                        <>
-                          <item.icon />
-                          <span>{item.label}</span>
-                        </>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              }
-            } else {
-              // Egyéb esetben a position alapján ellenőrizzük
-              if (item.allowedPositions.includes(session?.user?.position || "")) {
-                return (
-                  <SidebarMenuItem key={item.path}>
-                    <SidebarMenuButton asChild isActive={isActive(item.path)}>
-                      <Link href={item.path}>
-                        <>
-                          <item.icon />
-                          <span>{item.label}</span>
-                        </>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              }
+              return session?.user?.osztalyfonok !== "nincs";
             }
-            return null;
-          })}
-        </SidebarMenu>
-      </SidebarGroup>
-    );
-  })}
-</SidebarContent>
+            // Egyéb esetben a position alapján ellenőrizzük
+            return item.allowedPositions.includes(session?.user?.position || "");
+          });
 
-<SidebarFooter>
-  <span className="text-xs text-center">
-    © {new Date().getFullYear()} telock
-  </span>
-</SidebarFooter>
+          // Ha nincs látható menüelem, akkor kihagyjuk a csoportot
+          if (!hasVisibleItems) return null;
+
+          return (
+            <SidebarGroup key={groupIndex}>
+              {/* Csoport cím renderelése (ha van) */}
+              {group.groupLabel && <SidebarGroupLabel>{group.groupLabel}</SidebarGroupLabel>}
+
+              {/* Menüelemek renderelése */}
+              <SidebarMenu>
+                {group.items.map((item: SidebarItem) => {
+                  // Ha a csoport cím "Osztályom", akkor a session?.user?.osztalyfonok értékét figyeljük
+                  if (group.groupLabel === "Osztályom") {
+                    if (session?.user?.osztalyfonok !== "nincs") {
+                      return (
+                        <SidebarMenuItem key={item.path}>
+                          <SidebarMenuButton asChild isActive={isActive(item.path)}>
+                            <Link href={item.path}>
+                              <>
+                                <item.icon />
+                                <span>{item.label}</span>
+                              </>
+                            </Link>
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
+                      );
+                    }
+                  } else {
+                    // Egyéb esetben a position alapján ellenőrizzük
+                    if (item.allowedPositions.includes(session?.user?.position || "")) {
+                      return (
+                        <SidebarMenuItem key={item.path}>
+                          <SidebarMenuButton asChild isActive={isActive(item.path)}>
+                            <Link href={item.path}>
+                              <>
+                                <item.icon />
+                                <span>{item.label}</span>
+                              </>
+                            </Link>
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
+                      );
+                    }
+                  }
+                  return null;
+                })}
+              </SidebarMenu>
+            </SidebarGroup>
+          );
+        })}
+      </SidebarContent>
+
+      <SidebarFooter>
+        <span className="text-xs text-center">
+          © {new Date().getFullYear()} telock
+        </span>
+      </SidebarFooter>
     </Sidebar>
   );
 }
