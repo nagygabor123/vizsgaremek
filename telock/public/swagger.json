@@ -1098,7 +1098,7 @@
                 }
             }
         },
-        "api/config/getYearSchedule": {
+        "/api/config/getYearSchedule": {
             "get": {
                 "summary": "Évkezdési és évzárási információk lekérdezése",
                 "description": "Ez az API végpont lehetővé teszi az év kezdési és zárási időpontjainak, valamint a szünnapok és plusznapok adatainak lekérdezését. Az API a megadott típusú adatokat adja vissza a lekérdezés alapján. Támogatott típusok: 'plusznap', 'szunet', 'tanitasnelkul', 'kezd', 'veg'. A válasz formátuma a típusnak megfelelően változik.",
