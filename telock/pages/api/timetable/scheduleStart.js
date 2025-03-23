@@ -41,13 +41,13 @@ SELECT
     const rows = await sql(query, [student]);
 
     if (rows.length === 0) {
-      return res.status(404).json({ error: "No timetable found for the student on today's date." });
+      return res.status(404).json({ error: "Nincs tanóra a mai nap!" });
     }
 
     res.status(200).json(rows);
 
   } catch (error) {
-    console.error("Database error:", error);
-    res.status(500).json({ error: 'Database error occurred' });
+    console.error("Hiba az adatok lekérdezésekor.:", error);
+    res.status(500).json({ error: 'Hiba az adatok lekérdezésekor.' });
   }
 }

@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     const { className } = req.query;
     if (!className) {
-      return res.status(400).json({ error: 'Missing class name parameter' });
+      return res.status(400).json({ error: 'Hiányzik "class" paraméter!' });
     }
 
     const sql = neon(`${process.env.DATABASE_URL}`);
@@ -43,13 +43,13 @@ export default async function handler(req, res) {
         [`${className}%`] 
       );
       
-      console.log('Query Results:', results);
+      console.log('Válasz:', results);
       return res.status(200).json(results);
     } catch (error) {
-      console.error('Database error:', error);
-      return res.status(500).json({ error: 'Database connection error' });
+      console.error('DHiba az adatok lekérdezésekor:', error);
+      return res.status(500).json({ error: 'Hiba az adatok lekérdezésekor' });
     }
   } else {
-    return res.status(405).json({ error: 'Method Not Allowed' });
+    return res.status(405).json({ error: 'A HTTP metódus nem engedélyezett' });
   }
 }

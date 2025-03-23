@@ -370,13 +370,14 @@
         },
         "/api/system/status": {
             "get": {
-                "summary": "A rendszer státuszának lekérdezése",    
-"description": "Ez az API végpont a rendszer aktuális státuszának lekérdezésére szolgál. A végpont egyetlen rekordot olvas ki a 'system_status' táblából, amely a rendszer állapotát tárolja. A lekérdezés az adott státuszt (például 'zarva' vagy 'nyithato') adja vissza. A lekérdezés sikeressége esetén a rendszer egy JSON választ küld, amely tartalmazza a státusz értékét. Ha az adatbázisban nincs elérhető státusz, akkor a végpont egy 404-es hibát küld vissza. Ha a lekérdezés során hiba történik (például adatbázis-kapcsolati probléma), akkor egy 500-as hibaüzenetet kap a kliens. A végpont kizárólag GET metódussal érhető el, más HTTP metódusok használata esetén 405-ös hibakódot ad vissza.",                "tags": [
+                "summary": "A rendszer státuszának lekérdezése",
+                "description": "Ez az API végpont a rendszer aktuális státuszának lekérdezésére szolgál. A végpont egyetlen rekordot olvas ki a 'system_status' táblából, amely a rendszer állapotát tárolja. A lekérdezés az adott státuszt (például 'zarva' vagy 'nyithato') adja vissza. A lekérdezés sikeressége esetén a rendszer egy JSON választ küld, amely tartalmazza a státusz értékét. Ha az adatbázisban nincs elérhető státusz, akkor a végpont egy 404-es hibát küld vissza. Ha a lekérdezés során hiba történik (például adatbázis-kapcsolati probléma), akkor egy 500-as hibaüzenetet kap a kliens. A végpont kizárólag GET metódussal érhető el, más HTTP metódusok használata esetén 405-ös hibakódot ad vissza.",
+                "tags": [
                     "System"
                 ],
                 "responses": {
                     "201": {
-                        "description": "'zarva' vagy 'nyithato' státusz visszaküldve"   
+                        "description": "'zarva' vagy 'nyithato' státusz visszaküldve"
                     },
                     "400": {
                         "description": "A rendszer státusza nem található"
@@ -390,11 +391,10 @@
                 }
             }
         },
-
         "/api/system/studentAccess": {
             "post": {
-                "summary": "Szekrény nyitása RFID címkével",
-                "description": "Ez az API végpont lehetővé teszi a felhasználó számára, hogy ellenőrizze, hogy egy adott RFID címke hozzáféréssel rendelkezik-e egy szekrényhez. A végpont lekéri az adott RFID címkéhez tartozó adatokat az adatbázisból, és visszaadja, hogy a felhasználónak van-e engedélyezett hozzáférése, vagy ha a hozzáférés zárolt. Ezen kívül ellenőrzi a diák órarendjét is, és ha az aktuális idő tartozik az órák közé, a zár nyitva marad. Ha az RFID címke nem található, vagy nincs hozzáférése a szekrényhez, a rendszer egy hibát jelez. A végpont csak GET kéréseket fogad, és az RFID címkét a query paraméterben várja.",
+                "summary": "Diák engedélyezése a szekrényhez",
+                "description": "Ez az API végpont lehetővé teszi a felhasználó számára, hogy egy adott diák RFID hozzáférését frissítse az adatbázisban. A végpont egy adott diák azonosítójához (student_id) rendelt hozzáférési státuszt módosítja 'nyitható' értékre.",
                 "tags": [
                     "System"
                 ],
@@ -403,7 +403,7 @@
                         "name": "student",
                         "in": "query",
                         "required": true,
-                        "description": "Az RFID címke, amelynek a szekrényét nyitni szeretnénk."
+                        "description": "A diák azonosítója, akinek az 'access' mezőjét frissíteni szeretnénk."
                     }
                 ],
                 "responses": {
@@ -418,6 +418,190 @@
                     },
                     "500": {
                         "description": "Hiba az adatok feltöltésekor"
+                    }
+                }
+            }
+        },
+        "/api/timetable/getClassTimetable": {
+            "get": {
+                "summary": "Egy adott osztály órarendjének lekérdezése",
+                "description": "Ez az API végpont egy adott osztályhoz tartozó órarend lekérdezésére szolgál. A lekérdezés az 'osztály' paraméter alapján történik, amely a csoport nevét adja meg. Az eredmény egy JSON tömb, amely az adott osztály órarendjének adatait tartalmazza, beleértve a hét napját, az óra kezdési és befejezési időpontját, az osztály és a csoport nevét, valamint a tanár rövid nevét. Az adatok a hét napja szerint és időrendben vannak rendezve.",
+                "tags": [
+                    "Timetable"
+                ],
+                "parameters": [
+                    {
+                        "name": "className",
+                        "in": "query",
+                        "description": "Az osztály neve, amelynek az órarendjét le szeretnénk kérdezni. A keresés részleges egyezéssel történik.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sikeres válasz, amely az adott osztály órarendjét tartalmazza.",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "day_of_week": "monday",
+                                        "start_time": "08:00:00",
+                                        "end_time": "08:45:00",
+                                        "class": "10.A",
+                                        "group_name": "Matematika",
+                                        "teacher_name": "Kovacs"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Hiányzik 'class' paraméter!"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett."
+                    },
+                    "500": {
+                        "description": "Hiba az adatok lekérdezésekor"
+                    }
+                }
+            }
+        },
+        "/api/timetable/getTeacherTimetable": {
+            "get": {
+                "summary": "Egy adott tanár órarendjének lekérdezése",
+                "description": "Ez az API végpont egy adott tanárhoz tartozó órarend lekérdezésére szolgál. A lekérdezés a 'teacherName' paraméter alapján történik, amely a tanár rövid nevét adja meg. Az eredmény egy JSON tömb, amely az adott tanár órarendjének adatait tartalmazza, beleértve a hét napját, az óra kezdési és befejezési időpontját, a csoportok neveit és a tanár nevét. Az adatok a hét napja szerint és időrendben vannak rendezve.",
+                "tags": [
+                    "Timetable"
+                ],
+                "parameters": [
+                    {
+                        "name": "teacherName",
+                        "in": "query",
+                        "description": "A tanár rövid neve, akinek az órarendjét le szeretnénk kérdezni.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sikeres válasz, amely az adott tanár órarendjét tartalmazza.",
+                        "content": {
+                            "application/json": {
+                                "example": [
+                                    {
+                                        "day_of_week": "monday",
+                                        "start_time": "08:00:00",
+                                        "end_time": "08:45:00",
+                                        "class": "10.A, 11.B",
+                                        "group_name": "Matematika",
+                                        "teacher_name": "Kovacs"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Hiányzik 'teacherName' paraméter!"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett."
+                    },
+                    "500": {
+                        "description": "Hiba az adatok lekérdezésekor."
+                    }
+                }
+            }
+        },
+        "/api/timetable/allScheduleStart": {
+            "get": {
+                "summary": "Diákok napi első és utolsó órájának lekérdezése",
+                "description": "Ez az API végpont visszaadja az adott napi órarend alapján a diákok első és utolsó tanórájának időpontját. Az adatok a nap aktuális dátuma alapján kerülnek lekérdezésre.",
+                "tags": [
+                    "Timetable"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sikeres válasz, amely tartalmazza a diákok első és utolsó tanórájának kezdési és befejezési időpontját.",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "students": [
+                                        {
+                                            "student_id": 1,
+                                            "full_name": "Kovács Péter",
+                                            "first_class_start": "08:00:00",
+                                            "last_class_end": "14:30:00"
+                                        },
+                                        {
+                                            "student_id": 2,
+                                            "full_name": "Nagy Anna",
+                                            "first_class_start": "09:00:00",
+                                            "last_class_end": "15:15:00"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Nincs tanóra a mai nap!"
+                    },
+                    "500": {
+                        "description": "Hiba az adatok lekérdezésekor"
+                    }
+                }
+            }
+        },
+        "/api/timetable/scheduleStart": {
+            "get": {
+                "summary": "egy adott diák napi első és utolsó órájának lekérdezése",
+                "description": "Ez az API végpont visszaadja az adott napi órarend alapján egy diáknak első és utolsó tanórájának időpontját. Az adatok a nap aktuális dátuma alapján kerülnek lekérdezésre.",
+                "tags": [
+                    "Timetable"
+                ],
+                "parameters": [
+                    {
+                        "name": "student",
+                        "in": "query",
+                        "description": "A dátum, amelynek az órarendjét le szeretnénk kérdezni. Formátum: YYYY-MM-DD. Ha nincs megadva, akkor a mai napra vonatkozó adatokat adja vissza.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sikeres válasz, amely tartalmazza a diákok első és utolsó tanórájának kezdési és befejezési időpontját.",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "students": [
+                                        {
+                                            "student_id": 1,
+                                            "full_name": "Kovács Péter",
+                                            "first_class_start": "08:00:00",
+                                            "last_class_end": "14:30:00"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Hiányzó 'student_id'!"
+                    },
+                    "404": {
+                        "description": "Nincs tanóra a megadott napon!"
+                    },
+                    "500": {
+                        "description": "Hiba az adatok lekérdezésekor"
                     }
                 }
             }

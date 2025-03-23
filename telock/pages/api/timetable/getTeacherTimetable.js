@@ -3,12 +3,11 @@ import { neon } from '@neondatabase/serverless';
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     const { teacherName } = req.query;
-
+    if (!teacherName) {
+      return res.status(400).json({ error: 'Hiányzik "teacherName" paraméter!' });
+    }
     try {
-      // Connect to the Neon database
       const sql = neon(`${process.env.DATABASE_URL}`);
-
-      // Execute the query
       const results = await sql(
         `    
           SELECT 
@@ -46,12 +45,11 @@ export default async function handler(req, res) {
       );
 
       return res.status(200).json(results);
-
     } catch (error) {
-      console.error('Database error:', error);
-      return res.status(500).json({ error: 'Database connection error' });
+      console.error('Hiba az adatok lekérdezésekor:', error);
+      return res.status(500).json({ error: 'Hiba az adatok lekérdezésekor' });
     }
   } else {
-    return res.status(405).json({ error: 'Method Not Allowed' });
+    return res.status(405).json({ error: 'A HTTP metódus nem engedélyezett.' });
   }
 }
