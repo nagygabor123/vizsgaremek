@@ -910,11 +910,10 @@ const Calendar: React.FC = () => {
                       {isToday(day) && isCurrentLesson(lesson) && (
                       <DialogContent className="sm:w-[800px]">
   <DialogHeader>
-    <DialogTitle>{modalInfo?.lesson}</DialogTitle>
-    <DialogDescription>{modalInfo?.time}</DialogDescription>
-    <h3>Osztály: {modalInfo?.className}</h3>
+    <DialogTitle>{modalInfo?.lesson} ({modalInfo?.time})</DialogTitle>
+    <DialogDescription>{modalInfo?.className}</DialogDescription>
+   
     <div>
-
      <div className="rounded-md border mt-5">
       <table className="w-full">
         <thead className="text-center text-sm text-muted-foreground">
