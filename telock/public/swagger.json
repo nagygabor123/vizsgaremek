@@ -81,6 +81,64 @@
                 }
             }
         },
+        "/api/upload/uploadRinging": {
+            "post": {
+                "summary": "Csengetési rend feltöltése",
+                "description": "Ez az API végpont a csengetési rend adatainak feltöltésére szolgál. Az adatokat egy tömb formájában várja, amelyben a csengetési időpontok kezdő és végidőpontja szerepel. Az adatokat az `INSERT INTO ring_times` SQL lekérdezéssel helyezi el az adatbázisban. Ha bármelyik adat hiányzik vagy hibás, a rendszer figyelmeztetést ad, és azt a sort kihagyja.",
+                "tags": [
+                    "Upload"
+                ],
+                "requestBody": {
+                    "description": "A feltöltendő csengetési rend adatai",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "ringing": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "start_time": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                },
+                                                "end_time": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                }
+                                            },
+                                            "required": [
+                                                "start_time",
+                                                "end_time"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "ringing"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Csengetési rend sikeresen feltöltve!"
+                    },
+                    "400": {
+                        "description": "A ringing tömb üres vagy hibás"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    },
+                    "500": {
+                        "description": "Hiba az adatok feltöltésekor"
+                    }
+                }
+            }
+        },
         "/api/students/create": {
             "post": {
                 "summary": "Új diák létrehozása",
@@ -288,7 +346,6 @@
                 }
             }
         }
-       
     },
     "components": {
         "schemas": {

@@ -2,7 +2,7 @@ import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Csak a POST metódus használható' });
+    return res.status(405).json({ error: 'A HTTP metódus nem engedélyezett' });
   }
 
   try {
@@ -25,13 +25,13 @@ export default async function handler(req, res) {
         await sql(insertQuery, [start_time, end_time]);
       } catch (dbError) {
         console.error(`Hiba az adatbázisba íráskor: ${dbError.message}`);
-        return res.status(500).json({ error: 'Adatbázis hiba a feltöltés közben.' });
+        return res.status(500).json({ error: 'Hiba az adatok feltöltésekor' });
       }
     }
 
     return res.status(200).json({ message: 'Csengetési rend sikeresen feltöltve!' });
   } catch (error) {
     console.error('Hiba a kérés feldolgozása közben:', error);
-    return res.status(500).json({ error: 'Hiba a kérés feldolgozása közben' });
+    return res.status(500).json({ error: 'Hiba az adatok feltöltésekor' });
   }
 }
