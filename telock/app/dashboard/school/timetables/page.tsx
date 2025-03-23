@@ -606,29 +606,17 @@ const Calendar: React.FC = () => {
   }
 
   const { startOfWeek2, endOfWeek } = getWeekStartAndEnd(currentDate);
-
   const [currentPage, setCurrentPage] = useState(1);
-  const studentsPerPage = 5;
-
-  // Az aktuális oldalon megjelenő tanulók kiszámítása
-  const indexOfLastStudent = currentPage * studentsPerPage;
-  const indexOfFirstStudent = indexOfLastStudent - studentsPerPage;
-  const currentStudents = students.slice(indexOfFirstStudent, indexOfLastStudent);
-
-  // Teljes oldalszám kiszámítása
-  const totalPages = Math.ceil(students.length / studentsPerPage);
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
+  const itemsPerPage = 5; // Oldalanként megjelenítendő diákok száma
+  
+  const getPaginatedStudents = (className: string, page: number) => {
+    const allStudents = getStudentsByClass(className);
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return allStudents.slice(startIndex, endIndex);
   };
 
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
+
 
   return (
     <SidebarProvider>
@@ -915,12 +903,13 @@ const Calendar: React.FC = () => {
                         )}
                       </DialogTrigger>
                       {isToday(day) && isCurrentLesson(lesson) && (
-                        <DialogContent className="sm:max-w-[800px]">
-                          <DialogHeader>
-                            <DialogTitle className="text-3xl">{modalInfo?.lesson}</DialogTitle>
-                            <h3>{modalInfo?.time}</h3>
-                            <h3>{modalInfo?.className}</h3>
-                            <div>
+                      <DialogContent className="sm:max-w-[800px]">
+  <DialogHeader>
+    <DialogTitle>{modalInfo?.lesson}</DialogTitle>
+    <DialogDescription>Időpont: {modalInfo?.time} {modalInfo?.className}</DialogDescription>
+    <h3>Osztály: {modalInfo?.className}</h3>
+    <div>
+      <h4>Diákok:</h4>
       <table className="table-auto w-full border-collapse border border-gray-300">
         <thead>
           <tr className="bg-gray-200">
@@ -930,51 +919,43 @@ const Calendar: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {currentStudents.map((student) => {
+          {getPaginatedStudents(modalInfo?.className || '', currentPage).map((student) => {
             const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
             const currentTime = new Date().toTimeString().slice(0, 5);
-            const canUnlockStudent = systemClose || (studentTimetableData &&
+            const canUnlockStudent = systemClose || studentTimetableData &&
               currentTime >= studentTimetableData.first_class_start &&
-              currentTime <= studentTimetableData.last_class_end);
+              currentTime <= studentTimetableData.last_class_end;
             return (
               <tr key={student.student_id} className="border border-gray-300">
                 <td className="border border-gray-300 px-4 py-2">{student.full_name}</td>
                 <td className="border border-gray-300 px-4 py-2">{student.status}</td>
                 <td className="border border-gray-300 px-4 py-2">
-                  <button
-                    onClick={() => handleStudentOpen(student.student_id)}
-                    disabled={!canUnlockStudent}
-                    className="px-4 py-2 bg-blue-500 text-white disabled:opacity-50"
-                  >
+                  <Button onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>
                     Feloldás
-                  </button>
+                  </Button>
                 </td>
               </tr>
             );
           })}
         </tbody>
       </table>
-
       <div className="flex justify-between mt-4">
-        <button
-          onClick={handlePrevPage}
+        <Button
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
-          className="px-4 py-2 bg-blue-500 text-white disabled:opacity-50"
         >
           Előző
-        </button>
-        <span className="px-4 py-2">Oldal {currentPage} / {totalPages}</span>
-        <button
-          onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-          className="px-4 py-2 bg-blue-500 text-white disabled:opacity-50"
+        </Button>
+        <Button
+          onClick={() => setCurrentPage((prev) => prev + 1)}
+          disabled={getPaginatedStudents(modalInfo?.className || '', currentPage + 1).length === 0}
         >
           Következő
-        </button>
+        </Button>
       </div>
     </div>
-                          </DialogHeader>
-                        </DialogContent>
+  </DialogHeader>
+</DialogContent>
                       )}
                     </Dialog>
                   );
