@@ -4,7 +4,7 @@
         "/api/students/create": {
             "post": {
                 "summary": "Új diák létrehozása",
-                "description": "Létrehoz egy új diákot a megadott adatokkal.",
+                "description": "Ez az API végpont lehetővé teszi egy új diák hozzáadását a rendszerhez a megadott adatokkal. A diák regisztrálása során meg kell adni az egyedi azonosítóját (OM szám), teljes nevét, osztályát és RFID címkéjét. A sikeres regisztráció után a rendszer automatikusan létrehoz egy szekrényt a diáknak, és hozzárendeli azt az RFID címkéjéhez. Emellett a diák hozzáadódik a megfelelő csoportokhoz az API hívás révén. Amennyiben bármelyik kötelező mező hiányzik, a szerver hibát ad vissza. Ha a regisztráció sikeres, a válaszban visszaküldi a diák azonosítóját és a hozzá tartozó szekrény számát.",
                 "tags": [
                     "Students"
                 ],
@@ -21,7 +21,7 @@
                                     },
                                     "full_name": {
                                         "type": "string",
-                                        "example": "fasz kalap"
+                                        "example": "Kiss Péter"
                                     },
                                     "class": {
                                         "type": "string",
@@ -55,27 +55,25 @@
         "/api/students/read": {
             "get": {
                 "summary": "Diákok lekérése",
-                "description": "A diákok adatainak lekérése.",
+                "description": "Ez az API végpont a diákok adatainak lekérésére szolgál. Az adatbázisból lekérdezi az összes diák adatait, beleértve az RFID címkéjüket és egyéb releváns információkat. Ha a diákhoz tartozik egy szekrénykapcsolat, akkor a rendszer csatolja hozzá a szekrény aktuális státuszát is. Az adatokat az `students` táblából nyeri ki, amelyet bal oldali csatlakozással (`LEFT JOIN`) összekapcsol a `locker_relationships` és `lockers` táblákkal. A válasz JSON formátumban tartalmazza a diákok listáját és esetlegesen a hozzárendelt szekrények állapotát.",
                 "tags": [
                     "Students"
                 ],
-                "responses": {
-                    "200": {
-                        "description": "Sikeres lekérés"
-                    },
-                    "405": {
-                        "description": "A HTTP metódus nem engedélyezett"
-                    },
-                    "500": {
-                        "description": "Hiba az adatok lekérésénél"
-                    }
+                "200": {
+                    "description": "Sikeres lekérés"
+                },
+                "405": {
+                    "description": "A HTTP metódus nem engedélyezett"
+                },
+                "500": {
+                    "description": "Hiba az adatok lekérésénél"
                 }
             }
         },
         "/api/students/update": {
             "put": {
                 "summary": "Diák adatainak frissítése",
-                "description": "A diák adatainak frissítésére szolgáló API végpont.",
+                "description": "Ez az API végpont a diákok adatainak frissítésére szolgál. A frissítés magában foglalja a diák nevének, osztályának és RFID címkéjének módosítását. Ha a diák RFID címkéje nem változik, csak a név és osztály kerül frissítésre. Ha az RFID címke változik, akkor a rendszer ellenőrzi, hogy az új RFID címke már nem tartozik más diákhoz. Amennyiben van már más diákhoz rendelt RFID, a rendszer egy új diákot hoz létre és az új RFID címkét az ő adatainál tárolja, miközben a régi diákot törli. Ha a diákhoz tartozó szekrény kapcsolatot is frissíteni kell, a rendszer a szekrény kapcsolatot is módosítja az új RFID címke szerint.",
                 "tags": [
                     "Students"
                 ],
@@ -126,7 +124,7 @@
         "/api/students/delete": {
             "delete": {
                 "summary": "Diák törlése",
-                "description": "A diák törlésére szolgáló API végpont.",
+                "description": "Ez az API végpont lehetővé teszi egy diák törlését az adatbázisból. A törlés folyamata először ellenőrzi, hogy a megadott `student_id` létezik-e az adatbázisban. Ha igen, a rendszer eltávolítja a diákhoz tartozó összes kapcsolódó információt, beleértve a locker kapcsolatokat is. A sikeres törlés után a diák rekordja teljesen eltávolításra kerül. Ha a diák nem található, a rendszer megfelelő hibaüzenetet küld vissza. A törléshez a HTTP DELETE metódus használata szükséges.",
                 "tags": [
                     "Students"
                 ],
@@ -168,7 +166,7 @@
         "/api/students/setStudentGroups": {
             "post": {
                 "summary": "Egy diák csoportokba rendezése",
-                "description": "Új diák létrehozásánál vagy egy meglévő diák adatainak frissítésekor, ez a végpont csoportokba rendezi a diákot.",
+                "description": "Ez a végpont lehetővé teszi egy diák csoportokba történő rendezését. Ha új diákot hozol létre vagy egy meglévő diák adatait frissíted, a rendszer az adott diákhoz tartozó osztálynevek alapján meghatározza, mely csoportokhoz tartozik. A diák a megadott osztálynevek alapján kerül hozzárendelésre a csoportokhoz, amennyiben ezek az osztályok már léteznek a rendszerben. Ha a diák nem található az adatbázisban, a rendszer hibaüzenetet küld. Ha a diák már szerepel a csoportokban, akkor azok először törlésre kerülnek, majd az új csoportok kerülnek hozzáadásra. A rendszer visszajelzést ad a csoportokba való sikeres hozzárendelésről vagy annak hiányáról.",
                 "tags": [
                     "Students"
                 ],
@@ -211,45 +209,45 @@
             }
         },
         "/api/setup/ascToDatabase": {
-    "post": {
-        "summary": "Az asc órarend tervező program xml fájljából az adatok kinyerése és feltöltése az adatbázisba",
-        "description": "Ez az API végpont az ASC órarend tervező szoftver XML fájljából nyeri ki az órarendi adatokat, majd azokat feltölti az adatbázisba. A feldolgozás során az alábbi információk kerülnek kinyerésre és tárolásra:\n\n- **Csengetési rend**: Az egyes tanórák kezdési és befejezési időpontjai.\n- **Tanárok**: A pedagógusok neve, rövidítése, valamint az osztályfőnöki szerepkör (ha elérhető).\n- **Osztályok és csoportok**: A teljes osztályok és kisebb tanulócsoportok listája.\n- **Órarend**: A tantárgyak, tanárok, időpontok és osztályok/csoportok kapcsolatai.\n\nA végpont egy `multipart/form-data` kérést fogad el, amelyben a feltöltött XML fájlt dolgozza fel. A sikeres feldolgozás után az adatok továbbításra kerülnek az adatbázisba, és egy JSON választ küld vissza a mentett adatokkal.",
-        "tags": [
-            "Setup"
-        ],
-        "requestBody": {
-            "required": true,
-            "content": {
-                "multipart/form-data": {
-                    "schema": {
-                        "type": "object",
-                        "properties": {
-                            "file": {
-                                "type": "string",
-                                "format": "binary",
-                                "description": "Az asc órarend tervező XML fájlja"
+            "post": {
+                "summary": "Az asc órarend tervező program xml fájljából az adatok kinyerése és feltöltése az adatbázisba",
+                "description": "Ez az API végpont az ASC órarend tervező szoftver XML fájljából nyeri ki az órarendi adatokat, majd azokat feltölti az adatbázisba. A feldolgozás során az alábbi információk kerülnek kinyerésre és tárolásra:\n\n- **Csengetési rend**: Az egyes tanórák kezdési és befejezési időpontjai.\n- **Tanárok**: A pedagógusok neve, rövidítése, valamint az osztályfőnöki szerepkör (ha elérhető).\n- **Osztályok és csoportok**: A teljes osztályok és kisebb tanulócsoportok listája.\n- **Órarend**: A tantárgyak, tanárok, időpontok és osztályok/csoportok kapcsolatai.\n\nA végpont egy `multipart/form-data` kérést fogad el, amelyben a feltöltött XML fájlt dolgozza fel. A sikeres feldolgozás után az adatok továbbításra kerülnek az adatbázisba, és egy JSON választ küld vissza a mentett adatokkal.",
+                "tags": [
+                    "Setup"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary",
+                                        "description": "Az asc órarend tervező XML fájlja"
+                                    }
+                                }
                             }
                         }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "XML adatok sikeresen feldolgozva és továbbítva!"
+                    },
+                    "400": {
+                        "description": "Hiba a fájl feltöltésekor! VAGY Nincs fájl feltöltve!"
+                    },
+                    "500": {
+                        "description": "Hiba a fájl feldolgozása közben"
+                    },
+                    "405": {
+                        "description": "A metódus nem követhető"
                     }
                 }
             }
         },
-        "responses": {
-            "201": {
-                "description": "XML adatok sikeresen feldolgozva és továbbítva!"
-            },
-            "400": {
-                "description": "Hiba a fájl feltöltésekor! VAGY Nincs fájl feltöltve!"
-            },
-            "500": {
-                "description": "Hiba a fájl feldolgozása közben"
-            },
-            "405": {
-                "description": "A metódus nem követhető"
-            }
-        }
-    }
-},
         "/api/setup/studentsToDatabase": {
             "post": {
                 "summary": "Diákok feltöltése az adatbázisba egy CSV fájlból",
