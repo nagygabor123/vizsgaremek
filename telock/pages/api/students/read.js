@@ -19,9 +19,9 @@ export default async function handler(req, res) {
       res.status(200).json(students);
     } catch (error) {
       console.error('Adatbázis hiba:', error);
-      res.status(500).json({ message: 'Internal Server Error', error: error.message });
+      res.status(500).json({ message: 'Hiba az adatok lekérésénél', error: error.message });
     }
   } else {
-    res.status(405).json({ message: 'Method Not Allowed' });
+    res.status(405).json({ message: 'A HTTP metódus nem engedélyezett' });
   }
 }

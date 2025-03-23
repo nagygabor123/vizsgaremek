@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   const { student_id, full_name, class: studentClass, rfid_tag } = req.body;
 
   if (!student_id || !full_name || !studentClass || !rfid_tag) {
-    return res.status(400).json({ message: 'Missing required fields' });
+    return res.status(400).json({ message: 'Hiányzó vagy érvénytelen mezők' });
   }
 
   const sql = neon(process.env.DATABASE_URL);
@@ -19,7 +19,7 @@ export default async function handler(req, res) {
     );
 
     if (studentData.length === 0) {
-      return res.status(404).json({ message: 'Student not found' });
+      return res.status(404).json({ message: 'A diák nem található' });
     }
 
     const currentRfidTag = studentData[0].rfid_tag;
@@ -30,7 +30,7 @@ export default async function handler(req, res) {
         [full_name, studentClass, student_id]
       );
       await setStudentGroups(student_id);
-      return res.status(200).json({ message: 'Student updated successfully' });
+      return res.status(200).json({ message: 'Sikeres frissítés' });
     }
 
     const duplicateRfidError = await dataCheck(sql, rfid_tag, student_id);
@@ -59,14 +59,14 @@ export default async function handler(req, res) {
 
       await deleteStudent(student_id);
       await setStudentGroups(newStudentId);
-      return res.status(200).json({ message: 'Student and locker relationship updated successfully' });
+      return res.status(200).json({ message: 'Sikeres diák és szekrény kapcsolat frissítés' });
     }
 
-    return res.status(404).json({ message: 'Locker relationship not found for the student' });
+    return res.status(404).json({ message: 'A diák és szekrény kapcsolat nem található' });
 
   } catch (error) {
-    console.error('Error updating student:', error);
-    res.status(500).json({ message: 'Error updating student and locker relationship', error: error.message });
+    console.error('Hiba a frissítés során:', error);
+    res.status(500).json({ message: '	Hiba történt a diák adatainak frissítése során', error: error.message });
   }
 }
 
@@ -77,10 +77,10 @@ async function dataCheck(sql, rfid_tag, student_id) {
   );
 
   if (existingRfid.length > 0 && existingRfid[0].student_id !== student_id) {
-    return { message: 'Duplicate RFID tag' };
+    return { message: 'Ismétlődő RFID azonosító' };
   }
 
-  return null;  // Ha nincs hiba, akkor null-t adunk vissza
+  return null;  
 }
 
 async function deleteStudent(student_id) {
@@ -90,7 +90,7 @@ async function deleteStudent(student_id) {
     body: JSON.stringify({ student_id }),
   });
   if (!deleteResponse.ok) {
-    throw new Error('Failed to delete old student');
+    throw new Error('Sikertelen törlés');
   }
 }
 
@@ -99,9 +99,9 @@ async function setStudentGroups(student_id) {
 
   try {
     const response = await fetch(url, {
-      method: 'POST', // A kérés metódusa POST
+      method: 'POST', 
       headers: {
-        'Content-Type': 'application/json', // A kérés fejléce
+        'Content-Type': 'application/json', 
       },
     });
 
@@ -109,11 +109,11 @@ async function setStudentGroups(student_id) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data = await response.json(); // A válasz JSON formátumban
-    console.log('Response:', data);
-    return data; // Visszaadjuk a választ
+    const data = await response.json(); 
+    console.log('Válasz:', data);
+    return data; 
   } catch (error) {
-    console.error('Error calling setStudentGroups:', error);
-    throw error; // Hibát dobunk, ha valami elromlik
+    console.error('Hiba az "api/students/setStudentGroups" végpont meghívása során:', error);
+    throw error; 
   }
 }

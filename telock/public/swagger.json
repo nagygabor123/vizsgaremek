@@ -37,7 +37,8 @@
                 "tags": ["Students"],
                 "responses": {
                     "200": {"description": "Sikeres lekérés"},
-                    "405": {"description": "A HTTP metódus nem engedélyezett"}
+                    "405": {"description": "A HTTP metódus nem engedélyezett"},
+                    "500": {"description": "Hiba az adatok lekérésénél"}
                 }
             }
         },
@@ -63,9 +64,9 @@
                     }
                 },
                 "responses": {
-                    "200": {"description": "Sikeres frissítés"},
+                    "200": {"description": "Sikeres frissítés VAGY Sikeres diák és szekrény kapcsolat frissítés"},
                     "400": {"description": "Hiányzó vagy érvénytelen mezők"},
-                    "404": {"description": "A diák nem található"},
+                    "404": {"description": "A diák nem található VAGY A diák és szekrény kapcsolat nem található"},
                     "500": {"description": "Hiba történt a diák adatainak frissítése során"}
                 }
             }
@@ -92,6 +93,7 @@
                     "200": {"description": "Sikeres törlés"},
                     "400": {"description": "Hiányzó student_id"},
                     "404": {"description": "A diák nem található"},
+                    "405": {"description": "A HTTP metódus nem engedélyezett"},
                     "500": {"description": "Hiba történt a diák törlése során"}
                 }
             }
@@ -116,7 +118,7 @@
                 "responses": {
                     "200":{"description": "Nem találtam csoport egyezést"},    
                     "201": {"description": "Sikeres csoportba rendezés"},
-                    "400": {"description": "A student_id hiányzik"},
+                    "400": {"description": "Hiányzó student_id"},
                     "404": {"description": "A diák nem található"},   
                     "500": {"description": "Hiba az adatok feltöltésekor"},
                     "405": {"description": "A metódus nem követhető"}

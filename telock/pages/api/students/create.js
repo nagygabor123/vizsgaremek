@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     const { student_id, full_name, class: studentClass, rfid_tag } = req.body;
 
     if (!student_id || !full_name || !studentClass || !rfid_tag) {
-      return res.status(400).json({ message: 'Missing required fields' });
+      return res.status(400).json({ message: 'Hiányzó kötelező mezők' });
     }
 
     try {
@@ -23,14 +23,14 @@ export default async function handler(req, res) {
       await sql('INSERT INTO lockers (locker_id, status) VALUES ($1, $2);', [nextLockerId, 'ki']);
       await sql('INSERT INTO locker_relationships (rfid_tag, locker_id) VALUES ($1, $2);', [rfid_tag, nextLockerId]);
       const result = await setStudentGroups(student_id);
-      console.log('Student groups: ', result);
-      res.status(201).json({ message: 'Student and locker relationship created', locker_id: nextLockerId });
+      console.log('Tanuló csoportok: ', result);
+      res.status(201).json({ message: 'Sikeresen létrehozott diák, szekrény:', locker_id: nextLockerId });
     } catch (error) {
-      console.error('Database error:', error);
-      res.status(500).json({ message: 'Error creating student and locker relationship', error: error.message });
+      console.error('Adatbázis hiba:', error);
+      res.status(500).json({ message: 'Hiba a diák létrehozása során', error: error.message });
     }
   } else {
-    res.status(405).json({ message: 'Method Not Allowed' });
+    res.status(405).json({ message: 'A HTTP metódus nem engedélyezett' });
   }
 }
 
@@ -51,10 +51,10 @@ async function setStudentGroups(student_id) {
     }
 
     const data = await response.json(); 
-    console.log('Response:', data);
+    console.log('Válasz:', data);
     return data;
   } catch (error) {
-    console.error('Error calling setStudentGroups:', error);
+    console.error('Hiba az "api/students/setStudentGroups" végpont meghívása során', error);
     throw error; 
   }
 }
