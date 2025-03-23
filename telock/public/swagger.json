@@ -95,25 +95,13 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "ringing": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "start_time": {
-                                                    "type": "string",
-                                                    "format": "7:15"
-                                                },
-                                                "end_time": {
-                                                    "type": "string",
-                                                    "format": "8:00"
-                                                }
-                                            },
-                                            "required": [
-                                                "start_time",
-                                                "end_time"
-                                            ]
-                                        }
+                                    "start_time": {
+                                        "type": "string",
+                                        "example": "7:15"
+                                    },
+                                    "end_time": {
+                                        "type": "string",
+                                        "example": "8:00"
                                     }
                                 }
                             }
@@ -152,19 +140,19 @@
                                 "properties": {
                                     "full_name": {
                                         "type": "string",
-                                        "description": "A tanár teljes neve"
+                                        "example": "Teszt Elek"
                                     },
                                     "position": {
                                         "type": "string",
-                                        "description": "A tanár pozíciója"
+                                        "example": "Rendszergazda"
                                     },
                                     "osztalyfonok": {
                                         "type": "string",
-                                        "description": "Az osztályfőnök neve (opcionális)"
+                                        "example": "nincs"
                                     },
                                     "short_name": {
                                         "type": "string",
-                                        "description": "A tanár rövid neve (opcionális)"
+                                        "example": "tttt"
                                     }
                                 }
                             }
