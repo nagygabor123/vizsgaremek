@@ -25,18 +25,21 @@ export default async function handler(req, res) {
         nextAdminId = lastAdmin[0].admin_id + 1;
       }
 
-      const password = employee.short_name + "123";
-      const hashedPassword = await hash(password, 10);
+      const { hash } = require('bcrypt'); // vagy más hashelő könyvtár, például 'bcryptjs'
 
-      const insertValues = employees.map(employee => [
-        nextAdminId++,
-        employee.full_name,
-        // generatePassword(),
-        hashedPassword,
-        employee.position,
-        employee.osztalyfonok || 'nincs',
-        employee.short_name || null
-      ]);
+      const insertValues = await Promise.all(employees.map(async (employee) => {
+        const password = employee.short_name + "123";
+        const hashedPassword = await hash(password, 10);
+      
+        return [
+          nextAdminId++,
+          employee.full_name,
+          hashedPassword,
+          employee.position,
+          employee.osztalyfonok || 'nincs',
+          employee.short_name || null
+        ];
+      }));
 
       const placeholders = insertValues.map(
         (_, rowIndex) => `($${rowIndex * 6 + 1}, $${rowIndex * 6 + 2}, $${rowIndex * 6 + 3}, $${rowIndex * 6 + 4}, $${rowIndex * 6 + 5}, $${rowIndex * 6 + 6})`
