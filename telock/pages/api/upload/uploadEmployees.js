@@ -1,9 +1,11 @@
 import { neon } from '@neondatabase/serverless';
-import crypto from 'crypto';
+// import crypto from 'crypto';
+import {hash} from 'bcrypt';
 
-function generatePassword(length = 12) {
-  return crypto.randomBytes(length).toString('hex');
-}
+// function generatePassword(length = 12) {
+//   return crypto.randomBytes(length).toString('hex');
+// }
+
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -23,10 +25,14 @@ export default async function handler(req, res) {
         nextAdminId = lastAdmin[0].admin_id + 1;
       }
 
+      const password = employee.short_name + "123";
+      const hashedPassword = await hash(password, 10);
+
       const insertValues = employees.map(employee => [
         nextAdminId++,
         employee.full_name,
-        generatePassword(),
+        // generatePassword(),
+        hashedPassword,
         employee.position,
         employee.osztalyfonok || 'nincs',
         employee.short_name || null
