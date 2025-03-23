@@ -12,13 +12,13 @@ const dayMapping = {
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method Not Allowed' });
+    return res.status(405).json({ message: 'A HTTP metódus nem engedélyezett' });
   }
 
   const { schedule } = req.body;
 
   if (!Array.isArray(schedule) || schedule.length === 0) {
-    return res.status(400).json({ message: 'Invalid or empty schedule array' });
+    return res.status(400).json({ message: 'A schedule tömb üres vagy hibás' });
   }
 
   const sql = neon(`${process.env.DATABASE_URL}`);
@@ -26,12 +26,12 @@ export default async function handler(req, res) {
   try {
     const admins = await sql('SELECT admin_id, full_name FROM admins');
     if (!Array.isArray(admins)) {
-      throw new Error('Invalid response from database for admins');
+      throw new Error('Érvénytelen válasz az adatbázisból az adminok táblából');
     }
     const adminMap = new Map(admins.map(admin => [admin.full_name.trim(), admin.admin_id]));
     const groups = await sql('SELECT group_id, group_name FROM csoportok');
     if (!Array.isArray(groups)) {
-      throw new Error('Invalid response from database for groups');
+      throw new Error('Érvénytelen válasz az adatbázisból a csoportok táblából');
     }
     const groupMap = new Map(groups.map(group => [group.group_name.trim(), group.group_id]));
     const timetableInsertValues = [];
@@ -112,10 +112,10 @@ export default async function handler(req, res) {
       await sql(groupRelationsQuery, groupRelationsParams);
     }
 
-    res.status(201).json({ message: 'Órarend sikeresen feltöltve' });
+    res.status(201).json({ message: 'Órarend sikeresen feltöltve!' });
 
   } catch (error) {
-    console.error('Hiba az órarend feltöltésekor:', error);
-    res.status(500).json({ message: 'Hiba az órarend feltöltésekor', error: error.message });
+    console.error('Hiba az adatok feltöltésekor:', error);
+    res.status(500).json({ message: 'Hiba az adatok feltöltésekor', error: error.message });
   }
 }

@@ -88,26 +88,6 @@
                 "tags": [
                     "Upload"
                 ],
-                "requestBody": {
-                    "description": "A feltöltendő csengetési rend adatai",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "start_time": {
-                                        "type": "string",
-                                        "example": "7:15"
-                                    },
-                                    "end_time": {
-                                        "type": "string",
-                                        "example": "8:00"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
                 "responses": {
                     "200": {
                         "description": "Csengetési rend sikeresen feltöltve!"
@@ -131,34 +111,6 @@
                 "tags": [
                     "Upload"
                 ],
-                "requestBody": {
-                    "description": "A feltöltendő tanárok adatai",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "full_name": {
-                                        "type": "string",
-                                        "example": "Teszt Elek"
-                                    },
-                                    "position": {
-                                        "type": "string",
-                                        "example": "Rendszergazda"
-                                    },
-                                    "osztalyfonok": {
-                                        "type": "string",
-                                        "example": "nincs"
-                                    },
-                                    "short_name": {
-                                        "type": "string",
-                                        "example": "tttt"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
                 "responses": {
                     "201": {
                         "description": "Tanárok sikeresen feltöltve!"
@@ -175,6 +127,97 @@
                 }
             }
         },
+        "/api/upload/uploadGroups": {
+            "post": {
+                "summary": "Csoportok feltöltése",
+                "description": "Ez az API végpont a csoportok adatainak feltöltésére szolgál. A POST kérés egy tömb formájában várja a csoportok neveit, és az adatokat a 'csoportok' táblába tölti fel. Ha a 'groups' tömb üres vagy hibás, a rendszer 400-as hibával válaszol. A csoportok sikeres feltöltésekor 201-es státuszkódot küld vissza a válaszban.",                "tags": [
+                    "Upload"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Csoportok sikeresen feltöltve!"
+                    },
+                    "400": {
+                        "description": "A groups tömb üres vagy hibás"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    },
+                    "500": {
+                        "description": "Hiba az adatok feltöltésekor"
+                    }
+                }
+            }
+        },
+        "/api/upload/uploadTimetables": {
+            "post": {
+                "summary": "Órarend feltöltése",
+                "description": "Ez az API végpont az órarend adatainak feltöltésére szolgál. Az adatokat egy tömb formájában várja, amely tartalmazza a tanárok nevét, csoportjaikat, napokat, kezdési és befejezési időpontokat. Az adatok között szerepelhetnek több csoportok is, és ha bármelyik adat hiányzik vagy hibás, a rendszer figyelmeztetést ad és kihagyja a hibás bejegyzéseket. Az órarend sikeres feltöltése után a kapcsolódó csoportok is mentésre kerülnek.",                "tags": [
+                    "Upload"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Órarend sikeresen feltöltve!"
+                    },
+                    "400": {
+                        "description": "A schedule tömb üres vagy hibás"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    },
+                    "500": {
+                        "description": "Hiba az adatok feltöltésekor"
+                    }
+                }
+            }
+        },
+"/api/upload/uploadStudLockRelations": {
+  "post": {
+    "summary": "Diák-szekrény kapcsolat létrehozása",
+    "description": "Ez az API végpont felelős a diákok RFID-címkéjeinek és szekrényeik hozzárendelésének kezeléséért. A végpont először lekéri az összes diák RFID-címkéjét, majd hozzáadja azokat a szekrényeket a rendszerhez, amelyek a diákok számára rendelhetők. Ha nincs RFID-címke egyetlen diáknál sem, akkor hibát jelez. A szekrények és a diákok közötti kapcsolatok sikeresen feltöltésre kerülnek az adatbázisba. Ha a szekrények száma már elérte a maximális értéket, a rendszer új szekrényekhez rendeli a diákokat.",
+    "tags": [
+      "Upload"
+    ],
+    "responses": {
+      "201": {
+        "description": "Diák-szekrény kapcsolatok sikeresen feltöltve!"
+      },
+      "400": {
+        "description": "Nem találtak RFID-címkével rendelkező diákokat"
+      },
+      "405": {
+        "description": "A HTTP metódus nem engedélyezett"
+      },
+      "500": {
+        "description": "Hiba az adatok feltöltésekor"
+      }
+    }
+  }
+},
+"/api/upload/uploadStudentGroups": {
+  "post": {
+    "summary": "Diák-csoportok  létrehozása",
+    "description": "Ez az API végpont a diákok és csoportjaik közötti kapcsolatok létrehozására szolgál. A végpont először lekéri a diákok listáját, majd összeveti a diákok osztályait a meglévő csoportokkal. Ha a diák osztálya egyezik egy csoport nevével, a kapcsolatot rögzíti a 'student_groups' táblában. A sikeres művelet után a diák-csoport kapcsolatok mentésre kerülnek. Ha nem található egyező csoport, vagy ha nincs mit beilleszteni, a rendszer egy figyelmeztetést küld. A végpont csak POST kéréseket fogad.",    "tags": [
+      "Upload"
+    ],
+    "responses": {
+      "201": {
+        "description": "Diák-csoport kapcsolatok sikeresen feltöltve!"
+      },
+      "400": {
+        "description": "Nem találtak megfelelő diákcsoportokat, semmi sem került beillesztésre."
+      },
+      "405": {
+        "description": "A HTTP metódus nem engedélyezett"
+      },
+      "500": {
+        "description": "Hiba az adatok feltöltésekor"
+      }
+    }
+  }
+},
+
+
         "/api/students/create": {
             "post": {
                 "summary": "Új diák létrehozása",

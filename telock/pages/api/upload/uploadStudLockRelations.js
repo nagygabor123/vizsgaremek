@@ -9,7 +9,7 @@ export default async function handler(req, res) {
       const studentCount = students.length;
 
       if (studentCount === 0) {
-        return res.status(400).json({ message: 'No students with RFID tags found' });
+        return res.status(400).json({ message: 'Nem találtak RFID-címkével rendelkező diákokat' });
       }
 
       const maxLocker = await sql('SELECT MAX(locker_id) AS max_id FROM lockers');
@@ -27,15 +27,15 @@ export default async function handler(req, res) {
       );
 
       res.status(201).json({ 
-        message: 'Lockers and relationships created successfully',
+        message: 'Diák-szekrény kapcsolatok sikeresen feltöltve', 
         lockersInserted: studentCount,
         relationshipsInserted: studentCount
       });
     } catch (error) {
-      console.error('Error processing lockers:', error);
-      res.status(500).json({ message: 'Error processing lockers', error: error.message });
+      console.error('Hiba az adatok feltöltésekor:', error);
+      res.status(500).json({ message: 'Hiba az adatok feltöltésekor', error: error.message });
     }
   } else {
-    res.status(405).json({ message: 'Method Not Allowed' });
+    res.status(405).json({ message: 'A HTTP metódus nem engedélyezett' });
   }
 }

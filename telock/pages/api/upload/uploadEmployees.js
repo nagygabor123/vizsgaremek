@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     const { employees } = req.body;
     
     if (!Array.isArray(employees) || employees.length === 0) {
-      return res.status(400).json({ message: 'Érvénytelen vagy hamis mezők' });
+      return res.status(400).json({ message: 'Az employees tömb üres vagy hibás' });
     }
 
     const sql = neon(process.env.DATABASE_URL);

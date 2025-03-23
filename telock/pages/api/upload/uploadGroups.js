@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     const { groups } = req.body;
 
     if (!Array.isArray(groups) || groups.length === 0) {
-      return res.status(400).json({ message: 'Invalid or empty groups array' });
+      return res.status(400).json({ message: 'A groups tömb üres vagy hibás' });
     }
 
     const sql = neon(process.env.DATABASE_URL);
@@ -17,12 +17,12 @@ export default async function handler(req, res) {
 
       await Promise.all(insertPromises);
 
-      res.status(201).json({ message: 'Groups uploaded successfully' });
+      res.status(201).json({ message: 'Csoportok sikeresen feltöltve!' });
     } catch (error) {
-      console.error('Error uploading groups:', error);
-      res.status(500).json({ message: 'Error uploading groups', error: error.message });
+      console.error('Hiba az adatok feltöltésekor:', error);
+      res.status(500).json({ message: 'Error uploaHiba az adatok feltöltésekording groups', error: error.message });
     }
   } else {
-    res.status(405).json({ message: 'Method Not Allowed' });
+    res.status(405).json({ message: 'A HTTP metódus nem engedélyezett' });
   }
 }
