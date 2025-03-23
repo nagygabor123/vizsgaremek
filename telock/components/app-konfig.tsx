@@ -206,15 +206,16 @@ const SheetComponent: React.FC = () => {
         <div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
           <div className="grid auto-rows-min gap-4 w-full">
             {isButtonVisible && ( 
-              <div className="min-h-[60px] rounded-xl bg-red-100 flex items-center px-4 w-full box-border overflow-hidden">
-                <TriangleAlert className="text-red-600" />
-                <p className="text-sm truncate ml-3 text-red-600">
-                  A rendszer nincs beállítva. Kérjük, végezze el a szükséges konfigurációt!
-                </p>
-                <Button className="ml-auto" variant="destructive" onClick={() => setIsSheetOpen(true)}>
-                  Konfigurálás most
-                </Button>
-              </div>
+             <div className="min-h-[60px] rounded-xl bg-red-100 flex items-center px-4 w-full box-border overflow-hidden">
+             {/* A TriangleAlert ikon eltűnik telefonos nézetben */}
+             <TriangleAlert className="text-red-600 hidden sm:block" />
+             <p className="text-sm truncate ml-3 text-red-600">
+               A rendszer nincs beállítva. Kérjük, végezze el a szükséges konfigurációt!
+             </p>
+             <Button className="ml-auto" variant="destructive" onClick={() => setIsSheetOpen(true)}>
+               Konfigurálás most
+             </Button>
+           </div>
             )} 
           </div>
         </div>
