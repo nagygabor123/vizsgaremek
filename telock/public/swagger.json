@@ -288,7 +288,7 @@
             }
         },
         "/api/locker/setLockerStatus": {
-            "get": {
+            "patch": {
                 "summary": "Szekrény státuszának frissítése és diák hozzáférés módosítása",
                 "description": "Ez az API végpont lehetővé teszi a felhasználó számára, hogy frissítse egy adott szekrény státuszát (nyitva vagy zárva). Ha a szekrény státusza 'be', akkor a rendszer a státuszt 'ki'-ra változtatja, és fordítva. A végpont emellett frissíti a diák hozzáférését a szekrényhez (pl. 'zarva'). Ha a szekrényhez nincs társított diák, vagy ha a státusz frissítése nem sikerült, hibaüzenet kerül visszaküldésre. A végpont csak PATCH kéréseket fogad, és a szekrény azonosítóját (id) query paraméterként várja.",
                 "tags": [
