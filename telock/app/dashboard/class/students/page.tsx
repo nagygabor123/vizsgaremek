@@ -297,6 +297,32 @@ export default function Home() {
   };
 
 
+  async function updateGroupAccess() {
+    // Szűrés: csak azok a diákok, akiknek az osztálya tartalmazza a keresett kifejezést
+    const filteredStudents = students
+      .filter(student => student.class.toLowerCase().includes(searchClass.toLowerCase()))
+      .map(student => student.student_id);
+  
+    if (filteredStudents.length === 0) {
+      console.log("Nincs megfelelő diák a keresési feltétel alapján.");
+      return;
+    }
+  
+    try {
+      const response = await fetch("https://vizsgaremek-mocha.vercel.app/api/system/groupAccess", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ students: filteredStudents })
+      });
+  
+      const result = await response.json();
+      console.log("Sikeres válasz:", result);
+    } catch (error) {
+      console.error("Hiba a kérés során:", error);
+    }
+  }
 
 
   const PAGE_SIZE = 13;
@@ -410,9 +436,10 @@ export default function Home() {
                 </SelectContent>
               </Select> */}
 
-                <Button variant="outline"  > 
+                <Button variant="outline" onClick={() => updateGroupAccess()}> 
                 <LockOpen/> Összes feloldás
-                {/*  
+                {
+                /*  
                 onClick={handleSystemClose}
 
                 {systemClose ? <LockOpen /> : <Lock />}
