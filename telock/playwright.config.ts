@@ -7,4 +7,5 @@ export default defineConfig({
     headless: true, // Beállíthatod `false`-ra, ha látni akarod a tesztet
   },
   testDir: './tests',
+  reporter: [['html', { outputFolder: 'playwright-report' }]], // HTML jelentés
 });
