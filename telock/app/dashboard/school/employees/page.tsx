@@ -449,6 +449,19 @@ export default function AddEmployeePage() {
                       />
                     </div>
 
+                    <div className="grid gap-2">
+                      <Label htmlFor="jelszo">Ideiglenes jelszó</Label>
+                      <Input
+                        disabled
+                        className="col-span-3"
+                        id="jelszo"
+                        type="text"
+                        placeholder={`${shortname}123`}
+
+                       
+                                              />
+                    </div>
+
 
                     <div className="grid gap-2">
                       <Label htmlFor="fullName">Teljes név</Label>
