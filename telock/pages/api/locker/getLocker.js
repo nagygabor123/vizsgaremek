@@ -47,15 +47,20 @@ export default async function handler(req, res) {
     if (currentTime >= first_class_start && currentTime <= last_class_end) {
       if (studentaccess === "zarva") {
         return res.status(200).send("zarva");
+      } else if (studentaccess === "nyithato") {
+        const lockerResult = await getLockerByRFID(rfid, sql);
+        if (lockerResult.error) {
+          return res.status(lockerResult.status).json({ error: lockerResult.error });
+        }
+        return res.status(200).send({ lockerId: lockerResult.lockerId });
       }
+    } else {
+      const lockerResult = await getLockerByRFID(rfid, sql);
+      if (lockerResult.error) {
+        return res.status(lockerResult.status).json({ error: lockerResult.error });
+      }
+      return res.status(200).send({ lockerId: lockerResult.lockerId });
     }
-    
-    const lockerResult = await getLockerByRFID(rfid, sql);
-    if (lockerResult.error) {
-      return res.status(lockerResult.status).json({ error: lockerResult.error });
-    }
-
-    return res.status(200).send({ lockerId: lockerResult.lockerId });
   } catch (error) {
     console.error('Adatbazis error:', error);
     return res.status(500).json({ error: 'Adatbázis csatlakozási hiba' });
