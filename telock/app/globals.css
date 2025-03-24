@@ -89,25 +89,21 @@
 }
 
 .lesson-card {
-  min-height: 100px;
-  transition: background-color 0.3s ease;
-  flex: 1 1 calc(33% - 10px); 
-  padding: 8px; 
- /* background-color: #fbfeff;*/
-  border: 1px solid #ececec;
-  color: #94a3b8/*rgb(85, 85, 85)*/;
-  border-radius: 8px;
-  margin: 0; 
-  /* height: 140px; */
-  box-sizing: border-box; 
-  position: relative;
-  /* padding: 8px; */
-  overflow: hidden; 
   display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
+  flex-wrap: wrap;
+  gap: 10px; /* A leckék közötti tér */
+  border: 1px #0f4efc;
 }
 
+.lesson-card > div {
+  flex: 1 1 calc(33.333% - 20px); /* Három oszlopos elrendezés */
+  box-sizing: border-box;
+}
+
+/* Ha csak egy lecke van, akkor teljes szélességű */
+.lesson-card > div:only-child {
+  flex: 1 1 100%;
+}
 /*
 .lesson-card:hover {
   transition: background-color 0.3s ease;
