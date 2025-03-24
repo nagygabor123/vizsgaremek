@@ -44,8 +44,10 @@ export default async function handler(req, res) {
     console.log(`Első óra kezdete: ${first_class_start}`);
     console.log(`Utolsó óra vége: ${last_class_end}`);
 
-    if ((currentTime >= first_class_start && currentTime <= last_class_end) && studentaccess === "zarva") {
-      return res.status(200).send("zarva");
+    if (currentTime >= first_class_start && currentTime <= last_class_end) {
+      if (studentaccess === "zarva") {
+        return res.status(200).send("zarva");
+      }
     }
     
     const lockerResult = await getLockerByRFID(rfid, sql);
