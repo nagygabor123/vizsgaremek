@@ -34,9 +34,13 @@ export default async function handler(req, res) {
     const schedule = await scheduleResponse.json();
     const { first_class_start, last_class_end } = schedule[0] || {};
 
+    // Az aktuális idő lekérése és HH:MM:SS formátumba alakítása
     const currentTime = new Date().toLocaleTimeString('hu-HU', {
       timeZone: 'Europe/Budapest',
-      hour12: false
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
     });
 
     console.log(schedule);
@@ -44,16 +48,23 @@ export default async function handler(req, res) {
     console.log(`Első óra kezdete: ${first_class_start}`);
     console.log(`Utolsó óra vége: ${last_class_end}`);
 
-    if (studentaccess === "zarva" || (currentTime >= first_class_start && currentTime <= last_class_end)) {
-      return res.status(200).send("zarva");
+    if (currentTime >= first_class_start && currentTime <= last_class_end) {
+      if (studentaccess === "zarva") {
+        return res.status(200).send("zarva");
+      } else if (studentaccess === "nyithato") {
+        const lockerResult = await getLockerByRFID(rfid, sql);
+        if (lockerResult.error) {
+          return res.status(lockerResult.status).json({ error: lockerResult.error });
+        }
+        return res.status(200).send({ lockerId: lockerResult.lockerId });
+      }
+    } else {
+      const lockerResult = await getLockerByRFID(rfid, sql);
+      if (lockerResult.error) {
+        return res.status(lockerResult.status).json({ error: lockerResult.error });
+      }
+      return res.status(200).send({ lockerId: lockerResult.lockerId });
     }
-    
-    const lockerResult = await getLockerByRFID(rfid, sql);
-    if (lockerResult.error) {
-      return res.status(lockerResult.status).json({ error: lockerResult.error });
-    }
-
-    return res.status(200).send({ lockerId: lockerResult.lockerId });
   } catch (error) {
     console.error('Adatbazis error:', error);
     return res.status(500).json({ error: 'Adatbázis csatlakozási hiba' });
