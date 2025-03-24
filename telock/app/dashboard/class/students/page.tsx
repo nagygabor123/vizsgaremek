@@ -435,19 +435,19 @@ export default function Home() {
                 </SelectContent>
               </Select> */}
 
-                <Button variant="outline" onClick={() => updateGroupAccess()}>
+             {/*   <Button variant="outline" onClick={() => updateGroupAccess()}>
                   <LockOpen /> Összes feloldás
-                  {
+                 
+                </Button>*/}
+              </div>
+
+ {
                 /*  
                 onClick={handleSystemClose}
 
                 {systemClose ? <LockOpen /> : <Lock />}
                   {systemClose ? 'Összes feloldás' : 'Összes zárolás'}
 */}
-                </Button>
-              </div>
-
-
 
               {/*
               <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>

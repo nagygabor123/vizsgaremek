@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     const newAccessState = action === 'close' ? 'zarva' : 'nyithato';
 
     try {
-      //await sql('UPDATE students SET access = $1', [newAccessState]);
+      await sql('UPDATE students SET access = $1', [newAccessState]);
       await sql('UPDATE system_status SET status = $1 WHERE id = 1', [newAccessState]);
 
       return res.status(200).json({ message: `Az összes diák 'access' mezője és a 'status' ${newAccessState} (-ra) frissítve` });

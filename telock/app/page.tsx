@@ -193,7 +193,7 @@ export default async function Home() {
       <footer>
         <div className="container mx-auto flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
           <p className="text-center text-sm leading-loose md:text-left">
-            Az oldal vizsgaprojektként készült, fejlesztését Nagy Gábor és Szalkai-Szabó Ádám végezték.
+            Az oldal vizsgaprojektként készült, fejlesztését Szalkai-Szabó Ádám és Nagy Gábor végezték.
           </p>
           <p className="text-sm md:text-right">© 2025</p>
         </div>
