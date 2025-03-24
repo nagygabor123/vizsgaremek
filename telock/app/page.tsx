@@ -57,7 +57,7 @@ export default async function Home() {
         <h2 className="text-3xl md:text-6xl font-bold">Biztonságos és kényelmes <span className="text-blue-600">telefontárolás</span> iskoláknak</h2>
 
         <p className="mt-4 text-gray-600 max-w-2xl mx-auto text-sm md:text-base text-muted-foreground">
-          elefontároló rendszerünk biztosítja, hogy az iskolák diákjai biztonságosan és kényelmesen tárolhassák mobiltelefonjaikat az oktatási időszak alatt, miközben csökkentik a zavaró tényezőket az órákon.
+          Telefontároló rendszerünk biztosítja, hogy az iskolák diákjai biztonságosan és kényelmesen tárolhassák mobiltelefonjaikat az oktatási időszak alatt, miközben csökkentik a zavaró tényezőket az órákon.
         </p>
         <Button className="mt-6">Kapcsolatfelvétel</Button>
       </section>

@@ -175,7 +175,7 @@ export default function AddEmployeePage() {
         fetchEmployees();
         setIsDialogOpen(false);
         setOpen(false);
-   
+
       } else {
         setMessage(data.message || 'Error adding employee');
       }
@@ -399,7 +399,7 @@ export default function AddEmployeePage() {
                   value={searchOsztalyfonok}
                   onValueChange={setSearchOsztalyfonok}
                 >
-                  <SelectTrigger className="col-span-3" id="searchOsztalyfonok"> {/* Id itt a Trigger elemhez */}
+                  <SelectTrigger className="col-span-3" id="searchOsztalyfonok">
                     <SelectValue placeholder="Keresés osztály szerint..." />
                   </SelectTrigger>
                   <SelectContent>
@@ -410,16 +410,6 @@ export default function AddEmployeePage() {
                     ))}
                   </SelectContent>
                 </Select>
-
-                <div>
-
-
-
-
-
-
-
-                </div>
 
               </div>
 
@@ -438,6 +428,18 @@ export default function AddEmployeePage() {
                   <form onSubmit={handleSubmit} className="grid items-start gap-4">
 
                   <div className="grid gap-2">
+                      <Label htmlFor="fullName">Teljes név</Label>
+                      <Input
+                        className="col-span-3"
+                        id="fullName"
+                        type="text"
+                        placeholder="Teszt Elek"
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
+                      />
+                    </div>
+                    
+                    <div className="grid gap-2">
                       <Label htmlFor="shortName">Rövidített név (felhasználónév)</Label>
                       <Input
                         className="col-span-3"
@@ -456,26 +458,11 @@ export default function AddEmployeePage() {
                         className="col-span-3"
                         id="jelszo"
                         type="text"
-                        placeholder={`${shortname}123`}
-
-                       
-                                              />
+                        placeholder={`${shortname}123`} />
                     </div>
 
 
-                    <div className="grid gap-2">
-                      <Label htmlFor="fullName">Teljes név</Label>
-                      <Input
-                        className="col-span-3"
-                        id="fullName"
-                        type="text"
-                        placeholder="Teszt Elek"
-                        value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
-                      />
-                    </div>
 
-             
 
 
 
@@ -559,7 +546,7 @@ export default function AddEmployeePage() {
 
                     paginatedEmployees.map((employee) => (
                       <tr key={employee.admin_id} className="text-center border-t">
-                      
+
                         <td className="p-1">{employee.full_name} ({employee.short_name})</td>
                         <td className="p-1">
                           {positions.find((pos) => pos.value === employee.position)?.label || employee.position}
@@ -586,7 +573,7 @@ export default function AddEmployeePage() {
 
                               <div className="grid items-start gap-4">
 
-                               {/* <div className="grid gap-2">
+                                {/* <div className="grid gap-2">
                                   <Label htmlFor="shortName">Rövidített név (felhasználónév)</Label>
                                   <Input
                                    disabled 
