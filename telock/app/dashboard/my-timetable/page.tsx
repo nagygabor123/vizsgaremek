@@ -625,9 +625,10 @@ const Calendar: React.FC = () => {
     return allStudents.slice(startIndex, endIndex);
   };
 
-  function searchGroupStudent(group: string) {
+  async function searchGroupStudent(group: string) {
     console.log("kapott csoport:", group);
     const groupArray = group.split(',').map(g => g.trim());
+
     const studentsInGroup = students
       .filter(student =>
         groupArray.some(groupName => student.class.toLowerCase().includes(groupName.toLowerCase()))
@@ -635,8 +636,34 @@ const Calendar: React.FC = () => {
       .map(student => student.student_id);
 
     setGroupStudents(studentsInGroup);
+    
+    if (group.length === 0) {
+      console.log("Nincs megfelelő diák a keresési feltétel alapján.");
+      return;
+    }
     console.log("Csoportba tartozó diákok:", studentsInGroup);
-  }
+    
+    try {
+        const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/system/groupAccess', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                students: studentsInGroup,  
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Hiba történt a kérés küldésekor');
+        }
+
+        const responseData = await response.json();
+        console.log("Sikeres válasz a szervertől:", responseData);
+    } catch (error) {
+        console.error("Hiba a végpont elérésekor:", error);
+    }
+}
 
 
   return (
