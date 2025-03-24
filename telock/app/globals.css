@@ -62,7 +62,7 @@
 
 
 .calendar-cell {
-  /*min-height: 90px;*/ /* Állítsd be a kívánt minimális magasságot */
+  min-height: 100px; /* Állítsd be a kívánt minimális magasságot */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,7 +89,7 @@
 }
 
 .lesson-card {
-  /*min-height: 100px;*/
+  min-height: 110px;
   transition: background-color 0.3s ease;
   flex: 1 1 calc(33% - 10px); 
   padding: 8px; 
