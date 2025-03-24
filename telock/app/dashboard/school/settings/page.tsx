@@ -38,7 +38,9 @@ import {
 
 
 import * as React from "react"
-import { format } from "date-fns"
+import { format} from "date-fns"
+import { hu } from "date-fns/locale";
+
 import { addDays } from 'date-fns';
 
 import {
@@ -445,17 +447,17 @@ export default function Page() {
           </div>
         </div>*/}
 
-<div>
-  {loading ? (
- <div className="flex items-center justify-center min-h-screen">
- <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-100 border-t-blue-600"></div>
-</div>
-  ) : (
-    <>
-      {/* Üres tartalom, semmi nem jelenik meg a betöltés után */}
-    </>
-  )}
-</div>
+        <div>
+          {loading ? (
+            <div className="flex items-center justify-center min-h-screen">
+              <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-100 border-t-blue-600"></div>
+            </div>
+          ) : (
+            <>
+              {/* Üres tartalom, semmi nem jelenik meg a betöltés után */}
+            </>
+          )}
+        </div>
 
         <div className="p-4">
 
@@ -484,7 +486,7 @@ export default function Page() {
           {/* <h1 className="text-2xl mb-10 font-semibold">Aktív tanév: 2024/2025</h1> */}
 
 
-          <div className="mb-5 flex flex-col sm:flex-row items-start"> 
+          <div className="mb-5 flex flex-col sm:flex-row items-start">
 
             {/* gap-6 sm:gap-10 */}
             <div className="sm:w-1/2 w-full">
@@ -567,14 +569,16 @@ export default function Page() {
                           >
                             <CalendarIcon />
                             {endDate
-                              ? format(endDate, "PPP")
+                              ? format(endDate, "PPP", { locale: hu })
                               : schoolEndEdit
-                                ? format(schoolEndEdit, "PPP")
+                                ? format(schoolEndEdit, "PPP", { locale: hu })
                                 : <span>Válasszon egy dátumot</span>}
+
                           </Button>
                         </PopoverTrigger>
                         <PopoverContent className="w-auto p-0" align="start">
                           <Calendar
+                          locale={hu}
                             mode="single"
                             selected={endDate}
                             onSelect={(date) => setEndDate(date ?? undefined)}
@@ -713,8 +717,8 @@ export default function Page() {
                     {yearSchedule.noSchool.map((noSchoolPeriod: any) => (
                       <tr key={noSchoolPeriod.id} className="text-center border-t">
                         <td className="p-1">
-                           {new Date(noSchoolPeriod.end).toLocaleDateString("hu-HU")}</td>
-                        
+                          {new Date(noSchoolPeriod.end).toLocaleDateString("hu-HU")}</td>
+
                         <td className="p-1">
                           <AlertDialog>
                             <AlertDialogTrigger>
@@ -858,62 +862,62 @@ export default function Page() {
                 </Dialog>
 
               </div>
-              </div>
+            </div>
 
-              <div className="rounded-xl border overflow-x-auto w-full">
-                {yearSchedule?.plusDates?.length > 0 ? (
-                  <table className="w-full min-w-max">
-                    <thead className="text-center text-sm text-muted-foreground">
-                      <tr>
-                        <th className="p-2 cursor-pointer font-normal">Dátum</th>
-                        <th className="p-2 cursor-pointer font-normal">Órarendi nap</th>
-                        <th className="p-2 cursor-pointer font-normal">Művelet</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {yearSchedule.plusDates.map((plusDate: any) => (
-                        <tr key={plusDate.id} className="text-center border-t">
-                          <td className="p-1">{new Date(plusDate.date).toLocaleDateString("hu-HU")}</td>
-                          <td className="p-1">{days.find((day) => day.value === plusDate.replaceDay)?.label || plusDate.replaceDay}</td>
-                          <td className="p-1">
+            <div className="rounded-xl border overflow-x-auto w-full">
+              {yearSchedule?.plusDates?.length > 0 ? (
+                <table className="w-full min-w-max">
+                  <thead className="text-center text-sm text-muted-foreground">
+                    <tr>
+                      <th className="p-2 cursor-pointer font-normal">Dátum</th>
+                      <th className="p-2 cursor-pointer font-normal">Órarendi nap</th>
+                      <th className="p-2 cursor-pointer font-normal">Művelet</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {yearSchedule.plusDates.map((plusDate: any) => (
+                      <tr key={plusDate.id} className="text-center border-t">
+                        <td className="p-1">{new Date(plusDate.date).toLocaleDateString("hu-HU")}</td>
+                        <td className="p-1">{days.find((day) => day.value === plusDate.replaceDay)?.label || plusDate.replaceDay}</td>
+                        <td className="p-1">
 
 
-                            <AlertDialog>
-                              <AlertDialogTrigger>
-                                <Button variant="ghost">
-                                  <Trash2 className="w-4 h-4 inline-block" />
-                                </Button>
-                              </AlertDialogTrigger>
-                              <AlertDialogContent>
-                                <AlertDialogHeader>
-                                  <AlertDialogTitle>Biztosan törölni szeretné ezt a napot?</AlertDialogTitle>
-                                  <AlertDialogDescription>
-                                    Ez a művelet nem vonható vissza. A szombati tanítási nap véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
-                                  </AlertDialogDescription>
-                                </AlertDialogHeader>
-                                <AlertDialogFooter>
-                                  <AlertDialogCancel>Mégse</AlertDialogCancel>
-                                  <AlertDialogAction onClick={() => handleDeletePlusBreak(plusDate.id)}>Véglegesítés</AlertDialogAction>
-                                </AlertDialogFooter>
-                              </AlertDialogContent>
-                            </AlertDialog>
+                          <AlertDialog>
+                            <AlertDialogTrigger>
+                              <Button variant="ghost">
+                                <Trash2 className="w-4 h-4 inline-block" />
+                              </Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>Biztosan törölni szeretné ezt a napot?</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  Ez a művelet nem vonható vissza. A szombati tanítási nap véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Mégse</AlertDialogCancel>
+                                <AlertDialogAction onClick={() => handleDeletePlusBreak(plusDate.id)}>Véglegesítés</AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
 
-                            {/* <Button variant="ghost" onClick={() => handleDeletePlusBreak(plusDate.id)}>
+                          {/* <Button variant="ghost" onClick={() => handleDeletePlusBreak(plusDate.id)}>
                               <Trash2 className="w-4 h-4 inline-block" />
                             </Button> */}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                ) : (
-                  <div className="text-center p-3 text-muted-foreground">
-                    Nincs megjelenítendő szombati tanítási nap
-                  </div>
-                )}
-              </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <div className="text-center p-3 text-muted-foreground">
+                  Nincs megjelenítendő szombati tanítási nap
+                </div>
+              )}
             </div>
-       
+          </div>
+
           {/* </div> */}
 
 
@@ -1037,8 +1041,8 @@ export default function Page() {
                         <tr key={breakPeriod.id} className="text-center border-t">
                           <td className="p-1 truncate">{breakPeriod.name}</td>
                           <td className="p-1">
-  {new Date(breakPeriod.start).toLocaleDateString("hu-HU")} - {new Date(breakPeriod.end).toLocaleDateString("hu-HU")}
-</td>
+                            {new Date(breakPeriod.start).toLocaleDateString("hu-HU")} - {new Date(breakPeriod.end).toLocaleDateString("hu-HU")}
+                          </td>
 
                           <td className="p-1">
                             <AlertDialog>
