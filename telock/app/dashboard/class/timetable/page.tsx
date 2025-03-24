@@ -118,7 +118,7 @@ const getWeekStartAndEnd = (date: Date) => {
 const Calendar: React.FC = () => {
 
   const { data: session } = useSession();
-
+  const groupStudents: string[] = []; 
   const [systemClose, setSystemClose] = useState<boolean>(false);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isMobileView, setIsMobileView] = useState(false);
@@ -804,7 +804,16 @@ const Calendar: React.FC = () => {
                   <tbody>
                   {getPaginatedStudents(modalInfo?.className || '', currentPage).map((student) => {
                   const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
-                  const currentTime = new Date().toTimeString().slice(0, 5);
+                  const currentTime = new Date().toLocaleTimeString('hu-HU', {
+                    timeZone: 'Europe/Budapest',
+                    hour12: false,
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                  });
+                  console.log(`Aktuális idő: ${currentTime}`);
+                  groupStudents.push(student.student_id);
+                  console.log(groupStudents);
                   const canUnlockStudent = systemClose || studentTimetableData &&
                   currentTime >= studentTimetableData.first_class_start &&
                   currentTime <= studentTimetableData.last_class_end;
