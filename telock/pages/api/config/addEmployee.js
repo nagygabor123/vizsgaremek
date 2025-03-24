@@ -1,9 +1,9 @@
 import { neon } from '@neondatabase/serverless';
 import crypto from 'crypto';
 
-function generatePassword(length = 12) {
-  return crypto.randomBytes(length).toString('hex');
-}
+//function generatePassword(length = 12) {
+//  return crypto.randomBytes(length).toString('hex');
+//}
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -13,7 +13,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: 'Hiányzó kötelező mezők' });
     }
 
-    const password = generatePassword();
+    //const password = generatePassword();
     const sql = neon(`${process.env.DATABASE_URL}`);
 
     try {
@@ -23,12 +23,16 @@ export default async function handler(req, res) {
         nextAdminId = lastAdmin[0].max_id + 1;
       }
 
+      const password = short_name + "123";
+      const hashedPassword = await hash(password, 10);
+    
+
       await sql(
         'INSERT INTO admins (admin_id, full_name, password, position, osztalyfonok, short_name) VALUES ($1, $2, $3, $4, $5, $6)',
-        [nextAdminId, full_name, password, position, osztalyfonok, short_name]
+        [nextAdminId, full_name, hashedPassword, position, osztalyfonok, short_name]
       );
 
-      res.status(201).json({ message: 'Sikeresen hozzáadott alkalmazott!', password });
+      res.status(201).json({ message: 'Sikeresen hozzáadott alkalmazott!' }); //, password
     } catch (error) {
       console.error('Hiba a hozzáadás során:', error);
       res.status(500).json({ message: 'Hiba a hozzáadás során', error: error.message });
