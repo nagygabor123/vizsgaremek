@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: "Metódus nem támogatott." });
   }
 
-  const session = await getSession({ req });
+  const { data: session } = useSession();
   if (!session) {
     return res.status(401).json({ message: "Nincs bejelentkezve." });
   }
