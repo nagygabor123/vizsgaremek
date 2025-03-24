@@ -610,9 +610,9 @@ const Calendar: React.FC = () => {
   
   function searchGroupStudent(group: string) {
     console.log("kapott csoport:", group);
-    const studentsInGroup = getPaginatedStudents(modalInfo?.className || '', currentPage)
-      .filter(student => student.class.toLowerCase() === group.toLowerCase()) 
-      .map(student => student.student_id); 
+    const studentsInGroup = students
+    .filter(student => student.class.toLowerCase().includes(group.toLowerCase()))
+    .map(student => student.student_id);
   
     setGroupStudents(studentsInGroup);
     console.log("Csoportba tartozó diákok:", studentsInGroup);

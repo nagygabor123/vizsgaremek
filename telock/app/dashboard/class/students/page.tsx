@@ -298,7 +298,6 @@ export default function Home() {
 
 
   async function updateGroupAccess() {
-    // Szűrés: csak azok a diákok, akiknek az osztálya tartalmazza a keresett kifejezést
     const filteredStudents = students
       .filter(student => student.class.toLowerCase().includes(searchClass.toLowerCase()))
       .map(student => student.student_id);
