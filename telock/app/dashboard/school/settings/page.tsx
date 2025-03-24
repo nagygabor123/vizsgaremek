@@ -38,7 +38,7 @@ import {
 
 
 import * as React from "react"
-import { format} from "date-fns"
+import { format } from "date-fns"
 import { hu } from "date-fns/locale";
 
 import { addDays } from 'date-fns';
@@ -509,14 +509,15 @@ export default function Page() {
                           >
                             <CalendarIcon />
                             {startDate
-                              ? format(startDate, "PPP")
+                              ? format(startDate, "PPP", { locale: hu })
                               : schoolStartEdit
-                                ? format(schoolStartEdit, "PPP")
+                                ? format(schoolStartEdit, "PPP", { locale: hu })
                                 : <span>Válasszon egy dátumot</span>}
                           </Button>
                         </PopoverTrigger>
                         <PopoverContent className="w-auto p-0" align="start">
                           <Calendar
+                            locale={hu}
                             mode="single"
                             selected={startDate}
                             onSelect={(date) => setStartDate(date ?? undefined)}
@@ -578,7 +579,7 @@ export default function Page() {
                         </PopoverTrigger>
                         <PopoverContent className="w-auto p-0" align="start">
                           <Calendar
-                          locale={hu}
+                            locale={hu}
                             mode="single"
                             selected={endDate}
                             onSelect={(date) => setEndDate(date ?? undefined)}
@@ -658,13 +659,14 @@ export default function Page() {
                               )}
                             >
                               <CalendarIcon />
-                              {selectedDate ? format(new Date(selectedDate), "PPP") : (
-                                <span>May 20th, 2025</span>
+                              {selectedDate ? format(new Date(selectedDate), "PPP", { locale: hu }) : (
+                                <span>2025. május 20.</span>
                               )}
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent className="w-auto p-0" align="start">
                             <Calendar
+                              locale={hu}
                               mode="single"
                               selected={selectedDate ? new Date(selectedDate) : undefined}
                               onSelect={(date) => {
@@ -813,13 +815,14 @@ export default function Page() {
                               )}
                             >
                               <CalendarIcon />
-                              {newPlusDate.which_day ? format(new Date(newPlusDate.which_day), "PPP") : (
-                                <span>April 14th, 2025</span>
+                              {newPlusDate.which_day ? format(new Date(newPlusDate.which_day), "PPP", { locale: hu }) : (
+                                <span>2025. április 14.</span>
                               )}
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent className="w-auto p-0" align="start">
                             <Calendar
+                              locale={hu}
                               mode="single"
                               selected={newPlusDate.which_day ? new Date(newPlusDate.which_day) : undefined}
                               onSelect={(date) => {
@@ -963,6 +966,8 @@ export default function Page() {
 
                       <div className="grid gap-2">
                         <Label htmlFor="position">Dátum</Label>
+
+
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
                             <Button
@@ -977,20 +982,21 @@ export default function Page() {
                               {date?.from ? (
                                 date.to ? (
                                   <>
-                                    {format(date.from, "LLL dd, y")} -{" "}
-                                    {format(date.to, "LLL dd, y")}
+                                    {format(date.from, "PPP", { locale: hu })} -{" "}
+                                    {format(date.to, "PPP", { locale: hu })}
                                   </>
                                 ) : (
-                                  format(date.from, "LLL dd, y")
+                                  format(date.from, "PPP", { locale: hu })
                                 )
                               ) : (
-                                <span>April 14th, 2025 - May 20th, 2025</span>
+                                <span>2025. április 14. - 2025. május 20.</span>
                               )}
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent className="w-auto p-0" align="start">
                             <Calendar
                               initialFocus
+                              locale={hu}
                               mode="range"
                               defaultMonth={date?.from}
                               selected={date}
@@ -1010,6 +1016,7 @@ export default function Page() {
                             />
                           </DropdownMenuContent>
                         </DropdownMenu>
+
 
                       </div>
                     </div>
