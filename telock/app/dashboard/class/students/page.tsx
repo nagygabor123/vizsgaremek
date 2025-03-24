@@ -1,6 +1,6 @@
 "use client";
 
-import {useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 import { AppSidebar } from "@/components/app-sidebar";
 import {
@@ -262,8 +262,8 @@ export default function Home() {
 
   const [sortOrder, setSortOrder] = useState("asc");
   //const [searchName, setSearchName] = useState("");
- // const [searchClass, setSearchClass] = useState({session?.user?.osztalyfonok});
-  
+  // const [searchClass, setSearchClass] = useState({session?.user?.osztalyfonok});
+
 
 
 
@@ -278,13 +278,13 @@ export default function Home() {
 
   const [searchName, setSearchName] = useState("");
   const [searchClass, setSearchClass] = useState(session?.user?.osztalyfonok || "");
-  
+
   // Szűrés
   const filteredStudents = sortedStudents.filter(student =>
     student.full_name.toLowerCase().includes(searchName.toLowerCase()) &&
     student.class.toLowerCase().includes(searchClass.toLowerCase())
   );
-  
+
 
   // Rendezés váltása adott mező szerint
   const toggleSort = (field: "full_name" | "class") => {
@@ -301,12 +301,12 @@ export default function Home() {
     const filteredStudents = students
       .filter(student => student.class.toLowerCase().includes(searchClass.toLowerCase()))
       .map(student => student.student_id);
-  
+
     if (filteredStudents.length === 0) {
       console.log("Nincs megfelelő diák a keresési feltétel alapján.");
       return;
     }
-  
+
     try {
       const response = await fetch("https://vizsgaremek-mocha.vercel.app/api/system/groupAccess", {
         method: "POST",
@@ -315,7 +315,7 @@ export default function Home() {
         },
         body: JSON.stringify({ students: filteredStudents })
       });
-  
+
       const result = await response.json();
       console.log("Sikeres válasz:", result);
     } catch (error) {
@@ -390,17 +390,17 @@ export default function Home() {
 
 
 
-        <div>
-  {loading ? (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-100 border-t-blue-600"></div>
-    </div>
-  ) : (
-    <>
-      {/* Ide kerülhet más tartalom, ha szükséges */}
-    </>
-  )}
-</div>
+          <div>
+            {loading ? (
+              <div className="flex items-center justify-center min-h-screen">
+                <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-100 border-t-blue-600"></div>
+              </div>
+            ) : (
+              <>
+                {/* Ide kerülhet más tartalom, ha szükséges */}
+              </>
+            )}
+          </div>
 
           <div className="p-4">
 
@@ -416,7 +416,7 @@ export default function Home() {
                   value={searchName}
                   onChange={(e) => setSearchName(e.target.value)}
                 />
-                 {/* <Input
+                {/* <Input
                   type="text"
                   placeholder="Keresés csoport szerint..."
                   className="border p-2 rounded-md"
@@ -435,9 +435,9 @@ export default function Home() {
                 </SelectContent>
               </Select> */}
 
-                <Button variant="outline" onClick={() => updateGroupAccess()}> 
-                <LockOpen/> Összes feloldás
-                {
+                <Button variant="outline" onClick={() => updateGroupAccess()}>
+                  <LockOpen /> Összes feloldás
+                  {
                 /*  
                 onClick={handleSystemClose}
 
@@ -575,15 +575,15 @@ export default function Home() {
                             {/* <td className="p-1">{student.rfid_tag}</td> */}
                             <td className="p-1">
 
-                                             <Button 
-  variant="ghost" 
-  onClick={() => handleStudentOpen(student.student_id)} 
-  disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}
-> 
-  <LockOpen className="w-4 h-4 inline-block" />
-</Button>  
+                              <Button
+                                variant="ghost"
+                                onClick={() => handleStudentOpen(student.student_id)}
+                                disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}
+                              >
+                                <LockOpen className="w-4 h-4 inline-block" />
+                              </Button>
 
-                             {/* <Dialog open={open} onOpenChange={setOpen}>
+                              {/* <Dialog open={open} onOpenChange={setOpen}>
                                 <DialogTrigger asChild>
                                   <Button variant="ghost" onClick={() => handleEdit(student)}><Pen /></Button>
                                 </DialogTrigger>

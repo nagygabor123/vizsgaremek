@@ -132,6 +132,7 @@ const Calendar: React.FC = () => {
   const [tanevkezdes, setStartYear] = useState<string | null>(null);
   const [tanevvege, setEndYear] = useState<string | null>(null);
   const [lessonTimes, setLessonTimes] = useState<lessonTimes[]>([]);
+  const [unlockedStudents, setUnlockedStudents] = useState(new Set());
 
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -525,31 +526,17 @@ const Calendar: React.FC = () => {
 
   const handleStudentOpen = async (student_id: string) => {
     try {
-      const scheduleResponse = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${student_id}`);
+      const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/system/studentAccess?student=${student_id}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
 
-      if (!scheduleResponse.ok) {
-        console.error('Nem sikerült lekérni a diák órarendjét.');
-        return;
-      }
-
-      const schedule = await scheduleResponse.json();
-      const { first_class_start, last_class_end } = schedule;
-
-      // Az aktuális idő HH:MM formátumban
-      const currentTime = new Date().toTimeString().slice(0, 5);
-
-      // Ellenőrizzük, hogy az aktuális idő az órarendi időintervallumba esik-e
-      if (currentTime >= first_class_start && currentTime <= last_class_end) {
-        const response = await fetch(`http://localhost:3000/api/system/studentAccess?student=${student_id}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-        });
-
-        if (!response.ok) {
-          console.error('Hiba történt a zárolás feloldásakor:', await response.text());
-        }
+      if (!response.ok) {
+        console.error('Hiba történt a zárolás feloldásakor:', await response.text());
       } else {
-        console.warn('A diák jelenleg nincs órán, nem lehet feloldani.');
+        const data = await response.json();
+        console.log(data.message);
+        setUnlockedStudents(prev => new Set(prev).add(student_id)); // Ne engedje újra megnyomni
       }
     } catch (error) {
       console.error('Hiba történt a kérés során:', error);
@@ -577,11 +564,10 @@ const Calendar: React.FC = () => {
 
 
   const fetchSystemStatus = async () => {
-    const response = await fetch('http://localhost:3000/api/system/status');
+    const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/system/status');
     if (response.ok) {
       const data = await response.json();
-      setSystemClose(data.status === "nyitva" ? false : true);
-
+      setSystemClose(data.status === "nyithato" ? false : true);
     }
   };
 
@@ -619,34 +605,34 @@ const Calendar: React.FC = () => {
       .map(student => student.student_id);
 
     setGroupStudents(studentsInGroup);
-    
+
     if (group.length === 0) {
       console.log("Nincs megfelelő diák a keresési feltétel alapján.");
       return;
     }
     console.log("Csoportba tartozó diákok:", studentsInGroup);
-    
+
     try {
-        const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/system/groupAccess', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                students: studentsInGroup,  
-            }),
-        });
+      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/system/groupAccess', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          students: studentsInGroup,
+        }),
+      });
 
-        if (!response.ok) {
-            throw new Error('Hiba történt a kérés küldésekor');
-        }
+      if (!response.ok) {
+        throw new Error('Hiba történt a kérés küldésekor');
+      }
 
-        const responseData = await response.json();
-        console.log("Sikeres válasz a szervertől:", responseData);
+      const responseData = await response.json();
+      console.log("Sikeres válasz a szervertől:", responseData);
     } catch (error) {
-        console.error("Hiba a végpont elérésekor:", error);
+      console.error("Hiba a végpont elérésekor:", error);
     }
-}
+  }
 
 
 
@@ -873,8 +859,11 @@ const Calendar: React.FC = () => {
 
                                                   </td>
                                                   <td className="p-1">
-                                                    <Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>
-
+                                                    <Button
+                                                      variant="ghost"
+                                                      onClick={() => handleStudentOpen(student.student_id)}
+                                                      disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}
+                                                    >
                                                       <LockOpen className="w-4 h-4 inline-block" />
                                                     </Button>
                                                   </td>
