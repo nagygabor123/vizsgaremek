@@ -34,9 +34,13 @@ export default async function handler(req, res) {
     const schedule = await scheduleResponse.json();
     const { first_class_start, last_class_end } = schedule[0] || {};
 
+    // Az aktuális idő lekérése és HH:MM:SS formátumba alakítása
     const currentTime = new Date().toLocaleTimeString('hu-HU', {
       timeZone: 'Europe/Budapest',
-      hour12: false
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
     });
 
     console.log(schedule);
