@@ -803,7 +803,7 @@ const Calendar: React.FC = () => {
                   <DialogDescription>{modalInfo?.className}</DialogDescription>
                   
                   <div><div>
-  <button onClick={() => searchGroupStudent(modalInfo?.className || '')}>
+  <button onClick={() => searchGroupStudent(lesson.class)}>
     felold
   </button>
 </div>
