@@ -118,7 +118,8 @@ const getWeekStartAndEnd = (date: Date) => {
 const Calendar: React.FC = () => {
 
   const { data: session } = useSession();
-  const groupStudents: string[] = []; 
+  const [groupStudents, setGroupStudents] = useState<string[]>([]); // Diákok tárolása a csoportban
+
   const [systemClose, setSystemClose] = useState<boolean>(false);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isMobileView, setIsMobileView] = useState(false);
@@ -605,7 +606,17 @@ const Calendar: React.FC = () => {
     const endIndex = startIndex + itemsPerPage;
     return allStudents.slice(startIndex, endIndex);
   };
-
+ 
+  
+  function searchGroupStudent(group: string) {
+    const studentsInGroup = getPaginatedStudents(modalInfo?.className || '', currentPage)
+      .filter(student => student.class.toLowerCase() === group.toLowerCase()) 
+      .map(student => student.student_id); 
+  
+    setGroupStudents(studentsInGroup);
+    console.log("Csoportba tartozó diákok:", studentsInGroup);
+  }
+  
 
   return (
     <SidebarProvider>
@@ -791,7 +802,12 @@ const Calendar: React.FC = () => {
                   <DialogTitle>{modalInfo?.lesson} ({modalInfo?.time})</DialogTitle>
                   <DialogDescription>{modalInfo?.className}</DialogDescription>
                   
-                  <div>
+                  <div><div>
+  <button onClick={() => searchGroupStudent(modalInfo?.className || '')}>
+    felold
+  </button>
+</div>
+
                   <div className="rounded-md border mt-5">
                   <table className="w-full">
                   <thead className="text-center text-sm text-muted-foreground">
@@ -812,8 +828,6 @@ const Calendar: React.FC = () => {
                     second: '2-digit'
                   });
                   console.log(`Aktuális idő: ${currentTime}`);
-                  groupStudents.push(student.student_id);
-                  console.log(groupStudents);
                   const canUnlockStudent = systemClose || studentTimetableData &&
                   currentTime >= studentTimetableData.first_class_start &&
                   currentTime <= studentTimetableData.last_class_end;
