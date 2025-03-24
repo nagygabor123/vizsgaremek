@@ -88,23 +88,25 @@
   /* transition: background-color 0.2s; */
 }
 
-.row {
-  display: flex;
-  align-items: stretch; /* Egyforma magasság */
-  gap: 8px;
-}
-
 .lesson-card {
-  flex-grow: 1;
-  min-height: 100px; /* Minimum magasság */
+  min-height: 150px;
+  transition: background-color 0.3s ease;
+  flex: 1 1 calc(33% - 10px); 
+  padding: 8px; 
+ /* background-color: #fbfeff;*/
+  border: 1px solid #ececec;
+  color: #94a3b8/*rgb(85, 85, 85)*/;
+  border-radius: 8px;
+  margin: 0; 
+  /* height: 140px; */
+  box-sizing: border-box; 
+  position: relative;
+  /* padding: 8px; */
+  overflow: hidden; 
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  border: 1px solid #ececec;
-  border-radius: 8px;
-  padding: 8px;
+  /* justify-content: center; */
 }
-
 
 /*
 .lesson-card:hover {
