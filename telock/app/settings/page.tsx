@@ -52,7 +52,9 @@ export default function ChangePassword() {
   const [newPassword, setNewPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleChangePassword = async () => {
+  const handleChangePassword = async (e: FormEvent) => {
+    e.preventDefault();
+
     if (!session?.user?.password) {
       setMessage("Hiba: nincs bejelentkezett felhasználó.");
       return;
@@ -61,7 +63,7 @@ export default function ChangePassword() {
     const res = await fetch("https://vizsgaremek-mocha.vercel.app/api/config/changePassword", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ oldPassword, newPassword }),
+      body: JSON.stringify({ oldPassword, newPassword })
     });
 
     const data = await res.json();
@@ -126,7 +128,7 @@ export default function ChangePassword() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleChangePassword}>
+              <form onSubmit={handleChangePassword} method="POST">
                 <div className="grid gap-6">
                 <div className="grid gap-6">
                   <div className="grid gap-2">
@@ -134,7 +136,7 @@ export default function ChangePassword() {
                     <Input
                       name="old_password"
                       type="password"
-                      placeholder="Régi jelszó"
+                      placeholder=""
                       value={oldPassword}
                       onChange={(e) => setOldPassword(e.target.value)}
                       required
@@ -147,16 +149,14 @@ export default function ChangePassword() {
                     <Input
                       name="new_password"
                       type="password"
-                      placeholder="Új jelszó"
+                      placeholder=""
                       value={newPassword}
                       onChange={(e) => setNewPassword(e.target.value)}
                       required
                     />
                
                   </div>
-                  <Button  onClick={() => {
-                  signOut();
-                }} type="submit" className="w-full">
+                  <Button type="submit" className="w-full">
                     Jelszó módosítása
                   </Button>
                   {message && <p className="text-center text-sm mt-2">{message}</p>}
