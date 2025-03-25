@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     );
 
     return res.status(200).json({ 
-      message: `${students.length} diák 'access' frissítve nyithato-ra` 
+      message: `A megadott ${students.length} diákok 'access' frissítve 'nyitható'-ra` 
     });
   } catch (error) {
     console.error("Hiba az adatok frissítésekor:", error);
