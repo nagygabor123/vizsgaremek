@@ -5,8 +5,8 @@ import { neon } from "@neondatabase/serverless";
 
 export default async function handler(req, res) {
     if (req.method !== "POST") {
-        console.log("Hibás HTTP metódus:", req.method);
-        return res.status(405).json({ message: "Metódus nem támogatott." });
+        console.log("A HTTP metódus nem engedélyezett:", req.method);
+        return res.status(405).json({ message: "A HTTP metódus nem engedélyezett" });
     }
 
     const sql = neon(`${process.env.DATABASE_URL}`);

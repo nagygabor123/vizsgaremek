@@ -904,6 +904,69 @@
                 }
             }
         },
+        "/api/config/changePassword": {
+            "post": {
+                "summary": "Jelszó módosítása",
+                "description": "Ez az API végpont lehetővé teszi a bejelentkezett adminisztrátorok számára a jelszó módosítását. A felhasználónak meg kell adnia a régi jelszavát és az új jelszót. A rendszer ellenőrzi a régi jelszót, majd ha az helyes, az új jelszót titkosítva tárolja.",
+                "tags": [
+                    "Config"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "oldPassword": {
+                                        "type": "string",
+                                        "example": "currentPassword123"
+                                    },
+                                    "newPassword": {
+                                        "type": "string",
+                                        "example": "newSecurePassword456"
+                                    }
+                                },
+                                "required": [
+                                    "oldPassword",
+                                    "newPassword"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Jelszó sikeresen módosítva",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Jelszó sikeresen módosítva!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Minden mezőt ki kell tölteni VAGY Hibás régi jelszó."
+                    },
+                    "401": {
+                        "description": "Nincs bejelentkezve"
+                    },
+                    "500": {
+                        "description": "Hiba a jelszó módosítása során."
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    }
+                }
+            }
+        },
         "/api/config/getEmployees": {
             "get": {
                 "summary": "Admin alkalmazottak lekérdezése",
