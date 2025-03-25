@@ -67,7 +67,7 @@ export default function ChangePassword() {
     const data = await res.json();
     setMessage(data.message);
 
-    signOut();
+    
   };
 
   return (
@@ -143,6 +143,7 @@ export default function ChangePassword() {
                   <div className="grid gap-2">
                   <div className="flex items-center">
                     <Label htmlFor="new_password">Új jelszó</Label>
+                    </div>
                     <Input
                       name="new_password"
                       type="password"
@@ -151,9 +152,11 @@ export default function ChangePassword() {
                       onChange={(e) => setNewPassword(e.target.value)}
                       required
                     />
+               
                   </div>
-                  </div>
-                  <Button type="submit" className="w-full">
+                  <Button  onClick={() => {
+                  signOut();
+                }} type="submit" className="w-full">
                     Jelszó módosítása
                   </Button>
                   {message && <p className="text-center text-sm mt-2">{message}</p>}
