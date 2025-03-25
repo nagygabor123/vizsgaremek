@@ -60,10 +60,13 @@ export default function Form() {
 </Button>
       <Card>
         <CardHeader className="text-center">
-          <CardTitle className="text-xl">Üdv újra itt!</CardTitle>
+          <CardTitle className="text-xl">Bejelentkezés</CardTitle>
           <CardDescription>
-          Jelentkezzen be a fiókjába a felhasználónevének és jelszavának megadásával
-          </CardDescription>
+      
+  Üdvözöljük! Kérjük, adja meg bejelentkezési adatait a folytatáshoz.
+</CardDescription>
+
+        
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit}>
@@ -125,7 +128,7 @@ export default function Form() {
         </CardContent>
       </Card>
       <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary  ">
-      Az adatait biztonságban tartjuk, és kizárólag azonosításra használjuk.
+      Az adatait biztonságban tartjuk. Soha ne ossza meg jelszavát másokkal!
         {/* <a href="#">Terms of Service</a>{" "}
         and <a href="#">Privacy Policy</a>. */}
       </div>

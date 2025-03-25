@@ -17,6 +17,7 @@ import {
   CalendarHeart,
   Calendar,
   House,
+  LockKeyhole
 } from "lucide-react";
 import {
   Sidebar,
@@ -218,7 +219,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
   <Link href="/settings">
-    <Settings className="text-gray-800"/>
+    <LockKeyhole className="text-gray-800"/>
     Jelszó módosítása
   </Link>
 </DropdownMenuItem>
