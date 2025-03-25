@@ -219,7 +219,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <DropdownMenuItem asChild>
   <Link href="/settings">
     <Settings className="text-gray-800"/>
-    Fiók beállításai
+    Jelszó módosítása
   </Link>
 </DropdownMenuItem>
             <DropdownMenuItem>

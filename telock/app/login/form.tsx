@@ -125,7 +125,7 @@ export default function Form() {
         </CardContent>
       </Card>
       <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary  ">
-      Az adatai biztonságban vannak, kizárólag azonosításra használjuk.
+      Az adatait biztonságban tartjuk, és kizárólag azonosításra használjuk.
         {/* <a href="#">Terms of Service</a>{" "}
         and <a href="#">Privacy Policy</a>. */}
       </div>
