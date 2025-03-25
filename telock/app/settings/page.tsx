@@ -1,8 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { useSession } from "next-auth/react";
-
+import { signOut, useSession } from "next-auth/react";
 import { AppSidebar } from "@/components/app-sidebar"
 import {
   Slash
@@ -67,6 +66,8 @@ export default function ChangePassword() {
 
     const data = await res.json();
     setMessage(data.message);
+
+    signOut();
   };
 
   return (
@@ -98,7 +99,7 @@ export default function ChangePassword() {
 
 
       <div className="flex w-full max-w-sm flex-col gap-6">
-        <a href="/dashboard" className="flex items-center gap-2 self-center font-medium">
+        <a href="/" className="flex items-center gap-2 self-center font-medium">
           {/* <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
       <GalleryVerticalEnd className="size-4" />
     </div>
@@ -111,7 +112,7 @@ export default function ChangePassword() {
         <div className="flex flex-col gap-6">
           <Button variant="ghost" className="absolute left-4 top-4 p-2" asChild>
 
-            <Link href="/">
+            <Link href="/dashboard">
 
               <ChevronLeft /> Vissza
 
@@ -126,7 +127,8 @@ export default function ChangePassword() {
             </CardHeader>
             <CardContent>
               <form onSubmit={handleChangePassword}>
-                <div className="grid gap-6 p-4">
+                <div className="grid gap-6">
+                <div className="grid gap-6">
                   <div className="grid gap-2">
                     <Label htmlFor="old_password">Régi jelszó</Label>
                     <Input
@@ -139,6 +141,7 @@ export default function ChangePassword() {
                     />
                   </div>
                   <div className="grid gap-2">
+                  <div className="flex items-center">
                     <Label htmlFor="new_password">Új jelszó</Label>
                     <Input
                       name="new_password"
@@ -149,10 +152,12 @@ export default function ChangePassword() {
                       required
                     />
                   </div>
+                  </div>
                   <Button type="submit" className="w-full">
                     Jelszó módosítása
                   </Button>
                   {message && <p className="text-center text-sm mt-2">{message}</p>}
+                </div>
                 </div>
               </form>
 
