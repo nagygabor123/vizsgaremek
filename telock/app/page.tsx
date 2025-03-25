@@ -62,11 +62,11 @@ export default async function Home() {
         <Button className="mt-6">Kapcsolatfelvétel</Button>
       </section>
 
-      <div className="w-full max-w-3xl bg-gradient-to-r from-blue-600 to-white p-4 md:p-8 rounded-lg shadow">
+    {/*  <div className="w-full max-w-3xl bg-gradient-to-r from-blue-600 to-white p-4 md:p-8 rounded-lg shadow">
 
-        <Image src="/example.png" alt="dashbiard" width={800} height={600} className="w-full h-auto rounded-lg" priority /> {/*width={800} height={400} */}
+        <Image src="/example.png" alt="dashbiard" width={800} height={600} className="w-full h-auto rounded-lg" priority /> 
 
-      </div>
+      </div>*/}
 
    
 

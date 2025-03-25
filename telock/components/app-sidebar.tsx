@@ -216,11 +216,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-
-  
-
+            <DropdownMenuItem asChild>
+  <Link href="/settings">
+    <Settings className="text-gray-800"/>
+    Fiók beállításai
+  </Link>
+</DropdownMenuItem>
             <DropdownMenuItem>
-              <LogOut />
+              <LogOut className="text-gray-800"/>
               <span
                 onClick={() => {
                   signOut();
