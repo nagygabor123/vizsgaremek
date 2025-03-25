@@ -138,7 +138,7 @@ export default function ChangePassword() {
                     {error && (
                       <Alert variant="destructive">
                         <AlertCircle className="h-4 w-4" />
-                        <AlertTitle>Hiba</AlertTitle>
+                        <AlertTitle>Sikeretlen jelszóváltoztatás </AlertTitle>
                         <AlertDescription>
                           {error}
                         </AlertDescription>
@@ -146,9 +146,9 @@ export default function ChangePassword() {
                     )}
                     
                     {success && (
-                      <Alert>
-                        <CircleCheck className="h-4 w-4 text-green-500" />
-                        <AlertTitle>Siker</AlertTitle>
+                      <Alert variant="siker">
+                        <CircleCheck className="h-4 w-4" />
+                        <AlertTitle>Sikeres jelszóváltoztatás</AlertTitle>
                         <AlertDescription>
                           {success}
                         </AlertDescription>
