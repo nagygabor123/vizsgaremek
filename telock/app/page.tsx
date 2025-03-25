@@ -62,9 +62,9 @@ export default async function Home() {
         <Button className="mt-6">Kapcsolatfelvétel</Button>
       </section>
 
-      <div className="w-full max-w-2xl bg-gradient-to-r from-blue-600 to-white p-4 md:p-8 rounded-xl shadow">
+      <div className="w-full max-w-3xl bg-gradient-to-r from-blue-600 to-white p-4 md:p-8 rounded-lg shadow">
 
-        <Image src="/example.png" alt="Illustration" width={800} height={400} className="w-full h-auto rounded-xl" priority /> {/*width={800} height={400} */}
+        <Image src="/example.png" alt="dashbiard" width={800} height={600} className="w-full h-auto rounded-lg" priority /> {/*width={800} height={400} */}
 
       </div>
 
@@ -178,12 +178,13 @@ export default async function Home() {
             Minden, amire szüksége van a rendszer hatékony használatához. A felhasználói dokumenctáció segít a könnyű navigálásban, míg a fejlesztői technikai leírásokat tartalmaz.
           </p>
           <div className="flex gap-4 mt-3">
-            <Button className="">
-              Fejlesztői dokumentáció
+          <Button  asChild>
+              <Link href="/api-docs">API dokumentáció</Link>
             </Button>
-            <Button className="">
-              Felhasználói dokumentáció
+            <Button  asChild>
+              <Link href="#">Fejlesztői és felhasználói dokumenctáció</Link>
             </Button>
+       
           </div>
         </div>
         
