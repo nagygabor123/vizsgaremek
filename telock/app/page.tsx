@@ -178,12 +178,13 @@ export default async function Home() {
             Minden, amire szüksége van a rendszer hatékony használatához. A felhasználói dokumenctáció segít a könnyű navigálásban, míg a fejlesztői technikai leírásokat tartalmaz.
           </p>
           <div className="flex gap-4 mt-3">
-            <Button className="">
-              Fejlesztői dokumentáció
+          <Button  asChild>
+              <Link href="/api-docs">API dokumentáció</Link>
             </Button>
-            <Button className="">
-              Felhasználói dokumentáció
+            <Button  asChild>
+              <Link href="#">Fejlesztői és felhasználói dokumenctáció</Link>
             </Button>
+       
           </div>
         </div>
         
