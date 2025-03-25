@@ -422,6 +422,57 @@
                 }
             }
         },
+        "/api/system/groupAccess": {
+            "post": {
+                "summary": "Egy csoport engedélyezése a szekrényhez",
+                "description": "Ez az API végpont lehetővé teszi egy adott csoporthoz tartozó diákok RFID hozzáférésének frissítését az adatbázisban. A végpont a megadott diákokhoz (student_id) rendelt hozzáférési státuszokat módosítja 'nyitható' értékre.",
+                "tags": [
+                    "System"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "students": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "description": "A diákok azonosítóinak listája, akiknek az 'access' mezőjét frissíteni szeretnénk.",
+                                        "example": [
+                                            "OM7000",
+                                            "OM7001",
+                                            "OM7002",
+                                            "OM7003"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "students"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "A megadott diákok 'access' frissítve 'nyitható'-ra"
+                    },
+                    "400": {
+                        "description": "'students' tömb hiányzik vagy üres"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    },
+                    "500": {
+                        "description": "Hiba az adatok frissítésekor"
+                    }
+                }
+            }
+        },
         "/api/timetable/getClassTimetable": {
             "get": {
                 "summary": "Egy adott osztály órarendjének lekérdezése",
