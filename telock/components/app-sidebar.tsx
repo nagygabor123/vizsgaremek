@@ -223,7 +223,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   </Link>
 </DropdownMenuItem>
             <DropdownMenuItem>
-              <LogOut />
+              <LogOut className="text-gray-800"/>
               <span
                 onClick={() => {
                   signOut();
