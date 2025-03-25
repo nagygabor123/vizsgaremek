@@ -51,13 +51,17 @@ export default function ChangePassword() {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<boolean>(false);
+
 
   const handleChangePassword = async (e: FormEvent) => {
     e.preventDefault();
+    setError(null);
+    setSuccess(false);
 
     if (!session?.user?.password) {
-      setMessage("Hiba: nincs bejelentkezett felhasználó.");
-      return;
+      throw new Error("Nincs bejelentkezett felhasználó");
     }
 
     const res = await fetch("https://vizsgaremek-mocha.vercel.app/api/config/changePassword", {
@@ -67,8 +71,14 @@ export default function ChangePassword() {
     });
 
     const data = await res.json();
-    setMessage(data.message);
 
+
+    if (!res.ok) {
+      throw new Error(data.message || "Ismeretlen hiba történt");
+    }
+
+    setMessage(data.message);
+    setSuccess(true);
     
   };
 
@@ -159,6 +169,28 @@ export default function ChangePassword() {
                   <Button type="submit" className="w-full">
                     Jelszó módosítása
                   </Button>
+
+                  {error && 
+  <Alert variant="destructive">
+    <AlertCircle className="h-4 w-4" />
+    <AlertTitle>Jelszóváltoztatás sikertelen</AlertTitle>
+    <AlertDescription>
+      {error}
+    </AlertDescription>
+  </Alert>
+}
+
+{success && 
+  <Alert variant="siker">
+    <CircleCheck className="h-4 w-4" />
+    <AlertTitle>Sikeres jelszómódosítás</AlertTitle>
+    <AlertDescription>
+      Az új jelszóval legközelebb tudsz bejelentkezni.
+    </AlertDescription>
+  </Alert>
+}
+
+
                   {message && <p className="text-center text-sm mt-2">{message}</p>}
                 </div>
                 </div>
