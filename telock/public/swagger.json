@@ -441,7 +441,13 @@
                                         "items": {
                                             "type": "string"
                                         },
-                                        "description": "A diákok azonosítóinak listája, akiknek az 'access' mezőjét frissíteni szeretnénk."
+                                        "description": "A diákok azonosítóinak listája, akiknek az 'access' mezőjét frissíteni szeretnénk.",
+                                        "example": [
+                                            "OM7000",
+                                            "OM7001",
+                                            "OM7002",
+                                            "OM7003"
+                                        ]
                                     }
                                 },
                                 "required": [
