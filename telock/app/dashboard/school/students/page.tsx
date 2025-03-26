@@ -99,7 +99,8 @@ export default function Home() {
 
   const fetchStudents = async () => {
     try {
-      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/students/read');
+      const API_BASE_URL = window.location.origin;
+    const response = await fetch(`${API_BASE_URL}/api/students/read`);
       const data = await response.json();
       setStudents(data);
       setHasStudents(data.length > 0); // Ha van legalább egy diák, akkor true
@@ -112,7 +113,10 @@ export default function Home() {
 
   // Fetch system status from the database
   const fetchSystemStatus = async () => {
-    const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/system/status');
+
+    const API_BASE_URL = window.location.origin;
+   
+    const response = await fetch(`${API_BASE_URL}/api/system/status`);
     if (response.ok) {
       const data = await response.json();
       setSystemClose(data.status === "nyithato" ? false : true);
@@ -137,7 +141,8 @@ export default function Home() {
     const fetchTimetables = async () => {
       try {
         // Fetch all students' timetable data at once from the new API endpoint
-        const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/timetable/allScheduleStart');
+        const API_BASE_URL = window.location.origin;
+        const response = await fetch(`${API_BASE_URL}/api/timetable/allScheduleStart`);
         if (!response.ok) {
           throw new Error('Nem sikerült lekérni az összes diák órarendjét.');
         }
@@ -233,7 +238,8 @@ export default function Home() {
 
   const handleStudentOpen = async (student_id: string) => {
     try {
-      const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/system/studentAccess?student=${student_id}`, {
+      const API_BASE_URL = window.location.origin;
+      const response = await fetch(`${API_BASE_URL}/api/system/studentAccess?student=${student_id}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       });
