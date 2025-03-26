@@ -92,14 +92,14 @@ export default function Home() {
 
 
 
-
+  const API_BASE_URL = window.location.origin;
 
   // Fetch students from the database
   const [loading, setLoading] = useState(true); // Betöltési állapot
 
   const fetchStudents = async () => {
     try {
-      const API_BASE_URL = window.location.origin;
+    
     const response = await fetch(`${API_BASE_URL}/api/students/read`);
       const data = await response.json();
       setStudents(data);
@@ -114,7 +114,7 @@ export default function Home() {
   // Fetch system status from the database
   const fetchSystemStatus = async () => {
 
-    const API_BASE_URL = window.location.origin;
+   
    
     const response = await fetch(`${API_BASE_URL}/api/system/status`);
     if (response.ok) {
@@ -141,7 +141,7 @@ export default function Home() {
     const fetchTimetables = async () => {
       try {
         // Fetch all students' timetable data at once from the new API endpoint
-        const API_BASE_URL = window.location.origin;
+   
         const response = await fetch(`${API_BASE_URL}/api/timetable/allScheduleStart`);
         if (!response.ok) {
           throw new Error('Nem sikerült lekérni az összes diák órarendjét.');
@@ -238,7 +238,7 @@ export default function Home() {
 
   const handleStudentOpen = async (student_id: string) => {
     try {
-      const API_BASE_URL = window.location.origin;
+    
       const response = await fetch(`${API_BASE_URL}/api/system/studentAccess?student=${student_id}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
