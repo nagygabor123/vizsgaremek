@@ -160,7 +160,7 @@ export default function AddEmployeePage() {
     setMessage('');
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/config/addEmployee`, {
+      const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/config/addEmployee`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ full_name: fullName, position: position, osztalyfonok: osztaly, short_name: shortname }),
