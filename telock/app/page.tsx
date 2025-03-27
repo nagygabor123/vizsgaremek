@@ -51,8 +51,8 @@ export default async function Home() {
       <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
         <Image
           src="/desktop.png"
-          width={1200}
-          height={900}
+          width={1600}
+          height={1200}
           className="hidden md:block rounded-sm border shadow-lg drop-shadow-lg shadow-blue-500/50"
           alt="Screenshots of the dashboard project showing desktop version"
         />
