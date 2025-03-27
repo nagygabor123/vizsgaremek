@@ -303,9 +303,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
 
       <SidebarFooter>
-        <span className="text-xs text-center">
-          © {new Date().getFullYear()} telock
-        </span>
+
+<Link href="/" className="text-xs text-center">
+  © {new Date().getFullYear()} telock
+</Link>
+
       </SidebarFooter>
     </Sidebar>
   );
