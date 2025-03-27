@@ -152,25 +152,36 @@ export default async function Home() {
         </div>
       </section>
 
-      <section id="dokumentaciok" className="space-y-2 py-4 md:py-6 lg:py-8">
-        <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-          <h2 className="font-heading text-2xl font-bold leading-[1.1] sm:text-2xl md:text-4xl">
-            Dokumentációk
-          </h2>
-          <p className="max-w-[85%] leading-normal text-muted-foreground text-sm md:text-base">
-            Minden, amire szüksége van a rendszer hatékony használatához.
-          </p>
-          <div className="flex gap-4 mt-3">
-            <Button asChild>
-              <Link href="/api-docs">API dokumentáció</Link>
+      <section id="dokumentaciok" className="py-6 md:py-8 lg:py-12">
+      <div className="container mx-auto max-w-3xl text-center">
+        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+          Dokumentációk
+        </h2>
+        <p className="mt-2 text-muted-foreground text-base sm:text-lg">
+          Minden, amire szüksége van a rendszer hatékony használatához.
+        </p>
+        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="rounded-lg border bg-card p-4 shadow-sm">
+            <h3 className="text-lg font-semibold">API Dokumentáció</h3>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Fejlesztőknek szóló API-referencia és példák.
+            </p>
+            <Button asChild className="mt-3 w-full">
+              <Link href="/api-docs">Megnyitás</Link>
             </Button>
-            <Button asChild>
-              <Link href="#">Fejlesztői és felhasználói dokumenctáció</Link>
+          </div>
+          <div className="rounded-lg border bg-card p-4 shadow-sm">
+            <h3 className="text-lg font-semibold">Fejlesztői & Felhasználói Dokumentáció</h3>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Útmutató a rendszer hatékony használatához.
+            </p>
+            <Button asChild className="mt-3 w-full">
+              <Link href="#">Megnyitás</Link>
             </Button>
-
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
       <footer>
         <div className="container mx-auto flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
