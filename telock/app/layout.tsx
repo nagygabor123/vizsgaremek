@@ -28,8 +28,8 @@ import { GeistMono } from 'geist/font/mono';
 
 
 export const metadata: Metadata = {
-  title: "telock",
-  description: "Automatikus telefontároló rendszer",
+  title: "telock - Automatikus telefontároló rendszer",
+  description: "telock - Automatikus telefontároló rendszer",
 };
 
 export default async function RootLayout({

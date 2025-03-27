@@ -145,7 +145,7 @@ export default async function Home() {
               <div className="space-y-2">
                 <h3 className="font-bold">Szoftverfrissítések</h3>
                 <p className="text-sm text-muted-foreground">
-                  A rendszer mindig a legújabb funkciókat és biztonsági javításokat biztosítsa.
+                  A rendszer mindig a legújabb funkciókat és biztonsági javításokat tartalmazza.
                 </p>
               </div>
             </div>
@@ -156,7 +156,7 @@ export default async function Home() {
               <div className="space-y-2">
                 <h3 className="font-bold">Több tárolóhely támogatása</h3>
                 <p className="text-sm text-muted-foreground">
-                  Lehetőség van arra, hogy több fiókot telepítsenek az iskola különböző pontjaira.
+                  Lehetőség van arra, hogy több tárolószekrényt telepítsenek az iskola különböző pontjaira.
                 </p>
               </div>
             </div>
@@ -175,7 +175,7 @@ export default async function Home() {
             Dokumentációk
           </h2>
           <p className="max-w-[85%] leading-normal text-muted-foreground text-sm md:text-base">
-            Minden, amire szüksége van a rendszer hatékony használatához. A felhasználói dokumenctáció segít a könnyű navigálásban, míg a fejlesztői technikai leírásokat tartalmaz.
+            Minden, amire szüksége van a rendszer hatékony használatához.
           </p>
           <div className="flex gap-4 mt-3">
           <Button  asChild>

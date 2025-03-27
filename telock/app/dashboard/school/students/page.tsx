@@ -629,15 +629,16 @@ export default function Home() {
                                       />
                                     </div>
 
-
+                                    <div className="grid gap-2">
+                                    <Label htmlFor="rfid_tag">Osztály és csoportok</Label>
                                     <Input
                                       type="text"
                                       name="class"
-                                      placeholder="Class"
+                                      placeholder=""
                                       value={formData.class}
                                       onChange={e => setFormData({ ...formData, class: e.target.value })}
                                     />
-
+  </div>
 
                                     <div className="grid gap-2">
                                       <Label htmlFor="rfid_tag">RFID azonosító</Label>
