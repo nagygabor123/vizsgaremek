@@ -73,7 +73,7 @@ export default async function Home() {
     src="/desktop.png"
     width={1200} 
     height={900}
-    className="hidden md:block rounded-md border border-slate-500 shadow-lg drop-shadow-lg shadow-blue-500/50"
+    className="hidden md:block rounded-md border shadow-lg drop-shadow-lg shadow-blue-500/50"
     alt="Screenshots of the dashboard project showing desktop version"
   />
   
@@ -81,7 +81,7 @@ export default async function Home() {
     src="/mobile.png"
     width={560}
     height={620}
-    className="block md:hidden rounded-md border border-slate-500 shadow-lg drop-shadow-lg shadow-blue-500/50"
+    className="block md:hidden rounded-md border shadow-lg drop-shadow-lg shadow-blue-500/50"
     alt="Screenshot of the dashboard project showing mobile version"
   />
 </div>
