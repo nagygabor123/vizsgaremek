@@ -45,10 +45,9 @@ export default async function Home() {
         <p className="mt-4 text-gray-600 max-w-2xl mx-auto text-sm md:text-base text-muted-foreground">
           Telefontároló rendszerünk biztosítja, hogy az iskolák diákjai biztonságosan és kényelmesen tárolhassák mobiltelefonjaikat az oktatási időszak alatt, miközben csökkentik a zavaró tényezőket az órákon.
         </p>
-        {/* <Button className="mt-6">Kapcsolatfelvétel</Button> */}
       </section>
 
-      <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
+      <div className="flex items-center justify-center p-6 lg:w-4/5 md:px-28 md:py-12">
         <Image
           src="/desktop.png"
           width={1600}
@@ -64,6 +63,7 @@ export default async function Home() {
           alt="Screenshot of the dashboard project showing mobile version"
         />
       </div>
+
 
       <section id="miert" className="space-y-2 py-4 md:py-6 lg:py-8 mt-8">
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
@@ -180,7 +180,7 @@ export default async function Home() {
           <p className="text-sm md:text-right">© 2025</p>
         </div>
       </footer>
-      
+
     </div>
   );
 }
