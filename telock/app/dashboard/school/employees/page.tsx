@@ -429,7 +429,7 @@ export default function AddEmployeePage() {
                       />
                     </div>
 
-                    <div className="grid gap-2">
+                    {/* <div className="grid gap-2">
                       <Label htmlFor="jelszo">Ideiglenes jelszó</Label>
                       <Input
                         disabled
@@ -437,7 +437,7 @@ export default function AddEmployeePage() {
                         id="jelszo"
                         type="text"
                         placeholder={`${shortname}123`} />
-                    </div>
+                    </div> */}
 
 
 
