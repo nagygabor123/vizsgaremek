@@ -307,9 +307,6 @@ export default function AddEmployeePage() {
     return null;
   }
 
-  //const isOsztalyfonok = editPosition === "osztalyfonok";
-
-
 
   return (
     <SidebarProvider>
@@ -344,24 +341,6 @@ export default function AddEmployeePage() {
         </header>
         <div className="overflow-x-auto">
 
-
-          {/* <div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
-            <div className="grid auto-rows-min gap-4 w-full">
-              {isButtonVisible && (
-              <div className="aspect-[18/1] rounded-xl bg-red-100 flex items-center px-4 w-full box-border overflow-hidden">
-                <TriangleAlert className="text-red-500" />
-                <p className="text-sm truncate ml-3">
-                A rendszer nincs beállítva. Kérjük, végezze el a szükséges konfigurációt!
-                </p>
-          
-              <AppKonfig/>
-              </div>
-               )} 
-             
-            </div>
-          </div> */}
-
-
           <div>
             {loading2 ? (
               <div className="flex items-center justify-center min-h-screen">
@@ -370,7 +349,6 @@ export default function AddEmployeePage() {
             ) : (
               <>
                 {!hasStudents && <AppKonfig />}
-                {/* <p>{hasStudents ? "Már vannak diákok az adatbázisban." : "Nincsenek diákok."}</p> */}
               </>
             )}
           </div>
@@ -636,21 +614,8 @@ export default function AddEmployeePage() {
                                 <Button onClick={handleUpdate} >Mentés</Button>
                               </div>
 
-
-
-
-
-
-                              {/* <DialogFooter>
-
-                                <Button onClick={handleUpdate} >Mentés</Button>
-
-                              </DialogFooter> */}
                             </DialogContent>
                           </Dialog>
-
-
-
 
                           <AlertDialog>
                             <AlertDialogTrigger disabled={employee.position === 'Tanár' || employee.position === "igazgato" || employee.position === "igazgatohelyettes"} >
@@ -669,10 +634,6 @@ export default function AddEmployeePage() {
                               </AlertDialogFooter>
                             </AlertDialogContent>
                           </AlertDialog>
-
-
-                          {/* <Button variant="ghost" onClick={() => handleDelete(employee.admin_id)}><X className="w-4 h-4 inline-block" /></Button>  */}
-
                         </td>
                       </tr>
                     ))
@@ -687,18 +648,8 @@ export default function AddEmployeePage() {
               <Button variant="ghost" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>Következő  <ChevronRight /></Button>
             </div>
 
-
-
-
-
-
           </div>
         </div>
-
-        {/*{message && <p>{message}</p>}*/}
-
-
-
       </SidebarInset>
     </SidebarProvider>
   );

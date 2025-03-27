@@ -1,6 +1,6 @@
 import { type Session, type TokenSet, type User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { authorize } from "@/app/api/auth/authorize"; // Új import
+import { authorize } from "@/app/api/auth/authorize";
 
 export const authOptions = {
   session: {
@@ -16,7 +16,7 @@ export const authOptions = {
         password: {},
       },
       async authorize(credentials, req) {
-        return await authorize(credentials); // Külön szerveroldali függvény meghívása
+        return await authorize(credentials);
       },
     }),
   ],

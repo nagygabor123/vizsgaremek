@@ -220,7 +220,7 @@ const SheetComponent: React.FC = () => {
                 <p className="text-sm truncate ml-3 text-red-600">
                   A rendszer nincs beállítva. Kérjük, végezze el a szükséges konfigurációt!
                 </p>
-                <Button className="ml-auto" variant="destructive" onClick={() => setIsSheetOpen(true)}>
+                <Button data-testid="configure-button"  className="ml-auto" variant="destructive" onClick={() => setIsSheetOpen(true)}>
                   Konfigurálás most
                 </Button>
               </div>

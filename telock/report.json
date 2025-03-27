@@ -1,0 +1,346 @@
+{
+  "config": {
+    "configFile": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/playwright.config.ts",
+    "rootDir": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "report.json"
+        }
+      ],
+      [
+        "html",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.51.1",
+    "workers": 4,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "employees.spec.ts",
+      "file": "employees.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Alkalmazott kezelése",
+          "file": "employees.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Új alkalmazott hozzáadása",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 30027,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests/employees.spec.ts",
+                            "column": 12,
+                            "line": 32
+                          },
+                          "message": "Error: page.waitForResponse: Test timeout of 30000ms exceeded.\n\n\u001b[0m \u001b[90m 30 |\u001b[39m     \u001b[90m// Mentés és várakozás a táblázat frissülésére\u001b[39m\n \u001b[90m 31 |\u001b[39m     \u001b[36mawait\u001b[39m \u001b[33mPromise\u001b[39m\u001b[33m.\u001b[39mall([\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 32 |\u001b[39m       page\u001b[33m.\u001b[39mwaitForResponse(response \u001b[33m=>\u001b[39m \n \u001b[90m    |\u001b[39m            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 33 |\u001b[39m         response\u001b[33m.\u001b[39murl()\u001b[33m.\u001b[39mincludes(\u001b[32m'/api/config/addEmployee'\u001b[39m) \u001b[33m&&\u001b[39m\n \u001b[90m 34 |\u001b[39m         response\u001b[33m.\u001b[39mstatus() \u001b[33m===\u001b[39m \u001b[35m200\u001b[39m\n \u001b[90m 35 |\u001b[39m       )\u001b[33m,\u001b[39m\u001b[0m\n\u001b[2m    at /Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests/employees.spec.ts:32:12\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-03-27T17:22:37.732Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "173bfcde56ef5531431c-3979382400b5bd89e9be",
+              "file": "employees.spec.ts",
+              "line": 17,
+              "column": 7
+            },
+            {
+              "title": "Alkalmazott szerkesztése",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "interrupted",
+                      "duration": 3224,
+                      "error": {
+                        "message": "Error: page.waitForURL: Test ended.\n=========================== logs ===========================\nwaiting for navigation to \"/dashboard\" until \"load\"\n============================================================",
+                        "stack": "Error: page.waitForURL: Test ended.\n=========================== logs ===========================\nwaiting for navigation to \"/dashboard\" until \"load\"\n============================================================\n    at /Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests/employees.spec.ts:10:16",
+                        "location": {
+                          "file": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests/employees.spec.ts",
+                          "column": 16,
+                          "line": 10
+                        },
+                        "snippet": "\u001b[0m \u001b[90m  8 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'input[name=\"password\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'admin'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m  9 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m'button[type=\"submit\"]'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 10 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForURL(\u001b[32m'/dashboard'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 11 |\u001b[39m     \n \u001b[90m 12 |\u001b[39m     \u001b[90m// Navigálás az alkalmazottak oldalára\u001b[39m\n \u001b[90m 13 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/dashboard/school/employees'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests/employees.spec.ts",
+                            "column": 16,
+                            "line": 10
+                          },
+                          "message": "Error: page.waitForURL: Test ended.\n=========================== logs ===========================\nwaiting for navigation to \"/dashboard\" until \"load\"\n============================================================\n\n\u001b[0m \u001b[90m  8 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'input[name=\"password\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'admin'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m  9 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m'button[type=\"submit\"]'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 10 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForURL(\u001b[32m'/dashboard'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 11 |\u001b[39m     \n \u001b[90m 12 |\u001b[39m     \u001b[90m// Navigálás az alkalmazottak oldalára\u001b[39m\n \u001b[90m 13 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/dashboard/school/employees'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests/employees.spec.ts:10:16\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-03-27T17:23:08.217Z",
+                      "attachments": [
+                        {
+                          "name": "_prompt-0",
+                          "contentType": "text/markdown",
+                          "body": "IyBJbnN0cnVjdGlvbnMKCi0gRm9sbG93aW5nIFBsYXl3cmlnaHQgdGVzdCBmYWlsZWQuCi0gRXhwbGFpbiB3aHksIGJlIGNvbmNpc2UsIHJlc3BlY3QgUGxheXdyaWdodCBiZXN0IHByYWN0aWNlcy4KLSBQcm92aWRlIGEgc25pcHBldCBvZiBjb2RlIHdpdGggdGhlIGZpeCwgaWYgcG9zc2libGUuCgojIFRlc3QgaW5mbwoKLSBOYW1lOiBBbGthbG1hem90dCBrZXplbMOpc2UgPj4gQWxrYWxtYXpvdHQgc3plcmtlc3p0w6lzZQotIExvY2F0aW9uOiAvVXNlcnMvc3phbGthaWFkYWFtL0RvY3VtZW50cy9HaXRIdWIvdml6c2dhcmVtZWsvdGVsb2NrL3Rlc3RzL2VtcGxveWVlcy5zcGVjLnRzOjQ4OjcKCiMgRXJyb3IgZGV0YWlscwoKYGBgCkVycm9yOiBwYWdlLndhaXRGb3JVUkw6IFRlc3QgZW5kZWQuCj09PT09PT09PT09PT09PT09PT09PT09PT09PSBsb2dzID09PT09PT09PT09PT09PT09PT09PT09PT09PQp3YWl0aW5nIGZvciBuYXZpZ2F0aW9uIHRvICIvZGFzaGJvYXJkIiB1bnRpbCAibG9hZCIKPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CiAgICBhdCAvVXNlcnMvc3phbGthaWFkYWFtL0RvY3VtZW50cy9HaXRIdWIvdml6c2dhcmVtZWsvdGVsb2NrL3Rlc3RzL2VtcGxveWVlcy5zcGVjLnRzOjEwOjE2CmBgYAoKIyBUZXN0IHNvdXJjZQoKYGBgdHMKICAgMSB8IGltcG9ydCB7IHRlc3QsIGV4cGVjdCB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwogICAyIHwKICAgMyB8IHRlc3QuZGVzY3JpYmUoJ0Fsa2FsbWF6b3R0IGtlemVsw6lzZScsICgpID0+IHsKICAgNCB8ICAgdGVzdC5iZWZvcmVFYWNoKGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICA1IHwgICAgIC8vIEJlamVsZW50a2V6w6lzIGEgcmVuZHN6ZXJiZSAobcOzZG9zw610c2QgYSBoaXRlbGVzw610w6lzaSBhZGF0b2thdCkKICAgNiB8ICAgICBhd2FpdCBwYWdlLmdvdG8oJy9sb2dpbicpOwogICA3IHwgICAgIGF3YWl0IHBhZ2UuZmlsbCgnaW5wdXRbbmFtZT0ic2hvcnRfbmFtZSJdJywgJ0FkQWQnKTsKICAgOCB8ICAgICBhd2FpdCBwYWdlLmZpbGwoJ2lucHV0W25hbWU9InBhc3N3b3JkIl0nLCAnYWRtaW4nKTsKICAgOSB8ICAgICBhd2FpdCBwYWdlLmNsaWNrKCdidXR0b25bdHlwZT0ic3VibWl0Il0nKTsKPiAgMTAgfCAgICAgYXdhaXQgcGFnZS53YWl0Rm9yVVJMKCcvZGFzaGJvYXJkJyk7CiAgICAgIHwgICAgICAgICAgICAgICAgXiBFcnJvcjogcGFnZS53YWl0Rm9yVVJMOiBUZXN0IGVuZGVkLgogICAxMSB8ICAgICAKICAgMTIgfCAgICAgLy8gTmF2aWfDoWzDoXMgYXogYWxrYWxtYXpvdHRhayBvbGRhbMOhcmEKICAgMTMgfCAgICAgYXdhaXQgcGFnZS5nb3RvKCcvZGFzaGJvYXJkL3NjaG9vbC9lbXBsb3llZXMnKTsKICAgMTQgfCAgICAgYXdhaXQgcGFnZS53YWl0Rm9yU2VsZWN0b3IoJ3RhYmxlJyk7CiAgIDE1IHwgICB9KTsKICAgMTYgfAogICAxNyB8ICAgdGVzdCgnw5pqIGFsa2FsbWF6b3R0IGhvenrDoWFkw6FzYScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICAxOCB8ICAgICAvLyBLYXR0aW50w6FzIGF6ICLDmmogYWxrYWxtYXpvdHQiIGdvbWJyYQogICAxOSB8ICAgICBhd2FpdCBwYWdlLmNsaWNrKCd0ZXh0PcOaaiBhbGthbG1hem90dCBob3p6w6FhZMOhcycpOwogICAyMCB8ICAgICAKICAgMjEgfCAgICAgLy8gxbBybGFwIGtpdMO2bHTDqXNlCiAgIDIyIHwgICAgIGF3YWl0IHBhZ2UuZmlsbCgnaW5wdXRbaWQ9ImZ1bGxOYW1lIl0nLCAnVGVzenQgQWxrYWxtYXpvdHQnKTsKICAgMjMgfCAgICAgYXdhaXQgcGFnZS5maWxsKCdpbnB1dFtpZD0ic2hvcnROYW1lIl0nLCAnVGVBbCcpOwogICAyNCB8ICAgICAKICAgMjUgfCAgICAgLy8gUG96w61jacOzIGtpdsOhbGFzenTDoXNhCiAgIDI2IHwgICAgIGF3YWl0IHBhZ2UuY2xpY2soJ3RleHQ9VsOhbGFzc3pvbi4uLicpOwogICAyNyB8ICAgICBhd2FpdCBwYWdlLndhaXRGb3JTZWxlY3RvcignW3JvbGU9Imxpc3Rib3giXScpOwogICAyOCB8ICAgICBhd2FpdCBwYWdlLmNsaWNrKCdkaXZbcm9sZT0ib3B0aW9uIl06aGFzLXRleHQoIklnYXpnYXTDs2hlbHlldHRlcyIpJyk7CiAgIDI5IHwgICAgIAogICAzMCB8ICAgICAvLyBNZW50w6lzIMOpcyB2w6FyYWtvesOhcyBhIHTDoWJsw6F6YXQgZnJpc3PDvGzDqXPDqXJlCiAgIDMxIHwgICAgIGF3YWl0IFByb21pc2UuYWxsKFsKICAgMzIgfCAgICAgICBwYWdlLndhaXRGb3JSZXNwb25zZShyZXNwb25zZSA9PiAKICAgMzMgfCAgICAgICAgIHJlc3BvbnNlLnVybCgpLmluY2x1ZGVzKCcvYXBpL2NvbmZpZy9hZGRFbXBsb3llZScpICYmCiAgIDM0IHwgICAgICAgICByZXNwb25zZS5zdGF0dXMoKSA9PT0gMjAwCiAgIDM1IHwgICAgICAgKSwKICAgMzYgfCAgICAgICBwYWdlLmNsaWNrKCdidXR0b246aGFzLXRleHQoIk1lbnTDqXMiKScpCiAgIDM3IHwgICAgIF0pOwogICAzOCB8ICAgCiAgIDM5IHwgICAgIC8vIEV4cGxpY2l0IHbDoXJha296w6FzIGEgdMOhYmzDoXphdCBmcmlzc8O8bMOpc8OpcmUKICAgNDAgfCAgICAgYXdhaXQgcGFnZS53YWl0Rm9yU2VsZWN0b3IoJ3RhYmxlIHRib2R5IHRyOmhhcy10ZXh0KCJUZXN6dCBBbGthbG1hem90dCIpJywgeyB0aW1lb3V0OiAxMDAwMCB9KTsKICAgNDEgfCAgICAgCiAgIDQyIHwgICAgIC8vIFBvbnRvc2FiYiBlbGxlbsWRcnrDqXMgYSB0w6FibMOhemF0IHNvcsOhcmEKICAgNDMgfCAgICAgY29uc3QgbmV3RW1wbG95ZWVSb3cgPSBwYWdlLmxvY2F0b3IoJ3RhYmxlIHRib2R5IHRyOmhhcy10ZXh0KCJUZXN6dCBBbGthbG1hem90dCIpJyk7CiAgIDQ0IHwgICAgIGF3YWl0IGV4cGVjdChuZXdFbXBsb3llZVJvdykudG9Db250YWluVGV4dCgnVGVzenQgQWxrYWxtYXpvdHQnKTsKICAgNDUgfCAgICAgYXdhaXQgZXhwZWN0KG5ld0VtcGxveWVlUm93KS50b0NvbnRhaW5UZXh0KCdJZ2F6Z2F0w7NoZWx5ZXR0ZXMnKTsKICAgNDYgfCAgIH0pOwogICA0NyB8CiAgIDQ4IHwgICB0ZXN0KCdBbGthbG1hem90dCBzemVya2VzenTDqXNlJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDQ5IHwgICAgIC8vIEF6IGVsc8WRIGFsa2FsbWF6b3R0IHN6ZXJrZXN6dMOpc8OpbmVrIG1lZ255aXTDoXNhCiAgIDUwIHwgICAgIGNvbnN0IGZpcnN0RW1wbG95ZWUgPSBwYWdlLmxvY2F0b3IoJ3RhYmxlIHRib2R5IHRyJykuZmlyc3QoKTsKICAgNTEgfCAgICAgYXdhaXQgZmlyc3RFbXBsb3llZS5sb2NhdG9yKCdidXR0b246aGFzLXRleHQoIlN6ZXJrZXN6dMOpcyIpJykuY2xpY2soKTsKICAgNTIgfCAgICAgCiAgIDUzIHwgICAgIC8vIE7DqXYgbcOzZG9zw610w6FzYQogICA1NCB8ICAgICBhd2FpdCBwYWdlLmZpbGwoJ2lucHV0W2lkPSJmdWxsTmFtZSJdJywgJ03Ds2Rvc8OtdG90dCBOw6l2Jyk7CiAgIDU1IHwgICAgIAogICA1NiB8ICAgICAvLyBQb3rDrWNpw7MgbcOzZG9zw610w6FzYQogICA1NyB8ICAgICBhd2FpdCBwYWdlLmNsaWNrKCd0ZXh0PVbDoWxhc3N6b24uLi4nKTsKICAgNTggfCAgICAgYXdhaXQgcGFnZS5jbGljaygndGV4dD1Qb3J0w6FzJyk7CiAgIDU5IHwgICAgIAogICA2MCB8ICAgICAvLyBNZW50w6lzCiAgIDYxIHwgICAgIGF3YWl0IHBhZ2UuY2xpY2soJ2J1dHRvbjpoYXMtdGV4dCgiTWVudMOpcyIpJyk7CiAgIDYyIHwgICAgIAogICA2MyB8ICAgICAvLyBFbGxlbsWRcnrDqXMsIGhvZ3kgZnJpc3PDvGx0LWUgYXogYWRhdAogICA2NCB8ICAgICBhd2FpdCBleHBlY3QoZmlyc3RFbXBsb3llZSkudG9Db250YWluVGV4dCgnTcOzZG9zw610b3R0IE7DqXYnKTsKICAgNjUgfCAgICAgYXdhaXQgZXhwZWN0KGZpcnN0RW1wbG95ZWUpLnRvQ29udGFpblRleHQoJ1BvcnTDoXMnKTsKICAgNjYgfCAgIH0pOwogICA2NyB8CiAgIDY4IHwgICB0ZXN0KCdBbGthbG1hem90dCB0w7ZybMOpc2UnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgNjkgfCAgICAgLy8gTWVna2VyZXNzw7xrIGEgdGVzenQgYWxrYWxtYXpvdHRhdAogICA3MCB8ICAgICBjb25zdCB0ZXN0RW1wbG95ZWVSb3cgPSBwYWdlLmxvY2F0b3IoJ3RyOmhhcy10ZXh0KCJUZXN6dCBBbGthbG1hem90dCIpJyk7CiAgIDcxIHwgICAgIAogICA3MiB8ICAgICAvLyBUw7ZybMOpcyBnb21iIG1lZ255b23DoXNhCiAgIDczIHwgICAgIGF3YWl0IHRlc3RFbXBsb3llZVJvdy5sb2NhdG9yKCdidXR0b246aGFzLXRleHQoIlTDtnJsw6lzIiknKS5jbGljaygpOwogICA3NCB8ICAgICAKICAgNzUgfCAgICAgLy8gTWVnZXLFkXPDrXTDqXMgYSBkaWFsw7NndXNiYW4KICAgNzYgfCAgICAgYXdhaXQgcGFnZS5jbGljaygnYnV0dG9uOmhhcy10ZXh0KCJWw6lnbGVnZXPDrXTDqXMiKScpOwogICA3NyB8ICAgICAKICAgNzggfCAgICAgLy8gRWxsZW7FkXJ6w6lzLCBob2d5IGVsdMWxbnQtZSBhIHTDoWJsw6F6YXRiw7NsCiAgIDc5IHwgICAgIGF3YWl0IGV4cGVjdCh0ZXN0RW1wbG95ZWVSb3cpLm5vdC50b0JlVmlzaWJsZSgpOwogICA4MCB8ICAgfSk7CiAgIDgxIHwKICAgODIgfCAgIHRlc3QoJ0tlcmVzw6lzIGFsa2FsbWF6b3R0YWsga8O2esO2dHQnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgODMgfCAgICAgLy8gS2VyZXPDqXMgbsOpdiBhbGFwasOhbgogICA4NCB8ICAgICBhd2FpdCBwYWdlLmZpbGwoJ2lucHV0W3BsYWNlaG9sZGVyPSJLZXJlc8OpcyBuw6l2IHN6ZXJpbnQuLi4iXScsICdNw7Nkb3PDrXRvdHQnKTsKICAgODUgfCAgICAgCiAgIDg2IHwgICAgIC8vIEVsbGVuxZFyesOpcywgaG9neSBjc2FrIGEgbWVnZmVsZWzFkSBzb3JvayBtYXJhZG5hawogICA4NyB8ICAgICBjb25zdCByb3dzID0gcGFnZS5sb2NhdG9yKCd0YWJsZSB0Ym9keSB0cicpOwogICA4OCB8ICAgICBhd2FpdCBleHBlY3Qocm93cykudG9IYXZlQ291bnQoMSk7CiAgIDg5IHwgICAgIGF3YWl0IGV4cGVjdChyb3dzLmZpcnN0KCkpLnRvQ29udGFpblRleHQoJ03Ds2Rvc8OtdG90dCBOw6l2Jyk7CiAgIDkwIHwgICAgIAogICA5MSB8ICAgICAvLyBLZXJlc8OpcyBwb3rDrWNpw7MgYWxhcGrDoW4KICAgOTIgfCAgICAgYXdhaXQgcGFnZS5maWxsKCdpbnB1dFtwbGFjZWhvbGRlcj0iS2VyZXPDqXMgbsOpdiBzemVyaW50Li4uIl0nLCAnJyk7CiAgIDkzIHwgICAgIGF3YWl0IHBhZ2UuZmlsbCgnaW5wdXRbcGxhY2Vob2xkZXI9IktlcmVzw6lzIHBvesOtY2nDsyBzemVyaW50Li4uIl0nLCAnUG9ydMOhcycpOwogICA5NCB8ICAgICAKICAgOTUgfCAgICAgLy8gRWxsZW7FkXJ6w6lzCiAgIDk2IHwgICAgIGF3YWl0IGV4cGVjdChyb3dzKS50b0hhdmVDb3VudCgxKTsKICAgOTcgfCAgICAgYXdhaXQgZXhwZWN0KHJvd3MuZmlyc3QoKSkudG9Db250YWluVGV4dCgnUG9ydMOhcycpOwogICA5OCB8ICAgfSk7CiAgIDk5IHwKICAxMDAgfCAgIHRlc3QoJ0xhcG96w6FzIG3FsWvDtmTDqXNlJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgMTAxIHwgICAgIC8vIFTDtmJiIGFsa2FsbWF6b3R0IGhvenrDoWFkw6FzYSBhIGxhcG96w6FzIHRlc3p0ZWzDqXPDqWhlegogIDEwMiB8ICAgICBmb3IgKGxldCBpID0gMTsgaSA8PSAxNTsgaSsrKSB7CiAgMTAzIHwgICAgICAgYXdhaXQgcGFnZS5jbGljaygndGV4dD3DmmogYWxrYWxtYXpvdHQgaG96esOhYWTDoXMnKTsKICAxMDQgfCAgICAgICBhd2FpdCBwYWdlLmZpbGwoJ2lucHV0W2lkPSJmdWxsTmFtZSJdJywgYEFsa2FsbWF6b3R0ICR7aX1gKTsKICAxMDUgfCAgICAgICBhd2FpdCBwYWdlLmZpbGwoJ2lucHV0W2lkPSJzaG9ydE5hbWUiXScsIGBBbGske2l9YCk7CiAgMTA2IHwgICAgICAgYXdhaXQgcGFnZS5jbGljaygndGV4dD1Ww6FsYXNzem9uLi4uJyk7CiAgMTA3IHwgICAgICAgYXdhaXQgcGFnZS5jbGljaygndGV4dD1UYW7DoXInKTsKICAxMDggfCAgICAgICBhd2FpdCBwYWdlLmNsaWNrKCdidXR0b246aGFzLXRleHQoIk1lbnTDqXMiKScpOwogIDEwOSB8ICAgICB9CiAgMTEwIHwgICAgIApgYGA="
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests/employees.spec.ts",
+                        "column": 16,
+                        "line": 10
+                      }
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "173bfcde56ef5531431c-599b0651465165bf8643",
+              "file": "employees.spec.ts",
+              "line": 48,
+              "column": 7
+            },
+            {
+              "title": "Alkalmazott törlése",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "173bfcde56ef5531431c-576372e3c8da8b38fc3d",
+              "file": "employees.spec.ts",
+              "line": 68,
+              "column": 7
+            },
+            {
+              "title": "Keresés alkalmazottak között",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "173bfcde56ef5531431c-0a3de27d0f4037098db9",
+              "file": "employees.spec.ts",
+              "line": 82,
+              "column": 7
+            },
+            {
+              "title": "Lapozás működése",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "173bfcde56ef5531431c-7abe8d520a972533c5c5",
+              "file": "employees.spec.ts",
+              "line": 100,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "login.spec.ts",
+      "file": "login.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Bejelentkezés teszt",
+          "file": "login.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Sikeres bejelentkezés",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 2687,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-03-27T17:22:37.730Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-eb3495a7a057a49fc43c",
+              "file": "login.spec.ts",
+              "line": 4,
+              "column": 7
+            },
+            {
+              "title": "Sikertelen bejelentkezés",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1680,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-03-27T17:22:40.539Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-085e816658bdf80143a6",
+              "file": "login.spec.ts",
+              "line": 19,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-03-27T17:22:37.287Z",
+    "duration": 34301.170999999995,
+    "expected": 2,
+    "skipped": 4,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

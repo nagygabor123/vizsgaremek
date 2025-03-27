@@ -1,17 +1,9 @@
-import { useEffect } from "react";
-import { Separator } from "@/components/ui/separator"
 import Image from "next/image";
-import { motion } from "framer-motion";
 import Link from "next/link"
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
 import { FileClock, Zap, ChartColumnBig, ShieldCheck, RefreshCw, Server } from "lucide-react";
 import { getServerSession } from "next-auth";
-import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button"
 import localFont from "next/font/local";
-
-
 
 const ZenDots = localFont({
   src: "./fonts/ZenDots-Regular.ttf",
@@ -19,12 +11,11 @@ const ZenDots = localFont({
   weight: "100 900",
 });
 
-
 export default async function Home() {
   const session = await getServerSession();
   return (
     <div className="min-h-screen bg-zinc-50 flex flex-col items-center p-6">
-      
+
       <header className="w-full max-w-6xl flex flex-wrap justify-between items-center py-6 px-4">
         <span className={`${ZenDots.className} text-xl`}>
           telock
@@ -40,12 +31,9 @@ export default async function Home() {
             <Button variant="outline" className="px-4 py-2" asChild>
               <Link href="/dashboard">Vezérlőpult</Link>
             </Button>
-           
           </>
         }
-
         {!session &&
-
           <Button variant="outline" className="px-4 py-2" asChild>
             <Link href="/login">Bejelentkezés</Link>
           </Button>
@@ -54,39 +42,28 @@ export default async function Home() {
 
       <section className="w-full max-w-6xl text-center my-12 px-4">
         <h2 className="text-3xl md:text-6xl font-bold">Biztonságos és kényelmes <span className="text-blue-600">telefontárolás</span> iskoláknak</h2>
-
         <p className="mt-4 text-gray-600 max-w-2xl mx-auto text-sm md:text-base text-muted-foreground">
           Telefontároló rendszerünk biztosítja, hogy az iskolák diákjai biztonságosan és kényelmesen tárolhassák mobiltelefonjaikat az oktatási időszak alatt, miközben csökkentik a zavaró tényezőket az órákon.
         </p>
-        <Button className="mt-6">Kapcsolatfelvétel</Button>
+        {/* <Button className="mt-6">Kapcsolatfelvétel</Button> */}
       </section>
 
-    {/*  <div className="w-full max-w-3xl bg-gradient-to-r from-blue-600 to-white p-4 md:p-8 rounded-lg shadow">
-
-        <Image src="/example.png" alt="dashbiard" width={800} height={600} className="w-full h-auto rounded-lg" priority /> 
-
-      </div>*/}
-
-
-<div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-  <Image
-    src="/desktop.png"
-    width={1200} 
-    height={900}
-    className="hidden md:block rounded-md border shadow-lg drop-shadow-lg shadow-blue-500/50"
-    alt="Screenshots of the dashboard project showing desktop version"
-  />
-  
-  <Image
-    src="/mobile.png"
-    width={560}
-    height={620}
-    className="block md:hidden rounded-md border shadow-lg drop-shadow-lg shadow-blue-500/50"
-    alt="Screenshot of the dashboard project showing mobile version"
-  />
-</div>
-
-
+      <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
+        <Image
+          src="/desktop.png"
+          width={1200}
+          height={900}
+          className="hidden md:block rounded-sm border shadow-lg drop-shadow-lg shadow-blue-500/50"
+          alt="Screenshots of the dashboard project showing desktop version"
+        />
+        <Image
+          src="/mobile.png"
+          width={560}
+          height={620}
+          className="block md:hidden rounded-sm border shadow-lg drop-shadow-lg shadow-blue-500/50"
+          alt="Screenshot of the dashboard project showing mobile version"
+        />
+      </div>
 
       <section id="miert" className="space-y-2 py-4 md:py-6 lg:py-8 mt-8">
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
@@ -95,14 +72,8 @@ export default async function Home() {
           </p>
         </div>
       </section>
-    
 
-
-      <section
-        id="funkciok"
-        className="space-y-2 py-4 md:py-6 lg:py-8"
-      >
-          
+      <section id="funkciok" className="space-y-2 py-4 md:py-6 lg:py-8">
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
           <h2 className="font-heading text-2xl font-bold leading-[1.1] sm:text-2xl md:text-4xl">
             Funkciók
@@ -180,13 +151,8 @@ export default async function Home() {
           </div>
         </div>
       </section>
-     
 
-      <section
-        id="dokumentaciok"
-        className="space-y-2 py-4 md:py-6 lg:py-8"
-      >
-         
+      <section id="dokumentaciok" className="space-y-2 py-4 md:py-6 lg:py-8">
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
           <h2 className="font-heading text-2xl font-bold leading-[1.1] sm:text-2xl md:text-4xl">
             Dokumentációk
@@ -195,18 +161,16 @@ export default async function Home() {
             Minden, amire szüksége van a rendszer hatékony használatához.
           </p>
           <div className="flex gap-4 mt-3">
-          <Button  asChild>
+            <Button asChild>
               <Link href="/api-docs">API dokumentáció</Link>
             </Button>
-            <Button  asChild>
+            <Button asChild>
               <Link href="#">Fejlesztői és felhasználói dokumenctáció</Link>
             </Button>
-       
+
           </div>
         </div>
-        
       </section>
-     
 
       <footer>
         <div className="container mx-auto flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
@@ -216,6 +180,7 @@ export default async function Home() {
           <p className="text-sm md:text-right">© 2025</p>
         </div>
       </footer>
+      
     </div>
   );
 }
