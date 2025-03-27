@@ -23,6 +23,8 @@ const SheetComponent: React.FC = () => {
   
   const [isSheetOpen, setIsSheetOpen] = useState(false); // Új állapot az ablak nyitás/zárás kezelésére
 
+  const API_BASE_URL = window.location.origin;   
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const csvFileInputRef = useRef<HTMLInputElement>(null);
 
@@ -151,7 +153,7 @@ const SheetComponent: React.FC = () => {
     formData.append('file', csvFile);
 
     try {
-      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/setup/studentsToDatabase', {
+      const response = await fetch(`${API_BASE_URL}/api/setup/studentsToDatabase`, {
         method: 'POST',
         body: formData,
       });
@@ -184,7 +186,7 @@ const SheetComponent: React.FC = () => {
     formData.append("file", file);
 
     try {
-      const response = await fetch("https://vizsgaremek-mocha.vercel.app/api/setup/ascToDatabase", {
+      const response = await fetch(`${API_BASE_URL}/api/setup/ascToDatabase`, {
         method: "POST",
         body: formData,
       });

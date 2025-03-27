@@ -134,7 +134,7 @@ const Calendar: React.FC = () => {
   const [lessonTimes, setLessonTimes] = useState<lessonTimes[]>([]);
   const [unlockedStudents, setUnlockedStudents] = useState(new Set());
 
-
+  const API_BASE_URL = window.location.origin; 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5; // Oldalanként megjelenítendő diákok száma
 
@@ -175,7 +175,7 @@ const Calendar: React.FC = () => {
   useEffect(() => {
     const fetchLessonTimes = async () => {
       try {
-        const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getRinging');
+        const response = await fetch(`${API_BASE_URL}/api/config/getRinging`);
         if (!response.ok) {
           throw new Error('Nem sikerült lekérni a csengetési rendet.');
         }
@@ -194,7 +194,7 @@ const Calendar: React.FC = () => {
     const fetchTimetables = async () => {
       try {
         // Fetch all students' timetable data at once from the new API endpoint
-        const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/timetable/allScheduleStart');
+        const response = await fetch(`${API_BASE_URL}/api/timetable/allScheduleStart`);
         if (!response.ok) {
           throw new Error('Nem sikerült lekérni az összes diák órarendjét.');
         }
@@ -218,8 +218,8 @@ const Calendar: React.FC = () => {
     }
   }, [students]);
 
-  //https://vizsgaremek-mocha.vercel.app/api/timetable/getClassTimetable?className=13.I
-  //https://vizsgaremek-mocha.vercel.app/api/timetable/getTeacherTimetable?teacherName=${teacher}
+  //${API_BASE_URL}/api/timetable/getClassTimetable?className=13.I
+  //${API_BASE_URL}/api/timetable/getTeacherTimetable?teacherName=${teacher}
 
   //PaZo
 
@@ -227,7 +227,7 @@ const Calendar: React.FC = () => {
   useEffect(() => {
     async function fetchSchedule() {
       try {
-        const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/getClassTimetable?className=${session?.user?.osztalyfonok}
+        const response = await fetch(`${API_BASE_URL}/api/timetable/getClassTimetable?className=${session?.user?.osztalyfonok}
 `);
         const data = await response.json();
         const formattedData = data.map((lesson: any) => ({
@@ -261,7 +261,7 @@ const Calendar: React.FC = () => {
   // Dolgozók (tanárok és osztályfőnökök) lekérése
   const fetchEmployees = async () => {
     try {
-      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getEmployees');
+      const response = await fetch(`${API_BASE_URL}/api/config/getEmployees`);
       const data = await response.json();
       if (response.ok) {
         setEmployees(data);
@@ -311,7 +311,7 @@ const Calendar: React.FC = () => {
   /*
     const fetchTeacherTimetable = async (teacherName: string) => {
       try {
-        const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/getTeacherTimetable?teacherName=${teacherName}`);
+        const response = await fetch(`${API_BASE_URL}/api/timetable/getTeacherTimetable?teacherName=${teacherName}`);
         const data = await response.json();
         const formattedData = data.map((lesson: any) => ({
           day: lesson.day_of_week,
@@ -340,19 +340,19 @@ const Calendar: React.FC = () => {
   useEffect(() => {
     const fetchAdditionalData = async () => {
       try {
-        const plusResponse = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=plusznap');
+        const plusResponse = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?type=plusznap`);
         const plusData = await plusResponse.json();
         setPlusdate(plusData.plusDates_alap);
 
-        const breakResponse = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=szunet');
+        const breakResponse = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?type=szunet`);
         const breakData = await breakResponse.json();
         setBreakdate(breakData.breakDates_alap);
 
-        const startResponse = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=kezd');
+        const startResponse = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?type=kezd`);
         const startData = await startResponse.json();
         setStartYear(startData.schoolYearStart.start);
 
-        const endResponse = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=veg');
+        const endResponse = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?type=veg`);
         const endData = await endResponse.json();
         setEndYear(endData.schoolYearEnd.end);
       } catch (error) {
@@ -526,7 +526,7 @@ const Calendar: React.FC = () => {
 
   const handleStudentOpen = async (student_id: string) => {
     try {
-      const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/system/studentAccess?student=${student_id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/system/studentAccess?student=${student_id}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       });
@@ -564,7 +564,7 @@ const Calendar: React.FC = () => {
 
 
   const fetchSystemStatus = async () => {
-    const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/system/status');
+    const response = await fetch(`${API_BASE_URL}/api/system/status`);
     if (response.ok) {
       const data = await response.json();
       setSystemClose(data.status === "nyithato" ? false : true);
@@ -613,7 +613,7 @@ const Calendar: React.FC = () => {
     console.log("Csoportba tartozó diákok:", studentsInGroup);
 
     try {
-      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/system/groupAccess', {
+      const response = await fetch(`${API_BASE_URL}/api/system/groupAccess`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

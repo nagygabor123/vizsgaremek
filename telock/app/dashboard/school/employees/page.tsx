@@ -60,7 +60,7 @@ import {
 export default function AddEmployeePage() {
   const [open, setOpen] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-
+  const API_BASE_URL = window.location.origin;
 
 
   // const [isDialogOpen2, setIsDialogOpen2] = useState(false);
@@ -88,7 +88,7 @@ export default function AddEmployeePage() {
 
   const fetchStudents = async () => {
     try {
-      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/students/read');
+      const response = await fetch(`${API_BASE_URL}/api/students/read`);
       const data = await response.json();
       // setStudents(data);
       setHasStudents(data.length > 0); // Ha van legalább egy diák, akkor true
@@ -138,7 +138,7 @@ export default function AddEmployeePage() {
 
   const fetchEmployees = async () => {
     try {
-      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getEmployees');
+      const response = await fetch(`${API_BASE_URL}/api/config/getEmployees`);
       const data = await response.json();
       if (response.ok) {
         setEmployees(data);
@@ -160,7 +160,7 @@ export default function AddEmployeePage() {
     setMessage('');
 
     try {
-      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/addEmployee', {
+      const response = await fetch(`${API_BASE_URL}/api/config/addEmployee`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ full_name: fullName, position: position, osztalyfonok: osztaly, short_name: shortname }),
@@ -188,7 +188,7 @@ export default function AddEmployeePage() {
 
   const handleDelete = async (id: number) => {
     try {
-      const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/config/deleteEmployee?admin_id=${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/config/deleteEmployee?admin_id=${id}`, {
         method: 'DELETE',
       });
       if (response.ok) {
@@ -214,7 +214,7 @@ export default function AddEmployeePage() {
     if (!editId) return;
 
     try {
-      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/updateEmployee', {
+      const response = await fetch(`${API_BASE_URL}/api/config/updateEmployee`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ admin_id: editId, full_name: editName, position: editPosition, osztalyfonok: editOsztaly }),

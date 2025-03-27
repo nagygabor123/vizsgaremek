@@ -95,7 +95,7 @@ export default function Page() {
 
   const [date, setDate] = React.useState<DateRange | undefined>(undefined);
 
-
+  const API_BASE_URL = window.location.origin;
   const [message, setMessage] = useState<string>('');
   const [apiResponse, setApiResponse] = useState<any>(null);
   const [yearSchedule, setYearSchedule] = useState<any>({
@@ -132,11 +132,11 @@ export default function Page() {
 
   const fetchYearSchedule = async () => {
     try {
-      const plusRes = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=plusznap');
-      const szunetRes = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=szunet');
-      const noschoolRes = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=tanitasnelkul');
-      const startRes = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=kezd');
-      const endRes = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/getYearSchedule?type=veg');
+      const plusRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?type=plusznap`);
+      const szunetRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?type=szunet`);
+      const noschoolRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?type=tanitasnelkul`);
+      const startRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?type=kezd`);
+      const endRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?type=veg`);
 
       const plusDates = await plusRes.json();
       const breakDates = await szunetRes.json();
@@ -168,7 +168,7 @@ export default function Page() {
     try {
       console.log('Küldött adatok:', { type, which_day: date });
 
-      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/setYearStartEnd', {
+      const response = await fetch(`${API_BASE_URL}/api/config/setYearStartEnd`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -199,7 +199,7 @@ export default function Page() {
 
   const handleAddBreak = async () => {
     try {
-      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/addPlusBreak', {
+      const response = await fetch(`${API_BASE_URL}/api/config/addPlusBreak`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type: 'szunet', ...newBreak })
@@ -223,7 +223,7 @@ export default function Page() {
 
   const handleAddNoSchool = async () => {
     try {
-      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/addPlusBreak', {
+      const response = await fetch(`${API_BASE_URL}/api/config/addPlusBreak`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type: 'tanitasnelkul', ...newNo })
@@ -250,7 +250,7 @@ export default function Page() {
 
   const handleAddPlusDate = async () => {
     try {
-      const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/config/addPlusBreak', {
+      const response = await fetch(`${API_BASE_URL}/api/config/addPlusBreak`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type: 'plusznap', ...newPlusDate })
@@ -276,7 +276,7 @@ export default function Page() {
 
   const handleDeletePlusBreak = async (id: number) => {
     try {
-      const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/config/deletePlusBreak?year_schedule_id=${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/config/deletePlusBreak?year_schedule_id=${id}`, {
         method: 'DELETE',
       });
 

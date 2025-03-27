@@ -49,6 +49,9 @@ export default function ChangePassword() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
+
+  const API_BASE_URL = window.location.origin;   
+  
   const handleChangePassword = async (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -62,7 +65,7 @@ export default function ChangePassword() {
     }
 
     try {
-      const res = await fetch("https://vizsgaremek-mocha.vercel.app/api/config/changePassword", {
+      const res = await fetch(`${API_BASE_URL}/api/config/changePassword`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ oldPassword, newPassword })
