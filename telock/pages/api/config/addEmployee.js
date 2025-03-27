@@ -1,5 +1,5 @@
 import { neon } from '@neondatabase/serverless';
-import { hash } from 'bcryptjs';
+
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -16,6 +16,8 @@ export default async function handler(req, res) {
   try {
     const lastAdmin = await sql`SELECT MAX(admin_id) AS max_id FROM admins`;
     let nextAdminId = lastAdmin[0]?.max_id ? lastAdmin[0].max_id + 1 : 1;
+
+    const { hash } = require('bcrypt');
 
     const password = short_name + "123";
     const hashedPassword = await hash(password, 10);
