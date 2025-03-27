@@ -2,28 +2,15 @@
 
 import { FormEvent, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
-import { AppSidebar } from "@/components/app-sidebar"
-import {
-  Slash
-} from "lucide-react"
+import localFont from "next/font/local";
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
-import {
-  SidebarTrigger,
-  SidebarInset,
-  SidebarProvider,
-} from "@/components/ui/sidebar"
+const ZenDots = localFont({
+  src: "../fonts/ZenDots-Regular.ttf",
+  variable: "--font-zen-dots",
+  weight: "100 900",
+});
 
 import Link from "next/link";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, AlertCircle, CircleCheck } from "lucide-react";
@@ -50,8 +37,8 @@ export default function ChangePassword() {
   const router = useRouter();
 
 
-  const API_BASE_URL = window.location.origin;   
-  
+  const API_BASE_URL = window.location.origin;
+
   const handleChangePassword = async (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -72,7 +59,7 @@ export default function ChangePassword() {
       });
 
       const data = await res.json();
-      
+
       if (!res.ok) {
         setError(data.message || "Hiba a jelszó módosítása során");
       } else {
@@ -94,7 +81,9 @@ export default function ChangePassword() {
     <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-zinc-50 p-6 md:p-10">
       <div className="flex w-full max-w-sm flex-col gap-6">
         <a href="/" className="flex items-center gap-2 self-center font-medium">
-          {/* Your logo */}
+        <span className={`${ZenDots.className} text-xl`}>
+                telock
+              </span>
         </a>
         <div className="flex flex-col gap-6">
           <Button variant="ghost" className="absolute left-4 top-4 p-2" asChild>
@@ -137,7 +126,7 @@ export default function ChangePassword() {
                         required
                       />
                     </div>
-                    
+
                     {error && (
                       <Alert variant="destructive">
                         <AlertCircle className="h-4 w-4" />
@@ -147,7 +136,7 @@ export default function ChangePassword() {
                         </AlertDescription>
                       </Alert>
                     )}
-                    
+
                     {success && (
                       <Alert variant="siker">
                         <CircleCheck className="h-4 w-4" />
@@ -157,9 +146,9 @@ export default function ChangePassword() {
                         </AlertDescription>
                       </Alert>
                     )}
-                    
-                    <Button 
-                      type="submit" 
+
+                    <Button
+                      type="submit"
                       className="w-full"
                       disabled={isLoading}
                     >

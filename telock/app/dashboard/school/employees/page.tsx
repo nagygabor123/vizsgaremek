@@ -420,9 +420,9 @@ export default function AddEmployeePage() {
                 <DialogContent className="sm:max-w-[425px]">
                   <DialogHeader>
                     <DialogTitle>Alkalmazott hozzáadása</DialogTitle>
-                    <DialogDescription>
+                    {/* <DialogDescription>
                       Aliquam metus eros, tristique nec semper id, congue eget metus
-                    </DialogDescription>
+                    </DialogDescription> */}
                   </DialogHeader>
 
                   <form onSubmit={handleSubmit} className="grid items-start gap-4">
@@ -563,9 +563,9 @@ export default function AddEmployeePage() {
                             <DialogContent className="sm:max-w-[425px]">
                               <DialogHeader>
                                 <DialogTitle>Alkalmazott szerkesztése</DialogTitle>
-                                <DialogDescription>
+                                {/* <DialogDescription>
                                   Aliquam metus eros, tristique nec semper id, congue eget metus.
-                                </DialogDescription>
+                                </DialogDescription> */}
                               </DialogHeader>
 
 

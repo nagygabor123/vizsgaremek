@@ -56,7 +56,6 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 
 
-// Sidebar elemek típusa
 interface SidebarItem {
   label: string;
   icon: React.ComponentType<any>;
@@ -64,13 +63,12 @@ interface SidebarItem {
   allowedPositions: string[];
 }
 
-// Sidebar csoportok típusa
 interface SidebarGroupConfig {
-  groupLabel?: string; // Csoport cím (opcionális)
-  items: SidebarItem[]; // A csoporthoz tartozó menüelemek
+  groupLabel?: string;
+  items: SidebarItem[];
 }
 
-// Sidebar konfiguráció
+
 const sidebarConfig: SidebarGroupConfig[] = [
   {
     items: [
@@ -89,7 +87,7 @@ const sidebarConfig: SidebarGroupConfig[] = [
     ],
   },
   {
-    groupLabel: "Osztályom", // Csoport cím
+    groupLabel: "Osztályom",
     items: [
       {
         label: "Órarend",
@@ -106,7 +104,7 @@ const sidebarConfig: SidebarGroupConfig[] = [
     ],
   },
   {
-    groupLabel: "Iskolai nyilvántartás", // Csoport cím
+    groupLabel: "Iskolai nyilvántartás",
     items: [
       {
         label: "Órarendek",
@@ -129,7 +127,7 @@ const sidebarConfig: SidebarGroupConfig[] = [
     ],
   },
   {
-    groupLabel: "Beállítások és naplózás", // Csoport cím
+    groupLabel: "Beállítások és naplózás",
     items: [
       {
         label: "Tanév beállításai",
@@ -218,13 +216,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-  <Link href="/settings">
-    <LockKeyhole className="text-gray-800"/>
-    Jelszó módosítása
-  </Link>
-</DropdownMenuItem>
+              <Link href="/settings">
+                <LockKeyhole className="text-gray-800" />
+                Jelszó módosítása
+              </Link>
+            </DropdownMenuItem>
             <DropdownMenuItem>
-              <LogOut className="text-gray-800"/>
+              <LogOut className="text-gray-800" />
               <span
                 onClick={() => {
                   signOut();
@@ -240,28 +238,21 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
       <SidebarContent>
         {sidebarConfig.map((group: SidebarGroupConfig, groupIndex: number) => {
-          // Ellenőrizzük, hogy a csoportban van-e látható menüelem
           const hasVisibleItems = group.items.some((item) => {
-            // Ha a csoport cím "Osztályom", akkor a session?.user?.osztalyfonok értékét figyeljük
             if (group.groupLabel === "Osztályom") {
               return session?.user?.osztalyfonok !== "nincs";
             }
-            // Egyéb esetben a position alapján ellenőrizzük
+
             return item.allowedPositions.includes(session?.user?.position || "");
           });
 
-          // Ha nincs látható menüelem, akkor kihagyjuk a csoportot
           if (!hasVisibleItems) return null;
 
           return (
             <SidebarGroup key={groupIndex}>
-              {/* Csoport cím renderelése (ha van) */}
               {group.groupLabel && <SidebarGroupLabel>{group.groupLabel}</SidebarGroupLabel>}
-
-              {/* Menüelemek renderelése */}
               <SidebarMenu>
                 {group.items.map((item: SidebarItem) => {
-                  // Ha a csoport cím "Osztályom", akkor a session?.user?.osztalyfonok értékét figyeljük
                   if (group.groupLabel === "Osztályom") {
                     if (session?.user?.osztalyfonok !== "nincs") {
                       return (
@@ -278,7 +269,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                       );
                     }
                   } else {
-                    // Egyéb esetben a position alapján ellenőrizzük
                     if (item.allowedPositions.includes(session?.user?.position || "")) {
                       return (
                         <SidebarMenuItem key={item.path}>
@@ -301,12 +291,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           );
         })}
       </SidebarContent>
-
       <SidebarFooter>
 
-<Link href="/" className="text-xs text-center">
-  © {new Date().getFullYear()} telock
-</Link>
+        <Link href="/" className="text-xs text-center">
+          © {new Date().getFullYear()} telock
+        </Link>
 
       </SidebarFooter>
     </Sidebar>

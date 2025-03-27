@@ -20,10 +20,10 @@ const SheetComponent: React.FC = () => {
   const [csvFile, setCsvFile] = useState<File | null>(null);
   const [csvMessage, setCsvMessage] = useState<React.ReactNode>(null);
   const [isLoading, setIsLoading] = useState(false);
-  
-  const [isSheetOpen, setIsSheetOpen] = useState(false); // Új állapot az ablak nyitás/zárás kezelésére
 
-  const API_BASE_URL = window.location.origin;   
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+  const API_BASE_URL = window.location.origin;
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const csvFileInputRef = useRef<HTMLInputElement>(null);
@@ -39,26 +39,26 @@ const SheetComponent: React.FC = () => {
   }, []);
 
   const handleNext = async () => {
-    setIsLoading(true); // Betöltés indítása
+    setIsLoading(true);
     if (step === 1) {
       if (!file) {
         setMessage(
           <div className="text-red-600 text-sm">Nincs fájl kiválasztva</div>
         );
-        setIsLoading(false); // Betöltés leállítása
+        setIsLoading(false);
         return;
       }
-  
+
       await handleUpload();
-  
+
       if (message && message !== "Sikeres feltöltés") {
         setStep((prev) => Math.min(prev + 1, 3));
-        localStorage.setItem("currentStep", String(step + 1)); 
-        setIsLoading(false); // Betöltés leállítása
+        localStorage.setItem("currentStep", String(step + 1));
+        setIsLoading(false);
         return;
       }
     }
-    setIsLoading(false); // Betöltés leállítása
+    setIsLoading(false);
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -99,13 +99,13 @@ const SheetComponent: React.FC = () => {
   };
 
   const handleConfirmClick = async () => {
-    setIsLoading(true); // Betöltés indítása
+    setIsLoading(true);
     if (csvFile) {
       await handleCsvUpload();
     }
     setButtonVisible(false);
-    setIsSheetOpen(false); // Bezárjuk az ablakot
-    setIsLoading(false); // Betöltés leállítása
+    setIsSheetOpen(false);
+    setIsLoading(false);
     window.location.reload();
   };
 
@@ -136,8 +136,8 @@ const SheetComponent: React.FC = () => {
       setCsvFile(selectedFile);
       setCsvMessage(
         <span>
-        <Paperclip className="w-4 h-4 inline-block text-sm" /> {selectedFile.name}
-      </span>
+          <Paperclip className="w-4 h-4 inline-block text-sm" /> {selectedFile.name}
+        </span>
 
       );
     }
@@ -214,18 +214,17 @@ const SheetComponent: React.FC = () => {
       <SheetTrigger asChild>
         <div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
           <div className="grid auto-rows-min gap-4 w-full">
-            {isButtonVisible && ( 
-             <div className="min-h-[60px] rounded-xl bg-red-100 flex items-center px-4 w-full box-border overflow-hidden">
-             {/* A TriangleAlert ikon eltűnik telefonos nézetben */}
-             <TriangleAlert className="text-red-600 hidden sm:block" />
-             <p className="text-sm truncate ml-3 text-red-600">
-               A rendszer nincs beállítva. Kérjük, végezze el a szükséges konfigurációt!
-             </p>
-             <Button className="ml-auto" variant="destructive" onClick={() => setIsSheetOpen(true)}>
-               Konfigurálás most
-             </Button>
-           </div>
-            )} 
+            {isButtonVisible && (
+              <div className="min-h-[60px] rounded-xl bg-red-100 flex items-center px-4 w-full box-border overflow-hidden">
+                <TriangleAlert className="text-red-600 hidden sm:block" />
+                <p className="text-sm truncate ml-3 text-red-600">
+                  A rendszer nincs beállítva. Kérjük, végezze el a szükséges konfigurációt!
+                </p>
+                <Button className="ml-auto" variant="destructive" onClick={() => setIsSheetOpen(true)}>
+                  Konfigurálás most
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </SheetTrigger>
@@ -254,7 +253,7 @@ const SheetComponent: React.FC = () => {
               onClick={handleClick}
               className="mt-5 border-dashed border-2 border-blue-600 rounded-md p-4 flex flex-col items-center justify-center min-h-[250px] cursor-pointer hover:bg-blue-100 transition text-center"
             >
-             <img
+              <img
                 src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNsb3VkLXVwbG9hZCI+PHBhdGggZD0iTTEyIDEzdjgiLz48cGF0aCBkPSJNNCAxNC44OTlBNyA3IDAgMSAxIDE1LjcxIDhoMS43OWE0LjUgNC41IDAgMCAxIDIuNSA4LjI0MiIvPjxwYXRoIGQ9Im04IDE3IDQtNCA0IDQiLz48L3N2Zz4="
                 alt="Upload Icon"
                 className="w-12 h-12 mx-auto"
@@ -282,13 +281,13 @@ const SheetComponent: React.FC = () => {
               onClick={() => csvFileInputRef.current?.click()}
               className="mt-5 border-dashed border-2 border-blue-600 rounded-md p-4 flex flex-col items-center justify-center min-h-[250px] cursor-pointer hover:bg-blue-100 transition text-center"
             >
-             <img
+              <img
                 src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNsb3VkLXVwbG9hZCI+PHBhdGggZD0iTTEyIDEzdjgiLz48cGF0aCBkPSJNNCAxNC44OTlBNyA3IDAgMSAxIDE1LjcxIDhoMS43OWE0LjUgNC41IDAgMCAxIDIuNSA4LjI0MiIvPjxwYXRoIGQ9Im04IDE3IDQtNCA0IDQiLz48L3N2Zz4="
                 alt="Upload Icon"
                 className="w-12 h-12 mx-auto"
               />
-             {/*  {csvFile ? csvFile.name :  }*/}
-             <p className="text-gray-900 font-semibold mt-3">Válassza ki a feltölteni kívánt CSV-fájlt</p>
+              {/*  {csvFile ? csvFile.name :  }*/}
+              <p className="text-gray-900 font-semibold mt-3">Válassza ki a feltölteni kívánt CSV-fájlt</p>
               {/* {csvFile ? csvFile.name : <p className="text-base text-gray-500">vagy húzza ide a fájlt</p>} */}
               {csvMessage && <p className="mt-5">{csvMessage}</p>}
             </div>
@@ -302,21 +301,21 @@ const SheetComponent: React.FC = () => {
           </div>
         )}
 
-<div className="flex justify-end mt-6">
-  <Button
-    onClick={step < 2 ? handleNext : handleConfirmClick}
-    disabled={isLoading}
-  >
-    {isLoading ? (
-      <>
-        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-        Kérjük, várjon...
-      </>
-    ) : (
-      step < 2 ? "Mentés & Tovább" : "Mentés & Megerősítés"
-    )}
-  </Button>
-</div>
+        <div className="flex justify-end mt-6">
+          <Button
+            onClick={step < 2 ? handleNext : handleConfirmClick}
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Kérjük, várjon...
+              </>
+            ) : (
+              step < 2 ? "Mentés & Tovább" : "Mentés & Megerősítés"
+            )}
+          </Button>
+        </div>
       </SheetContent>
     </Sheet>
   );
