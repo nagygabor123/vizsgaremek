@@ -69,23 +69,25 @@ export default async function Home() {
 
 
 <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-{/* Add Hero Images Here */}
-<Image
-  src="/example.png"
-  width={1000}
-  height={760}
-  className="hidden md:block"
-  alt="Screenshots of the dashboard project showing desktop version"
-/>
-<Image
-  src="/mobile-example.png"
-  width={560}
-  height={620}
-  className="block md:hidden"
-  alt="Screenshot of the dashboard project showing mobile version"
-/>
+  {/* Asztali verzió */}
+  <Image
+    src="/desktop.png"
+    width={1000}
+    height={760}
+    className="hidden md:block rounded-lg border border-gray-300 shadow-lg drop-shadow-lg shadow-blue-500/50"
+    alt="Screenshots of the dashboard project showing desktop version"
+  />
+  
+  {/* Mobil verzió */}
+  <Image
+    src="/mobile.png"
+    width={560}
+    height={620}
+    className="block md:hidden rounded-lg border border-gray-300 shadow-lg drop-shadow-lg shadow-blue-500/50"
+    alt="Screenshot of the dashboard project showing mobile version"
+  />
 </div>
-   
+
 
 
       <section id="miert" className="space-y-2 py-4 md:py-6 lg:py-8 mt-8">
