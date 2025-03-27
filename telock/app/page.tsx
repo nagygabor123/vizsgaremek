@@ -72,9 +72,9 @@ export default async function Home() {
   {/* Asztali verzió */}
   <Image
     src="/desktop.png"
-    width={1000}
-    height={760}
-    className="hidden md:block rounded-lg border border-gray-300 shadow-lg drop-shadow-lg shadow-blue-500/50"
+    width={1200} // Növelt szélesség
+    height={900} // Növelt magasság
+    className="hidden md:block rounded-md border border-gray-300 shadow-lg drop-shadow-lg shadow-blue-500/50"
     alt="Screenshots of the dashboard project showing desktop version"
   />
   
@@ -83,7 +83,7 @@ export default async function Home() {
     src="/mobile.png"
     width={560}
     height={620}
-    className="block md:hidden rounded-lg border border-gray-300 shadow-lg drop-shadow-lg shadow-blue-500/50"
+    className="block md:hidden rounded-md border border-gray-300 shadow-lg drop-shadow-lg shadow-blue-500/50"
     alt="Screenshot of the dashboard project showing mobile version"
   />
 </div>
