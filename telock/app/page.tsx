@@ -69,21 +69,19 @@ export default async function Home() {
 
 
 <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-  {/* Asztali verzió */}
   <Image
     src="/desktop.png"
-    width={1200} // Növelt szélesség
-    height={900} // Növelt magasság
-    className="hidden md:block rounded-md border border-gray-300 shadow-lg drop-shadow-lg shadow-blue-500/50"
+    width={1200} 
+    height={900}
+    className="hidden md:block rounded-md border border-slate-500 shadow-lg drop-shadow-lg shadow-blue-500/50"
     alt="Screenshots of the dashboard project showing desktop version"
   />
   
-  {/* Mobil verzió */}
   <Image
     src="/mobile.png"
     width={560}
     height={620}
-    className="block md:hidden rounded-md border border-gray-300 shadow-lg drop-shadow-lg shadow-blue-500/50"
+    className="block md:hidden rounded-md border border-slate-500 shadow-lg drop-shadow-lg shadow-blue-500/50"
     alt="Screenshot of the dashboard project showing mobile version"
   />
 </div>
