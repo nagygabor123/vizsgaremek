@@ -434,6 +434,7 @@ export default function Home() {
                     <div className="grid gap-2">
                       <Label htmlFor="student_id">Azonosító szám</Label>
                       <Input
+                       id="student_id"
                         className="col-span-3"
                         type="text"
                         placeholder="OM1234567"
@@ -445,6 +446,7 @@ export default function Home() {
                     <div className="grid gap-2">
                       <Label htmlFor="full_name">Teljes név</Label>
                       <Input
+                       id="full_name"
                         className="col-span-3"
                         type="text"
                         name="full_name"
@@ -456,6 +458,7 @@ export default function Home() {
                     <div className="grid gap-2">
                       <Label htmlFor="class">Osztály és csoportok</Label>
                       <Input
+                       id="class"
                         className="col-span-3"
                         type="text"
                         name="class"
@@ -468,6 +471,7 @@ export default function Home() {
                     <div className="grid gap-2">
                       <Label htmlFor="class">RFID azonosító</Label>
                       <Input
+                       id="rfid_tag"
                         className="col-span-3"
                         type="text"
                         name="rfid_tag"
