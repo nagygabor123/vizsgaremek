@@ -262,11 +262,20 @@ export default function AddEmployeePage() {
   });
 
   // Szűrés
-  const filteredEmployees = sortedEmployees.filter(student =>
+  /*const filteredEmployees = sortedEmployees.filter(student =>
     student.full_name.toLowerCase().includes(searchName.toLowerCase()) &&
-    student.position.label.toLowerCase().includes(searchPosition.toLowerCase()) &&
+    student.position.toLowerCase().includes(searchPosition.toLowerCase()) &&
     student.osztalyfonok.toLowerCase().includes(searchOsztalyfonok.toLowerCase())
-  );
+  );*/
+  const filteredEmployees = sortedEmployees.filter(employee => {
+    const positionLabel = positions.find(pos => pos.value === employee.position)?.label || employee.position;
+    
+    return (
+      employee.full_name.toLowerCase().includes(searchName.toLowerCase()) &&
+      positionLabel.toLowerCase().includes(searchPosition.toLowerCase()) &&
+      employee.osztalyfonok.toLowerCase().includes(searchOsztalyfonok.toLowerCase())
+    );
+  });
 
   // Rendezés váltása adott mező szerint
   const toggleSort = (field: "full_name" | "position" | "osztalyfonok") => {
@@ -368,13 +377,13 @@ export default function AddEmployeePage() {
                   onChange={(e) => setSearchName(e.target.value)}
                 />
          
-    <Input
-      type="text"
-      placeholder="Keresés pozíció szerint..."
-      className="border p-2 rounded-md"
-      value={searchPosition}
-      onChange={(e) => setSearchPosition(e.target.value)}
-    />
+         <Input
+  type="text"
+  placeholder="Keresés pozíció szerint..."
+  className="border p-2 rounded-md"
+  value={searchPosition}
+  onChange={(e) => setSearchPosition(e.target.value)}
+/>
     
  
 
