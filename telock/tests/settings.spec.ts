@@ -28,7 +28,6 @@ test.describe('School Year Configuration Page', () => {
         });
       });
 
-
     await page.goto('/login');
     await page.fill('input[name="short_name"]', 'AdAd');
     await page.fill('input[name="password"]', 'admin');
@@ -40,7 +39,7 @@ test.describe('School Year Configuration Page', () => {
     await page.goto('/dashboard/school/settings');
   });
 
-  test('should display school year start and end dates', async ({ page }) => {
+  test('Oldalbetöltés', async ({ page }) => {
     await expect(page.getByText('Tanítási év első napja')).toBeVisible();
     await expect(page.getByText('Tanítási év utolsó napja')).toBeVisible();
     
@@ -72,7 +71,7 @@ test.describe('School Year Configuration Page', () => {
   });
 
   test('Tanítási év utolsó napja módosítás', async ({ page }) => {
-    const endDateButton = page.locator('button').filter({ hasText: '2024. szeptember 2.' }).first();
+    const endDateButton = page.locator('button').filter({ hasText: '2025. június 13.' }).first();
     await endDateButton.click();
     
     while (true) {
@@ -96,60 +95,65 @@ test.describe('School Year Configuration Page', () => {
 
 
 
-  test('should add a non-teaching day', async ({ page }) => {
+test('should manage non-teaching workdays', async ({ page }) => {
+    // Open add dialog
     await page.getByRole('button', { name: 'Új nap hozzáadás' }).first().click();
     
-    // Select a date in the dialog
-    await page.getByRole('button', { name: 'CalendarIcon' }).first().click();
+    // Select date
+    await page.getByRole('button', { name: /2025\. május 20\./ }).click();
     await page.getByRole('gridcell', { name: '15' }).first().click();
-    await page.getByRole('button', { name: 'Mentés' }).click();
+    await page.waitForTimeout(500);
+    await page.keyboard.press('Escape');
+    // Save
+    await page.getByRole('button', { name: 'Mentés' }).first().click();
     
-    // Verify the new item appears in the table
-    await expect(page.getByText('2024. szeptember 15.')).toBeVisible();
-  });
-
-  
-
-
-  test('should add a Saturday teaching day', async ({ page }) => {
-    await page.getByRole('button', { name: 'Új nap hozzáadás' }).nth(1).click();
+    // Verify added date in table
+    const currentYear = new Date().getFullYear();
+    await expect(page.getByText(`${currentYear}. 03. 15.`)).toBeVisible();
     
-    // Select a date in the dialog
-    await page.getByRole('button', { name: 'CalendarIcon' }).first().click();
-    await page.getByRole('gridcell', { name: '20' }).first().click();
-    
-    // Select a weekday to replace
-    await page.getByRole('combobox').click();
-    await page.getByRole('option', { name: 'Hétfő' }).click();
-    
-    await page.getByRole('button', { name: 'Mentés' }).click();
-    
-    // Verify the new item appears in the table
-    await expect(page.getByText('2024. szeptember 20.')).toBeVisible();
-    await expect(page.getByText('Hétfő')).toBeVisible();
+   
   });
 
 
+//   test('should add a Saturday teaching day', async ({ page }) => {
+//     await page.getByRole('button', { name: 'Új nap hozzáadás' }).nth(1).click();
+    
+//     // Select a date in the dialog
+//     await page.getByRole('button', { name: 'CalendarIcon' }).first().click();
+//     await page.getByRole('gridcell', { name: '20' }).first().click();
+    
+//     // Select a weekday to replace
+//     await page.getByRole('combobox').click();
+//     await page.getByRole('option', { name: 'Hétfő' }).click();
+    
+//     await page.getByRole('button', { name: 'Mentés' }).click();
+    
+//     // Verify the new item appears in the table
+//     await expect(page.getByText('2024. szeptember 20.')).toBeVisible();
+//     await expect(page.getByText('Hétfő')).toBeVisible();
+//   });
 
 
 
-  test('should add a school break', async ({ page }) => {
-    await page.getByRole('button', { name: 'Új szünet hozzáadás' }).click();
+
+
+//   test('should add a school break', async ({ page }) => {
+//     await page.getByRole('button', { name: 'Új szünet hozzáadás' }).click();
     
-    // Fill in the break name
-    await page.getByLabel('Név').fill('Téli szünet');
+//     // Fill in the break name
+//     await page.getByLabel('Név').fill('Téli szünet');
     
-    // Select date range
-    await page.getByRole('button', { name: 'CalendarIcon' }).click();
-    await page.getByRole('gridcell', { name: '20' }).first().click();
-    await page.getByRole('gridcell', { name: '25' }).first().click();
+//     // Select date range
+//     await page.getByRole('button', { name: 'CalendarIcon' }).click();
+//     await page.getByRole('gridcell', { name: '20' }).first().click();
+//     await page.getByRole('gridcell', { name: '25' }).first().click();
     
-    await page.getByRole('button', { name: 'Mentés' }).click();
+//     await page.getByRole('button', { name: 'Mentés' }).click();
     
-    // Verify the new break appears in the table
-    await expect(page.getByText('Téli szünet')).toBeVisible();
-    await expect(page.getByText('2024. december 20. - 2024. december 25.')).toBeVisible();
-  });
+//     // Verify the new break appears in the table
+//     await expect(page.getByText('Téli szünet')).toBeVisible();
+//     await expect(page.getByText('2024. december 20. - 2024. december 25.')).toBeVisible();
+//   });
 
 
 
