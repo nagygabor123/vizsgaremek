@@ -48,7 +48,7 @@ test.describe('Iskolai nyilvántartás - Tanulók', () => {
     await expect(studentRow).toContainText("9.I");
   });
 
-  test('Keresés', async ({ page }) => {
+  test('Alkalamzott keresés', async ({ page }) => {
   
     await page.getByPlaceholder('Keresés név szerint...').fill('teszt');
     await expect(page.getByText('Teszt Elek')).toBeVisible();

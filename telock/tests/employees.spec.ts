@@ -40,7 +40,7 @@ test.describe('Iskolai nyilvántartás - Munkatársak', () => {
     });
 
 
-    test('Keresés', async ({ page }) => {
+    test('Alkalamzott keresés', async ({ page }) => {
 
         await page.getByPlaceholder('Keresés név szerint...').fill('teszt');
         await expect(page.getByText('Teszt Alkalmazott (TeAl)')).toBeVisible();

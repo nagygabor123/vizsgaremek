@@ -269,6 +269,7 @@ const SheetComponent: React.FC = () => {
               ref={fileInputRef}
               onChange={handleFileChange}
               style={{ display: "none" }}
+               data-testid="file-input"
             />
           </div>
         )}
@@ -297,7 +298,8 @@ const SheetComponent: React.FC = () => {
               ref={csvFileInputRef}
               onChange={handleCsvFileChange}
               style={{ display: "none" }}
-            />
+              data-testid="csv-input"
+                          />
           </div>
         )}
 
