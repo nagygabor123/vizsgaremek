@@ -163,7 +163,7 @@ export default function AddEmployeePage() {
       const response = await fetch(`${API_BASE_URL}/api/config/addEmployee`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ full_name: fullName, position: position, osztalyfonok: osztaly, short_name: shortname }),
+        body: JSON.stringify({ full_name: fullName, position: position, osztalyfonok: 'nincs', short_name: shortname }),
       });
       const data = await response.json();
       if (response.ok) {
@@ -429,7 +429,7 @@ export default function AddEmployeePage() {
                       />
                     </div>
 
-                    {/* <div className="grid gap-2">
+                    <div className="grid gap-2">
                       <Label htmlFor="jelszo">Ideiglenes jelszó</Label>
                       <Input
                         disabled
@@ -437,7 +437,7 @@ export default function AddEmployeePage() {
                         id="jelszo"
                         type="text"
                         placeholder={`${shortname}123`} />
-                    </div> */}
+                    </div> 
 
 
 
