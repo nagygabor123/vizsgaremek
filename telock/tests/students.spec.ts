@@ -14,11 +14,12 @@ test.describe('Iskolai nyilvántartás - Tanulók', () => {
     await page.waitForSelector('table');
   });
 
-  test('Oldal betöltés', async ({ page }) => {
+  test('Oldalbetöltés', async ({ page }) => {
     await expect(page.getByRole('button', { name: 'Új tanuló hozzáadás' })).toBeVisible();
     await expect(page.getByPlaceholder('Keresés név szerint...')).toBeVisible();
     await expect(page.getByPlaceholder('Keresés osztály szerint...')).toBeVisible();
   });
+  
 
 
   test('Új tanuló hozzáadás', async ({ page }) => {

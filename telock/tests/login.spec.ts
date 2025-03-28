@@ -2,10 +2,10 @@ import { test, expect } from '@playwright/test';
 
 test.describe("Bejelentkezés", () => {
 
-  test('Oldal betöltés', async ({ page }) => {
+  test('Oldalbetöltés', async ({ page }) => {
     await page.goto('/login');
     await expect(page.getByRole('button', { name: 'Bejelentkezés' })).toBeVisible();
-  
+
     const shortNameInput = page.locator('input[name="short_name"]');
     await expect(shortNameInput).toBeVisible();
     await expect(shortNameInput).toHaveAttribute('type', 'text');
@@ -18,7 +18,7 @@ test.describe("Bejelentkezés", () => {
   test("Sikeres bejelentkezés", async ({ page }) => {
     await page.goto("/login");
 
-    await page.fill('input[name="short_name"]', "AdAd"); 
+    await page.fill('input[name="short_name"]', "AdAd");
     await page.fill('input[name="password"]', "admin");
     await page.click('button[type="submit"]');
 

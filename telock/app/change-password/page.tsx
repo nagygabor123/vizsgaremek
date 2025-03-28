@@ -66,6 +66,8 @@ export default function ChangePassword() {
         setSuccess(data.message || "Jelszó sikeresen módosítva!");
         setOldPassword("");
         setNewPassword("");
+        await signOut({ redirect: false });
+        router.push("/auth/signin");  // Itt az útvonal a bejelentkezési oldalra mutat
         // Optionally sign out the user after password change
         // await signOut({ redirect: false });
         // router.push("/auth/signin");
@@ -93,7 +95,7 @@ export default function ChangePassword() {
           </Button>
           <Card>
             <CardHeader className="text-center">
-              <CardTitle className="text-xl">Jelszó módosítása</CardTitle>
+              <CardTitle className="text-xl">Jelszó módosíts</CardTitle>
               <CardDescription>
                 Kérjük, adja meg jelenlegi jelszavát, majd állítson be egy újat.
               </CardDescription>

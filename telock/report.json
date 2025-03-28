@@ -62,15 +62,15 @@
   },
   "suites": [
     {
-      "title": "students.spec.ts",
-      "file": "students.spec.ts",
+      "title": "change-password.spec.ts",
+      "file": "change-password.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Iskolai nyilvántartás - Tanulók",
-          "file": "students.spec.ts",
+          "title": "Jelszó módosítás",
+          "file": "change-password.spec.ts",
           "line": 5,
           "column": 6,
           "specs": [
@@ -90,26 +90,26 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 4016,
+                      "duration": 3789,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-28T08:04:36.088Z",
+                      "startTime": "2025-03-28T08:24:42.764Z",
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "070ffa9c3689b3a10912-0e21f8f8ed149cb08094",
-              "file": "students.spec.ts",
-              "line": 17,
-              "column": 7
+              "id": "a071e09ab42148c452f7-307cff288cced6e1e875",
+              "file": "change-password.spec.ts",
+              "line": 15,
+              "column": 9
             },
             {
-              "title": "Új tanuló hozzáadás",
-              "ok": true,
+              "title": "Sikeres jelszóváltoztatás",
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -122,26 +122,48 @@
                     {
                       "workerIndex": 0,
                       "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 6598,
-                      "errors": [],
+                      "status": "timedOut",
+                      "duration": 30018,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\change-password.spec.ts",
+                            "column": 20,
+                            "line": 31
+                          },
+                          "message": "Error: page.fill: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[name=\"old_password\"]')\u001b[22m\n\n\n\u001b[0m \u001b[90m 29 |\u001b[39m\n \u001b[90m 30 |\u001b[39m     test(\u001b[32m'Sikeres jelszóváltoztatás'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 31 |\u001b[39m         \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'input[name=\"old_password\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m\"admin\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 32 |\u001b[39m         \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'input[name=\"new_password\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m\"admin123\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 33 |\u001b[39m         \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m'button[type=\"submit\"]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 34 |\u001b[39m     \u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\change-password.spec.ts:31:20\u001b[22m"
+                        }
+                      ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-28T08:04:40.169Z",
-                      "attachments": []
+                      "startTime": "2025-03-28T08:24:46.613Z",
+                      "attachments": [
+                        {
+                          "name": "_prompt-1",
+                          "contentType": "text/markdown",
+                          "body": "IyBJbnN0cnVjdGlvbnMKCi0gRm9sbG93aW5nIFBsYXl3cmlnaHQgdGVzdCBmYWlsZWQuCi0gRXhwbGFpbiB3aHksIGJlIGNvbmNpc2UsIHJlc3BlY3QgUGxheXdyaWdodCBiZXN0IHByYWN0aWNlcy4KLSBQcm92aWRlIGEgc25pcHBldCBvZiBjb2RlIHdpdGggdGhlIGZpeCwgaWYgcG9zc2libGUuCgojIFRlc3QgaW5mbwoKLSBOYW1lOiBKZWxzesOzIG3Ds2Rvc8OtdMOhcyA+PiBTaWtlcmVzIGplbHN6w7N2w6FsdG96dGF0w6FzCi0gTG9jYXRpb246IEM6XFVzZXJzXFN6YWxrYWktU3phYm9BZGFtXERvY3VtZW50c1xHaXRIdWJcdml6c2dhcmVtZWtcdGVsb2NrXHRlc3RzXGNoYW5nZS1wYXNzd29yZC5zcGVjLnRzOjMwOjkKCiMgRXJyb3IgZGV0YWlscwoKYGBgCkVycm9yOiBwYWdlLmZpbGw6IFRlc3QgdGltZW91dCBvZiAzMDAwMG1zIGV4Y2VlZGVkLgpDYWxsIGxvZzoKICAtIHdhaXRpbmcgZm9yIGxvY2F0b3IoJ2lucHV0W25hbWU9Im9sZF9wYXNzd29yZCJdJykKCiAgICBhdCBDOlxVc2Vyc1xTemFsa2FpLVN6YWJvQWRhbVxEb2N1bWVudHNcR2l0SHViXHZpenNnYXJlbWVrXHRlbG9ja1x0ZXN0c1xjaGFuZ2UtcGFzc3dvcmQuc3BlYy50czozMToyMApgYGAKCiMgUGFnZSBzbmFwc2hvdAoKYGBgeWFtbAotIGJ1dHRvbiAiS2lza3VuZsOpbGVneWjDoXppIFN6ZW50IEJlbmVkZWsgUEcgS8O2esOpcGlza29sYSBBZEFkIjoKICAtIHRleHQ6IEtpc2t1bmbDqWxlZ3low6F6aSBTemVudCBCZW5lZGVrIFBHIEvDtnrDqXBpc2tvbGEgQWRBZAogIC0gaW1nCi0gbGlzdDoKICAtIGxpc3RpdGVtOgogICAgLSBsaW5rICJLZXpkxZFsYXAiOgogICAgICAtIGltZwogICAgICAtIHRleHQ6IEtlemTFkWxhcAotIHRleHQ6IElza29sYWkgbnlpbHbDoW50YXJ0w6FzCi0gbGlzdDoKICAtIGxpc3RpdGVtOgogICAgLSBsaW5rICLDk3JhcmVuZGVrIjoKICAgICAgLSBpbWcKICAgICAgLSB0ZXh0OiDDk3JhcmVuZGVrCiAgLSBsaXN0aXRlbToKICAgIC0gbGluayAiVGFudWzDs2siOgogICAgICAtIGltZwogICAgICAtIHRleHQ6IFRhbnVsw7NrCiAgLSBsaXN0aXRlbToKICAgIC0gbGluayAiTXVua2F0w6Fyc2FrIjoKICAgICAgLSBpbWcKICAgICAgLSB0ZXh0OiBNdW5rYXTDoXJzYWsKLSB0ZXh0OiBCZcOhbGzDrXTDoXNvayDDqXMgbmFwbMOzesOhcwotIGxpc3Q6CiAgLSBsaXN0aXRlbToKICAgIC0gbGluayAiVGFuw6l2IGJlw6FsbMOtdMOhc2FpIjoKICAgICAgLSBpbWcKICAgICAgLSB0ZXh0OiBUYW7DqXYgYmXDoWxsw610w6FzYWkKLSBsaW5rICLCqSAyMDI1IHRlbG9jayIKLSBtYWluOgogIC0gYnV0dG9uICJUb2dnbGUgU2lkZWJhciI6CiAgICAtIGltZwogICAgLSB0ZXh0OiBUb2dnbGUgU2lkZWJhcgogIC0gbmF2aWdhdGlvbiAiYnJlYWRjcnVtYiI6CiAgICAtIGxpc3Q6CiAgICAgIC0gbGlzdGl0ZW06CiAgICAgICAgLSBsaW5rICJLZXpkxZFsYXAiIFtkaXNhYmxlZF0KICAtIGltZwogIC0gcGFyYWdyYXBoOiDDnGR2w7Z6w7ZsasO8ayBhIFRlbG9jayB2ZXrDqXJsxZFwdWx0asOhYmFuLCBBZG1pbiBBZG1pbiEKLSBhbGVydApgYGAKCiMgVGVzdCBzb3VyY2UKCmBgYHRzCiAgIDEgfCBpbXBvcnQgeyB0ZXN0LCBleHBlY3QgfSBmcm9tICdAcGxheXdyaWdodC90ZXN0JzsKICAgMiB8CiAgIDMgfAogICA0IHwKICAgNSB8IHRlc3QuZGVzY3JpYmUoJ0plbHN6w7MgbcOzZG9zw610w6FzJywgKCkgPT4gewogICA2IHwgICAgIHRlc3QuYmVmb3JlRWFjaChhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgNyB8ICAgICAgICAgYXdhaXQgcGFnZS5nb3RvKCcvbG9naW4nKTsKICAgOCB8ICAgICAgICAgYXdhaXQgcGFnZS5maWxsKCdpbnB1dFtuYW1lPSJzaG9ydF9uYW1lIl0nLCAnQWRBZCcpOwogICA5IHwgICAgICAgICBhd2FpdCBwYWdlLmZpbGwoJ2lucHV0W25hbWU9InBhc3N3b3JkIl0nLCAnYWRtaW4nKTsKICAxMCB8ICAgICAgICAgYXdhaXQgcGFnZS5jbGljaygnYnV0dG9uW3R5cGU9InN1Ym1pdCJdJyk7CiAgMTEgfCAgICAgICAgIGF3YWl0IHBhZ2Uud2FpdEZvclVSTCgnL2Rhc2hib2FyZCcpOwogIDEyIHwKICAxMyB8ICAgICB9KTsKICAxNCB8CiAgMTUgfCAgICAgdGVzdCgnT2xkYWxiZXTDtmx0w6lzJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgMTYgfAogIDE3IHwgICAgICAgICBhd2FpdCBwYWdlLmdvdG8oJy9jaGFuZ2UtcGFzc3dvcmQnKTsKICAxOCB8ICAgICAgICAgYXdhaXQgZXhwZWN0KHBhZ2UuZ2V0QnlSb2xlKCdidXR0b24nLCB7IG5hbWU6ICdKZWxzesOzIG3Ds2Rvc8OtdMOhc2EnIH0pKS50b0JlVmlzaWJsZSgpOwogIDE5IHwKICAyMCB8ICAgICAgICAgY29uc3Qgb2xkUGFzc3dvcmQgPSBwYWdlLmxvY2F0b3IoJ2lucHV0W25hbWU9Im9sZF9wYXNzd29yZCJdJyk7CiAgMjEgfCAgICAgICAgIGF3YWl0IGV4cGVjdChvbGRQYXNzd29yZCkudG9CZVZpc2libGUoKTsKICAyMiB8ICAgICAgICAgYXdhaXQgZXhwZWN0KG9sZFBhc3N3b3JkKS50b0hhdmVBdHRyaWJ1dGUoJ3R5cGUnLCAncGFzc3dvcmQnKTsKICAyMyB8CiAgMjQgfCAgICAgICAgIGNvbnN0IG5ld1Bhc3N3b3JkID0gcGFnZS5sb2NhdG9yKCdpbnB1dFtuYW1lPSJuZXdfcGFzc3dvcmQiXScpOwogIDI1IHwgICAgICAgICBhd2FpdCBleHBlY3QobmV3UGFzc3dvcmQpLnRvQmVWaXNpYmxlKCk7CiAgMjYgfCAgICAgICAgIGF3YWl0IGV4cGVjdChuZXdQYXNzd29yZCkudG9IYXZlQXR0cmlidXRlKCd0eXBlJywgJ3Bhc3N3b3JkJyk7CiAgMjcgfCAgICAgfSk7CiAgMjggfAogIDI5IHwKICAzMCB8ICAgICB0ZXN0KCdTaWtlcmVzIGplbHN6w7N2w6FsdG96dGF0w6FzJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7Cj4gMzEgfCAgICAgICAgIGF3YWl0IHBhZ2UuZmlsbCgnaW5wdXRbbmFtZT0ib2xkX3Bhc3N3b3JkIl0nLCAiYWRtaW4iKTsKICAgICB8ICAgICAgICAgICAgICAgICAgICBeIEVycm9yOiBwYWdlLmZpbGw6IFRlc3QgdGltZW91dCBvZiAzMDAwMG1zIGV4Y2VlZGVkLgogIDMyIHwgICAgICAgICBhd2FpdCBwYWdlLmZpbGwoJ2lucHV0W25hbWU9Im5ld19wYXNzd29yZCJdJywgImFkbWluMTIzIik7CiAgMzMgfCAgICAgICAgIGF3YWl0IHBhZ2UuY2xpY2soJ2J1dHRvblt0eXBlPSJzdWJtaXQiXScpOwogIDM0IHwgICAgIAogIDM1IHwgICAgICAgICBjb25zdCBzdWNjZXNzQWxlcnQgPSBwYWdlLmxvY2F0b3IoJ2Rpdltyb2xlPSJhbGVydCJdOmhhcy10ZXh0KCJTaWtlcmVzIGplbHN6w7N2w6FsdG96dGF0w6FzIiknKTsKICAzNiB8ICAgICAgICAgYXdhaXQgZXhwZWN0KHN1Y2Nlc3NBbGVydCkudG9CZVZpc2libGUoKTsKICAzNyB8ICAgICB9KTsKICAzOCB8CiAgMzkgfCAgICAgdGVzdCgnSGliw6FzIGplbHN6w7N2YWwgdMO2cnTDqW7FkSBwcsOzYsOhbGtvesOhcycsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDQwIHwgICAgIAogIDQxIHwgICAgIH0pOwogIDQyIHwgfSk7CiAgNDMgfApgYGA="
+                        }
+                      ]
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
-              "id": "070ffa9c3689b3a10912-afb9c832c7a1de392605",
-              "file": "students.spec.ts",
-              "line": 24,
-              "column": 7
+              "id": "a071e09ab42148c452f7-1f53d4d6b3b96a6229cf",
+              "file": "change-password.spec.ts",
+              "line": 30,
+              "column": 9
             },
             {
-              "title": "Keresés",
+              "title": "Hibás jelszóval történő próbálkozás",
               "ok": true,
               "tags": [],
               "tests": [
@@ -153,190 +175,25 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": 0,
+                      "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 4481,
+                      "duration": 3348,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-28T08:04:46.769Z",
+                      "startTime": "2025-03-28T08:25:17.216Z",
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "070ffa9c3689b3a10912-1814d4589d9468036015",
-              "file": "students.spec.ts",
-              "line": 50,
-              "column": 7
-            },
-            {
-              "title": "Tanuló szerkesztés",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 6806,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-03-28T08:04:51.253Z",
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "070ffa9c3689b3a10912-a3fc15357be58b2baee5",
-              "file": "students.spec.ts",
-              "line": 60,
-              "column": 7
-            },
-            {
-              "title": "Tanuló törlés",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 6653,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-03-28T08:04:58.065Z",
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "070ffa9c3689b3a10912-850d6e2a2a7767bfc19f",
-              "file": "students.spec.ts",
-              "line": 86,
-              "column": 7
-            },
-            {
-              "title": "Rendezés",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 3698,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-03-28T08:05:04.721Z",
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "070ffa9c3689b3a10912-43d38c8a08b1a2055d0e",
-              "file": "students.spec.ts",
-              "line": 107,
-              "column": 7
-            },
-            {
-              "title": "Lapozás",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 3505,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-03-28T08:05:08.423Z",
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "070ffa9c3689b3a10912-8e92b8827673e2b5b121",
-              "file": "students.spec.ts",
-              "line": 120,
-              "column": 7
-            },
-            {
-              "title": "Zárolás/feloldás gomb",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 3417,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-03-28T08:05:11.932Z",
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "070ffa9c3689b3a10912-807de15d452c343e5353",
-              "file": "students.spec.ts",
-              "line": 127,
-              "column": 7
+              "id": "a071e09ab42148c452f7-fea02d51fb0678c8ff60",
+              "file": "change-password.spec.ts",
+              "line": 39,
+              "column": 9
             }
           ]
         }
@@ -345,11 +202,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-03-28T08:04:35.464Z",
-    "duration": 39935.704999999994,
-    "expected": 8,
+    "startTime": "2025-03-28T08:24:42.182Z",
+    "duration": 38491.366,
+    "expected": 2,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 1,
     "flaky": 0
   }
 }
