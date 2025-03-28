@@ -2,11 +2,17 @@ import { test, expect } from '@playwright/test';
 
 test.describe('SheetComponent', () => {
   test.beforeEach(async ({ page }) => {
+    await page.goto('/login');
+    await page.fill('input[name="short_name"]', 'AdAd');
+    await page.fill('input[name="password"]', 'admin');
+    await page.click('button[type="submit"]');
+    await page.waitForURL('/dashboard');
     // Navigate to the page that includes the SheetComponent
     await page.goto('/dashboard/school/employees'); // Adjust the URL to your setup
   });
 
   test('should open the sheet when "Konfigurálás most" button is clicked', async ({ page }) => {
+    await page.goto('/dashboard/school/employees');
     // Check if the button is visible and click it
     const configureButton = await page.locator('[data-testid="configure-button"]');
     await expect(configureButton).toBeVisible();
