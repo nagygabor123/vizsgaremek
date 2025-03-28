@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe("Bejelentkezés", () => {
 
-  test('Oldal megfelelően betöltődik', async ({ page }) => {
+  test('Oldal betöltés', async ({ page }) => {
     await page.goto('/login');
     await expect(page.getByRole('button', { name: 'Bejelentkezés' })).toBeVisible();
   
