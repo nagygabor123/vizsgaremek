@@ -67,7 +67,7 @@ export default function ChangePassword() {
         setOldPassword("");
         setNewPassword("");
         await signOut({ redirect: false });
-        router.push("/auth/signin");  // Itt az útvonal a bejelentkezési oldalra mutat
+        router.push("/login");  // Itt az útvonal a bejelentkezési oldalra mutat
         // Optionally sign out the user after password change
         // await signOut({ redirect: false });
         // router.push("/auth/signin");
