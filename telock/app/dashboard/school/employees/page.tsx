@@ -587,6 +587,7 @@ export default function AddEmployeePage() {
                                   <Input
                                     className="col-span-3"
                                     id="fullName"
+                                     name="full_name"
                                     type="text"
                                     placeholder=""
                                     value={editName}
@@ -637,7 +638,7 @@ export default function AddEmployeePage() {
 
                           <AlertDialog>
                             <AlertDialogTrigger disabled={employee.position === 'Tanár' || employee.position === "igazgato" || employee.position === "igazgatohelyettes"} >
-                              <Button disabled={employee.position === 'Tanár' || employee.position === "igazgato" || employee.position === "igazgatohelyettes"} variant="ghost"><Trash2 className="w-4 h-4 inline-block" /></Button>
+                              <Button disabled={employee.position === 'Tanár' || employee.position === "igazgato" || employee.position === "igazgatohelyettes"} variant="ghost"><Trash2 className="w-4 h-4 inline-block"  data-testid="delete-button" /></Button>
                             </AlertDialogTrigger>
                             <AlertDialogContent>
                               <AlertDialogHeader>

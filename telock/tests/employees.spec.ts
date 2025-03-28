@@ -76,6 +76,25 @@ test.describe('Iskolai nyilvántartás - Munkatársak', () => {
     
       });
 
+      test('Tanuló törlés', async ({ page }) => {
+
+        await page.getByPlaceholder('Keresés név szerint...').fill('Teszt Alkalmazott Módosított');
+    
+        const studentRow = await page.locator('tr', { hasText: 'Teszt Alkalmazott Módosított' });
+    
+        const editButton = studentRow.locator('[data-testid="delete-button"]');
+        await editButton.click();
+    
+        const dialogTitle = page.locator('text=Biztosan törölni szeretné a tanulót?');
+        await expect(dialogTitle).toBeVisible();
+    
+        const confirmButton = page.locator('button:has-text("Véglegesítés")');
+        await confirmButton.click();
+    
+        //  await page.getByPlaceholder('Keresés név szerint...').fill('Teszt Elek');
+    
+        await expect(studentRow).not.toBeVisible();
+      });
 
 
 });
