@@ -448,19 +448,21 @@ export default function AddEmployeePage() {
 
                     <div className="grid gap-2 w-full">
                       <Label htmlFor="position">Pozíció</Label>
-                      <Select value={position} onValueChange={setPosition} data-testid="position-select">
-                        <SelectTrigger className="col-span-3 w-full">
-
-                          <SelectValue placeholder="Válasszon..." />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {positions.map((pos) => (
-                            <SelectItem key={pos.value} value={pos.value}>
-                              {pos.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      <Select value={position} onValueChange={setPosition}>
+  <SelectTrigger 
+    data-testid="position-select" 
+    className="col-span-3 w-full"
+  >
+    <SelectValue placeholder="Válasszon..." />
+  </SelectTrigger>
+  <SelectContent>
+    {positions.map((pos) => (
+      <SelectItem key={pos.value} value={pos.value}>
+        {pos.label}
+      </SelectItem>
+    ))}
+  </SelectContent>
+</Select>
                     </div>
 
                     {/*{["tanar", "igazgato"].includes(position) && (*/}
