@@ -264,7 +264,7 @@ export default function AddEmployeePage() {
   // Szűrés
   const filteredEmployees = sortedEmployees.filter(student =>
     student.full_name.toLowerCase().includes(searchName.toLowerCase()) &&
-    student.position.toLowerCase().includes(searchPosition.toLowerCase()) &&
+    student.position.label.toLowerCase().includes(searchPosition.toLowerCase()) &&
     student.osztalyfonok.toLowerCase().includes(searchOsztalyfonok.toLowerCase())
   );
 
@@ -307,9 +307,9 @@ export default function AddEmployeePage() {
     return null;
   }
 
-  const filteredPositions = positions.filter(position =>
-    position.label.toLowerCase().includes(searchPosition.toLowerCase())
-  );
+
+
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -376,9 +376,6 @@ export default function AddEmployeePage() {
       onChange={(e) => setSearchPosition(e.target.value)}
     />
     
-    {filteredPositions.map(position => (
-      <div key={position.value}>{position.label}</div>
-    ))}
  
 
                 <Select
