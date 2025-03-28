@@ -678,7 +678,7 @@ export default function Home() {
 
                               <AlertDialog>
                                 <AlertDialogTrigger>
-                                  <Button variant="ghost" ><Trash2 /></Button>
+                                  <Button variant="ghost" data-testid="delete-button" ><Trash2 /> </Button>
                                 </AlertDialogTrigger>
                                 <AlertDialogContent>
                                   <AlertDialogHeader>

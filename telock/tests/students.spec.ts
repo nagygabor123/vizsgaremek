@@ -14,12 +14,13 @@ test.describe('Iskolai nyilvántartás - Tanulók', () => {
     await page.waitForSelector('table');
   });
 
-  test('Oldal megfelelően betöltődik', async ({ page }) => {
+  test('Oldal betöltődés', async ({ page }) => {
     await expect(page.getByRole('button', { name: 'Új tanuló hozzáadás' })).toBeVisible();
     await expect(page.getByPlaceholder('Keresés név szerint...')).toBeVisible();
     await expect(page.getByPlaceholder('Keresés osztály szerint...')).toBeVisible();
   });
 
+  
   test('Új tanuló hozzáadása', async ({ page }) => {
 
     await page.getByRole('button', { name: 'Új tanuló hozzáadás' }).click();
@@ -39,71 +40,70 @@ test.describe('Iskolai nyilvántartás - Tanulók', () => {
     await page.waitForLoadState('networkidle');
   
     await page.getByPlaceholder('Keresés név szerint...').fill("Teszt Elek");
-    await page.waitForTimeout(1000); 
+   // await page.waitForTimeout(1000); 
   
     const studentRow = page.locator('tbody tr').filter({ hasText: "Teszt Elek"});
-    
-    
-    await expect(studentRow).toBeVisible({ timeout: 15000 }); 
-    
-    
-    
-    //const studentRow = await page.locator('tr', { hasText: 'Teszt Elek' });
+    //await expect(studentRow).toBeVisible({ timeout: 15000 }); 
+    await expect(studentRow).toContainText("9.I");
+  });
+  
 
-  // Ellenőrizd, hogy a sor látható-e
+
+  test('Tanuló szerkesztése', async ({ page }) => {
+    
+    await page.getByPlaceholder('Keresés név szerint...').fill('Teszt Elek');
+    
+  
+    const studentRow = await page.locator('tr', { hasText: 'Teszt Elek' });
+
   await expect(studentRow).toBeVisible();
 
-  // A gomb keresése a data-testid alapján
   const editButton = studentRow.locator('[data-testid="edit-button"]');
   await editButton.click();
 
-  // Várj, amíg megjelenik a dialógus
-  const dialogContent = page.locator('dialog[open]');
-  await expect(dialogContent).toBeVisible();
+  const dialog = page.locator('[role="dialog"]');
+  await expect(dialog).toBeVisible();
+  await expect(dialog).toContainText('Tanuló szerkesztése');
 
-  // Töltsük ki a form mezőket
-  await page.fill('input[name="full_name"]', 'John Doe');
-  await page.fill('input[name="class"]', '10A');
-  await page.fill('input[name="rfid_tag"]', '123456789');
+  // 6️⃣ Módosítjuk a nevet egy random számmal
+  const fullNameInput = page.locator('input[name="full_name"]');
 
-  // Küldjük el a formot
-  await page.locator('button[type="submit"]').click();
+  await fullNameInput.fill(`Teszt Elek Módosított`);
+
+  await dialog.locator('button', { hasText: 'Mentés' }).click();
+
+  await expect(dialog).not.toBeVisible();
+
   });
-  
-/*
 
-  test('Tanuló szerkesztése', async ({ page }) => {
-    // Keress egy meglévő tanulót
-    await page.getByPlaceholder('Keresés név szerint...').fill('Teszt Elek');
-    
-    // Nyisd meg a szerkesztési dialógust
-    await page.locator('tr', { hasText: 'Teszt Elek' }).getByRole('button', { name: 'Szerkesztés' }).click();
-    
-    // Módosítsd az adatokat
-    await page.getByLabel('Teljes név').fill('Teszt Elek Módosított');
-    await page.getByLabel('Osztály és csoportok').fill('10.I');
-    
-    // Mentsd a változtatásokat
-    await page.getByRole('button', { name: 'Mentés' }).click();
-    
-    // Ellenőrizd a módosításokat
-    await expect(page.getByText('Teszt Elek Módosított')).toBeVisible();
-    await expect(page.getByText('10.I')).toBeVisible();
-  });*/
 
   test('Tanuló törlése', async ({ page }) => {
     // Keress egy meglévő tanulót
     await page.getByPlaceholder('Keresés név szerint...').fill('Teszt Elek Módosított');
     
-    // Kattints a törlés gombra
-    await page.locator('tr', { hasText: 'Teszt Elek Módosított' }).getByRole('button', { name: 'Törlés' }).click();
     
-    // Erősítsd meg a törlést
-    await page.getByRole('button', { name: 'Véglegesítés' }).click();
+
+
+
+
+    const dialogTitle = page.locator('text=Biztosan törölni szeretné a tanulót?');
+  await expect(dialogTitle).toBeVisible();
+
+  // 4️⃣ Kattintsunk a "Véglegesítés" gombra
+  const confirmButton = page.locator('button:has-text("Véglegesítés")');
+  await confirmButton.click();
+
+
+  await page.getByPlaceholder('Keresés név szerint...').fill('Teszt Elek');
     
-    // Ellenőrizd, hogy a tanuló eltűnt a listából
-    await expect(page.getByText('Teszt Elek Módosított')).not.toBeVisible();
+  
+  // 5️⃣ Ellenőrizzük, hogy a tanuló eltűnt a listából
+  const studentRow = page.locator('tr', { hasText: 'Teszt Elek' });
+  await expect(studentRow).not.toBeVisible(); 
   });
+
+
+
 
   test('Rendezés működése', async ({ page }) => {
     // Név szerinti rendezés ellenőrzése
