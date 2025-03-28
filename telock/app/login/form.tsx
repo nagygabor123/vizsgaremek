@@ -77,7 +77,7 @@ export default function Form() {
                   <Input
                     name="short_name"
                     type="text"
-                    placeholder="TeEl"
+                    placeholder="Felhasználónév"
                     required
                   />
                 </div>
@@ -91,7 +91,7 @@ export default function Form() {
                       Elfelejtette jelszavát? 
                     </a>*/}
                   </div>
-                  <Input name="password" type="password" required />
+                  <Input name="password" type="password" required placeholder="Jelszó" />
                 </div>
                 <Button type="submit" className="w-full">
                   Bejelentkezés

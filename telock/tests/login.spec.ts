@@ -1,6 +1,14 @@
 import { test, expect } from '@playwright/test';
 
-test.describe("Bejelentkezés teszt", () => {
+test.describe("Bejelentkezés", () => {
+
+  test('Oldal megfelelően betöltődik', async ({ page }) => {
+    await page.goto('/login');
+    await expect(page.getByRole('button', { name: 'Bejelentkezés' })).toBeVisible();
+    await expect(page.getByPlaceholder('Felhasználónév')).toBeVisible();
+    await expect(page.getByPlaceholder('Jelszó')).toBeVisible();
+  });
+
   test("Sikeres bejelentkezés", async ({ page }) => {
     await page.goto("/login");
 
@@ -16,7 +24,7 @@ test.describe("Bejelentkezés teszt", () => {
     await expect(successAlert).toBeVisible();
   });
 
-  test("Sikertelen bejelentkezés", async ({ page }) => {
+  test("Sikeretlen bejelentkezés", async ({ page }) => {
     await page.goto("/login");
 
     // Hibás adatokat adunk meg
