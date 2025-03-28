@@ -18,7 +18,7 @@ export default async function handler(req, res) {
       const values = [which_day, type];
       const result = await sql(query, values);
 
-      if (result.rowCount > 0) {
+      if (result.length > 0) {
         return res.status(200).json({ message: 'Sikeres frissítés', updatedType: type, updatedDate: which_day });
       } else {
         return res.status(404).json({ error: 'Nem található a megfelelő rekord' });
