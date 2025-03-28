@@ -525,7 +525,7 @@ export default function AddEmployeePage() {
                 <thead className="text-center text-sm text-muted-foreground">
                   <tr >
 
-                    <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Név  <ArrowUpDown className="w-4 h-4 inline-block" /></th>
+                    <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Teljes név <ArrowUpDown className="w-4 h-4 inline-block" /></th>
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("position")}>Pozíció  <ArrowUpDown className="w-4 h-4 inline-block" /></th>
                     <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("osztalyfonok")}>Osztály <ArrowUpDown className="w-4 h-4 inline-block" /></th>
                     <th className="p-2 cursor-pointer font-normal">Műveletek</th>

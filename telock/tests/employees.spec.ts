@@ -41,60 +41,77 @@ test.describe('Iskolai nyilvántartás - Munkatársak', () => {
 
 
     test('Keresés', async ({ page }) => {
-  
+
         await page.getByPlaceholder('Keresés név szerint...').fill('teszt');
         await expect(page.getByText('Teszt Alkalmazott (TeAl)')).toBeVisible();
-    
-    
+
+
         await page.getByPlaceholder('Keresés pozíció szerint...').fill('Portás');
         await expect(page.getByText('Portás')).toBeVisible();
-      });
+    });
 
 
-      test('Alkalmazott szerkesztés', async ({ page }) => {
+    test('Alkalmazott szerkesztés', async ({ page }) => {
 
         await page.getByPlaceholder('Keresés név szerint...').fill('Teszt Alkalmazott');
-    
-        const studentRow = await page.locator('tr', { hasText: 'Teszt Alkalmazott (TeAl)' });
-    
-        await expect(studentRow).toBeVisible();
-    
-        const editButton = studentRow.locator('[data-testid="edit-button"]');
+
+        const employeRow = await page.locator('tr', { hasText: 'Teszt Alkalmazott (TeAl)' });
+
+        await expect(employeRow).toBeVisible();
+
+        const editButton = employeRow.locator('[data-testid="edit-button"]');
         await editButton.click();
-    
+
         const dialog = page.locator('[role="dialog"]');
         await expect(dialog).toBeVisible();
         await expect(dialog).toContainText('Alkalmazott szerkesztése');
-    
-        const fullNameInput = page.locator('input[name="full_name"]');
-    
-        await fullNameInput.fill(`Teszt Alkalmazott Módosított`);
-    
-        await dialog.locator('button', { hasText: 'Mentés' }).click();
-    
-        await expect(dialog).not.toBeVisible();
-    
-      });
 
-      test('Tanuló törlés', async ({ page }) => {
+        const fullNameInput = page.locator('input[name="full_name"]');
+
+        await fullNameInput.fill(`Teszt Alkalmazott Módosított`);
+
+        await dialog.locator('button', { hasText: 'Mentés' }).click();
+
+        await expect(dialog).not.toBeVisible();
+
+    });
+
+    test('Alkalamzott törlés', async ({ page }) => {
 
         await page.getByPlaceholder('Keresés név szerint...').fill('Teszt Alkalmazott Módosított');
-    
-        const studentRow = await page.locator('tr', { hasText: 'Teszt Alkalmazott Módosított' });
-    
-        const editButton = studentRow.locator('[data-testid="delete-button"]');
+
+        const employeRow = await page.locator('tr', { hasText: 'Teszt Alkalmazott Módosított' });
+
+        const editButton = employeRow.locator('[data-testid="delete-button"]');
         await editButton.click();
-    
-        const dialogTitle = page.locator('text=Biztosan törölni szeretné a tanulót?');
+
+        const dialogTitle = page.locator('text=Biztosan törölni szeretné az alkalmazottat?');
         await expect(dialogTitle).toBeVisible();
-    
+
         const confirmButton = page.locator('button:has-text("Véglegesítés")');
         await confirmButton.click();
-    
+
         //  await page.getByPlaceholder('Keresés név szerint...').fill('Teszt Elek');
-    
-        await expect(studentRow).not.toBeVisible();
-      });
+
+        await expect(employeRow).not.toBeVisible();
+    });
+
+
+    test('Rendezés', async ({ page }) => {
+        await page.locator('th', { hasText: 'Teljes név' }).click();
+
+        await page.locator('th', { hasText: 'Pozíció' }).click();
+
+        await page.locator('th', { hasText: 'Osztály' }).click();
+
+    });
+
+    test('Lapozás', async ({ page }) => {
+        if (await page.getByRole('button', { name: 'Következő' }).isEnabled()) {
+            await page.getByRole('button', { name: 'Következő' }).click();
+            await page.getByRole('button', { name: 'Előző' }).click();
+        }
+    });
 
 
 });
