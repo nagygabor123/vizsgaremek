@@ -1,7 +1,7 @@
 {
   "config": {
-    "configFile": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\playwright.config.ts",
-    "rootDir": "C:/Users/Szalkai-SzaboAdam/Documents/GitHub/vizsgaremek/telock/tests",
+    "configFile": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/playwright.config.ts",
+    "rootDir": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests",
     "forbidOnly": false,
     "fullyParallel": false,
     "globalSetup": null,
@@ -37,7 +37,7 @@
     "quiet": false,
     "projects": [
       {
-        "outputDir": "C:/Users/Szalkai-SzaboAdam/Documents/GitHub/vizsgaremek/telock/test-results",
+        "outputDir": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -45,7 +45,7 @@
         },
         "id": "",
         "name": "",
-        "testDir": "C:/Users/Szalkai-SzaboAdam/Documents/GitHub/vizsgaremek/telock/tests",
+        "testDir": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -57,7 +57,7 @@
     "updateSnapshots": "missing",
     "updateSourceMethod": "patch",
     "version": "1.51.1",
-    "workers": 8,
+    "workers": 4,
     "webServer": null
   },
   "suites": [
@@ -69,13 +69,13 @@
       "specs": [],
       "suites": [
         {
-          "title": "SheetComponent",
+          "title": "Konfiguráció",
           "file": "config.spec.ts",
           "line": 3,
           "column": 6,
           "specs": [
             {
-              "title": "should open the sheet when \"Konfigurálás most\" button is clicked",
+              "title": "Felületbetöltés",
               "ok": true,
               "tags": [],
               "tests": [
@@ -90,25 +90,25 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 6080,
+                      "duration": 4900,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-28T11:15:22.677Z",
+                      "startTime": "2025-03-28T15:33:55.387Z",
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "9196cb1f5e62547dc5c9-c7facfeedcc2ce8d8de9",
+              "id": "9196cb1f5e62547dc5c9-57138b7e335c0cb7d07a",
               "file": "config.spec.ts",
               "line": 14,
               "column": 7
             },
             {
-              "title": "should display error message if no XML file is selected and \"Mentés & Tovább\" is clicked",
+              "title": "Sikeretlen feltöltés, nincs kiválaszott fájls",
               "ok": true,
               "tags": [],
               "tests": [
@@ -123,26 +123,26 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 6257,
+                      "duration": 5369,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-28T11:15:28.824Z",
+                      "startTime": "2025-03-28T15:34:00.389Z",
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "9196cb1f5e62547dc5c9-93e535bf1de3333432a2",
+              "id": "9196cb1f5e62547dc5c9-3baf644268e9e38f33fe",
               "file": "config.spec.ts",
-              "line": 26,
+              "line": 24,
               "column": 7
             },
             {
-              "title": "should show file name after selecting a valid XML file",
-              "ok": false,
+              "title": "Sikeres XML és CSV fájl feltöltés",
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -155,69 +155,27 @@
                     {
                       "workerIndex": 0,
                       "parallelIndex": 0,
-                      "status": "failed",
-                      "duration": 9663,
-                      "error": {
-                        "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: locator('text=file.xml')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=file.xml')\u001b[22m\n",
-                        "stack": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: locator('text=file.xml')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=file.xml')\u001b[22m\n\n    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\config.spec.ts:48:28",
-                        "matcherResult": {
-                          "message": "\u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: locator('text=file.xml')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=file.xml')\u001b[22m\n",
-                          "pass": false,
-                          "actual": "<element(s) not found>",
-                          "name": "toBeVisible",
-                          "expected": "visible",
-                          "log": [
-                            "  - expect.toBeVisible with timeout 5000ms",
-                            "  - waiting for locator('text=file.xml')"
-                          ],
-                          "timeout": 5000
-                        },
-                        "location": {
-                          "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\config.spec.ts",
-                          "column": 28,
-                          "line": 48
-                        },
-                        "snippet": "\u001b[0m \u001b[90m 46 |\u001b[39m     \u001b[90m// Check if the file name is displayed\u001b[39m\n \u001b[90m 47 |\u001b[39m     \u001b[36mconst\u001b[39m fileName \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'text=file.xml'\u001b[39m)\u001b[33m;\u001b[39m \u001b[90m// Adjust based on the file name\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 48 |\u001b[39m     \u001b[36mawait\u001b[39m expect(fileName)\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 49 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 50 |\u001b[39m\n \u001b[90m 51 |\u001b[39m   test(\u001b[32m'should upload XML file and show success message'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\config.spec.ts",
-                            "column": 28,
-                            "line": 48
-                          },
-                          "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: locator('text=file.xml')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=file.xml')\u001b[22m\n\n\n\u001b[0m \u001b[90m 46 |\u001b[39m     \u001b[90m// Check if the file name is displayed\u001b[39m\n \u001b[90m 47 |\u001b[39m     \u001b[36mconst\u001b[39m fileName \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'text=file.xml'\u001b[39m)\u001b[33m;\u001b[39m \u001b[90m// Adjust based on the file name\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 48 |\u001b[39m     \u001b[36mawait\u001b[39m expect(fileName)\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 49 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 50 |\u001b[39m\n \u001b[90m 51 |\u001b[39m   test(\u001b[32m'should upload XML file and show success message'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\config.spec.ts:48:28\u001b[22m"
-                        }
-                      ],
+                      "status": "passed",
+                      "duration": 16836,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-28T11:15:35.084Z",
-                      "attachments": [
-                        {
-                          "name": "_prompt-0",
-                          "contentType": "text/markdown",
-                          "body": "IyBJbnN0cnVjdGlvbnMKCi0gRm9sbG93aW5nIFBsYXl3cmlnaHQgdGVzdCBmYWlsZWQuCi0gRXhwbGFpbiB3aHksIGJlIGNvbmNpc2UsIHJlc3BlY3QgUGxheXdyaWdodCBiZXN0IHByYWN0aWNlcy4KLSBQcm92aWRlIGEgc25pcHBldCBvZiBjb2RlIHdpdGggdGhlIGZpeCwgaWYgcG9zc2libGUuCgojIFRlc3QgaW5mbwoKLSBOYW1lOiBTaGVldENvbXBvbmVudCA+PiBzaG91bGQgc2hvdyBmaWxlIG5hbWUgYWZ0ZXIgc2VsZWN0aW5nIGEgdmFsaWQgWE1MIGZpbGUKLSBMb2NhdGlvbjogQzpcVXNlcnNcU3phbGthaS1TemFib0FkYW1cRG9jdW1lbnRzXEdpdEh1Ylx2aXpzZ2FyZW1la1x0ZWxvY2tcdGVzdHNcY29uZmlnLnNwZWMudHM6Mzc6NwoKIyBFcnJvciBkZXRhaWxzCgpgYGAKRXJyb3I6IFRpbWVkIG91dCA1MDAwbXMgd2FpdGluZyBmb3IgZXhwZWN0KGxvY2F0b3IpLnRvQmVWaXNpYmxlKCkKCkxvY2F0b3I6IGxvY2F0b3IoJ3RleHQ9ZmlsZS54bWwnKQpFeHBlY3RlZDogdmlzaWJsZQpSZWNlaXZlZDogPGVsZW1lbnQocykgbm90IGZvdW5kPgpDYWxsIGxvZzoKICAtIGV4cGVjdC50b0JlVmlzaWJsZSB3aXRoIHRpbWVvdXQgNTAwMG1zCiAgLSB3YWl0aW5nIGZvciBsb2NhdG9yKCd0ZXh0PWZpbGUueG1sJykKCiAgICBhdCBDOlxVc2Vyc1xTemFsa2FpLVN6YWJvQWRhbVxEb2N1bWVudHNcR2l0SHViXHZpenNnYXJlbWVrXHRlbG9ja1x0ZXN0c1xjb25maWcuc3BlYy50czo0ODoyOApgYGAKCiMgUGFnZSBzbmFwc2hvdAoKYGBgeWFtbAotIGRpYWxvZyAiQmXDoWxsw610w6FzaSBmb2x5YW1hdCI6CiAgLSBidXR0b24gIkNsb3NlIjoKICAgIC0gaW1nCiAgICAtIHRleHQ6IENsb3NlCiAgLSBoZWFkaW5nICJCZcOhbGzDrXTDoXNpIGZvbHlhbWF0IiBbbGV2ZWw9Ml0KICAtIHBhcmFncmFwaDogS8OpdCBsw6lww6lzYmVuIHbDqWdpZ3ZlemV0asO8ayBhIGtvbmZpZ3Vyw6Fsw6Fzb24uCiAgLSB0ZXh0OiAxLiBBU0Mgw7NyYXJlbmQgZmVsdMO2bHTDqXNlIDIuIERpw6Frb2sgZmVsdMO2bHTDqXNlCiAgLSBpbWcgIlVwbG9hZCBJY29uIgogIC0gcGFyYWdyYXBoOiBWw6FsYXNzemEga2kgYSBmZWx0w7ZsdGVuaSBrw612w6FudCBYTUwtZsOhamx0CiAgLSBwYXJhZ3JhcGg6CiAgICAtIGltZwogICAgLSB0ZXh0OiBvcmFyZW5kLnhtbAogIC0gYnV0dG9uICJNZW50w6lzICYgVG92w6FiYiIKYGBgCgojIFRlc3Qgc291cmNlCgpgYGB0cwogICAxIHwgaW1wb3J0IHsgdGVzdCwgZXhwZWN0IH0gZnJvbSAnQHBsYXl3cmlnaHQvdGVzdCc7CiAgIDIgfAogICAzIHwgdGVzdC5kZXNjcmliZSgnU2hlZXRDb21wb25lbnQnLCAoKSA9PiB7CiAgIDQgfCAgIHRlc3QuYmVmb3JlRWFjaChhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgNSB8ICAgICBhd2FpdCBwYWdlLmdvdG8oJy9sb2dpbicpOwogICA2IHwgICAgIGF3YWl0IHBhZ2UuZmlsbCgnaW5wdXRbbmFtZT0ic2hvcnRfbmFtZSJdJywgJ0FkQWQnKTsKICAgNyB8ICAgICBhd2FpdCBwYWdlLmZpbGwoJ2lucHV0W25hbWU9InBhc3N3b3JkIl0nLCAnYWRtaW4nKTsKICAgOCB8ICAgICBhd2FpdCBwYWdlLmNsaWNrKCdidXR0b25bdHlwZT0ic3VibWl0Il0nKTsKICAgOSB8ICAgICBhd2FpdCBwYWdlLndhaXRGb3JVUkwoJy9kYXNoYm9hcmQnKTsKICAxMCB8ICAgICAvLyBOYXZpZ2F0ZSB0byB0aGUgcGFnZSB0aGF0IGluY2x1ZGVzIHRoZSBTaGVldENvbXBvbmVudAogIDExIHwgICAgIGF3YWl0IHBhZ2UuZ290bygnL2Rhc2hib2FyZC9zY2hvb2wvZW1wbG95ZWVzJyk7IC8vIEFkanVzdCB0aGUgVVJMIHRvIHlvdXIgc2V0dXAKICAxMiB8ICAgfSk7CiAgMTMgfAogIDE0IHwgICB0ZXN0KCdzaG91bGQgb3BlbiB0aGUgc2hlZXQgd2hlbiAiS29uZmlndXLDoWzDoXMgbW9zdCIgYnV0dG9uIGlzIGNsaWNrZWQnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAxNSB8ICAgICBhd2FpdCBwYWdlLmdvdG8oJy9kYXNoYm9hcmQvc2Nob29sL2VtcGxveWVlcycpOwogIDE2IHwgICAgIC8vIENoZWNrIGlmIHRoZSBidXR0b24gaXMgdmlzaWJsZSBhbmQgY2xpY2sgaXQKICAxNyB8ICAgICBjb25zdCBjb25maWd1cmVCdXR0b24gPSBhd2FpdCBwYWdlLmxvY2F0b3IoJ1tkYXRhLXRlc3RpZD0iY29uZmlndXJlLWJ1dHRvbiJdJyk7CiAgMTggfCAgICAgYXdhaXQgZXhwZWN0KGNvbmZpZ3VyZUJ1dHRvbikudG9CZVZpc2libGUoKTsKICAxOSB8ICAgICBhd2FpdCBjb25maWd1cmVCdXR0b24uY2xpY2soKTsKICAyMCB8CiAgMjEgfCAgICAgLy8gQ2hlY2sgaWYgdGhlIHNoZWV0IGlzIG9wZW4gYnkgY2hlY2tpbmcgZm9yIGl0cyB0aXRsZQogIDIyIHwgICAgIGNvbnN0IHNoZWV0VGl0bGUgPSBhd2FpdCBwYWdlLmxvY2F0b3IoJ3RleHQ9QmXDoWxsw610w6FzaSBmb2x5YW1hdCcpOwogIDIzIHwgICAgIGF3YWl0IGV4cGVjdChzaGVldFRpdGxlKS50b0JlVmlzaWJsZSgpOwogIDI0IHwgICB9KTsKICAyNSB8CiAgMjYgfCAgIHRlc3QoJ3Nob3VsZCBkaXNwbGF5IGVycm9yIG1lc3NhZ2UgaWYgbm8gWE1MIGZpbGUgaXMgc2VsZWN0ZWQgYW5kICJNZW50w6lzICYgVG92w6FiYiIgaXMgY2xpY2tlZCcsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDI3IHwgICAgIGF3YWl0IHBhZ2UubG9jYXRvcignW2RhdGEtdGVzdGlkPSJjb25maWd1cmUtYnV0dG9uIl0nKS5jbGljaygpOyAvLyBPcGVuIHNoZWV0CiAgMjggfAogIDI5IHwgICAgIGNvbnN0IG5leHRCdXR0b24gPSBwYWdlLmxvY2F0b3IoJ2J1dHRvbjpoYXMtdGV4dCgiTWVudMOpcyAmIFRvdsOhYmIiKScpOwogIDMwIHwgICAgIGF3YWl0IG5leHRCdXR0b24uY2xpY2soKTsgLy8gVHJ5IHRvIHByb2NlZWQgd2l0aG91dCBzZWxlY3RpbmcgYSBmaWxlCiAgMzEgfAogIDMyIHwgICAgIC8vIENoZWNrIGZvciB0aGUgZXJyb3IgbWVzc2FnZSBhYm91dCBmaWxlIHNlbGVjdGlvbgogIDMzIHwgICAgIGNvbnN0IGVycm9yTWVzc2FnZSA9IGF3YWl0IHBhZ2UubG9jYXRvcigndGV4dD1OaW5jcyBmw6FqbCBraXbDoWxhc3p0dmEnKTsKICAzNCB8ICAgICBhd2FpdCBleHBlY3QoZXJyb3JNZXNzYWdlKS50b0JlVmlzaWJsZSgpOwogIDM1IHwgICB9KTsKICAzNiB8CiAgMzcgfCAgIHRlc3QoJ3Nob3VsZCBzaG93IGZpbGUgbmFtZSBhZnRlciBzZWxlY3RpbmcgYSB2YWxpZCBYTUwgZmlsZScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDM4IHwgICAgIGF3YWl0IHBhZ2UubG9jYXRvcignW2RhdGEtdGVzdGlkPSJjb25maWd1cmUtYnV0dG9uIl0nKS5jbGljaygpOyAvLyBPcGVuIHNoZWV0CiAgMzkgfAogIDQwIHwgICAgIGNvbnN0IGZpbGVJbnB1dCA9IGF3YWl0IHBhZ2UubG9jYXRvcignW2RhdGEtdGVzdGlkPSJmaWxlLWlucHV0Il0nKTsKICA0MSB8ICAgICAKICA0MiB8ICAgICAvLyBNb2NrIGZpbGUgc2VsZWN0aW9uCiAgNDMgfCAgICAgY29uc3QgZmlsZVBhdGggPSAndGVzdC1kYXRhL29yYXJlbmQueG1sJzsgLy8gQWRqdXN0IHRoZSBwYXRoIHRvIGEgcmVhbCBmaWxlIG9uIHlvdXIgc3lzdGVtCiAgNDQgfCAgICAgYXdhaXQgZmlsZUlucHV0LnNldElucHV0RmlsZXMoZmlsZVBhdGgpOwogIDQ1IHwKICA0NiB8ICAgICAvLyBDaGVjayBpZiB0aGUgZmlsZSBuYW1lIGlzIGRpc3BsYXllZAogIDQ3IHwgICAgIGNvbnN0IGZpbGVOYW1lID0gYXdhaXQgcGFnZS5sb2NhdG9yKCd0ZXh0PWZpbGUueG1sJyk7IC8vIEFkanVzdCBiYXNlZCBvbiB0aGUgZmlsZSBuYW1lCj4gNDggfCAgICAgYXdhaXQgZXhwZWN0KGZpbGVOYW1lKS50b0JlVmlzaWJsZSgpOwogICAgIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgXiBFcnJvcjogVGltZWQgb3V0IDUwMDBtcyB3YWl0aW5nIGZvciBleHBlY3QobG9jYXRvcikudG9CZVZpc2libGUoKQogIDQ5IHwgICB9KTsKICA1MCB8CiAgNTEgfCAgIHRlc3QoJ3Nob3VsZCB1cGxvYWQgWE1MIGZpbGUgYW5kIHNob3cgc3VjY2VzcyBtZXNzYWdlJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgNTIgfCAgICAgYXdhaXQgcGFnZS5sb2NhdG9yKCdbZGF0YS10ZXN0aWQ9ImNvbmZpZ3VyZS1idXR0b24iXScpLmNsaWNrKCk7IC8vIE9wZW4gc2hlZXQKICA1MyB8CiAgNTQgfCAgICAgY29uc3QgZmlsZUlucHV0ID0gYXdhaXQgcGFnZS5sb2NhdG9yKCdbZGF0YS10ZXN0aWQ9ImZpbGUtaW5wdXQiXScpOwogIDU1IHwKICA1NiB8ICAgICAvLyBNb2NrIGZpbGUgc2VsZWN0aW9uCiAgNTcgfCAgICAgY29uc3QgZmlsZVBhdGggPSAndGVzdC1kYXRhL29yYXJlbmQueG1sJzsgLy8gQWRqdXN0IHRoZSBwYXRoIHRvIGEgcmVhbCBmaWxlIG9uIHlvdXIgc3lzdGVtCiAgNTggfCAgICAgYXdhaXQgZmlsZUlucHV0LnNldElucHV0RmlsZXMoZmlsZVBhdGgpOwogIDU5IHwKICA2MCB8ICAgICBjb25zdCBuZXh0QnV0dG9uID0gcGFnZS5sb2NhdG9yKCdidXR0b246aGFzLXRleHQoIk1lbnTDqXMgJiBUb3bDoWJiIiknKTsKICA2MSB8ICAgICBhd2FpdCBuZXh0QnV0dG9uLmNsaWNrKCk7IC8vIFByb2NlZWQgdG8gdXBsb2FkCiAgNjIgfAogIDYzIHwgICAgIC8vIFdhaXQgZm9yIHRoZSBzdWNjZXNzIG1lc3NhZ2UgYWZ0ZXIgZmlsZSB1cGxvYWQKICA2NCB8ICAgICBjb25zdCBzdWNjZXNzTWVzc2FnZSA9IGF3YWl0IHBhZ2UubG9jYXRvcigndGV4dD1TaWtlcmVzIGZlbHTDtmx0w6lzJyk7CiAgNjUgfCAgICAgYXdhaXQgZXhwZWN0KHN1Y2Nlc3NNZXNzYWdlKS50b0JlVmlzaWJsZSgpOwogIDY2IHwgICB9KTsKICA2NyB8CiAgNjggfCAgIHRlc3QoJ3Nob3VsZCB1cGxvYWQgQ1NWIGZpbGUgYW5kIHNob3cgc3VjY2VzcyBtZXNzYWdlJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgNjkgfCAgICAgYXdhaXQgcGFnZS5sb2NhdG9yKCdbZGF0YS10ZXN0aWQ9ImNvbmZpZ3VyZS1idXR0b24iXScpLmNsaWNrKCk7IC8vIE9wZW4gc2hlZXQKICA3MCB8CiAgNzEgfCAgICAgLy8gR28gdG8gdGhlIHNlY29uZCBzdGVwCiAgNzIgfCAgICAgYXdhaXQgcGFnZS5sb2NhdG9yKCd0ZXh0PTIuIERpw6Frb2sgZmVsdMO2bHTDqXNlJykuY2xpY2soKTsgLy8gR28gdG8gc3RlcCAyCiAgNzMgfAogIDc0IHwgICAgIGNvbnN0IGNzdkZpbGVJbnB1dCA9IGF3YWl0IHBhZ2UubG9jYXRvcignW2RhdGEtdGVzdGlkPSJjc3YtaW5wdXQiXScpOwogIDc1IHwKICA3NiB8ICAgICAvLyBNb2NrIENTViBmaWxlIHNlbGVjdGlvbgogIDc3IHwgICAgIGNvbnN0IGNzdkZpbGVQYXRoID0gJ3Rlc3QtZGF0YS90YW51bG9rLmNzdic7IC8vIEFkanVzdCB0aGUgcGF0aCB0byBhIHJlYWwgZmlsZSBvbiB5b3VyIHN5c3RlbQogIDc4IHwgICAgIGF3YWl0IGNzdkZpbGVJbnB1dC5zZXRJbnB1dEZpbGVzKGNzdkZpbGVQYXRoKTsKICA3OSB8CiAgODAgfCAgICAgY29uc3QgY29uZmlybUJ1dHRvbiA9IHBhZ2UubG9jYXRvcignYnV0dG9uOmhhcy10ZXh0KCJNZW50w6lzICYgTWVnZXLFkXPDrXTDqXMiKScpOwogIDgxIHwgICAgIGF3YWl0IGNvbmZpcm1CdXR0b24uY2xpY2soKTsgLy8gUHJvY2VlZCB0byB1cGxvYWQgQ1NWCiAgODIgfAogIDgzIHwgICAgIC8vIFdhaXQgZm9yIHRoZSBzdWNjZXNzIG1lc3NhZ2UgYWZ0ZXIgQ1NWIHVwbG9hZAogIDg0IHwgICAgIGNvbnN0IHN1Y2Nlc3NNZXNzYWdlID0gYXdhaXQgcGFnZS5sb2NhdG9yKCd0ZXh0PUZpbGUgdXBsb2FkZWQgc3VjY2Vzc2Z1bGx5IScpOwogIDg1IHwgICAgIGF3YWl0IGV4cGVjdChzdWNjZXNzTWVzc2FnZSkudG9CZVZpc2libGUoKTsKICA4NiB8ICAgfSk7CiAgODcgfCB9KTsKICA4OCB8CmBgYA=="
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\config.spec.ts",
-                        "column": 28,
-                        "line": 48
-                      }
+                      "startTime": "2025-03-28T15:34:05.761Z",
+                      "attachments": []
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
-              "id": "9196cb1f5e62547dc5c9-00500c69f710befbca79",
+              "id": "9196cb1f5e62547dc5c9-052e90e00056004471ab",
               "file": "config.spec.ts",
-              "line": 37,
+              "line": 34,
               "column": 7
             },
             {
-              "title": "should upload XML file and show success message",
-              "ok": false,
+              "title": "Feltöltött adatok ellenőrzése",
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -228,71 +186,29 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": 1,
+                      "workerIndex": 0,
                       "parallelIndex": 0,
-                      "status": "failed",
-                      "duration": 10815,
-                      "error": {
-                        "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: locator('text=Sikeres feltöltés')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=Sikeres feltöltés')\u001b[22m\n",
-                        "stack": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: locator('text=Sikeres feltöltés')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=Sikeres feltöltés')\u001b[22m\n\n    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\config.spec.ts:65:34",
-                        "matcherResult": {
-                          "message": "\u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: locator('text=Sikeres feltöltés')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=Sikeres feltöltés')\u001b[22m\n",
-                          "pass": false,
-                          "actual": "<element(s) not found>",
-                          "name": "toBeVisible",
-                          "expected": "visible",
-                          "log": [
-                            "  - expect.toBeVisible with timeout 5000ms",
-                            "  - waiting for locator('text=Sikeres feltöltés')"
-                          ],
-                          "timeout": 5000
-                        },
-                        "location": {
-                          "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\config.spec.ts",
-                          "column": 34,
-                          "line": 65
-                        },
-                        "snippet": "\u001b[0m \u001b[90m 63 |\u001b[39m     \u001b[90m// Wait for the success message after file upload\u001b[39m\n \u001b[90m 64 |\u001b[39m     \u001b[36mconst\u001b[39m successMessage \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'text=Sikeres feltöltés'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 65 |\u001b[39m     \u001b[36mawait\u001b[39m expect(successMessage)\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 66 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 67 |\u001b[39m\n \u001b[90m 68 |\u001b[39m   test(\u001b[32m'should upload CSV file and show success message'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\config.spec.ts",
-                            "column": 34,
-                            "line": 65
-                          },
-                          "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: locator('text=Sikeres feltöltés')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=Sikeres feltöltés')\u001b[22m\n\n\n\u001b[0m \u001b[90m 63 |\u001b[39m     \u001b[90m// Wait for the success message after file upload\u001b[39m\n \u001b[90m 64 |\u001b[39m     \u001b[36mconst\u001b[39m successMessage \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'text=Sikeres feltöltés'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 65 |\u001b[39m     \u001b[36mawait\u001b[39m expect(successMessage)\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 66 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 67 |\u001b[39m\n \u001b[90m 68 |\u001b[39m   test(\u001b[32m'should upload CSV file and show success message'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\config.spec.ts:65:34\u001b[22m"
-                        }
-                      ],
+                      "status": "passed",
+                      "duration": 5503,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-28T11:15:45.330Z",
-                      "attachments": [
-                        {
-                          "name": "_prompt-0",
-                          "contentType": "text/markdown",
-                          "body": "IyBJbnN0cnVjdGlvbnMKCi0gRm9sbG93aW5nIFBsYXl3cmlnaHQgdGVzdCBmYWlsZWQuCi0gRXhwbGFpbiB3aHksIGJlIGNvbmNpc2UsIHJlc3BlY3QgUGxheXdyaWdodCBiZXN0IHByYWN0aWNlcy4KLSBQcm92aWRlIGEgc25pcHBldCBvZiBjb2RlIHdpdGggdGhlIGZpeCwgaWYgcG9zc2libGUuCgojIFRlc3QgaW5mbwoKLSBOYW1lOiBTaGVldENvbXBvbmVudCA+PiBzaG91bGQgdXBsb2FkIFhNTCBmaWxlIGFuZCBzaG93IHN1Y2Nlc3MgbWVzc2FnZQotIExvY2F0aW9uOiBDOlxVc2Vyc1xTemFsa2FpLVN6YWJvQWRhbVxEb2N1bWVudHNcR2l0SHViXHZpenNnYXJlbWVrXHRlbG9ja1x0ZXN0c1xjb25maWcuc3BlYy50czo1MTo3CgojIEVycm9yIGRldGFpbHMKCmBgYApFcnJvcjogVGltZWQgb3V0IDUwMDBtcyB3YWl0aW5nIGZvciBleHBlY3QobG9jYXRvcikudG9CZVZpc2libGUoKQoKTG9jYXRvcjogbG9jYXRvcigndGV4dD1TaWtlcmVzIGZlbHTDtmx0w6lzJykKRXhwZWN0ZWQ6IHZpc2libGUKUmVjZWl2ZWQ6IDxlbGVtZW50KHMpIG5vdCBmb3VuZD4KQ2FsbCBsb2c6CiAgLSBleHBlY3QudG9CZVZpc2libGUgd2l0aCB0aW1lb3V0IDUwMDBtcwogIC0gd2FpdGluZyBmb3IgbG9jYXRvcigndGV4dD1TaWtlcmVzIGZlbHTDtmx0w6lzJykKCiAgICBhdCBDOlxVc2Vyc1xTemFsa2FpLVN6YWJvQWRhbVxEb2N1bWVudHNcR2l0SHViXHZpenNnYXJlbWVrXHRlbG9ja1x0ZXN0c1xjb25maWcuc3BlYy50czo2NTozNApgYGAKCiMgUGFnZSBzbmFwc2hvdAoKYGBgeWFtbAotIGRpYWxvZyAiQmXDoWxsw610w6FzaSBmb2x5YW1hdCI6CiAgLSBidXR0b24gIkNsb3NlIjoKICAgIC0gaW1nCiAgICAtIHRleHQ6IENsb3NlCiAgLSBoZWFkaW5nICJCZcOhbGzDrXTDoXNpIGZvbHlhbWF0IiBbbGV2ZWw9Ml0KICAtIHBhcmFncmFwaDogS8OpdCBsw6lww6lzYmVuIHbDqWdpZ3ZlemV0asO8ayBhIGtvbmZpZ3Vyw6Fsw6Fzb24uCiAgLSB0ZXh0OiAxLiBBU0Mgw7NyYXJlbmQgZmVsdMO2bHTDqXNlIDIuIERpw6Frb2sgZmVsdMO2bHTDqXNlCiAgLSBpbWcgIlVwbG9hZCBJY29uIgogIC0gcGFyYWdyYXBoOiBWw6FsYXNzemEga2kgYSBmZWx0w7ZsdGVuaSBrw612w6FudCBYTUwtZsOhamx0CiAgLSBwYXJhZ3JhcGg6CiAgICAtIGltZwogICAgLSB0ZXh0OiBvcmFyZW5kLnhtbAogIC0gYnV0dG9uICJLw6lyasO8aywgdsOhcmpvbi4uLiIgW2Rpc2FibGVkXToKICAgIC0gaW1nCiAgICAtIHRleHQ6IEvDqXJqw7xrLCB2w6Fyam9uLi4uCmBgYAoKIyBUZXN0IHNvdXJjZQoKYGBgdHMKICAgMSB8IGltcG9ydCB7IHRlc3QsIGV4cGVjdCB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwogICAyIHwKICAgMyB8IHRlc3QuZGVzY3JpYmUoJ1NoZWV0Q29tcG9uZW50JywgKCkgPT4gewogICA0IHwgICB0ZXN0LmJlZm9yZUVhY2goYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDUgfCAgICAgYXdhaXQgcGFnZS5nb3RvKCcvbG9naW4nKTsKICAgNiB8ICAgICBhd2FpdCBwYWdlLmZpbGwoJ2lucHV0W25hbWU9InNob3J0X25hbWUiXScsICdBZEFkJyk7CiAgIDcgfCAgICAgYXdhaXQgcGFnZS5maWxsKCdpbnB1dFtuYW1lPSJwYXNzd29yZCJdJywgJ2FkbWluJyk7CiAgIDggfCAgICAgYXdhaXQgcGFnZS5jbGljaygnYnV0dG9uW3R5cGU9InN1Ym1pdCJdJyk7CiAgIDkgfCAgICAgYXdhaXQgcGFnZS53YWl0Rm9yVVJMKCcvZGFzaGJvYXJkJyk7CiAgMTAgfCAgICAgLy8gTmF2aWdhdGUgdG8gdGhlIHBhZ2UgdGhhdCBpbmNsdWRlcyB0aGUgU2hlZXRDb21wb25lbnQKICAxMSB8ICAgICBhd2FpdCBwYWdlLmdvdG8oJy9kYXNoYm9hcmQvc2Nob29sL2VtcGxveWVlcycpOyAvLyBBZGp1c3QgdGhlIFVSTCB0byB5b3VyIHNldHVwCiAgMTIgfCAgIH0pOwogIDEzIHwKICAxNCB8ICAgdGVzdCgnc2hvdWxkIG9wZW4gdGhlIHNoZWV0IHdoZW4gIktvbmZpZ3Vyw6Fsw6FzIG1vc3QiIGJ1dHRvbiBpcyBjbGlja2VkJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgMTUgfCAgICAgYXdhaXQgcGFnZS5nb3RvKCcvZGFzaGJvYXJkL3NjaG9vbC9lbXBsb3llZXMnKTsKICAxNiB8ICAgICAvLyBDaGVjayBpZiB0aGUgYnV0dG9uIGlzIHZpc2libGUgYW5kIGNsaWNrIGl0CiAgMTcgfCAgICAgY29uc3QgY29uZmlndXJlQnV0dG9uID0gYXdhaXQgcGFnZS5sb2NhdG9yKCdbZGF0YS10ZXN0aWQ9ImNvbmZpZ3VyZS1idXR0b24iXScpOwogIDE4IHwgICAgIGF3YWl0IGV4cGVjdChjb25maWd1cmVCdXR0b24pLnRvQmVWaXNpYmxlKCk7CiAgMTkgfCAgICAgYXdhaXQgY29uZmlndXJlQnV0dG9uLmNsaWNrKCk7CiAgMjAgfAogIDIxIHwgICAgIC8vIENoZWNrIGlmIHRoZSBzaGVldCBpcyBvcGVuIGJ5IGNoZWNraW5nIGZvciBpdHMgdGl0bGUKICAyMiB8ICAgICBjb25zdCBzaGVldFRpdGxlID0gYXdhaXQgcGFnZS5sb2NhdG9yKCd0ZXh0PUJlw6FsbMOtdMOhc2kgZm9seWFtYXQnKTsKICAyMyB8ICAgICBhd2FpdCBleHBlY3Qoc2hlZXRUaXRsZSkudG9CZVZpc2libGUoKTsKICAyNCB8ICAgfSk7CiAgMjUgfAogIDI2IHwgICB0ZXN0KCdzaG91bGQgZGlzcGxheSBlcnJvciBtZXNzYWdlIGlmIG5vIFhNTCBmaWxlIGlzIHNlbGVjdGVkIGFuZCAiTWVudMOpcyAmIFRvdsOhYmIiIGlzIGNsaWNrZWQnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAyNyB8ICAgICBhd2FpdCBwYWdlLmxvY2F0b3IoJ1tkYXRhLXRlc3RpZD0iY29uZmlndXJlLWJ1dHRvbiJdJykuY2xpY2soKTsgLy8gT3BlbiBzaGVldAogIDI4IHwKICAyOSB8ICAgICBjb25zdCBuZXh0QnV0dG9uID0gcGFnZS5sb2NhdG9yKCdidXR0b246aGFzLXRleHQoIk1lbnTDqXMgJiBUb3bDoWJiIiknKTsKICAzMCB8ICAgICBhd2FpdCBuZXh0QnV0dG9uLmNsaWNrKCk7IC8vIFRyeSB0byBwcm9jZWVkIHdpdGhvdXQgc2VsZWN0aW5nIGEgZmlsZQogIDMxIHwKICAzMiB8ICAgICAvLyBDaGVjayBmb3IgdGhlIGVycm9yIG1lc3NhZ2UgYWJvdXQgZmlsZSBzZWxlY3Rpb24KICAzMyB8ICAgICBjb25zdCBlcnJvck1lc3NhZ2UgPSBhd2FpdCBwYWdlLmxvY2F0b3IoJ3RleHQ9TmluY3MgZsOhamwga2l2w6FsYXN6dHZhJyk7CiAgMzQgfCAgICAgYXdhaXQgZXhwZWN0KGVycm9yTWVzc2FnZSkudG9CZVZpc2libGUoKTsKICAzNSB8ICAgfSk7CiAgMzYgfAogIDM3IHwgICB0ZXN0KCdzaG91bGQgc2hvdyBmaWxlIG5hbWUgYWZ0ZXIgc2VsZWN0aW5nIGEgdmFsaWQgWE1MIGZpbGUnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAzOCB8ICAgICBhd2FpdCBwYWdlLmxvY2F0b3IoJ1tkYXRhLXRlc3RpZD0iY29uZmlndXJlLWJ1dHRvbiJdJykuY2xpY2soKTsgLy8gT3BlbiBzaGVldAogIDM5IHwKICA0MCB8ICAgICBjb25zdCBmaWxlSW5wdXQgPSBhd2FpdCBwYWdlLmxvY2F0b3IoJ1tkYXRhLXRlc3RpZD0iZmlsZS1pbnB1dCJdJyk7CiAgNDEgfCAgICAgCiAgNDIgfCAgICAgLy8gTW9jayBmaWxlIHNlbGVjdGlvbgogIDQzIHwgICAgIGNvbnN0IGZpbGVQYXRoID0gJ3Rlc3QtZGF0YS9vcmFyZW5kLnhtbCc7IC8vIEFkanVzdCB0aGUgcGF0aCB0byBhIHJlYWwgZmlsZSBvbiB5b3VyIHN5c3RlbQogIDQ0IHwgICAgIGF3YWl0IGZpbGVJbnB1dC5zZXRJbnB1dEZpbGVzKGZpbGVQYXRoKTsKICA0NSB8CiAgNDYgfCAgICAgLy8gQ2hlY2sgaWYgdGhlIGZpbGUgbmFtZSBpcyBkaXNwbGF5ZWQKICA0NyB8ICAgICBjb25zdCBmaWxlTmFtZSA9IGF3YWl0IHBhZ2UubG9jYXRvcigndGV4dD1maWxlLnhtbCcpOyAvLyBBZGp1c3QgYmFzZWQgb24gdGhlIGZpbGUgbmFtZQogIDQ4IHwgICAgIGF3YWl0IGV4cGVjdChmaWxlTmFtZSkudG9CZVZpc2libGUoKTsKICA0OSB8ICAgfSk7CiAgNTAgfAogIDUxIHwgICB0ZXN0KCdzaG91bGQgdXBsb2FkIFhNTCBmaWxlIGFuZCBzaG93IHN1Y2Nlc3MgbWVzc2FnZScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDUyIHwgICAgIGF3YWl0IHBhZ2UubG9jYXRvcignW2RhdGEtdGVzdGlkPSJjb25maWd1cmUtYnV0dG9uIl0nKS5jbGljaygpOyAvLyBPcGVuIHNoZWV0CiAgNTMgfAogIDU0IHwgICAgIGNvbnN0IGZpbGVJbnB1dCA9IGF3YWl0IHBhZ2UubG9jYXRvcignW2RhdGEtdGVzdGlkPSJmaWxlLWlucHV0Il0nKTsKICA1NSB8CiAgNTYgfCAgICAgLy8gTW9jayBmaWxlIHNlbGVjdGlvbgogIDU3IHwgICAgIGNvbnN0IGZpbGVQYXRoID0gJ3Rlc3QtZGF0YS9vcmFyZW5kLnhtbCc7IC8vIEFkanVzdCB0aGUgcGF0aCB0byBhIHJlYWwgZmlsZSBvbiB5b3VyIHN5c3RlbQogIDU4IHwgICAgIGF3YWl0IGZpbGVJbnB1dC5zZXRJbnB1dEZpbGVzKGZpbGVQYXRoKTsKICA1OSB8CiAgNjAgfCAgICAgY29uc3QgbmV4dEJ1dHRvbiA9IHBhZ2UubG9jYXRvcignYnV0dG9uOmhhcy10ZXh0KCJNZW50w6lzICYgVG92w6FiYiIpJyk7CiAgNjEgfCAgICAgYXdhaXQgbmV4dEJ1dHRvbi5jbGljaygpOyAvLyBQcm9jZWVkIHRvIHVwbG9hZAogIDYyIHwKICA2MyB8ICAgICAvLyBXYWl0IGZvciB0aGUgc3VjY2VzcyBtZXNzYWdlIGFmdGVyIGZpbGUgdXBsb2FkCiAgNjQgfCAgICAgY29uc3Qgc3VjY2Vzc01lc3NhZ2UgPSBhd2FpdCBwYWdlLmxvY2F0b3IoJ3RleHQ9U2lrZXJlcyBmZWx0w7ZsdMOpcycpOwo+IDY1IHwgICAgIGF3YWl0IGV4cGVjdChzdWNjZXNzTWVzc2FnZSkudG9CZVZpc2libGUoKTsKICAgICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4gRXJyb3I6IFRpbWVkIG91dCA1MDAwbXMgd2FpdGluZyBmb3IgZXhwZWN0KGxvY2F0b3IpLnRvQmVWaXNpYmxlKCkKICA2NiB8ICAgfSk7CiAgNjcgfAogIDY4IHwgICB0ZXN0KCdzaG91bGQgdXBsb2FkIENTViBmaWxlIGFuZCBzaG93IHN1Y2Nlc3MgbWVzc2FnZScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDY5IHwgICAgIGF3YWl0IHBhZ2UubG9jYXRvcignW2RhdGEtdGVzdGlkPSJjb25maWd1cmUtYnV0dG9uIl0nKS5jbGljaygpOyAvLyBPcGVuIHNoZWV0CiAgNzAgfAogIDcxIHwgICAgIC8vIEdvIHRvIHRoZSBzZWNvbmQgc3RlcAogIDcyIHwgICAgIGF3YWl0IHBhZ2UubG9jYXRvcigndGV4dD0yLiBEacOha29rIGZlbHTDtmx0w6lzZScpLmNsaWNrKCk7IC8vIEdvIHRvIHN0ZXAgMgogIDczIHwKICA3NCB8ICAgICBjb25zdCBjc3ZGaWxlSW5wdXQgPSBhd2FpdCBwYWdlLmxvY2F0b3IoJ1tkYXRhLXRlc3RpZD0iY3N2LWlucHV0Il0nKTsKICA3NSB8CiAgNzYgfCAgICAgLy8gTW9jayBDU1YgZmlsZSBzZWxlY3Rpb24KICA3NyB8ICAgICBjb25zdCBjc3ZGaWxlUGF0aCA9ICd0ZXN0LWRhdGEvdGFudWxvay5jc3YnOyAvLyBBZGp1c3QgdGhlIHBhdGggdG8gYSByZWFsIGZpbGUgb24geW91ciBzeXN0ZW0KICA3OCB8ICAgICBhd2FpdCBjc3ZGaWxlSW5wdXQuc2V0SW5wdXRGaWxlcyhjc3ZGaWxlUGF0aCk7CiAgNzkgfAogIDgwIHwgICAgIGNvbnN0IGNvbmZpcm1CdXR0b24gPSBwYWdlLmxvY2F0b3IoJ2J1dHRvbjpoYXMtdGV4dCgiTWVudMOpcyAmIE1lZ2VyxZFzw610w6lzIiknKTsKICA4MSB8ICAgICBhd2FpdCBjb25maXJtQnV0dG9uLmNsaWNrKCk7IC8vIFByb2NlZWQgdG8gdXBsb2FkIENTVgogIDgyIHwKICA4MyB8ICAgICAvLyBXYWl0IGZvciB0aGUgc3VjY2VzcyBtZXNzYWdlIGFmdGVyIENTViB1cGxvYWQKICA4NCB8ICAgICBjb25zdCBzdWNjZXNzTWVzc2FnZSA9IGF3YWl0IHBhZ2UubG9jYXRvcigndGV4dD1GaWxlIHVwbG9hZGVkIHN1Y2Nlc3NmdWxseSEnKTsKICA4NSB8ICAgICBhd2FpdCBleHBlY3Qoc3VjY2Vzc01lc3NhZ2UpLnRvQmVWaXNpYmxlKCk7CiAgODYgfCAgIH0pOwogIDg3IHwgfSk7CiAgODggfApgYGA="
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\config.spec.ts",
-                        "column": 34,
-                        "line": 65
-                      }
+                      "startTime": "2025-03-28T15:34:22.600Z",
+                      "attachments": []
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
-              "id": "9196cb1f5e62547dc5c9-b2c37c47d6fa6c10baa2",
+              "id": "9196cb1f5e62547dc5c9-d965bd56a37ae2ebc1bc",
               "file": "config.spec.ts",
-              "line": 51,
+              "line": 55,
               "column": 7
             },
             {
-              "title": "should upload CSV file and show success message",
-              "ok": false,
+              "title": "Feltöltött adatok ellenőrzése2",
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -303,46 +219,24 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": 2,
+                      "workerIndex": 0,
                       "parallelIndex": 0,
-                      "status": "timedOut",
-                      "duration": 30022,
-                      "error": {
-                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
-                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
-                      },
-                      "errors": [
-                        {
-                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
-                        },
-                        {
-                          "location": {
-                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\config.spec.ts",
-                            "column": 5,
-                            "line": 78
-                          },
-                          "message": "Error: locator.setInputFiles: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"csv-input\"]')\u001b[22m\n\n\n\u001b[0m \u001b[90m 76 |\u001b[39m     \u001b[90m// Mock CSV file selection\u001b[39m\n \u001b[90m 77 |\u001b[39m     \u001b[36mconst\u001b[39m csvFilePath \u001b[33m=\u001b[39m \u001b[32m'test-data/tanulok.csv'\u001b[39m\u001b[33m;\u001b[39m \u001b[90m// Adjust the path to a real file on your system\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m     \u001b[36mawait\u001b[39m csvFileInput\u001b[33m.\u001b[39msetInputFiles(csvFilePath)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m\n \u001b[90m 80 |\u001b[39m     \u001b[36mconst\u001b[39m confirmButton \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'button:has-text(\"Mentés & Megerősítés\")'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 81 |\u001b[39m     \u001b[36mawait\u001b[39m confirmButton\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m \u001b[90m// Proceed to upload CSV\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\config.spec.ts:78:5\u001b[22m"
-                        }
-                      ],
+                      "status": "passed",
+                      "duration": 5476,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-28T11:15:56.885Z",
-                      "attachments": [
-                        {
-                          "name": "_prompt-1",
-                          "contentType": "text/markdown",
-                          "body": "IyBJbnN0cnVjdGlvbnMKCi0gRm9sbG93aW5nIFBsYXl3cmlnaHQgdGVzdCBmYWlsZWQuCi0gRXhwbGFpbiB3aHksIGJlIGNvbmNpc2UsIHJlc3BlY3QgUGxheXdyaWdodCBiZXN0IHByYWN0aWNlcy4KLSBQcm92aWRlIGEgc25pcHBldCBvZiBjb2RlIHdpdGggdGhlIGZpeCwgaWYgcG9zc2libGUuCgojIFRlc3QgaW5mbwoKLSBOYW1lOiBTaGVldENvbXBvbmVudCA+PiBzaG91bGQgdXBsb2FkIENTViBmaWxlIGFuZCBzaG93IHN1Y2Nlc3MgbWVzc2FnZQotIExvY2F0aW9uOiBDOlxVc2Vyc1xTemFsa2FpLVN6YWJvQWRhbVxEb2N1bWVudHNcR2l0SHViXHZpenNnYXJlbWVrXHRlbG9ja1x0ZXN0c1xjb25maWcuc3BlYy50czo2ODo3CgojIEVycm9yIGRldGFpbHMKCmBgYApFcnJvcjogbG9jYXRvci5zZXRJbnB1dEZpbGVzOiBUZXN0IHRpbWVvdXQgb2YgMzAwMDBtcyBleGNlZWRlZC4KQ2FsbCBsb2c6CiAgLSB3YWl0aW5nIGZvciBsb2NhdG9yKCdbZGF0YS10ZXN0aWQ9ImNzdi1pbnB1dCJdJykKCiAgICBhdCBDOlxVc2Vyc1xTemFsa2FpLVN6YWJvQWRhbVxEb2N1bWVudHNcR2l0SHViXHZpenNnYXJlbWVrXHRlbG9ja1x0ZXN0c1xjb25maWcuc3BlYy50czo3ODo1CmBgYAoKIyBQYWdlIHNuYXBzaG90CgpgYGB5YW1sCi0gZGlhbG9nICJCZcOhbGzDrXTDoXNpIGZvbHlhbWF0IjoKICAtIGJ1dHRvbiAiQ2xvc2UiOgogICAgLSBpbWcKICAgIC0gdGV4dDogQ2xvc2UKICAtIGhlYWRpbmcgIkJlw6FsbMOtdMOhc2kgZm9seWFtYXQiIFtsZXZlbD0yXQogIC0gcGFyYWdyYXBoOiBLw6l0IGzDqXDDqXNiZW4gdsOpZ2lndmV6ZXRqw7xrIGEga29uZmlndXLDoWzDoXNvbi4KICAtIHRleHQ6IDEuIEFTQyDDs3JhcmVuZCBmZWx0w7ZsdMOpc2UgMi4gRGnDoWtvayBmZWx0w7ZsdMOpc2UKICAtIGltZyAiVXBsb2FkIEljb24iCiAgLSBwYXJhZ3JhcGg6IFbDoWxhc3N6YSBraSBhIGZlbHTDtmx0ZW5pIGvDrXbDoW50IFhNTC1mw6FqbHQKICAtIGJ1dHRvbiAiTWVudMOpcyAmIFRvdsOhYmIiCmBgYAoKIyBUZXN0IHNvdXJjZQoKYGBgdHMKICAgMSB8IGltcG9ydCB7IHRlc3QsIGV4cGVjdCB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwogICAyIHwKICAgMyB8IHRlc3QuZGVzY3JpYmUoJ1NoZWV0Q29tcG9uZW50JywgKCkgPT4gewogICA0IHwgICB0ZXN0LmJlZm9yZUVhY2goYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDUgfCAgICAgYXdhaXQgcGFnZS5nb3RvKCcvbG9naW4nKTsKICAgNiB8ICAgICBhd2FpdCBwYWdlLmZpbGwoJ2lucHV0W25hbWU9InNob3J0X25hbWUiXScsICdBZEFkJyk7CiAgIDcgfCAgICAgYXdhaXQgcGFnZS5maWxsKCdpbnB1dFtuYW1lPSJwYXNzd29yZCJdJywgJ2FkbWluJyk7CiAgIDggfCAgICAgYXdhaXQgcGFnZS5jbGljaygnYnV0dG9uW3R5cGU9InN1Ym1pdCJdJyk7CiAgIDkgfCAgICAgYXdhaXQgcGFnZS53YWl0Rm9yVVJMKCcvZGFzaGJvYXJkJyk7CiAgMTAgfCAgICAgLy8gTmF2aWdhdGUgdG8gdGhlIHBhZ2UgdGhhdCBpbmNsdWRlcyB0aGUgU2hlZXRDb21wb25lbnQKICAxMSB8ICAgICBhd2FpdCBwYWdlLmdvdG8oJy9kYXNoYm9hcmQvc2Nob29sL2VtcGxveWVlcycpOyAvLyBBZGp1c3QgdGhlIFVSTCB0byB5b3VyIHNldHVwCiAgMTIgfCAgIH0pOwogIDEzIHwKICAxNCB8ICAgdGVzdCgnc2hvdWxkIG9wZW4gdGhlIHNoZWV0IHdoZW4gIktvbmZpZ3Vyw6Fsw6FzIG1vc3QiIGJ1dHRvbiBpcyBjbGlja2VkJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgMTUgfCAgICAgYXdhaXQgcGFnZS5nb3RvKCcvZGFzaGJvYXJkL3NjaG9vbC9lbXBsb3llZXMnKTsKICAxNiB8ICAgICAvLyBDaGVjayBpZiB0aGUgYnV0dG9uIGlzIHZpc2libGUgYW5kIGNsaWNrIGl0CiAgMTcgfCAgICAgY29uc3QgY29uZmlndXJlQnV0dG9uID0gYXdhaXQgcGFnZS5sb2NhdG9yKCdbZGF0YS10ZXN0aWQ9ImNvbmZpZ3VyZS1idXR0b24iXScpOwogIDE4IHwgICAgIGF3YWl0IGV4cGVjdChjb25maWd1cmVCdXR0b24pLnRvQmVWaXNpYmxlKCk7CiAgMTkgfCAgICAgYXdhaXQgY29uZmlndXJlQnV0dG9uLmNsaWNrKCk7CiAgMjAgfAogIDIxIHwgICAgIC8vIENoZWNrIGlmIHRoZSBzaGVldCBpcyBvcGVuIGJ5IGNoZWNraW5nIGZvciBpdHMgdGl0bGUKICAyMiB8ICAgICBjb25zdCBzaGVldFRpdGxlID0gYXdhaXQgcGFnZS5sb2NhdG9yKCd0ZXh0PUJlw6FsbMOtdMOhc2kgZm9seWFtYXQnKTsKICAyMyB8ICAgICBhd2FpdCBleHBlY3Qoc2hlZXRUaXRsZSkudG9CZVZpc2libGUoKTsKICAyNCB8ICAgfSk7CiAgMjUgfAogIDI2IHwgICB0ZXN0KCdzaG91bGQgZGlzcGxheSBlcnJvciBtZXNzYWdlIGlmIG5vIFhNTCBmaWxlIGlzIHNlbGVjdGVkIGFuZCAiTWVudMOpcyAmIFRvdsOhYmIiIGlzIGNsaWNrZWQnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAyNyB8ICAgICBhd2FpdCBwYWdlLmxvY2F0b3IoJ1tkYXRhLXRlc3RpZD0iY29uZmlndXJlLWJ1dHRvbiJdJykuY2xpY2soKTsgLy8gT3BlbiBzaGVldAogIDI4IHwKICAyOSB8ICAgICBjb25zdCBuZXh0QnV0dG9uID0gcGFnZS5sb2NhdG9yKCdidXR0b246aGFzLXRleHQoIk1lbnTDqXMgJiBUb3bDoWJiIiknKTsKICAzMCB8ICAgICBhd2FpdCBuZXh0QnV0dG9uLmNsaWNrKCk7IC8vIFRyeSB0byBwcm9jZWVkIHdpdGhvdXQgc2VsZWN0aW5nIGEgZmlsZQogIDMxIHwKICAzMiB8ICAgICAvLyBDaGVjayBmb3IgdGhlIGVycm9yIG1lc3NhZ2UgYWJvdXQgZmlsZSBzZWxlY3Rpb24KICAzMyB8ICAgICBjb25zdCBlcnJvck1lc3NhZ2UgPSBhd2FpdCBwYWdlLmxvY2F0b3IoJ3RleHQ9TmluY3MgZsOhamwga2l2w6FsYXN6dHZhJyk7CiAgMzQgfCAgICAgYXdhaXQgZXhwZWN0KGVycm9yTWVzc2FnZSkudG9CZVZpc2libGUoKTsKICAzNSB8ICAgfSk7CiAgMzYgfAogIDM3IHwgICB0ZXN0KCdzaG91bGQgc2hvdyBmaWxlIG5hbWUgYWZ0ZXIgc2VsZWN0aW5nIGEgdmFsaWQgWE1MIGZpbGUnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAzOCB8ICAgICBhd2FpdCBwYWdlLmxvY2F0b3IoJ1tkYXRhLXRlc3RpZD0iY29uZmlndXJlLWJ1dHRvbiJdJykuY2xpY2soKTsgLy8gT3BlbiBzaGVldAogIDM5IHwKICA0MCB8ICAgICBjb25zdCBmaWxlSW5wdXQgPSBhd2FpdCBwYWdlLmxvY2F0b3IoJ1tkYXRhLXRlc3RpZD0iZmlsZS1pbnB1dCJdJyk7CiAgNDEgfCAgICAgCiAgNDIgfCAgICAgLy8gTW9jayBmaWxlIHNlbGVjdGlvbgogIDQzIHwgICAgIGNvbnN0IGZpbGVQYXRoID0gJ3Rlc3QtZGF0YS9vcmFyZW5kLnhtbCc7IC8vIEFkanVzdCB0aGUgcGF0aCB0byBhIHJlYWwgZmlsZSBvbiB5b3VyIHN5c3RlbQogIDQ0IHwgICAgIGF3YWl0IGZpbGVJbnB1dC5zZXRJbnB1dEZpbGVzKGZpbGVQYXRoKTsKICA0NSB8CiAgNDYgfCAgICAgLy8gQ2hlY2sgaWYgdGhlIGZpbGUgbmFtZSBpcyBkaXNwbGF5ZWQKICA0NyB8ICAgICBjb25zdCBmaWxlTmFtZSA9IGF3YWl0IHBhZ2UubG9jYXRvcigndGV4dD1maWxlLnhtbCcpOyAvLyBBZGp1c3QgYmFzZWQgb24gdGhlIGZpbGUgbmFtZQogIDQ4IHwgICAgIGF3YWl0IGV4cGVjdChmaWxlTmFtZSkudG9CZVZpc2libGUoKTsKICA0OSB8ICAgfSk7CiAgNTAgfAogIDUxIHwgICB0ZXN0KCdzaG91bGQgdXBsb2FkIFhNTCBmaWxlIGFuZCBzaG93IHN1Y2Nlc3MgbWVzc2FnZScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDUyIHwgICAgIGF3YWl0IHBhZ2UubG9jYXRvcignW2RhdGEtdGVzdGlkPSJjb25maWd1cmUtYnV0dG9uIl0nKS5jbGljaygpOyAvLyBPcGVuIHNoZWV0CiAgNTMgfAogIDU0IHwgICAgIGNvbnN0IGZpbGVJbnB1dCA9IGF3YWl0IHBhZ2UubG9jYXRvcignW2RhdGEtdGVzdGlkPSJmaWxlLWlucHV0Il0nKTsKICA1NSB8CiAgNTYgfCAgICAgLy8gTW9jayBmaWxlIHNlbGVjdGlvbgogIDU3IHwgICAgIGNvbnN0IGZpbGVQYXRoID0gJ3Rlc3QtZGF0YS9vcmFyZW5kLnhtbCc7IC8vIEFkanVzdCB0aGUgcGF0aCB0byBhIHJlYWwgZmlsZSBvbiB5b3VyIHN5c3RlbQogIDU4IHwgICAgIGF3YWl0IGZpbGVJbnB1dC5zZXRJbnB1dEZpbGVzKGZpbGVQYXRoKTsKICA1OSB8CiAgNjAgfCAgICAgY29uc3QgbmV4dEJ1dHRvbiA9IHBhZ2UubG9jYXRvcignYnV0dG9uOmhhcy10ZXh0KCJNZW50w6lzICYgVG92w6FiYiIpJyk7CiAgNjEgfCAgICAgYXdhaXQgbmV4dEJ1dHRvbi5jbGljaygpOyAvLyBQcm9jZWVkIHRvIHVwbG9hZAogIDYyIHwKICA2MyB8ICAgICAvLyBXYWl0IGZvciB0aGUgc3VjY2VzcyBtZXNzYWdlIGFmdGVyIGZpbGUgdXBsb2FkCiAgNjQgfCAgICAgY29uc3Qgc3VjY2Vzc01lc3NhZ2UgPSBhd2FpdCBwYWdlLmxvY2F0b3IoJ3RleHQ9U2lrZXJlcyBmZWx0w7ZsdMOpcycpOwogIDY1IHwgICAgIGF3YWl0IGV4cGVjdChzdWNjZXNzTWVzc2FnZSkudG9CZVZpc2libGUoKTsKICA2NiB8ICAgfSk7CiAgNjcgfAogIDY4IHwgICB0ZXN0KCdzaG91bGQgdXBsb2FkIENTViBmaWxlIGFuZCBzaG93IHN1Y2Nlc3MgbWVzc2FnZScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDY5IHwgICAgIGF3YWl0IHBhZ2UubG9jYXRvcignW2RhdGEtdGVzdGlkPSJjb25maWd1cmUtYnV0dG9uIl0nKS5jbGljaygpOyAvLyBPcGVuIHNoZWV0CiAgNzAgfAogIDcxIHwgICAgIC8vIEdvIHRvIHRoZSBzZWNvbmQgc3RlcAogIDcyIHwgICAgIGF3YWl0IHBhZ2UubG9jYXRvcigndGV4dD0yLiBEacOha29rIGZlbHTDtmx0w6lzZScpLmNsaWNrKCk7IC8vIEdvIHRvIHN0ZXAgMgogIDczIHwKICA3NCB8ICAgICBjb25zdCBjc3ZGaWxlSW5wdXQgPSBhd2FpdCBwYWdlLmxvY2F0b3IoJ1tkYXRhLXRlc3RpZD0iY3N2LWlucHV0Il0nKTsKICA3NSB8CiAgNzYgfCAgICAgLy8gTW9jayBDU1YgZmlsZSBzZWxlY3Rpb24KICA3NyB8ICAgICBjb25zdCBjc3ZGaWxlUGF0aCA9ICd0ZXN0LWRhdGEvdGFudWxvay5jc3YnOyAvLyBBZGp1c3QgdGhlIHBhdGggdG8gYSByZWFsIGZpbGUgb24geW91ciBzeXN0ZW0KPiA3OCB8ICAgICBhd2FpdCBjc3ZGaWxlSW5wdXQuc2V0SW5wdXRGaWxlcyhjc3ZGaWxlUGF0aCk7CiAgICAgfCAgICAgXiBFcnJvcjogbG9jYXRvci5zZXRJbnB1dEZpbGVzOiBUZXN0IHRpbWVvdXQgb2YgMzAwMDBtcyBleGNlZWRlZC4KICA3OSB8CiAgODAgfCAgICAgY29uc3QgY29uZmlybUJ1dHRvbiA9IHBhZ2UubG9jYXRvcignYnV0dG9uOmhhcy10ZXh0KCJNZW50w6lzICYgTWVnZXLFkXPDrXTDqXMiKScpOwogIDgxIHwgICAgIGF3YWl0IGNvbmZpcm1CdXR0b24uY2xpY2soKTsgLy8gUHJvY2VlZCB0byB1cGxvYWQgQ1NWCiAgODIgfAogIDgzIHwgICAgIC8vIFdhaXQgZm9yIHRoZSBzdWNjZXNzIG1lc3NhZ2UgYWZ0ZXIgQ1NWIHVwbG9hZAogIDg0IHwgICAgIGNvbnN0IHN1Y2Nlc3NNZXNzYWdlID0gYXdhaXQgcGFnZS5sb2NhdG9yKCd0ZXh0PUZpbGUgdXBsb2FkZWQgc3VjY2Vzc2Z1bGx5IScpOwogIDg1IHwgICAgIGF3YWl0IGV4cGVjdChzdWNjZXNzTWVzc2FnZSkudG9CZVZpc2libGUoKTsKICA4NiB8ICAgfSk7CiAgODcgfCB9KTsKICA4OCB8CmBgYA=="
-                        }
-                      ]
+                      "startTime": "2025-03-28T15:34:28.106Z",
+                      "attachments": []
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
-              "id": "9196cb1f5e62547dc5c9-264e791aa74609d4e278",
+              "id": "9196cb1f5e62547dc5c9-fb8ff785a6da7db9c8ca",
               "file": "config.spec.ts",
-              "line": 68,
+              "line": 65,
               "column": 7
             }
           ]
@@ -352,11 +246,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-03-28T11:15:22.050Z",
-    "duration": 64981.952000000005,
-    "expected": 2,
+    "startTime": "2025-03-28T15:33:54.992Z",
+    "duration": 38621.804,
+    "expected": 5,
     "skipped": 0,
-    "unexpected": 3,
+    "unexpected": 0,
     "flaky": 0
   }
 }
