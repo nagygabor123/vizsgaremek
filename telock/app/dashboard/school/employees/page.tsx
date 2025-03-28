@@ -307,7 +307,9 @@ export default function AddEmployeePage() {
     return null;
   }
 
-
+  const filteredPositions = positions.filter(position =>
+    position.label.toLowerCase().includes(searchPosition.toLowerCase())
+  );
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -365,13 +367,19 @@ export default function AddEmployeePage() {
                   value={searchName}
                   onChange={(e) => setSearchName(e.target.value)}
                 />
-                <Input
-                  type="text"
-                  placeholder="Keresés pozíció szerint..."
-                  className="border p-2 rounded-md"
-                  value={searchPosition}
-                  onChange={(e) => setSearchPosition(e.target.value)}
-                />
+         
+    <Input
+      type="text"
+      placeholder="Keresés pozíció szerint..."
+      className="border p-2 rounded-md"
+      value={searchPosition}
+      onChange={(e) => setSearchPosition(e.target.value)}
+    />
+    
+    {filteredPositions.map(position => (
+      <div key={position.value}>{position.label}</div>
+    ))}
+ 
 
                 <Select
                   value={searchOsztalyfonok}
