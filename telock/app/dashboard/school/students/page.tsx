@@ -605,11 +605,14 @@ export default function Home() {
                                 variant="ghost"
                                 onClick={() => handleStudentOpen(student.student_id)}
                                 disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}
+                                
                               >
                                 <LockOpen className="w-4 h-4 inline-block" />
-                              </Button>                              <Dialog open={open} onOpenChange={setOpen}>
+                              </Button>                       
+                              
+                                     <Dialog open={open} onOpenChange={setOpen}>
                                 <DialogTrigger asChild>
-                                  <Button variant="ghost" onClick={() => handleEdit(student)}><Pen /></Button>
+                                  <Button variant="ghost"  onClick={() => handleEdit(student)} data-testid="edit-button"><Pen /></Button>
                                 </DialogTrigger>
                                 <DialogContent className="sm:max-w-[425px]">
                                   <DialogHeader>

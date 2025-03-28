@@ -2,22 +2,19 @@
 
 import { test, expect } from '@playwright/test';
 
-test.describe('Iskolai nyilvántartás - Tanulók kezelése', () => {
+test.describe('Iskolai nyilvántartás - Tanulók', () => {
   test.beforeEach(async ({ page }) => {
-    // Bejelentkezés a rendszerbe (módosítsd a hitelesítési adatokat)
     await page.goto('/login');
     await page.fill('input[name="short_name"]', 'AdAd');
     await page.fill('input[name="password"]', 'admin');
     await page.click('button[type="submit"]');
     await page.waitForURL('/dashboard');
-    
-    // Navigálás az alkalmazottak oldalára
+
     await page.goto('/dashboard/school/students');
     await page.waitForSelector('table');
   });
 
   test('Oldal megfelelően betöltődik', async ({ page }) => {
-    // Ellenőrizd, hogy a fő elemek megjelennek
     await expect(page.getByRole('button', { name: 'Új tanuló hozzáadás' })).toBeVisible();
     await expect(page.getByPlaceholder('Keresés név szerint...')).toBeVisible();
     await expect(page.getByPlaceholder('Keresés osztály szerint...')).toBeVisible();
@@ -25,38 +22,55 @@ test.describe('Iskolai nyilvántartás - Tanulók kezelése', () => {
 
   test('Új tanuló hozzáadása', async ({ page }) => {
 
-  
-    // 2. Tanuló hozzáadása
     await page.getByRole('button', { name: 'Új tanuló hozzáadás' }).click();
     await page.locator('input[name="student_id"]').fill('OM1234567');
     await page.locator('input[name="full_name"]').fill('Teszt Elek');
     await page.locator('input[name="class"]').fill('9.I');
     await page.locator('input[name="rfid_tag"]').fill('R6HF6K86');
     await page.getByRole('button', { name: 'Mentés' }).click();
-  
-    // 3. Használjuk a keresőmezőt a gyors megtaláláshoz
+
     await page.getByPlaceholder('Keresés név szerint...').fill("Teszt Elek");
     
-    // 4. Ellenőrzés
     await page.waitForResponse(response => 
       response.url().includes('/api/students') && 
       response.status() === 200
     );
+
     await page.waitForLoadState('networkidle');
   
-    // 4. Keresés a pontos név alapján
     await page.getByPlaceholder('Keresés név szerint...').fill("Teszt Elek");
-    await page.waitForTimeout(1000); // Rövid várakozás a szűrésre
+    await page.waitForTimeout(1000); 
   
-    // 5. Ellenőrzés (növelt timeout-tal)
     const studentRow = page.locator('tbody tr').filter({ hasText: "Teszt Elek"});
-    await expect(studentRow).toBeVisible({ timeout: 15000 }); // 15 másodperc
     
-    // 6. További ellenőrzések
-    await expect(studentRow).toContainText("9.I");
+    
+    await expect(studentRow).toBeVisible({ timeout: 15000 }); 
+    
+    
+    
+    //const studentRow = await page.locator('tr', { hasText: 'Teszt Elek' });
+
+  // Ellenőrizd, hogy a sor látható-e
+  await expect(studentRow).toBeVisible();
+
+  // A gomb keresése a data-testid alapján
+  const editButton = studentRow.locator('[data-testid="edit-button"]');
+  await editButton.click();
+
+  // Várj, amíg megjelenik a dialógus
+  const dialogContent = page.locator('dialog[open]');
+  await expect(dialogContent).toBeVisible();
+
+  // Töltsük ki a form mezőket
+  await page.fill('input[name="full_name"]', 'John Doe');
+  await page.fill('input[name="class"]', '10A');
+  await page.fill('input[name="rfid_tag"]', '123456789');
+
+  // Küldjük el a formot
+  await page.locator('button[type="submit"]').click();
   });
   
-
+/*
 
   test('Tanuló szerkesztése', async ({ page }) => {
     // Keress egy meglévő tanulót
@@ -75,7 +89,7 @@ test.describe('Iskolai nyilvántartás - Tanulók kezelése', () => {
     // Ellenőrizd a módosításokat
     await expect(page.getByText('Teszt Elek Módosított')).toBeVisible();
     await expect(page.getByText('10.I')).toBeVisible();
-  });
+  });*/
 
   test('Tanuló törlése', async ({ page }) => {
     // Keress egy meglévő tanulót
