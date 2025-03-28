@@ -216,7 +216,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link href="/settings">
+              <Link href="/change-password">
                 <LockKeyhole className="text-gray-800" />
                 Jelszó módosítása
               </Link>
