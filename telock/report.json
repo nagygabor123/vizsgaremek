@@ -66,72 +66,218 @@
       "file": "employees.spec.ts",
       "column": 0,
       "line": 0,
-      "specs": [
+      "specs": [],
+      "suites": [
         {
-          "title": "Új alkalmazott hozzáadása pozíció választással",
-          "ok": false,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "",
-              "projectName": "",
-              "results": [
-                {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
-                  "status": "timedOut",
-                  "duration": 30020,
-                  "error": {
-                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
-                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
-                  },
-                  "errors": [
-                    {
-                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
-                    },
-                    {
-                      "location": {
-                        "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\employees.spec.ts",
-                        "column": 72,
-                        "line": 8
-                      },
-                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Új alkalmazott hozzáadás' })\u001b[22m\n\n\n\u001b[0m \u001b[90m  6 |\u001b[39m   \n \u001b[90m  7 |\u001b[39m   \u001b[90m// 2. Dialógus megnyitása\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  8 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'button'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Új alkalmazott hozzáadás'\u001b[39m })\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m  9 |\u001b[39m   \n \u001b[90m 10 |\u001b[39m   \u001b[90m// 3. Várunk a dialógus megjelenésére\u001b[39m\n \u001b[90m 11 |\u001b[39m   \u001b[36mconst\u001b[39m dialog \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mgetByRole(\u001b[32m'dialog'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Alkalmazott hozzáadása'\u001b[39m })\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\employees.spec.ts:8:72\u001b[22m"
-                    }
-                  ],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2025-03-28T09:48:37.036Z",
-                  "attachments": [
-                    {
-                      "name": "_prompt-1",
-                      "contentType": "text/markdown",
-                      "body": "IyBJbnN0cnVjdGlvbnMKCi0gRm9sbG93aW5nIFBsYXl3cmlnaHQgdGVzdCBmYWlsZWQuCi0gRXhwbGFpbiB3aHksIGJlIGNvbmNpc2UsIHJlc3BlY3QgUGxheXdyaWdodCBiZXN0IHByYWN0aWNlcy4KLSBQcm92aWRlIGEgc25pcHBldCBvZiBjb2RlIHdpdGggdGhlIGZpeCwgaWYgcG9zc2libGUuCgojIFRlc3QgaW5mbwoKLSBOYW1lOiDDmmogYWxrYWxtYXpvdHQgaG96esOhYWTDoXNhIHBvesOtY2nDsyB2w6FsYXN6dMOhc3NhbAotIExvY2F0aW9uOiBDOlxVc2Vyc1xTemFsa2FpLVN6YWJvQWRhbVxEb2N1bWVudHNcR2l0SHViXHZpenNnYXJlbWVrXHRlbG9ja1x0ZXN0c1xlbXBsb3llZXMuc3BlYy50czozOjUKCiMgRXJyb3IgZGV0YWlscwoKYGBgCkVycm9yOiBsb2NhdG9yLmNsaWNrOiBUZXN0IHRpbWVvdXQgb2YgMzAwMDBtcyBleGNlZWRlZC4KQ2FsbCBsb2c6CiAgLSB3YWl0aW5nIGZvciBnZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogJ8OaaiBhbGthbG1hem90dCBob3p6w6FhZMOhcycgfSkKCiAgICBhdCBDOlxVc2Vyc1xTemFsa2FpLVN6YWJvQWRhbVxEb2N1bWVudHNcR2l0SHViXHZpenNnYXJlbWVrXHRlbG9ja1x0ZXN0c1xlbXBsb3llZXMuc3BlYy50czo4OjcyCmBgYAoKIyBQYWdlIHNuYXBzaG90CgpgYGB5YW1sCi0gbGluayAidGVsb2NrIgotIGxpbmsgIlZpc3N6YSI6CiAgLSBpbWcKICAtIHRleHQ6IFZpc3N6YQotIHRleHQ6IEJlamVsZW50a2V6w6lzIMOcZHbDtnrDtmxqw7xrISBLw6lyasO8aywgYWRqYSBtZWcgYmVqZWxlbnRrZXrDqXNpIGFkYXRhaXQgYSBmb2x5dGF0w6FzaG96LiBGZWxoYXN6bsOhbMOzbsOpdgotIHRleHRib3gKLSB0ZXh0OiBKZWxzesOzCi0gdGV4dGJveAotIGJ1dHRvbiAiQmVqZWxlbnRrZXrDqXMiCi0gdGV4dDogQXogYWRhdGFpdCBiaXp0b25zw6FnYmFuIHRhcnRqdWsuIFNvaGEgbmUgb3NzemEgbWVnIGplbHN6YXbDoXQgbcOhc29ra2FsIQotIGFsZXJ0CmBgYAoKIyBUZXN0IHNvdXJjZQoKYGBgdHMKICAgMSB8IGltcG9ydCB7IHRlc3QsIGV4cGVjdCB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwogICAyIHwKICAgMyB8IHRlc3QoJ8OaaiBhbGthbG1hem90dCBob3p6w6FhZMOhc2EgcG96w61jacOzIHbDoWxhc3p0w6Fzc2FsJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDQgfCAgIC8vIDEuIE5hdmlnw6Fsw6FzIGF6IGFsa2FsbWF6b3R0YWsgb2xkYWxyYQogICA1IHwgICBhd2FpdCBwYWdlLmdvdG8oJy9kYXNoYm9hcmQvc2Nob29sL2VtcGxveWVlcycpOwogICA2IHwgICAKICAgNyB8ICAgLy8gMi4gRGlhbMOzZ3VzIG1lZ255aXTDoXNhCj4gIDggfCAgIGF3YWl0IHBhZ2UuZ2V0QnlSb2xlKCdidXR0b24nLCB7IG5hbWU6ICfDmmogYWxrYWxtYXpvdHQgaG96esOhYWTDoXMnIH0pLmNsaWNrKCk7CiAgICAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4gRXJyb3I6IGxvY2F0b3IuY2xpY2s6IFRlc3QgdGltZW91dCBvZiAzMDAwMG1zIGV4Y2VlZGVkLgogICA5IHwgICAKICAxMCB8ICAgLy8gMy4gVsOhcnVuayBhIGRpYWzDs2d1cyBtZWdqZWxlbsOpc8OpcmUKICAxMSB8ICAgY29uc3QgZGlhbG9nID0gcGFnZS5nZXRCeVJvbGUoJ2RpYWxvZycsIHsgbmFtZTogJ0Fsa2FsbWF6b3R0IGhvenrDoWFkw6FzYScgfSk7CiAgMTIgfCAgIGF3YWl0IGV4cGVjdChkaWFsb2cpLnRvQmVWaXNpYmxlKCk7CiAgMTMgfAogIDE0IHwgICAvLyA0LiDFsHJsYXAga2l0w7ZsdMOpc2UKICAxNSB8ICAgY29uc3QgZnVsbE5hbWUgPSAnVGVzenQgQWxrYWxtYXpvdHQnOwogIDE2IHwgICBjb25zdCBzaG9ydE5hbWUgPSAnVGVzenRBbCc7CiAgMTcgfCAgIAogIDE4IHwgICBhd2FpdCBwYWdlLmdldEJ5TGFiZWwoJ1RlbGplcyBuw6l2JykuZmlsbChmdWxsTmFtZSk7CiAgMTkgfCAgIGF3YWl0IHBhZ2UuZ2V0QnlMYWJlbCgnUsO2dmlkw610ZXR0IG7DqXYgKGZlbGhhc3puw6Fsw7Nuw6l2KScpLmZpbGwoc2hvcnROYW1lKTsKICAyMCB8ICAgCiAgMjEgfCAgIC8vIDUuIFBPWsONQ0nDkyBLSVbDgUxBU1pUw4FTQSAtIEpBVsONVE9UVCBWRVJaScOTCiAgMjIgfCAgIC8vIEEgZGF0YS10ZXN0aWQgbW9zdCBhIFNlbGVjdFRyaWdnZXItZW4gdmFuCiAgMjMgfCAgIGNvbnN0IHBvc2l0aW9uVHJpZ2dlciA9IHBhZ2UubG9jYXRvcignW2RhdGEtdGVzdGlkPSJwb3NpdGlvbi1zZWxlY3QiXScpOwogIDI0IHwgICBhd2FpdCBleHBlY3QocG9zaXRpb25UcmlnZ2VyKS50b0JlVmlzaWJsZSgpOwogIDI1IHwgICBhd2FpdCBwb3NpdGlvblRyaWdnZXIuY2xpY2soKTsKICAyNiB8ICAgCiAgMjcgfCAgIC8vIFbDoXJ1bmsgYXogb3BjacOzayBtZWdqZWxlbsOpc8OpcmUKICAyOCB8ICAgYXdhaXQgZXhwZWN0KHBhZ2UubG9jYXRvcignLnNlbGVjdC1jb250ZW50JykpLnRvQmVWaXNpYmxlKCk7CiAgMjkgfCAgIAogIDMwIHwgICAvLyBWw6FsYXNzenVrIGtpIGEgIlRhbsOhciIgcG96w61jacOzdAogIDMxIHwgICBhd2FpdCBwYWdlLmdldEJ5Um9sZSgnb3B0aW9uJywgeyBuYW1lOiAnVGFuw6FyJyB9KS5jbGljaygpOwogIDMyIHwgICAKICAzMyB8ICAgLy8gRWxsZW7FkXJpenrDvGsgYSBraXbDoWxhc3p0b3R0IMOpcnTDqWtldAogIDM0IHwgICBhd2FpdCBleHBlY3QocG9zaXRpb25UcmlnZ2VyKS50b0NvbnRhaW5UZXh0KCdUYW7DoXInKTsKICAzNSB8ICAgCiAgMzYgfCAgIC8vIDYuIE1lbnTDqXMKICAzNyB8ICAgYXdhaXQgcGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogJ01lbnTDqXMnIH0pLmNsaWNrKCk7CiAgMzggfCAgIAogIDM5IHwgICAvLyA3LiBEaWFsw7NndXMgYmV6w6FydWzDoXPDoW5hayBlbGxlbsWRcnrDqXNlCiAgNDAgfCAgIGF3YWl0IGV4cGVjdChkaWFsb2cpLm5vdC50b0JlVmlzaWJsZSgpOwogIDQxIHwgfSk7CmBgYA=="
-                    }
-                  ]
-                }
-              ],
-              "status": "unexpected"
-            }
-          ],
-          "id": "173bfcde56ef5531431c-bf01452d1332ccdcf208",
+          "title": "Iskolai nyilvántartás - Munkatársak",
           "file": "employees.spec.ts",
           "line": 3,
-          "column": 5
+          "column": 6,
+          "specs": [
+            {
+              "title": "Oldalbetöltés",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6767,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-03-28T10:13:50.351Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "173bfcde56ef5531431c-c5991c8a3e86137db556",
+              "file": "employees.spec.ts",
+              "line": 15,
+              "column": 9
+            },
+            {
+              "title": "Új alkalmazott hozzáadás ",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6527,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-03-28T10:13:57.175Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "173bfcde56ef5531431c-adf064477a6669fe4093",
+              "file": "employees.spec.ts",
+              "line": 22,
+              "column": 9
+            },
+            {
+              "title": "Keresés",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 6435,
+                      "error": {
+                        "message": "Error: expect.toBeVisible: Error: strict mode violation: getByText('Teszt Alkalmazott (TeAl)') resolved to 2 elements:\n    1) <td class=\"p-1\">Teszt Alkalmazott (TeAl)</td> aka getByRole('cell', { name: 'Teszt Alkalmazott (TeAl)' }).first()\n    2) <td class=\"p-1\">Teszt Alkalmazott (TeAl)</td> aka getByRole('cell', { name: 'Teszt Alkalmazott (TeAl)' }).nth(1)\n\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Teszt Alkalmazott (TeAl)')\u001b[22m\n",
+                        "stack": "Error: expect.toBeVisible: Error: strict mode violation: getByText('Teszt Alkalmazott (TeAl)') resolved to 2 elements:\n    1) <td class=\"p-1\">Teszt Alkalmazott (TeAl)</td> aka getByRole('cell', { name: 'Teszt Alkalmazott (TeAl)' }).first()\n    2) <td class=\"p-1\">Teszt Alkalmazott (TeAl)</td> aka getByRole('cell', { name: 'Teszt Alkalmazott (TeAl)' }).nth(1)\n\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Teszt Alkalmazott (TeAl)')\u001b[22m\n\n    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\employees.spec.ts:46:66",
+                        "location": {
+                          "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\employees.spec.ts",
+                          "column": 66,
+                          "line": 46
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 44 |\u001b[39m   \n \u001b[90m 45 |\u001b[39m         \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByPlaceholder(\u001b[32m'Keresés név szerint...'\u001b[39m)\u001b[33m.\u001b[39mfill(\u001b[32m'teszt'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 46 |\u001b[39m         \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByText(\u001b[32m'Teszt Alkalmazott (TeAl)'\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 47 |\u001b[39m     \n \u001b[90m 48 |\u001b[39m     \n \u001b[90m 49 |\u001b[39m         \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByPlaceholder(\u001b[32m'Keresés pozíció szerint...'\u001b[39m)\u001b[33m.\u001b[39mfill(\u001b[32m'Portás'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\employees.spec.ts",
+                            "column": 66,
+                            "line": 46
+                          },
+                          "message": "Error: expect.toBeVisible: Error: strict mode violation: getByText('Teszt Alkalmazott (TeAl)') resolved to 2 elements:\n    1) <td class=\"p-1\">Teszt Alkalmazott (TeAl)</td> aka getByRole('cell', { name: 'Teszt Alkalmazott (TeAl)' }).first()\n    2) <td class=\"p-1\">Teszt Alkalmazott (TeAl)</td> aka getByRole('cell', { name: 'Teszt Alkalmazott (TeAl)' }).nth(1)\n\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Teszt Alkalmazott (TeAl)')\u001b[22m\n\n\n\u001b[0m \u001b[90m 44 |\u001b[39m   \n \u001b[90m 45 |\u001b[39m         \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByPlaceholder(\u001b[32m'Keresés név szerint...'\u001b[39m)\u001b[33m.\u001b[39mfill(\u001b[32m'teszt'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 46 |\u001b[39m         \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByText(\u001b[32m'Teszt Alkalmazott (TeAl)'\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 47 |\u001b[39m     \n \u001b[90m 48 |\u001b[39m     \n \u001b[90m 49 |\u001b[39m         \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByPlaceholder(\u001b[32m'Keresés pozíció szerint...'\u001b[39m)\u001b[33m.\u001b[39mfill(\u001b[32m'Portás'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\employees.spec.ts:46:66\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-03-28T10:14:03.706Z",
+                      "attachments": [
+                        {
+                          "name": "_prompt-0",
+                          "contentType": "text/markdown",
+                          "body": "IyBJbnN0cnVjdGlvbnMKCi0gRm9sbG93aW5nIFBsYXl3cmlnaHQgdGVzdCBmYWlsZWQuCi0gRXhwbGFpbiB3aHksIGJlIGNvbmNpc2UsIHJlc3BlY3QgUGxheXdyaWdodCBiZXN0IHByYWN0aWNlcy4KLSBQcm92aWRlIGEgc25pcHBldCBvZiBjb2RlIHdpdGggdGhlIGZpeCwgaWYgcG9zc2libGUuCgojIFRlc3QgaW5mbwoKLSBOYW1lOiBJc2tvbGFpIG55aWx2w6FudGFydMOhcyAtIE11bmthdMOhcnNhayA+PiBLZXJlc8OpcwotIExvY2F0aW9uOiBDOlxVc2Vyc1xTemFsa2FpLVN6YWJvQWRhbVxEb2N1bWVudHNcR2l0SHViXHZpenNnYXJlbWVrXHRlbG9ja1x0ZXN0c1xlbXBsb3llZXMuc3BlYy50czo0Mzo5CgojIEVycm9yIGRldGFpbHMKCmBgYApFcnJvcjogZXhwZWN0LnRvQmVWaXNpYmxlOiBFcnJvcjogc3RyaWN0IG1vZGUgdmlvbGF0aW9uOiBnZXRCeVRleHQoJ1Rlc3p0IEFsa2FsbWF6b3R0IChUZUFsKScpIHJlc29sdmVkIHRvIDIgZWxlbWVudHM6CiAgICAxKSA8dGQgY2xhc3M9InAtMSI+VGVzenQgQWxrYWxtYXpvdHQgKFRlQWwpPC90ZD4gYWthIGdldEJ5Um9sZSgnY2VsbCcsIHsgbmFtZTogJ1Rlc3p0IEFsa2FsbWF6b3R0IChUZUFsKScgfSkuZmlyc3QoKQogICAgMikgPHRkIGNsYXNzPSJwLTEiPlRlc3p0IEFsa2FsbWF6b3R0IChUZUFsKTwvdGQ+IGFrYSBnZXRCeVJvbGUoJ2NlbGwnLCB7IG5hbWU6ICdUZXN6dCBBbGthbG1hem90dCAoVGVBbCknIH0pLm50aCgxKQoKQ2FsbCBsb2c6CiAgLSBleHBlY3QudG9CZVZpc2libGUgd2l0aCB0aW1lb3V0IDUwMDBtcwogIC0gd2FpdGluZyBmb3IgZ2V0QnlUZXh0KCdUZXN6dCBBbGthbG1hem90dCAoVGVBbCknKQoKICAgIGF0IEM6XFVzZXJzXFN6YWxrYWktU3phYm9BZGFtXERvY3VtZW50c1xHaXRIdWJcdml6c2dhcmVtZWtcdGVsb2NrXHRlc3RzXGVtcGxveWVlcy5zcGVjLnRzOjQ2OjY2CmBgYAoKIyBQYWdlIHNuYXBzaG90CgpgYGB5YW1sCi0gYnV0dG9uICJLaXNrdW5mw6lsZWd5aMOhemkgU3plbnQgQmVuZWRlayBQRyBLw7Z6w6lwaXNrb2xhIEFkQWQiOgogIC0gdGV4dDogS2lza3VuZsOpbGVneWjDoXppIFN6ZW50IEJlbmVkZWsgUEcgS8O2esOpcGlza29sYSBBZEFkCiAgLSBpbWcKLSBsaXN0OgogIC0gbGlzdGl0ZW06CiAgICAtIGxpbmsgIktlemTFkWxhcCI6CiAgICAgIC0gaW1nCiAgICAgIC0gdGV4dDogS2V6ZMWRbGFwCi0gdGV4dDogSXNrb2xhaSBueWlsdsOhbnRhcnTDoXMKLSBsaXN0OgogIC0gbGlzdGl0ZW06CiAgICAtIGxpbmsgIsOTcmFyZW5kZWsiOgogICAgICAtIGltZwogICAgICAtIHRleHQ6IMOTcmFyZW5kZWsKICAtIGxpc3RpdGVtOgogICAgLSBsaW5rICJUYW51bMOzayI6CiAgICAgIC0gaW1nCiAgICAgIC0gdGV4dDogVGFudWzDs2sKICAtIGxpc3RpdGVtOgogICAgLSBsaW5rICJNdW5rYXTDoXJzYWsiOgogICAgICAtIGltZwogICAgICAtIHRleHQ6IE11bmthdMOhcnNhawotIHRleHQ6IEJlw6FsbMOtdMOhc29rIMOpcyBuYXBsw7N6w6FzCi0gbGlzdDoKICAtIGxpc3RpdGVtOgogICAgLSBsaW5rICJUYW7DqXYgYmXDoWxsw610w6FzYWkiOgogICAgICAtIGltZwogICAgICAtIHRleHQ6IFRhbsOpdiBiZcOhbGzDrXTDoXNhaQotIGxpbmsgIsKpIDIwMjUgdGVsb2NrIgotIG1haW46CiAgLSBidXR0b24gIlRvZ2dsZSBTaWRlYmFyIjoKICAgIC0gaW1nCiAgICAtIHRleHQ6IFRvZ2dsZSBTaWRlYmFyCiAgLSBuYXZpZ2F0aW9uICJicmVhZGNydW1iIjoKICAgIC0gbGlzdDoKICAgICAgLSBsaXN0aXRlbToKICAgICAgICAtIGxpbmsgIktlemTFkWxhcCIKICAgICAgLSBsaXN0aXRlbToKICAgICAgICAtIGxpbmsgIklza29sYWkgbnlpbHbDoW50YXJ0w6FzIiBbZGlzYWJsZWRdCiAgICAgIC0gbGlzdGl0ZW06CiAgICAgICAgLSBsaW5rICJNdW5rYXTDoXJzYWsiIFtkaXNhYmxlZF0KICAtIHRleHRib3ggIktlcmVzw6lzIG7DqXYgc3plcmludC4uLiI6IHRlc3p0CiAgLSB0ZXh0Ym94ICJLZXJlc8OpcyBwb3rDrWNpw7Mgc3plcmludC4uLiIKICAtIGNvbWJvYm94OiBLZXJlc8OpcyBvc3p0w6FseSBzemVyaW50Li4uCiAgLSBidXR0b24gIsOaaiBhbGthbG1hem90dCBob3p6w6FhZMOhcyI6CiAgICAtIGltZwogICAgLSB0ZXh0OiDDmmogYWxrYWxtYXpvdHQgaG96esOhYWTDoXMKICAtIHRhYmxlOgogICAgLSByb3dncm91cDoKICAgICAgLSByb3cgIk7DqXYgUG96w61jacOzIE9zenTDoWx5IE3FsXZlbGV0ZWsiOgogICAgICAgIC0gY2VsbCAiTsOpdiI6CiAgICAgICAgICAtIHRleHQ6IE7DqXYKICAgICAgICAgIC0gaW1nCiAgICAgICAgLSBjZWxsICJQb3rDrWNpw7MiOgogICAgICAgICAgLSB0ZXh0OiBQb3rDrWNpw7MKICAgICAgICAgIC0gaW1nCiAgICAgICAgLSBjZWxsICJPc3p0w6FseSI6CiAgICAgICAgICAtIHRleHQ6IE9zenTDoWx5CiAgICAgICAgICAtIGltZwogICAgICAgIC0gY2VsbCAiTcWxdmVsZXRlayIKICAgIC0gcm93Z3JvdXA6CiAgICAgIC0gcm93ICJUZXN6dCBBbGthbG1hem90dCAoVGVBbCkgUG9ydMOhcyBuaW5jcyI6CiAgICAgICAgLSBjZWxsICJUZXN6dCBBbGthbG1hem90dCAoVGVBbCkiCiAgICAgICAgLSBjZWxsICJQb3J0w6FzIgogICAgICAgIC0gY2VsbCAibmluY3MiCiAgICAgICAgLSBjZWxsOgogICAgICAgICAgLSBidXR0b246CiAgICAgICAgICAgIC0gaW1nCiAgICAgICAgICAtIGJ1dHRvbjoKICAgICAgICAgICAgLSBidXR0b246CiAgICAgICAgICAgICAgLSBpbWcKICAgICAgLSByb3cgIlRlc3p0IEFsa2FsbWF6b3R0IChUZUFsKSBQb3J0w6FzIG5pbmNzIjoKICAgICAgICAtIGNlbGwgIlRlc3p0IEFsa2FsbWF6b3R0IChUZUFsKSIKICAgICAgICAtIGNlbGwgIlBvcnTDoXMiCiAgICAgICAgLSBjZWxsICJuaW5jcyIKICAgICAgICAtIGNlbGw6CiAgICAgICAgICAtIGJ1dHRvbjoKICAgICAgICAgICAgLSBpbWcKICAgICAgICAgIC0gYnV0dG9uOgogICAgICAgICAgICAtIGJ1dHRvbjoKICAgICAgICAgICAgICAtIGltZwogIC0gYnV0dG9uICJFbMWResWRIiBbZGlzYWJsZWRdOgogICAgLSBpbWcKICAgIC0gdGV4dDogRWzFkXrFkQogIC0gdGV4dDogMSAvIDEKICAtIGJ1dHRvbiAiS8O2dmV0a2V6xZEiIFtkaXNhYmxlZF06CiAgICAtIHRleHQ6IEvDtnZldGtlesWRCiAgICAtIGltZwotIGFsZXJ0CmBgYAoKIyBUZXN0IHNvdXJjZQoKYGBgdHMKICAgMSB8IGltcG9ydCB7IHRlc3QsIGV4cGVjdCB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwogICAyIHwKICAgMyB8IHRlc3QuZGVzY3JpYmUoJ0lza29sYWkgbnlpbHbDoW50YXJ0w6FzIC0gTXVua2F0w6Fyc2FrJywgKCkgPT4gewogICA0IHwgICAgIHRlc3QuYmVmb3JlRWFjaChhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgNSB8ICAgICAgICAgYXdhaXQgcGFnZS5nb3RvKCcvbG9naW4nKTsKICAgNiB8ICAgICAgICAgYXdhaXQgcGFnZS5maWxsKCdpbnB1dFtuYW1lPSJzaG9ydF9uYW1lIl0nLCAnQWRBZCcpOwogICA3IHwgICAgICAgICBhd2FpdCBwYWdlLmZpbGwoJ2lucHV0W25hbWU9InBhc3N3b3JkIl0nLCAnYWRtaW4nKTsKICAgOCB8ICAgICAgICAgYXdhaXQgcGFnZS5jbGljaygnYnV0dG9uW3R5cGU9InN1Ym1pdCJdJyk7CiAgIDkgfCAgICAgICAgIGF3YWl0IHBhZ2Uud2FpdEZvclVSTCgnL2Rhc2hib2FyZCcpOwogIDEwIHwKICAxMSB8ICAgICAgICAgYXdhaXQgcGFnZS5nb3RvKCcvZGFzaGJvYXJkL3NjaG9vbC9lbXBsb3llZXMnKTsKICAxMiB8ICAgICAgICAgYXdhaXQgcGFnZS53YWl0Rm9yU2VsZWN0b3IoJ3RhYmxlJyk7CiAgMTMgfCAgICAgfSk7CiAgMTQgfAogIDE1IHwgICAgIHRlc3QoJ09sZGFsYmV0w7ZsdMOpcycsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDE2IHwgICAgICAgICBhd2FpdCBleHBlY3QocGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogJ8OaaiBhbGthbG1hem90dCBob3p6w6FhZMOhcycgfSkpLnRvQmVWaXNpYmxlKCk7CiAgMTcgfCAgICAgICAgIGF3YWl0IGV4cGVjdChwYWdlLmdldEJ5UGxhY2Vob2xkZXIoJ0tlcmVzw6lzIG7DqXYgc3plcmludC4uLicpKS50b0JlVmlzaWJsZSgpOwogIDE4IHwgICAgICAgICBhd2FpdCBleHBlY3QocGFnZS5nZXRCeVBsYWNlaG9sZGVyKCdLZXJlc8OpcyBwb3rDrWNpw7Mgc3plcmludC4uLicpKS50b0JlVmlzaWJsZSgpOwogIDE5IHwgICAgICAgICBhd2FpdCBleHBlY3QocGFnZS5sb2NhdG9yKCcjc2VhcmNoT3N6dGFseWZvbm9rJykpLnRvQmVWaXNpYmxlKCk7CiAgMjAgfCAgICAgfSk7CiAgMjEgfAogIDIyIHwgICAgIHRlc3QoJ8OaaiBhbGthbG1hem90dCBob3p6w6FhZMOhcyAnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAyMyB8ICAgICAgICAgLy9hd2FpdCBwYWdlLmdvdG8oJy9kYXNoYm9hcmQvc2Nob29sL2VtcGxveWVlcycpOwogIDI0IHwKICAyNSB8ICAgICAgICAgYXdhaXQgcGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogJ8OaaiBhbGthbG1hem90dCBob3p6w6FhZMOhcycgfSkuY2xpY2soKTsKICAyNiB8ICAgICAgICAgYXdhaXQgZXhwZWN0KHBhZ2UuZ2V0QnlSb2xlKCdkaWFsb2cnLCB7IG5hbWU6ICdBbGthbG1hem90dCBob3p6w6FhZMOhc2EnIH0pKS50b0JlVmlzaWJsZSgpOwogIDI3IHwgICAgICAgICBhd2FpdCBwYWdlLmdldEJ5TGFiZWwoJ1RlbGplcyBuw6l2JykuZmlsbCgnVGVzenQgQWxrYWxtYXpvdHQnKTsKICAyOCB8ICAgICAgICAgYXdhaXQgcGFnZS5nZXRCeUxhYmVsKCdSw7Z2aWTDrXRldHQgbsOpdiAoZmVsaGFzem7DoWzDs27DqXYpJykuZmlsbCgnVGVBbCcpOwogIDI5IHwKICAzMCB8ICAgICAgICAgY29uc3QgcG9zaXRpb25TZWxlY3QgPSBwYWdlLmdldEJ5VGVzdElkKCdwb3NpdGlvbi1zZWxlY3QnKTsKICAzMSB8ICAgICAgICAgYXdhaXQgcG9zaXRpb25TZWxlY3QuY2xpY2soKTsKICAzMiB8CiAgMzMgfCAgICAgICAgIGF3YWl0IHBhZ2UuZ2V0QnlSb2xlKCdvcHRpb24nLCB7IG5hbWU6ICdQb3J0w6FzJyB9KS5jbGljaygpOwogIDM0IHwKICAzNSB8ICAgICAgICAgYXdhaXQgZXhwZWN0KHBvc2l0aW9uU2VsZWN0KS50b0NvbnRhaW5UZXh0KCdQb3J0w6FzJyk7CiAgMzYgfAogIDM3IHwgICAgICAgICBhd2FpdCBwYWdlLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAnTWVudMOpcycgfSkuY2xpY2soKTsKICAzOCB8CiAgMzkgfCAgICAgICAgIGF3YWl0IGV4cGVjdChwYWdlLmdldEJ5Um9sZSgnZGlhbG9nJykpLm5vdC50b0JlVmlzaWJsZSgpOwogIDQwIHwgICAgIH0pOwogIDQxIHwKICA0MiB8CiAgNDMgfCAgICAgdGVzdCgnS2VyZXPDqXMnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICA0NCB8ICAgCiAgNDUgfCAgICAgICAgIGF3YWl0IHBhZ2UuZ2V0QnlQbGFjZWhvbGRlcignS2VyZXPDqXMgbsOpdiBzemVyaW50Li4uJykuZmlsbCgndGVzenQnKTsKPiA0NiB8ICAgICAgICAgYXdhaXQgZXhwZWN0KHBhZ2UuZ2V0QnlUZXh0KCdUZXN6dCBBbGthbG1hem90dCAoVGVBbCknKSkudG9CZVZpc2libGUoKTsKICAgICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXiBFcnJvcjogZXhwZWN0LnRvQmVWaXNpYmxlOiBFcnJvcjogc3RyaWN0IG1vZGUgdmlvbGF0aW9uOiBnZXRCeVRleHQoJ1Rlc3p0IEFsa2FsbWF6b3R0IChUZUFsKScpIHJlc29sdmVkIHRvIDIgZWxlbWVudHM6CiAgNDcgfCAgICAgCiAgNDggfCAgICAgCiAgNDkgfCAgICAgICAgIGF3YWl0IHBhZ2UuZ2V0QnlQbGFjZWhvbGRlcignS2VyZXPDqXMgcG96w61jacOzIHN6ZXJpbnQuLi4nKS5maWxsKCdQb3J0w6FzJyk7CiAgNTAgfCAgICAgICAgIGF3YWl0IGV4cGVjdChwYWdlLmdldEJ5VGV4dCgnUG9ydMOhcycpKS50b0JlVmlzaWJsZSgpOwogIDUxIHwgICAgICAgfSk7CiAgNTIgfAogIDUzIHwKICA1NCB8ICAgICAgIHRlc3QoJ0Fsa2FsbWF6b3R0IHN6ZXJrZXN6dMOpcycsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDU1IHwKICA1NiB8ICAgICAgICAgYXdhaXQgcGFnZS5nZXRCeVBsYWNlaG9sZGVyKCdLZXJlc8OpcyBuw6l2IHN6ZXJpbnQuLi4nKS5maWxsKCdUZXN6dCBBbGthbG1hem90dCcpOwogIDU3IHwgICAgIAogIDU4IHwgICAgICAgICBjb25zdCBzdHVkZW50Um93ID0gYXdhaXQgcGFnZS5sb2NhdG9yKCd0cicsIHsgaGFzVGV4dDogJ1Rlc3p0IEFsa2FsbWF6b3R0IChUZUFsKScgfSk7CiAgNTkgfCAgICAgCiAgNjAgfCAgICAgICAgIGF3YWl0IGV4cGVjdChzdHVkZW50Um93KS50b0JlVmlzaWJsZSgpOwogIDYxIHwgICAgIAogIDYyIHwgICAgICAgICBjb25zdCBlZGl0QnV0dG9uID0gc3R1ZGVudFJvdy5sb2NhdG9yKCdbZGF0YS10ZXN0aWQ9ImVkaXQtYnV0dG9uIl0nKTsKICA2MyB8ICAgICAgICAgYXdhaXQgZWRpdEJ1dHRvbi5jbGljaygpOwogIDY0IHwgICAgIAogIDY1IHwgICAgICAgICBjb25zdCBkaWFsb2cgPSBwYWdlLmxvY2F0b3IoJ1tyb2xlPSJkaWFsb2ciXScpOwogIDY2IHwgICAgICAgICBhd2FpdCBleHBlY3QoZGlhbG9nKS50b0JlVmlzaWJsZSgpOwogIDY3IHwgICAgICAgICBhd2FpdCBleHBlY3QoZGlhbG9nKS50b0NvbnRhaW5UZXh0KCdBbGthbG1hem90dCBzemVya2VzenTDqXNlJyk7CiAgNjggfCAgICAgCiAgNjkgfCAgICAgICAgIGNvbnN0IGZ1bGxOYW1lSW5wdXQgPSBwYWdlLmxvY2F0b3IoJ2lucHV0W25hbWU9ImZ1bGxfbmFtZSJdJyk7CiAgNzAgfCAgICAgCiAgNzEgfCAgICAgICAgIGF3YWl0IGZ1bGxOYW1lSW5wdXQuZmlsbChgVGVzenQgQWxrYWxtYXpvdHQgTcOzZG9zw610b3R0YCk7CiAgNzIgfCAgICAgCiAgNzMgfCAgICAgICAgIGF3YWl0IGRpYWxvZy5sb2NhdG9yKCdidXR0b24nLCB7IGhhc1RleHQ6ICdNZW50w6lzJyB9KS5jbGljaygpOwogIDc0IHwgICAgIAogIDc1IHwgICAgICAgICBhd2FpdCBleHBlY3QoZGlhbG9nKS5ub3QudG9CZVZpc2libGUoKTsKICA3NiB8ICAgICAKICA3NyB8ICAgICAgIH0pOwogIDc4IHwKICA3OSB8CiAgODAgfAogIDgxIHwgfSk7CmBgYA=="
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\employees.spec.ts",
+                        "column": 66,
+                        "line": 46
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "173bfcde56ef5531431c-4ee2a849a769109fea09",
+              "file": "employees.spec.ts",
+              "line": 43,
+              "column": 9
+            },
+            {
+              "title": "Alkalmazott szerkesztés",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 7882,
+                      "error": {
+                        "message": "Error: expect.toBeVisible: Error: strict mode violation: locator('tr').filter({ hasText: 'Teszt Alkalmazott (TeAl)' }) resolved to 2 elements:\n    1) <tr class=\"text-center border-t\">…</tr> aka getByRole('row', { name: 'Teszt Alkalmazott (TeAl) Port' }).first()\n    2) <tr class=\"text-center border-t\">…</tr> aka getByRole('row', { name: 'Teszt Alkalmazott (TeAl) Port' }).nth(1)\n\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('tr').filter({ hasText: 'Teszt Alkalmazott (TeAl)' })\u001b[22m\n",
+                        "stack": "Error: expect.toBeVisible: Error: strict mode violation: locator('tr').filter({ hasText: 'Teszt Alkalmazott (TeAl)' }) resolved to 2 elements:\n    1) <tr class=\"text-center border-t\">…</tr> aka getByRole('row', { name: 'Teszt Alkalmazott (TeAl) Port' }).first()\n    2) <tr class=\"text-center border-t\">…</tr> aka getByRole('row', { name: 'Teszt Alkalmazott (TeAl) Port' }).nth(1)\n\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('tr').filter({ hasText: 'Teszt Alkalmazott (TeAl)' })\u001b[22m\n\n    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\employees.spec.ts:60:34",
+                        "location": {
+                          "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\employees.spec.ts",
+                          "column": 34,
+                          "line": 60
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 58 |\u001b[39m         \u001b[36mconst\u001b[39m studentRow \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'tr'\u001b[39m\u001b[33m,\u001b[39m { hasText\u001b[33m:\u001b[39m \u001b[32m'Teszt Alkalmazott (TeAl)'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 59 |\u001b[39m     \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 60 |\u001b[39m         \u001b[36mawait\u001b[39m expect(studentRow)\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 61 |\u001b[39m     \n \u001b[90m 62 |\u001b[39m         \u001b[36mconst\u001b[39m editButton \u001b[33m=\u001b[39m studentRow\u001b[33m.\u001b[39mlocator(\u001b[32m'[data-testid=\"edit-button\"]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 63 |\u001b[39m         \u001b[36mawait\u001b[39m editButton\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\employees.spec.ts",
+                            "column": 34,
+                            "line": 60
+                          },
+                          "message": "Error: expect.toBeVisible: Error: strict mode violation: locator('tr').filter({ hasText: 'Teszt Alkalmazott (TeAl)' }) resolved to 2 elements:\n    1) <tr class=\"text-center border-t\">…</tr> aka getByRole('row', { name: 'Teszt Alkalmazott (TeAl) Port' }).first()\n    2) <tr class=\"text-center border-t\">…</tr> aka getByRole('row', { name: 'Teszt Alkalmazott (TeAl) Port' }).nth(1)\n\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('tr').filter({ hasText: 'Teszt Alkalmazott (TeAl)' })\u001b[22m\n\n\n\u001b[0m \u001b[90m 58 |\u001b[39m         \u001b[36mconst\u001b[39m studentRow \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'tr'\u001b[39m\u001b[33m,\u001b[39m { hasText\u001b[33m:\u001b[39m \u001b[32m'Teszt Alkalmazott (TeAl)'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 59 |\u001b[39m     \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 60 |\u001b[39m         \u001b[36mawait\u001b[39m expect(studentRow)\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 61 |\u001b[39m     \n \u001b[90m 62 |\u001b[39m         \u001b[36mconst\u001b[39m editButton \u001b[33m=\u001b[39m studentRow\u001b[33m.\u001b[39mlocator(\u001b[32m'[data-testid=\"edit-button\"]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 63 |\u001b[39m         \u001b[36mawait\u001b[39m editButton\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\employees.spec.ts:60:34\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-03-28T10:14:10.807Z",
+                      "attachments": [
+                        {
+                          "name": "_prompt-0",
+                          "contentType": "text/markdown",
+                          "body": "IyBJbnN0cnVjdGlvbnMKCi0gRm9sbG93aW5nIFBsYXl3cmlnaHQgdGVzdCBmYWlsZWQuCi0gRXhwbGFpbiB3aHksIGJlIGNvbmNpc2UsIHJlc3BlY3QgUGxheXdyaWdodCBiZXN0IHByYWN0aWNlcy4KLSBQcm92aWRlIGEgc25pcHBldCBvZiBjb2RlIHdpdGggdGhlIGZpeCwgaWYgcG9zc2libGUuCgojIFRlc3QgaW5mbwoKLSBOYW1lOiBJc2tvbGFpIG55aWx2w6FudGFydMOhcyAtIE11bmthdMOhcnNhayA+PiBBbGthbG1hem90dCBzemVya2VzenTDqXMKLSBMb2NhdGlvbjogQzpcVXNlcnNcU3phbGthaS1TemFib0FkYW1cRG9jdW1lbnRzXEdpdEh1Ylx2aXpzZ2FyZW1la1x0ZWxvY2tcdGVzdHNcZW1wbG95ZWVzLnNwZWMudHM6NTQ6MTEKCiMgRXJyb3IgZGV0YWlscwoKYGBgCkVycm9yOiBleHBlY3QudG9CZVZpc2libGU6IEVycm9yOiBzdHJpY3QgbW9kZSB2aW9sYXRpb246IGxvY2F0b3IoJ3RyJykuZmlsdGVyKHsgaGFzVGV4dDogJ1Rlc3p0IEFsa2FsbWF6b3R0IChUZUFsKScgfSkgcmVzb2x2ZWQgdG8gMiBlbGVtZW50czoKICAgIDEpIDx0ciBjbGFzcz0idGV4dC1jZW50ZXIgYm9yZGVyLXQiPuKApjwvdHI+IGFrYSBnZXRCeVJvbGUoJ3JvdycsIHsgbmFtZTogJ1Rlc3p0IEFsa2FsbWF6b3R0IChUZUFsKSBQb3J0JyB9KS5maXJzdCgpCiAgICAyKSA8dHIgY2xhc3M9InRleHQtY2VudGVyIGJvcmRlci10Ij7igKY8L3RyPiBha2EgZ2V0QnlSb2xlKCdyb3cnLCB7IG5hbWU6ICdUZXN6dCBBbGthbG1hem90dCAoVGVBbCkgUG9ydCcgfSkubnRoKDEpCgpDYWxsIGxvZzoKICAtIGV4cGVjdC50b0JlVmlzaWJsZSB3aXRoIHRpbWVvdXQgNTAwMG1zCiAgLSB3YWl0aW5nIGZvciBsb2NhdG9yKCd0cicpLmZpbHRlcih7IGhhc1RleHQ6ICdUZXN6dCBBbGthbG1hem90dCAoVGVBbCknIH0pCgogICAgYXQgQzpcVXNlcnNcU3phbGthaS1TemFib0FkYW1cRG9jdW1lbnRzXEdpdEh1Ylx2aXpzZ2FyZW1la1x0ZWxvY2tcdGVzdHNcZW1wbG95ZWVzLnNwZWMudHM6NjA6MzQKYGBgCgojIFBhZ2Ugc25hcHNob3QKCmBgYHlhbWwKLSBidXR0b24gIktpc2t1bmbDqWxlZ3low6F6aSBTemVudCBCZW5lZGVrIFBHIEvDtnrDqXBpc2tvbGEgQWRBZCI6CiAgLSB0ZXh0OiBLaXNrdW5mw6lsZWd5aMOhemkgU3plbnQgQmVuZWRlayBQRyBLw7Z6w6lwaXNrb2xhIEFkQWQKICAtIGltZwotIGxpc3Q6CiAgLSBsaXN0aXRlbToKICAgIC0gbGluayAiS2V6ZMWRbGFwIjoKICAgICAgLSBpbWcKICAgICAgLSB0ZXh0OiBLZXpkxZFsYXAKLSB0ZXh0OiBJc2tvbGFpIG55aWx2w6FudGFydMOhcwotIGxpc3Q6CiAgLSBsaXN0aXRlbToKICAgIC0gbGluayAiw5NyYXJlbmRlayI6CiAgICAgIC0gaW1nCiAgICAgIC0gdGV4dDogw5NyYXJlbmRlawogIC0gbGlzdGl0ZW06CiAgICAtIGxpbmsgIlRhbnVsw7NrIjoKICAgICAgLSBpbWcKICAgICAgLSB0ZXh0OiBUYW51bMOzawogIC0gbGlzdGl0ZW06CiAgICAtIGxpbmsgIk11bmthdMOhcnNhayI6CiAgICAgIC0gaW1nCiAgICAgIC0gdGV4dDogTXVua2F0w6Fyc2FrCi0gdGV4dDogQmXDoWxsw610w6Fzb2sgw6lzIG5hcGzDs3rDoXMKLSBsaXN0OgogIC0gbGlzdGl0ZW06CiAgICAtIGxpbmsgIlRhbsOpdiBiZcOhbGzDrXTDoXNhaSI6CiAgICAgIC0gaW1nCiAgICAgIC0gdGV4dDogVGFuw6l2IGJlw6FsbMOtdMOhc2FpCi0gbGluayAiwqkgMjAyNSB0ZWxvY2siCi0gbWFpbjoKICAtIGJ1dHRvbiAiVG9nZ2xlIFNpZGViYXIiOgogICAgLSBpbWcKICAgIC0gdGV4dDogVG9nZ2xlIFNpZGViYXIKICAtIG5hdmlnYXRpb24gImJyZWFkY3J1bWIiOgogICAgLSBsaXN0OgogICAgICAtIGxpc3RpdGVtOgogICAgICAgIC0gbGluayAiS2V6ZMWRbGFwIgogICAgICAtIGxpc3RpdGVtOgogICAgICAgIC0gbGluayAiSXNrb2xhaSBueWlsdsOhbnRhcnTDoXMiIFtkaXNhYmxlZF0KICAgICAgLSBsaXN0aXRlbToKICAgICAgICAtIGxpbmsgIk11bmthdMOhcnNhayIgW2Rpc2FibGVkXQogIC0gdGV4dGJveCAiS2VyZXPDqXMgbsOpdiBzemVyaW50Li4uIjogVGVzenQgQWxrYWxtYXpvdHQKICAtIHRleHRib3ggIktlcmVzw6lzIHBvesOtY2nDsyBzemVyaW50Li4uIgogIC0gY29tYm9ib3g6IEtlcmVzw6lzIG9zenTDoWx5IHN6ZXJpbnQuLi4KICAtIGJ1dHRvbiAiw5pqIGFsa2FsbWF6b3R0IGhvenrDoWFkw6FzIjoKICAgIC0gaW1nCiAgICAtIHRleHQ6IMOaaiBhbGthbG1hem90dCBob3p6w6FhZMOhcwogIC0gdGFibGU6CiAgICAtIHJvd2dyb3VwOgogICAgICAtIHJvdyAiTsOpdiBQb3rDrWNpw7MgT3N6dMOhbHkgTcWxdmVsZXRlayI6CiAgICAgICAgLSBjZWxsICJOw6l2IjoKICAgICAgICAgIC0gdGV4dDogTsOpdgogICAgICAgICAgLSBpbWcKICAgICAgICAtIGNlbGwgIlBvesOtY2nDsyI6CiAgICAgICAgICAtIHRleHQ6IFBvesOtY2nDswogICAgICAgICAgLSBpbWcKICAgICAgICAtIGNlbGwgIk9zenTDoWx5IjoKICAgICAgICAgIC0gdGV4dDogT3N6dMOhbHkKICAgICAgICAgIC0gaW1nCiAgICAgICAgLSBjZWxsICJNxbF2ZWxldGVrIgogICAgLSByb3dncm91cDoKICAgICAgLSByb3cgIlRlc3p0IEFsa2FsbWF6b3R0IChUZUFsKSBQb3J0w6FzIG5pbmNzIjoKICAgICAgICAtIGNlbGwgIlRlc3p0IEFsa2FsbWF6b3R0IChUZUFsKSIKICAgICAgICAtIGNlbGwgIlBvcnTDoXMiCiAgICAgICAgLSBjZWxsICJuaW5jcyIKICAgICAgICAtIGNlbGw6CiAgICAgICAgICAtIGJ1dHRvbjoKICAgICAgICAgICAgLSBpbWcKICAgICAgICAgIC0gYnV0dG9uOgogICAgICAgICAgICAtIGJ1dHRvbjoKICAgICAgICAgICAgICAtIGltZwogICAgICAtIHJvdyAiVGVzenQgQWxrYWxtYXpvdHQgKFRlQWwpIFBvcnTDoXMgbmluY3MiOgogICAgICAgIC0gY2VsbCAiVGVzenQgQWxrYWxtYXpvdHQgKFRlQWwpIgogICAgICAgIC0gY2VsbCAiUG9ydMOhcyIKICAgICAgICAtIGNlbGwgIm5pbmNzIgogICAgICAgIC0gY2VsbDoKICAgICAgICAgIC0gYnV0dG9uOgogICAgICAgICAgICAtIGltZwogICAgICAgICAgLSBidXR0b246CiAgICAgICAgICAgIC0gYnV0dG9uOgogICAgICAgICAgICAgIC0gaW1nCiAgLSBidXR0b24gIkVsxZF6xZEiIFtkaXNhYmxlZF06CiAgICAtIGltZwogICAgLSB0ZXh0OiBFbMWResWRCiAgLSB0ZXh0OiAxIC8gMQogIC0gYnV0dG9uICJLw7Z2ZXRrZXrFkSIgW2Rpc2FibGVkXToKICAgIC0gdGV4dDogS8O2dmV0a2V6xZEKICAgIC0gaW1nCi0gYWxlcnQKYGBgCgojIFRlc3Qgc291cmNlCgpgYGB0cwogICAxIHwgaW1wb3J0IHsgdGVzdCwgZXhwZWN0IH0gZnJvbSAnQHBsYXl3cmlnaHQvdGVzdCc7CiAgIDIgfAogICAzIHwgdGVzdC5kZXNjcmliZSgnSXNrb2xhaSBueWlsdsOhbnRhcnTDoXMgLSBNdW5rYXTDoXJzYWsnLCAoKSA9PiB7CiAgIDQgfCAgICAgdGVzdC5iZWZvcmVFYWNoKGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICA1IHwgICAgICAgICBhd2FpdCBwYWdlLmdvdG8oJy9sb2dpbicpOwogICA2IHwgICAgICAgICBhd2FpdCBwYWdlLmZpbGwoJ2lucHV0W25hbWU9InNob3J0X25hbWUiXScsICdBZEFkJyk7CiAgIDcgfCAgICAgICAgIGF3YWl0IHBhZ2UuZmlsbCgnaW5wdXRbbmFtZT0icGFzc3dvcmQiXScsICdhZG1pbicpOwogICA4IHwgICAgICAgICBhd2FpdCBwYWdlLmNsaWNrKCdidXR0b25bdHlwZT0ic3VibWl0Il0nKTsKICAgOSB8ICAgICAgICAgYXdhaXQgcGFnZS53YWl0Rm9yVVJMKCcvZGFzaGJvYXJkJyk7CiAgMTAgfAogIDExIHwgICAgICAgICBhd2FpdCBwYWdlLmdvdG8oJy9kYXNoYm9hcmQvc2Nob29sL2VtcGxveWVlcycpOwogIDEyIHwgICAgICAgICBhd2FpdCBwYWdlLndhaXRGb3JTZWxlY3RvcigndGFibGUnKTsKICAxMyB8ICAgICB9KTsKICAxNCB8CiAgMTUgfCAgICAgdGVzdCgnT2xkYWxiZXTDtmx0w6lzJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgMTYgfCAgICAgICAgIGF3YWl0IGV4cGVjdChwYWdlLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAnw5pqIGFsa2FsbWF6b3R0IGhvenrDoWFkw6FzJyB9KSkudG9CZVZpc2libGUoKTsKICAxNyB8ICAgICAgICAgYXdhaXQgZXhwZWN0KHBhZ2UuZ2V0QnlQbGFjZWhvbGRlcignS2VyZXPDqXMgbsOpdiBzemVyaW50Li4uJykpLnRvQmVWaXNpYmxlKCk7CiAgMTggfCAgICAgICAgIGF3YWl0IGV4cGVjdChwYWdlLmdldEJ5UGxhY2Vob2xkZXIoJ0tlcmVzw6lzIHBvesOtY2nDsyBzemVyaW50Li4uJykpLnRvQmVWaXNpYmxlKCk7CiAgMTkgfCAgICAgICAgIGF3YWl0IGV4cGVjdChwYWdlLmxvY2F0b3IoJyNzZWFyY2hPc3p0YWx5Zm9ub2snKSkudG9CZVZpc2libGUoKTsKICAyMCB8ICAgICB9KTsKICAyMSB8CiAgMjIgfCAgICAgdGVzdCgnw5pqIGFsa2FsbWF6b3R0IGhvenrDoWFkw6FzICcsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDIzIHwgICAgICAgICAvL2F3YWl0IHBhZ2UuZ290bygnL2Rhc2hib2FyZC9zY2hvb2wvZW1wbG95ZWVzJyk7CiAgMjQgfAogIDI1IHwgICAgICAgICBhd2FpdCBwYWdlLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAnw5pqIGFsa2FsbWF6b3R0IGhvenrDoWFkw6FzJyB9KS5jbGljaygpOwogIDI2IHwgICAgICAgICBhd2FpdCBleHBlY3QocGFnZS5nZXRCeVJvbGUoJ2RpYWxvZycsIHsgbmFtZTogJ0Fsa2FsbWF6b3R0IGhvenrDoWFkw6FzYScgfSkpLnRvQmVWaXNpYmxlKCk7CiAgMjcgfCAgICAgICAgIGF3YWl0IHBhZ2UuZ2V0QnlMYWJlbCgnVGVsamVzIG7DqXYnKS5maWxsKCdUZXN6dCBBbGthbG1hem90dCcpOwogIDI4IHwgICAgICAgICBhd2FpdCBwYWdlLmdldEJ5TGFiZWwoJ1LDtnZpZMOtdGV0dCBuw6l2IChmZWxoYXN6bsOhbMOzbsOpdiknKS5maWxsKCdUZUFsJyk7CiAgMjkgfAogIDMwIHwgICAgICAgICBjb25zdCBwb3NpdGlvblNlbGVjdCA9IHBhZ2UuZ2V0QnlUZXN0SWQoJ3Bvc2l0aW9uLXNlbGVjdCcpOwogIDMxIHwgICAgICAgICBhd2FpdCBwb3NpdGlvblNlbGVjdC5jbGljaygpOwogIDMyIHwKICAzMyB8ICAgICAgICAgYXdhaXQgcGFnZS5nZXRCeVJvbGUoJ29wdGlvbicsIHsgbmFtZTogJ1BvcnTDoXMnIH0pLmNsaWNrKCk7CiAgMzQgfAogIDM1IHwgICAgICAgICBhd2FpdCBleHBlY3QocG9zaXRpb25TZWxlY3QpLnRvQ29udGFpblRleHQoJ1BvcnTDoXMnKTsKICAzNiB8CiAgMzcgfCAgICAgICAgIGF3YWl0IHBhZ2UuZ2V0QnlSb2xlKCdidXR0b24nLCB7IG5hbWU6ICdNZW50w6lzJyB9KS5jbGljaygpOwogIDM4IHwKICAzOSB8ICAgICAgICAgYXdhaXQgZXhwZWN0KHBhZ2UuZ2V0QnlSb2xlKCdkaWFsb2cnKSkubm90LnRvQmVWaXNpYmxlKCk7CiAgNDAgfCAgICAgfSk7CiAgNDEgfAogIDQyIHwKICA0MyB8ICAgICB0ZXN0KCdLZXJlc8OpcycsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDQ0IHwgICAKICA0NSB8ICAgICAgICAgYXdhaXQgcGFnZS5nZXRCeVBsYWNlaG9sZGVyKCdLZXJlc8OpcyBuw6l2IHN6ZXJpbnQuLi4nKS5maWxsKCd0ZXN6dCcpOwogIDQ2IHwgICAgICAgICBhd2FpdCBleHBlY3QocGFnZS5nZXRCeVRleHQoJ1Rlc3p0IEFsa2FsbWF6b3R0IChUZUFsKScpKS50b0JlVmlzaWJsZSgpOwogIDQ3IHwgICAgIAogIDQ4IHwgICAgIAogIDQ5IHwgICAgICAgICBhd2FpdCBwYWdlLmdldEJ5UGxhY2Vob2xkZXIoJ0tlcmVzw6lzIHBvesOtY2nDsyBzemVyaW50Li4uJykuZmlsbCgnUG9ydMOhcycpOwogIDUwIHwgICAgICAgICBhd2FpdCBleHBlY3QocGFnZS5nZXRCeVRleHQoJ1BvcnTDoXMnKSkudG9CZVZpc2libGUoKTsKICA1MSB8ICAgICAgIH0pOwogIDUyIHwKICA1MyB8CiAgNTQgfCAgICAgICB0ZXN0KCdBbGthbG1hem90dCBzemVya2VzenTDqXMnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICA1NSB8CiAgNTYgfCAgICAgICAgIGF3YWl0IHBhZ2UuZ2V0QnlQbGFjZWhvbGRlcignS2VyZXPDqXMgbsOpdiBzemVyaW50Li4uJykuZmlsbCgnVGVzenQgQWxrYWxtYXpvdHQnKTsKICA1NyB8ICAgICAKICA1OCB8ICAgICAgICAgY29uc3Qgc3R1ZGVudFJvdyA9IGF3YWl0IHBhZ2UubG9jYXRvcigndHInLCB7IGhhc1RleHQ6ICdUZXN6dCBBbGthbG1hem90dCAoVGVBbCknIH0pOwogIDU5IHwgICAgIAo+IDYwIHwgICAgICAgICBhd2FpdCBleHBlY3Qoc3R1ZGVudFJvdykudG9CZVZpc2libGUoKTsKICAgICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4gRXJyb3I6IGV4cGVjdC50b0JlVmlzaWJsZTogRXJyb3I6IHN0cmljdCBtb2RlIHZpb2xhdGlvbjogbG9jYXRvcigndHInKS5maWx0ZXIoeyBoYXNUZXh0OiAnVGVzenQgQWxrYWxtYXpvdHQgKFRlQWwpJyB9KSByZXNvbHZlZCB0byAyIGVsZW1lbnRzOgogIDYxIHwgICAgIAogIDYyIHwgICAgICAgICBjb25zdCBlZGl0QnV0dG9uID0gc3R1ZGVudFJvdy5sb2NhdG9yKCdbZGF0YS10ZXN0aWQ9ImVkaXQtYnV0dG9uIl0nKTsKICA2MyB8ICAgICAgICAgYXdhaXQgZWRpdEJ1dHRvbi5jbGljaygpOwogIDY0IHwgICAgIAogIDY1IHwgICAgICAgICBjb25zdCBkaWFsb2cgPSBwYWdlLmxvY2F0b3IoJ1tyb2xlPSJkaWFsb2ciXScpOwogIDY2IHwgICAgICAgICBhd2FpdCBleHBlY3QoZGlhbG9nKS50b0JlVmlzaWJsZSgpOwogIDY3IHwgICAgICAgICBhd2FpdCBleHBlY3QoZGlhbG9nKS50b0NvbnRhaW5UZXh0KCdBbGthbG1hem90dCBzemVya2VzenTDqXNlJyk7CiAgNjggfCAgICAgCiAgNjkgfCAgICAgICAgIGNvbnN0IGZ1bGxOYW1lSW5wdXQgPSBwYWdlLmxvY2F0b3IoJ2lucHV0W25hbWU9ImZ1bGxfbmFtZSJdJyk7CiAgNzAgfCAgICAgCiAgNzEgfCAgICAgICAgIGF3YWl0IGZ1bGxOYW1lSW5wdXQuZmlsbChgVGVzenQgQWxrYWxtYXpvdHQgTcOzZG9zw610b3R0YCk7CiAgNzIgfCAgICAgCiAgNzMgfCAgICAgICAgIGF3YWl0IGRpYWxvZy5sb2NhdG9yKCdidXR0b24nLCB7IGhhc1RleHQ6ICdNZW50w6lzJyB9KS5jbGljaygpOwogIDc0IHwgICAgIAogIDc1IHwgICAgICAgICBhd2FpdCBleHBlY3QoZGlhbG9nKS5ub3QudG9CZVZpc2libGUoKTsKICA3NiB8ICAgICAKICA3NyB8ICAgICAgIH0pOwogIDc4IHwKICA3OSB8CiAgODAgfAogIDgxIHwgfSk7CmBgYA=="
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\employees.spec.ts",
+                        "column": 34,
+                        "line": 60
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "173bfcde56ef5531431c-490f853f6f0df6019189",
+              "file": "employees.spec.ts",
+              "line": 54,
+              "column": 11
+            }
+          ]
         }
       ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-03-28T09:48:36.446Z",
-    "duration": 30709.132999999998,
-    "expected": 0,
+    "startTime": "2025-03-28T10:13:49.739Z",
+    "duration": 29050.934,
+    "expected": 2,
     "skipped": 0,
-    "unexpected": 1,
+    "unexpected": 2,
     "flaky": 0
   }
 }

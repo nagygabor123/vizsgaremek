@@ -538,7 +538,7 @@ export default function AddEmployeePage() {
 
                           <Dialog open={open} onOpenChange={setOpen}>
                             <DialogTrigger asChild>
-                              <Button variant="ghost" onClick={() => handleEdit(employee)}>
+                              <Button variant="ghost" onClick={() => handleEdit(employee)}  data-testid="edit-button" >
                                 <Pen />
                               </Button>
                             </DialogTrigger>
