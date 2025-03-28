@@ -448,7 +448,7 @@ export default function AddEmployeePage() {
 
                     <div className="grid gap-2 w-full">
                       <Label htmlFor="position">Pozíció</Label>
-                      <Select value={position} onValueChange={setPosition}>
+                      <Select value={position} onValueChange={setPosition} data-testid="position-select">
                         <SelectTrigger className="col-span-3 w-full">
 
                           <SelectValue placeholder="Válasszon..." />

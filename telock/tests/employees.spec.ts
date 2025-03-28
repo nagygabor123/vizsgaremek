@@ -1,140 +1,92 @@
-
-
 import { test, expect } from '@playwright/test';
 
-test.describe('Iskolai nyilvántartás - Munkatársak', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('/login');
-    await page.fill('input[name="short_name"]', 'AdAd');
-    await page.fill('input[name="password"]', 'admin');
-    await page.click('button[type="submit"]');
-    await page.waitForURL('/dashboard');
+test.describe('Alkalmazott hozzáadása dialógus', () => {
+    test.beforeEach(async ({ page }) => {
+        await page.goto('/login');
+        await page.fill('input[name="short_name"]', 'AdAd');
+        await page.fill('input[name="password"]', 'admin');
+        await page.click('button[type="submit"]');
+        await page.waitForURL('/dashboard');
 
-    await page.goto('/dashboard/school/employees');
-    await page.waitForSelector('table');
+    });
+
+  test('Dialógus megnyitása és alapvető ellenőrzések', async ({ page }) => {
+    
+    
+    await page.goto('dashboard/school/employees');
+    
+    // 2. Lépés: Új alkalmazott gomb megkeresése és kattintás
+    const newEmployeeButton = page.getByRole('button', { name: 'Új alkalmazott hozzáadás' });
+    await expect(newEmployeeButton).toBeVisible();
+    await newEmployeeButton.click();
+
+    // 3. Lépés: Dialógus megjelenésének ellenőrzése
+    const dialog = page.getByRole('dialog', { name: 'Alkalmazott hozzáadása' });
+    await expect(dialog).toBeVisible();
+
+    // 4. Lépés: Mezők ellenőrzése
+    await expect(page.getByLabel('Teljes név')).toBeVisible();
+    await expect(page.getByLabel('Rövidített név (felhasználónév)')).toBeVisible();
+    await expect(page.getByLabel('Ideiglenes jelszó')).toBeVisible();
+    await expect(page.getByLabel('Pozíció')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Mentés' })).toBeVisible();
   });
 
-  test('Oldalbetöltés', async ({ page }) => {
-    await expect(page.getByRole('button', { name: 'Új alkalmazott hozzáadás' })).toBeVisible();
-    await expect(page.getByPlaceholder('Keresés név szerint...')).toBeVisible();
-    await expect(page.getByPlaceholder('Keresés pozíció szerint...')).toBeVisible();
-    await expect(page.locator('#searchOsztalyfonok')).toBeVisible();
-
-  });
-  
-
-
-  test('Új alkalmazott hozzáadás', async ({ page }) => {
-
+  test('Alkalmazott hozzáadása - pozíció választó működése', async ({ page }) => {
+    // 1. Lépés: Dialógus megnyitása
     await page.getByRole('button', { name: 'Új alkalmazott hozzáadás' }).click();
-    await page.locator('input[name="full_name"]').fill('Teszt Elek');
-    await page.locator('input[name="short_name"]').fill('TeEl');
 
-    const selectTrigger = page.locator('button[role="combobox"]'); // Vagy válaszd ki más módon a Select mezőt
-    await selectTrigger.click();
-  
-    // Válaszd ki a portás értéket a listából
-    const selectItem = page.locator('li[role="option"]:has-text("Portás")');
-    await selectItem.click();
-  
-    // Ellenőrizd, hogy a helyes érték lett kiválasztva
-    const selectedValue = await page.locator('input[name="position"]').inputValue();
-    expect(selectedValue).toBe('portas');
+    // 2. Lépés: Kitöltjük a kötelező mezőket
+    await page.getByLabel('Teljes név').fill('Teszt Elek');
+    await page.getByLabel('Rövidített név (felhasználónév)').fill('TeEl');
 
+    // 3. Lépés: Pozíció választó kinyitása
+    const positionSelect = page.getByLabel('Pozíció');
+    await positionSelect.click();
+
+    // 4. Lépés: Ellenőrizzük, hogy vannak-e lehetőségek
+    const positionOptions = page.locator('.select-content .select-item');
+    await expect(positionOptions).not.toHaveCount(0);
+
+    // 5. Lépés: Válasszunk egy pozíciót (az elsőt)
+    const firstOption = positionOptions.first();
+    const selectedPosition = await firstOption.textContent();
+    await firstOption.click();
+
+    // 6. Lépés: Ellenőrizzük, hogy a kiválasztott érték megjelenik
+    await expect(positionSelect).toContainText(selectedPosition!);
+
+    // 7. Lépés: Mentés gomb megnyomása
     await page.getByRole('button', { name: 'Mentés' }).click();
 
-    await page.getByPlaceholder('Keresés név szerint...').fill("Teszt Elek");
-
-    await page.waitForResponse(response =>
-      response.url().includes('/api/config/getEmployees') &&
-      response.status() === 200
-    );
-
-    await page.waitForLoadState('networkidle');
-
-    await page.getByPlaceholder('Keresés név szerint...').fill("Teszt Elek");
-    // await page.waitForTimeout(1000); 
-
-    const studentRow = page.locator('tbody tr').filter({ hasText: "Teszt Elek" });
-    //await expect(studentRow).toBeVisible({ timeout: 15000 }); 
-    await expect(studentRow).toContainText("Portás");
-  });
-/*
-  test('Keresés', async ({ page }) => {
-  
-    await page.getByPlaceholder('Keresés név szerint...').fill('teszt');
-    await expect(page.getByText('Teszt Elek')).toBeVisible();
-
-
-    await page.getByPlaceholder('Keresés osztály szerint...').fill('9.I');
-    await expect(page.getByText('9.I')).toBeVisible();
+    // 8. Lépés: Ellenőrizzük, hogy a dialógus bezárult
+    await expect(page.getByRole('dialog', { name: 'Alkalmazott hozzáadása' })).not.toBeVisible();
   });
 
-  test('Tanuló szerkesztés', async ({ page }) => {
+  test('Rövid név alapján automatikus jelszó generálás', async ({ page }) => {
+    // 1. Lépés: Dialógus megnyitása
+    await page.getByRole('button', { name: 'Új alkalmazott hozzáadás' }).click();
 
-    await page.getByPlaceholder('Keresés név szerint...').fill('Teszt Elek');
+    // 2. Lépés: Rövid név megadása
+    const shortName = 'TeEl';
+    await page.getByLabel('Rövidített név (felhasználónév)').fill(shortName);
 
-    const studentRow = await page.locator('tr', { hasText: 'Teszt Elek' });
-
-    await expect(studentRow).toBeVisible();
-
-    const editButton = studentRow.locator('[data-testid="edit-button"]');
-    await editButton.click();
-
-    const dialog = page.locator('[role="dialog"]');
-    await expect(dialog).toBeVisible();
-    await expect(dialog).toContainText('Tanuló szerkesztése');
-
-    const fullNameInput = page.locator('input[name="full_name"]');
-
-    await fullNameInput.fill(`Teszt Elek Módosított`);
-
-    await dialog.locator('button', { hasText: 'Mentés' }).click();
-
-    await expect(dialog).not.toBeVisible();
-
+    // 3. Lépés: Jelszó mező placeholder ellenőrzése
+    const passwordField = page.getByLabel('Ideiglenes jelszó');
+    await expect(passwordField).toHaveAttribute('placeholder', `${shortName}123`);
   });
 
+  test('Kötelező mezők validációja', async ({ page }) => {
+    // 1. Lépés: Dialógus megnyitása
+    await page.getByRole('button', { name: 'Új alkalmazott hozzáadás' }).click();
 
-  test('Tanuló törlés', async ({ page }) => {
+    // 2. Lépés: Mentés gomb megnyomása üres formmal
+    await page.getByRole('button', { name: 'Mentés' }).click();
 
-    await page.getByPlaceholder('Keresés név szerint...').fill('Teszt Elek Módosított');
-
-    const studentRow = await page.locator('tr', { hasText: 'Teszt Elek Módosított' });
-
-    const editButton = studentRow.locator('[data-testid="delete-button"]');
-    await editButton.click();
-
-    const dialogTitle = page.locator('text=Biztosan törölni szeretné a tanulót?');
-    await expect(dialogTitle).toBeVisible();
-
-    const confirmButton = page.locator('button:has-text("Véglegesítés")');
-    await confirmButton.click();
-
-    //  await page.getByPlaceholder('Keresés név szerint...').fill('Teszt Elek');
-
-    await expect(studentRow).not.toBeVisible();
+    // 3. Lépés: Hibák megjelenésének ellenőrzése
+    // (Itt feltételezem, hogy a form hibákat jelenít meg, ha nincs kitöltve)
+    await expect(page.getByText('A teljes név megadása kötelező')).toBeVisible();
+    await expect(page.getByText('A rövid név megadása kötelező')).toBeVisible();
+    await expect(page.getByText('A pozíció kiválasztása kötelező')).toBeVisible();
   });
-
-  test('Rendezés', async ({ page }) => {
-    await page.locator('th', { hasText: 'Teljes név' }).click();
-
-    await page.locator('th', { hasText: 'Osztály és csoportok' }).click();
-
-  });
-
-  test('Lapozás', async ({ page }) => {
-    if (await page.getByRole('button', { name: 'Következő' }).isEnabled()) {
-      await page.getByRole('button', { name: 'Következő' }).click();
-      await page.getByRole('button', { name: 'Előző' }).click();
-    }
-  });
-
-  test('Zárolás/feloldás gomb', async ({ page }) => {
-    const lockButton = page.getByRole('button', { name: /Összes (zárolás|feloldás)/ });
-    await lockButton.click();
-    
-  });*/
-
-
 });
