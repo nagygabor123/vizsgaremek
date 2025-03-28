@@ -211,7 +211,7 @@ const SheetComponent: React.FC = () => {
 
   return (
     <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-      <SheetTrigger asChild>
+      <SheetTrigger data-testid="configure-button" asChild>
         <div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
           <div className="grid auto-rows-min gap-4 w-full">
             {isButtonVisible && (
@@ -220,7 +220,7 @@ const SheetComponent: React.FC = () => {
                 <p className="text-sm truncate ml-3 text-red-600">
                   A rendszer nincs beállítva. Kérjük, végezze el a szükséges konfigurációt!
                 </p>
-                <Button data-testid="configure-button"  className="ml-auto" variant="destructive" onClick={() => setIsSheetOpen(true)}>
+                <Button className="ml-auto" variant="destructive" onClick={() => setIsSheetOpen(true)}>
                   Konfigurálás most
                 </Button>
               </div>
