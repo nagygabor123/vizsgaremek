@@ -410,6 +410,7 @@ export default function AddEmployeePage() {
                       <Input
                         className="col-span-3"
                         id="fullName"
+                        name="full_name"
                         type="text"
                         placeholder="Teszt Elek"
                         value={fullName}
@@ -422,6 +423,7 @@ export default function AddEmployeePage() {
                       <Input
                         className="col-span-3"
                         id="shortName"
+                           name="short_name"
                         type="text"
                         placeholder="TeEl"
                         value={shortname}

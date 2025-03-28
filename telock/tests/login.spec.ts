@@ -30,9 +30,11 @@ test.describe("Bejelentkezés", () => {
     await page.goto("/login");
 
     await page.fill('input[name="short_name"]', "admin");
-    await page.fill('input[name="password"]', "rossz_jelszó");
+    await page.fill('input[name="password"]', "rossz_jelszo");
     await page.click('button[type="submit"]');
 
-    await expect(page.locator("text=Hibás felhasználónév vagy jelszó!")).toBeVisible();
+    //await expect(page.locator("text=Hibás felhasználónév vagy jelszó!")).toBeVisible();
+    const errorAlert = page.locator('div[role="alert"]:has-text("Sikeretlen bejelentkezés")');
+    await expect(errorAlert).toBeVisible();
   });
 });
