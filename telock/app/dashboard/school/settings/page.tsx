@@ -537,6 +537,7 @@ export default function Page() {
                         disabled={!startDate}
                         variant="outline"
                         size="icon"
+                        data-testid="start-save-button" 
                       >
                         <SaveAll className="w-4 h-4 inline-block" />
                       </Button>
