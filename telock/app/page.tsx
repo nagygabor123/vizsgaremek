@@ -144,7 +144,7 @@ export default async function Home() {
               <div className="space-y-2">
                 <h3 className="font-bold">Több tárolóhely támogatása</h3>
                 <p className="text-sm text-muted-foreground">
-                  Több tárolószekrény telepítsére is lehetőség van az iskola különböző pontjaira.
+                  Több tárolószekrény telepítse az iskola különböző pontjaira.
                 </p>
               </div>
             </div>
