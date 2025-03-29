@@ -706,9 +706,7 @@ const Calendar: React.FC = () => {
             <div className="calendar-controls">
 
 
-            <Button variant="outline"  >
-                                          <LockOpen /> Összes feloldás
-                                        </Button>
+    
 
               {/*<Select>
                 <SelectTrigger>

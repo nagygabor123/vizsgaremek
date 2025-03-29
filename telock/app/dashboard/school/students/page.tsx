@@ -296,7 +296,7 @@ export default function Home() {
 
 
 
-  const PAGE_SIZE = 13;
+  const PAGE_SIZE = 15;
 
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(filteredStudents.length / PAGE_SIZE);

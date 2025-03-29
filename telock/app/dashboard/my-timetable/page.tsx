@@ -819,9 +819,12 @@ const Calendar: React.FC = () => {
 
                                     <div>
                                       <div>
-                                        <button onClick={() => searchGroupStudent(lesson.class)}>
+                                   {/* <button onClick={() => searchGroupStudent(lesson.class)}>
                                           felold
-                                        </button>
+                                        </button> */}
+                                        <Button variant="outline" onClick={() => searchGroupStudent(lesson.class)} >
+                                          <LockOpen /> Összes feloldás
+                                        </Button>
                                       </div>
                                       <div className="rounded-md border mt-5">
                                         <table className="w-full">

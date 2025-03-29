@@ -822,9 +822,12 @@ const Calendar: React.FC = () => {
                                     <DialogDescription>{modalInfo?.className}</DialogDescription>
 
                                     <div><div>
-                                      <button onClick={() => searchGroupStudent(lesson.class)}>
-                                        felold
-                                      </button>
+                                {/* <button onClick={() => searchGroupStudent(lesson.class)}>
+                                          felold
+                                        </button> */}
+                                        <Button variant="outline" onClick={() => searchGroupStudent(lesson.class)} >
+                                          <LockOpen /> Összes feloldás
+                                        </Button>
                                     </div>
 
                                       <div className="rounded-md border mt-5">
