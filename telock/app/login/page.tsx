@@ -1,6 +1,25 @@
+'use client'
+
+import { FormEvent, useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button"
+import { ChevronLeft, AlertCircle, CircleCheck } from "lucide-react";
+import Link from 'next/link';
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 
 import { getServerSession } from "next-auth";
-import Form from "./form";
+// import Form from "./form";
 import { redirect } from "next/navigation";
 import localFont from "next/font/local";
 
@@ -10,26 +29,122 @@ const ZenDots = localFont({
   weight: "100 900",
 });
 
+export default async function LoginPage() {
+  const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<boolean>(false);
 
-export default async function LoginPage(){
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError(null);
+    setSuccess(false);
 
-    const session = await getServerSession();
-    if(session){
-      redirect("/dashboard")
+    const formData = new FormData(e.currentTarget);
+    const response = await signIn('credentials', {
+      short_name: formData.get('short_name') as string,
+      password: formData.get('password') as string,
+      redirect: false,
+    });
+
+    if (response?.error) {
+      setError("Hibás felhasználónév vagy jelszó!");
+    } else {
+      setSuccess(true);
+      setTimeout(() => {
+        router.push("/dashboard");
+        router.refresh();
+      }, 1500);
     }
-    return(
-<div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-zinc-50 p-6 md:p-10">
-<div className="flex w-full max-w-sm flex-col gap-6">
-  <a href="/" className="flex items-center gap-2 self-center font-medium">
-   {/* <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
-      <GalleryVerticalEnd className="size-4" />
-    </div>*/}
-    <span className={`${ZenDots.className} text-xl`}>
-                telock
-              </span>
-  </a>
-  <Form />
-</div>
-</div>
-    )
+  };
+
+  const session = await getServerSession();
+  if (session) {
+    redirect("/dashboard")
+  }
+  return (
+    <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-zinc-50 p-6 md:p-10">
+      <div className="flex w-full max-w-sm flex-col gap-6">
+        <a href="/" className="flex items-center gap-2 self-center font-medium">
+          <span className={`${ZenDots.className} text-xl`}>
+            telock
+          </span>
+        </a>
+        <div className="flex flex-col gap-6">
+      <Button variant="ghost" className="absolute left-4 top-4 p-2" asChild>
+        <Link href="/">
+          <ChevronLeft /> Vissza
+        </Link>
+      </Button>
+      <Card>
+        <CardHeader className="text-center">
+          <CardTitle className="text-xl">Bejelentkezés</CardTitle>
+          <CardDescription>
+            Üdvözöljük! Kérjük, adja meg bejelentkezési adatait a folytatáshoz.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit}>
+            <div className="grid gap-6">
+              <div className="grid gap-6">
+                <div className="grid gap-2">
+                  <Label htmlFor="short_name">Felhasználónév</Label>
+                  <Input
+                    name="short_name"
+                    type="text"
+                    required
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <div className="flex items-center">
+                    <Label htmlFor="password">Jelszó</Label>
+                    {/* <a
+                      href="#"
+                      className="ml-auto text-sm underline-offset-4 hover:underline"
+                    >
+                      Elfelejtette jelszavát? 
+                    </a>*/}
+                  </div>
+                  <Input name="password" type="password" required />
+                </div>
+                <Button type="submit" className="w-full">
+                  Bejelentkezés
+                </Button>
+
+                {error &&
+                  <Alert variant="destructive">
+                    <AlertCircle className="h-4 w-4" />
+                    <AlertTitle>Sikeretlen bejelentkezés</AlertTitle>
+                    <AlertDescription>
+                      {error}
+                    </AlertDescription>
+                  </Alert>}
+                {success &&
+
+                  <Alert variant="siker">
+                    <CircleCheck className="h-4 w-4" />
+                    <AlertTitle>Sikeres bejelentkezés</AlertTitle>
+                    <AlertDescription>
+                      Nem sokára átirányítunk a vezérlőpultra.
+                    </AlertDescription>
+                  </Alert>
+
+                }
+              </div>
+              {/* <div className="text-center text-sm">
+              Szeretné használni a rendszerünket?{" "} 
+                <a href="#" className="underline underline-offset-4">
+                Lépjen velünk kapcsolatba
+                </a>
+              </div> */}
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+      <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary  ">
+        Az adatait biztonságban tartjuk. Soha ne ossza meg jelszavát másokkal!
+      </div>
+    </div>
+      </div>
+    </div>
+  )
 }

@@ -4,13 +4,11 @@ import { FormEvent, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, AlertCircle, CircleCheck  } from "lucide-react";
+import { ChevronLeft, AlertCircle, CircleCheck } from "lucide-react";
 import Link from 'next/link';
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-
-
 
 import {
   Card,
@@ -50,23 +48,17 @@ export default function Form() {
 
   return (
     <div className="flex flex-col gap-6">
-        <Button variant="ghost" className="absolute left-4 top-4 p-2" asChild>
-
-<Link href="/">
-
-  <ChevronLeft /> Vissza
-
-</Link>
-</Button>
+      <Button variant="ghost" className="absolute left-4 top-4 p-2" asChild>
+        <Link href="/">
+          <ChevronLeft /> Vissza
+        </Link>
+      </Button>
       <Card>
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Bejelentkezés</CardTitle>
           <CardDescription>
-      
-  Üdvözöljük! Kérjük, adja meg bejelentkezési adatait a folytatáshoz.
-</CardDescription>
-
-        
+            Üdvözöljük! Kérjük, adja meg bejelentkezési adatait a folytatáshoz.
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit}>
@@ -77,44 +69,43 @@ export default function Form() {
                   <Input
                     name="short_name"
                     type="text"
-                   
                     required
                   />
                 </div>
                 <div className="grid gap-2">
                   <div className="flex items-center">
                     <Label htmlFor="password">Jelszó</Label>
-                   {/* <a
+                    {/* <a
                       href="#"
                       className="ml-auto text-sm underline-offset-4 hover:underline"
                     >
                       Elfelejtette jelszavát? 
                     </a>*/}
                   </div>
-                  <Input name="password" type="password" required  />
+                  <Input name="password" type="password" required />
                 </div>
                 <Button type="submit" className="w-full">
                   Bejelentkezés
                 </Button>
 
-                {error && 
-                <Alert variant="destructive">
-      <AlertCircle className="h-4 w-4" />
-      <AlertTitle>Sikeretlen bejelentkezés</AlertTitle>
-      <AlertDescription>
-        {error}
-      </AlertDescription>
-    </Alert>}
-                {success && 
-                
-                <Alert variant="siker">
-      <CircleCheck className="h-4 w-4" />
-      <AlertTitle>Sikeres bejelentkezés</AlertTitle>
-      <AlertDescription>
-      Nem sokára átirányítunk a vezérlőpultra.
-      </AlertDescription>
-    </Alert>
-                
+                {error &&
+                  <Alert variant="destructive">
+                    <AlertCircle className="h-4 w-4" />
+                    <AlertTitle>Sikeretlen bejelentkezés</AlertTitle>
+                    <AlertDescription>
+                      {error}
+                    </AlertDescription>
+                  </Alert>}
+                {success &&
+
+                  <Alert variant="siker">
+                    <CircleCheck className="h-4 w-4" />
+                    <AlertTitle>Sikeres bejelentkezés</AlertTitle>
+                    <AlertDescription>
+                      Nem sokára átirányítunk a vezérlőpultra.
+                    </AlertDescription>
+                  </Alert>
+
                 }
               </div>
               {/* <div className="text-center text-sm">
@@ -128,9 +119,7 @@ export default function Form() {
         </CardContent>
       </Card>
       <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary  ">
-      Az adatait biztonságban tartjuk. Soha ne ossza meg jelszavát másokkal!
-        {/* <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>. */}
+        Az adatait biztonságban tartjuk. Soha ne ossza meg jelszavát másokkal!
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
-// app/providers.tsx
-"use client"; // Jelöld meg, hogy ez egy kliensoldali komponens
+"use client"; 
 
 import { SessionProvider } from "next-auth/react";
 

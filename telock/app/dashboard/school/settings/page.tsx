@@ -153,7 +153,7 @@ export default function Page() {
 
   const updateSchoolYear = async (type: string, date: string) => {
     try {
-      console.log('Küldött adatok:', { type, which_day: date });
+      //console.log('Küldött adatok:', { type, which_day: date });
 
       const response = await fetch(`${API_BASE_URL}/api/config/setYearStartEnd`, {
         method: 'POST',
@@ -163,8 +163,8 @@ export default function Page() {
         body: JSON.stringify({ type, which_day: date }),
       });
 
-      const responseData = await response.json();
-      console.log('API válasz:', responseData);
+      //const responseData = await response.json();
+      //console.log('API válasz:', responseData);
 
       if (response.ok) {
         setMessage(`${type === 'kezd' ? 'Tanév kezdete' : 'Tanév vége'} sikeresen frissítve!`);
