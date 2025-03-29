@@ -73,7 +73,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section id="funkciok" className="space-y-2 py-6 md:py-8 lg:py-10">
+      <section id="funkciok" className="space-y-2 py-8 md:py-10 lg:py-12">
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
           <h2 className="font-heading text-2xl font-bold leading-[1.1] sm:text-2xl md:text-4xl">
             Funkciók
