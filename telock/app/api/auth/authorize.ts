@@ -1,4 +1,3 @@
-// app/api/auth/authorize.ts
 'use server';
 
 import { neon } from "@neondatabase/serverless";

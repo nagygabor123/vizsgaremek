@@ -36,7 +36,6 @@ export default function ChangePassword() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-
   const API_BASE_URL = window.location.origin;
 
   const handleChangePassword = async (e: FormEvent) => {
@@ -67,10 +66,7 @@ export default function ChangePassword() {
         setOldPassword("");
         setNewPassword("");
         await signOut({ redirect: false });
-        router.push("/login");  // Itt az útvonal a bejelentkezési oldalra mutat
-        // Optionally sign out the user after password change
-        // await signOut({ redirect: false });
-        // router.push("/auth/signin");
+        router.push("/login");
       }
     } catch (err) {
       setError("Hálózati hiba történt. Kérjük, próbálja újra később.");
@@ -83,9 +79,9 @@ export default function ChangePassword() {
     <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-zinc-50 p-6 md:p-10">
       <div className="flex w-full max-w-sm flex-col gap-6">
         <a href="/" className="flex items-center gap-2 self-center font-medium">
-        <span className={`${ZenDots.className} text-xl`}>
-                telock
-              </span>
+          <span className={`${ZenDots.className} text-xl`}>
+            telock
+          </span>
         </a>
         <div className="flex flex-col gap-6">
           <Button variant="ghost" className="absolute left-4 top-4 p-2" asChild>

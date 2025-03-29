@@ -20,43 +20,15 @@ import {
   SidebarProvider,
 } from "@/components/ui/sidebar";
 
-import { Label } from "@/components/ui/label"
 import Link from "next/link";
 
-import { Pen, Trash2, ArrowUpDown, CirclePlus, CircleCheck, LockOpen, CircleAlert, CircleMinus, Lock, ChevronRight, ChevronLeft, Slash, } from "lucide-react"
+import { ArrowUpDown, CircleCheck, LockOpen, CircleAlert, CircleMinus, ChevronRight, ChevronLeft, Slash, } from "lucide-react"
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-
-
-
-import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import '../../../globals.css';
 
-import AppKonfig from '@/components/app-konfig';
-
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-
-
-// Diák típus
 interface Student {
   student_id: string;
   full_name: string;
@@ -73,48 +45,28 @@ interface Timetable {
 
 export default function Home() {
   const { data: session } = useSession();
-
-  const [open, setOpen] = useState(false);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-  const API_BASE_URL = window.location.origin; 
-
   const [students, setStudents] = useState<Student[]>([]);
   const [studentTimetable, setStudentTimetable] = useState<Timetable[]>([]);
-  const [formData, setFormData] = useState<Student>({
-    student_id: '',
-    full_name: '',
-    class: '',
-    rfid_tag: '',
-    status: '',
-  });
-  const [editing, setEditing] = useState<boolean>(false);
-  const [, setEditStudentId] = useState<string | null>(null); //editStudentId,
   const [systemClose, setSystemClose] = useState<boolean>(false);
   const [unlockedStudents, setUnlockedStudents] = useState(new Set());
   const [hasStudents, setHasStudents] = useState<boolean | null>(null);
+  const [loading, setLoading] = useState(true);
 
-
-
-
-
-  // Fetch students from the database
-  const [loading, setLoading] = useState(true); // Betöltési állapot
+  const API_BASE_URL = window.location.origin;
 
   const fetchStudents = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/students/read`);
       const data = await response.json();
       setStudents(data);
-      setHasStudents(data.length > 0); // Ha van legalább egy diák, akkor true
+      setHasStudents(data.length > 0);
     } catch (error) {
       console.error('Error fetching students', error);
     } finally {
-      setLoading(false); // Lekérés vége
+      setLoading(false);
     }
   };
 
-  // Fetch system status from the database
   const fetchSystemStatus = async () => {
     const response = await fetch(`${API_BASE_URL}/api/system/status`);
     if (response.ok) {
@@ -123,31 +75,20 @@ export default function Home() {
     }
   };
 
-  // Fetch timetable for each student
-  //   const fetchStudentTimetable = async (student_id: string) => {
-  //     const response = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${student_id}`);
-  //     const data = await response.json();
-  //     return data;
-  //   };
-
-  // Call fetchStudents and fetchSystemStatus on initial load
   useEffect(() => {
     fetchStudents();
     fetchSystemStatus();
   }, []);
 
-  // Fetch timetable for each student
   useEffect(() => {
     const fetchTimetables = async () => {
       try {
-        // Fetch all students' timetable data at once from the new API endpoint
         const response = await fetch(`${API_BASE_URL}/api/timetable/allScheduleStart`);
         if (!response.ok) {
           throw new Error('Nem sikerült lekérni az összes diák órarendjét.');
         }
 
         const data = await response.json();
-        // Map the response to match the structure of your state
         const timetables = data.students.map((student: any) => ({
           student_id: student.student_id,
           first_class_start: student.first_class_start,
@@ -165,76 +106,6 @@ export default function Home() {
     }
   }, [students]);
 
-  // Handle form input changes
-  //   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //     const { name, value } = e.target;
-  //     setFormData({
-  //       ...formData,
-  //       [name]: value,
-  //     });
-  //   };
-
-  // Handle form submission for creating or updating students
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const method = editing ? 'PUT' : 'POST';
-    const url = editing ? '/api/students/update' : '/api/students/create';
-
-    const response = await fetch(url, {
-      method: method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    });
-
-    if (response.ok) {
-      setFormData({ student_id: '', full_name: '', class: '', rfid_tag: '', status: '' });
-      setEditing(false);
-      setEditStudentId(null);
-      fetchStudents();  // Refresh the student list after creating or updating
-      //setIsModalOpen(false);
-      setOpen(false);
-      setIsDialogOpen(false);
-    }
-  };
-
-  // Handle deleting a student
-  const handleDelete = async (student_id: string) => {
-    const response = await fetch('/api/students/delete', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ student_id }),
-    });
-
-    if (response.ok) {
-      fetchStudents();  // Refresh the student list after deletion
-    }
-  };
-
-  // Handle editing a student
-  const handleEdit = (student: Student) => {
-    setFormData(student);
-    setEditing(true);
-    setEditStudentId(student.student_id);
-    //setIsModalOpen(true);
-  };
-
-
-
-
-  // Handle system close/unlock button click
-  const handleSystemClose = async () => {
-    const action = systemClose ? 'open' : 'close'; // Determine whether to send "open" or "close"
-    const response = await fetch('/api/system/closeOpen', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action }),
-    });
-
-    if (response.ok) {
-      setSystemClose((prevState) => !prevState); // Toggle the systemClose state
-    }
-  };
-
   const handleStudentOpen = async (student_id: string) => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/system/studentAccess?student=${student_id}`, {
@@ -247,27 +118,16 @@ export default function Home() {
       } else {
         const data = await response.json();
         console.log(data.message);
-        setUnlockedStudents(prev => new Set(prev).add(student_id)); // Ne engedje újra megnyomni
+        setUnlockedStudents(prev => new Set(prev).add(student_id));
       }
     } catch (error) {
       console.error('Hiba történt a kérés során:', error);
     }
   };
 
-
-
-
-
   const [sortField, setSortField] = useState<"full_name" | "class" | null>(null);
-
   const [sortOrder, setSortOrder] = useState("asc");
-  //const [searchName, setSearchName] = useState("");
-  // const [searchClass, setSearchClass] = useState({session?.user?.osztalyfonok});
 
-
-
-
-  // Rendezési logika
   const sortedStudents = [...students].sort((a, b) => {
     if (!sortField) return 0;
     const fieldA = String(a[sortField] ?? "").toLowerCase();
@@ -279,14 +139,11 @@ export default function Home() {
   const [searchName, setSearchName] = useState("");
   const [searchClass, setSearchClass] = useState(session?.user?.osztalyfonok || "");
 
-  // Szűrés
   const filteredStudents = sortedStudents.filter(student =>
     student.full_name.toLowerCase().includes(searchName.toLowerCase()) &&
     student.class.toLowerCase().includes(searchClass.toLowerCase())
   );
 
-
-  // Rendezés váltása adott mező szerint
   const toggleSort = (field: "full_name" | "class") => {
     if (sortField === field) {
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
@@ -296,45 +153,39 @@ export default function Home() {
     }
   };
 
+  // async function updateGroupAccess() {
+  //   const filteredStudents = students
+  //     .filter(student => student.class.toLowerCase().includes(searchClass.toLowerCase()))
+  //     .map(student => student.student_id);
 
-  async function updateGroupAccess() {
-    const filteredStudents = students
-      .filter(student => student.class.toLowerCase().includes(searchClass.toLowerCase()))
-      .map(student => student.student_id);
+  //   if (filteredStudents.length === 0) {
+  //     console.log("Nincs megfelelő diák a keresési feltétel alapján.");
+  //     return;
+  //   }
 
-    if (filteredStudents.length === 0) {
-      console.log("Nincs megfelelő diák a keresési feltétel alapján.");
-      return;
-    }
+  //   try {
+  //     const response = await fetch(`${API_BASE_URL}/api/system/groupAccess`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json"
+  //       },
+  //       body: JSON.stringify({ students: filteredStudents })
+  //     });
 
-    try {
-      const response = await fetch(`${API_BASE_URL}/api/system/groupAccess`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ students: filteredStudents })
-      });
-
-      const result = await response.json();
-      console.log("Sikeres válasz:", result);
-    } catch (error) {
-      console.error("Hiba a kérés során:", error);
-    }
-  }
-
+  //     const result = await response.json();
+  //     console.log("Sikeres válasz:", result);
+  //   } catch (error) {
+  //     console.error("Hiba a kérés során:", error);
+  //   }
+  // }
 
   const PAGE_SIZE = 14;
-
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(filteredStudents.length / PAGE_SIZE);
-
   const paginatedStudents = filteredStudents.slice(
     (currentPage - 1) * PAGE_SIZE,
     currentPage * PAGE_SIZE
   );
-
-
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -345,10 +196,6 @@ export default function Home() {
   if (isButtonVisible === null) {
     return null;
   }
-
-  //if (loading) return null; 
-
-
 
   return (
     <SidebarProvider>
@@ -382,13 +229,7 @@ export default function Home() {
           </div>
         </header>
 
-
-
-
         <div className="overflow-x-auto">
-
-
-
 
           <div>
             {loading ? (
@@ -397,15 +238,11 @@ export default function Home() {
               </div>
             ) : (
               <>
-                {/* Ide kerülhet más tartalom, ha szükséges */}
               </>
             )}
           </div>
 
           <div className="p-4">
-
-
-
 
             <div className="flex flex-col gap-2 md:flex-row mb-4">
               <div className="flex flex-col gap-2 md:flex-row">
@@ -416,114 +253,20 @@ export default function Home() {
                   value={searchName}
                   onChange={(e) => setSearchName(e.target.value)}
                 />
-                {/* <Input
-                  type="text"
-                  placeholder="Keresés csoport szerint..."
-                  className="border p-2 rounded-md"
-                  value={searchClass}
-                  onChange={(e) => setSearchClass(e.target.value)}
-                /> */}
-                {/* <Select>
-                <SelectTrigger > 
-                  <SelectValue placeholder="Keresés osztály szerint..." />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Osztályok</SelectLabel>
-                    <SelectItem value="13i">13.I</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select> */}
-
-             {/*   <Button variant="outline" onClick={() => updateGroupAccess()}>
-                  <LockOpen /> Összes feloldás
-                 
-                </Button>*/}
               </div>
 
- {
-                /*  
+              {/*   
+                <Button variant="outline" onClick={() => updateGroupAccess()}>
+                  <LockOpen /> Összes feloldás 
+                </Button>
+              */}
+              {/*  
                 onClick={handleSystemClose}
-
                 {systemClose ? <LockOpen /> : <Lock />}
-                  {systemClose ? 'Összes feloldás' : 'Összes zárolás'}
-*/}
-
-              {/*
-              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogTrigger asChild>
-                  <Button variant="outline" className="ml-auto" ><CirclePlus /> Új tanuló hozzáadás</Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
-                  <DialogHeader>
-                    <DialogTitle>Tanuló hozzáadása</DialogTitle>
-                    <DialogDescription>
-                      Aliquam metus eros, tristique nec semper id, congue eget metus.
-                    </DialogDescription>
-                  </DialogHeader>
-
-                  <form onSubmit={handleSubmit} className="grid items-start gap-4">
-                    <div className="grid gap-2">
-                      <Label htmlFor="student_id">Azonosító szám</Label>
-                      <Input
-                        className="col-span-3"
-                        type="text"
-                        placeholder="OM1234567"
-                        name="student_id"
-                        // value={formData.student_id}
-                        onChange={e => setFormData({ ...formData, student_id: e.target.value })}
-                      />
-                    </div>
-                    <div className="grid gap-2">
-                      <Label htmlFor="full_name">Teljes név</Label>
-                      <Input
-                        className="col-span-3"
-                        type="text"
-                        name="full_name"
-                        placeholder="Teszt Elek"
-                        // value={formData.full_name}
-                        onChange={e => setFormData({ ...formData, full_name: e.target.value })}
-                      />
-                    </div>
-                    <div className="grid gap-2">
-                      <Label htmlFor="class">Osztály és csoportok</Label>
-                      <Input
-                        className="col-span-3"
-                        type="text"
-                        name="class"
-                        placeholder="9.I,9.I-A2"
-                        // value={formData.class}
-                        onChange={e => setFormData({ ...formData, class: e.target.value })}
-                      />
-                    </div>
-
-                    <div className="grid gap-2">
-                      <Label htmlFor="class">RFID azonosító</Label>
-                      <Input
-                        className="col-span-3"
-                        type="text"
-                        name="rfid_tag"
-                        placeholder="R6HF6K86"
-                        //  value={formData.rfid_tag}
-                        onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
-                      />
-                    </div>
-
-
-                    <Button type="submit">Mentés</Button>
-                  </form>
-
-                
-                </DialogContent>
-              </Dialog>*/}
-
-
+                {systemClose ? 'Összes feloldás' : 'Összes zárolás'}
+              */}
 
             </div>
-
-
-
-
 
             <div className="rounded-md border mt-5">
               <table className="w-full">
@@ -538,139 +281,50 @@ export default function Home() {
                 </thead>
                 <tbody>
 
-                  {
+                  {students.length === 0 ? (
+                    <tr>
+                      <td colSpan={5} className="text-center p-6 h-dvh text-base text-muted-foreground">
+                        Nem szerepel tanuló a rendszerben
+                      </td>
+                    </tr>
+                  ) : (
 
-                    students.length === 0 ? (
-                      <tr>
-                        <td colSpan={5} className="text-center p-6 h-dvh text-base text-muted-foreground">
-                          Nem szerepel tanuló a rendszerben
-                        </td>
-                      </tr>
-                    ) : (
+                    paginatedStudents.map((student) => {
+                      const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
+                      const currentTime = new Date().toLocaleString('hu-HU', {
+                        timeZone: 'Europe/Budapest',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: false
+                      });
 
+                      const canUnlockStudent = systemClose || (studentTimetableData &&
+                        currentTime >= studentTimetableData.first_class_start &&
+                        currentTime <= studentTimetableData.last_class_end);
 
-                      paginatedStudents.map((student) => {
-                        const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
-                        const currentTime = new Date().toLocaleString('hu-HU', {
-                          timeZone: 'Europe/Budapest',
-                          hour: '2-digit',
-                          minute: '2-digit',
-                          hour12: false
-                        });
-                        //console.log(currentTime); 
-
-                        const canUnlockStudent = systemClose || (studentTimetableData &&
-                          currentTime >= studentTimetableData.first_class_start &&
-                          currentTime <= studentTimetableData.last_class_end);
-
-                        return (
-                          <tr key={student.student_id} className="text-center text-sm border-t">
-                            <td className="p-1">{student.full_name}</td>
-                            <td className="p-1">{student.class}</td>
-                            <td className="p-1">
-                              {student.status === "ki" ? <span className="text-gray-500"><CircleMinus className="w-4 h-4 inline-block" /></span> : student.status === "be" ? <span className="text-green-500"><CircleCheck className="w-4 h-4 inline-block" /></span> : <span className="text-red-500"><CircleAlert className="w-4 h-4 inline-block" /></span>}
-
-
-                            </td>
-                            {/* <td className="p-1">{student.rfid_tag}</td> */}
-                            <td className="p-1">
-
-                              <Button
-                                variant="ghost"
-                                onClick={() => handleStudentOpen(student.student_id)}
-                                disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}
-                              >
-                                <LockOpen className="w-4 h-4 inline-block" />
-                              </Button>
-
-                              {/* <Dialog open={open} onOpenChange={setOpen}>
-                                <DialogTrigger asChild>
-                                  <Button variant="ghost" onClick={() => handleEdit(student)}><Pen /></Button>
-                                </DialogTrigger>
-                                <DialogContent className="sm:max-w-[425px]">
-                                  <DialogHeader>
-                                    <DialogTitle>Tanuló szerkesztése</DialogTitle>
-                                    <DialogDescription>
-
-                                      Aliquam metus eros, tristique nec semper id, congue eget metus
-                                    </DialogDescription>
-                                  </DialogHeader>
-
-                                  <form onSubmit={handleSubmit} className="grid items-start gap-4">
-                                    <div className="grid gap-2">
-                                      <Label htmlFor="full_name">Teljes név</Label>
-                                      <Input
-                                        className="col-span-3"
-                                        type="text"
-                                        name="full_name"
-                                        placeholder=""
-                                        value={formData.full_name}
-                                        onChange={e => setFormData({ ...formData, full_name: e.target.value })}
-                                      />
-                                    </div>
-
-
-                                    <Input
-                                      type="text"
-                                      name="class"
-                                      placeholder="Class"
-                                      value={formData.class}
-                                      onChange={e => setFormData({ ...formData, class: e.target.value })}
-                                    />
-
-
-                                    <div className="grid gap-2">
-                                      <Label htmlFor="rfid_tag">RFID azonosító</Label>
-                                      <Input
-                                        className="col-span-3"
-                                        type="text"
-                                        name="rfid_tag"
-                                        placeholder=""
-                                        value={formData.rfid_tag}
-                                        onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
-                                      />
-                                    </div>
-
-
-
-                                    <Button type="submit">Mentés</Button>
-                                  </form>
-                         
-                                </DialogContent>
-                              </Dialog>*/}
-
-
-
-                              {/*<AlertDialog>
-                                <AlertDialogTrigger>
-                                  <Button variant="ghost" ><Trash2 /></Button>
-                                </AlertDialogTrigger>
-                                <AlertDialogContent>
-                                  <AlertDialogHeader>
-                                    <AlertDialogTitle>Biztosan törölni szeretné a tanulót?</AlertDialogTitle>
-                                    <AlertDialogDescription>
-                                      Ez a művelet nem vonható vissza. A tanuló véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
-                                    </AlertDialogDescription>
-                                  </AlertDialogHeader>
-                                  <AlertDialogFooter>
-                                    <AlertDialogCancel>Mégse</AlertDialogCancel>
-                                    <AlertDialogAction onClick={() => handleDelete(student.student_id)}>Véglegesítés</AlertDialogAction>
-                                  </AlertDialogFooter>
-                                </AlertDialogContent>
-                              </AlertDialog>*/}
-
-                              {/* <Button variant="ghost" onClick={() => handleDelete(student.student_id)}><X /></Button> */}
-                            </td>
-
-                          </tr>
-                        );
-                      })
-                    )}
+                      return (
+                        <tr key={student.student_id} className="text-center text-sm border-t">
+                          <td className="p-1">{student.full_name}</td>
+                          <td className="p-1">{student.class}</td>
+                          <td className="p-1">
+                            {student.status === "ki" ? <span className="text-gray-500"><CircleMinus className="w-4 h-4 inline-block" /></span> : student.status === "be" ? <span className="text-green-500"><CircleCheck className="w-4 h-4 inline-block" /></span> : <span className="text-red-500"><CircleAlert className="w-4 h-4 inline-block" /></span>}
+                          </td>
+                          {/* <td className="p-1">{student.rfid_tag}</td> */}
+                          <td className="p-1">
+                            <Button
+                              variant="ghost"
+                              onClick={() => handleStudentOpen(student.student_id)}
+                              disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}
+                            >
+                              <LockOpen className="w-4 h-4 inline-block" />
+                            </Button>
+                          </td>
+                        </tr>
+                      );
+                    })
+                  )}
                 </tbody>
               </table>
-
-              {/* Lapozó gombok */}
-
 
             </div>
 
@@ -682,9 +336,6 @@ export default function Home() {
           </div>
 
         </div>
-
-
-
 
       </SidebarInset>
     </SidebarProvider>
