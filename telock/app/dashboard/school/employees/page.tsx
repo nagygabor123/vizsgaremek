@@ -227,8 +227,8 @@ export default function AddEmployeePage() {
         setEditPosition('');
         setEditOsztaly('');
         fetchEmployees();
-        //setOpen(false);
-        setIsDialogOpen(false);
+        setOpen(false);
+        //setIsDialogOpen(false);
         //      setOpen(false); //////////////////////////////////////////
 
       } else {
