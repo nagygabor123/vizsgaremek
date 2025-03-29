@@ -161,19 +161,17 @@ export default async function Home() {
           Minden, amire szüksége van a rendszer hatékony használatához.
         </p>
         <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div className="rounded-lg border bg-card p-4 shadow-sm">
-            <h3 className="text-lg font-semibold">API Dokumentáció</h3>
+          <div className="rounded-lg border bg-card p-4">
+            <h3 className="text-lg font-semibold">API dokumentáció</h3>
             <p className="mt-1 text-sm text-muted-foreground">
-              Fejlesztőknek szóló API-referencia és példák.
             </p>
             <Button asChild className="mt-3 w-full">
               <Link href="/api-docs">Megnyitás</Link>
             </Button>
           </div>
-          <div className="rounded-lg border bg-card p-4 shadow-sm">
-            <h3 className="text-lg font-semibold">Fejlesztői & Felhasználói Dokumentáció</h3>
+          <div className="rounded-lg border bg-card p-4">
+            <h3 className="text-lg font-semibold">Szoftver dokumentáció</h3>
             <p className="mt-1 text-sm text-muted-foreground">
-              Útmutató a rendszer hatékony használatához.
             </p>
             <Button asChild className="mt-3 w-full">
               <Link href="#">Megnyitás</Link>
