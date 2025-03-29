@@ -175,6 +175,8 @@ export default function AddEmployeePage() {
         setOsztaly('');
         fetchEmployees();
         setIsDialogOpen(false);
+        setOpen(false);
+        fetchEmployees();
        // setOpen(false);
 
       } else {
@@ -227,8 +229,10 @@ export default function AddEmployeePage() {
         setEditName('');
         setEditPosition('');
         setEditOsztaly('');
-        fetchEmployees();
+       
         setOpen(false);
+        setIsDialogOpen(false);
+        fetchEmployees();
         //setIsDialogOpen(false);
         //      setOpen(false); //////////////////////////////////////////
 
