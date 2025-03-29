@@ -45,7 +45,7 @@ export default function Page() {
             <div className="min-h-[60px] rounded-xl bg-blue-50 flex items-center px-4 w-full box-border overflow-hidden">
               <Megaphone className="text-blue-600" />
               <p className="text-sm truncate ml-3 text-blue-600">
-                Üdvözöljük a Telock vezérlőpultjában, {session?.user?.full_name}!
+                Üdvözöljük a telock vezérlőpultján, {session?.user?.full_name}!
               </p>
             </div>
           </div>

@@ -43,7 +43,7 @@ export default async function Home() {
       <section className="w-full max-w-6xl text-center my-12 px-4">
         <h2 className="text-3xl md:text-6xl font-bold">Biztonságos és kényelmes <span className="text-blue-600">telefontárolás</span> iskoláknak</h2>
         <p className="mt-4 text-gray-600 max-w-2xl mx-auto text-sm md:text-base text-muted-foreground">
-          Telefontároló rendszerünk biztosítja, hogy az iskolák diákjai biztonságosan és kényelmesen tárolhassák mobiltelefonjaikat az oktatási időszak alatt, miközben csökkentik a zavaró tényezőket az órákon.
+          Telefontároló rendszerünk biztosítja, hogy az iskolák diákjai biztonságosan és kényelmesen tárolhassák mobiltelefonjaikat az oktatási idő alatt, miközben csökkentik a zavaró tényezőket az órákon.
         </p>
       </section>
 
@@ -73,7 +73,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section id="funkciok" className="space-y-2 py-4 md:py-6 lg:py-8">
+      <section id="funkciok" className="space-y-2 py-6 md:py-8 lg:py-10">
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
           <h2 className="font-heading text-2xl font-bold leading-[1.1] sm:text-2xl md:text-4xl">
             Funkciók
@@ -122,7 +122,7 @@ export default async function Home() {
               <div className="space-y-2">
                 <h3 className="font-bold">Adminisztrátori felügyelet</h3>
                 <p className="text-sm text-muted-foreground">
-                  Az iskola vezetése valós időben ellenőrizheti a fiókok állapotát.
+                  Az iskola vezetősége valós időben ellenőrizheti a fiókok állapotát.
                 </p>
               </div>
             </div>
