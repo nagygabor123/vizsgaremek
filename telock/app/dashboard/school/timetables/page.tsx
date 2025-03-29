@@ -134,7 +134,14 @@ const Calendar: React.FC = () => {
   const [unlockedStudents, setUnlockedStudents] = useState(new Set());
 
 
-  const API_BASE_URL = window.location.origin;
+  const getApiBaseUrl = () => {
+    if (typeof window !== "undefined") {
+      return window.location.origin; // Ha kliensoldalon fut, használja a window objektumot
+    } else {
+      return process.env.API_BASE_URL || 'https://vizsgaremek-mocha.vercel.app'; // Szerveroldalon használj helyettesítő URL-t
+    }
+  };
+  const API_BASE_URL = getApiBaseUrl();
 
 
   const [hasStudents, setHasStudents] = useState<boolean | null>(null);
@@ -190,7 +197,7 @@ const Calendar: React.FC = () => {
     const fetchTimetables = async () => {
       try {
         // Fetch all students' timetable data at once from the new API endpoint
-        const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/allScheduleStart`);
+        const response = await fetch(`${API_BASE_URL}/api/timetable/allScheduleStart`);
         if (!response.ok) {
           throw new Error('Nem sikerült lekérni az összes diák órarendjét.');
         }

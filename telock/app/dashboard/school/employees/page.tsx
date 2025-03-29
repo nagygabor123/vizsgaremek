@@ -60,7 +60,14 @@ import {
 export default function AddEmployeePage() {
   const [open, setOpen] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const API_BASE_URL = window.location.origin;
+  const getApiBaseUrl = () => {
+    if (typeof window !== "undefined") {
+      return window.location.origin; // Ha kliensoldalon fut, használja a window objektumot
+    } else {
+      return process.env.API_BASE_URL || 'https://vizsgaremek-mocha.vercel.app'; // Szerveroldalon használj helyettesítő URL-t
+    }
+  };
+  const API_BASE_URL = getApiBaseUrl();
 
 
   // const [isDialogOpen2, setIsDialogOpen2] = useState(false);
