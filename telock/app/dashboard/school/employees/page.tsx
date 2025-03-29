@@ -58,8 +58,9 @@ import {
 
 
 export default function AddEmployeePage() {
-  const [open, setOpen] = useState(false);
+ 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const API_BASE_URL = window.location.origin;
 
 
@@ -174,7 +175,7 @@ export default function AddEmployeePage() {
         setOsztaly('');
         fetchEmployees();
         setIsDialogOpen(false);
-        setOpen(false);
+       // setOpen(false);
 
       } else {
         setMessage(data.message || 'Error adding employee');
