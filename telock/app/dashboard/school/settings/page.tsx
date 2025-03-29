@@ -18,7 +18,7 @@ import {
   SidebarProvider,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
-import { TriangleAlert, Plus, Trash2, Trash, CalendarPlus, CalendarIcon, SaveAll, Slash } from "lucide-react";
+import { Trash2, CalendarPlus, CalendarIcon, SaveAll, Slash } from "lucide-react";
 import Link from "next/link";
 
 import { Input } from "@/components/ui/input"
@@ -36,12 +36,9 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 
-
 import * as React from "react"
 import { format } from "date-fns"
 import { hu } from "date-fns/locale";
-
-import { addDays } from 'date-fns';
 
 import {
   DropdownMenu,
@@ -64,8 +61,6 @@ import {
 
 import { DateRange } from 'react-day-picker';
 
-
-import AppKonfig from '@/components/app-konfig';
 import {
   Select,
   SelectContent,
@@ -73,7 +68,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-
 
 import {
   Dialog,
@@ -85,19 +79,14 @@ import {
   DialogFooter
 } from "@/components/ui/dialog"
 
-
-
 export default function Page() {
-  const [loading, setLoading] = useState(true); // Betöltési állapot
+  const [loading, setLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDialogOpen2, setIsDialogOpen2] = useState(false);
   const [isDialogOpen3, setIsDialogOpen3] = useState(false);
-
   const [date, setDate] = React.useState<DateRange | undefined>(undefined);
-
-  const API_BASE_URL = window.location.origin;
   const [message, setMessage] = useState<string>('');
-  const [apiResponse, setApiResponse] = useState<any>(null);
+  //const [apiResponse, setApiResponse] = useState<any>(null);
   const [yearSchedule, setYearSchedule] = useState<any>({
     plusDates: [],
     breakDates: [],
@@ -110,10 +99,9 @@ export default function Page() {
   const [newBreak, setNewBreak] = useState({ nev: '', which_day: '', replace_day: '' });
   const [newNo, setNewNo] = useState({ nev: '', which_day: '', replace_day: '' });
   const [newPlusDate, setNewPlusDate] = useState({ nev: '', which_day: '', replace_day: '' });
-
-
-
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
+
+  const API_BASE_URL = window.location.origin;
 
   useEffect(() => {
     if (!isDialogOpen3) {
@@ -156,7 +144,7 @@ export default function Page() {
     } catch (error) {
       console.error('Error fetching year schedule:', error);
     } finally {
-      setLoading(false); // Lekérés vége
+      setLoading(false); 
     }
   };
 
@@ -300,85 +288,78 @@ export default function Page() {
 
 
 
-  const [dateRange, setDateRange] = React.useState<DateRange | undefined>(undefined);
+  //const [dateRange, setDateRange] = React.useState<DateRange | undefined>(undefined);
   //const [date, setDate] = React.useState<Date>()
   const [saturdayClasses, setSaturdayClasses] = React.useState<Date[]>([]);
   const [nonTeachingDays, setNonTeachingDays] = React.useState<Date[]>([]);
-  const [breaks, setBreaks] = React.useState<{ from: Date, to: Date }[]>([])
+  //const [breaks, setBreaks] = React.useState<{ from: Date, to: Date }[]>([])
   const [startDate, setStartDate] = React.useState<Date | undefined>();
   const [endDate, setEndDate] = React.useState<Date | undefined>();
-  const [newSaturdayClass, setNewSaturdayClass] = React.useState<Date | undefined>();
-  const [newNonTeachingDay, setNewNonTeachingDay] = React.useState<Date | undefined>();
+  ////const [newNonTeachingDay, setNewNonTeachingDay] = React.useState<Date | undefined>();
   // const [newBreak, setNewBreak] = React.useState<Date | undefined>();
 
 
-  const handleAddRange = () => {
-    if (dateRange?.from instanceof Date && dateRange?.to instanceof Date) {
-      setBreaks(prevBreaks => [
-        ...prevBreaks, // Fontos: ne töröljük az előző elemeket!
-        { from: dateRange.from as Date, to: dateRange.to as Date }
-      ]);
-    } else {
-      console.error("Invalid date range. Both 'from' and 'to' must be valid Date objects.");
-    }
-  };
+  // const handleAddRange = () => {
+  //   if (dateRange?.from instanceof Date && dateRange?.to instanceof Date) {
+  //     setBreaks(prevBreaks => [
+  //       ...prevBreaks, 
+  //       { from: dateRange.from as Date, to: dateRange.to as Date }
+  //     ]);
+  //   } else {
+  //     console.error("Invalid date range. Both 'from' and 'to' must be valid Date objects.");
+  //   }
+  // };
 
 
-  const handleAddDate = (date: Date | undefined, setState: React.Dispatch<React.SetStateAction<Date[]>>, state: Date[]) => {
-    if (date) setState([...state, date]);
-  };
+  // const handleAddDate = (date: Date | undefined, setState: React.Dispatch<React.SetStateAction<Date[]>>, state: Date[]) => {
+  //   if (date) setState([...state, date]);
+  // };
 
-
-
-  const [isOverlayVisible, setOverlayVisible] = useState(false);
+  // const [isOverlayVisible, setOverlayVisible] = useState(false);
   // const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    age: "",
-    city: "",
-    profession: "",
-    hobby: "",
-    experience: "",
-    feedback: "",
-  });
+  // const [step, setStep] = useState(1);
+  // const [formData, setFormData] = useState({
+  //   name: "",
+  //   email: "",
+  //   age: "",
+  //   city: "",
+  //   profession: "",
+  //   hobby: "",
+  //   experience: "",
+  //   feedback: "",
+  // });
 
-  useEffect(() => {
-    const hasClickedBefore = localStorage.getItem("hasClickedOverlayButton");
-    setButtonVisible(hasClickedBefore !== "true");
-  }, []);
 
-  const handleButtonClick = () => {
-    setOverlayVisible(true);
-  };
+  // const handleButtonClick = () => {
+  //   setOverlayVisible(true);
+  // };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  //   setFormData({
+  //     ...formData,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
-  const handleNext = () => {
-    if (step < 5) setStep(step + 1);
-  };
+  // const handleNext = () => {
+  //   if (step < 5) setStep(step + 1);
+  // };
 
-  const handleBack = () => {
-    if (step > 1) setStep(step - 1);
-  };
+  // const handleBack = () => {
+  //   if (step > 1) setStep(step - 1);
+  // };
 
-  const handleFormSubmit = () => {
-    console.log("Form Data:", formData);
-    setOverlayVisible(false);
-    setButtonVisible(false);
-    localStorage.setItem("hasClickedOverlayButton", "true");
-    window.location.reload();
-  };
+  // const handleFormSubmit = () => {
+  //   console.log("Form Data:", formData);
+  //   setOverlayVisible(false);
+  //   setButtonVisible(false);
+  //   localStorage.setItem("hasClickedOverlayButton", "true");
+  //   window.location.reload();
+  // };
 
-  const handleClose = () => {
-    setOverlayVisible(false);
-  };
+  // const handleClose = () => {
+  //   setOverlayVisible(false);
+  // };
 
 
 
@@ -392,10 +373,6 @@ export default function Page() {
   if (isButtonVisible === null) {
     return null;
   }
-
-  {/*console.log("BreakDates:", yearSchedule?.breakDates);*/ }
-
-
 
   return (
     <SidebarProvider>
