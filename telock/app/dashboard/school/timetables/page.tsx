@@ -134,14 +134,8 @@ const Calendar: React.FC = () => {
   const [unlockedStudents, setUnlockedStudents] = useState(new Set());
 
 
-  const getApiBaseUrl = () => {
-    if (typeof window !== "undefined") {
-      return window.location.origin; // Ha kliensoldalon fut, használja a window objektumot
-    } else {
-      return process.env.API_BASE_URL || 'https://vizsgaremek-mocha.vercel.app'; // Szerveroldalon használj helyettesítő URL-t
-    }
-  };
-  const API_BASE_URL = getApiBaseUrl();
+  
+  const API_BASE_URL = window.location.origin;
 
 
   const [hasStudents, setHasStudents] = useState<boolean | null>(null);
