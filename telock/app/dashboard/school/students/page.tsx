@@ -296,7 +296,7 @@ export default function Home() {
 
 
 
-  const PAGE_SIZE = 15;
+  const PAGE_SIZE = 14;
 
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(filteredStudents.length / PAGE_SIZE);
@@ -425,6 +425,7 @@ export default function Home() {
                 <DialogContent className="sm:max-w-[425px]">
                   <DialogHeader>
                     <DialogTitle>Tanuló hozzáadása</DialogTitle>
+                    <DialogDescription></DialogDescription>
                     {/* <DialogDescription>
                       Aliquam metus eros, tristique nec semper id, congue eget metus.
                     </DialogDescription> */}
@@ -617,6 +618,7 @@ export default function Home() {
                                 <DialogContent className="sm:max-w-[425px]">
                                   <DialogHeader>
                                     <DialogTitle>Tanuló szerkesztése</DialogTitle>
+                                    <DialogDescription></DialogDescription>
                                     {/* <DialogDescription>
 
                                       Aliquam metus eros, tristique nec semper id, congue eget metus

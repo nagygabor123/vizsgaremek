@@ -490,7 +490,7 @@ export default function Page() {
 
             {/* gap-6 sm:gap-10 */}
             <div className="sm:w-1/2 w-full">
-              <h2 className="text-lg font-semibold">Tanítási év első napja</h2>
+              <h2 className="text-lg font-semibold mb-2">Tanítási év első napja</h2>
               {/* <p className="text-sm text-muted-foreground mb-2">
                 Válassza ki a tanév első napját, majd mentse el.
               </p> */}
@@ -552,7 +552,7 @@ export default function Page() {
 
             {/* Tanítási év utolsó napja */}
             <div className="sm:w-1/2 w-full">
-              <h2 className="text-lg font-semibold">Tanítási év utolsó napja</h2>
+              <h2 className="text-lg font-semibold mb-2">Tanítási év utolsó napja</h2>
               {/* <p className="text-sm text-muted-foreground mb-2">
                 Válassza ki a tanév utolsó napját, majd mentse el.
               </p> */}
