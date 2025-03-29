@@ -144,7 +144,7 @@ export default async function Home() {
               <div className="space-y-2">
                 <h3 className="font-bold">Több tárolóhely támogatása</h3>
                 <p className="text-sm text-muted-foreground">
-                  Lehetőség van arra, hogy több tárolószekrényt telepítsenek az iskola különböző pontjaira.
+                  Több tárolószekrény telepítsére is lehetőség van az iskola különböző pontjaira.
                 </p>
               </div>
             </div>
@@ -161,18 +161,14 @@ export default async function Home() {
           Minden, amire szüksége van a rendszer hatékony használatához.
         </p>
         <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div className="rounded-lg border bg-card p-4">
-            <h3 className="text-lg font-semibold">API dokumentáció</h3>
-            <p className="mt-1 text-sm text-muted-foreground">
-            </p>
+          <div className="rounded-lg bg-background border bg-card p-4">
+            <h3 className="font-semibold">API dokumentáció</h3>
             <Button asChild className="mt-3 w-full">
               <Link href="/api-docs">Megnyitás</Link>
             </Button>
           </div>
-          <div className="rounded-lg border bg-card p-4">
-            <h3 className="text-lg font-semibold">Szoftver dokumentáció</h3>
-            <p className="mt-1 text-sm text-muted-foreground">
-            </p>
+          <div className="rounded-lg bg-background border bg-card p-4">
+            <h3 className="font-semibold">Szoftver dokumentáció</h3>
             <Button asChild className="mt-3 w-full">
               <Link href="#">Megnyitás</Link>
             </Button>
