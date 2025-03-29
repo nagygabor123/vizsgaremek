@@ -537,7 +537,7 @@ export default function Page() {
                         disabled={!startDate}
                         variant="outline"
                         size="icon"
-                        data-testid="start-save-button" 
+                        data-testid="start-save-button"
                       >
                         <SaveAll className="w-4 h-4 inline-block" />
                       </Button>
@@ -600,7 +600,7 @@ export default function Page() {
                         disabled={!endDate}
                         variant="outline"
                         size="icon"
-                        data-testid="end-save-button" 
+                        data-testid="end-save-button"
                       >
                         <SaveAll className="w-4 h-4 inline-block" />
                       </Button>
@@ -727,9 +727,8 @@ export default function Page() {
                           <AlertDialog>
                             <AlertDialogTrigger>
                               <Button
-
+                                data-testid="delete-button"
                                 variant="ghost"
-
                               >
                                 <Trash2 className="w-4 h-4 inline-block" />
                               </Button>
@@ -844,7 +843,7 @@ export default function Page() {
                           value={newPlusDate.replace_day}
                           onValueChange={(value) => setNewPlusDate({ ...newPlusDate, replace_day: value })}
                         >
-                          <SelectTrigger className="w-full"  data-testid="position-select" >
+                          <SelectTrigger className="w-full" data-testid="position-select" >
                             <SelectValue placeholder="Válasszon..." />
                           </SelectTrigger>
                           <SelectContent>
@@ -889,7 +888,7 @@ export default function Page() {
 
                           <AlertDialog>
                             <AlertDialogTrigger>
-                              <Button variant="ghost">
+                              <Button variant="ghost" data-testid="delete-button">
                                 <Trash2 className="w-4 h-4 inline-block" />
                               </Button>
                             </AlertDialogTrigger>
@@ -1056,7 +1055,7 @@ export default function Page() {
                           <td className="p-1">
                             <AlertDialog>
                               <AlertDialogTrigger>
-                                <Button variant="ghost">
+                                <Button variant="ghost" data-testid="delete-button">
                                   <Trash2 className="w-4 h-4 inline-block" />
                                 </Button>
                               </AlertDialogTrigger>
