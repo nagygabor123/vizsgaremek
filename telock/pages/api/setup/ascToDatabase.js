@@ -118,8 +118,8 @@ function extractTeachers(parsedXml) {
 
   return teachers.map(t => ({
     full_name: t.$.name,
-    short_name: t.$.short,  // Extracting the short name here
-    position: "Tanár", // Ha van pontosabb pozíció, azt itt lehet megadni
+    short_name: t.$.short,  
+    position: "Tanár", 
     osztalyfonok: classTeacherMap[t.$.id] ? classes.find(c => c.$.id === classTeacherMap[t.$.id])?.$.name || null : null,
   }));
 }

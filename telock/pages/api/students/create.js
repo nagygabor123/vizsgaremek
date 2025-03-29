@@ -1,5 +1,5 @@
 import { neon } from '@neondatabase/serverless';
-    
+
 const sql = neon(process.env.DATABASE_URL);
 
 export default async function handler(req, res) {
@@ -12,10 +12,10 @@ export default async function handler(req, res) {
 
     try {
       await sql(
-        'INSERT INTO students (student_id, full_name, class, rfid_tag, access) VALUES ($1, $2, $3, $4, $5);', 
-        [student_id, full_name, studentClass, rfid_tag, 'zarva'] 
+        'INSERT INTO students (student_id, full_name, class, rfid_tag, access) VALUES ($1, $2, $3, $4, $5);',
+        [student_id, full_name, studentClass, rfid_tag, 'zarva']
       );
-      
+
 
       const maxLocker = await sql('SELECT MAX(locker_id) AS max_id FROM lockers;');
       let nextLockerId = maxLocker.length > 0 && maxLocker[0].max_id ? maxLocker[0].max_id + 1 : 8;
@@ -40,9 +40,9 @@ async function setStudentGroups(student_id) {
 
   try {
     const response = await fetch(url, {
-      method: 'POST', 
+      method: 'POST',
       headers: {
-        'Content-Type': 'application/json', 
+        'Content-Type': 'application/json',
       },
     });
 
@@ -50,12 +50,12 @@ async function setStudentGroups(student_id) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data = await response.json(); 
+    const data = await response.json();
     console.log('Válasz:', data);
     return data;
   } catch (error) {
     console.error('Hiba az "api/students/setStudentGroups" végpont meghívása során', error);
-    throw error; 
+    throw error;
   }
 }
 
