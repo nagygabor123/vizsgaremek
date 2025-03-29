@@ -190,36 +190,52 @@ test.describe('Tanév beállításai', () => {
         await expect(page.getByText(`2024. 12. 20. - 2025. 01. 07.`)).toBeVisible();
     });
 
-    test('Szünet törlés', async ({ page }) => {
+    test('Tanítás nélküli munkanap törlés', async ({ page }) => {
     
         const studentRow = await page.locator('tr', { hasText: '2024. 12. 13.' });
     
         const editButton = studentRow.locator('[data-testid="delete-button"]');
         await editButton.click();
     
-        const dialogTitle = page.locator('text=Biztosan törölni szeretné a tanulót?');
+        const dialogTitle = page.locator('text=Biztosan törölni szeretné ezt a napot?');
         await expect(dialogTitle).toBeVisible();
     
         const confirmButton = page.locator('button:has-text("Véglegesítés")');
         await confirmButton.click();
     
-        //  await page.getByPlaceholder('Keresés név szerint...').fill('Teszt Elek');
+        await expect(studentRow).not.toBeVisible();
+      });
+
+      test('Szombati tanítási nap törlés', async ({ page }) => {
+    
+        const studentRow = await page.locator('tr', { hasText: '2025. 02. 08.' });
+    
+        const editButton = studentRow.locator('[data-testid="delete-button"]');
+        await editButton.click();
+    
+        const dialogTitle = page.locator('text=Biztosan törölni szeretné ezt a napot?');
+        await expect(dialogTitle).toBeVisible();
+    
+        const confirmButton = page.locator('button:has-text("Véglegesítés")');
+        await confirmButton.click();
     
         await expect(studentRow).not.toBeVisible();
       });
 
-    //   test('should delete items from tables', async ({ page }) => {
-    //     // First add an item to delete (mock API will handle this)
-    //     await page.getByRole('button', { name: 'Új nap hozzáadás' }).first().click();
-    //     await page.getByRole('button', { name: 'CalendarIcon' }).first().click();
-    //     await page.getByRole('gridcell', { name: '15' }).first().click();
-    //     await page.getByRole('button', { name: 'Mentés' }).click();
-
-    //     // Click delete button and confirm
-    //     await page.getByRole('button', { name: 'Trash2' }).first().click();
-    //     await page.getByRole('button', { name: 'Véglegesítés' }).click();
-
-    //     // Verify the item was removed
-    //     await expect(page.getByText('Nincs megjelenítendő tanítási nélküli munkanap')).toBeVisible();
-    //   });
+      test('Tanítási szünet törlés', async ({ page }) => {
+    
+        const studentRow = await page.locator('tr', { hasText: '2024. 12. 20. - 2025. 01. 07.' });
+    
+        const editButton = studentRow.locator('[data-testid="delete-button"]');
+        await editButton.click();
+    
+        const dialogTitle = page.locator('text=Biztosan törölni szeretné ezt a szünetet?');
+        await expect(dialogTitle).toBeVisible();
+    
+        const confirmButton = page.locator('button:has-text("Véglegesítés")');
+        await confirmButton.click();
+    
+        await expect(studentRow).not.toBeVisible();
+      });
+  
 });

@@ -1061,7 +1061,7 @@ export default function Page() {
                               </AlertDialogTrigger>
                               <AlertDialogContent>
                                 <AlertDialogHeader>
-                                  <AlertDialogTitle>Biztosan törölni szeretné ezt a szünetet</AlertDialogTitle>
+                                  <AlertDialogTitle>Biztosan törölni szeretné ezt a szünetet?</AlertDialogTitle>
                                   <AlertDialogDescription>
                                     Ez a művelet nem vonható vissza. A szünet véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
                                   </AlertDialogDescription>
