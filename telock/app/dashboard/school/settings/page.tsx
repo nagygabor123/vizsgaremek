@@ -844,7 +844,7 @@ export default function Page() {
                           value={newPlusDate.replace_day}
                           onValueChange={(value) => setNewPlusDate({ ...newPlusDate, replace_day: value })}
                         >
-                          <SelectTrigger className="w-full">
+                          <SelectTrigger className="w-full"  data-testid="position-select" >
                             <SelectValue placeholder="Válasszon..." />
                           </SelectTrigger>
                           <SelectContent>

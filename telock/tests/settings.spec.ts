@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('School Year Configuration Page', () => {
+test.describe('Tanév beállításai', () => {
   test.beforeEach(async ({ page }) => {
 
 
@@ -95,13 +95,22 @@ test.describe('School Year Configuration Page', () => {
 
 
 
-test('should manage non-teaching workdays', async ({ page }) => {
+test('Tanítás nélküli munkanap hozzáadás', async ({ page }) => {
     // Open add dialog
     await page.getByRole('button', { name: 'Új nap hozzáadás' }).first().click();
     
     // Select date
     await page.getByRole('button', { name: /2025\. május 20\./ }).click();
-    await page.getByRole('gridcell', { name: '15' }).first().click();
+    while (true) {
+        const currentMonth = await page.locator('div[role="presentation"][aria-live="polite"]').innerText();
+        
+        if (currentMonth.trim() === 'december 2024') break;
+      
+        await page.locator('button[name="previous-month"]').click({ force: true });
+        await page.waitForTimeout(200); 
+      }
+      
+      await page.getByRole('gridcell', { name: /^13$/ }).first().click();
     await page.waitForTimeout(500);
     await page.keyboard.press('Escape');
     // Save
@@ -109,10 +118,48 @@ test('should manage non-teaching workdays', async ({ page }) => {
     
     // Verify added date in table
     const currentYear = new Date().getFullYear();
-    await expect(page.getByText(`${currentYear}. 03. 15.`)).toBeVisible();
+    await expect(page.getByText(`2024. 12. 13.`)).toBeVisible();
     
    
   });
+
+
+  test('Szombati tanítási nap hozzáadás', async ({ page }) => {
+    // Open add dialog
+    await page.getByRole('button', { name: 'Új nap hozzáadás' }).nth(1).click();
+    
+    // Select date
+    await page.getByRole('button', { name: /2025\. április 14\./ }).click();
+    while (true) {
+        const currentMonth = await page.locator('div[role="presentation"][aria-live="polite"]').innerText();
+        
+        if (currentMonth.trim() === 'feburár 2025') break;
+      
+        await page.locator('button[name="next-month"]').click({ force: true });
+        await page.waitForTimeout(200); 
+      }
+      
+      await page.getByRole('gridcell', { name: /^8$/ }).first().click();
+    await page.waitForTimeout(500);
+    await page.keyboard.press('Escape');
+
+
+    const positionSelect = page.getByTestId('position-select');
+    await positionSelect.click();
+
+    await page.getByRole('option', { name: 'Hétfő' }).click();
+
+    await expect(positionSelect).toContainText('Hétfő');
+    // Save
+    await page.getByRole('button', { name: 'Mentés' }).first().click();
+    
+    // Verify added date in table
+    const currentYear = new Date().getFullYear();
+    await expect(page.getByText(`2025. 02. 08.`)).toBeVisible();
+    
+   
+  });
+
 
 
 //   test('should add a Saturday teaching day', async ({ page }) => {
