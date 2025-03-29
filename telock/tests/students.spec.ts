@@ -20,8 +20,6 @@ test.describe('Iskolai nyilvántartás - Tanulók', () => {
     await expect(page.getByPlaceholder('Keresés osztály szerint...')).toBeVisible();
   });
   
-
-
   test('Új tanuló hozzáadás', async ({ page }) => {
 
     await page.getByRole('button', { name: 'Új tanuló hozzáadás' }).click();
@@ -48,7 +46,7 @@ test.describe('Iskolai nyilvántartás - Tanulók', () => {
     await expect(studentRow).toContainText("9.I");
   });
 
-  test('Alkalamzott keresés', async ({ page }) => {
+  test('Tanuló keresés', async ({ page }) => {
   
     await page.getByPlaceholder('Keresés név szerint...').fill('teszt');
     await expect(page.getByText('Teszt Elek')).toBeVisible();
@@ -123,4 +121,46 @@ test.describe('Iskolai nyilvántartás - Tanulók', () => {
     await lockButton.click();
     
   });
+});
+
+
+
+
+
+
+test.describe('Osztályom - Tanulók', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/login');
+    await page.fill('input[name="short_name"]', 'BeMo');
+    await page.fill('input[name="password"]', 'BeMo123');
+    await page.click('button[type="submit"]');
+    await page.waitForURL('/dashboard');
+
+    await page.goto('/dashboard/class/students');
+    await page.waitForSelector('table');
+  });
+
+  test('Oldalbetöltés', async ({ page }) => {
+    await expect(page.getByPlaceholder('Keresés név szerint...')).toBeVisible();
+  });
+  
+  test('Tanuló keresés', async ({ page }) => {
+    await page.getByPlaceholder('Keresés név szerint...').fill('papp');
+    await expect(page.getByText('Papp Henrietta')).toBeVisible();
+  });
+
+  test('Rendezés', async ({ page }) => {
+    await page.locator('th', { hasText: 'Teljes név' }).click();
+
+    await page.locator('th', { hasText: 'Osztály és csoportok' }).click();
+
+  });
+
+  test('Lapozás', async ({ page }) => {
+    if (await page.getByRole('button', { name: 'Következő' }).isEnabled()) {
+      await page.getByRole('button', { name: 'Következő' }).click();
+      await page.getByRole('button', { name: 'Előző' }).click();
+    }
+  });
+
 });

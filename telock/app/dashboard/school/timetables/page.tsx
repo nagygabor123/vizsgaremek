@@ -134,7 +134,7 @@ const Calendar: React.FC = () => {
   const [unlockedStudents, setUnlockedStudents] = useState(new Set());
 
 
-  const API_BASE_URL = window.location.origin;   
+  const API_BASE_URL = window.location.origin;
 
 
   const [hasStudents, setHasStudents] = useState<boolean | null>(null);
@@ -706,7 +706,9 @@ const Calendar: React.FC = () => {
             <div className="calendar-controls">
 
 
-
+            <Button variant="outline"  >
+                                          <LockOpen /> Összes feloldás
+                                        </Button>
 
               {/*<Select>
                 <SelectTrigger>
@@ -919,9 +921,13 @@ const Calendar: React.FC = () => {
 
                                     <div>
                                       <div>
-                                        <button onClick={() => searchGroupStudent(lesson.class)}>
+                                        {/* <button onClick={() => searchGroupStudent(lesson.class)}>
                                           felold
-                                        </button>
+                                        </button> */}
+                                        <Button variant="outline" onClick={() => searchGroupStudent(lesson.class)} >
+                                          <LockOpen /> Összes feloldás
+                                        </Button>
+
                                       </div>
                                       <div className="rounded-md border mt-5">
                                         <table className="w-full">

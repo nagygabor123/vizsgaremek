@@ -62,16 +62,16 @@
   },
   "suites": [
     {
-      "title": "settings.spec.ts",
-      "file": "settings.spec.ts",
+      "title": "students.spec.ts",
+      "file": "students.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Tanév beállításai",
-          "file": "settings.spec.ts",
-          "line": 3,
+          "title": "Iskolai nyilvántartás - Tanulók",
+          "file": "students.spec.ts",
+          "line": 5,
           "column": 6,
           "specs": [
             {
@@ -90,25 +90,25 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 8739,
+                      "duration": 4692,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-29T07:47:51.533Z",
+                      "startTime": "2025-03-29T08:40:09.082Z",
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "d877ffdf71ec720167ae-b0a2d634d1bc60fa3be9",
-              "file": "settings.spec.ts",
-              "line": 39,
-              "column": 9
+              "id": "070ffa9c3689b3a10912-2adeba050a4aab7bb46c",
+              "file": "students.spec.ts",
+              "line": 17,
+              "column": 7
             },
             {
-              "title": "Tanítási év első napja módosítás",
+              "title": "Új tanuló hozzáadás",
               "ok": true,
               "tags": [],
               "tests": [
@@ -123,25 +123,25 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 8148,
+                      "duration": 7029,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-29T07:48:00.378Z",
+                      "startTime": "2025-03-29T08:40:13.882Z",
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "d877ffdf71ec720167ae-e458795e6cf2ff6972cb",
-              "file": "settings.spec.ts",
-              "line": 47,
-              "column": 9
+              "id": "070ffa9c3689b3a10912-afb9c832c7a1de392605",
+              "file": "students.spec.ts",
+              "line": 23,
+              "column": 7
             },
             {
-              "title": "Tanítási év utolsó napja módosítás",
+              "title": "Tanuló keresés",
               "ok": true,
               "tags": [],
               "tests": [
@@ -156,25 +156,25 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 6858,
+                      "duration": 6127,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-29T07:48:08.529Z",
+                      "startTime": "2025-03-29T08:40:20.914Z",
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "d877ffdf71ec720167ae-2df96e9b3d46611a214e",
-              "file": "settings.spec.ts",
-              "line": 69,
-              "column": 9
+              "id": "070ffa9c3689b3a10912-925686238b7cb5cec2eb",
+              "file": "students.spec.ts",
+              "line": 49,
+              "column": 7
             },
             {
-              "title": "Tanítás nélküli munkanap hozzáadás",
+              "title": "Tanuló szerkesztés",
               "ok": true,
               "tags": [],
               "tests": [
@@ -189,25 +189,25 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 7714,
+                      "duration": 8204,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-29T07:48:15.391Z",
+                      "startTime": "2025-03-29T08:40:27.044Z",
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "d877ffdf71ec720167ae-77c419cb1a9e23d22782",
-              "file": "settings.spec.ts",
-              "line": 92,
-              "column": 9
+              "id": "070ffa9c3689b3a10912-a3fc15357be58b2baee5",
+              "file": "students.spec.ts",
+              "line": 59,
+              "column": 7
             },
             {
-              "title": "Szombati tanítási nap hozzáadás",
+              "title": "Tanuló törlés",
               "ok": true,
               "tags": [],
               "tests": [
@@ -222,25 +222,25 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 8493,
+                      "duration": 7330,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-29T07:48:23.108Z",
+                      "startTime": "2025-03-29T08:40:35.252Z",
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "d877ffdf71ec720167ae-4c547114458fecf88e6b",
-              "file": "settings.spec.ts",
-              "line": 116,
-              "column": 9
+              "id": "070ffa9c3689b3a10912-850d6e2a2a7767bfc19f",
+              "file": "students.spec.ts",
+              "line": 85,
+              "column": 7
             },
             {
-              "title": "Tanítási szünet hozzáadás",
+              "title": "Rendezés",
               "ok": true,
               "tags": [],
               "tests": [
@@ -255,25 +255,165 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 7519,
+                      "duration": 4267,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-29T07:48:31.604Z",
+                      "startTime": "2025-03-29T08:40:42.587Z",
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "d877ffdf71ec720167ae-12d7a49fa6d388fba372",
-              "file": "settings.spec.ts",
+              "id": "070ffa9c3689b3a10912-43d38c8a08b1a2055d0e",
+              "file": "students.spec.ts",
+              "line": 105,
+              "column": 7
+            },
+            {
+              "title": "Lapozás",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4247,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-03-29T08:40:46.857Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "070ffa9c3689b3a10912-8e92b8827673e2b5b121",
+              "file": "students.spec.ts",
+              "line": 112,
+              "column": 7
+            },
+            {
+              "title": "Zárolás/feloldás gomb",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4713,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-03-29T08:40:51.107Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "070ffa9c3689b3a10912-807de15d452c343e5353",
+              "file": "students.spec.ts",
+              "line": 119,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Osztályom - Tanulók",
+          "file": "students.spec.ts",
+          "line": 131,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Oldalbetöltés",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4609,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-03-29T08:40:55.822Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "070ffa9c3689b3a10912-d6966e73dfebbce72941",
+              "file": "students.spec.ts",
+              "line": 143,
+              "column": 7
+            },
+            {
+              "title": "Tanuló keresés",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5253,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-03-29T08:41:00.435Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "070ffa9c3689b3a10912-1aca5ae5133f4f1c76c2",
+              "file": "students.spec.ts",
               "line": 147,
-              "column": 9
+              "column": 7
             },
             {
-              "title": "Tanítás nélküli munkanap törlés",
+              "title": "Rendezés",
               "ok": true,
               "tags": [],
               "tests": [
@@ -288,22 +428,55 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 6857,
+                      "duration": 4109,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-29T07:48:39.126Z",
+                      "startTime": "2025-03-29T08:41:05.691Z",
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "d877ffdf71ec720167ae-3697b1f2db4595494bea",
-              "file": "settings.spec.ts",
-              "line": 193,
-              "column": 9
+              "id": "070ffa9c3689b3a10912-66405bb68c720962a2a9",
+              "file": "students.spec.ts",
+              "line": 152,
+              "column": 7
+            },
+            {
+              "title": "Lapozás",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4216,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-03-29T08:41:09.804Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "070ffa9c3689b3a10912-979fac3f6f5bb14f2b85",
+              "file": "students.spec.ts",
+              "line": 159,
+              "column": 7
             }
           ]
         }
@@ -312,9 +485,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-03-29T07:47:51.075Z",
-    "duration": 54957.81,
-    "expected": 7,
+    "startTime": "2025-03-29T08:40:08.670Z",
+    "duration": 65378.130000000005,
+    "expected": 12,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
