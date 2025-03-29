@@ -190,7 +190,7 @@ const Calendar: React.FC = () => {
     const fetchTimetables = async () => {
       try {
         // Fetch all students' timetable data at once from the new API endpoint
-        const response = await fetch(`${API_BASE_URL}/api/timetable/allScheduleStart`);
+        const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/allScheduleStart`);
         if (!response.ok) {
           throw new Error('Nem sikerült lekérni az összes diák órarendjét.');
         }

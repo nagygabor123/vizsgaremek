@@ -256,17 +256,11 @@ export default function Home() {
     }
   };
 
-
-
-
-
   const [sortField, setSortField] = useState<"full_name" | "class" | null>(null);
 
   const [sortOrder, setSortOrder] = useState("asc");
   const [searchName, setSearchName] = useState("");
   const [searchClass, setSearchClass] = useState("");
-
-
 
   // Rendezési logika
   const sortedStudents = [...students].sort((a, b) => {
@@ -293,9 +287,6 @@ export default function Home() {
     }
   };
 
-
-
-
   const PAGE_SIZE = 14;
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -318,10 +309,7 @@ export default function Home() {
     return null;
   }
 
-  //if (loading) return null; 
-
-
-
+  
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -354,14 +342,7 @@ export default function Home() {
           </div>
         </header>
 
-
-
-
         <div className="overflow-x-auto">
-
-
-
-
           <div>
             {loading ? (
               <div className="flex items-center justify-center min-h-screen">
@@ -376,9 +357,6 @@ export default function Home() {
           </div>
 
           <div className="p-4">
-
-
-
 
             <div className="flex flex-col gap-2 md:flex-row mb-4">
               <div className="flex flex-col gap-2 md:flex-row">
@@ -396,17 +374,7 @@ export default function Home() {
                   value={searchClass}
                   onChange={(e) => setSearchClass(e.target.value)}
                 />
-                {/* <Select>
-                <SelectTrigger > 
-                  <SelectValue placeholder="Keresés osztály szerint..." />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Osztályok</SelectLabel>
-                    <SelectItem value="13i">13.I</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select> */}
+           
 
                 <Button variant="outline" onClick={handleSystemClose} > {/*className="ml-auto" */}
                   {systemClose ? <LockOpen /> : <Lock />} {/*   Keyhole  */}
@@ -426,9 +394,7 @@ export default function Home() {
                   <DialogHeader>
                     <DialogTitle>Tanuló hozzáadása</DialogTitle>
                     <DialogDescription></DialogDescription>
-                    {/* <DialogDescription>
-                      Aliquam metus eros, tristique nec semper id, congue eget metus.
-                    </DialogDescription> */}
+          
                   </DialogHeader>
 
                   <form onSubmit={handleSubmit} className="grid items-start gap-4">
@@ -486,71 +452,11 @@ export default function Home() {
                     <Button type="submit">Mentés</Button>
                   </form>
 
-                  {/* <div className="grid gap-4 py-4">
-                                <div className="grid grid-cols-4 items-center gap-4">
-                          <Label className="text-right" htmlFor="student_id">Azonosító szám</Label>
-                          <Input
-                           className="col-span-3"
-                            type="text"
-                            placeholder="Azonosító szám"
-                            name="student_id"
-                            // value={formData.student_id}
-                            onChange={e => setFormData({ ...formData, student_id: e.target.value })}
-                          />
-                        </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                          <Label className="text-right" htmlFor="full_name">Teljes név</Label>
-                          <Input
-                           className="col-span-3"
-                            type="text"
-                            name="full_name"
-                            placeholder="Teljes név"
-                            // value={formData.full_name}
-                            onChange={e => setFormData({ ...formData, full_name: e.target.value })}
-                          />
-                        </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                          <Label className="text-right" htmlFor="class">Osztály</Label>
-                          <Input
-                           className="col-span-3"
-                            type="text"
-                            name="class"
-                            placeholder="Osztály"
-                            // value={formData.class}
-                            onChange={e => setFormData({ ...formData, class: e.target.value })}
-                          />
-                        </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                          <Label className="text-right" htmlFor="class">RFID azonosító</Label>
-                          <Input
-                           className="col-span-3"
-                            type="text"
-                            name="rfid_tag"
-                            placeholder="RFID azonosító"
-                            //  value={formData.rfid_tag}
-                            onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
-                          />
-                        </div>
-                      </div>
-    
-                  <DialogFooter>
-                    <form onSubmit={handleSubmit}>
-                      <Button type="submit">
-                        Mentés
-                      </Button> 
-                    </form>
-
-                  </DialogFooter> */}
+             
                 </DialogContent>
               </Dialog>
 
-
-
             </div>
-
-
-
-
 
             <div className="rounded-md border mt-5">
               <table className="w-full">
@@ -619,10 +525,7 @@ export default function Home() {
                                   <DialogHeader>
                                     <DialogTitle>Tanuló szerkesztése</DialogTitle>
                                     <DialogDescription></DialogDescription>
-                                    {/* <DialogDescription>
-
-                                      Aliquam metus eros, tristique nec semper id, congue eget metus
-                                    </DialogDescription> */}
+                      
                                   </DialogHeader>
 
                                   <form onSubmit={handleSubmit} className="grid items-start gap-4">
@@ -665,18 +568,8 @@ export default function Home() {
 
                                     <Button type="submit">Mentés</Button>
                                   </form>
-                                  {/* <DialogFooter>
-                                <form onSubmit={handleSubmit}>
-                                  <Button type="submit">
-                                    Mentés
-                                  </Button>
-                                </form>
-
-                              </DialogFooter> */}
                                 </DialogContent>
                               </Dialog>
-
-
 
                               <AlertDialog>
                                 <AlertDialogTrigger>
@@ -694,9 +587,7 @@ export default function Home() {
                                     <AlertDialogAction onClick={() => handleDelete(student.student_id)}>Véglegesítés</AlertDialogAction>
                                   </AlertDialogFooter>
                                 </AlertDialogContent>
-                              </AlertDialog>
-
-                              {/* <Button variant="ghost" onClick={() => handleDelete(student.student_id)}><X /></Button> */}
+                              </AlertDialog>                        
                             </td>
 
                           </tr>
@@ -706,9 +597,6 @@ export default function Home() {
                 </tbody>
               </table>
 
-              {/* Lapozó gombok */}
-
-
             </div>
 
             <div className="flex justify-between items-center p-2">
@@ -717,11 +605,7 @@ export default function Home() {
               <Button variant="ghost" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>Következő <ChevronRight /></Button>
             </div>
           </div>
-
         </div>
-
-
-
 
       </SidebarInset>
     </SidebarProvider>

@@ -412,6 +412,7 @@ export default function AddEmployeePage() {
                 <DialogContent className="sm:max-w-[425px]">
                   <DialogHeader>
                     <DialogTitle>Alkalmazott hozzáadása</DialogTitle>
+                    <DialogDescription></DialogDescription>
                     {/* <DialogDescription>
                       Aliquam metus eros, tristique nec semper id, congue eget metus
                     </DialogDescription> */}
@@ -559,6 +560,7 @@ export default function AddEmployeePage() {
                             <DialogContent className="sm:max-w-[425px]">
                               <DialogHeader>
                                 <DialogTitle>Alkalmazott szerkesztése</DialogTitle>
+                                <DialogDescription></DialogDescription>
                                 {/* <DialogDescription>
                                   Aliquam metus eros, tristique nec semper id, congue eget metus.
                                 </DialogDescription> */}

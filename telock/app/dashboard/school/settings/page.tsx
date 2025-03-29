@@ -643,6 +643,7 @@ export default function Page() {
                   >
                     <DialogHeader>
                       <DialogTitle>Tanítás nélküli munkanap hozzáadása</DialogTitle>
+                      <DialogDescription></DialogDescription>
                       {/* <DialogDescription>
                         Aliquam metus eros, tristique nec semper id, congue eget metus
                       </DialogDescription> */}
@@ -798,6 +799,7 @@ export default function Page() {
                   >
                     <DialogHeader>
                       <DialogTitle>Szombati tanítási nap hozzáadása</DialogTitle>
+                      <DialogDescription></DialogDescription>
                       {/* <DialogDescription>
                         Aliquam metus eros, tristique nec semper id, congue eget metus
                       </DialogDescription> */}
@@ -949,6 +951,7 @@ export default function Page() {
                   >
                     <DialogHeader>
                       <DialogTitle>Szünet hozzáadása</DialogTitle>
+                      <DialogDescription></DialogDescription>
                       {/* <DialogDescription>
                         Aliquam metus eros, tristique nec semper id, congue eget metus
                       </DialogDescription> */}
