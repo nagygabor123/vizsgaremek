@@ -2,9 +2,9 @@ import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   use: {
-    baseURL: 'https://vizsgaremek-mocha.vercel.app', // Vercel URL
-    browserName: 'chromium', // vagy 'firefox', 'webkit'
-    headless: true, // Beállíthatod `false`-ra, ha látni akarod a tesztet
+    baseURL: 'https://vizsgaremek-mocha.vercel.app', 
+    browserName: 'chromium', 
+    headless: true, 
   },
   testDir: './tests',
   reporter: [['list'], ['json', { outputFile: 'report.json' }], ['html']],

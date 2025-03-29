@@ -1,6 +1,5 @@
 'use client';
 
-
 import { AppSidebar } from "@/components/app-sidebar"
 import { ChevronRight, ChevronLeft, Slash, LockOpen, CircleMinus, CircleCheck, CircleAlert } from "lucide-react"
 
@@ -16,13 +15,11 @@ import { Separator } from "@/components/ui/separator"
 import {
   SidebarTrigger,
   SidebarInset,
-
   SidebarProvider,
 
 } from "@/components/ui/sidebar"
 
 import Link from "next/link";
-
 
 import {
   Select,
@@ -50,8 +47,6 @@ import { hu } from 'date-fns/locale';
 import '../../../globals.css';
 
 import AppKonfig from '@/components/app-konfig';
-
-
 
 import { Button } from '@/components/ui/button';
 import {

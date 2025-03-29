@@ -20,13 +20,11 @@ const SheetComponent: React.FC = () => {
   const [csvFile, setCsvFile] = useState<File | null>(null);
   const [csvMessage, setCsvMessage] = useState<React.ReactNode>(null);
   const [isLoading, setIsLoading] = useState(false);
-
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-
-  const API_BASE_URL = window.location.origin;
-
   const fileInputRef = useRef<HTMLInputElement>(null);
   const csvFileInputRef = useRef<HTMLInputElement>(null);
+
+  const API_BASE_URL = window.location.origin;
 
   useEffect(() => {
     const savedStep = localStorage.getItem("currentStep");
