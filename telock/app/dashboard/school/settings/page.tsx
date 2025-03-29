@@ -86,7 +86,6 @@ export default function Page() {
   const [isDialogOpen3, setIsDialogOpen3] = useState(false);
   const [date, setDate] = React.useState<DateRange | undefined>(undefined);
   const [message, setMessage] = useState<string>('');
-  //const [apiResponse, setApiResponse] = useState<any>(null);
   const [yearSchedule, setYearSchedule] = useState<any>({
     plusDates: [],
     breakDates: [],
@@ -286,83 +285,8 @@ export default function Page() {
   };
 
 
-
-
-  //const [dateRange, setDateRange] = React.useState<DateRange | undefined>(undefined);
-  //const [date, setDate] = React.useState<Date>()
-  const [saturdayClasses, setSaturdayClasses] = React.useState<Date[]>([]);
-  const [nonTeachingDays, setNonTeachingDays] = React.useState<Date[]>([]);
-  //const [breaks, setBreaks] = React.useState<{ from: Date, to: Date }[]>([])
   const [startDate, setStartDate] = React.useState<Date | undefined>();
   const [endDate, setEndDate] = React.useState<Date | undefined>();
-  ////const [newNonTeachingDay, setNewNonTeachingDay] = React.useState<Date | undefined>();
-  // const [newBreak, setNewBreak] = React.useState<Date | undefined>();
-
-
-  // const handleAddRange = () => {
-  //   if (dateRange?.from instanceof Date && dateRange?.to instanceof Date) {
-  //     setBreaks(prevBreaks => [
-  //       ...prevBreaks, 
-  //       { from: dateRange.from as Date, to: dateRange.to as Date }
-  //     ]);
-  //   } else {
-  //     console.error("Invalid date range. Both 'from' and 'to' must be valid Date objects.");
-  //   }
-  // };
-
-
-  // const handleAddDate = (date: Date | undefined, setState: React.Dispatch<React.SetStateAction<Date[]>>, state: Date[]) => {
-  //   if (date) setState([...state, date]);
-  // };
-
-  // const [isOverlayVisible, setOverlayVisible] = useState(false);
-  // const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
-  // const [step, setStep] = useState(1);
-  // const [formData, setFormData] = useState({
-  //   name: "",
-  //   email: "",
-  //   age: "",
-  //   city: "",
-  //   profession: "",
-  //   hobby: "",
-  //   experience: "",
-  //   feedback: "",
-  // });
-
-
-  // const handleButtonClick = () => {
-  //   setOverlayVisible(true);
-  // };
-
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-  //   setFormData({
-  //     ...formData,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
-
-  // const handleNext = () => {
-  //   if (step < 5) setStep(step + 1);
-  // };
-
-  // const handleBack = () => {
-  //   if (step > 1) setStep(step - 1);
-  // };
-
-  // const handleFormSubmit = () => {
-  //   console.log("Form Data:", formData);
-  //   setOverlayVisible(false);
-  //   setButtonVisible(false);
-  //   localStorage.setItem("hasClickedOverlayButton", "true");
-  //   window.location.reload();
-  // };
-
-  // const handleClose = () => {
-  //   setOverlayVisible(false);
-  // };
-
-
-
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -406,24 +330,6 @@ export default function Page() {
           </div>
         </header>
 
-        {/*<div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
-          <div className="grid auto-rows-min gap-4 w-full">
-            {isButtonVisible && (
-              <div className="aspect-[18/1] rounded-xl bg-red-100 flex items-center px-4 w-full box-border overflow-hidden">
-                <TriangleAlert className="text-red-500" />
-                <p className="text-sm truncate ml-3">
-                  A rendszer nincs teljesen beállítva. Kérjük, végezze el a szükséges konfigurációt!
-                </p>
-                <AppKonfig />
-
-
-              </div>
-            )}
-
-
-          </div>
-        </div>*/}
-
         <div>
           {loading ? (
             <div className="flex items-center justify-center min-h-screen">
@@ -431,46 +337,17 @@ export default function Page() {
             </div>
           ) : (
             <>
-              {/* Üres tartalom, semmi nem jelenik meg a betöltés után */}
+            
             </>
           )}
         </div>
 
         <div className="p-4">
 
-
-          {/* {message && (
-            <p style={{ marginTop: '20px', color: message.startsWith('Error') ? 'red' : 'green' }}>
-              {message}
-            </p>
-          )}
-          {apiResponse && (
-            <pre style={{ marginTop: '20px', padding: '10px', backgroundColor: '#f8f9fa', border: '1px solid #ddd', borderRadius: '5px' }}>
-              {JSON.stringify(apiResponse, null, 2)}
-            </pre>
-          )} */}
-
-
-
-          {/* <input
-            type="date"
-            value={schoolStartEdit}
-            onChange={(e) => setSchoolStartEdit(e.target.value)}
-          />
-          <button onClick={() => updateSchoolYear('kezd', schoolStartEdit)}>Mentés</button> */}
-
-
-          {/* <h1 className="text-2xl mb-10 font-semibold">Aktív tanév: 2024/2025</h1> */}
-
-
           <div className="mb-5 flex flex-col sm:flex-row items-start">
 
-            {/* gap-6 sm:gap-10 */}
             <div className="sm:w-1/2 w-full">
               <h2 className="text-lg font-semibold mb-2">Tanítási év első napja</h2>
-              {/* <p className="text-sm text-muted-foreground mb-2">
-                Válassza ki a tanév első napját, majd mentse el.
-              </p> */}
               <div className="space-y-3">
                 <div className="space-y-2">
                   <div className="space-y-1">
@@ -524,15 +401,9 @@ export default function Page() {
               </div>
             </div>
 
-            {/* Függőleges elválasztó */}
             <div className="hidden sm:block mx-4 h-auto self-stretch custom-thin-border"></div>
-
-            {/* Tanítási év utolsó napja */}
             <div className="sm:w-1/2 w-full">
               <h2 className="text-lg font-semibold mb-2">Tanítási év utolsó napja</h2>
-              {/* <p className="text-sm text-muted-foreground mb-2">
-                Válassza ki a tanév utolsó napját, majd mentse el.
-              </p> */}
               <div className="space-y-3">
                 <div className="space-y-2">
                   <div className="space-y-1">
@@ -588,7 +459,6 @@ export default function Page() {
             </div>
           </div>
 
-
           <Separator />
           <div className="mt-5 mb-5 flex flex-col gap-3 sm:gap-3">
             <div className="flex justify-between items-start">
@@ -614,16 +484,10 @@ export default function Page() {
                       <CalendarPlus className="w-4 h-4 inline-block" /> Új nap hozzáadás
                     </Button>
                   </DialogTrigger>
-                  <DialogContent
-                    className="sm:max-w-[425px]"
-
-                  >
+                  <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
                       <DialogTitle>Tanítás nélküli munkanap hozzáadása</DialogTitle>
                       <DialogDescription></DialogDescription>
-                      {/* <DialogDescription>
-                        Aliquam metus eros, tristique nec semper id, congue eget metus
-                      </DialogDescription> */}
                     </DialogHeader>
 
                     <div className="grid items-start gap-4">
@@ -653,14 +517,12 @@ export default function Page() {
                                 if (!date) return;
 
                                 const originalDate = format(date, "yyyy-MM-dd");
-                                const whichDay = originalDate; // Nem vonunk le egy napot!
-                                // const replaceDayDate = parseDate(originalDate);
-                                // const replaceDay = replaceDayDate.toISOString().split("T")[0];
+                                const whichDay = originalDate; 
 
                                 setSelectedDate(originalDate);
                                 setNewNo({
                                   ...newNo,
-                                  which_day: whichDay, // Marad ugyanaz a nap
+                                  which_day: whichDay, 
                                   replace_day: whichDay,
                                   nev: whichDay
                                 });
@@ -671,21 +533,16 @@ export default function Page() {
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </div>
-
-
                     </div>
 
                     <DialogFooter>
-
                       <Button className="w-full" onClick={handleAddNoSchool}>Mentés </Button>
-
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
               </div>
             </div>
 
-            {/* Görgethető táblázat kis képernyőn */}
             <div className="rounded-xl border overflow-x-auto w-full">
               {yearSchedule?.noSchool?.length > 0 ? (
                 <table className="w-full min-w-max">
@@ -724,13 +581,6 @@ export default function Page() {
                               </AlertDialogFooter>
                             </AlertDialogContent>
                           </AlertDialog>
-                          {/* <Button
-
-                              variant="ghost"
-                              onClick={() => handleDeletePlusBreak(noSchoolPeriod.id)}
-                            >
-                              <Trash2 className="w-4 h-4 inline-block" />
-                            </Button> */}
                         </td>
                       </tr>
                     ))}
@@ -744,14 +594,6 @@ export default function Page() {
             </div>
           </div>
 
-
-
-
-
-
-
-
-
           <Separator />
           <div className="mt-5 mb-5 flex flex-col gap-3 sm:gap-3">
             <div className="flex justify-between items-start">
@@ -762,24 +604,17 @@ export default function Page() {
                 </p>
               </div>
 
-              <div >  {/**<div className="w-full"> */}
-                {/* <div className="flex justify-start sm:justify-end mb-3"> */}
+              <div >  
                 <Dialog open={isDialogOpen2} onOpenChange={(isOpen) => setIsDialogOpen2(isOpen)}>
                   <DialogTrigger asChild>
                     <Button variant="outline">
                       <CalendarPlus className="w-4 h-4 inline-block" /> Új nap hozzáadás
                     </Button>
                   </DialogTrigger>
-                  <DialogContent
-                    className="sm:max-w-[425px]"
-
-                  >
+                  <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
                       <DialogTitle>Szombati tanítási nap hozzáadása</DialogTitle>
                       <DialogDescription></DialogDescription>
-                      {/* <DialogDescription>
-                        Aliquam metus eros, tristique nec semper id, congue eget metus
-                      </DialogDescription> */}
                     </DialogHeader>
 
                     <div className="grid items-start gap-4">
@@ -864,7 +699,6 @@ export default function Page() {
                         <td className="p-1">{days.find((day) => day.value === plusDate.replaceDay)?.label || plusDate.replaceDay}</td>
                         <td className="p-1">
 
-
                           <AlertDialog>
                             <AlertDialogTrigger>
                               <Button variant="ghost" data-testid="delete-button">
@@ -884,10 +718,7 @@ export default function Page() {
                               </AlertDialogFooter>
                             </AlertDialogContent>
                           </AlertDialog>
-
-                          {/* <Button variant="ghost" onClick={() => handleDeletePlusBreak(plusDate.id)}>
-                              <Trash2 className="w-4 h-4 inline-block" />
-                            </Button> */}
+            
                         </td>
                       </tr>
                     ))}
@@ -901,10 +732,6 @@ export default function Page() {
             </div>
           </div>
 
-          {/* </div> */}
-
-
-
           <Separator />
           <div className="mt-5 mb-5 flex flex-col gap-3 sm:gap-3">
             <div className="flex justify-between items-start">
@@ -913,9 +740,7 @@ export default function Page() {
                 <p className="text-sm text-muted-foreground">Az iskola tanítási szünetei és időtartamuk.</p>
               </div>
 
-
               <div >
-
                 <Dialog open={isDialogOpen} onOpenChange={(isOpen) => setIsDialogOpen(isOpen)}>
                   <DialogTrigger asChild>
                     <Button variant="outline">
@@ -923,15 +748,11 @@ export default function Page() {
                     </Button>
                   </DialogTrigger>
                   <DialogContent
-                    className="sm:max-w-[425px]"
-
-                  >
+                    className="sm:max-w-[425px]">
                     <DialogHeader>
                       <DialogTitle>Szünet hozzáadása</DialogTitle>
                       <DialogDescription></DialogDescription>
-                      {/* <DialogDescription>
-                        Aliquam metus eros, tristique nec semper id, congue eget metus
-                      </DialogDescription> */}
+         
                     </DialogHeader>
 
                     <div className="grid items-start gap-4">
@@ -947,8 +768,6 @@ export default function Page() {
 
                       <div className="grid gap-2">
                         <Label htmlFor="position">Dátum</Label>
-
-
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
                             <Button
@@ -998,13 +817,11 @@ export default function Page() {
                           </DropdownMenuContent>
                         </DropdownMenu>
 
-
                       </div>
                     </div>
 
                     <DialogFooter>
                       <Button className="w-full" onClick={handleAddBreak}>Mentés</Button>
-
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
@@ -1052,9 +869,6 @@ export default function Page() {
                                 </AlertDialogFooter>
                               </AlertDialogContent>
                             </AlertDialog>
-                            {/* <Button variant="ghost" onClick={() => handleDeletePlusBreak(breakPeriod.id)}>
-                                <Trash2 className="w-4 h-4 inline-block" />
-                              </Button> */}
                           </td>
                         </tr>
                       ))}
@@ -1062,13 +876,9 @@ export default function Page() {
                 </table>
               ) : (
                 <div className="text-center p-3 text-muted-foreground">Nincs megjelenítendő tanítási szünet</div>
-
               )}
             </div>
-
           </div>
-
-
         </div >
       </SidebarInset>
     </SidebarProvider>
