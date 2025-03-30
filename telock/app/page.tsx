@@ -286,7 +286,7 @@ export default async function Home() {
         </div>
       </section> */}
 
-      <footer className="w-full text-black py-12">
+      <footer className="w-full text-black py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8 border-t border-gray-800 mt-12 pt-8 ">
             <div>
@@ -298,14 +298,14 @@ export default async function Home() {
             <div>
               <h4 className="font-bold mb-4">Linkek</h4>
               <ul className="space-y-2">
-                <li><Link href="/dashboard" className="text-gray-400 hover:text-white transition">Vezérlőpult</Link></li>
-                <li><Link href="#" className="text-gray-400 hover:text-white transition">Dokumentáció</Link></li>
-                <li><Link href="/api-docs" className="text-gray-400 hover:text-white transition">API</Link></li>
+                <li><Link href="/dashboard" className="text-gray-600 hover:text-white transition">Vezérlőpult</Link></li>
+                <li><Link href="#" className="text-gray-600 hover:text-white transition">Dokumentáció</Link></li>
+                <li><Link href="/api-docs" className="text-gray-600 hover:text-white transition">API</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold mb-4">Kapcsolat</h4>
-              <ul className="space-y-2 text-gray-400">
+              <ul className="space-y-2 text-gray-600">
                 <li>nagy.gabor@diak.szbi-pg.hu</li>
                 <li>szalkai-szabo.adam@diak.szbi-pg.hu</li>
               </ul>
@@ -313,9 +313,9 @@ export default async function Home() {
             <div>
               <h4 className="font-bold mb-4">Kövessen minket</h4>
               <div className="flex space-x-4">
-                <Link href="#" className="text-gray-400 hover:text-white transition">Instagram</Link>
-                <Link href="#" className="text-gray-400 hover:text-white transition">TikTok</Link>
-                <Link href="#" className="text-gray-400 hover:text-white transition">YouTube</Link>
+                <Link href="#" className="text-gray-600 hover:text-white transition">Instagram</Link>
+                <Link href="#" className="text-gray-600 hover:text-white transition">TikTok</Link>
+                <Link href="#" className="text-gray-600 hover:text-white transition">YouTube</Link>
               </div>
             </div>
           </div>
