@@ -469,16 +469,15 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
     />
   )
 }
-
 const sidebarMenuButtonVariants = cva(
-  "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-lg p-3 text-left text-sm outline-none ring-2 ring-transparent transition-all duration-200 ease-in-out hover:bg-sidebar-accent hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-400 active:bg-sidebar-accent active:text-blue-600 disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-semibold data-[active=true]:text-blue-600 data-[active=true]:border-2 data-[active=true]:border-blue-600 data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-blue-600 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
+  "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-lg p-3 text-left text-sm outline-none transition-all duration-200 ease-in-out hover:bg-sidebar-accent hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-400 active:bg-sidebar-accent active:text-blue-600 disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-semibold data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-blue-600 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          "hover:bg-sidebar-accent hover:text-blue-600 hover:border-2 hover:border-blue-600 transition-all ease-out", // Hover állapotban keret
+          "hover:bg-sidebar-accent hover:text-blue-600 transition-all ease-out", // No border on hover
         outline:
-          "bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:bg-sidebar-accent hover:text-blue-600 hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))] transition-all ease-out", // Hover állapotban keret
+          "bg-background shadow-none hover:bg-sidebar-accent hover:text-blue-600 transition-all ease-out", // No border and shadow
       },
       size: {
         default: "h-10 text-sm",
@@ -492,6 +491,7 @@ const sidebarMenuButtonVariants = cva(
     },
   }
 );
+
 
 
 
