@@ -14,7 +14,7 @@ const ZenDots = localFont({
 export default async function Home() {
   const session = await getServerSession();
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 flex flex-col items-center">
+    <div className="min-h-screen  flex flex-col items-center">
       {/* Hero Section with overlapping space */}
       <div className="w-full bg-gradient-to-r from-blue-600 to-blue-800 pb-32 md:pb-48 relative z-0">
         <div className="max-w-7xl mx-auto px-6 pt-16">
@@ -286,9 +286,9 @@ export default async function Home() {
         </div>
       </section> */}
 
-      <footer className="w-full text-white py-12 border-t border-gray-800 mt-12 pt-8 bg-gray-50">
+      <footer className="w-full text-black py-12">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-4 gap-8 border-t border-gray-800 mt-12 pt-8 ">
             <div>
               <h3 className={`${ZenDots.className} text-2xl mb-4`}>telock</h3>
               <p className="text-gray-400">
