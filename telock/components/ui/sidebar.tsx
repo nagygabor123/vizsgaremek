@@ -471,14 +471,14 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
 }
 
 const sidebarMenuButtonVariants = cva(
-  "peer/menu-button flex w-full items-center gap-1 overflow-hidden rounded-md p-2 text-left text-sm outline-none transition-all duration-200 ease-in-out text-black hover:bg-blue-100 hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-600 active:bg-blue-100 active:text-blue-600 disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-blue-100 data-[active=true]:text-blue-600 data-[state=open]:hover:bg-blue-100 data-[state=open]:hover:text-blue-600 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
+  "peer/menu-button flex w-full items-center gap-1 overflow-hidden rounded-md p-2 text-left text-sm outline-none transition-all duration-300 ease-in-out text-black hover:bg-blue-50 hover:text-black focus-visible:ring-2 focus-visible:ring-blue-600 active:bg-blue-100 active:text-blue-600 disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-blue-100 data-[active=true]:text-blue-600 data-[state=open]:hover:bg-blue-50 data-[state=open]:hover:text-black group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          "text-black hover:bg-blue-100 hover:text-blue-600 transition-all ease-out", // No background in normal state
+          "text-black hover:bg-blue-50 hover:text-black transition-all duration-300 ease-in-out", // Hover with blue-50 background and black text
         outline:
-          "bg-blue-50 shadow-none hover:bg-blue-100 hover:text-blue-600 transition-all ease-out", // Subtle hover for outline
+          "bg-blue-50 shadow-none hover:bg-blue-50 hover:text-black transition-all duration-300 ease-in-out", // Subtle hover for outline
       },
       size: {
         default: "h-9 text-sm", // Compact button height
