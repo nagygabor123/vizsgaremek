@@ -29,11 +29,11 @@ export default async function Home() {
           </nav>
 
           {session ? (
-            <Button variant="secondary" className="px-6 py-2" asChild>
+            <Button variant="secondary"  asChild>
               <Link href="/dashboard">Vezérlőpult</Link>
             </Button>
           ) : (
-            <Button variant="secondary" className="px-6 py-2" asChild>
+            <Button variant="secondary"  asChild>
               <Link href="/login">Bejelentkezés</Link>
             </Button>
           )}
