@@ -98,8 +98,8 @@ export default async function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-blue-50 p-8 rounded-xl hover:shadow-lg transition-all">
-              <div className="w-14 h-14 rounded-full flex items-center justify-center mb-6">
+            <div className=" p-8 rounded-xl hover:shadow-lg transition-all">
+              <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
                 <ShieldCheck className="w-7 h-7 text-blue-600" />
               </div>
               <h3 className="text-xl font-bold mb-3">Magas szintű biztonság</h3>
@@ -108,8 +108,8 @@ export default async function Home() {
               </p>
             </div>
 
-            <div className="bg-blue-50 p-8 rounded-xl hover:shadow-lg transition-all">
-              <div className="w-14 h-14 rounded-full flex items-center justify-center mb-6">
+            <div className="b p-8 rounded-xl hover:shadow-lg transition-all">
+              <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
                 <TrendingUp className="w-7 h-7 text-blue-600" />
               </div>
               <h3 className="text-xl font-bold mb-3">Tanulmányi eredmények javulása</h3>
@@ -118,8 +118,8 @@ export default async function Home() {
               </p>
             </div>
 
-            <div className="bg-blue-50 p-8 rounded-xl hover:shadow-lg transition-all">
-              <div className="w-14 h-14 rounded-full flex items-center justify-center mb-6">
+            <div className=" p-8 rounded-xl hover:shadow-lg transition-all">
+              <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
                 <Cpu className="w-7 h-7 text-blue-600" />
               </div>
               <h3 className="text-xl font-bold mb-3">Okos integrációk</h3>
@@ -286,7 +286,7 @@ export default async function Home() {
         </div>
       </section> */}
 
-      <footer className="w-full py-16 bg-gradient-to-r from-blue-700 to-blue-900 text-white">
+      <footer className="w-full text-white py-12">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
