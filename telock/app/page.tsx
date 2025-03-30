@@ -60,21 +60,21 @@ export default async function Home() {
 
     {/* Product Showcase - Overlapping */}
     <div className="w-full max-w-7xl px-6 -mt-24 md:-mt-40 relative z-10">
-      <div className="bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200">
+      <div className="bg-white rounded-sm shadow-2xl overflow-hidden border border-gray-200">
         <Image
-          src="/dashboard-preview.jpg"
+          src="/desktop.jpg"
           width={1920}
           height={1080}
           className="w-full h-auto"
           alt="Telock irányítópult előnézet"
           priority
         />
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"></div>
+        {/* <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"></div> */}
       </div>
     </div>
 
       {/* Why Choose Us */}
-      <section id="miert" className="w-full py-16 bg-white">
+      <section id="miert" className="w-full py-16">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
