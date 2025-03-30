@@ -59,32 +59,30 @@ export default async function Home() {
       </div>
 
 
-      {/* Product Showcase - Overlapping with responsive images */}
-      <div className="w-full max-w-7xl px-6 -mt-24 md:-mt-40 relative z-10">
-        <div className="bg-white rounded-sm shadow-2xl overflow-hidden border border-gray-200">
-          {/* Desktop version */}
-          <Image
-            src="/desktop.png"
-            width={1600}
-            height={1200}
-            className="hidden md:block w-full h-auto rounded-sm shadow-lg drop-shadow-lg shadow-blue-500/50"
-            alt="Telock irányítópult asztali verzió"
-            priority
-          />
-
-          {/* Mobile version */}
-          <Image
-            src="/mobile.png"
-            width={560}
-            height={620}
-            className="block md:hidden w-full h-auto rounded-sm shadow-lg drop-shadow-lg shadow-blue-500/50"
-            alt="Telock irányítópult mobil verzió"
-            priority
-          />
-        </div>
-      </div>
-
-      <section id="miert" className="w-full py-16 bg-gradient-to-b from-gray-50 to-white">
+    {/* Product Showcase - Overlapping with responsive images */}
+<div className="w-full max-w-7xl px-6 mx-auto -mt-24 md:-mt-40 relative z-10 mb-24 md:mb-32"> {/* Increased bottom margin */}
+  <div className="bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200/50 hover:border-blue-200 transition-all duration-300">
+    {/* Desktop version */}
+    <Image
+      src="/desktop.png"
+      width={1600}
+      height={1200}
+      className="hidden md:block w-full h-auto rounded-lg shadow-xl"
+      alt="Telock irányítópult asztali verzió"
+      priority
+    />
+    {/* Mobile version */}
+    <Image
+      src="/mobile.png"
+      width={560}
+      height={620}
+      className="block md:hidden w-full h-auto rounded-lg shadow-xl"
+      alt="Telock irányítópult mobil verzió"
+      priority
+    />
+  </div>
+</div>
+      <section id="miert" className="w-full pt-8 pb-24 bg-gradient-to-b from-white to-gray-50"> {/* Reduced top padding */}
   <div className="max-w-7xl mx-auto px-6">
     <div className="text-center mb-16">
       <div className="inline-flex items-center justify-center px-4 py-2 bg-blue-50 rounded-full mb-4">
@@ -130,12 +128,12 @@ export default async function Home() {
             </div>
             <h3 className="text-xl font-bold mb-3 text-gray-900">{feature.title}</h3>
             <p className="text-gray-600">{feature.description}</p>
-            <div className="mt-6">
+            {/* <div className="mt-6">
               <span className="inline-flex items-center text-blue-600 font-medium text-sm">
                 Tudjon meg többet
                 <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
-            </div>
+            </div> */}
           </div>
         </div>
       ))}
@@ -206,7 +204,7 @@ export default async function Home() {
         },
         {
           title: 'Valós idejű nyomonkövetés',
-          description: 'Minden eszköz mozgása nyomon követhető az admin felületen.',
+          description: 'Minden eszköz mozgása nyomon követhető a vezérlőpulton.',
           icon: <ChartColumnBig className="w-6 h-6 text-blue-600" />
         },
         {
@@ -252,12 +250,6 @@ export default async function Home() {
       ))}
     </div>
 
-    <div className="mt-16 text-center">
-      <button className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg inline-flex items-center">
-        Összes funkció megtekintése
-        <ChevronDown className="w-5 h-5 ml-2 animate-bounce" />
-      </button>
-    </div>
   </div>
 </section>
 
