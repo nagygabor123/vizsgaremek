@@ -16,13 +16,13 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 flex flex-col items-center">
     {/* Hero Section with overlapping space */}
-    <div className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white pb-32 md:pb-48 relative z-0">
+    <div className="w-full bg-gradient-to-r from-blue-600 to-blue-800 pb-32 md:pb-48 relative z-0">
       <div className="max-w-7xl mx-auto px-6 pt-16">
         <header className="w-full flex justify-between items-center mb-16">
           <span className={`${ZenDots.className} text-3xl text-white`}>
             telock
           </span>
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-8 text-white">
             <Link href="#miert" className="hover:text-blue-200 transition">Miért mi?</Link>
             <Link href="#funkciok" className="hover:text-blue-200 transition">Funkciók</Link>
             <Link href="#dokumentaciok" className="hover:text-blue-200 transition">Dokumentációk</Link>
@@ -40,7 +40,7 @@ export default async function Home() {
         </header>
 
         <section className="w-full text-center my-12">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-white">
             Biztonságos telefontárolás <br /> modern iskoláknak
           </h1>
           <p className="mt-6 text-xl text-blue-100 max-w-3xl mx-auto">
@@ -127,6 +127,25 @@ export default async function Home() {
                 Kompatibilis az iskolai rendszerekkel, naplóprogramokkal és adminisztrációs szoftverekkel.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full py-16 bg-gradient-to-r from-blue-700 to-blue-900 text-white">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            Készen áll az iskolája digitális átalakulására?
+          </h2>
+          <p className="text-xl text-blue-100 mb-8">
+            Vegye fel velünk a kapcsolatot még ma, és kérjen egy személyre szabott bemutatót!
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Button size="lg" className="bg-white text-blue-800 hover:bg-gray-100" asChild>
+              <Link href="#contact">Bemutató kérése</Link>
+            </Button>
+            <Button variant="outline" size="lg" className="text-white border-white hover:bg-white/10" asChild>
+              <Link href="tel:+3612345678">Hívjon minket</Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -271,24 +290,7 @@ export default async function Home() {
       </section>
 
       {/* CTA */}
-      <section className="w-full py-16 bg-gradient-to-r from-blue-700 to-blue-900 text-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Készen áll az iskolája digitális átalakulására?
-          </h2>
-          <p className="text-xl text-blue-100 mb-8">
-            Vegye fel velünk a kapcsolatot még ma, és kérjen egy személyre szabott bemutatót!
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button size="lg" className="bg-white text-blue-800 hover:bg-gray-100" asChild>
-              <Link href="#contact">Bemutató kérése</Link>
-            </Button>
-            <Button variant="outline" size="lg" className="text-white border-white hover:bg-white/10" asChild>
-              <Link href="tel:+3612345678">Hívjon minket</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+
 
       {/* Footer */}
       <footer className="w-full bg-gray-900 text-white py-12">
