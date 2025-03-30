@@ -38,8 +38,8 @@ export default async function Home() {
       </header>
 
       <section className="w-full max-w-6xl text-center my-12 px-4">
-        <h2 className="text-4xl md:text-7xl font-bold text-blue-700">
-          Biztonságos és kényelmes <span className="text-blue-500">telefontárolás</span> iskoláknak
+        <h2 className="text-4xl md:text-7xl font-bold text-gray-800">
+          Biztonságos és kényelmes telefontárolás iskoláknak
         </h2>
         <p className="mt-4 text-gray-700 max-w-2xl mx-auto text-base md:text-lg">
           Telefontároló rendszerünk biztosítja, hogy az iskolák diákjai biztonságosan és kényelmesen tárolhassák mobiltelefonjaikat az oktatási idő alatt, miközben csökkentik a zavaró tényezőket az órákon.
@@ -51,17 +51,24 @@ export default async function Home() {
           src="/desktop.png"
           width={1600}
           height={1200}
-          className="hidden md:block rounded-xl border shadow-xl"
+          className="hidden md:block rounded-xl border"
           alt="Screenshots of the dashboard project showing desktop version"
         />
         <Image
           src="/mobile.png"
           width={560}
           height={620}
-          className="block md:hidden rounded-xl border shadow-xl"
+          className="block md:hidden rounded-xl border"
           alt="Screenshot of the dashboard project showing mobile version"
         />
       </div>
+
+      <section id="miert" className="w-full max-w-6xl text-center my-12 px-4">
+        <h2 className="text-4xl font-bold text-gray-800 mb-4">Miért mi?</h2>
+        <p className="text-gray-700 max-w-3xl mx-auto text-base md:text-lg">
+          Innovatív megoldásainkkal biztosítjuk a diákok számára a biztonságos és kényelmes telefontárolást, miközben segítjük az iskolákat a modern kihívások kezelésében. Rendszerünk egyszerűen kezelhető, megbízható, és hozzájárul a zavartalan oktatási folyamatokhoz.
+        </p>
+      </section>
     </div>
   );
 }
