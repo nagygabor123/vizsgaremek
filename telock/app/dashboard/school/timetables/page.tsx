@@ -686,11 +686,7 @@ const Calendar: React.FC = () => {
             <>
               {!hasStudents && <AppKonfig />}
               {/* <p>{hasStudents ? "Már vannak diákok az adatbázisban." : "Nincsenek diákok."}</p> */}
-            </>
-          )}
-        </div>
-
-        <div className="calendar-container">
+              <div className="calendar-container">
           {/* <span>{tanevkezdes}</span>
   <span>{tanevvege}</span> */}
           <div className="calendar-header">
@@ -1158,6 +1154,11 @@ const Calendar: React.FC = () => {
           </div>
 
         </div>
+            </>
+          )}
+        </div>
+
+   
 
       </SidebarInset>
     </SidebarProvider>

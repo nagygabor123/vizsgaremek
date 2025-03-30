@@ -41,14 +41,14 @@ export default async function Home() {
 
         <section className="w-full text-center my-12">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-white">
-            Biztonságos és kényelmes telefontárolos iskoláknak
+            Biztonságos és kényelmes <br/> telefontárolos iskoláknak
           </h1>
           <p className="mt-6 text-xl text-blue-100 max-w-3xl mx-auto">
             Innovatív megoldásunk segít fenntartani a koncentrációt az órákon, miközben biztosítja diák eszközeinek védelmét.
           </p>
           <div className="mt-10 flex justify-center gap-4">
             <Button asChild>
-              <Link href="#mailto:nagy.gabor@diak.szbi-pg.hu,szalkai-szabo.adam@diak.szbi-pg.hu?subject=Your%20Subject&body=Hello%20there!">Írjon nekünk</Link>
+              <Link href="mailto:nagy.gabor@diak.szbi-pg.hu,szalkai-szabo.adam@diak.szbi-pg.hu?subject=Your%20Subject&body=Hello%20there!">Írjon nekünk</Link>
             </Button>
             <Button variant="secondary" asChild>
               <Link href="#funkciok">Funkciók</Link>
