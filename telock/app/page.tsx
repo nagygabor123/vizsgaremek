@@ -246,7 +246,8 @@ export default async function Home() {
 
 <footer className="w-full bg-gray-50 text-gray-800 py-12">
   <div className="max-w-7xl mx-auto px-6">
-    <div className="grid md:grid-cols-4 gap-8 border-t border-gray-200 mt-12 pt-8">
+    <div className="grid md:grid-cols-4 gap-8 ">
+    {/* border-t border-gray-200 mt-12 pt-8 */}
       <div>
         <h3 className={`${ZenDots.className} text-2xl mb-4`}>telock</h3>
         <p className="text-gray-600">
