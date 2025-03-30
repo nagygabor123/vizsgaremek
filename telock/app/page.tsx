@@ -62,7 +62,7 @@ export default async function Home() {
       <div className="w-full max-w-7xl px-6 py-12 md:py-20 -mt-12 md:-mt-20 relative z-10">
         <div className="bg-white rounded-xl shadow-xl overflow-hidden">
           <Image
-            src="/dashboard-preview.jpg"
+            src="/desktop.png"
             width={1920}
             height={1080}
             className="w-full h-auto"
