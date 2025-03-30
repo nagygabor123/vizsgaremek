@@ -150,7 +150,45 @@ export default async function Home() {
         </div>
       </section> */}
 
-      {/* Features */}
+<section className=" w-full py-16 bg-gradient-to-r from-blue-700 to-blue-900 text-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Iskolák véleménye
+            </h2>
+            <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+              Csatlakozzon több mint 120 elégedett oktatási intézményhez.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                quote: "A Telock rendszer bevezetése óta drasztikusan csökkent a mobiltelefonok miatti fegyelmi incidensek száma iskolánkban.",
+                author: "Kovács János, igazgató",
+                school: "Budapesti Széchenyi Gimnázium"
+              },
+              {
+                quote: "Végre egy olyan megoldás, ami tényleg működik és nem csak terhet ró a tanárainkra. A diákjaink is könnyen megtanulták használni.",
+                author: "Nagy Edit, iskolavezető",
+                school: "Debreceni Református Kollégium"
+              },
+              {
+                quote: "Technikai támogatásuk kiváló, minden kérdésünkre gyorsan és szakmailag megalapozottan válaszolnak.",
+                author: "Tóth Béla, Rendszergazda",
+                school: "Pécsi Műszaki Szakközépiskola"
+              }
+            ].map((testimonial, index) => (
+              <div key={index} className="bg-white/10 p-8 rounded-xl backdrop-blur-sm">
+                <p className="italic mb-6 text-lg">"{testimonial.quote}"</p>
+                <p className="font-bold">{testimonial.author}</p>
+                <p className="text-blue-200">{testimonial.school}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="funkciok" className="w-full py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
@@ -207,48 +245,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Testimonials     */}
-      <section className=" w-full py-16 bg-gradient-to-r from-blue-700 to-blue-900 text-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Iskolák véleménye
-            </h2>
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-              Csatlakozzon több mint 120 elégedett oktatási intézményhez.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                quote: "A Telock rendszer bevezetése óta drasztikusan csökkent a mobiltelefonok miatti fegyelmi incidensek száma iskolánkban.",
-                author: "Kovács János, igazgató",
-                school: "Budapesti Széchenyi Gimnázium"
-              },
-              {
-                quote: "Végre egy olyan megoldás, ami tényleg működik és nem csak terhet ró a tanárainkra. A diákjaink is könnyen megtanulták használni.",
-                author: "Nagy Edit, iskolavezető",
-                school: "Debreceni Református Kollégium"
-              },
-              {
-                quote: "Technikai támogatásuk kiváló, minden kérdésünkre gyorsan és szakmailag megalapozottan válaszolnak.",
-                author: "Tóth Béla, Rendszergazda",
-                school: "Pécsi Műszaki Szakközépiskola"
-              }
-            ].map((testimonial, index) => (
-              <div key={index} className="bg-white/10 p-8 rounded-xl backdrop-blur-sm">
-                <p className="italic mb-6 text-lg">"{testimonial.quote}"</p>
-                <p className="font-bold">{testimonial.author}</p>
-                <p className="text-blue-200">{testimonial.school}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Documentation */}
-      <section id="dokumentaciok" className="w-full py-16 bg-white">
+      {/* <section id="dokumentaciok" className="w-full py-16 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -287,13 +284,8 @@ export default async function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
-
-      {/* CTA */}
-
-
-      {/* Footer */}
       <footer className="w-full bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8">
@@ -307,9 +299,9 @@ export default async function Home() {
               <h4 className="font-bold mb-4">Linkek</h4>
               <ul className="space-y-2">
                 <li><Link href="/dashboard" className="text-gray-400 hover:text-white transition">Vezérlőpult</Link></li>
-                <li><Link href="#miert" className="text-gray-400 hover:text-white transition">Miért mi?</Link></li>
-                <li><Link href="#funkciok" className="text-gray-400 hover:text-white transition">Funkciók</Link></li>
-                <li><Link href="#dokumentaciok" className="text-gray-400 hover:text-white transition">Dokumentáció</Link></li>
+                <li><Link href="/api-docs" className="text-gray-400 hover:text-white transition">API</Link></li>
+                <li><Link href="#" className="text-gray-400 hover:text-white transition">Dokumentáció</Link></li>
+      
               </ul>
             </div>
             <div>
