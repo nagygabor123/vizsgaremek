@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link"
-import { FileClock, Zap, ChartColumnBig, ShieldCheck, RefreshCw, Server, ChevronDown, Instagram, Cpu, ArrowRight, Phone, Twitter, Youtube, Mail, Newspaper, TrendingUp, CheckCircle, Lock, Navigation, Facebook,  } from "lucide-react";
+import { FileClock, Zap, ChartColumnBig, ShieldCheck, RefreshCw, Server, ChevronDown, Instagram, Cpu, ArrowRight, Twitter, Youtube, Mail, Newspaper, TrendingUp, CheckCircle, Lock, Navigation, Facebook,  } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { Button } from "@/components/ui/button"
 import localFont from "next/font/local";
@@ -91,7 +91,7 @@ export default async function Home() {
         <span className="text-sm font-medium text-blue-600">Innovatív megoldások</span>
       </div>
       <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-        Miért válassza a <span className="text-blue-600">Telock</span> rendszert?
+        Miért válassza a <span className="text-blue-600">telock</span> rendszerét?
       </h2>
       <p className="text-lg text-gray-600 max-w-3xl mx-auto">
         Különleges megoldásaink egyedivé teszik rendszerünket az iskolai telefontárolás területén.
@@ -141,12 +141,6 @@ export default async function Home() {
       ))}
     </div>
 
-    <div className="mt-16 text-center">
-      <button className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg inline-flex items-center">
-        Összes előny megtekintése
-        <ChevronDown className="w-5 h-5 ml-2 animate-bounce" />
-      </button>
-    </div>
   </div>
 </section>
 
@@ -189,11 +183,14 @@ export default async function Home() {
   </div>
 </section>
 
-<section id="funkciok" className="w-full py-16 bg-white">
+<section id="funkciok" className="w-full py-16 bg-gradient-to-b from-white to-gray-50">
   <div className="max-w-7xl mx-auto px-6">
     <div className="text-center mb-16">
+      <div className="inline-flex items-center justify-center px-4 py-2 bg-blue-50 rounded-full mb-4">
+        <span className="text-sm font-medium text-blue-600">Technológiai előnyök</span>
+      </div>
       <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-        Funkciók
+        Fejlett <span className="text-blue-600">funkciók</span>
       </h2>
       <p className="text-lg text-gray-600 max-w-3xl mx-auto">
         Minden, amire egy modern iskolának szüksége lehet a hatékony telefontároláshoz.
@@ -205,42 +202,61 @@ export default async function Home() {
         {
           title: 'RFID azonosítás',
           description: 'Diákigazolványokkal kompatibilis gyors azonosítás és kiszolgálás.',
-          icon: <Zap className="w-6 h-6 text-blue-600 rounded-full" />
+          icon: <Zap className="w-6 h-6 text-blue-600" />
         },
         {
           title: 'Valós idejű nyomonkövetés',
           description: 'Minden eszköz mozgása nyomon követhető az admin felületen.',
-          icon: <ChartColumnBig className="w-6 h-6 text-blue-600 rounded-full" />
+          icon: <ChartColumnBig className="w-6 h-6 text-blue-600" />
         },
         {
           title: 'Többfaktoros hitelesítés',
           description: 'Tanári hozzáférés PIN kód és biometrikus adatok kombinációjával.',
-          icon: <ShieldCheck className="w-6 h-6 text-blue-600 rounded-full" />
+          icon: <ShieldCheck className="w-6 h-6 text-blue-600" />
         },
         {
           title: 'Automatikus frissítések',
           description: 'Rendszerünk mindig naprakész a legújabb biztonsági javításokkal.',
-          icon: <RefreshCw className="w-6 h-6 text-blue-600 rounded-full" />
+          icon: <RefreshCw className="w-6 h-6 text-blue-600" />
         },
         {
           title: 'Skálázható architektúra',
           description: 'Akár 1000+ diák számára is biztosítunk megbízható megoldást.',
-          icon: <Server className="w-6 h-6 text-blue-600 rounded-full" />
+          icon: <Server className="w-6 h-6 text-blue-600" />
         },
         {
           title: 'Részletes jelentéskészítés',
           description: 'Testreszabható jelentések a használati szokásokról és trendekről.',
-          icon: <FileClock className="w-6 h-6 text-blue-600 rounded-full" />
+          icon: <FileClock className="w-6 h-6 text-blue-600" />
         }
       ].map((feature, index) => (
-        <div key={index} className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100">
-          <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-4">
-            {feature.icon}
+        <div 
+          key={index} 
+          className="group relative bg-white p-8 rounded-xl border border-gray-100 hover:border-blue-100 transition-all duration-300 shadow-sm hover:shadow-lg overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-white to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div className="relative z-10">
+            <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110">
+              {feature.icon}
+            </div>
+            <h3 className="text-lg font-bold mb-2 text-gray-900">{feature.title}</h3>
+            <p className="text-gray-600 mb-4">{feature.description}</p>
+            <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span className="inline-flex items-center text-blue-600 text-sm font-medium">
+                Részletek
+                <ArrowRight className="w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" />
+              </span>
+            </div>
           </div>
-          <h3 className="text-lg font-bold mb-2">{feature.title}</h3>
-          <p className="text-gray-600">{feature.description}</p>
         </div>
       ))}
+    </div>
+
+    <div className="mt-16 text-center">
+      <button className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg inline-flex items-center">
+        Összes funkció megtekintése
+        <ChevronDown className="w-5 h-5 ml-2 animate-bounce" />
+      </button>
     </div>
   </div>
 </section>
