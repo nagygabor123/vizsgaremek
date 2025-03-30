@@ -238,101 +238,100 @@ export default function Home() {
               </div>
             ) : (
               <>
+                <div className="p-4">
+
+                  <div className="flex flex-col gap-2 md:flex-row mb-4">
+                    <div className="flex flex-col gap-2 md:flex-row">
+                      <Input
+                        type="text"
+                        placeholder="Keresés név szerint..."
+                        className="border p-2 rounded-md"
+                        value={searchName}
+                        onChange={(e) => setSearchName(e.target.value)}
+                      />
+                    </div>
+
+                    {/*   
+    <Button variant="outline" onClick={() => updateGroupAccess()}>
+      <LockOpen /> Összes feloldás 
+    </Button>
+  */}
+                    {/*  
+    onClick={handleSystemClose}
+    {systemClose ? <LockOpen /> : <Lock />}
+    {systemClose ? 'Összes feloldás' : 'Összes zárolás'}
+  */}
+
+                  </div>
+
+                  <div className="rounded-md border mt-5">
+                    <table className="w-full">
+                      <thead className="text-center text-sm text-muted-foreground">
+                        <tr>
+                          <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Teljes név <ArrowUpDown className="w-4 h-4 inline-block" /></th>
+                          <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("class")}>Osztály és csoportok<ArrowUpDown className="w-4 h-4 inline-block" /></th>
+                          <th className="p-2 font-normal">Státusz</th>
+                          {/* <th className="p-2 font-normal">RFID azonosító</th> */}
+                          <th className="p-2 font-normal">Műveletek</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                        {students.length === 0 ? (
+                          <tr>
+                            <td colSpan={5} className="text-center p-6 h-dvh text-base text-muted-foreground">
+                              Nem szerepel tanuló a rendszerben
+                            </td>
+                          </tr>
+                        ) : (
+
+                          paginatedStudents.map((student) => {
+                            const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
+                            const currentTime = new Date().toLocaleString('hu-HU', {
+                              timeZone: 'Europe/Budapest',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                              hour12: false
+                            });
+
+                            const canUnlockStudent = systemClose || (studentTimetableData &&
+                              currentTime >= studentTimetableData.first_class_start &&
+                              currentTime <= studentTimetableData.last_class_end);
+
+                            return (
+                              <tr key={student.student_id} className="text-center text-sm border-t">
+                                <td className="p-1">{student.full_name}</td>
+                                <td className="p-1">{student.class}</td>
+                                <td className="p-1">
+                                  {student.status === "ki" ? <span className="text-gray-500"><CircleMinus className="w-4 h-4 inline-block" /></span> : student.status === "be" ? <span className="text-green-500"><CircleCheck className="w-4 h-4 inline-block" /></span> : <span className="text-red-500"><CircleAlert className="w-4 h-4 inline-block" /></span>}
+                                </td>
+                                {/* <td className="p-1">{student.rfid_tag}</td> */}
+                                <td className="p-1">
+                                  <Button
+                                    variant="ghost"
+                                    onClick={() => handleStudentOpen(student.student_id)}
+                                    disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}
+                                  >
+                                    <LockOpen className="w-4 h-4 inline-block" />
+                                  </Button>
+                                </td>
+                              </tr>
+                            );
+                          })
+                        )}
+                      </tbody>
+                    </table>
+
+                  </div>
+
+                  <div className="flex justify-between items-center p-2">
+                    <Button variant="ghost" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}> <ChevronLeft /> Előző</Button>
+                    <span> {currentPage} / {totalPages}</span>
+                    <Button variant="ghost" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>Következő <ChevronRight /></Button>
+                  </div>
+                </div>
               </>
             )}
-          </div>
-
-          <div className="p-4">
-
-            <div className="flex flex-col gap-2 md:flex-row mb-4">
-              <div className="flex flex-col gap-2 md:flex-row">
-                <Input
-                  type="text"
-                  placeholder="Keresés név szerint..."
-                  className="border p-2 rounded-md"
-                  value={searchName}
-                  onChange={(e) => setSearchName(e.target.value)}
-                />
-              </div>
-
-              {/*   
-                <Button variant="outline" onClick={() => updateGroupAccess()}>
-                  <LockOpen /> Összes feloldás 
-                </Button>
-              */}
-              {/*  
-                onClick={handleSystemClose}
-                {systemClose ? <LockOpen /> : <Lock />}
-                {systemClose ? 'Összes feloldás' : 'Összes zárolás'}
-              */}
-
-            </div>
-
-            <div className="rounded-md border mt-5">
-              <table className="w-full">
-                <thead className="text-center text-sm text-muted-foreground">
-                  <tr>
-                    <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Teljes név <ArrowUpDown className="w-4 h-4 inline-block" /></th>
-                    <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("class")}>Osztály és csoportok<ArrowUpDown className="w-4 h-4 inline-block" /></th>
-                    <th className="p-2 font-normal">Státusz</th>
-                    {/* <th className="p-2 font-normal">RFID azonosító</th> */}
-                    <th className="p-2 font-normal">Műveletek</th>
-                  </tr>
-                </thead>
-                <tbody>
-
-                  {students.length === 0 ? (
-                    <tr>
-                      <td colSpan={5} className="text-center p-6 h-dvh text-base text-muted-foreground">
-                        Nem szerepel tanuló a rendszerben
-                      </td>
-                    </tr>
-                  ) : (
-
-                    paginatedStudents.map((student) => {
-                      const studentTimetableData = studentTimetable.find(t => t.student_id === student.student_id);
-                      const currentTime = new Date().toLocaleString('hu-HU', {
-                        timeZone: 'Europe/Budapest',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        hour12: false
-                      });
-
-                      const canUnlockStudent = systemClose || (studentTimetableData &&
-                        currentTime >= studentTimetableData.first_class_start &&
-                        currentTime <= studentTimetableData.last_class_end);
-
-                      return (
-                        <tr key={student.student_id} className="text-center text-sm border-t">
-                          <td className="p-1">{student.full_name}</td>
-                          <td className="p-1">{student.class}</td>
-                          <td className="p-1">
-                            {student.status === "ki" ? <span className="text-gray-500"><CircleMinus className="w-4 h-4 inline-block" /></span> : student.status === "be" ? <span className="text-green-500"><CircleCheck className="w-4 h-4 inline-block" /></span> : <span className="text-red-500"><CircleAlert className="w-4 h-4 inline-block" /></span>}
-                          </td>
-                          {/* <td className="p-1">{student.rfid_tag}</td> */}
-                          <td className="p-1">
-                            <Button
-                              variant="ghost"
-                              onClick={() => handleStudentOpen(student.student_id)}
-                              disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}
-                            >
-                              <LockOpen className="w-4 h-4 inline-block" />
-                            </Button>
-                          </td>
-                        </tr>
-                      );
-                    })
-                  )}
-                </tbody>
-              </table>
-
-            </div>
-
-            <div className="flex justify-between items-center p-2">
-              <Button variant="ghost" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}> <ChevronLeft /> Előző</Button>
-              <span> {currentPage} / {totalPages}</span>
-              <Button variant="ghost" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>Következő <ChevronRight /></Button>
-            </div>
           </div>
 
         </div>
