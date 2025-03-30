@@ -25,7 +25,7 @@ export default async function Home() {
             <nav className="hidden md:flex space-x-8 text-white">
               <Link href="#miert" className="hover:text-blue-200 transition">Miért mi?</Link>
               <Link href="#funkciok" className="hover:text-blue-200 transition">Funkciók</Link>
-              <Link href="#dokumentaciok" className="hover:text-blue-200 transition">Dokumentációk</Link>
+              <Link href="#velemenyek" className="hover:text-blue-200 transition">Vélemények</Link>
             </nav>
 
             {session ? (
@@ -150,7 +150,7 @@ export default async function Home() {
         </div>
       </section> */}
 
-<section className="w-full py-16 bg-gradient-to-r from-blue-700 to-blue-900 text-white">
+<section id="velemenyek" className="w-full py-16 bg-gradient-to-r from-blue-700 to-blue-900 text-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -286,7 +286,7 @@ export default async function Home() {
         </div>
       </section> */}
 
-      <footer className="w-full text-white py-12 border-b border-gray-800 mb-12 pb-8">
+      <footer className="w-full text-white py-12 border-t border-gray-800 mt-12 pt-8 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
