@@ -97,8 +97,8 @@ export default async function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all">
-            <div className=" p-8 rounded-xl hover:shadow-lg transition-all">
+          <div className="grid md:grid-cols-3 gap-8 ">
+            <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all p-8 rounded-xl hover:shadow-lg transition-all">
               <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
                 <ShieldCheck className="w-7 h-7 text-blue-600" />
               </div>
@@ -108,7 +108,7 @@ export default async function Home() {
               </p>
             </div>
 
-            <div className="b p-8 rounded-xl hover:shadow-lg transition-all">
+            <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all p-8 rounded-xl hover:shadow-lg transition-all">
               <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
                 <TrendingUp className="w-7 h-7 text-blue-600" />
               </div>
@@ -118,7 +118,7 @@ export default async function Home() {
               </p>
             </div>
 
-            <div className=" p-8 rounded-xl hover:shadow-lg transition-all">
+            <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all p-8 rounded-xl hover:shadow-lg transition-all">
               <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
                 <Cpu className="w-7 h-7 text-blue-600" />
               </div>
