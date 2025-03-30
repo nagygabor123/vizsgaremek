@@ -97,7 +97,7 @@ export default async function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all">
             <div className=" p-8 rounded-xl hover:shadow-lg transition-all">
               <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
                 <ShieldCheck className="w-7 h-7 text-blue-600" />
@@ -131,24 +131,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* <section className="w-full py-16 bg-gradient-to-r from-blue-700 to-blue-900">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-            Készen áll az iskolája digitális átalakulására?
-          </h2>
-          <p className="text-xl text-blue-100 mb-8 text-white">
-            Vegye fel velünk a kapcsolatot még ma, és kérjen egy személyre szabott bemutatót!
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button asChild>
-              <Link href="#contact">Bemutató kérése</Link>
-            </Button>
-            <Button variant="outline" asChild>
-              <Link href="tel:+3612345678">Hívjon minket</Link>
-            </Button>
-          </div>
-        </div>
-      </section> */}
+  
 
 <section id="velemenyek" className="w-full py-16 bg-gradient-to-r from-blue-700 to-blue-900 text-white">
         <div className="max-w-7xl mx-auto px-6">
@@ -169,12 +152,12 @@ export default async function Home() {
                 school: "Budapesti Széchenyi Gimnázium"
               },
               {
-                quote: "Végre egy olyan megoldás, ami tényleg működik és nem csak terhet ró a tanárainkra. A diákjaink is könnyen megtanulták használni.",
+                quote: "Végre egy olyan megoldás, ami tényleg működik és nem csak megnehezíti a tanáraink munkáját. A diákjaink is könnyen megtanulták használni.",
                 author: "Nagy Edit, iskolavezető",
                 school: "Debreceni Református Kollégium"
               },
               {
-                quote: "Technikai támogatásuk kiváló, minden kérdésünkre gyorsan és szakmailag megalapozottan válaszolnak.",
+                quote: "Technikai támogatásuk kiváló, minden kérdésünkre gyorsan és szakmailag precízen válaszolnak. Profi csapat!",
                 author: "Tóth Béla, Rendszergazda",
                 school: "Pécsi Műszaki Szakközépiskola"
               }
@@ -285,6 +268,25 @@ export default async function Home() {
           </div>
         </div>
       </section> */}
+
+      <section className="w-full py-16 bg-gradient-to-r from-blue-700 to-blue-900">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+            Készen áll az iskolája digitális átalakulására?
+          </h2>
+          <p className="text-xl text-blue-100 mb-8 text-white">
+            Vegye fel velünk a kapcsolatot még ma, és kérjen egy személyre szabott bemutatót!
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Button asChild>
+              <Link href="#contact">Bemutató kérése</Link>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link href="tel:+3612345678">Hívjon minket</Link>
+            </Button>
+          </div>
+        </div>
+      </section> 
 
       <footer className="w-full text-black py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
