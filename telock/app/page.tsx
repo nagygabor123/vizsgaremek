@@ -131,12 +131,12 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="w-full py-16 bg-gradient-to-r from-blue-700 to-blue-900 text-white">
+      <section className="w-full py-16 bg-gradient-to-r from-blue-700 to-blue-900">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
             Készen áll az iskolája digitális átalakulására?
           </h2>
-          <p className="text-xl text-blue-100 mb-8">
+          <p className="text-xl text-blue-100 mb-8 text-white">
             Vegye fel velünk a kapcsolatot még ma, és kérjen egy személyre szabott bemutatót!
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -328,7 +328,7 @@ export default async function Home() {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
-            <p>© 2025 telock. Minden jog fenntartva.</p>
+            <p>© {new Date().getFullYear()} telock. Minden jog fenntartva.</p>
           </div>
         </div>
       </footer>

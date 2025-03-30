@@ -186,8 +186,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="text-s truncate">Kiskunfélegyházi Szent Benedek PG Középiskola</span>
               </div>
-              <Avatar className="h-9 w-9 rounded-full border border-blue-600">
-                <AvatarFallback className="text-blue-600 text-[0.625rem]">
+              <Avatar className="h-9 w-9 rounded-full bg-blue-600">
+                <AvatarFallback className="text-white text-[0.625rem]">
                   {session?.user?.short_name}
                 </AvatarFallback>
               </Avatar>
@@ -202,8 +202,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-9 w-9 rounded-full border border-blue-600">
-                  <AvatarFallback className="text-blue-600 text-[0.625rem]">
+                <Avatar className="h-9 w-9 rounded-full bg-blue-600">
+                  <AvatarFallback className="text-white text-[0.625rem]">
                     {session?.user?.short_name}
                   </AvatarFallback>
                 </Avatar>
