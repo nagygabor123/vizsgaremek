@@ -82,7 +82,7 @@ export default async function Home() {
     />
   </div>
 </div>
-      <section id="miert" className="w-full pt-8 pb-24 bg-gradient-to-b from-white to-gray-50"> {/* Reduced top padding */}
+      <section id="miert" className="w-full pt-8 pb-24"> {/* Reduced top padding */}
   <div className="max-w-7xl mx-auto px-6">
     <div className="text-center mb-16">
       <div className="inline-flex items-center justify-center px-4 py-2 bg-blue-50 rounded-full mb-4">
@@ -234,7 +234,7 @@ export default async function Home() {
         >
           <div className="absolute inset-0 bg-gradient-to-br from-white to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           <div className="relative z-10">
-            <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110">
+            <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110">
               {feature.icon}
             </div>
             <h3 className="text-lg font-bold mb-2 text-gray-900">{feature.title}</h3>
