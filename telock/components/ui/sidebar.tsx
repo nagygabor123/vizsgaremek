@@ -471,55 +471,42 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
 }
 
 const sidebarMenuButtonVariants = cva(
-  "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-lg p-2 text-left text-sm outline-none transition-all duration-200 hover:bg-blue-50 hover:text-blue-700 focus-visible:ring-2 focus-visible:ring-blue-300 active:bg-blue-100 disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
+  "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-none transition-colors duration-150 hover:bg-blue-100/80 focus-visible:ring-2 focus-visible:ring-blue-300 disabled:pointer-events-none disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
   {
     variants: {
       variant: {
         default: [
-          "text-gray-700",
-          "data-[active=true]:bg-blue-50",
-          "data-[active=true]:text-blue-700",
-          "data-[active=true]:font-semibold",
-          "data-[active=true]:border-l-4",
-          "data-[active=true]:border-blue-500",
-          "hover:bg-blue-50/80",
-          "hover:text-blue-600",
-          "dark:text-gray-300",
-          "dark:hover:bg-blue-900/20",
-          "dark:hover:text-blue-400",
-          "dark:data-[active=true]:bg-blue-900/30",
-          "dark:data-[active=true]:text-blue-400",
+          "text-gray-800",
+          "data-[active=true]:bg-blue-600",
+          "data-[active=true]:text-white",
+          "hover:bg-blue-100",
+          "dark:text-gray-200",
+          "dark:hover:bg-blue-900/40",
+          "dark:data-[active=true]:bg-blue-700"
         ],
         outline: [
-          "bg-white border border-gray-200",
-          "hover:border-blue-300",
-          "hover:bg-blue-50",
-          "hover:text-blue-600",
-          "shadow-sm",
-          "data-[active=true]:border-blue-400",
-          "data-[active=true]:bg-blue-50",
-          "data-[active=true]:text-blue-700",
-          "dark:bg-gray-800",
+          "border border-transparent",
+          "hover:border-blue-200",
+          "data-[active=true]:bg-blue-600",
+          "data-[active=true]:text-white",
+          "data-[active=true]:border-transparent",
           "dark:border-gray-700",
-          "dark:hover:border-blue-600",
-          "dark:hover:bg-blue-900/20",
-          "dark:data-[active=true]:border-blue-600",
-          "dark:data-[active=true]:bg-blue-900/30",
-        ],
+          "dark:hover:border-blue-800",
+          "dark:data-[active=true]:bg-blue-700"
+        ]
       },
       size: {
-        default: "h-10 text-sm px-3",
-        sm: "h-8 text-xs px-2.5",
-        lg: "h-12 text-base px-4 group-data-[collapsible=icon]:p-0!",
-      },
+        default: "h-9 text-sm px-2.5",
+        sm: "h-8 text-xs px-2",
+        lg: "h-10 text-sm px-3"
+      }
     },
     defaultVariants: {
       variant: "default",
-      size: "default",
-    },
+      size: "default"
+    }
   }
 );
-
 function SidebarMenuButton({
   asChild = false,
   isActive = false,
