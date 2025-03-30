@@ -41,14 +41,14 @@ export default async function Home() {
 
         <section className="w-full text-center my-12">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-white">
-            Biztonságos telefontárolás <br /> modern iskoláknak
+            Biztonságos és kényelmes telefontárolos iskoláknak
           </h1>
           <p className="mt-6 text-xl text-blue-100 max-w-3xl mx-auto">
-            Innovatív megoldásunk segít fenntartani a koncentrációt az órákon, miközben biztosítja diákjaitok értékes eszközeinek védelmét.
+            Innovatív megoldásunk segít fenntartani a koncentrációt az órákon, miközben biztosítja diák eszközeinek védelmét.
           </p>
           <div className="mt-10 flex justify-center gap-4">
             <Button asChild>
-              <Link href="#contact">Bemutató kérése</Link>
+              <Link href="#mailto:nagy.gabor@diak.szbi-pg.hu,szalkai-szabo.adam@diak.szbi-pg.hu?subject=Your%20Subject&body=Hello%20there!">Írjon nekünk</Link>
             </Button>
             <Button variant="secondary" asChild>
               <Link href="#funkciok">Funkciók</Link>
@@ -249,45 +249,46 @@ export default async function Home() {
 
       {/* Documentation */}
       <section id="dokumentaciok" className="w-full py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Dokumentáció & Támogatás
-            </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Minden erőforrás, amire szüksége van a rendszer hatékony használatához.
-            </p>
-          </div>
+  <div className="max-w-7xl mx-auto px-6">
+    <div className="text-center mb-16">
+      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        Dokumentáció & Támogatás
+      </h2>
+      <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+        Minden erőforrás, amire szüksége van a rendszer hatékony használatához.
+      </p>
+    </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <div className="border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-all">
-              <div className="bg-blue-50 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
-                <FileClock className="w-6 h-6 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Felhasználói kézikönyv</h3>
-              <p className="text-gray-600 mb-6">
-                Részletes útmutató a rendszer használatához, telepítéséhez és karbantartásához.
-              </p>
-              <Button variant="outline" asChild>
-                <Link href="#">Letöltés PDF</Link>
-              </Button>
-            </div>
-
-            <div className="border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-all">
-              <div className="bg-blue-50 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
-                <Rocket className="w-6 h-6 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Technikai dokumentáció</h3>
-              <p className="text-gray-600 mb-6">
-                API referenciák, integrációs útmutatók és fejlesztői dokumentáció.
-              </p>
-              <Button variant="outline" asChild>
-                <Link href="#">Megnyitás</Link>
-              </Button>
-            </div>
-          </div>
+    <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      <div className="border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-all">
+        <div className="bg-blue-50 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
+          <FileClock className="w-6 h-6 text-blue-600" />
         </div>
-      </section>
+        <h3 className="text-xl font-bold mb-3">Felhasználói és Fejlesztői Dokumentáció</h3>
+        <p className="text-gray-600 mb-6">
+          Egyetlen PDF dokumentumban megtalálható a felhasználói és fejlesztői dokumentáció, amely segít a rendszer használatában, telepítésében és karbantartásában.
+        </p>
+        <Button variant="outline" asChild>
+          <Link href="#">Letöltés PDF</Link>
+        </Button>
+      </div>
+
+      <div className="border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-all">
+        <div className="bg-blue-50 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
+          <Rocket className="w-6 h-6 text-blue-600" />
+        </div>
+        <h3 className="text-xl font-bold mb-3">API Dokumentáció</h3>
+        <p className="text-gray-600 mb-6">
+          Az API dokumentációban látható az összes végpont, illetve teszteesetek is olvashatóak.
+        </p>
+        <Button variant="outline" asChild>
+          <Link href="/api-docs">Megnyitás</Link>
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* CTA */}
 

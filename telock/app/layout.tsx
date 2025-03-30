@@ -8,8 +8,8 @@ import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 
 export const metadata: Metadata = {
-  title: "telock: Biztonságos telefontárolás modern iskoláknak",
-  description: "telock: Biztonságos telefontárolás modern iskoláknak",
+  title: "telock: Biztonságos és kényelmes telefontárolos iskoláknak",
+  description: "telock: Biztonságos és kényelmes telefontárolos iskoláknak",
 };
 
 export default async function RootLayout({
