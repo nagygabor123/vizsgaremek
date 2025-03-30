@@ -471,42 +471,30 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
 }
 
 const sidebarMenuButtonVariants = cva(
-  "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-none transition-colors duration-150 hover:bg-blue-100/80 focus-visible:ring-2 focus-visible:ring-blue-300 disabled:pointer-events-none disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
+  "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-lg p-3 text-left text-sm outline-none ring-2 ring-transparent transition-all duration-200 ease-in-out hover:bg-sidebar-accent hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-400 active:bg-sidebar-accent active:text-blue-600 disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-semibold data-[active=true]:text-blue-600 data-[active=true]:border-2 data-[active=true]:border-blue-600 data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-blue-600 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: [
-          "text-gray-800",
-          "data-[active=true]:bg-blue-600",
-          "data-[active=true]:text-white",
-          "hover:bg-blue-100",
-          "dark:text-gray-200",
-          "dark:hover:bg-blue-900/40",
-          "dark:data-[active=true]:bg-blue-700"
-        ],
-        outline: [
-          "border border-transparent",
-          "hover:border-blue-200",
-          "data-[active=true]:bg-blue-600",
-          "data-[active=true]:text-white",
-          "data-[active=true]:border-transparent",
-          "dark:border-gray-700",
-          "dark:hover:border-blue-800",
-          "dark:data-[active=true]:bg-blue-700"
-        ]
+        default:
+          "hover:bg-sidebar-accent hover:text-blue-600 hover:border-2 hover:border-blue-600 transition-all ease-out", // Hover állapotban keret
+        outline:
+          "bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:bg-sidebar-accent hover:text-blue-600 hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))] transition-all ease-out", // Hover állapotban keret
       },
       size: {
-        default: "h-9 text-sm px-2.5",
-        sm: "h-8 text-xs px-2",
-        lg: "h-10 text-sm px-3"
-      }
+        default: "h-10 text-sm",
+        sm: "h-8 text-xs",
+        lg: "h-14 text-base group-data-[collapsible=icon]:p-0!",
+      },
     },
     defaultVariants: {
       variant: "default",
-      size: "default"
-    }
+      size: "default",
+    },
   }
 );
+
+
+
 function SidebarMenuButton({
   asChild = false,
   isActive = false,
