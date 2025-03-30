@@ -471,25 +471,52 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
 }
 
 const sidebarMenuButtonVariants = cva(
-  "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-hidden ring-sidebar-ring transition-all duration-200 ease-in-out hover:bg-blue-600 hover:text-white focus-visible:ring-2 active:bg-blue-600 disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-blue-600 data-[active=true]:font-medium data-[active=true]:text-white group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
+  "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-none transition-all duration-200",
   {
     variants: {
       variant: {
-        default: "hover:bg-blue-600 hover:text-white",
-        outline: "bg-background hover:bg-blue-600 hover:text-white",
+        default: [
+          "bg-transparent text-foreground/80",
+          "hover:bg-accent/50 hover:text-foreground",
+          "focus-visible:ring-2 focus-visible:ring-ring",
+          "active:bg-accent/70",
+          "data-[active=true]:bg-accent/80 data-[active=true]:text-foreground",
+        ],
+        outline: [
+          "bg-background border border-border",
+          "hover:border-accent hover:text-foreground",
+          "data-[active=true]:border-accent data-[active=true]:bg-accent/20",
+        ],
       },
       size: {
-        default: "h-8 text-sm",
-        sm: "h-7 text-xs",
-        lg: "h-12 text-sm group-data-[collapsible=icon]:p-0!",
+        default: "h-9 px-3 py-2 text-sm",
+        sm: "h-8 px-2.5 py-1.5 text-xs",
+        lg: "h-10 px-4 py-2.5 text-base",
+      },
+      state: {
+        open: "bg-accent/20",
+        closed: "",
       },
     },
+    compoundVariants: [
+      {
+        variant: "default",
+        state: "open",
+        class: "bg-accent/20",
+      },
+      {
+        variant: "outline",
+        state: "open",
+        class: "border-accent/50",
+      },
+    ],
     defaultVariants: {
       variant: "default",
       size: "default",
     },
   }
 );
+
 function SidebarMenuButton({
   asChild = false,
   isActive = false,
