@@ -99,7 +99,7 @@ export default async function Home() {
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-blue-50 p-8 rounded-xl hover:shadow-lg transition-all">
-              <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+              <div className="w-14 h-14 rounded-full flex items-center justify-center mb-6">
                 <ShieldCheck className="w-7 h-7 text-blue-600" />
               </div>
               <h3 className="text-xl font-bold mb-3">Magas szintű biztonság</h3>
@@ -109,7 +109,7 @@ export default async function Home() {
             </div>
 
             <div className="bg-blue-50 p-8 rounded-xl hover:shadow-lg transition-all">
-              <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+              <div className="w-14 h-14 rounded-full flex items-center justify-center mb-6">
                 <TrendingUp className="w-7 h-7 text-blue-600" />
               </div>
               <h3 className="text-xl font-bold mb-3">Tanulmányi eredmények javulása</h3>
@@ -119,7 +119,7 @@ export default async function Home() {
             </div>
 
             <div className="bg-blue-50 p-8 rounded-xl hover:shadow-lg transition-all">
-              <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+              <div className="w-14 h-14 rounded-full flex items-center justify-center mb-6">
                 <Cpu className="w-7 h-7 text-blue-600" />
               </div>
               <h3 className="text-xl font-bold mb-3">Okos integrációk</h3>
@@ -150,7 +150,7 @@ export default async function Home() {
         </div>
       </section> */}
 
-<section className=" w-full py-16 bg-gradient-to-r from-blue-700 to-blue-900 text-white">
+<section className="w-full py-16 bg-gradient-to-r from-blue-700 to-blue-900 text-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -286,7 +286,7 @@ export default async function Home() {
         </div>
       </section> */}
 
-      <footer className="w-full bg-gray-900 text-white py-12">
+      <footer className="w-full py-16 bg-gradient-to-r from-blue-700 to-blue-900 text-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
@@ -299,9 +299,8 @@ export default async function Home() {
               <h4 className="font-bold mb-4">Linkek</h4>
               <ul className="space-y-2">
                 <li><Link href="/dashboard" className="text-gray-400 hover:text-white transition">Vezérlőpult</Link></li>
-                <li><Link href="/api-docs" className="text-gray-400 hover:text-white transition">API</Link></li>
                 <li><Link href="#" className="text-gray-400 hover:text-white transition">Dokumentáció</Link></li>
-      
+                <li><Link href="/api-docs" className="text-gray-400 hover:text-white transition">API</Link></li>
               </ul>
             </div>
             <div>
