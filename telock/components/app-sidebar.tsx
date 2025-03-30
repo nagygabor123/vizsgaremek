@@ -187,7 +187,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <span className="text-s truncate">Kiskunfélegyházi Szent Benedek PG Középiskola</span>
               </div>
               <Avatar className="h-9 w-9 rounded-full">
-                <AvatarFallback className="bg-blue-600 text-white text-[0.625rem]">
+                <AvatarFallback className="bg-blue-100 font-semibold text-blue-600 text-[0.625rem]">
                   {session?.user?.short_name}
                 </AvatarFallback>
               </Avatar>
