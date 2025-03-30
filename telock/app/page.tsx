@@ -50,7 +50,7 @@ export default async function Home() {
             <Button size="lg" asChild>
               <Link href="#contact">Bemutató kérése</Link>
             </Button>
-            <Button variant="outline" size="lg" className="text-white border-white hover:bg-white/10" asChild>
+            <Button variant="outline" size="lg" asChild>
               <Link href="#funkciok">Funkciók</Link>
             </Button>
           </div>
@@ -58,20 +58,32 @@ export default async function Home() {
       </div>
     </div>
 
-    {/* Product Showcase - Overlapping */}
-    <div className="w-full max-w-7xl px-6 -mt-24 md:-mt-40 relative z-10">
-      <div className="bg-white rounded-sm shadow-2xl overflow-hidden border border-gray-200">
-        <Image
-          src="/desktop.png"
-          width={1920}
-          height={1080}
-          className="w-full h-auto"
-          alt="Telock irányítópult előnézet"
-          priority
-        />
-        {/* <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"></div> */}
-      </div>
-    </div>
+
+{/* Product Showcase - Overlapping with responsive images */}
+<div className="w-full max-w-7xl px-6 -mt-24 md:-mt-40 relative z-10">
+  <div className="bg-white rounded-sm shadow-2xl overflow-hidden border border-gray-200">
+    {/* Desktop version */}
+    <Image
+      src="/desktop.png"
+      width={1600}
+      height={1200}
+      className="hidden md:block w-full h-auto rounded-sm shadow-lg drop-shadow-lg shadow-blue-500/50"
+      alt="Telock irányítópult asztali verzió"
+      priority
+    />
+    
+    {/* Mobile version */}
+    <Image
+      src="/mobile.png"
+      width={560}
+      height={620}
+      className="block md:hidden w-full h-auto rounded-sm shadow-lg drop-shadow-lg shadow-blue-500/50"
+      alt="Telock irányítópult mobil verzió"
+      priority
+    />
+  </div>
+</div>
+
 
       {/* Why Choose Us */}
       <section id="miert" className="w-full py-16">
