@@ -269,109 +269,46 @@ export default async function Home() {
   </div>
 </section>
 
-<footer className="w-full bg-gradient-to-b from-gray-50 to-gray-100 text-gray-800 py-16">
+<footer className="w-full bg-gray-50 text-gray-800 py-12">
   <div className="max-w-7xl mx-auto px-6">
-    <div className="grid md:grid-cols-4 gap-8 mb-12">
-      <div>
-        <div className="flex items-center gap-2 mb-4">
-          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-            <Lock className="w-5 h-5 text-white" />
-          </div>
-          <h3 className={`${ZenDots.className} text-2xl`}>telock</h3>
-        </div>
+    <div className="grid md:grid-cols-3 gap-8 mb-8">
+      <div className="space-y-4">
+        <h3 className={`${ZenDots.className} text-2xl`}>telock</h3>
         <p className="text-gray-600">
           Innovatív megoldások a modern oktatás támogatására.
         </p>
-        <div className="flex gap-4 mt-6">
-          {[Instagram, Twitter, Youtube].map((Icon, index) => (
-            <Link 
-              key={index} 
-              href="#" 
-              className="text-gray-500 hover:text-blue-600 transition-colors"
-            >
-              <Icon className="w-5 h-5" />
-            </Link>
-          ))}
-        </div>
       </div>
 
       <div>
-        <h4 className="font-bold text-lg mb-4 flex items-center gap-2">
-          <Navigation className="w-4 h-4" />
-          Navigáció
-        </h4>
-        <ul className="space-y-3">
-          {[
-            { name: 'Vezérlőpult', href: '/dashboard' },
-            { name: 'Dokumentáció', href: '#' },
-            { name: 'API Dokumentáció', href: '/api-docs' },
-            { name: 'GYIK', href: '#' }
-          ].map((item, index) => (
-            <li key={index}>
-              <Link 
-                href={item.href} 
-                className="text-gray-600 hover:text-blue-600 transition-colors flex items-center gap-2"
-              >
-                <ChevronRight className="w-3 h-3" />
-                {item.name}
-              </Link>
-            </li>
-          ))}
+        <h4 className="font-bold mb-3">Linkek</h4>
+        <ul className="space-y-2">
+          <li><Link href="/dashboard" className="text-gray-600 hover:text-blue-600 transition">Vezérlőpult</Link></li>
+          <li><Link href="#" className="text-gray-600 hover:text-blue-600 transition">Dokumentáció</Link></li>
+          <li><Link href="/api-docs" className="text-gray-600 hover:text-blue-600 transition">API</Link></li>
         </ul>
       </div>
 
       <div>
-        <h4 className="font-bold text-lg mb-4 flex items-center gap-2">
-          <Mail className="w-4 h-4" />
-          Kapcsolat
-        </h4>
-        <ul className="space-y-3 text-gray-600">
-          <li className="flex items-center gap-2">
-            <Mail className="w-4 h-4" />
-            nagy.gabor@diak.szbi-pg.hu
-          </li>
-          <li className="flex items-center gap-2">
-            <Mail className="w-4 h-4" />
-            szalkai-szabo.adam@diak.szbi-pg.hu
-          </li>
-          <li className="flex items-center gap-2 mt-4">
-            <Phone className="w-4 h-4" />
-            +36 1 234 5678
-          </li>
+        <h4 className="font-bold mb-3">Kapcsolat</h4>
+        <ul className="space-y-2 text-gray-600">
+          <li>nagy.gabor@diak.szbi-pg.hu</li>
+          <li>szalkai-szabo.adam@diak.szbi-pg.hu</li>
         </ul>
-      </div>
-
-      <div>
-        <h4 className="font-bold text-lg mb-4 flex items-center gap-2">
-          <Newspaper className="w-4 h-4" />
-          Hírlevél
-        </h4>
-        <p className="text-gray-600 mb-4">
-          Iratkozzon fel hírlevelünkre az újdonságokért!
-        </p>
-        <div className="flex gap-2">
-          <input 
-            type="email" 
-            placeholder="Email cím" 
-            className="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300"
-          />
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-            <Send className="w-4 h-4" />
-          </button>
-        </div>
       </div>
     </div>
 
     <div className="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center">
-      <p className="text-gray-500 mb-4 md:mb-0">
+      <p className="text-gray-500 mb-3 md:mb-0">
         © {new Date().getFullYear()} telock. Minden jog fenntartva.
       </p>
-      <div className="flex gap-6">
-        <Link href="#" className="text-gray-500 hover:text-blue-600 text-sm">
-          Adatvédelmi irányelvek
+      <div className="flex gap-4">
+        <Link href="#" className="text-gray-500 hover:text-blue-600">
+          <span className="sr-only">Instagram</span>
+          <Instagram className="w-5 h-5" />
         </Link>
-        <Link href="#" className="text-gray-500 hover:text-blue-600 text-sm">
-          Felhasználási feltételek
+        <Link href="#" className="text-gray-500 hover:text-blue-600">
+          <span className="sr-only">YouTube</span>
+          <Youtube className="w-5 h-5" />
         </Link>
       </div>
     </div>
