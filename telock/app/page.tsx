@@ -326,7 +326,7 @@ export default async function Home() {
     </div>
 
     <div className="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center">
-      <p className="text-gray-500 mb-3 md:mb-0">
+      <p className="text-gray-500 mb-3 md:mb-0 text-sm">
         © {new Date().getFullYear()} telock. Minden jog fenntartva.
       </p>
       <div className="flex gap-4">
