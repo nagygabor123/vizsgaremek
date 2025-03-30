@@ -65,10 +65,52 @@ export default async function Home() {
 
       <section id="miert" className="w-full max-w-6xl text-center my-12 px-4">
         <h2 className="text-4xl font-bold text-gray-800 mb-4">Miért mi?</h2>
-        <p className="text-gray-700 max-w-3xl mx-auto text-base md:text-lg">
-          Innovatív megoldásainkkal biztosítjuk a diákok számára a biztonságos és kényelmes telefontárolást, miközben segítjük az iskolákat a modern kihívások kezelésében. Rendszerünk egyszerűen kezelhető, megbízható, és hozzájárul a zavartalan oktatási folyamatokhoz.
-        </p>
+        <div className="bg-white shadow-lg rounded-lg p-8 mt-6 transition-transform hover:scale-105">
+          <p className="text-gray-700 max-w-3xl mx-auto text-base md:text-lg">
+            🚀 Innovatív megoldásainkkal biztosítjuk a diákok számára a biztonságos és kényelmes telefontárolást. <br />
+            📈 Segítünk az iskoláknak a modern kihívások kezelésében. <br />
+            🔒 Rendszerünk egyszerűen kezelhető, megbízható, és hozzájárul a zavartalan oktatási folyamatokhoz.
+          </p>
+        </div>
       </section>
+
+      <section id="funkciok" className="w-full max-w-6xl text-center my-12 px-4">
+        <h2 className="text-4xl font-bold text-gray-800 mb-4">Funkciók</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {[{
+            title: 'Biztonságos tárolás',
+            description: 'A diákok telefonjai zárt fiókokban kerülnek tárolásra.',
+            icon: <ShieldCheck className="w-12 h-12 text-blue-600 mx-auto" />
+          }, {
+            title: 'Gyors kiadás és visszavétel',
+            description: 'RFID segítségével gyorsan kiadható és visszavehető a készülék.',
+            icon: <Zap className="w-12 h-12 text-blue-600 mx-auto" />
+          }, {
+            title: 'Események naplózása',
+            description: 'A rendszer naplózza a telefonok leadását és kivételét.',
+            icon: <FileClock className="w-12 h-12 text-blue-600 mx-auto" />
+          }, {
+            title: 'Adminisztrátori felügyelet',
+            description: 'Az iskola vezetősége valós időben ellenőrizheti a fiókok állapotát.',
+            icon: <ChartColumnBig className="w-12 h-12 text-blue-600 mx-auto" />
+          }, {
+            title: 'Szoftverfrissítések',
+            description: 'A rendszer mindig a legújabb funkciókat és biztonsági javításokat tartalmazza.',
+            icon: <RefreshCw className="w-12 h-12 text-blue-600 mx-auto" />
+          }, {
+            title: 'Több tárolóhely támogatása',
+            description: 'Több tárolószekrény telepítse az iskola különböző pontjaira.',
+            icon: <Server className="w-12 h-12 text-blue-600 mx-auto" />
+          }].map((feature, index) => (
+            <div key={index} className="bg-white shadow-md rounded-lg p-6 transition-transform hover:scale-105">
+              {feature.icon}
+              <h3 className="font-bold mt-4">{feature.title}</h3>
+              <p className="text-sm text-muted-foreground mt-2">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
     </div>
   );
 }
