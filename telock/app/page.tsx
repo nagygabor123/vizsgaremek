@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link"
-import { FileClock, Zap, ChartColumnBig, ShieldCheck, RefreshCw, Server } from "lucide-react";
+import { FileClock, Zap, ChartColumnBig, ShieldCheck, RefreshCw, Server, Rocket, Cpu, TrendingUp } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { Button } from "@/components/ui/button"
 import localFont from "next/font/local";
@@ -63,14 +63,28 @@ export default async function Home() {
         />
       </div>
 
-      <section id="miert" className="w-full max-w-6xl text-center my-12 px-4">
-        <h2 className="text-4xl font-bold text-gray-800 mb-4">Miért mi?</h2>
-        <div className="bg-white shadow-lg rounded-lg p-8 mt-6 transition-transform hover:scale-105">
-          <p className="text-gray-700 max-w-3xl mx-auto text-base md:text-lg">
-            🚀 Innovatív megoldásainkkal biztosítjuk a diákok számára a biztonságos és kényelmes telefontárolást. <br />
-            📈 Segítünk az iskoláknak a modern kihívások kezelésében. <br />
-            🔒 Rendszerünk egyszerűen kezelhető, megbízható, és hozzájárul a zavartalan oktatási folyamatokhoz.
-          </p>
+      <section id="miert-mi" className="w-full max-w-6xl text-center my-12 px-4">
+        <h2 className="text-4xl font-bold text-gray-800 mb-4">Miért válassz minket?</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {[{
+            icon: <Rocket className="text-blue-600 w-12 h-12 mb-4" />,
+            title: 'Gyors bevezetés',
+            description: 'Pár perc alatt üzembe helyezhető rendszer, amely azonnal működésre kész.'
+          }, {
+            icon: <Cpu className="text-blue-600 w-12 h-12 mb-4" />,
+            title: 'Modern Technológia',
+            description: 'A legújabb webes technológiákkal fejlesztve a gyorsaság és megbízhatóság érdekében.'
+          }, {
+            icon: <TrendingUp className="text-blue-600 w-12 h-12 mb-4" />,
+            title: 'Folyamatos Fejlődés',
+            description: 'Rendszeres frissítések és új funkciók az igényeidhez igazítva.'
+          }].map((feature, index) => (
+            <div key={index} className="bg-white shadow-md rounded-lg p-6 transition-transform hover:scale-105">
+              {feature.icon}
+              <h3 className="font-bold text-xl text-blue-600 mb-2">{feature.title}</h3>
+              <p className="text-sm text-muted-foreground mb-4">{feature.description}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -106,6 +120,31 @@ export default async function Home() {
               {feature.icon}
               <h3 className="font-bold mt-4">{feature.title}</h3>
               <p className="text-sm text-muted-foreground mt-2">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="dokumentaciok" className="w-full max-w-6xl text-center my-12 px-4">
+        <h2 className="text-4xl font-bold text-gray-800 mb-4">Dokumentációk</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {[{
+            title: 'Telepítési útmutató',
+            description: 'Részletes dokumentáció a rendszer telepítéséről és beállításáról.',
+            link: '/docs/install'
+          }, {
+            title: 'API Referencia',
+            description: 'Az összes elérhető API végpont és használatuk ismertetése.',
+            link: '/docs/api'
+          }, {
+            title: 'Felhasználói kézikönyv',
+            description: 'Az adminisztrátorok és felhasználók számára készült részletes útmutató.',
+            link: '/docs/user-guide'
+          }].map((doc, index) => (
+            <div key={index} className="bg-white shadow-md rounded-lg p-6 transition-transform hover:scale-105">
+              <h3 className="font-bold text-xl text-blue-600 mb-2">{doc.title}</h3>
+              <p className="text-sm text-muted-foreground mb-4">{doc.description}</p>
+              <Link href={doc.link} className="text-blue-600 underline">Megnyitás</Link>
             </div>
           ))}
         </div>
