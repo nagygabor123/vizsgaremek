@@ -15,61 +15,63 @@ export default async function Home() {
   const session = await getServerSession();
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 flex flex-col items-center">
-      {/* Hero Section */}
-      <div className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
-          <header className="w-full flex justify-between items-center mb-16">
-            <span className={`${ZenDots.className} text-3xl text-white`}>
-              telock
-            </span>
-            <nav className="hidden md:flex space-x-8">
-              <Link href="#miert" className="hover:text-blue-200 transition">Miért mi?</Link>
-              <Link href="#funkciok" className="hover:text-blue-200 transition">Funkciók</Link>
-              <Link href="#dokumentaciok" className="hover:text-blue-200 transition">Dokumentációk</Link>
-            </nav>
+    {/* Hero Section with overlapping space */}
+    <div className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white pb-32 md:pb-48 relative z-0">
+      <div className="max-w-7xl mx-auto px-6 pt-16">
+        <header className="w-full flex justify-between items-center mb-16">
+          <span className={`${ZenDots.className} text-3xl text-white`}>
+            telock
+          </span>
+          <nav className="hidden md:flex space-x-8">
+            <Link href="#miert" className="hover:text-blue-200 transition">Miért mi?</Link>
+            <Link href="#funkciok" className="hover:text-blue-200 transition">Funkciók</Link>
+            <Link href="#dokumentaciok" className="hover:text-blue-200 transition">Dokumentációk</Link>
+          </nav>
 
-            {session ? (
-              <Button variant="secondary" className="px-6 py-2" asChild>
-                <Link href="/dashboard">Vezérlőpult</Link>
-              </Button>
-            ) : (
-              <Button variant="secondary" className="px-6 py-2" asChild>
-                <Link href="/login">Bejelentkezés</Link>
-              </Button>
-            )}
-          </header>
+          {session ? (
+            <Button variant="secondary" className="px-6 py-2" asChild>
+              <Link href="/dashboard">Vezérlőpult</Link>
+            </Button>
+          ) : (
+            <Button variant="secondary" className="px-6 py-2" asChild>
+              <Link href="/login">Bejelentkezés</Link>
+            </Button>
+          )}
+        </header>
 
-          <section className="w-full text-center my-12">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              Biztonságos telefontárolás <br /> modern iskoláknak
-            </h1>
-            <p className="mt-6 text-xl text-blue-100 max-w-3xl mx-auto">
-              Innovatív megoldásunk segít fenntartani a koncentrációt az órákon, miközben biztosítja diákjaitok értékes eszközeinek védelmét.
-            </p>
-            <div className="mt-10 flex justify-center gap-4">
-              <Button size="lg" asChild>
-                <Link href="#contact">Bemutató kérése</Link>
-              </Button>
-              <Button variant="outline" size="lg" className="text-white border-white hover:bg-white/10" asChild>
-                <Link href="#funkciok">Funkciók</Link>
-              </Button>
-            </div>
-          </section>
-        </div>
+        <section className="w-full text-center my-12">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+            Biztonságos telefontárolás <br /> modern iskoláknak
+          </h1>
+          <p className="mt-6 text-xl text-blue-100 max-w-3xl mx-auto">
+            Innovatív megoldásunk segít fenntartani a koncentrációt az órákon, miközben biztosítja diákjaitok értékes eszközeinek védelmét.
+          </p>
+          <div className="mt-10 flex justify-center gap-4">
+            <Button size="lg" asChild>
+              <Link href="#contact">Bemutató kérése</Link>
+            </Button>
+            <Button variant="outline" size="lg" className="text-white border-white hover:bg-white/10" asChild>
+              <Link href="#funkciok">Funkciók</Link>
+            </Button>
+          </div>
+        </section>
       </div>
+    </div>
 
-      {/* Product Showcase */}
-      <div className="w-full max-w-7xl px-6 py-12 md:py-20 -mt-12 md:-mt-20 relative z-10">
-        <div className="bg-white rounded-xl shadow-xl overflow-hidden">
-          <Image
-            src="/desktop.png"
-            width={1920}
-            height={1080}
-            className="w-full h-auto"
-            alt="Telock irányítópult előnézet"
-          />
-        </div>
+    {/* Product Showcase - Overlapping */}
+    <div className="w-full max-w-7xl px-6 -mt-24 md:-mt-40 relative z-10">
+      <div className="bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200">
+        <Image
+          src="/dashboard-preview.jpg"
+          width={1920}
+          height={1080}
+          className="w-full h-auto"
+          alt="Telock irányítópult előnézet"
+          priority
+        />
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"></div>
       </div>
+    </div>
 
       {/* Why Choose Us */}
       <section id="miert" className="w-full py-16 bg-white">
