@@ -471,45 +471,48 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
 }
 
 const sidebarMenuButtonVariants = cva(
-  "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-none transition-all duration-200",
+  "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-lg p-2 text-left text-sm outline-none transition-all duration-200 hover:bg-blue-50 hover:text-blue-700 focus-visible:ring-2 focus-visible:ring-blue-300 active:bg-blue-100 disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
   {
     variants: {
       variant: {
         default: [
-          "bg-transparent text-foreground/80",
-          "hover:bg-accent/50 hover:text-foreground",
-          "focus-visible:ring-2 focus-visible:ring-ring",
-          "active:bg-accent/70",
-          "data-[active=true]:bg-accent/80 data-[active=true]:text-foreground",
+          "text-gray-700",
+          "data-[active=true]:bg-blue-50",
+          "data-[active=true]:text-blue-700",
+          "data-[active=true]:font-semibold",
+          "data-[active=true]:border-l-4",
+          "data-[active=true]:border-blue-500",
+          "hover:bg-blue-50/80",
+          "hover:text-blue-600",
+          "dark:text-gray-300",
+          "dark:hover:bg-blue-900/20",
+          "dark:hover:text-blue-400",
+          "dark:data-[active=true]:bg-blue-900/30",
+          "dark:data-[active=true]:text-blue-400",
         ],
         outline: [
-          "bg-background border border-border",
-          "hover:border-accent hover:text-foreground",
-          "data-[active=true]:border-accent data-[active=true]:bg-accent/20",
+          "bg-white border border-gray-200",
+          "hover:border-blue-300",
+          "hover:bg-blue-50",
+          "hover:text-blue-600",
+          "shadow-sm",
+          "data-[active=true]:border-blue-400",
+          "data-[active=true]:bg-blue-50",
+          "data-[active=true]:text-blue-700",
+          "dark:bg-gray-800",
+          "dark:border-gray-700",
+          "dark:hover:border-blue-600",
+          "dark:hover:bg-blue-900/20",
+          "dark:data-[active=true]:border-blue-600",
+          "dark:data-[active=true]:bg-blue-900/30",
         ],
       },
       size: {
-        default: "h-9 px-3 py-2 text-sm",
-        sm: "h-8 px-2.5 py-1.5 text-xs",
-        lg: "h-10 px-4 py-2.5 text-base",
-      },
-      state: {
-        open: "bg-accent/20",
-        closed: "",
+        default: "h-10 text-sm px-3",
+        sm: "h-8 text-xs px-2.5",
+        lg: "h-12 text-base px-4 group-data-[collapsible=icon]:p-0!",
       },
     },
-    compoundVariants: [
-      {
-        variant: "default",
-        state: "open",
-        class: "bg-accent/20",
-      },
-      {
-        variant: "outline",
-        state: "open",
-        class: "border-accent/50",
-      },
-    ],
     defaultVariants: {
       variant: "default",
       size: "default",
