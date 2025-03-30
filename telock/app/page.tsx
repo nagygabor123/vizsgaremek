@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link"
-import { FileClock, Zap, ChartColumnBig, ShieldCheck, RefreshCw, Server, Rocket, Cpu, TrendingUp } from "lucide-react";
+import { FileClock, Zap, ChartColumnBig, ShieldCheck, RefreshCw, Server, Rocket, Cpu, TrendingUp, CheckCircle } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { Button } from "@/components/ui/button"
 import localFont from "next/font/local";
@@ -225,21 +225,46 @@ export default async function Home() {
   </div>
 </section>
 
-<section className="w-full py-16 bg-blue-600 text-white">
+<section className="w-full py-16 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
   <div className="max-w-4xl mx-auto px-6 text-center">
-    <h2 className="text-3xl md:text-4xl font-bold mb-6">
-      Készen áll az iskolája digitális átalakulására?
+    <div className="relative inline-block mb-8">
+      <div className="absolute -inset-4 bg-blue-500/30 rounded-xl blur-md animate-pulse"></div>
+      <div className="relative bg-blue-700 px-6 py-3 rounded-lg">
+        <span className="font-medium">Új lehetőség az iskoláknak</span>
+      </div>
+    </div>
+    
+    <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
+      Készen áll a <span className="text-blue-200">digitális fejlődésre</span>?
     </h2>
-    <p className="text-xl text-blue-100 mb-8">
-      Vegye fel velünk a kapcsolatot még ma, és kérjen egy személyre szabott bemutatót!
-    </p>
-    <div className="flex flex-col sm:flex-row justify-center gap-4">
-      <Button asChild className="bg-white text-blue-600 hover:bg-blue-50">
-        <Link href="#contact">Bemutató kérése</Link>
-      </Button>
-      <Button variant="outline" className="text-white border-white hover:bg-white/10">
-        <Link href="tel:+3612345678">Hívjon minket</Link>
-      </Button>
+    
+    <div className="max-w-2xl mx-auto mb-8">
+      <p className="text-lg text-blue-100 mb-6">
+        Írja be az email címét, és küldjük Önnek az ingyenes bemutató anyagot, valamint egy személyes konzultáció időpontot!
+      </p>
+      
+      <div className="flex flex-col sm:flex-row gap-3 justify-center">
+        <input 
+          type="email" 
+          placeholder="iskola@example.hu" 
+          className="flex-1 px-4 py-3 rounded-lg border border-blue-400 bg-blue-500/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
+        />
+        <button className="px-6 py-3 bg-white text-blue-600 font-medium rounded-lg hover:bg-blue-50 transition-all shadow-md hover:shadow-lg whitespace-nowrap">
+          Anyagot kérek
+        </button>
+      </div>
+    </div>
+    
+    <div className="flex items-center justify-center gap-4 text-sm text-blue-200">
+      <div className="flex items-center gap-2">
+        <CheckCircle className="w-4 h-4" />
+        <span>Ingyenes bemutató</span>
+      </div>
+      <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
+      <div className="flex items-center gap-2">
+        <CheckCircle className="w-4 h-4" />
+        <span>Nem kötelező megrendelés</span>
+      </div>
     </div>
   </div>
 </section>
@@ -273,6 +298,7 @@ export default async function Home() {
         <h4 className="font-bold mb-4">Kövessen minket</h4>
         <div className="flex space-x-4">
           <Link href="#" className="text-gray-600 hover:text-blue-600 transition">Instagram</Link>
+          <Link href="#" className="text-gray-600 hover:text-blue-600 transition">Facebook</Link>
           <Link href="#" className="text-gray-600 hover:text-blue-600 transition">TikTok</Link>
           <Link href="#" className="text-gray-600 hover:text-blue-600 transition">YouTube</Link>
         </div>
