@@ -63,30 +63,37 @@ export default async function Home() {
         />
       </div>
 
-      <section id="miert-mi" className="w-full max-w-6xl text-center my-12 px-4">
-        <h2 className="text-4xl font-bold text-gray-800 mb-4">Miért válassz minket?</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {[{
-            icon: <Rocket className="text-blue-600 w-12 h-12 mb-4" />,
-            title: 'Gyors bevezetés',
-            description: 'Pár perc alatt üzembe helyezhető rendszer, amely azonnal működésre kész.'
-          }, {
-            icon: <Cpu className="text-blue-600 w-12 h-12 mb-4" />,
-            title: 'Modern Technológia',
-            description: 'A legújabb webes technológiákkal fejlesztve a gyorsaság és megbízhatóság érdekében.'
-          }, {
-            icon: <TrendingUp className="text-blue-600 w-12 h-12 mb-4" />,
-            title: 'Folyamatos Fejlődés',
-            description: 'Rendszeres frissítések és új funkciók az igényeidhez igazítva.'
-          }].map((feature, index) => (
-            <div key={index} className="bg-white shadow-md rounded-lg p-6 transition-transform hover:scale-105">
-              {feature.icon}
-              <h3 className="font-bold text-xl text-blue-600 mb-2">{feature.title}</h3>
-              <p className="text-sm text-muted-foreground mb-4">{feature.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <section id="miert" className="py-6 md:py-8 lg:py-12">
+  <div className="container mx-auto text-center">
+    <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6">
+      Miért válassz minket?
+    </h2>
+    <p className="text-sm text-muted-foreground sm:text-lg mb-8">
+      Mi innovatív megoldásokkal segítjük az iskolákat, hogy biztosítva legyen a diákok mobiltelefonjainak biztonságos tárolása. Mi nem csupán egy rendszert kínálunk, hanem egy egyszerűen kezelhető és megbízható megoldást, amely hozzájárul a zavartalan oktatás biztosításához.
+    </p>
+    <div className="flex flex-col sm:flex-row justify-center gap-6">
+      <div className="w-full max-w-xs bg-white shadow-lg p-6 rounded-lg text-left">
+        <h3 className="text-xl font-semibold mb-4">Innováció és megbízhatóság</h3>
+        <p className="text-sm text-muted-foreground mb-6">
+          A legmodernebb technológia alkalmazásával biztosítjuk a diákok eszközeinek védelmét és a rendszer zökkenőmentes működését.
+        </p>
+      </div>
+      <div className="w-full max-w-xs bg-white shadow-lg p-6 rounded-lg text-left">
+        <h3 className="text-xl font-semibold mb-4">Könnyű használhatóság</h3>
+        <p className="text-sm text-muted-foreground mb-6">
+          Az egyszerű kezelőfelület lehetővé teszi a tanárok és diákok számára is, hogy könnyedén használják a rendszert, csökkentve a tanulási görbét.
+        </p>
+      </div>
+      <div className="w-full max-w-xs bg-white shadow-lg p-6 rounded-lg text-left">
+        <h3 className="text-xl font-semibold mb-4">Rugalmasság</h3>
+        <p className="text-sm text-muted-foreground mb-6">
+          Rendszerünk könnyedén alkalmazkodik a különböző iskolai igényekhez, legyen szó több tárolóhelyről vagy egyedi beállítások kezeléséről.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       <section id="funkciok" className="w-full max-w-6xl text-center my-12 px-4">
         <h2 className="text-4xl font-bold text-gray-800 mb-4">Funkciók</h2>
@@ -125,30 +132,37 @@ export default async function Home() {
         </div>
       </section>
 
-      <section id="dokumentaciok" className="w-full max-w-6xl text-center my-12 px-4">
-        <h2 className="text-4xl font-bold text-gray-800 mb-4">Dokumentációk</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {[{
-            title: 'Telepítési útmutató',
-            description: 'Részletes dokumentáció a rendszer telepítéséről és beállításáról.',
-            link: '/docs/install'
-          }, {
-            title: 'API Referencia',
-            description: 'Az összes elérhető API végpont és használatuk ismertetése.',
-            link: '/docs/api'
-          }, {
-            title: 'Felhasználói kézikönyv',
-            description: 'Az adminisztrátorok és felhasználók számára készült részletes útmutató.',
-            link: '/docs/user-guide'
-          }].map((doc, index) => (
-            <div key={index} className="bg-white shadow-md rounded-lg p-6 transition-transform hover:scale-105">
-              <h3 className="font-bold text-xl text-blue-600 mb-2">{doc.title}</h3>
-              <p className="text-sm text-muted-foreground mb-4">{doc.description}</p>
-              <Link href={doc.link} className="text-blue-600 underline">Megnyitás</Link>
-            </div>
-          ))}
-        </div>
-      </section>
+      <section id="dokumentaciok" className="py-6 md:py-8 lg:py-12">
+  <div className="container mx-auto text-center">
+    <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6">
+      Dokumentációk
+    </h2>
+    <p className="text-sm text-muted-foreground sm:text-lg mb-8">
+      Minden, amire szükséged van a rendszer hatékony használatához.
+    </p>
+    <div className="flex justify-center gap-6">
+      <div className="bg-white shadow-lg p-8 rounded-lg w-full max-w-sm">
+        <h3 className="text-lg font-semibold mb-4">API dokumentáció</h3>
+        <p className="text-sm text-muted-foreground mb-6">
+          Fedezd fel az API használatát és az integrációk lehetőségeit.
+        </p>
+        <Button asChild className="w-full">
+          <Link href="/api-docs" className="text-blue-600 hover:text-blue-800">Megnyitás</Link>
+        </Button>
+      </div>
+      <div className="bg-white shadow-lg p-8 rounded-lg w-full max-w-sm">
+        <h3 className="text-lg font-semibold mb-4">Szoftver dokumentáció</h3>
+        <p className="text-sm text-muted-foreground mb-6">
+          Részletes útmutatók és telepítési információk a szoftverhez.
+        </p>
+        <Button asChild className="w-full">
+          <Link href="#" className="text-blue-600 hover:text-blue-800">Megnyitás</Link>
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
+
 
     </div>
   );
