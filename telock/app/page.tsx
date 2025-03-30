@@ -286,7 +286,7 @@ export default async function Home() {
         </div>
       </section> */}
 
-      <footer className="w-full text-white py-12">
+      <footer className="w-full text-white py-12 border-b border-gray-800 mb-12 pb-8">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
