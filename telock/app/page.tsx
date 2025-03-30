@@ -47,10 +47,10 @@ export default async function Home() {
             Innovatív megoldásunk segít fenntartani a koncentrációt az órákon, miközben biztosítja diákjaitok értékes eszközeinek védelmét.
           </p>
           <div className="mt-10 flex justify-center gap-4">
-            <Button size="lg" asChild>
+            <Button asChild>
               <Link href="#contact">Bemutató kérése</Link>
             </Button>
-            <Button variant="outline" size="lg" asChild>
+            <Button variant="secondary" asChild>
               <Link href="#funkciok">Funkciók</Link>
             </Button>
           </div>
@@ -140,10 +140,10 @@ export default async function Home() {
             Vegye fel velünk a kapcsolatot még ma, és kérjen egy személyre szabott bemutatót!
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button size="lg" className="bg-white text-blue-800 hover:bg-gray-100" asChild>
+            <Button asChild>
               <Link href="#contact">Bemutató kérése</Link>
             </Button>
-            <Button variant="outline" size="lg" className="text-white border-white hover:bg-white/10" asChild>
+            <Button variant="outline" asChild>
               <Link href="tel:+3612345678">Hívjon minket</Link>
             </Button>
           </div>
@@ -305,7 +305,7 @@ export default async function Home() {
             <div>
               <h4 className="font-bold mb-4">Linkek</h4>
               <ul className="space-y-2">
-                <li><Link href="#" className="text-gray-400 hover:text-white transition">Főoldal</Link></li>
+                <li><Link href="#" className="text-gray-400 hover:text-white transition">Vezérlőpult</Link></li>
                 <li><Link href="#miert" className="text-gray-400 hover:text-white transition">Miért mi?</Link></li>
                 <li><Link href="#funkciok" className="text-gray-400 hover:text-white transition">Funkciók</Link></li>
                 <li><Link href="#dokumentaciok" className="text-gray-400 hover:text-white transition">Dokumentáció</Link></li>
@@ -314,13 +314,12 @@ export default async function Home() {
             <div>
               <h4 className="font-bold mb-4">Kapcsolat</h4>
               <ul className="space-y-2 text-gray-400">
-                <li>info@telock.hu</li>
-                <li>+36 1 234 5678</li>
-                <li>1037 Budapest, Fő utca 1.</li>
+                <li>nagy.gabor@diak.szbi-pg.hu</li>
+                <li>szalkai-szabo.adam@diak.szbi-pg.hu</li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-4">Kövess minket</h4>
+              <h4 className="font-bold mb-4">Kövessen minket</h4>
               <div className="flex space-x-4">
                 <Link href="#" className="text-gray-400 hover:text-white transition">Facebook</Link>
                 <Link href="#" className="text-gray-400 hover:text-white transition">LinkedIn</Link>
@@ -329,7 +328,7 @@ export default async function Home() {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
-            <p>© 2023 Telock. Minden jog fenntartva.</p>
+            <p>© 2025 telock. Minden jog fenntartva.</p>
           </div>
         </div>
       </footer>
