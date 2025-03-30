@@ -14,8 +14,8 @@ const ZenDots = localFont({
 export default async function Home() {
   const session = await getServerSession();
   return (
-    <div className="min-h-screen  flex flex-col items-center">
-      {/* Hero Section with overlapping space */}
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center">
+
       <div className="w-full bg-gradient-to-r from-blue-600 to-blue-800 pb-32 md:pb-48 relative z-0">
         <div className="max-w-7xl mx-auto px-6 pt-16">
           <header className="w-full flex justify-between items-center mb-16">
@@ -85,30 +85,29 @@ export default async function Home() {
       </div>
 
 
-      {/* Why Choose Us */}
-      <section id="miert" className="w-full py-16">
+      <section id="miert" className="w-full py-16 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Miért mi?
+              Miért a Telock?
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Különleges megoldásaink egyedivé teszik rendszerünket az iskolai telefontárolás területén.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 ">
-            <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all p-8 rounded-xl hover:shadow-lg transition-all">
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-blue-50 p-8 rounded-xl hover:shadow-lg transition-all">
               <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
                 <ShieldCheck className="w-7 h-7 text-blue-600" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Magas szintű biztonság</h3>
+              <h3 className="text-xl font-bold mb-3">Katonai szintű biztonság</h3>
               <p className="text-gray-600">
                 Titkosított tárolóegységeink és auditált hozzáférési rendszerünk garantálja eszközeitek biztonságát.
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all p-8 rounded-xl hover:shadow-lg transition-all">
+            <div className="bg-blue-50 p-8 rounded-xl hover:shadow-lg transition-all">
               <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
                 <TrendingUp className="w-7 h-7 text-blue-600" />
               </div>
@@ -118,7 +117,7 @@ export default async function Home() {
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all p-8 rounded-xl hover:shadow-lg transition-all">
+            <div className="bg-blue-50 p-8 rounded-xl hover:shadow-lg transition-all">
               <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
                 <Cpu className="w-7 h-7 text-blue-600" />
               </div>
@@ -131,52 +130,12 @@ export default async function Home() {
         </div>
       </section>
 
-  
-
-<section id="velemenyek" className="w-full py-16 bg-gradient-to-r from-blue-700 to-blue-900 text-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Iskolák véleménye
-            </h2>
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-              Csatlakozzon több mint 120 elégedett oktatási intézményhez.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                quote: "A Telock rendszer bevezetése óta drasztikusan csökkent a mobiltelefonok miatti fegyelmi incidensek száma iskolánkban.",
-                author: "Kovács János, igazgató",
-                school: "Budapesti Széchenyi Gimnázium"
-              },
-              {
-                quote: "Végre egy olyan megoldás, ami tényleg működik és nem csak megnehezíti a tanáraink munkáját. A diákjaink is könnyen megtanulták használni.",
-                author: "Nagy Edit, iskolavezető",
-                school: "Debreceni Református Kollégium"
-              },
-              {
-                quote: "Technikai támogatásuk kiváló, minden kérdésünkre gyorsan és szakmailag precízen válaszolnak. Profi csapat!",
-                author: "Tóth Béla, Rendszergazda",
-                school: "Pécsi Műszaki Szakközépiskola"
-              }
-            ].map((testimonial, index) => (
-              <div key={index} className="bg-white/10 p-8 rounded-xl backdrop-blur-sm">
-                <p className="italic mb-6 text-lg">"{testimonial.quote}"</p>
-                <p className="font-bold">{testimonial.author}</p>
-                <p className="text-blue-200">{testimonial.school}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      {/* Features */}
       <section id="funkciok" className="w-full py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Funkciók
+              Fejlett funkciók
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Minden, amire egy modern iskolának szüksége lehet a hatékony telefontároláshoz.
@@ -228,11 +187,52 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* <section id="dokumentaciok" className="w-full py-16 bg-white">
+      {/* Testimonials */}
+      <section className="w-full py-16 bg-blue-600 text-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Iskoláink véleménye
+            </h2>
+            <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+              Csatlakozzon több mint 120 elégedett oktatási intézményhez.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                quote: "A Telock rendszer bevezetése óta drasztikusan csökkent a mobiltelefonok miatti fegyelmi incidensek száma iskolánkban.",
+                author: "Kovács János, igazgató",
+                school: "Budapesti Széchenyi Gimnázium"
+              },
+              {
+                quote: "Végre egy olyan megoldás, ami tényleg működik és nem csak terhet ró a tanárainkra. A diákjaink is könnyen megtanulták használni.",
+                author: "Nagy Edit, iskolavezető",
+                school: "Debreceni Református Kollégium"
+              },
+              {
+                quote: "Technikai támogatásuk kiváló, minden kérdésünkre gyorsan és szakmailag megalapozottan válaszolnak.",
+                author: "Tóth Béla, IT koordinátor",
+                school: "Pécsi Műszaki Szakközépiskola"
+              }
+            ].map((testimonial, index) => (
+              <div key={index} className="bg-white/10 p-8 rounded-xl backdrop-blur-sm">
+                <p className="italic mb-6 text-lg">"{testimonial.quote}"</p>
+                <p className="font-bold">{testimonial.author}</p>
+                <p className="text-blue-200">{testimonial.school}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Documentation */}
+      <section id="dokumentaciok" className="w-full py-16 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Dokumentáció és Támogatás
+              Dokumentáció & Támogatás
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Minden erőforrás, amire szüksége van a rendszer hatékony használatához.
@@ -244,9 +244,9 @@ export default async function Home() {
               <div className="bg-blue-50 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
                 <FileClock className="w-6 h-6 text-blue-600" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Projekt Dokumentáció</h3>
+              <h3 className="text-xl font-bold mb-3">Felhasználói kézikönyv</h3>
               <p className="text-gray-600 mb-6">
-                Egyetlen PDF dokumentumban megtalálható a felhasználói és fejlesztői dokumentáció, amely segít a rendszer használatában, telepítésében és karbantartásában.
+                Részletes útmutató a rendszer használatához, telepítéséhez és karbantartásához.
               </p>
               <Button variant="outline" asChild>
                 <Link href="#">Letöltés PDF</Link>
@@ -257,40 +257,42 @@ export default async function Home() {
               <div className="bg-blue-50 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
                 <Rocket className="w-6 h-6 text-blue-600" />
               </div>
-              <h3 className="text-xl font-bold mb-3">API Dokumentáció</h3>
+              <h3 className="text-xl font-bold mb-3">Technikai dokumentáció</h3>
               <p className="text-gray-600 mb-6">
-                Az API dokumentációban látható az összes végpont, illetve teszteesetek is olvashatóak.
+                API referenciák, integrációs útmutatók és fejlesztői dokumentáció.
               </p>
               <Button variant="outline" asChild>
-                <Link href="/api-docs">Megnyitás</Link>
+                <Link href="#">Megnyitás</Link>
               </Button>
             </div>
           </div>
         </div>
-      </section> */}
+      </section>
 
-      <section className="w-full py-16 bg-gradient-to-r from-blue-700 to-blue-900">
+      {/* CTA */}
+      <section className="w-full py-16 bg-gradient-to-r from-blue-700 to-blue-900 text-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Készen áll az iskolája digitális átalakulására?
           </h2>
-          <p className="text-xl text-blue-100 mb-8 text-white">
+          <p className="text-xl text-blue-100 mb-8">
             Vegye fel velünk a kapcsolatot még ma, és kérjen egy személyre szabott bemutatót!
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button asChild>
+            <Button size="lg" className="bg-white text-blue-800 hover:bg-gray-100" asChild>
               <Link href="#contact">Bemutató kérése</Link>
             </Button>
-            <Button variant="outline" asChild>
+            <Button variant="outline" size="lg" className="text-white border-white hover:bg-white/10" asChild>
               <Link href="tel:+3612345678">Hívjon minket</Link>
             </Button>
           </div>
         </div>
-      </section> 
+      </section>
 
-      <footer className="w-full text-black py-12 bg-gray-50">
+      {/* Footer */}
+      <footer className="w-full bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8 border-t border-gray-800 mt-12 pt-8 ">
+          <div className="grid md:grid-cols-4 gap-8">
             <div>
               <h3 className={`${ZenDots.className} text-2xl mb-4`}>telock</h3>
               <p className="text-gray-400">
@@ -300,29 +302,31 @@ export default async function Home() {
             <div>
               <h4 className="font-bold mb-4">Linkek</h4>
               <ul className="space-y-2">
-                <li><Link href="/dashboard" className="text-gray-600 hover:text-white transition">Vezérlőpult</Link></li>
-                <li><Link href="#" className="text-gray-600 hover:text-white transition">Dokumentáció</Link></li>
-                <li><Link href="/api-docs" className="text-gray-600 hover:text-white transition">API</Link></li>
+                <li><Link href="#" className="text-gray-400 hover:text-white transition">Főoldal</Link></li>
+                <li><Link href="#miert" className="text-gray-400 hover:text-white transition">Miért mi?</Link></li>
+                <li><Link href="#funkciok" className="text-gray-400 hover:text-white transition">Funkciók</Link></li>
+                <li><Link href="#dokumentaciok" className="text-gray-400 hover:text-white transition">Dokumentáció</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold mb-4">Kapcsolat</h4>
-              <ul className="space-y-2 text-gray-600">
-                <li>nagy.gabor@diak.szbi-pg.hu</li>
-                <li>szalkai-szabo.adam@diak.szbi-pg.hu</li>
+              <ul className="space-y-2 text-gray-400">
+                <li>info@telock.hu</li>
+                <li>+36 1 234 5678</li>
+                <li>1037 Budapest, Fő utca 1.</li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-4">Kövessen minket</h4>
+              <h4 className="font-bold mb-4">Kövess minket</h4>
               <div className="flex space-x-4">
-                <Link href="#" className="text-gray-600 hover:text-white transition">Instagram</Link>
-                <Link href="#" className="text-gray-600 hover:text-white transition">TikTok</Link>
-                <Link href="#" className="text-gray-600 hover:text-white transition">YouTube</Link>
+                <Link href="#" className="text-gray-400 hover:text-white transition">Facebook</Link>
+                <Link href="#" className="text-gray-400 hover:text-white transition">LinkedIn</Link>
+                <Link href="#" className="text-gray-400 hover:text-white transition">YouTube</Link>
               </div>
             </div>
           </div>
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
-            <p>© {new Date().getFullYear()} telock. Minden jog fenntartva.</p>
+            <p>© 2023 Telock. Minden jog fenntartva.</p>
           </div>
         </div>
       </footer>
