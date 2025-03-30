@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link"
-import { FileClock, Zap, ChartColumnBig, ShieldCheck, RefreshCw, Server, Send, Instagram, Cpu, ChevronRight, Phone, Twitter, Youtube, Mail, Newspaper, TrendingUp, CheckCircle, Lock, Navigation, Facebook,  } from "lucide-react";
+import { FileClock, Zap, ChartColumnBig, ShieldCheck, RefreshCw, Server, ChevronDown, Instagram, Cpu, ArrowRight, Phone, Twitter, Youtube, Mail, Newspaper, TrendingUp, CheckCircle, Lock, Navigation, Facebook,  } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { Button } from "@/components/ui/button"
 import localFont from "next/font/local";
@@ -84,12 +84,14 @@ export default async function Home() {
         </div>
       </div>
 
-{/* Why Choose Us */}
-<section id="miert" className="w-full py-16 bg-gray-50 ">
+      <section id="miert" className="w-full py-16 bg-gradient-to-b from-gray-50 to-white">
   <div className="max-w-7xl mx-auto px-6">
     <div className="text-center mb-16">
+      <div className="inline-flex items-center justify-center px-4 py-2 bg-blue-50 rounded-full mb-4">
+        <span className="text-sm font-medium text-blue-600">Innovatív megoldások</span>
+      </div>
       <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-        Miért mi?
+        Miért válassza a <span className="text-blue-600">Telock</span> rendszert?
       </h2>
       <p className="text-lg text-gray-600 max-w-3xl mx-auto">
         Különleges megoldásaink egyedivé teszik rendszerünket az iskolai telefontárolás területén.
@@ -97,35 +99,53 @@ export default async function Home() {
     </div>
 
     <div className="grid md:grid-cols-3 gap-8">
-      <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all">
-        <div className="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mb-6">
-          <ShieldCheck className="w-7 h-7 text-blue-600" />
+      {[
+        {
+          icon: <ShieldCheck className="w-7 h-7 text-blue-600" />,
+          title: "Magas szintű biztonság",
+          description: "Titkosított tárolóegységeink és auditált hozzáférési rendszerünk garantálja eszközeitek biztonságát.",
+          bgColor: "bg-blue-50"
+        },
+        {
+          icon: <TrendingUp className="w-7 h-7 text-blue-600" />,
+          title: "Tanulmányi eredmények javulása",
+          description: "Partneriskoláinknál 42%-kal csökkent a figyelemzavar, 27%-kal javultak az átlagok.",
+          bgColor: "bg-blue-50"
+        },
+        {
+          icon: <Cpu className="w-7 h-7 text-blue-600" />,
+          title: "Okos integrációk",
+          description: "Kompatibilis az iskolai rendszerekkel, naplóprogramokkal és adminisztrációs szoftverekkel.",
+          bgColor: "bg-blue-50"
+        }
+      ].map((feature, index) => (
+        <div 
+          key={index}
+          className="group relative bg-white p-8 rounded-xl border border-gray-100 hover:border-blue-100 transition-all duration-300 shadow-sm hover:shadow-lg overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-white to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div className="relative z-10">
+            <div className={`w-14 h-14 ${feature.bgColor} rounded-full flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110`}>
+              {feature.icon}
+            </div>
+            <h3 className="text-xl font-bold mb-3 text-gray-900">{feature.title}</h3>
+            <p className="text-gray-600">{feature.description}</p>
+            <div className="mt-6">
+              <span className="inline-flex items-center text-blue-600 font-medium text-sm">
+                Tudjon meg többet
+                <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+              </span>
+            </div>
+          </div>
         </div>
-        <h3 className="text-xl font-bold mb-3">Magas szintű biztonság</h3>
-        <p className="text-gray-600">
-          Titkosított tárolóegységeink és auditált hozzáférési rendszerünk garantálja eszközeitek biztonságát.
-        </p>
-      </div>
+      ))}
+    </div>
 
-      <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all">
-        <div className="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mb-6">
-          <TrendingUp className="w-7 h-7 text-blue-600" />
-        </div>
-        <h3 className="text-xl font-bold mb-3">Tanulmányi eredmények javulása</h3>
-        <p className="text-gray-600">
-          Partneriskoláinknál 42%-kal csökkent a figyelemzavar, 27%-kal javultak az átlagok.
-        </p>
-      </div>
-
-      <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all">
-        <div className="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mb-6">
-          <Cpu className="w-7 h-7 text-blue-600" />
-        </div>
-        <h3 className="text-xl font-bold mb-3">Okos integrációk</h3>
-        <p className="text-gray-600">
-          Kompatibilis az iskolai rendszerekkel, naplóprogramokkal és adminisztrációs szoftverekkel.
-        </p>
-      </div>
+    <div className="mt-16 text-center">
+      <button className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg inline-flex items-center">
+        Összes előny megtekintése
+        <ChevronDown className="w-5 h-5 ml-2 animate-bounce" />
+      </button>
     </div>
   </div>
 </section>
@@ -275,7 +295,7 @@ export default async function Home() {
       <div className="space-y-4">
         <h3 className={`${ZenDots.className} text-2xl`}>telock</h3>
         <p className="text-gray-600">
-          Innovatív megoldások a modern oktatás támogatására.
+        Fejlett megoldások a korszerű oktatásért.
         </p>
       </div>
 
@@ -284,7 +304,7 @@ export default async function Home() {
         <ul className="space-y-2">
           <li><Link href="/dashboard" className="text-gray-600 hover:text-blue-600 transition">Vezérlőpult</Link></li>
           <li><Link href="#" className="text-gray-600 hover:text-blue-600 transition">Dokumentáció</Link></li>
-          <li><Link href="/api-docs" className="text-gray-600 hover:text-blue-600 transition">API</Link></li>
+          <li><Link href="/api-docs" className="text-gray-600 hover:text-blue-600 transition">API Dokumentáció</Link></li>
         </ul>
       </div>
 
