@@ -85,7 +85,7 @@ export default async function Home() {
       </div>
 
 {/* Why Choose Us */}
-<section id="miert" className="w-full py-16 bg-gray-50">
+<section id="miert" className="w-full py-16 bg-gray-50 pt-8">
   <div className="max-w-7xl mx-auto px-6">
     <div className="text-center mb-16">
       <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -185,32 +185,32 @@ export default async function Home() {
         {
           title: 'RFID azonosítás',
           description: 'Diákigazolványokkal kompatibilis gyors azonosítás és kiszolgálás.',
-          icon: <Zap className="w-6 h-6 text-blue-600" />
+          icon: <Zap className="w-6 h-6 text-blue-600 rounded-full" />
         },
         {
           title: 'Valós idejű nyomonkövetés',
           description: 'Minden eszköz mozgása nyomon követhető az admin felületen.',
-          icon: <ChartColumnBig className="w-6 h-6 text-blue-600" />
+          icon: <ChartColumnBig className="w-6 h-6 text-blue-600 rounded-full" />
         },
         {
           title: 'Többfaktoros hitelesítés',
           description: 'Tanári hozzáférés PIN kód és biometrikus adatok kombinációjával.',
-          icon: <ShieldCheck className="w-6 h-6 text-blue-600" />
+          icon: <ShieldCheck className="w-6 h-6 text-blue-600 rounded-full" />
         },
         {
           title: 'Automatikus frissítések',
           description: 'Rendszerünk mindig naprakész a legújabb biztonsági javításokkal.',
-          icon: <RefreshCw className="w-6 h-6 text-blue-600" />
+          icon: <RefreshCw className="w-6 h-6 text-blue-600 rounded-full" />
         },
         {
           title: 'Skálázható architektúra',
           description: 'Akár 1000+ diák számára is biztosítunk megbízható megoldást.',
-          icon: <Server className="w-6 h-6 text-blue-600" />
+          icon: <Server className="w-6 h-6 text-blue-600 rounded-full" />
         },
         {
           title: 'Részletes jelentéskészítés',
           description: 'Testreszabható jelentések a használati szokásokról és trendekről.',
-          icon: <FileClock className="w-6 h-6 text-blue-600" />
+          icon: <FileClock className="w-6 h-6 text-blue-600 rounded-full" />
         }
       ].map((feature, index) => (
         <div key={index} className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100">
