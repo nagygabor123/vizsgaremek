@@ -470,19 +470,19 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
   )
 }
 const sidebarMenuButtonVariants = cva(
-  "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-lg p-3 text-left text-sm outline-none transition-all duration-200 ease-in-out hover:bg-sidebar-accent hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-400 active:bg-sidebar-accent active:text-blue-600 disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-semibold data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-blue-600 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
+  "peer/menu-button flex w-full items-center gap-1 overflow-hidden rounded-md p-2 text-left text-sm outline-none transition-all duration-200 ease-in-out bg-gray-800 text-gray-200 hover:bg-gray-700 hover:text-white focus-visible:ring-2 focus-visible:ring-blue-400 active:bg-gray-600 active:text-white disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-gray-700 data-[active=true]:font-semibold data-[state=open]:hover:bg-gray-600 data-[state=open]:hover:text-white group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          "hover:bg-sidebar-accent hover:text-blue-600 transition-all ease-out", // No border on hover
+          "hover:bg-gray-700 hover:text-white transition-all ease-out", // Subtle hover effect
         outline:
-          "bg-background shadow-none hover:bg-sidebar-accent hover:text-blue-600 transition-all ease-out", // No border and shadow
+          "bg-gray-800 shadow-none hover:bg-gray-700 hover:text-white transition-all ease-out", // No border and shadow
       },
       size: {
-        default: "h-10 text-sm",
-        sm: "h-8 text-xs",
-        lg: "h-14 text-base group-data-[collapsible=icon]:p-0!",
+        default: "h-9 text-sm", // Reduced height for more compactness
+        sm: "h-7 text-xs",
+        lg: "h-12 text-base group-data-[collapsible=icon]:p-0!",
       },
     },
     defaultVariants: {
@@ -491,6 +491,7 @@ const sidebarMenuButtonVariants = cva(
     },
   }
 );
+
 
 
 
