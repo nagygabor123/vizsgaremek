@@ -69,7 +69,7 @@ void updateLockerStatus(int lockerId) {
   if (client.connect(server, 3000)) {
     Serial.println("Connected to proxy server for status update.");
     String url = "/proxy2?id=" + String(lockerId); // Az URL-t a proxy szerverre irányítjuk
-    client.println("PATCH " + url + " HTTP/1.1");
+    client.println("PUT " + url + " HTTP/1.1");
     client.println("Host: 172.16.13.9");
     client.println("Connection: close");
     client.println();

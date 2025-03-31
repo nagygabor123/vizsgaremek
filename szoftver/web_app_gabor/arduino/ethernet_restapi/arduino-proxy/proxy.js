@@ -29,7 +29,7 @@ app.patch('/proxy2', async (req, res) => {
   }
 
   try {
-    const response = await axios.patch(`https://vizsgaremek-mocha.vercel.app/api/locker/setLockerStatus?id=${id}`, req.body, {
+    const response = await axios.put(`https://vizsgaremek-mocha.vercel.app/api/locker/setLockerStatus?id=${id}`, req.body, {
       headers: {
         'Content-Type': 'application/json'
       }
