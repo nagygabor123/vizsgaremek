@@ -12,8 +12,8 @@ export default async function handler(req, res) {
     const newAccessState = action === 'close' ? 'zarva' : 'nyithato';
 
     try {
-      await sql('UPDATE students SET access = $1 WHERE school_id = $2', [newAccessState],[school_id]);
-      await sql('UPDATE schools SET status = $1 WHERE school_id = $2', [newAccessState],[school_id]);
+      await sql('UPDATE students SET access = $1 WHERE school_id = $2', [newAccessState, school_id]);
+      await sql('UPDATE schools SET status = $1 WHERE school_id = $2', [newAccessState, school_id]);
 
       return res.status(200).json({ message: `Az összes diák 'access' mezője és a 'status' ${newAccessState} (-ra) frissítve` });
     } catch (error) {
