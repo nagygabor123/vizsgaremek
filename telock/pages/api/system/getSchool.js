@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     const sql = neon(process.env.DATABASE_URL);
 
     try {
-      const rows = await sql('SELECT school_name FROM students WHERE school_id = $1', [school_id]);
+        const rows = await sql(`SELECT school_name FROM students WHERE school_id = ${school_id}`);
 
       if (rows.length > 0) {
        // const access = rows[0].access;
