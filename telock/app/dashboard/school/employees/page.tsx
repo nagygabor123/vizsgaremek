@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { AppSidebar } from "@/components/app-sidebar";
+import { useSession } from "next-auth/react";
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -58,6 +60,7 @@ import {
 
 
 export default function AddEmployeePage() {
+  const { data: session } = useSession();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [fullName, setFullName] = useState('');
@@ -77,7 +80,7 @@ export default function AddEmployeePage() {
 
   const fetchStudents = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/students/read`);
+      const response = await fetch(`${API_BASE_URL}/api/students/read?school_id=${session?.user?.school_id}`);
       const data = await response.json();
       setHasStudents(data.length > 0);
     } catch (error) {
