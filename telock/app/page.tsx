@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link"
-import { FileClock, Zap, ChartColumnBig, ShieldCheck, RefreshCw, Server, ChevronDown, Instagram, Cpu, ArrowRight, Twitter, Youtube, Mail, Newspaper, TrendingUp, CheckCircle, Lock, Navigation, Facebook } from "lucide-react";
+import { FileClock, Zap, ChartColumnBig, ShieldCheck, RefreshCw, Server, Instagram, Cpu, ArrowRight, Clock, Youtube, TrendingUp, CheckCircle, Lock  } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { Button } from "@/components/ui/button"
 import localFont from "next/font/local";
@@ -42,14 +42,14 @@ export default async function Home() {
 
           <section className="w-full text-center my-12">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-white">
-              Professzionális megoldás <br /> iskolai telefontárolásra
+              Biztonságos és kényelmes <br /> telefontárolos iskoláknak
             </h1>
             <p className="mt-6 text-xl text-blue-100 max-w-3xl mx-auto">
               Innovatív rendszerünk segít az órai koncentráció növelésében, miközben biztosítja a diákok eszközeinek védelmét.
             </p>
             <div className="mt-10 flex justify-center gap-4">
               <Button asChild>
-                <Link href="mailto:nagy.gabor@diak.szbi-pg.hu,szalkai-szabo.adam@diak.szbi-pg.hu?subject=Érdeklődés">Kapcsolatfelvétel</Link>
+                <Link href="mailto:nagy.gabor@diak.szbi-pg.hu,szalkai-szabo.adam@diak.szbi-pg.hu">Kapcsolatfelvétel</Link>
               </Button>
               <Button variant="secondary" asChild>
                 <Link href="#funkciok">Funkciók megtekintése</Link>
@@ -99,7 +99,7 @@ export default async function Home() {
               {
                 icon: <ShieldCheck className="w-7 h-7 text-blue-600" />,
                 title: "Fokozott biztonság",
-                description: "Titkosított tárolóegységeink és ellenőrzött hozzáférési rendszerünk garantálja az eszközök biztonságát.",
+                description: "Fizikai és digitális védelmi rendszerünk garantálja: a telefonok nálunk a legbiztonságosabb helyen vannak.",
                 bgColor: "bg-blue-50"
               },
               {
@@ -115,7 +115,7 @@ export default async function Home() {
                 bgColor: "bg-blue-50"
               }
             ].map((feature, index) => (
-              <div 
+              <div
                 key={index}
                 className="group relative bg-white p-8 rounded-xl border border-gray-100 hover:border-blue-100 transition-all duration-300 shadow-sm hover:shadow-lg overflow-hidden"
               >
@@ -182,7 +182,7 @@ export default async function Home() {
               Fejlett <span className="text-blue-600">funkciók</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Minden, amire egy modern iskolának szüksége lehet a hatékony telefontároláshoz.
+              Minden, amire egy iskolának szüksége lehet a hatékony telefontároláshoz.
             </p>
           </div>
 
@@ -190,7 +190,7 @@ export default async function Home() {
             {[
               {
                 title: 'RFID azonosítás',
-                description: 'Diákigazolványokkal kompatibilis gyors azonosítás és kiszolgálás.',
+                description: 'RFID kártyákkal és beléptető bilétákkal kompatibilis gyors azonosítás',
                 icon: <Zap className="w-6 h-6 text-blue-600" />
               },
               {
@@ -199,9 +199,9 @@ export default async function Home() {
                 icon: <ChartColumnBig className="w-6 h-6 text-blue-600" />
               },
               {
-                title: 'Többfaktoros hitelesítés',
-                description: 'Tanári hozzáférés PIN kód és biometrikus ellenőrzéssel.',
-                icon: <ShieldCheck className="w-6 h-6 text-blue-600" />
+                title: 'Időzített zárolás',
+                description: 'Automatikus zárolás beállítható órarend szerint.',
+                icon: <Clock className="w-6 h-6 text-blue-600" />
               },
               {
                 title: 'Automatikus frissítések',
@@ -219,8 +219,8 @@ export default async function Home() {
                 icon: <FileClock className="w-6 h-6 text-blue-600" />
               }
             ].map((feature, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="group relative bg-white p-8 rounded-xl border border-gray-100 hover:border-blue-100 transition-all duration-300 shadow-sm hover:shadow-lg overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-white to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -251,27 +251,28 @@ export default async function Home() {
               <span className="font-medium">Új lehetőségek</span>
             </div>
           </div>
-          
+
           <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
-            Készen áll a <span className="text-blue-200">digitális átalakulásra</span>?
+            Készen áll a <span className="text-blue-200">telefontárolás modern megoldására</span>?
           </h2>
-          
+
           <div className="max-w-2xl mx-auto mb-8">
             <p className="text-lg text-blue-100 mb-6">
               Adja meg az email címét, és küldjük Önnek az ingyenes bemutató anyagot, valamint egy személyes konzultáció időpontot!
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Input
-                type="email" 
-                placeholder="iskola@minta.hu"
+              <input
+                className="flex-1 rounded-lg border border-blue-400 bg-blue-500/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                type="email"
+                placeholder=""
               />
               <Button variant="secondary" className="">
                 Információt kérek
               </Button>
             </div>
           </div>
-          
+
           <div className="flex items-center justify-center gap-4 text-sm text-blue-200">
             <div className="flex items-center gap-2">
               <CheckCircle className="w-4 h-4" />
@@ -307,9 +308,9 @@ export default async function Home() {
 
             <div>
               <h4 className="font-bold mb-3">Kapcsolat</h4>
-              <ul className="space-y-2 text-gray-600">
-                <li>nagy.gabor@diak.szbi-pg.hu</li>
-                <li>szalkai-szabo.adam@diak.szbi-pg.hu</li>
+              <ul className="space-y-2">
+                <li><Link href="mailto:nagy.gabor@diak.szbi-pg.hu" className="text-gray-600 hover:text-blue-600 transition">nagy.gabor@diak.szbi-pg.hu</Link></li>
+                <li><Link href="mailto:szalkai-szabo.adam@diak.szbi-pg.hu" className="text-gray-600 hover:text-blue-600 transition">szalkai-szabo.adam@diak.szbi-pg.hu</Link></li>
               </ul>
             </div>
           </div>
