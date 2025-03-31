@@ -149,6 +149,11 @@ export default function Page() {
       });
       setSchoolStartEdit(schoolStart.schoolYearStart.start);
       setSchoolEndEdit(schoolEnd.schoolYearEnd.end);
+      console.log('schoolStart:', schoolStart.schoolYearStart.start);
+      console.log('schoolEnd:', schoolEnd.schoolYearEnd.end); 
+      console.log('breakDates:', breakDates.breakDates_alap);
+      console.log('plusDates:', plusDates.plusDates_alap);  
+      console.log('noSchool:', noSchool.tanitasnelkul_alap);
     } catch (error) {
       console.error('Error fetching year schedule:', error);
     } finally {

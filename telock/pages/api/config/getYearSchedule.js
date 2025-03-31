@@ -4,13 +4,9 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     const { school_id, type } = req.body;
 
-    if (!type) {
+    if (!type || !school_id) {
       return res.status(400).json({ error: 'Type paraméter szükséges' });
     }
-    if (!school_id) {
-      return res.status(400).json({ error: 'School ID szükséges' });
-    }
-
     const sql = neon(`${process.env.DATABASE_URL}`);
 
     try {
