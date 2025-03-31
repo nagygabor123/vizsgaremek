@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 
     const sql = neon(`${process.env.DATABASE_URL}`);
     try {
-      const student = await sql('SELECT student_id, class FROM students WHERE student_id = $1', [student_id]);
+      const student = await sql('SELECT student_id, class, school_id FROM students WHERE student_id = $1', [student_id]);
       if (student.length === 0) {
         return res.status(404).json({ message: 'A diák nem található' });
       }
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
       await sql('DELETE FROM student_groups WHERE student_id = $1', [student_id]);
       console.log(`Deleted existing entries for student_id: ${student_id}`);
 
-      const groups = await sql('SELECT group_id, group_name FROM csoportok');
+      const groups = await sql('SELECT group_id, group_name FROM csoportok WHERE school_id = $1', [student[0].school_id]);
       console.log('Csoportok:', groups);
       const insertValues = [];
       const studentClasses = student[0].class ? student[0].class.split(',').map(c => c.trim()) : [];

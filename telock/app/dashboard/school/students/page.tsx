@@ -162,10 +162,15 @@ export default function Home() {
     const method = editing ? 'PUT' : 'POST';
     const url = editing ? '/api/students/update' : '/api/students/create';
 
+    const updatedFormData = {
+      ...formData,
+      school_id: session?.user?.school_id,  
+    };
+  
     const response = await fetch(url, {
       method: method,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(updatedFormData),
     });
 
     if (response.ok) {
