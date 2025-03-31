@@ -11,11 +11,11 @@ export default async function handler(req, res) {
     const sql = neon(process.env.DATABASE_URL);
 
     try {
-      const rows = await sql('SELECT access FROM students WHERE rfid_tag = $1', [rfid]);
+      const rows = await sql('SELECT locker_id FROM locker_relationships WHERE rfid_tag = $1', [rfid]);
 
       if (rows.length > 0) {
        // const access = rows[0].access;
-        return res.status(200).json({ message: 'Sikeres lekérdezés', data: rows });
+        return res.status(200).json(rows[0].locker_id);
       } else {
         return res.status(404).json({ error: 'RFID nem található' });
       }
