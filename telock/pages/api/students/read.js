@@ -24,8 +24,9 @@ export default async function handler(req, res) {
       const students = await sql(query, [school_id]);
 
       if (students.length === 0) {
-        return res.status(404).json({ message: 'Nincs találat' });
+        return res.status(200).json([]); 
       }
+      
 
       res.status(200).json(students);
     } catch (error) {
