@@ -191,7 +191,7 @@ export default async function Home() {
         Fejlett <span className="text-blue-600">funkciók</span>
       </h2>
       <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-        Minden, amire egy modern iskolának szüksége lehet a hatékony telefontároláshoz.
+        Minden, amire egy iskolának szüksége lehet a hatékony telefontároláshoz.
       </p>
     </div>
 
@@ -277,9 +277,9 @@ export default async function Home() {
           placeholder="iskola@minta.hu" 
           className="flex-1 px-4 py-3 rounded-lg border border-blue-400 bg-blue-500/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
         />
-        <button className="px-6 py-3 bg-white text-blue-600 font-medium rounded-lg hover:bg-blue-50 transition-all shadow-md hover:shadow-lg whitespace-nowrap">
-          Anyagot kérek
-        </button>
+        <Button variant="secondary" className="">
+          Bemutatót kérek
+        </Button>
       </div>
     </div>
     
@@ -291,7 +291,7 @@ export default async function Home() {
       <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
       <div className="flex items-center gap-2">
         <CheckCircle className="w-4 h-4" />
-        <span>Nem kötelező megrendelés</span>
+        <span>Nincs kötelező rendelés</span>
       </div>
     </div>
   </div>
