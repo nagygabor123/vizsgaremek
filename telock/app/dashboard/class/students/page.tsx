@@ -1,7 +1,6 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-
 import { AppSidebar } from "@/components/app-sidebar";
 import {
   Breadcrumb,
@@ -56,7 +55,7 @@ export default function Home() {
 
   const fetchStudents = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/students/read`);
+      const response = await fetch(`${API_BASE_URL}/api/students/read?school_id=${session?.user?.school_id}`);
       const data = await response.json();
       setStudents(data);
       setHasStudents(data.length > 0);
@@ -68,12 +67,12 @@ export default function Home() {
   };
 
   const fetchSystemStatus = async () => {
-    const response = await fetch(`${API_BASE_URL}/api/system/status`);
+    const response = await fetch(`${API_BASE_URL}/api/system/status?school_id=${session?.user?.school_id}`);
     if (response.ok) {
       const data = await response.json();
       setSystemClose(data.status === "nyithato" ? false : true);
     }
-  };
+  }
 
   useEffect(() => {
     fetchStudents();
@@ -83,7 +82,7 @@ export default function Home() {
   useEffect(() => {
     const fetchTimetables = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/timetable/allScheduleStart`);
+        const response = await fetch(`${API_BASE_URL}/api/timetable/allScheduleStart?school_id=${session?.user?.school_id}`);
         if (!response.ok) {
           throw new Error('Nem sikerült lekérni az összes diák órarendjét.');
         }

@@ -111,7 +111,7 @@ const getWeekStartAndEnd = (date: Date) => {
 };
 
 const Calendar: React.FC = () => {
-    const { data: session } = useSession();
+  const { data: session } = useSession();
   const [systemClose, setSystemClose] = useState<boolean>(false);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isMobileView, setIsMobileView] = useState(false);
@@ -187,14 +187,12 @@ const Calendar: React.FC = () => {
   useEffect(() => {
     const fetchTimetables = async () => {
       try {
-        // Fetch all students' timetable data at once from the new API endpoint
         const response = await fetch(`${API_BASE_URL}/api/timetable/allScheduleStart?school_id=${session?.user?.school_id}`);
         if (!response.ok) {
           throw new Error('Nem sikerült lekérni az összes diák órarendjét.');
         }
 
         const data = await response.json();
-        // Map the response to match the structure of your state
         const timetables = data.students.map((student: any) => ({
           student_id: student.student_id,
           first_class_start: student.first_class_start,
@@ -558,12 +556,10 @@ const Calendar: React.FC = () => {
       const response = await fetch(`${API_BASE_URL}/api/students/read?school_id=${session?.user?.school_id}`);
       const data = await response.json();
       setStudents(data);
-      setHasStudents(data.length > 0); // Ha van legalább egy diák, akkor true
+      setHasStudents(data.length > 0); 
     } catch (error) {
       console.error('Error fetching students', error);
-    } //finally {
-    //   setLoading(false); // Lekérés vége
-    // }
+    } 
   };
 
 
