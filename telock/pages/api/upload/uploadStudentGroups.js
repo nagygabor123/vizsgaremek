@@ -2,12 +2,14 @@ import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
+    const { school_id } = req.query;
+    console.log(school_id);
     const sql = neon(`${process.env.DATABASE_URL}`);
 
     try {
-      const students = await sql('SELECT student_id, class FROM students WHERE class IS NOT NULL');
+      const students = await sql(`SELECT student_id, class FROM students WHERE class IS NOT NULL AND school_id = ${school_id}`);
       console.log('Diákok:', students);
-      const groups = await sql('SELECT group_id, group_name FROM csoportok');
+      const groups = await sql(`SELECT group_id, group_name FROM csoportok WHERE  school_id = ${school_id}`);
       console.log('Csoportok:', groups);
       const insertValues = [];
 

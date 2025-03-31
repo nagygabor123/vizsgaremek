@@ -18,7 +18,8 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'A metódus nem követhető' });
   }
-
+  const { school_id } = req.query;
+  console.log(school_id);
   const form = new multiparty.Form({
     maxFieldsSize: 20 * 1024 * 1024,
     maxFilesSize: 50 * 1024 * 1024,
@@ -68,6 +69,7 @@ export default async function handler(req, res) {
           studentClass,
           generateRFID(),
           'zarva',
+          school_id
         ]);
       });
 
@@ -76,16 +78,16 @@ export default async function handler(req, res) {
       if (students.length > 0) {
         const values = students.flat();
         const placeholders = students
-          .map((_, i) => `($${i * 5 + 1}, $${i * 5 + 2}, $${i * 5 + 3}, $${i * 5 + 4}, $${i * 5 + 5})`)
+          .map((_, i) => `($${i * 6 + 1}, $${i * 6 + 2}, $${i * 6 + 3}, $${i * 6 + 4}, $${i * 6 + 5}, $${i * 6 + 6})`)
           .join(', ');
 
-        const insertQuery = `INSERT INTO students (student_id, full_name, class, rfid_tag, access) VALUES ${placeholders}`;
+        const insertQuery = `INSERT INTO students (student_id, full_name, class, rfid_tag, access, school_id) VALUES ${placeholders}`;
         
         await sql(insertQuery, values);
       }
 
-      await checkStudentsInserted(students);
-      await UploadStudentGroups();
+      await checkStudentsInserted(students, school_id);
+      await UploadStudentGroups(school_id);
       await uploadLockerRelations();
 
       return res.status(200).json({ message: `Sikeresen hozzáadva: ${students.length} diák` });
@@ -112,9 +114,9 @@ function generateRFID() {
   return crypto.randomBytes(4).toString('hex').toUpperCase();
 }
 
-async function checkStudentsInserted(students) {
+async function checkStudentsInserted(students,school_id) {
   try {
-    const studentsInDb = await sql('SELECT student_id FROM students');
+    const studentsInDb = await sql(`SELECT student_id FROM students WHERE school_id = ${school_id}`);
     
     console.log('Visszakapott adatok:', studentsInDb); // Logolás
 
@@ -135,9 +137,9 @@ async function checkStudentsInserted(students) {
   }
 }
 
-async function UploadStudentGroups() {
+async function UploadStudentGroups(school_id) {
   try {
-    const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/upload/uploadStudentGroups', {
+    const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/upload/uploadStudentGroups?school_id=${school_id}`, {
       method: 'POST',
     });
     if (!response.ok) {
