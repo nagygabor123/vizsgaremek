@@ -147,6 +147,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { isMobile } = useSidebar();
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
   const [hasStudents, setHasStudents] = useState<boolean | null>(null);
+  const [schoolName, setSchoolName] = useState("");
   const [loading, setLoading] = useState(true);
 
   const fetchStudents = async () => {
@@ -161,8 +162,27 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     }
   };
 
+  const fetchSchool = async () => {
+    try {
+      const response = await fetch(`/api/system/getSchool?school_id=${session?.user?.school_id}`);
+      const data = await response.json();
+
+      if (data.school_name) {
+        setSchoolName(data.school_name);
+      } else {
+        console.error("Iskola neve nem található");
+      }
+    } catch (error) {
+      console.error("Error fetching school", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   useEffect(() => {
     fetchStudents();
+    fetchSchool();
   }, []);
 
   useEffect(() => {
@@ -184,7 +204,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="text-s break-words">{session?.user?.school_id}</span>
+                <span className="text-s break-words">{schoolName}</span>
               </div>
 
               <Avatar className="h-10 w-10 rounded-full">
