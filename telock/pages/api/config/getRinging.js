@@ -4,10 +4,14 @@ export default async function handler(req, res) {
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'A HTTP metódus nem engedélyezett' });
   }
+  const { school_id } = req.query;
+  if (!school_id) {
+    return res.status(400).json({ message: 'school_id hiányzik' }); 
+  }
 
   try {
     const sql = neon(`${process.env.DATABASE_URL}`);
-    const rows = await sql('SELECT start_time as "start", end_time as "end" FROM ring_times');
+    const rows = await sql('SELECT start_time as "start", end_time as "end" FROM ring_times WHERE school_id = $1', [school_id]);
     const result = rows.map(row => ({
       start: row.start.slice(0, 5),  
       end: row.end.slice(0, 5)        

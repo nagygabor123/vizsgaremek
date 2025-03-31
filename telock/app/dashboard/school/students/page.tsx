@@ -103,7 +103,6 @@ export default function Home() {
   };
 
   const fetchSystemStatus = async () => {
-
     const response = await fetch(`${API_BASE_URL}/api/system/status?school_id=${session?.user?.school_id}`);
     if (response.ok) {
       const data = await response.json();

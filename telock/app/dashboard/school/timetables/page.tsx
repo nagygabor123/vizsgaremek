@@ -1,6 +1,7 @@
 'use client';
 
 import { AppSidebar } from "@/components/app-sidebar"
+import { useSession } from "next-auth/react";
 import { ChevronRight, ChevronLeft, Slash, LockOpen, CircleMinus, CircleCheck, CircleAlert } from "lucide-react"
 
 import {
@@ -110,6 +111,7 @@ const getWeekStartAndEnd = (date: Date) => {
 };
 
 const Calendar: React.FC = () => {
+    const { data: session } = useSession();
   const [systemClose, setSystemClose] = useState<boolean>(false);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isMobileView, setIsMobileView] = useState(false);
@@ -167,7 +169,7 @@ const Calendar: React.FC = () => {
   useEffect(() => {
     const fetchLessonTimes = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/config/getRinging`);
+        const response = await fetch(`${API_BASE_URL}/api/config/getRinging?school_id=${session?.user?.school_id}`);  
         if (!response.ok) {
           throw new Error('Nem sikerült lekérni a csengetési rendet.');
         }
@@ -186,7 +188,7 @@ const Calendar: React.FC = () => {
     const fetchTimetables = async () => {
       try {
         // Fetch all students' timetable data at once from the new API endpoint
-        const response = await fetch(`${API_BASE_URL}/api/timetable/allScheduleStart`);
+        const response = await fetch(`${API_BASE_URL}/api/timetable/allScheduleStart?school_id=${session?.user?.school_id}`);
         if (!response.ok) {
           throw new Error('Nem sikerült lekérni az összes diák órarendjét.');
         }
@@ -253,7 +255,7 @@ const Calendar: React.FC = () => {
   // Dolgozók (tanárok és osztályfőnökök) lekérése
   const fetchEmployees = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/config/getEmployees`);
+      const response = await fetch(`${API_BASE_URL}/api/config/getEmployees?school_id=${session?.user?.school_id}`);
       const data = await response.json();
       if (response.ok) {
         setEmployees(data);
@@ -348,19 +350,19 @@ const Calendar: React.FC = () => {
   useEffect(() => {
     const fetchAdditionalData = async () => {
       try {
-        const plusResponse = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?type=plusznap`);
+        const plusResponse = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=plusznap`);
         const plusData = await plusResponse.json();
         setPlusdate(plusData.plusDates_alap);
 
-        const breakResponse = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?type=szunet`);
+        const breakResponse = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=szunet`);
         const breakData = await breakResponse.json();
         setBreakdate(breakData.breakDates_alap);
 
-        const startResponse = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?type=kezd`);
+        const startResponse = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=kezd`);
         const startData = await startResponse.json();
         setStartYear(startData.schoolYearStart.start);
 
-        const endResponse = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?type=veg`);
+        const endResponse = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=veg`);
         const endData = await endResponse.json();
         setEndYear(endData.schoolYearEnd.end);
       } catch (error) {
@@ -553,7 +555,7 @@ const Calendar: React.FC = () => {
 
   const fetchStudents = async () => {
     try {
-      const response = await fetch('/api/students/read');
+      const response = await fetch(`${API_BASE_URL}/api/students/read?school_id=${session?.user?.school_id}`);
       const data = await response.json();
       setStudents(data);
       setHasStudents(data.length > 0); // Ha van legalább egy diák, akkor true
@@ -572,7 +574,7 @@ const Calendar: React.FC = () => {
 
 
   const fetchSystemStatus = async () => {
-    const response = await fetch(`${API_BASE_URL}/api/system/status`);
+    const response = await fetch(`${API_BASE_URL}/api/system/status?school_id=${session?.user?.school_id}`);
     if (response.ok) {
       const data = await response.json();
       setSystemClose(data.status === "nyithato" ? false : true);

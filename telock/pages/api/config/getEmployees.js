@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     const { school_id } = req.query;
     
     if (!school_id) {
-      return res.status(400).json({ message: 'school_id is required' });
+      return res.status(400).json({ message: 'school_id hiányzik' }); 
     }
 
     const sql = neon(process.env.DATABASE_URL);
