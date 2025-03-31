@@ -46,14 +46,14 @@ export default function handler(req, res) {
       console.log('Kinyert csoportok:', groups);
 
       await Promise.all([
-        sendRingingData(ringing,school_id),
-        sendEmployeesData(employees,school_id),
-        sendGroupsData(groups,school_id),
+        sendRingingData(ringing, school_id),
+        sendEmployeesData(employees, school_id),
+        sendGroupsData(groups, school_id),
       ]);
-      
-      await waitForDatabaseToBeReady(sql,employees.length,school_id);
-      await sendScheduleData(schedule,school_id);
-      
+
+      await waitForDatabaseToBeReady(sql, employees.length, school_id);
+      await sendScheduleData(schedule, school_id);
+
 
       return res.status(201).json({
         message: 'XML adatok sikeresen feldolgozva és továbbítva!',
@@ -62,32 +62,42 @@ export default function handler(req, res) {
       });
     } catch (error) {
       console.error('Hiba az XML fájl feldolgozása közben:', error);
-      return res.status(500).json({ 
+      return res.status(500).json({
         error: 'Hiba a fájl feldolgozása közben',
-        details: error.message 
+        details: error.message
       });
     }
   });
 }
 
 
-async function waitForDatabaseToBeReady(sql, minRows = 1, timeout = 5000,school_id) {
+async function waitForDatabaseToBeReady(sql, minRows, school_id, timeout = 5000) {
   const startTime = Date.now();
+  const numericSchoolId = parseInt(school_id, 10);
 
-  while (Date.now() - startTime < timeout) {
-    const result = await sql(`SELECT COUNT(*) as count FROM admins WHERE school_id = ${school_id}`);
-    const count = result[0].count;
-
-    if (count >= minRows) {
-      console.log(`Adatbázis készen áll: ${table} (${count} sor)`);
-      return;
-    }
-
-    console.log(`Várakozás az adatbázisra: ${table} (${count} sor)`);
-    await new Promise(resolve => setTimeout(resolve, 1000)); 
+  if (isNaN(numericSchoolId)) {
+    throw new Error('Invalid school_id');
   }
 
-  throw new Error(`Timeout: Az adatbázis (${table}) nem állt készen ${timeout / 1000} másodperc alatt.`);
+  while (Date.now() - startTime < timeout) {
+    try {
+      const result = await sql`SELECT COUNT(*) as count FROM admins WHERE school_id = ${numericSchoolId}`;
+      const count = parseInt(result[0].count, 10);
+
+      if (count >= minRows) {
+        console.log(`Adatbázis készen áll: admins tábla (${count} sor)`);
+        return;
+      }
+
+      console.log(`Várakozás az adatbázisra: admins tábla (${count} sor)`);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    } catch (error) {
+      console.error('Hiba az adatbázis ellenőrzése közben:', error);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+  }
+
+  throw new Error(`Timeout: Az adatbázis nem állt készen ${timeout / 1000} másodperc alatt.`);
 }
 
 function extractRingingSchedule(parsedXml) {
@@ -110,7 +120,7 @@ function extractTeachers(parsedXml) {
   const classes = parsedXml.timetable.classes ? parsedXml.timetable.classes[0].class : [];
   const lessons = parsedXml.timetable.lessons ? parsedXml.timetable.lessons[0].lesson : [];
   const classTeacherMap = {};
-  
+
   lessons.forEach(lesson => {
     if (lesson.$.subjectid === "DAA739606BB71EE6" && lesson.$.teacherids && lesson.$.classids) {
       classTeacherMap[lesson.$.teacherids] = lesson.$.classids;
@@ -119,8 +129,8 @@ function extractTeachers(parsedXml) {
 
   return teachers.map(t => ({
     full_name: t.$.name,
-    short_name: t.$.short,  
-    position: "Tanár", 
+    short_name: t.$.short,
+    position: "Tanár",
     osztalyfonok: classTeacherMap[t.$.id] ? classes.find(c => c.$.id === classTeacherMap[t.$.id])?.$.name || null : null,
   }));
 }
@@ -138,7 +148,7 @@ function extractGroups(parsedXml) {
       name: c.$.name,
     })),
     ...csoportok
-      .filter(g => g.$.name !== "Egész osztály")  
+      .filter(g => g.$.name !== "Egész osztály")
       .map(g => ({
         name: g.$.name,
       }))
@@ -165,7 +175,7 @@ function extractSchedule(parsedXml) {
         .split("")
         .map((bit, index) => (bit === "1" ? dayCodes[index] : null))
         .filter(Boolean);
-      
+
       return [d.$.id.trim(), activeDays];
     })
   );
@@ -187,7 +197,7 @@ function extractSchedule(parsedXml) {
   // 5. Csoportok (`groups`) betöltése és kapcsolás osztályokhoz
   const groups = Object.fromEntries(
     parsedXml.timetable.groups[0].group.map(g => [
-      g.$.id.trim(), 
+      g.$.id.trim(),
       g.$.entireclass === "1" ? classes[g.$.classid.trim()] || "Ismeretlen osztály" : g.$.name
     ])
   );
@@ -237,7 +247,7 @@ function extractSchedule(parsedXml) {
   });
 }
 
-async function sendRingingData(ringing,school_id) {
+async function sendRingingData(ringing, school_id) {
   try {
     const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/upload/uploadRinging?school_id=${school_id}`, {
       method: 'POST',
@@ -257,7 +267,7 @@ async function sendRingingData(ringing,school_id) {
   }
 }
 
-async function sendEmployeesData(employees,school_id) {
+async function sendEmployeesData(employees, school_id) {
   try {
     const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/upload/uploadEmployees?school_id=${school_id}`, {
       method: 'POST',
@@ -277,7 +287,7 @@ async function sendEmployeesData(employees,school_id) {
   }
 }
 
-async function sendGroupsData(groups,school_id) {
+async function sendGroupsData(groups, school_id) {
   try {
     const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/upload/uploadGroups?school_id=${school_id}`, {
       method: 'POST',
@@ -297,7 +307,7 @@ async function sendGroupsData(groups,school_id) {
   }
 }
 
-async function sendScheduleData(schedule,school_id) {
+async function sendScheduleData(schedule, school_id) {
   try {
     const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/upload/uploadTimetables?school_id=${school_id}`, {
       method: 'POST',
