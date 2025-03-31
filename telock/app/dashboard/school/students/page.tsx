@@ -86,6 +86,32 @@ export default function Home() {
   const [hasStudents, setHasStudents] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const [loading2, setLoading2] = useState(true);
+  const [schoolName, setSchoolName] = useState("");
+
+  const fetchSchool = async () => {
+    try {
+      const response = await fetch(`/api/system/getSchool?school_id=${session?.user?.school_id}`);
+      const data = await response.json();
+
+      if (data.school_name) {
+        setSchoolName(data.school_name);
+      } else {
+        console.error("Iskola neve nem található");
+      }
+    } catch (error) {
+      console.error("Error fetching school", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+  useEffect(() => {
+    fetchStudents();
+    fetchSchool();
+  }, []);
+
   const API_BASE_URL = window.location.origin;
 
   const fetchStudents = async () => {
@@ -285,6 +311,13 @@ export default function Home() {
 
 
   return (
+    <div>
+    {loading ? (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-100 border-t-blue-600"></div>
+      </div>
+    ) : (
+      <>
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
@@ -567,5 +600,8 @@ export default function Home() {
 
       </SidebarInset>
     </SidebarProvider>
+    </>
+          )}
+        </div>
   );
 }
