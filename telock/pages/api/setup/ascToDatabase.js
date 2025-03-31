@@ -51,7 +51,7 @@ export default function handler(req, res) {
         sendGroupsData(groups,school_id),
       ]);
       
-      await waitForDatabaseToBeReady(sql, 'admins', employees.length,school_id);
+      await waitForDatabaseToBeReady(sql,employees.length,school_id);
       await sendScheduleData(schedule,school_id);
       
 
@@ -71,11 +71,11 @@ export default function handler(req, res) {
 }
 
 
-async function waitForDatabaseToBeReady(sql, table, minRows = 1, timeout = 5000,school_id) {
+async function waitForDatabaseToBeReady(sql, minRows = 1, timeout = 5000,school_id) {
   const startTime = Date.now();
 
   while (Date.now() - startTime < timeout) {
-    const result = await sql(`SELECT COUNT(*) as count FROM ${table} WHERE school_id = ${school_id}`);
+    const result = await sql(`SELECT COUNT(*) as count FROM admins WHERE school_id = ${school_id}`);
     const count = result[0].count;
 
     if (count >= minRows) {
