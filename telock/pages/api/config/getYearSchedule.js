@@ -2,10 +2,13 @@ import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
-    const { type } = req.query;
+    const { school_id, type } = req.body;
 
     if (!type) {
       return res.status(400).json({ error: 'Type paraméter szükséges' });
+    }
+    if (!school_id) {
+      return res.status(400).json({ error: 'School ID szükséges' });
     }
 
     const sql = neon(`${process.env.DATABASE_URL}`);
@@ -15,20 +18,20 @@ export default async function handler(req, res) {
       let values = [];
 
       if (type === 'plusznap') {
-        query = 'SELECT year_schedule_id, nev, which_day, replace_day FROM year_schedule WHERE type = $1';
-        values = ['plusznap'];
+        query = 'SELECT year_schedule_id, nev, which_day, replace_day FROM year_schedule WHERE type = $1 AND school_id = $2';
+        values = ['plusznap', school_id];
       } else if (type === 'szunet') {
-        query = 'SELECT year_schedule_id, type, nev, which_day AS start, replace_day AS end FROM year_schedule WHERE type IN ($1, $2)';
-        values = ['szunet', 'tanitasnelkul'];
+        query = 'SELECT year_schedule_id, type, nev, which_day AS start, replace_day AS end FROM year_schedule WHERE type IN ($1, $2) AND school_id = $3';
+        values = ['szunet', 'tanitasnelkul', school_id];
       } else if (type === 'tanitasnelkul') {
-        query = 'SELECT year_schedule_id, nev, which_day AS start, replace_day AS end FROM year_schedule WHERE type = $1';
-        values = ['tanitasnelkul'];
+        query = 'SELECT year_schedule_id, nev, which_day AS start, replace_day AS end FROM year_schedule WHERE type = $1 AND school_id = $2';
+        values = ['tanitasnelkul', school_id];
       } else if (type === 'kezd') {
-        query = 'SELECT which_day AS start FROM year_schedule WHERE type = $1 LIMIT 1';
-        values = ['kezd'];
+        query = 'SELECT which_day AS start FROM year_schedule WHERE type = $1 AND school_id = $2 LIMIT 1';
+        values = ['kezd', school_id];
       } else if (type === 'veg') {
-        query = 'SELECT which_day AS end FROM year_schedule WHERE type = $1 LIMIT 1';
-        values = ['veg'];
+        query = 'SELECT which_day AS end FROM year_schedule WHERE type = $1 AND school_id = $2 LIMIT 1';
+        values = ['veg', school_id];
       } else {
         return res.status(400).json({ error: 'Érvénytelen type paraméter' });
       }
@@ -77,8 +80,3 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'A HTTP metódus nem engedélyezett' });
   }
 }
-
-
-//GET http://localhost:3000/api/config/handleYearSchedule?type=szunet
-//GET http://localhost:3000/api/config/handleYearSchedule?type=plusznap
-
