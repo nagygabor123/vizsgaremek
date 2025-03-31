@@ -102,7 +102,7 @@ export default function Page() {
   const [newPlusDate, setNewPlusDate] = useState({ nev: '', which_day: '', replace_day: '' });
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
-  const API_BASE_URL = window.location.origin;
+  const API_BASE_URL = typeof window !== "undefined" ? window.location.origin : "";
 
   useEffect(() => {
     if (!isDialogOpen3) {
