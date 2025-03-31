@@ -2,7 +2,7 @@ import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
-    const { school_id, type } = req.body;
+    const { school_id, type } = req.query;
 
     if (!type || !school_id) {
       return res.status(400).json({ error: 'Type paraméter szükséges' });
