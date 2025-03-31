@@ -154,7 +154,7 @@ const SheetComponent: React.FC = () => {
     formData.append('file', csvFile);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/setup/studentsToDatabase`, {
+      const response = await fetch(`${API_BASE_URL}/api/setup/studentsToDatabase?school_id=${session?.user?.school_id}`, {
         method: 'POST',
         body: formData,
       });
