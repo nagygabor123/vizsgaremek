@@ -127,7 +127,6 @@ void setup() {
 }
 
 void loop() {
-  // Először ellenőrizzük, hogy minden zár vissza van-e csukva
   if (!areAllLocksClosed(lockerId)) {
     Serial.println("Zárak vissza a szekrényt");
     bounce(2000); // Várás 2 másodpercig
@@ -145,18 +144,17 @@ void loop() {
   }
   Serial.println("RFID Tag read: " + rfidTag);
 
-  if (client.connect(server, 3000)) {
-    Serial.println("Connected to server.");
-    String url = "/api/locker/getLocker?rfid=" + rfidTag;
+  if (client.connect(server, 3000)) { // Kapcsolódás a proxy szerverhez
+    Serial.println("Connected to proxy server.");
+    String url = "/proxy1?rfid=" + rfidTag; // A getLocker endpointot kérjük le
     client.println("GET " + url + " HTTP/1.1");
-    client.println("Host: localhost");
+    client.println("Host: 172.16.13.9");
     client.println("Connection: close");
     client.println();
 
     while (client.connected() || client.available()) {
       if (client.available()) {
         String response = client.readStringUntil('\n');
-
         if (isValidLockerId(response)) {
           Serial.println("Validated Locker ID: " + response);
           lockerId = response.toInt();
@@ -175,10 +173,13 @@ void loop() {
 
     client.stop();
     digitalWrite(lockerId, LOW);
-    Serial.println("Disconnected from server.");
+    Serial.println("Disconnected from proxy server.");
   } else {
-    Serial.println("Failed to connect to server.");
+    // Ha nem sikerült csatlakozni a proxy szerverhez, kiírjuk a hibakódot
+    Serial.print("Failed to connect to proxy server. Error code: ");
+    Serial.println(client.status()); // Kiírja a kapcsolat hiba kódját
   }
 
   rfid.PCD_Init();
 }
+
