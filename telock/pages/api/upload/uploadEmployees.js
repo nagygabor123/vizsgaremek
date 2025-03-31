@@ -4,25 +4,22 @@ import { hash } from 'bcrypt';
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { school_id } = req.query;
+    console.log(school_id);
     const { employees } = req.body;
+    console.log(employees);
     const numericSchoolId = parseInt(school_id, 10);
     if (isNaN(numericSchoolId)) {
       return res.status(400).json({ message: 'Érvénytelen iskola azonosító' });
     }
 
-    if (!Array.isArray(employees) || employees.length === 0) {
+    if (!school_id || !Array.isArray(employees) || employees.length === 0) {
       return res.status(400).json({ message: 'Az employees tömb üres vagy hibás' });
     }
 
     const sql = neon(process.env.DATABASE_URL);
 
     try {
-      const schoolExists = await sql`SELECT * FROM schools WHERE school_id = ${numericSchoolId}`;
-      if (schoolExists.length === 0) {
-        return res.status(404).json({ message: 'Az iskola nem található' });
-      }
-
-      const lastAdmin = await sql`SELECT admin_id FROM admins WHERE school_id = ${numericSchoolId} ORDER BY admin_id DESC LIMIT 1`;
+      const lastAdmin = await sql`SELECT admin_id FROM admins WHERE school_id = ${school_id} ORDER BY admin_id DESC LIMIT 1`;
       
       let nextAdminId = 1;
       if (lastAdmin.length > 0) {
@@ -40,11 +37,10 @@ export default async function handler(req, res) {
           employee.position,
           employee.osztalyfonok || 'nincs',
           employee.short_name || null,
-          numericSchoolId  // Use the validated numeric school_id
+          school_id  
         ];
       }));
 
-      // Generate the query with proper parameter placeholders
       const query = `
         INSERT INTO admins 
           (admin_id, full_name, password, position, osztalyfonok, short_name, school_id)

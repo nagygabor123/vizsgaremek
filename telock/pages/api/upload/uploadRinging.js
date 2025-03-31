@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     const { ringing } = req.body;
     console.log(ringing);
 
-    if (!school_id&&!Array.isArray(ringing) || ringing.length === 0 ) {
+    if (!school_id || !Array.isArray(ringing) || ringing.length === 0) {
       return res.status(400).json({ error: 'A ringing tömb üres vagy hibás' });
     }
 
@@ -25,7 +25,7 @@ export default async function handler(req, res) {
       }
 
       try {
-        await sql(insertQuery, [start_time, end_time,school_id]);
+        await sql(insertQuery, [start_time, end_time, school_id]);
       } catch (dbError) {
         console.error(`Hiba az adatbázisba íráskor: ${dbError.message}`);
         return res.status(500).json({ error: 'Hiba az adatok feltöltésekor' });

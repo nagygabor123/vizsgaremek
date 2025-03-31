@@ -2,9 +2,13 @@ import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
+    const { school_id } = req.query;
+    console.log(school_id);
     const { groups } = req.body;
+    console.log(groups);
 
-    if (!Array.isArray(groups) || groups.length === 0) {
+
+    if (!school_id || !Array.isArray(groups) || groups.length === 0) {
       return res.status(400).json({ message: 'A groups tömb üres vagy hibás' });
     }
 
@@ -12,7 +16,7 @@ export default async function handler(req, res) {
 
     try {
       const insertPromises = groups.map(group => 
-        sql('INSERT INTO csoportok (group_name) VALUES ($1)', [group.name])
+        sql('INSERT INTO csoportok (group_name,school_id) VALUES ($1,$2)', [group.name,school_id])
       );
 
       await Promise.all(insertPromises);
