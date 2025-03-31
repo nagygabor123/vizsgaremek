@@ -132,7 +132,7 @@ export default function AddEmployeePage() {
       const response = await fetch(`${API_BASE_URL}/api/config/addEmployee`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ full_name: fullName, position: position, osztalyfonok: 'nincs', short_name: shortname }),
+        body: JSON.stringify({ full_name: fullName, position: position, osztalyfonok: 'nincs', short_name: shortname, school_id: session?.user?.school_id }),
       });
       const data = await response.json();
       if (response.ok) {

@@ -9,8 +9,8 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: 'A HTTP metódus nem engedélyezett' });
   }
 
-  const { full_name, position, osztalyfonok, short_name } = req.body;
-  if (!full_name || !position || !osztalyfonok || !short_name) {
+  const { full_name, position, osztalyfonok, short_name, school_id } = req.body;
+  if (!full_name || !position || !osztalyfonok || !short_name || !school_id) {
     return res.status(400).json({ message: 'Hiányzó kötelező mezők' });
   }
 
@@ -26,8 +26,8 @@ export default async function handler(req, res) {
     const hashedPassword = await hash(password, 10);
 
     await sql`
-      INSERT INTO admins (admin_id, full_name, password, position, osztalyfonok, short_name) 
-      VALUES (${nextAdminId}, ${full_name}, ${hashedPassword}, ${position}, ${osztalyfonok}, ${short_name})
+      INSERT INTO admins (admin_id, full_name, password, position, osztalyfonok, short_name, school_id) 
+      VALUES (${nextAdminId}, ${full_name}, ${hashedPassword}, ${position}, ${osztalyfonok}, ${short_name}, ${school_id})
     `;
 
     res.status(201).json({ message: 'Sikeresen hozzáadott alkalmazott!' });
