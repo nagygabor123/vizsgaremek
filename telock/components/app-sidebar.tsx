@@ -157,9 +157,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       setHasStudents(data.length > 0);
     } catch (error) {
       console.error("Error fetching students", error);
-    } finally {
-      setLoading(false);
-    }
+    } 
+    // finally {
+    //   setLoading(false);
+    // }
   };
 
   const fetchSchool = async () => {
@@ -195,6 +196,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   }
 
   return (
+    <div>
+    {loading ? (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-100 border-t-blue-600"></div>
+      </div>
+    ) : (
+      <>
     <Sidebar {...props}>
       <SidebarHeader>
         <DropdownMenu>
@@ -319,5 +327,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
       </SidebarFooter>
     </Sidebar>
+    </>
+            )}
+          </div>
   );
 }
