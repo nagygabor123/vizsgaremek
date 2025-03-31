@@ -34,7 +34,7 @@ export default async function handler(req, res) {
 
   try {
     const sql = neon(`${process.env.DATABASE_URL}`);
-    const rows = await sql(query, [school_id]);  // Paraméterek átadása tömbként
+    const rows = await sql(query, [school_id]); 
 
     if (rows.length === 0) {
       return res.status(404).json({ error: "Nincs tanóra a mai nap!" });
