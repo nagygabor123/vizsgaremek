@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { AppSidebar } from "@/components/app-sidebar";
+import { useSession } from "next-auth/react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -80,6 +81,7 @@ import {
 } from "@/components/ui/dialog"
 
 export default function Page() {
+  const { data: session } = useSession();
   const [loading, setLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDialogOpen2, setIsDialogOpen2] = useState(false);
@@ -119,11 +121,18 @@ export default function Page() {
 
   const fetchYearSchedule = async () => {
     try {
-      const plusRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?type=plusznap`);
-      const szunetRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?type=szunet`);
-      const noschoolRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?type=tanitasnelkul`);
-      const startRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?type=kezd`);
-      const endRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?type=veg`);
+      const requestBody = JSON.stringify({ school_id: 1 });
+      const requestOptions = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        body: requestBody
+      };
+
+      const plusRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule`, { ...requestOptions, body: JSON.stringify({ school_id: 1, type: 'plusznap' }) });
+      const szunetRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule`, { ...requestOptions, body: JSON.stringify({ school_id: 1, type: 'szunet' }) });
+      const noschoolRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule`, { ...requestOptions, body: JSON.stringify({ school_id: 1, type: 'tanitasnelkul' }) });
+      const startRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule`, { ...requestOptions, body: JSON.stringify({ school_id: 1, type: 'kezd' }) });
+      const endRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule`, { ...requestOptions, body: JSON.stringify({ school_id: 1, type: 'veg' }) });
 
       const plusDates = await plusRes.json();
       const breakDates = await szunetRes.json();
