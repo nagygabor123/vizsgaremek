@@ -107,7 +107,7 @@ export default function AddEmployeePage() {
 
   const fetchEmployees = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/config/getEmployees`);
+      const response = await fetch(`${API_BASE_URL}/api/config/getEmployees?school_id=${session?.user?.school_id}`);
       const data = await response.json();
       if (response.ok) {
         setEmployees(data);
