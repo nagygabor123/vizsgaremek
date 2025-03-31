@@ -4,12 +4,14 @@ import { FileClock, Zap, ChartColumnBig, ShieldCheck, RefreshCw, Server, Chevron
 import { getServerSession } from "next-auth";
 import { Button } from "@/components/ui/button"
 import localFont from "next/font/local";
+import { Input } from "@/components/ui/input"
 
 const ZenDots = localFont({
   src: "./fonts/ZenDots-Regular.ttf",
   variable: "--font-zen-dots",
   weight: "100 900",
 });
+
 
 export default async function Home() {
   const session = await getServerSession();
@@ -277,6 +279,9 @@ export default async function Home() {
           placeholder="iskola@minta.hu" 
           className="flex-1 px-4 py-3 rounded-lg border border-blue-400 bg-blue-500/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
         />
+        <Input
+                  className="flex-1 px-4 py-3 rounded-lg border border-blue-400 bg-blue-500/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                  type="email" placeholder="Email" />
         <Button variant="secondary" className="">
           Bemutatót kérek
         </Button>
