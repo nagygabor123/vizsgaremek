@@ -2,6 +2,8 @@ import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
+    const { school_id } = req.query;
+    console.log(school_id);
     const sql = neon(process.env.DATABASE_URL);
     try {
       const students = await sql(
@@ -10,6 +12,7 @@ export default async function handler(req, res) {
           lockers.status AS status
         FROM 
           students
+        WHERE school_id = ${school_id}
         LEFT JOIN 
           locker_relationships ON students.rfid_tag = locker_relationships.rfid_tag
         LEFT JOIN 
