@@ -229,7 +229,13 @@ export default function Home() {
       } else {
         const data = await response.json();
         console.log(data.message);
-        setUnlockedStudents(prev => new Set(prev).add(student_id));
+        // setUnlockedStudents(prev => new Set(prev).add(student_id));
+        setUnlockedStudents(prev => {
+          const newSet = new Set(prev);
+          newSet.add(student_id);
+          return newSet;
+        });
+        
       }
     } catch (error) {
       console.error('Hiba történt a kérés során:', error);
