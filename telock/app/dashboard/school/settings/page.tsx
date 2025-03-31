@@ -97,9 +97,9 @@ export default function Page() {
   });
   const [schoolStartEdit, setSchoolStartEdit] = useState('');
   const [schoolEndEdit, setSchoolEndEdit] = useState('');
-  const [newBreak, setNewBreak] = useState({ nev: '', which_day: '', replace_day: '' });
-  const [newNo, setNewNo] = useState({ nev: '', which_day: '', replace_day: '' });
-  const [newPlusDate, setNewPlusDate] = useState({ nev: '', which_day: '', replace_day: '' });
+  const [newBreak, setNewBreak] = useState({ nev: '', which_day: '', replace_day: '', school_id: session?.user?.school_id });
+  const [newNo, setNewNo] = useState({ nev: '', which_day: '', replace_day: '', school_id: session?.user?.school_id });
+  const [newPlusDate, setNewPlusDate] = useState({ nev: '', which_day: '', replace_day: '', school_id: session?.user?.school_id });  
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
   const API_BASE_URL = window.location.origin;
@@ -200,7 +200,7 @@ export default function Page() {
         }));
         setIsDialogOpen(false);
         setDate(undefined);
-        setNewBreak({ nev: '', which_day: '', replace_day: '' });
+        setNewBreak({ nev: '', which_day: '', replace_day: '' , school_id: session?.user?.school_id });
         await fetchYearSchedule();
 
 
@@ -229,7 +229,7 @@ export default function Page() {
         }));
 
         setIsDialogOpen3(false);
-        setNewNo({ nev: '', which_day: '', replace_day: '' });
+        setNewNo({ nev: '', which_day: '', replace_day: '', school_id: session?.user?.school_id  });
         await fetchYearSchedule();
       }
     } catch (error) {
@@ -255,7 +255,7 @@ export default function Page() {
           plusDates: [...(prev.plusDates ?? []), newPlusDate],
         }));
         setIsDialogOpen2(false);
-        setNewPlusDate({ nev: '', which_day: '', replace_day: '' });
+        setNewPlusDate({ nev: '', which_day: '', replace_day: '', school_id: session?.user?.school_id  });
         await fetchYearSchedule();
       }
     } catch (error) {
