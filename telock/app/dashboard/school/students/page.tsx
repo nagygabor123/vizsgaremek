@@ -22,7 +22,7 @@ import {
 import { Label } from "@/components/ui/label"
 import Link from "next/link";
 
-import { Pen, Trash2, ArrowUpDown, CirclePlus, CircleCheck, LockOpen, CircleAlert, CircleMinus, Lock, ChevronRight, ChevronLeft, Slash, } from "lucide-react"
+import { Pen, Trash2, ArrowUpDown, CirclePlus, CircleCheck, LockOpen, CircleAlert, CircleMinus, Lock, ChevronRight, ChevronLeft, Slash, School, } from "lucide-react"
 
 import {
   Dialog,
@@ -199,11 +199,12 @@ export default function Home() {
   };
 
   const handleSystemClose = async () => {
+    const school_id = session?.user?.school_id;
     const action = systemClose ? 'open' : 'close';
     const response = await fetch('/api/system/closeOpen', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action }),
+      body: JSON.stringify({ action, school_id }),
     });
 
     if (response.ok) {
