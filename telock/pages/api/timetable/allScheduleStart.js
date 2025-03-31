@@ -3,6 +3,7 @@ import { neon } from '@neondatabase/serverless';
 export default async function handler(req, res) {
   const { school_id } = req.query;
   console.log(school_id);
+
   const query = `
     SELECT 
         s.student_id, 
@@ -29,13 +30,11 @@ export default async function handler(req, res) {
     WHERE t.day_of_week = LOWER(TRIM(TO_CHAR(CURRENT_DATE, 'Day'))) 
     AND s.school_id = $1 
     GROUP BY s.student_id, s.full_name;
-
-
   `;
 
   try {
     const sql = neon(`${process.env.DATABASE_URL}`);
-    const rows = await sql(query,school_id);
+    const rows = await sql(query, [school_id]);  // Paraméterek átadása tömbként
 
     if (rows.length === 0) {
       return res.status(404).json({ error: "Nincs tanóra a mai nap!" });
@@ -44,7 +43,7 @@ export default async function handler(req, res) {
     res.status(200).json({ students: rows });
 
   } catch (error) {
-    console.error("Hiba az adatok lekérdezésekor.:", error);
+    console.error("Hiba az adatok lekérdezésekor:", error);
     res.status(500).json({ error: 'Hiba az adatok lekérdezésekor.' });
   }
 }
