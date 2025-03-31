@@ -9,6 +9,7 @@ export default async function handler(req, res) {
     const { school_id } = req.query;
     console.log(school_id);
     const { ringing } = req.body;
+    console.log(ringing);
 
     if (!school_id&&!Array.isArray(ringing) || ringing.length === 0 ) {
       return res.status(400).json({ error: 'A ringing tömb üres vagy hibás' });

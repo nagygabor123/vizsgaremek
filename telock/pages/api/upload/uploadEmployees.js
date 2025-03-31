@@ -9,8 +9,11 @@ import {hash} from 'bcrypt';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
+    const { school_id } = req.query;
+    console.log(school_id);
     const { employees } = req.body;
-    
+    console.log(employees);    
+
     if (!Array.isArray(employees) || employees.length === 0) {
       return res.status(400).json({ message: 'Az employees tömb üres vagy hibás' });
     }
@@ -18,7 +21,7 @@ export default async function handler(req, res) {
     const sql = neon(process.env.DATABASE_URL);
 
     try {
-      const lastAdmin = await sql('SELECT admin_id FROM admins ORDER BY admin_id DESC LIMIT 1');
+      const lastAdmin = await sql(`SELECT admin_id FROM admins WHERE school_id = ${school_id} ORDER BY admin_id DESC LIMIT 1`);
       
       let nextAdminId = 1;
       if (lastAdmin.length > 0) {
@@ -42,12 +45,12 @@ export default async function handler(req, res) {
       }));
 
       const placeholders = insertValues.map(
-        (_, rowIndex) => `($${rowIndex * 6 + 1}, $${rowIndex * 6 + 2}, $${rowIndex * 6 + 3}, $${rowIndex * 6 + 4}, $${rowIndex * 6 + 5}, $${rowIndex * 6 + 6})`
+        (_, rowIndex) => `($${rowIndex * 6 + 1}, $${rowIndex * 6 + 2}, $${rowIndex * 6 + 3}, $${rowIndex * 6 + 4}, $${rowIndex * 6 + 5}, $${rowIndex * 6 + 6}, $${school_id})`
       ).join(', ');
 
       const query = `
         INSERT INTO admins 
-          (admin_id, full_name, password, position, osztalyfonok, short_name)
+          (admin_id, full_name, password, position, osztalyfonok, short_name, school_id)
         VALUES ${placeholders}
       `;
 
