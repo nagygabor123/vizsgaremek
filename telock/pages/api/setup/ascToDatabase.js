@@ -84,7 +84,7 @@ async function waitForDatabaseToBeReady(sql, table, minRows = 1, timeout = 5000,
     }
 
     console.log(`Várakozás az adatbázisra: ${table} (${count} sor)`);
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Várunk 1 másodpercet
+    await new Promise(resolve => setTimeout(resolve, 1000)); 
   }
 
   throw new Error(`Timeout: Az adatbázis (${table}) nem állt készen ${timeout / 1000} másodperc alatt.`);

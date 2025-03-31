@@ -14,22 +14,25 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'A HTTP metódus nem engedélyezett' });
   }
-
+  const { school_id } = req.query;
+  console.log(school_id);
   const { schedule } = req.body;
+  console.log(schedule);
 
-  if (!Array.isArray(schedule) || schedule.length === 0) {
+
+  if (!school_id || !Array.isArray(schedule) || schedule.length === 0) {
     return res.status(400).json({ message: 'A schedule tömb üres vagy hibás' });
   }
 
   const sql = neon(`${process.env.DATABASE_URL}`);
 
   try {
-    const admins = await sql('SELECT admin_id, full_name FROM admins');
+    const admins = await sql(`SELECT admin_id, full_name FROM admins WHERE school_id = ${school_id}`);
     if (!Array.isArray(admins)) {
       throw new Error('Érvénytelen válasz az adatbázisból az adminok táblából');
     }
     const adminMap = new Map(admins.map(admin => [admin.full_name.trim(), admin.admin_id]));
-    const groups = await sql('SELECT group_id, group_name FROM csoportok');
+    const groups = await sql(`SELECT group_id, group_name FROM csoportok WHERE school_id = ${school_id}`);
     if (!Array.isArray(groups)) {
       throw new Error('Érvénytelen válasz az adatbázisból a csoportok táblából');
     }
@@ -58,6 +61,7 @@ export default async function handler(req, res) {
         dayMapping[entry.day] || 'monday',
         entry.start_time,
         entry.end_time,
+        school_id
       ]);
 
       groupRelationsInsertValues.push({ groupIds });
@@ -67,12 +71,12 @@ export default async function handler(req, res) {
 
     if (timetableInsertValues.length > 0) {
       const timetablePlaceholders = timetableInsertValues
-        .map((_, rowIndex) => `($${rowIndex * 5 + 1}, $${rowIndex * 5 + 2}, $${rowIndex * 5 + 3}, $${rowIndex * 5 + 4}, $${rowIndex * 5 + 5})`)
+        .map((_, rowIndex) => `($${rowIndex * 6 + 1}, $${rowIndex * 6 + 2}, $${rowIndex * 6 + 3}, $${rowIndex * 6 + 4}, $${rowIndex * 6 + 5}, $${rowIndex * 6 + 6})`)
         .join(', ');
 
       const timetableQuery = `
         INSERT INTO timetables 
-          (admin_id, group_name, day_of_week, start_time, end_time) 
+          (admin_id, group_name, day_of_week, start_time, end_time,school_id) 
         VALUES ${timetablePlaceholders}
         RETURNING timetable_id
       `;
