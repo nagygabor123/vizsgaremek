@@ -92,11 +92,22 @@ CREATE TABLE ring_times (
 );
 
 INSERT INTO schools (school_name,status) VALUES
-('Kiskunfélegyházi Szent Benedek PG Középiskola', 'nyithato');
+('Kiskunfélegyházi Szent Benedek PG Középiskola', 'zarva'),
+('Constantinum Katolikus Óvoda, Általános Iskola, Gimnázium, Technikum, Kollégium', 'zarva'),
+('Móra Ferenc Gimnázium', 'nyithato');
+
+
 
 INSERT INTO admins (full_name, password, position, osztalyfonok, short_name, school_id) VALUES
-('Admin Admin', '$2b$10$O5qBB4FhkxxTT9LBvuopzuA9y2L5.qrQxYjLOsLyYY8ofYCCJW1HW', 'rendszergazda', 'nincs', 'AdAd', 1);
+('Admin Pg', '$2b$10$O5qBB4FhkxxTT9LBvuopzuA9y2L5.qrQxYjLOsLyYY8ofYCCJW1HW', 'rendszergazda', 'nincs', 'AdPg', 1),
+('Admin Consti', '$2b$10$O5qBB4FhkxxTT9LBvuopzuA9y2L5.qrQxYjLOsLyYY8ofYCCJW1HW', 'rendszergazda', 'nincs', 'AdCo', 2),
+('Admin Mora', '$2b$10$O5qBB4FhkxxTT9LBvuopzuA9y2L5.qrQxYjLOsLyYY8ofYCCJW1HW', 'rendszergazda', 'nincs', 'AdMo', 3);
+
 
 INSERT INTO year_schedule (type, nev, which_day, replace_day, school_id) VALUES
 ('kezd', 'Tanévkezdés', '2024-09-02', '', 1),
-('veg', 'Tanévzárás', '2025-06-13', '', 1);
+('veg', 'Tanévzárás', '2025-06-13', '', 1),
+('kezd', 'Tanévkezdés', '2024-09-02', '', 2),
+('veg', 'Tanévzárás', '2025-06-13', '', 2),
+('kezd', 'Tanévkezdés', '2024-09-02', '', 3),
+('veg', 'Tanévzárás', '2025-06-13', '', 3);
