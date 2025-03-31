@@ -121,45 +121,39 @@ export default function Page() {
 
   const fetchYearSchedule = async () => {
     try {
-      const requestBody = JSON.stringify({ school_id: 1 });
-      const requestOptions = {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-        body: requestBody
-      };
-
-      const plusRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule`, { ...requestOptions, body: JSON.stringify({ school_id: 1, type: 'plusznap' }) });
-      const szunetRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule`, { ...requestOptions, body: JSON.stringify({ school_id: 1, type: 'szunet' }) });
-      const noschoolRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule`, { ...requestOptions, body: JSON.stringify({ school_id: 1, type: 'tanitasnelkul' }) });
-      const startRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule`, { ...requestOptions, body: JSON.stringify({ school_id: 1, type: 'kezd' }) });
-      const endRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule`, { ...requestOptions, body: JSON.stringify({ school_id: 1, type: 'veg' }) });
-
-      const plusDates = await plusRes.json();
-      const breakDates = await szunetRes.json();
-      const schoolStart = await startRes.json();
-      const schoolEnd = await endRes.json();
-      const noSchool = await noschoolRes.json();
-
+      const schoolId = 1; // Itt állíthatod be a megfelelő school_id-t
+  
+      const endpoints = ["plusznap", "szunet", "tanitasnelkul", "kezd", "veg"];
+      const requests = endpoints.map((type) =>
+        fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${schoolId}&type=${type}`)
+      );
+  
+      const responses = await Promise.all(requests);
+      const data = await Promise.all(responses.map((res) => res.json()));
+  
       setYearSchedule({
-        plusDates: plusDates.plusDates_alap,
-        breakDates: breakDates.breakDates_alap,
-        noSchool: noSchool.tanitasnelkul_alap,
-        schoolStart: schoolStart.schoolYearStart.start,
-        schoolEnd: schoolEnd.schoolYearEnd.end
+        plusDates: data[0]?.plusDates_alap || [],
+        breakDates: data[1]?.breakDates_alap || [],
+        noSchool: data[2]?.tanitasnelkul_alap || [],
+        schoolStart: data[3]?.schoolYearStart?.start || "",
+        schoolEnd: data[4]?.schoolYearEnd?.end || "",
       });
-      setSchoolStartEdit(schoolStart.schoolYearStart.start);
-      setSchoolEndEdit(schoolEnd.schoolYearEnd.end);
-      console.log('schoolStart:', schoolStart.schoolYearStart.start);
-      console.log('schoolEnd:', schoolEnd.schoolYearEnd.end); 
-      console.log('breakDates:', breakDates.breakDates_alap);
-      console.log('plusDates:', plusDates.plusDates_alap);  
-      console.log('noSchool:', noSchool.tanitasnelkul_alap);
+  
+      setSchoolStartEdit(data[3]?.schoolYearStart?.start || "");
+      setSchoolEndEdit(data[4]?.schoolYearEnd?.end || "");
+  
+      console.log("schoolStart:", data[3]?.schoolYearStart?.start);
+      console.log("schoolEnd:", data[4]?.schoolYearEnd?.end);
+      console.log("breakDates:", data[1]?.breakDates_alap);
+      console.log("plusDates:", data[0]?.plusDates_alap);
+      console.log("noSchool:", data[2]?.tanitasnelkul_alap);
     } catch (error) {
-      console.error('Error fetching year schedule:', error);
+      console.error("Error fetching year schedule:", error);
     } finally {
       setLoading(false);
     }
   };
+  
 
   useEffect(() => {
     fetchYearSchedule();
