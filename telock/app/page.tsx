@@ -24,9 +24,9 @@ export default async function Home() {
               telock
             </span>
             <nav className="hidden md:flex space-x-8 text-white">
-              <Link href="#miert" className="hover:text-blue-200 transition">Előnyeink</Link>
+              <Link href="#elonyeink" className="hover:text-blue-200 transition">Előnyeink</Link>
+              <Link href="#rolunk-mondtak" className="hover:text-blue-200 transition">Rólunk mondták</Link>
               <Link href="#funkciok" className="hover:text-blue-200 transition">Funkciók</Link>
-              <Link href="#velemenyek" className="hover:text-blue-200 transition">Rólunk mondták</Link>
             </nav>
 
             {session ? (
@@ -80,7 +80,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <section id="miert" className="w-full pt-8 pb-24">
+      <section id="elonyeink" className="w-full pt-8 pb-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <div className="inline-flex items-center justify-center px-4 py-2 bg-blue-50 rounded-full mb-4">
@@ -133,7 +133,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section id="velemenyek" className="w-full py-16 bg-blue-600 text-white">
+      <section id="rolunk-mondtak" className="w-full py-16 bg-blue-600 text-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
