@@ -13,7 +13,8 @@ export default function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'A metódus nem követhető' });
   }
-
+  const { school_id } = req.query;
+  console.log(school_id);
   const form = new multiparty.Form();
 
   form.parse(req, async (err, fields, files) => {
@@ -50,7 +51,7 @@ export default function handler(req, res) {
         sendGroupsData(groups),
       ]);
       
-      await waitForDatabaseToBeReady(sql, 'admins', employees.length);
+      await waitForDatabaseToBeReady(sql, 'admins', employees.length,school_id);
       await sendScheduleData(schedule);
       
 
@@ -70,11 +71,11 @@ export default function handler(req, res) {
 }
 
 
-async function waitForDatabaseToBeReady(sql, table, minRows = 1, timeout = 5000) {
+async function waitForDatabaseToBeReady(sql, table, minRows = 1, timeout = 5000,school_id) {
   const startTime = Date.now();
 
   while (Date.now() - startTime < timeout) {
-    const result = await sql(`SELECT COUNT(*) as count FROM ${table}`);
+    const result = await sql(`SELECT COUNT(*) as count FROM ${table} WHERE school_id = ${school_id}`);
     const count = result[0].count;
 
     if (count >= minRows) {

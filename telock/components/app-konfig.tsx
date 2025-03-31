@@ -1,3 +1,5 @@
+
+import { signOut, useSession } from "next-auth/react";
 import { useState, useEffect, useRef } from "react";
 import {
   Sheet,
@@ -12,6 +14,7 @@ import { Paperclip, TriangleAlert } from "lucide-react";
 import { Loader2 } from "lucide-react"
 
 const SheetComponent: React.FC = () => {
+  const { data: session } = useSession();
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [message, setMessage] = useState<React.ReactNode>("");
@@ -184,7 +187,7 @@ const SheetComponent: React.FC = () => {
     formData.append("file", file);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/setup/ascToDatabase`, {
+      const response = await fetch(`${API_BASE_URL}/api/setup/ascToDatabase?school_id=${session?.user?.school_id}`, {
         method: "POST",
         body: formData,
       });

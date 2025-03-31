@@ -1,9 +1,5 @@
-import { neon } from '@neondatabase/serverless';
-
-const sql = neon(process.env.DATABASE_URL);
-
 export default async function handler(req, res) {
-  if (req.method === 'PATCH') {
+  if (req.method === 'PUT') {  // <-- itt PUT legyen
     const { id } = req.query;
     const lockerId = parseInt(id);
 
@@ -12,7 +8,7 @@ export default async function handler(req, res) {
     }
 
     try {
-      const rows  = await sql('SELECT status FROM lockers WHERE locker_id = $1', [lockerId]);
+      const rows = await sql('SELECT status FROM lockers WHERE locker_id = $1', [lockerId]);
 
       if (rows.length === 0) {
         return res.status(404).json({ message: 'Szekrény nem található' });
@@ -21,7 +17,7 @@ export default async function handler(req, res) {
       const currentStatus = rows[0].status;
       const newStatus = currentStatus === 'be' ? 'ki' : 'be';
 
-      const rowCount  = await sql(
+      const rowCount = await sql(
         'UPDATE lockers SET status = $1 WHERE locker_id = $2',
         [newStatus, lockerId]
       );
@@ -30,7 +26,7 @@ export default async function handler(req, res) {
         return res.status(500).json({ message: 'Sikertelen szekrény státusz frissítés' });
       }
 
-      const  relationshipRows = await sql(
+      const relationshipRows = await sql(
         'SELECT rfid_tag FROM locker_relationships WHERE locker_id = $1',
         [lockerId]
       );
