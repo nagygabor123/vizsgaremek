@@ -67,12 +67,13 @@ void updateLockerStatus(int lockerId) {
   if (lockerId == 0) return; // Ha a lockerId 0, nem küldünk semmit
 
   if (client.connect(server, 3000)) {
-    Serial.println("Connected to server for status update.");
-    String url = "/api/locker/setLockerStatus?id=" + String(lockerId);
+    Serial.println("Connected to proxy server for status update.");
+    String url = "/proxy2?id=" + String(lockerId); // Az URL-t a proxy szerverre irányítjuk
     client.println("PATCH " + url + " HTTP/1.1");
-    client.println("Host: localhost");
+    client.println("Host: 172.16.13.9");
     client.println("Connection: close");
     client.println();
+
     while (client.connected() || client.available()) {
       if (client.available()) {
         String response = client.readStringUntil('\n');
@@ -80,9 +81,10 @@ void updateLockerStatus(int lockerId) {
       }
     }
     client.stop();
-    Serial.println("Disconnected from server after status update.");
+    Serial.println("Disconnected from proxy server after status update.");
   } else {
-    Serial.println("Failed to connect to server for status update.");
+    Serial.print("Failed to connect to proxy server. Error code: ");
+    Serial.println(client.status()); // Kiírja a kapcsolat hiba kódját
   }
 }
 
@@ -182,4 +184,3 @@ void loop() {
 
   rfid.PCD_Init();
 }
-
