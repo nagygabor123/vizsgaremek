@@ -7,6 +7,7 @@ declare module "next-auth" {
     position?: string;
     osztalyfonok?: string;
     password?: string;
+    school_id?: string;
   }
 
   interface Session {

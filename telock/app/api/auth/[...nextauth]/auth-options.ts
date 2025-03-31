@@ -22,12 +22,14 @@ export const authOptions = {
   ],
   callbacks: {
     async session({ session, token }: { session: Session; token: TokenSet }) {
-      if (session.user && token.short_name && token.full_name && token.position && token.osztalyfonok && token.password) {
+      if (session.user && token.short_name && token.full_name && token.position && token.osztalyfonok && token.password && token.school_id) {
         session.user.short_name = token.short_name as string;
         session.user.full_name = token.full_name as string;
         session.user.position = token.position as string;
         session.user.osztalyfonok = token.osztalyfonok as string;
         session.user.password = token.password as string;
+        session.user.school_id = token.school_id as string;
+
       }
       return session;
     },
@@ -38,6 +40,7 @@ export const authOptions = {
         token.position = user.position;
         token.osztalyfonok = user.osztalyfonok;
         token.password = user.password;
+        token.school_id = user.school_id;
       }
       return token;
     },

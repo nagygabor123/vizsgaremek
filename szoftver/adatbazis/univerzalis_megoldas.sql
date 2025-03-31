@@ -1,10 +1,8 @@
--- Iskolák táblája
 CREATE TABLE schools (
   school_id SERIAL PRIMARY KEY,
   school_name VARCHAR(255) NOT NULL UNIQUE
 );
 
--- Admins tábla
 CREATE TABLE admins (
   admin_id SERIAL PRIMARY KEY,
   full_name VARCHAR(255) NOT NULL,
@@ -16,7 +14,6 @@ CREATE TABLE admins (
   FOREIGN KEY (school_id) REFERENCES schools (school_id) ON DELETE CASCADE
 );
 
--- Students tábla
 CREATE TABLE students (
   student_id VARCHAR(20) PRIMARY KEY,
   full_name VARCHAR(255) NOT NULL,
@@ -27,15 +24,11 @@ CREATE TABLE students (
   FOREIGN KEY (school_id) REFERENCES schools (school_id) ON DELETE CASCADE
 );
 
--- Lockers tábla
 CREATE TABLE lockers (
   locker_id SERIAL PRIMARY KEY,
-  status TEXT CHECK (status IN ('be', 'ki')) NOT NULL,
-  school_id INT NOT NULL,
-  FOREIGN KEY (school_id) REFERENCES schools (school_id) ON DELETE CASCADE
+  status TEXT CHECK (status IN ('be', 'ki')) NOT NULL
 );
 
--- Locker_relationships tábla
 CREATE TABLE locker_relationships (
   relationship_id SERIAL PRIMARY KEY,
   rfid_tag VARCHAR(50) NOT NULL,
@@ -44,7 +37,6 @@ CREATE TABLE locker_relationships (
   FOREIGN KEY (locker_id) REFERENCES lockers (locker_id) ON DELETE CASCADE
 );
 
--- Csoportok tábla
 CREATE TABLE csoportok (
   group_id SERIAL PRIMARY KEY,
   group_name VARCHAR(255) NOT NULL,
@@ -52,7 +44,6 @@ CREATE TABLE csoportok (
   FOREIGN KEY (school_id) REFERENCES schools (school_id) ON DELETE CASCADE
 );
 
--- Student_groups tábla
 CREATE TABLE student_groups (
   student_group_id SERIAL PRIMARY KEY,
   student_id VARCHAR(20) NOT NULL,
@@ -61,7 +52,6 @@ CREATE TABLE student_groups (
   FOREIGN KEY (group_id) REFERENCES csoportok (group_id) ON DELETE CASCADE
 );
 
--- Timetables tábla
 CREATE TABLE timetables (
   timetable_id SERIAL PRIMARY KEY,
   admin_id INT NOT NULL,
@@ -74,7 +64,6 @@ CREATE TABLE timetables (
   FOREIGN KEY (school_id) REFERENCES schools (school_id) ON DELETE CASCADE
 );
 
--- Group_relations tábla
 CREATE TABLE group_relations (
   relation_id SERIAL PRIMARY KEY,
   timetable_id INT NOT NULL,
@@ -83,7 +72,6 @@ CREATE TABLE group_relations (
   FOREIGN KEY (group_id) REFERENCES csoportok (group_id) ON DELETE CASCADE
 );
 
--- System_status tábla
 CREATE TABLE system_status (
   id SERIAL PRIMARY KEY,
   status VARCHAR(10) NOT NULL,
@@ -91,7 +79,6 @@ CREATE TABLE system_status (
   FOREIGN KEY (school_id) REFERENCES schools (school_id) ON DELETE CASCADE
 );
 
--- Year_schedule tábla
 CREATE TABLE year_schedule (
   year_schedule_id SERIAL PRIMARY KEY,
   type VARCHAR(255) NOT NULL,
@@ -102,7 +89,6 @@ CREATE TABLE year_schedule (
   FOREIGN KEY (school_id) REFERENCES schools (school_id) ON DELETE CASCADE
 );
 
--- Ring_times tábla
 CREATE TABLE ring_times (
   id SERIAL PRIMARY KEY,
   start_time TIME NOT NULL,
@@ -111,7 +97,6 @@ CREATE TABLE ring_times (
   FOREIGN KEY (school_id) REFERENCES schools (school_id) ON DELETE CASCADE
 );
 
--- Mintaadatok beszúrása
 INSERT INTO schools (school_name) VALUES
 ('Minta Iskola');
 

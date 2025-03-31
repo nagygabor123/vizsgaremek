@@ -26,6 +26,7 @@ export async function authorize(credentials: any) {
       position: user.position,
       osztalyfonok: user.osztalyfonok,
       password: user.password,
+      school_id: user.school_id,
     };
   }
 
