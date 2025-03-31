@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link"
-import { FileClock, Zap, ChartColumnBig, ShieldCheck, RefreshCw, Server, Instagram, Cpu, ArrowRight, Clock, Youtube, TrendingUp, CheckCircle, Lock  } from "lucide-react";
+import { FileClock, Zap, ChartColumnBig, ShieldCheck, RefreshCw, Server, Instagram, Cpu, ArrowRight, BatteryCharging, Youtube, TrendingUp, CheckCircle, Lock  } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { Button } from "@/components/ui/button"
 import localFont from "next/font/local";
@@ -84,7 +84,7 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <div className="inline-flex items-center justify-center px-4 py-2 bg-blue-50 rounded-full mb-4">
-              <span className="text-sm font-medium text-blue-600">Innovatív megoldás</span>
+              <span className="text-sm font-medium text-blue-600">Innovatív megoldások</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Miért válassza a <span className="text-blue-600">telock</span> rendszerét?
@@ -199,9 +199,9 @@ export default async function Home() {
                 icon: <ChartColumnBig className="w-6 h-6 text-blue-600" />
               },
               {
-                title: 'Időzített zárolás',
-                description: 'Automatikus zárolás beállítható órarend szerint.',
-                icon: <Clock className="w-6 h-6 text-blue-600" />
+                title: 'Automatikus töltés',
+                description: 'Beépített töltőállomások minden tárolóban, hogy a diákok feltöltött telefonnal távozhassanak',
+                icon: <BatteryCharging className="w-6 h-6 text-blue-600" />
               },
               {
                 title: 'Automatikus frissítések',
@@ -258,7 +258,7 @@ export default async function Home() {
 
           <div className="max-w-2xl mx-auto mb-8">
             <p className="text-lg text-blue-100 mb-6">
-              Adja meg az email címét, és küldjük Önnek az ingyenes bemutató anyagot, valamint egy személyes konzultáció időpontot!
+            Kérjük, adja meg e-mail címét, és elküldjük Önnek az ingyenes bemutató anyagot. Ezenkívül felkínálunk egy egyéni konzultációt is, ahol szívesen válaszolunk kérdéseire!
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
