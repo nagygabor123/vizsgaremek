@@ -98,7 +98,7 @@ CREATE TABLE ring_times (
 );
 
 INSERT INTO schools (school_name) VALUES
-('Minta Iskola');
+('Kiskunfélegyházi Szent Benedek PG Középiskola');
 
 INSERT INTO admins (full_name, password, position, osztalyfonok, short_name, school_id) VALUES
 ('Admin Admin', '$2b$10$O5qBB4FhkxxTT9LBvuopzuA9y2L5.qrQxYjLOsLyYY8ofYCCJW1HW', 'rendszergazda', 'nincs', 'AdAd', 1);

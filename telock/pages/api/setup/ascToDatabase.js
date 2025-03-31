@@ -46,13 +46,13 @@ export default function handler(req, res) {
       console.log('Kinyert csoportok:', groups);
 
       await Promise.all([
-        sendRingingData(ringing),
-        sendEmployeesData(employees),
-        sendGroupsData(groups),
+        sendRingingData(ringing,school_id),
+        sendEmployeesData(employees,school_id),
+        sendGroupsData(groups,school_id),
       ]);
       
       await waitForDatabaseToBeReady(sql, 'admins', employees.length,school_id);
-      await sendScheduleData(schedule);
+      await sendScheduleData(schedule,school_id);
       
 
       return res.status(201).json({
@@ -237,9 +237,9 @@ function extractSchedule(parsedXml) {
   });
 }
 
-async function sendRingingData(ringing) {
+async function sendRingingData(ringing,school_id) {
   try {
-    const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/upload/uploadRinging', {
+    const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/upload/uploadRinging?school_id=${school_id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -257,9 +257,9 @@ async function sendRingingData(ringing) {
   }
 }
 
-async function sendEmployeesData(employees) {
+async function sendEmployeesData(employees,school_id) {
   try {
-    const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/upload/uploadEmployees', {
+    const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/upload/uploadEmployees?school_id=${school_id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -277,9 +277,9 @@ async function sendEmployeesData(employees) {
   }
 }
 
-async function sendGroupsData(groups) {
+async function sendGroupsData(groups,school_id) {
   try {
-    const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/upload/uploadGroups', {
+    const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/upload/uploadGroups?school_id=${school_id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -297,9 +297,9 @@ async function sendGroupsData(groups) {
   }
 }
 
-async function sendScheduleData(schedule) {
+async function sendScheduleData(schedule,school_id) {
   try {
-    const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/upload/uploadTimetables', {
+    const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/upload/uploadTimetables?school_id=${school_id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
