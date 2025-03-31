@@ -1,6 +1,7 @@
 "use client";
 
 import { AppSidebar } from "@/components/app-sidebar";
+import { useSession } from "next-auth/react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -66,6 +67,7 @@ interface Timetable {
 }
 
 export default function Home() {
+  const { data: session } = useSession();
   const [open, setOpen] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [students, setStudents] = useState<Student[]>([]);
@@ -124,7 +126,7 @@ export default function Home() {
     const fetchTimetables = async () => {
       try {
 
-        const response = await fetch(`${API_BASE_URL}/api/timetable/allScheduleStart`);
+        const response = await fetch(`${API_BASE_URL}/api/timetable/allScheduleStart?school_id=${session?.user?.school_id}`);
         if (!response.ok) {
           throw new Error('Nem sikerült lekérni az összes diák órarendjét.');
         }

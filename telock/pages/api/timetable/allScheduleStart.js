@@ -1,6 +1,8 @@
 import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
+  const { school_id } = req.query;
+  console.log(school_id);
   const query = `
     SELECT 
         s.student_id, 
@@ -25,12 +27,15 @@ export default async function handler(req, res) {
     JOIN group_relations gr ON c.group_id = gr.group_id 
     JOIN timetables t ON gr.timetable_id = t.timetable_id 
     WHERE t.day_of_week = LOWER(TRIM(TO_CHAR(CURRENT_DATE, 'Day'))) 
+    AND s.school_id = $1 
     GROUP BY s.student_id, s.full_name;
+
+
   `;
 
   try {
     const sql = neon(`${process.env.DATABASE_URL}`);
-    const rows = await sql(query);
+    const rows = await sql(query,school_id);
 
     if (rows.length === 0) {
       return res.status(404).json({ error: "Nincs tanóra a mai nap!" });
