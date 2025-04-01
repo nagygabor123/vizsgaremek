@@ -20,12 +20,8 @@ export default async function handler(req, res) {
 
     try {
       const lastAdmin = await sql`SELECT MAX(admin_id) AS max_admin_id FROM admins`;
+      let nextAdminId = (lastAdmin[0]?.max_admin_id || 0) + 1;
       
-      let nextAdminId = 1;
-      if (lastAdmin.length > 0) {
-        nextAdminId = lastAdmin[0].admin_id + 1;
-      }
-
       const insertValues = await Promise.all(employees.map(async (employee) => {
         const password = employee.short_name + "123";
         const hashedPassword = await hash(password, 10);
