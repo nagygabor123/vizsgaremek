@@ -19,7 +19,7 @@ export default async function handler(req, res) {
     const sql = neon(process.env.DATABASE_URL);
 
     try {
-      const lastAdmin = await sql`SELECT admin_id FROM admins WHERE school_id = ${school_id} ORDER BY admin_id DESC LIMIT 1`;
+      const lastAdmin = await sql`SELECT MAX(admin_id) AS max_admin_id FROM admins`;
       
       let nextAdminId = 1;
       if (lastAdmin.length > 0) {

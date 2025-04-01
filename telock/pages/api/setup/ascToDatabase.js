@@ -71,7 +71,7 @@ export default function handler(req, res) {
 }
 
 
-async function waitForDatabaseToBeReady(sql, minRows, school_id, timeout = 10000) {
+async function waitForDatabaseToBeReady(sql, minRows, school_id, timeout = 5000) {
   const startTime = Date.now();
   const numericSchoolId = parseInt(school_id, 10);
 
