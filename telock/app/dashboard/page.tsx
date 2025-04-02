@@ -24,10 +24,74 @@ export default function Page() {
   const { data: session } = useSession();
 
   const [students, setStudents] = useState([]);
-  const [hasStudents, setHasStudents] = useState(false);
+
+  const [studentsInStatusBe, setStudentsInStatusBe] = useState(0);
+
+  const [yearSchedule, setYearSchedule] = useState<any>({
+    plusDates: [],
+    breakDates: [],
+    noSchool: [],
+    schoolStart: '',
+    schoolEnd: ''
+  });
+  const [schoolStartEdit, setSchoolStartEdit] = useState('');
+  const [schoolEndEdit, setSchoolEndEdit] = useState('');
+
   const [loading, setLoading] = useState(true);
 
   const API_BASE_URL = window.location.origin;
+
+  const fetchYearSchedule = async () => {
+    try {
+      const plusRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=plusznap`);
+      const szunetRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=szunet`);
+      const noschoolRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=tanitasnelkul`);
+      const startRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=kezd`);
+      const endRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=veg`);
+  
+      const plusDates = await plusRes.json();
+      const breakDates = await szunetRes.json();
+      const schoolStart = await startRes.json();
+      const schoolEnd = await endRes.json();
+      const noSchool = await noschoolRes.json();
+  
+      const allDates = [
+        ...plusDates.plusDates_alap,
+        ...breakDates.breakDates_alap,
+        ...noSchool.tanitasnelkul_alap,
+        { date: schoolStart.schoolYearStart.start, name: "Tanév kezdete" },
+        { date: schoolEnd.schoolYearEnd.end, name: "Tanév vége" }
+      ];
+  
+      // Szűrés: Csak a jövőbeli dátumokat tartjuk meg
+      const futureDates = allDates
+        .filter((item) => new Date(item.date) >= new Date())
+        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  
+      // Az első két legközelebbi dátumot kiválasztjuk
+      const nextDates = futureDates.slice(0, 2);
+  
+      setYearSchedule({
+        plusDates: plusDates.plusDates_alap,
+        breakDates: breakDates.breakDates_alap,
+        noSchool: noSchool.tanitasnelkul_alap,
+        schoolStart: schoolStart.schoolYearStart.start,
+        schoolEnd: schoolEnd.schoolYearEnd.end,
+        nextDates: nextDates,  // Az első két legközelebbi dátum tárolása
+      });
+  
+      setSchoolStartEdit(schoolStart.schoolYearStart.start);
+      setSchoolEndEdit(schoolEnd.schoolYearEnd.end);
+    } catch (error) {
+      console.error('Error fetching year schedule:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  useEffect(() => {
+    fetchYearSchedule();
+  }, []);
   
   const fetchStudents = async () => {
     try {
@@ -36,7 +100,11 @@ export default function Page() {
       );
       const data = await response.json();
       setStudents(data);
-      setHasStudents(data.length > 0);
+
+      // Számoljuk meg, hány tanuló van "be" státusszal
+      const beCount = data.filter((student: any) => student.status === "be").length;
+      setStudentsInStatusBe(beCount);
+      
     } catch (error) {
       console.error("Error fetching students", error);
     } finally {
@@ -49,6 +117,7 @@ export default function Page() {
       fetchStudents();
     }
   }, [session?.user?.school_id]);
+
 
   return (
 
@@ -88,6 +157,26 @@ export default function Page() {
         </div>
 
 {students.length}
+{studentsInStatusBe}
+
+{yearSchedule.nextDates && yearSchedule.nextDates.length > 0 && (
+  <div>
+    {yearSchedule.nextDates.map((event: any, index: number) => {
+      const eventDate = new Date(event.date);
+      const today = new Date();
+      const diffInTime = eventDate.getTime() - today.getTime();
+      const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24));
+
+      return (
+        <div key={index} className="p-4 bg-white rounded-lg mt-4 shadow-lg">
+          <p>Esemény: {event.name}</p>
+          <p>Dátum: {eventDate.toLocaleDateString("hu-HU")}</p>
+          <p>{diffInDays} nap múlva lesz.</p>
+        </div>
+      );
+    })}
+  </div>
+)}
 
 
         </>

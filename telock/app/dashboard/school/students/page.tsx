@@ -219,39 +219,25 @@ export default function Home() {
     }
   };
 
-  // const handleStudentOpen = async (student_id: string) => {
-  //   try {
+  const handleStudentOpen = async (student_id: string) => {
+    try {
 
-  //     const response = await fetch(`${API_BASE_URL}/api/system/studentAccess?student=${student_id}`, {
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //     });
+      const response = await fetch(`${API_BASE_URL}/api/system/studentAccess?student=${student_id}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
 
-  //     if (!response.ok) {
-  //       console.error('Hiba történt a zárolás feloldásakor:', await response.text());
-  //     } else {
-  //       const data = await response.json();
-  //       console.log(data.message);
-  //       setUnlockedStudents(prev => new Set(prev).add(student_id));
-  //     }
-  //   } catch (error) {
-  //     console.error('Hiba történt a kérés során:', error);
-  //   }
-  // };
-
-  // Töröld ezt a sort (nincs szükség lokális állapotra)
-// const [unlockedStudents, setUnlockedStudents] = useState(new Set());
-
-const handleStudentOpen = async (student_id: string) => {
-  try {
-    await fetch(`${API_BASE_URL}/api/system/studentAccess?student=${student_id}`, {
-      method: 'POST',
-    });
-    // Nincs lokális állapot frissítés, a szerver kezeli a zárolást
-  } catch (error) {
-    console.error('Hiba:', error);
-  }
-};
+      if (!response.ok) {
+        console.error('Hiba történt a zárolás feloldásakor:', await response.text());
+      } else {
+        const data = await response.json();
+        console.log(data.message);
+        setUnlockedStudents(prev => new Set(prev).add(student_id));
+      }
+    } catch (error) {
+      console.error('Hiba történt a kérés során:', error);
+    }
+  };
 
   const [sortField, setSortField] = useState<"full_name" | "class" | null>(null);
   const [sortOrder, setSortOrder] = useState("asc");
@@ -289,7 +275,16 @@ const handleStudentOpen = async (student_id: string) => {
     currentPage * PAGE_SIZE
   );
 
+  // const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
 
+  // useEffect(() => {
+  //   const hasClickedBefore = localStorage.getItem("hasClickedOverlayButton");
+  //   setButtonVisible(hasClickedBefore !== "true");
+  // }, []);
+
+  // if (isButtonVisible === null) {
+  //   return null;
+  // }
 
 
   return (
@@ -471,20 +466,13 @@ const handleStudentOpen = async (student_id: string) => {
                               {/* <td className="p-1">{student.rfid_tag}</td> */}
                               <td className="p-1">
 
-                                {/* <Button
+                                <Button
                                   variant="ghost"
                                   onClick={() => handleStudentOpen(student.student_id)}
                                   disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}
                                 >
                                   <LockOpen className="w-4 h-4 inline-block" />
-                                </Button> */}
-                                <Button
-  variant="ghost"
-  onClick={() => handleStudentOpen(student.student_id)}
-  disabled={!canUnlockStudent}  // Csak a szerver oldali feltétel számít
->
-  <LockOpen className="w-4 h-4 inline-block" />
-</Button>
+                                </Button>
 
                                 <Dialog open={open} onOpenChange={setOpen}>
                                   <DialogTrigger asChild>
