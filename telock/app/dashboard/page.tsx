@@ -79,49 +79,26 @@ export default function Page() {
 
   const fetchYearSchedule = async () => {
     try {
-      setLoading(true);
-      
-      // Egyetlen API hívás az összes adatért
       const response = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}`);
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-  
       const allEvents = await response.json();
-      
-      // Hibakezelés, ha nem tömb jön vissza
+
       if (!Array.isArray(allEvents)) {
-        throw new Error("Invalid data format received from API");
+        throw new Error("Invalid data format");
       }
-  
-      // Szűrés az aktuális iskolára
+
       const schoolEvents = allEvents.filter(event => 
         event.school_id === Number(session?.user?.school_id)
       );
-  
-      // Adatok kinyerése
-      const plusDates = schoolEvents.filter(e => e.type === 'plusznap');
-      const breakDates = schoolEvents.filter(e => e.type === 'szunet');
-      const noSchool = schoolEvents.filter(e => e.type === 'tanitasnelkul');
-      const schoolStart = schoolEvents.find(e => e.type === 'kezd');
-      const schoolEnd = schoolEvents.find(e => e.type === 'veg');
-  
+
       setYearSchedule({
-        plusDates,
-        breakDates,
-        noSchool,
-        schoolStart: schoolStart?.which_day || '',
-        schoolEnd: schoolEnd?.which_day || ''
+        plusDates: schoolEvents.filter(e => e.type === 'plusznap'),
+        breakDates: schoolEvents.filter(e => e.type === 'szunet'),
+        noSchool: schoolEvents.filter(e => e.type === 'tanitasnelkul'),
+        schoolStart: schoolEvents.find(e => e.type === 'kezd')?.which_day || '',
+        schoolEnd: schoolEvents.find(e => e.type === 'veg')?.which_day || ''
       });
-  
-      setSchoolStartEdit(schoolStart?.which_day || '');
-      setSchoolEndEdit(schoolEnd?.which_day || '');
-  
     } catch (error) {
-      console.error('Error fetching year schedule:', error);
-    } finally {
-      setLoading(false);
+      console.error('Error:', error);
     }
   };
 
