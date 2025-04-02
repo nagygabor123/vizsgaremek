@@ -27,71 +27,52 @@ export default function Page() {
   const [hasStudents, setHasStudents] = useState(false);
   const [studentsInStatusBe, setStudentsInStatusBe] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [yearSchedule, setYearSchedule] = useState({
-    plusDates: [],
-    breakDates: [],
-    noSchool: [],
-    schoolStart: '',
-    schoolEnd: ''
-  });
-  const [nearestDate, setNearestDate] = useState<{date: string, type: string, label: string} | null>(null);
-
+  interface ScheduleItem {
+    year_schedule_id: number;
+    type: string;
+    nev: string;
+    which_day: string;
+    replace_day: string;
+    school_id: number;
+  }
+  
+  const [yearSchedule, setYearSchedule] = useState<ScheduleItem[]>([]);
+  const [nearestEvent, setNearestEvent] = useState<ScheduleItem | null>(null);
   const API_BASE_URL = window.location.origin;
 
   const fetchYearSchedule = async () => {
     try {
-      const plusRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=plusznap`);
-      const szunetRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=szunet`);
-      const noschoolRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=tanitasnelkul`);
-      const startRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=kezd`);
-      const endRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=veg`);
+      const response = await fetch(
+        `${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}`
+      );
+      const data: ScheduleItem[] = await response.json();
   
-      const plusDates = await plusRes.json();
-      const breakDates = await szunetRes.json();
-      const schoolStart = await startRes.json();
-      const schoolEnd = await endRes.json();
-      const noSchool = await noschoolRes.json();
-  
-      const scheduleData = {
-        plusDates: plusDates.plusDates_alap || [],
-        breakDates: breakDates.breakDates_alap || [],
-        noSchool: noSchool.tanitasnelkul_alap || [],
-        schoolStart: schoolStart.schoolYearStart?.start || '',
-        schoolEnd: schoolEnd.schoolYearEnd?.end || ''
-      };
-  
-      setYearSchedule(scheduleData);
+      // Konvertáljuk a school_id-t számra, hogy biztosan számként hasonlítsuk össze
+      const currentSchoolId = Number(session?.user?.school_id);
       
-      // Find the nearest date
+      // Szűrjük csak az aktuális iskola eseményeit
+      const schoolEvents = data.filter(item => 
+        item.school_id === currentSchoolId
+      );
+  
+      // Megkeressük a legközelebbi eseményt
       const today = new Date();
       today.setHours(0, 0, 0, 0);
-      
-      const allDates = [
-        ...scheduleData.plusDates.map((date: string) => ({date, type: 'plusznap', label: 'Pótnap'})),
-        ...scheduleData.breakDates.map((date: string) => ({date, type: 'szunet', label: 'Szünet'})),
-        ...scheduleData.noSchool.map((date: string) => ({date, type: 'tanitasnelkul', label: 'Tanítás nélküli nap'})),
-        {date: scheduleData.schoolStart, type: 'kezd', label: 'Tanév kezdete'},
-        {date: scheduleData.schoolEnd, type: 'veg', label: 'Tanév vége'}
-      ].filter(item => item.date);
   
-      // Convert to Date objects and filter future dates
-      const futureDates = allDates
-        .map(item => ({
-          ...item,
-          dateObj: new Date(item.date)
-        }))
-        .filter(item => item.dateObj >= today)
-        .sort((a, b) => a.dateObj.getTime() - b.dateObj.getTime());
+      const futureEvents = schoolEvents
+        .filter(event => {
+          const eventDate = new Date(event.which_day);
+          return eventDate >= today;
+        })
+        .sort((a, b) => {
+          return new Date(a.which_day).getTime() - new Date(b.which_day).getTime();
+        });
   
-      setNearestDate(futureDates[0] || null);
-  
+      setNearestEvent(futureEvents[0] || null);
     } catch (error) {
       console.error('Error fetching year schedule:', error);
-    } finally {
-      setLoading(false);
     }
   };
-  
   const fetchStudents = async () => {
     try {
       const response = await fetch(
@@ -114,9 +95,9 @@ export default function Page() {
   useEffect(() => {
     if (session?.user?.school_id) {
       fetchStudents();
+      fetchYearSchedule();
     }
   }, [session?.user?.school_id]);
-
 
   return (
 
@@ -155,10 +136,19 @@ export default function Page() {
           </div>
         </div>
 
-        {nearestDate && (
+
+        {nearestEvent && (
       <div className="min-h-[60px] rounded-xl bg-blue-50 flex items-center px-4 w-full box-border overflow-hidden">
         <p className="text-sm ml-3 text-blue-600">
-          Következő esemény: {nearestDate.label} - {new Date(nearestDate.date).toLocaleDateString('hu-HU')}
+          Következő esemény: {nearestEvent.nev} - {new Date(nearestEvent.which_day).toLocaleDateString('hu-HU', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            weekday: 'long'
+          })}
+          {nearestEvent.type === 'plusznap' && ' (Pótnap)'}
+          {nearestEvent.type === 'szunet' && ' (Szünet)'}
+          {nearestEvent.type === 'tanitasnelkul' && ' (Tanítás nélküli nap)'}
         </p>
       </div>
     )}
