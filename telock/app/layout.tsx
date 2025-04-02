@@ -2,6 +2,8 @@ import { getServerSession } from "next-auth";
 import type { Metadata } from "next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options";
 import Providers from "./providers";
+import { SidebarProvider } from "@/components/ui/sidebar";
+
 import "./globals.css";
 
 import { GeistSans } from 'geist/font/sans';
@@ -20,12 +22,10 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
 
   return ( 
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} >
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body>
         <Providers session={session}>
-          <div>
-            {children}
-          </div>
+          {children}
         </Providers>
       </body>
     </html>
