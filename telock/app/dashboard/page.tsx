@@ -119,7 +119,7 @@ export default function Page() {
             </div>
 
             {/* System Information */}
-            <Card>
+            {/* <Card>
               <CardHeader>
                 <CardTitle>Rendszer információk</CardTitle>
               </CardHeader>
@@ -150,6 +150,29 @@ export default function Page() {
                           day: 'numeric'
                         })}
                       </p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card> */}
+                    <Card>
+              <CardHeader>
+                <CardTitle>Legutóbbi aktivitás</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <div className="h-2 w-2 rounded-full bg-blue-500 mr-2"></div>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium">Kovács János</p>
+                      <p className="text-sm text-muted-foreground">Telefon leadva - 2025.04.03 14:25</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="h-2 w-2 rounded-full bg-green-500 mr-2"></div>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium">Nagy Anna</p>
+                      <p className="text-sm text-muted-foreground">Telefon visszaadva - 2025.04.03 13:40</p>
                     </div>
                   </div>
                 </div>
