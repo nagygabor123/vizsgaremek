@@ -20,12 +20,6 @@ import {
 
 import { Megaphone } from "lucide-react";
 
-type DateItem = {
-  date: string;
-  name: string;
-};
-
-
 export default function Page() {
   const { data: session } = useSession();
 
@@ -61,22 +55,19 @@ export default function Page() {
       const schoolEnd = await endRes.json();
       const noSchool = await noschoolRes.json();
   
-      const allDates: DateItem[] = [
+      const allDates = [
         ...plusDates.plusDates_alap,
-        ...breakDates.breakDates_alap,
-        ...noSchool.tanitasnelkul_alap,
+        ...breakDates.breakDates_alap.map((date: any) => ({ date: date.which_day, name: date.nev })),
+        ...noSchool.tanitasnelkul_alap.map((date: any) => ({ date: date.which_day, name: date.nev })),
         { date: schoolStart.schoolYearStart.start, name: "Tanév kezdete" },
         { date: schoolEnd.schoolYearEnd.end, name: "Tanév vége" }
       ];
       
-
-// Szűrés: Csak a jövőbeli dátumokat tartjuk meg
-// Szűrés: Csak a jövőbeli dátumokat tartjuk meg
-const futureDates = allDates
-  .filter((item: DateItem) => new Date(item.date) >= new Date())  // Az item.date stringet Date objektummá alakítjuk
-  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());  // Helyes időrendi rendezés
-
-
+  
+      // Szűrés: Csak a jövőbeli dátumokat tartjuk meg
+      const futureDates = allDates
+        .filter((item) => new Date(item.date) >= new Date())
+        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   
       // Az első két legközelebbi dátumot kiválasztjuk
       const nextDates = futureDates.slice(0, 2);
