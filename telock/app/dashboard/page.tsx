@@ -18,15 +18,29 @@ import {
   SidebarProvider,
 } from "@/components/ui/sidebar"
 
+import { format } from "date-fns"
+import { hu } from "date-fns/locale";
+
+
 import { Megaphone } from "lucide-react";
 
 export default function Page() {
+
+  const days = [
+    { label: 'Hétfő', value: 'monday' },
+    { label: 'Kedd', value: 'tuesday' },
+    { label: 'Szerda', value: 'wednesday' },
+    { label: 'Csütörtök', value: 'thursday' },
+    { label: 'Péntek', value: 'friday' },
+  ];
+
   const { data: session } = useSession();
 
   const [students, setStudents] = useState([]);
   const [hasStudents, setHasStudents] = useState(false);
   const [studentsInStatusBe, setStudentsInStatusBe] = useState(0);
   const [loading, setLoading] = useState(true);
+
   interface ScheduleItem {
     year_schedule_id: number;
     type: string;
@@ -36,43 +50,82 @@ export default function Page() {
     school_id: number;
   }
   
-  const [yearSchedule, setYearSchedule] = useState<ScheduleItem[]>([]);
+  interface YearSchedule {
+    plusDates: ScheduleItem[];
+    breakDates: ScheduleItem[];
+    noSchool: ScheduleItem[];
+    schoolStart: string;
+    schoolEnd: string;
+  }
+  
+  
   const [nearestEvent, setNearestEvent] = useState<ScheduleItem | null>(null);
   const API_BASE_URL = window.location.origin;
+  const [message, setMessage] = useState<string>('');
+  const [yearSchedule, setYearSchedule] = useState<YearSchedule>({
+    plusDates: [],
+    breakDates: [],
+    noSchool: [],
+    schoolStart: '',
+    schoolEnd: ''
+  });
+  const [schoolStartEdit, setSchoolStartEdit] = useState('');
+  const [schoolEndEdit, setSchoolEndEdit] = useState('');
+  const [newBreak, setNewBreak] = useState({ nev: '', which_day: '', replace_day: '', school_id: session?.user?.school_id });
+  const [newNo, setNewNo] = useState({ nev: '', which_day: '', replace_day: '', school_id: session?.user?.school_id });
+  const [newPlusDate, setNewPlusDate] = useState({ nev: '', which_day: '', replace_day: '', school_id: session?.user?.school_id });
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+
 
   const fetchYearSchedule = async () => {
     try {
-      const response = await fetch(
-        `${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}`
-      );
-      const data: ScheduleItem[] = await response.json();
-  
-      // Konvertáljuk a school_id-t számra, hogy biztosan számként hasonlítsuk össze
-      const currentSchoolId = Number(session?.user?.school_id);
+      setLoading(true);
       
-      // Szűrjük csak az aktuális iskola eseményeit
-      const schoolEvents = data.filter(item => 
-        item.school_id === currentSchoolId
+      // Egyetlen API hívás az összes adatért
+      const response = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}`);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const allEvents = await response.json();
+      
+      // Hibakezelés, ha nem tömb jön vissza
+      if (!Array.isArray(allEvents)) {
+        throw new Error("Invalid data format received from API");
+      }
+  
+      // Szűrés az aktuális iskolára
+      const schoolEvents = allEvents.filter(event => 
+        event.school_id === Number(session?.user?.school_id)
       );
   
-      // Megkeressük a legközelebbi eseményt
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
+      // Adatok kinyerése
+      const plusDates = schoolEvents.filter(e => e.type === 'plusznap');
+      const breakDates = schoolEvents.filter(e => e.type === 'szunet');
+      const noSchool = schoolEvents.filter(e => e.type === 'tanitasnelkul');
+      const schoolStart = schoolEvents.find(e => e.type === 'kezd');
+      const schoolEnd = schoolEvents.find(e => e.type === 'veg');
   
-      const futureEvents = schoolEvents
-        .filter(event => {
-          const eventDate = new Date(event.which_day);
-          return eventDate >= today;
-        })
-        .sort((a, b) => {
-          return new Date(a.which_day).getTime() - new Date(b.which_day).getTime();
-        });
+      setYearSchedule({
+        plusDates,
+        breakDates,
+        noSchool,
+        schoolStart: schoolStart?.which_day || '',
+        schoolEnd: schoolEnd?.which_day || ''
+      });
   
-      setNearestEvent(futureEvents[0] || null);
+      setSchoolStartEdit(schoolStart?.which_day || '');
+      setSchoolEndEdit(schoolEnd?.which_day || '');
+  
     } catch (error) {
       console.error('Error fetching year schedule:', error);
+    } finally {
+      setLoading(false);
     }
   };
+
+
   const fetchStudents = async () => {
     try {
       const response = await fetch(
@@ -137,21 +190,15 @@ export default function Page() {
         </div>
 
 
-        {nearestEvent && (
-      <div className="min-h-[60px] rounded-xl bg-blue-50 flex items-center px-4 w-full box-border overflow-hidden">
-        <p className="text-sm ml-3 text-blue-600">
-          Következő esemény: {nearestEvent.nev} - {new Date(nearestEvent.which_day).toLocaleDateString('hu-HU', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            weekday: 'long'
-          })}
-          {nearestEvent.type === 'plusznap' && ' (Pótnap)'}
-          {nearestEvent.type === 'szunet' && ' (Szünet)'}
-          {nearestEvent.type === 'tanitasnelkul' && ' (Tanítás nélküli nap)'}
-        </p>
-      </div>
-    )}
+        {yearSchedule.plusDates.map((plusDate: any) => (
+  <tr key={plusDate.year_schedule_id} className="text-center border-t">
+    <td className="p-1">{new Date(plusDate.which_day).toLocaleDateString("hu-HU")}</td>
+    <td className="p-1">{days.find((day) => day.value === plusDate.replace_day)?.label || plusDate.replace_day}</td>
+    <td className="p-1">
+      {/* Törlés gomb */}
+    </td>
+  </tr>
+))}
 
 {students.length}
 {studentsInStatusBe}
