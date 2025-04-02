@@ -59,50 +59,50 @@ export default function Page() {
         endRes.json()
       ]);
   
-      // Create a comprehensive list of all special dates with proper metadata
+      // Minden dátumot a which_day alapján kezelünk
       const allEvents = [
-        // School year boundaries
+        // Tanév határai
         {
-          date: schoolStart.schoolYearStart.start,
+          date: schoolStart.schoolYearStart.which_day, // which_day használata
           name: "Tanév kezdete",
           type: "year_boundary",
           isSchoolDay: true
         },
         {
-          date: schoolEnd.schoolYearEnd.end,
+          date: schoolEnd.schoolYearEnd.which_day, // which_day használata
           name: "Tanév vége",
           type: "year_boundary",
           isSchoolDay: false
         },
         
-        // Breaks (school is closed)
+        // Szünetek
         ...breakDates.breakDates_alap.map((item: any) => ({
-          date: item.date,
-          name: item.name || "Iskolai szünet",
+          date: item.which_day, // which_day használata
+          name: item.nev || "Iskolai szünet",
           type: "break",
           isSchoolDay: false
         })),
         
-        // Plus days (extra school days)
+        // Pótnapok
         ...plusDates.plusDates_alap.map((item: any) => ({
-          date: item.date,
-          name: item.name || "Szombati tanítási nap",
+          date: item.which_day, // which_day használata
+          name: item.nev || "Szombati tanítási nap",
           type: "plus_day",
           isSchoolDay: true
         })),
         
-        // Non-teaching workdays
+        // Tanítás nélküli napok
         ...noSchool.tanitasnelkul_alap.map((item: any) => ({
-          date: item.date,
-          name: item.name || "Tanítás nélküli munkanap",
+          date: item.which_day, // which_day használata
+          name: item.nev || "Tanítás nélküli munkanap",
           type: "non_teaching",
           isSchoolDay: false
         }))
       ];
   
-      // Filter future dates and sort chronologically
+      // Szűrés és rendezés
       const today = new Date();
-      today.setHours(0, 0, 0, 0); // Normalize to start of day
+      today.setHours(0, 0, 0, 0);
       
       const futureEvents = allEvents
         .filter(event => {
@@ -112,8 +112,8 @@ export default function Page() {
         })
         .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   
-      // Get the next 2 unique dates (group same-day events)
-      const uniqueDates = futureEvents.reduce((acc, event) => {
+      // Egyedi dátumok csoportosítása
+      const uniqueDates = futureEvents.reduce((acc: any, event) => {
         const dateStr = event.date.split('T')[0];
         if (!acc[dateStr]) {
           acc[dateStr] = {
@@ -126,20 +126,19 @@ export default function Page() {
         return acc;
       }, {});
   
-      const nextUniqueDates = Object.values(uniqueDates)
-        .slice(0, 2);
+      const nextUniqueDates = Object.values(uniqueDates).slice(0, 2);
   
       setYearSchedule({
         plusDates: plusDates.plusDates_alap,
         breakDates: breakDates.breakDates_alap,
         noSchool: noSchool.tanitasnelkul_alap,
-        schoolStart: schoolStart.schoolYearStart.start,
-        schoolEnd: schoolEnd.schoolYearEnd.end,
+        schoolStart: schoolStart.schoolYearStart.which_day, // which_day használata
+        schoolEnd: schoolEnd.schoolYearEnd.which_day, // which_day használata
         nextDates: nextUniqueDates,
       });
   
-      setSchoolStartEdit(schoolStart.schoolYearStart.start);
-      setSchoolEndEdit(schoolEnd.schoolYearEnd.end);
+      setSchoolStartEdit(schoolStart.schoolYearStart.which_day);
+      setSchoolEndEdit(schoolEnd.schoolYearEnd.which_day);
     } catch (error) {
       console.error('Error fetching year schedule:', error);
     } finally {
@@ -213,22 +212,13 @@ export default function Page() {
 
         {yearSchedule.nextDates && yearSchedule.nextDates.length > 0 && (
   <div className="space-y-4">
-    {yearSchedule.nextDates.map((day: any, index: number) => {
+    {(yearSchedule.nextDates as Array<any>).map((day, index) => {
       const eventDate = new Date(day.date);
       const today = new Date();
       today.setHours(0, 0, 0, 0);
-      const eventDay = new Date(day.date);
-      eventDay.setHours(0, 0, 0, 0);
       
-      const diffInTime = eventDay.getTime() - today.getTime();
+      const diffInTime = eventDate.getTime() - today.getTime();
       const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24));
-
-      const dateString = eventDate.toLocaleDateString("hu-HU", {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
 
       return (
         <div key={index} className={`p-4 rounded-lg shadow ${
@@ -237,15 +227,20 @@ export default function Page() {
           <div className="flex justify-between items-start">
             <div>
               <h3 className="font-medium text-gray-900">
-                {dateString}
+                {eventDate.toLocaleDateString("hu-HU", {
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
               </h3>
               <div className="mt-2 space-y-1">
                 {day.events.map((event: any, i: number) => (
                   <div key={i} className="flex items-center text-sm">
-                    {event.type === 'break'}
-                    {event.type === 'plus_day'}
-                    {event.type === 'non_teaching' }
-                    {event.type === 'year_boundary' }
+                    {event.type === 'break' && <Megaphone className="w-4 h-4 mr-2 text-red-500" />}
+                    {event.type === 'plus_day' && <Megaphone className="w-4 h-4 mr-2 text-blue-500" />}
+                    {event.type === 'non_teaching' && <Megaphone className="w-4 h-4 mr-2 text-gray-500" />}
+                    {event.type === 'year_boundary' && <Megaphone className="w-4 h-4 mr-2 text-purple-500" />}
                     {event.name}
                   </div>
                 ))}
@@ -260,7 +255,6 @@ export default function Page() {
     })}
   </div>
 )}
-
 
 {students.length}
 {studentsInStatusBe}
