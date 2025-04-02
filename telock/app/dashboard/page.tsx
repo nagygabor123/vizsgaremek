@@ -23,17 +23,24 @@ import { Megaphone } from "lucide-react";
 export default function Page() {
   const { data: session } = useSession();
 
-
   const [students, setStudents] = useState([]);
   const [hasStudents, setHasStudents] = useState(false);
   const [studentsInStatusBe, setStudentsInStatusBe] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const [yearSchedule, setYearSchedule] = useState<any>({
+    plusDates: [],
+    breakDates: [],
+    noSchool: [],
+    schoolStart: '',
+    schoolEnd: ''
+  });
+  const [schoolStartEdit, setSchoolStartEdit] = useState('');
+  const [schoolEndEdit, setSchoolEndEdit] = useState('');
 
   const API_BASE_URL = window.location.origin;
-
-  const [yearSchedule, setYearSchedule] = useState<any>(null);
-
-
+  
   const fetchYearSchedule = async () => {
     try {
       const plusRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=plusznap`);
@@ -41,32 +48,47 @@ export default function Page() {
       const noschoolRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=tanitasnelkul`);
       const startRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=kezd`);
       const endRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=veg`);
-
+  
       const plusDates = await plusRes.json();
       const breakDates = await szunetRes.json();
-      const noSchool = await noschoolRes.json();
       const schoolStart = await startRes.json();
       const schoolEnd = await endRes.json();
-
+      const noSchool = await noschoolRes.json();
+  
       const allDates = [
-        ...(plusDates.plusDates_alap || []).map((date: string) => ({ type: 'Plusz nap', date })),
-        ...(breakDates.breakDates_alap || []).map((date: string) => ({ type: 'Szünet', date })),
-        ...(noSchool.tanitasnelkul_alap || []).map((date: string) => ({ type: 'Tanítás nélküli nap', date })),
-        { type: 'Tanév kezdete', date: schoolStart.schoolYearStart.start || "Nincs adat" },
-        { type: 'Tanév vége', date: schoolEnd.schoolYearEnd.end || "Nincs adat" },
+        ...plusDates.plusDates_alap,
+        ...breakDates.breakDates_alap,
+        ...noSchool.tanitasnelkul_alap,
+        { date: schoolStart.schoolYearStart.start, name: "Tanév kezdete" },
+        { date: schoolEnd.schoolYearEnd.end, name: "Tanév vége" }
       ];
-
-      setYearSchedule(allDates);
+  
+      // Szűrés: Csak a jövőbeli dátumokat tartjuk meg
+      const futureDates = allDates
+        .filter((item) => new Date(item.date) >= new Date())
+        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  
+      // A legközelebbi dátumot kiválasztjuk
+      const nextDate = futureDates.length > 0 ? futureDates[0] : null;
+  
+      setYearSchedule({
+        plusDates: plusDates.plusDates_alap,
+        breakDates: breakDates.breakDates_alap,
+        noSchool: noSchool.tanitasnelkul_alap,
+        schoolStart: schoolStart.schoolYearStart.start,
+        schoolEnd: schoolEnd.schoolYearEnd.end,
+        nextDate: nextDate,  // Új adat a legközelebbi dátum tárolására
+      });
+  
+      setSchoolStartEdit(schoolStart.schoolYearStart.start);
+      setSchoolEndEdit(schoolEnd.schoolYearEnd.end);
     } catch (error) {
       console.error('Error fetching year schedule:', error);
     } finally {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchYearSchedule();
-  }, []);
+  
   
   const fetchStudents = async () => {
     try {
@@ -130,20 +152,12 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <tbody>
-  {Array.isArray(yearSchedule) && yearSchedule.length > 0 ? (
-    yearSchedule.map((item: { type: string; date: string }, index: number) => (
-      <tr key={index}>
-        <td className="border p-2">{item.type || "Ismeretlen típus"}</td>
-        <td className="border p-2">{item.date || "Ismeretlen dátum"}</td>
-      </tr>
-    ))
-  ) : (
-    <tr>
-      <td colSpan={2} className="border p-2 text-center">Nincs adat</td>
-    </tr>
-  )}
-</tbody>
+        {yearSchedule.nextDate && (
+  <div>
+    <p>Legközelebbi esemény: {yearSchedule.nextDate.name}</p>
+    <p>Dátum: {new Date(yearSchedule.nextDate.date).toLocaleDateString("hu-HU")}</p>
+  </div>
+)}
 
 
 {students.length}
