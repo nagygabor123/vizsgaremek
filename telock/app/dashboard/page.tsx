@@ -43,51 +43,91 @@ export default function Page() {
   
   const fetchYearSchedule = async () => {
     try {
-      const plusRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=plusznap`);
-      const szunetRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=szunet`);
-      const noschoolRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=tanitasnelkul`);
-      const startRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=kezd`);
-      const endRes = await fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=veg`);
+      const [plusRes, szunetRes, noschoolRes, startRes, endRes] = await Promise.all([
+        fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=plusznap`),
+        fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=szunet`),
+        fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=tanitasnelkul`),
+        fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=kezd`),
+        fetch(`${API_BASE_URL}/api/config/getYearSchedule?school_id=${session?.user?.school_id}&type=veg`)
+      ]);
   
-      const plusDates = await plusRes.json();
-      const breakDates = await szunetRes.json();
-      const schoolStart = await startRes.json();
-      const schoolEnd = await endRes.json();
-      const noSchool = await noschoolRes.json();
+      const [plusDates, breakDates, noSchool, schoolStart, schoolEnd] = await Promise.all([
+        plusRes.json(),
+        szunetRes.json(),
+        noschoolRes.json(),
+        startRes.json(),
+        endRes.json()
+      ]);
   
-      // Create an array of all special dates with their types
-      const allSpecialDates = [
-        ...plusDates.plusDates_alap.map((date: any) => ({
-          date: date.date,
-          name: date.name || "Szombati tanítási nap",
-          type: "plus"
-        })),
-        ...breakDates.breakDates_alap.map((date: any) => ({
-          date: date.date,
-          name: date.name || "Iskolai szünet",
-          type: "break"
-        })),
-        ...noSchool.tanitasnelkul_alap.map((date: any) => ({
-          date: date.date,
-          name: date.name || "Tanítás nélküli munkanap",
-          type: "no_school"
-        })),
+      // Create a comprehensive list of all special dates with proper metadata
+      const allEvents = [
+        // School year boundaries
         {
           date: schoolStart.schoolYearStart.start,
           name: "Tanév kezdete",
-          type: "school_start"
+          type: "year_boundary",
+          isSchoolDay: true
         },
         {
           date: schoolEnd.schoolYearEnd.end,
           name: "Tanév vége",
-          type: "school_end"
-        }
+          type: "year_boundary",
+          isSchoolDay: false
+        },
+        
+        // Breaks (school is closed)
+        ...breakDates.breakDates_alap.map((item: any) => ({
+          date: item.date,
+          name: item.name || "Iskolai szünet",
+          type: "break",
+          isSchoolDay: false
+        })),
+        
+        // Plus days (extra school days)
+        ...plusDates.plusDates_alap.map((item: any) => ({
+          date: item.date,
+          name: item.name || "Szombati tanítási nap",
+          type: "plus_day",
+          isSchoolDay: true
+        })),
+        
+        // Non-teaching workdays
+        ...noSchool.tanitasnelkul_alap.map((item: any) => ({
+          date: item.date,
+          name: item.name || "Tanítás nélküli munkanap",
+          type: "non_teaching",
+          isSchoolDay: false
+        }))
       ];
   
-      // Filter and sort future dates
-      const futureDates = allSpecialDates
-        .filter((item) => new Date(item.date) >= new Date())
+      // Filter future dates and sort chronologically
+      const today = new Date();
+      today.setHours(0, 0, 0, 0); // Normalize to start of day
+      
+      const futureEvents = allEvents
+        .filter(event => {
+          const eventDate = new Date(event.date);
+          eventDate.setHours(0, 0, 0, 0);
+          return eventDate >= today;
+        })
         .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  
+      // Get the next 2 unique dates (group same-day events)
+      const uniqueDates = futureEvents.reduce((acc, event) => {
+        const dateStr = event.date.split('T')[0];
+        if (!acc[dateStr]) {
+          acc[dateStr] = {
+            date: event.date,
+            events: [],
+            isSchoolDay: event.isSchoolDay
+          };
+        }
+        acc[dateStr].events.push(event);
+        return acc;
+      }, {});
+  
+      const nextUniqueDates = Object.values(uniqueDates)
+        .slice(0, 2);
   
       setYearSchedule({
         plusDates: plusDates.plusDates_alap,
@@ -95,7 +135,7 @@ export default function Page() {
         noSchool: noSchool.tanitasnelkul_alap,
         schoolStart: schoolStart.schoolYearStart.start,
         schoolEnd: schoolEnd.schoolYearEnd.end,
-        nextDates: futureDates.slice(0, 2), // Get the two nearest dates
+        nextDates: nextUniqueDates,
       });
   
       setSchoolStartEdit(schoolStart.schoolYearStart.start);
@@ -106,7 +146,6 @@ export default function Page() {
       setLoading(false);
     }
   };
-  
   
   const fetchStudents = async () => {
     try {
@@ -173,32 +212,48 @@ export default function Page() {
         </div>
 
         {yearSchedule.nextDates && yearSchedule.nextDates.length > 0 && (
-  <div>
-    {yearSchedule.nextDates.map((event: any, index: number) => {
-      const eventDate = new Date(event.date);
+  <div className="space-y-4">
+    {yearSchedule.nextDates.map((day: any, index: number) => {
+      const eventDate = new Date(day.date);
       const today = new Date();
-      const diffInTime = eventDate.getTime() - today.getTime();
+      today.setHours(0, 0, 0, 0);
+      const eventDay = new Date(day.date);
+      eventDay.setHours(0, 0, 0, 0);
+      
+      const diffInTime = eventDay.getTime() - today.getTime();
       const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24));
 
-      // Get appropriate icon based on event type
-   
+      const dateString = eventDate.toLocaleDateString("hu-HU", {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
 
       return (
-        <div key={index} className="p-4 bg-white rounded-lg mt-4 shadow-lg flex items-start gap-3">
-         
-          <div>
-            <p className="font-medium">{event.name}</p>
-            <p className="text-sm text-gray-600">
-              {eventDate.toLocaleDateString("hu-HU", { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-              })}
-            </p>
-            <p className="text-sm mt-1">
-              {diffInDays <= 0 ? 'Ma van' : `${diffInDays} nap múlva`}
-            </p>
+        <div key={index} className={`p-4 rounded-lg shadow ${
+          day.isSchoolDay ? 'bg-blue-50 border-l-4 border-blue-500' : 'bg-gray-50 border-l-4 border-gray-400'
+        }`}>
+          <div className="flex justify-between items-start">
+            <div>
+              <h3 className="font-medium text-gray-900">
+                {dateString}
+              </h3>
+              <div className="mt-2 space-y-1">
+                {day.events.map((event: any, i: number) => (
+                  <div key={i} className="flex items-center text-sm">
+                    {event.type === 'break'}
+                    {event.type === 'plus_day'}
+                    {event.type === 'non_teaching' }
+                    {event.type === 'year_boundary' }
+                    {event.name}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="bg-white px-3 py-1 rounded-full text-sm font-medium">
+              {diffInDays <= 0 ? 'Ma' : `${diffInDays} nap múlva`}
+            </div>
           </div>
         </div>
       );
