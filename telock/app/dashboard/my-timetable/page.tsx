@@ -648,9 +648,10 @@ const Calendar: React.FC = () => {
 
 
   return (
-    <SidebarProvider>
-    <AppSidebar />
-    <SidebarInset>
+    // <SidebarProvider>
+    // <AppSidebar />
+    // <SidebarInset>
+      <div>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b">
           <div className="flex flex-1 items-center gap-2 px-3">
             <SidebarTrigger />
@@ -1049,9 +1050,10 @@ const Calendar: React.FC = () => {
             </>
           )}
         </div>
-
-        </SidebarInset>
-      </SidebarProvider>
+        
+        {/* </SidebarInset>
+      </SidebarProvider> */}
+      </div>
   );
 };
 
