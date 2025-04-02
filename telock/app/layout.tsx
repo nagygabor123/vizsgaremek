@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   description: "telock: Biztonságos és kényelmes telefontárolos iskoláknak",
 };
 
+export const dynamic = "force-dynamic";  // 👈 FONTOS!
+
 export default async function RootLayout({
   children,
 }: {

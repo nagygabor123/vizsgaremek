@@ -9,6 +9,8 @@ import { GeistMono } from 'geist/font/mono';
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 
+export const dynamic = "force-dynamic";  // 👈 FONTOS!
+
 export default async function RootLayout({
   children,
 }: {
@@ -16,6 +18,7 @@ export default async function RootLayout({
 }) {
   const session = await getServerSession(authOptions);
 
+  
   return ( 
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} >
       <body>
