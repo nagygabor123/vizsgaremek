@@ -55,22 +55,39 @@ export default function Page() {
       const schoolEnd = await endRes.json();
       const noSchool = await noschoolRes.json();
   
-      const allDates = [
-        ...plusDates.plusDates_alap,
-        ...breakDates.breakDates_alap.map((date: any) => ({ date: date.which_day, name: date.nev })),
-        ...noSchool.tanitasnelkul_alap.map((date: any) => ({ date: date.which_day, name: date.nev })),
-        { date: schoolStart.schoolYearStart.start, name: "Tanév kezdete" },
-        { date: schoolEnd.schoolYearEnd.end, name: "Tanév vége" }
+      // Create an array of all special dates with their types
+      const allSpecialDates = [
+        ...plusDates.plusDates_alap.map((date: any) => ({
+          date: date.date,
+          name: date.name || "Szombati tanítási nap",
+          type: "plus"
+        })),
+        ...breakDates.breakDates_alap.map((date: any) => ({
+          date: date.date,
+          name: date.name || "Iskolai szünet",
+          type: "break"
+        })),
+        ...noSchool.tanitasnelkul_alap.map((date: any) => ({
+          date: date.date,
+          name: date.name || "Tanítás nélküli munkanap",
+          type: "no_school"
+        })),
+        {
+          date: schoolStart.schoolYearStart.start,
+          name: "Tanév kezdete",
+          type: "school_start"
+        },
+        {
+          date: schoolEnd.schoolYearEnd.end,
+          name: "Tanév vége",
+          type: "school_end"
+        }
       ];
-      
   
-      // Szűrés: Csak a jövőbeli dátumokat tartjuk meg
-      const futureDates = allDates
+      // Filter and sort future dates
+      const futureDates = allSpecialDates
         .filter((item) => new Date(item.date) >= new Date())
         .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-  
-      // Az első két legközelebbi dátumot kiválasztjuk
-      const nextDates = futureDates.slice(0, 2);
   
       setYearSchedule({
         plusDates: plusDates.plusDates_alap,
@@ -78,7 +95,7 @@ export default function Page() {
         noSchool: noSchool.tanitasnelkul_alap,
         schoolStart: schoolStart.schoolYearStart.start,
         schoolEnd: schoolEnd.schoolYearEnd.end,
-        nextDates: nextDates,  // Az első két legközelebbi dátum tárolása
+        nextDates: futureDates.slice(0, 2), // Get the two nearest dates
       });
   
       setSchoolStartEdit(schoolStart.schoolYearStart.start);
@@ -89,7 +106,6 @@ export default function Page() {
       setLoading(false);
     }
   };
-  
   
   
   const fetchStudents = async () => {
@@ -164,17 +180,31 @@ export default function Page() {
       const diffInTime = eventDate.getTime() - today.getTime();
       const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24));
 
+      // Get appropriate icon based on event type
+   
+
       return (
-        <div key={index} className="p-4 bg-white rounded-lg mt-4 shadow-lg">
-          <p>Esemény: {event.name}</p>
-          <p>Dátum: {eventDate.toLocaleDateString("hu-HU")}</p>
-          <p>{diffInDays} nap múlva lesz.</p>
+        <div key={index} className="p-4 bg-white rounded-lg mt-4 shadow-lg flex items-start gap-3">
+         
+          <div>
+            <p className="font-medium">{event.name}</p>
+            <p className="text-sm text-gray-600">
+              {eventDate.toLocaleDateString("hu-HU", { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+              })}
+            </p>
+            <p className="text-sm mt-1">
+              {diffInDays <= 0 ? 'Ma van' : `${diffInDays} nap múlva`}
+            </p>
+          </div>
         </div>
       );
     })}
   </div>
 )}
-
 
 
 {students.length}
