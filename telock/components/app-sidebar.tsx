@@ -1,10 +1,24 @@
-"use client";
+'use client'
 
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import * as React from "react";
+import {
+  TriangleAlert,
+  Settings,
+  SlidersHorizontal,
+  ChevronDown,
+  GraduationCap,
+  FileClock,
+  BriefcaseBusiness,
+  LogOut,
+  CalendarHeart,
+  Calendar,
+  House,
+  LockKeyhole
+} from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -21,6 +35,7 @@ import { Separator } from "@/components/ui/separator";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -28,14 +43,18 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
-  LogOut,
-  House,
-  CalendarHeart,
-  GraduationCap,
-  BriefcaseBusiness,
-  LockKeyhole,
-  ChevronDown
-} from "lucide-react";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
+
 
 interface SidebarItem {
   label: string;
@@ -49,13 +68,80 @@ interface SidebarGroupConfig {
   items: SidebarItem[];
 }
 
+
 const sidebarConfig: SidebarGroupConfig[] = [
-  // Sidebar konfiguráció itt marad
+  {
+    items: [
+      {
+        label: "Kezdőlap",
+        icon: House,
+        path: "/dashboard",
+        allowedPositions: ["Tanár", "igazgato", "igazgatohelyettes", "rendszergazda", "portas"],
+      },
+      {
+        label: "Saját órák",
+        icon: CalendarHeart,
+        path: "/dashboard/my-timetable",
+        allowedPositions: ["Tanár", "igazgato", "igazgatohelyettes"],
+      },
+    ],
+  },
+  {
+    groupLabel: "Osztályom",
+    items: [
+      {
+        label: "Órarend",
+        icon: Calendar,
+        path: "/dashboard/class/timetable",
+        allowedPositions: [],
+      },
+      {
+        label: "Tanulók",
+        icon: GraduationCap,
+        path: "/dashboard/class/students",
+        allowedPositions: [],
+      },
+    ],
+  },
+  {
+    groupLabel: "Iskolai nyilvántartás",
+    items: [
+      {
+        label: "Órarendek",
+        icon: Calendar,
+        path: "/dashboard/school/timetables",
+        allowedPositions: ["igazgato", "igazgatohelyettes", "rendszergazda"],
+      },
+      {
+        label: "Tanulók",
+        icon: GraduationCap,
+        path: "/dashboard/school/students",
+        allowedPositions: ["igazgato", "igazgatohelyettes", "rendszergazda", "portas"],
+      },
+      {
+        label: "Munkatársak",
+        icon: BriefcaseBusiness,
+        path: "/dashboard/school/employees",
+        allowedPositions: ["igazgato", "igazgatohelyettes", "rendszergazda"],
+      },
+    ],
+  },
+  {
+    groupLabel: "Beállítások és naplózás",
+    items: [
+      {
+        label: "Tanév beállításai",
+        icon: SlidersHorizontal,
+        path: "/dashboard/school/settings",
+        allowedPositions: ["igazgato", "igazgatohelyettes", "rendszergazda"],
+      },
+    ],
+  },
 ];
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const isActive = (path: string) => pathname === path;
 
   const { isMobile } = useSidebar();
@@ -63,13 +149,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const [hasStudents, setHasStudents] = useState<boolean | null>(null);
   const [schoolName, setSchoolName] = useState("");
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (session) {
-      fetchStudents();
-      fetchSchool();
-    }
-  }, [session]);  // Frissíti a kérését, amikor a session változik
 
   const fetchStudents = async () => {
     try {
@@ -79,19 +158,20 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     } catch (error) {
       console.error("Error fetching students", error);
     }
+    // finally {
+    //   setLoading(false);
+    // }
   };
 
   const fetchSchool = async () => {
     try {
-      if (session?.user?.school_id) {
-        const response = await fetch(`/api/system/getSchool?school_id=${session.user.school_id}`);
-        const data = await response.json();
+      const response = await fetch(`/api/system/getSchool?school_id=${session?.user?.school_id}`);
+      const data = await response.json();
 
-        if (data.school_name) {
-          setSchoolName(data.school_name);
-        } else {
-          console.error("Iskola neve nem található");
-        }
+      if (data.school_name) {
+        setSchoolName(data.school_name);
+      } else {
+        console.error("Iskola neve nem található");
       }
     } catch (error) {
       console.error("Error fetching school", error);
@@ -100,18 +180,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     }
   };
 
+
+  useEffect(() => {
+    fetchStudents();
+    fetchSchool();
+  }, []);
+
   useEffect(() => {
     const hasClickedBefore = localStorage.getItem("hasClickedOverlayButton");
     setButtonVisible(hasClickedBefore !== "true");
   }, []);
-
-  if (status === "loading") {
-    return <div>Loading...</div>;
-  }
-
-  if (status === "unauthenticated") {
-    return <div>Not authenticated</div>;
-  }
 
   if (isButtonVisible === null) {
     return null;
@@ -126,6 +204,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </div>
         ) : (
           <>
+
             <SidebarHeader>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -243,13 +322,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarContent>
 
             <SidebarFooter>
+
               <Link href="/" className="text-xs text-center">
                 © {new Date().getFullYear()} telock
               </Link>
+
             </SidebarFooter>
           </>
         )}
       </div>
+
     </Sidebar>
   );
 }
