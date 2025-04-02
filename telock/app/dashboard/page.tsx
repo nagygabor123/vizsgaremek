@@ -24,20 +24,17 @@ export default function Page() {
   const { data: session } = useSession();
 
   const [students, setStudents] = useState([]);
-
+  const [hasStudents, setHasStudents] = useState(false);
   const [studentsInStatusBe, setStudentsInStatusBe] = useState(0);
-
-  const [yearSchedule, setYearSchedule] = useState<any>({
+  const [loading, setLoading] = useState(true);
+  const [yearSchedule, setYearSchedule] = useState({
     plusDates: [],
     breakDates: [],
     noSchool: [],
     schoolStart: '',
     schoolEnd: ''
   });
-  const [schoolStartEdit, setSchoolStartEdit] = useState('');
-  const [schoolEndEdit, setSchoolEndEdit] = useState('');
-
-  const [loading, setLoading] = useState(true);
+  const [nearestDate, setNearestDate] = useState<{date: string, type: string, label: string} | null>(null);
 
   const API_BASE_URL = window.location.origin;
 
@@ -51,53 +48,49 @@ export default function Page() {
   
       const plusDates = await plusRes.json();
       const breakDates = await szunetRes.json();
-      const noSchool = await noschoolRes.json();
       const schoolStart = await startRes.json();
       const schoolEnd = await endRes.json();
+      const noSchool = await noschoolRes.json();
   
-      const allDates = [
-        ...plusDates.plusDates_alap.map((item: any) => ({ date: new Date(item.which_day), name: item.type })),
-        ...breakDates.breakDates_alap.map((item: any) => ({ date: new Date(item.which_day), name: item.type })),
-        ...noSchool.tanitasnelkul_alap.map((item: any) => ({ date: new Date(item.which_day), name: item.type })),
-        { date: new Date(schoolStart.schoolYearStart.start), name: "kezd" },
-        { date: new Date(schoolEnd.schoolYearEnd.end), name: "veg" }
-      ];
+      const scheduleData = {
+        plusDates: plusDates.plusDates_alap || [],
+        breakDates: breakDates.breakDates_alap || [],
+        noSchool: noSchool.tanitasnelkul_alap || [],
+        schoolStart: schoolStart.schoolYearStart?.start || '',
+        schoolEnd: schoolEnd.schoolYearEnd?.end || ''
+      };
   
-      // Csak a jövőbeli dátumok megtartása (a mai napot is beleszámítjuk)
+      setYearSchedule(scheduleData);
+      
+      // Find the nearest date
       const today = new Date();
       today.setHours(0, 0, 0, 0);
+      
+      const allDates = [
+        ...scheduleData.plusDates.map((date: string) => ({date, type: 'plus', label: 'Pótnap'})),
+        ...scheduleData.breakDates.map((date: string) => ({date, type: 'break', label: 'Szünet'})),
+        ...scheduleData.noSchool.map((date: string) => ({date, type: 'noSchool', label: 'Tanítás nélküli nap'})),
+        {date: scheduleData.schoolStart, type: 'start', label: 'Tanév kezdete'},
+        {date: scheduleData.schoolEnd, type: 'end', label: 'Tanév vége'}
+      ].filter(item => item.date);
   
+      // Convert to Date objects and filter future dates
       const futureDates = allDates
-        .filter(item => item.date >= today)
-        .sort((a, b) => a.date.getTime() - b.date.getTime()); // Rendezés növekvő sorrendben
+        .map(item => ({
+          ...item,
+          dateObj: new Date(item.date)
+        }))
+        .filter(item => item.dateObj >= today)
+        .sort((a, b) => a.dateObj.getTime() - b.dateObj.getTime());
   
-      // Az első két legközelebbi dátum kiválasztása
-      const nextDates = futureDates.slice(0, 2);
+      setNearestDate(futureDates[0] || null);
   
-      setYearSchedule({
-        plusDates: plusDates.plusDates_alap,
-        breakDates: breakDates.breakDates_alap,
-        noSchool: noSchool.tanitasnelkul_alap,
-        schoolStart: schoolStart.schoolYearStart.start,
-        schoolEnd: schoolEnd.schoolYearEnd.end,
-        nextDates: nextDates
-      });
-  
-      setSchoolStartEdit(schoolStart.schoolYearStart.start);
-      setSchoolEndEdit(schoolEnd.schoolYearEnd.end);
     } catch (error) {
       console.error('Error fetching year schedule:', error);
     } finally {
       setLoading(false);
     }
   };
-  
-  
-  
-  
-  useEffect(() => {
-    fetchYearSchedule();
-  }, []);
   
   const fetchStudents = async () => {
     try {
@@ -162,31 +155,16 @@ export default function Page() {
           </div>
         </div>
 
+        {nearestDate && (
+      <div className="min-h-[60px] rounded-xl bg-blue-50 flex items-center px-4 w-full box-border overflow-hidden">
+        <p className="text-sm ml-3 text-blue-600">
+          Következő esemény: {nearestDate.label} - {new Date(nearestDate.date).toLocaleDateString('hu-HU')}
+        </p>
+      </div>
+    )}
+
 {students.length}
 {studentsInStatusBe}
-
-{yearSchedule.nextDates && yearSchedule.nextDates.length > 0 && (
-  <div>
-    {yearSchedule.nextDates.map((event: any, index: number) => {
-      const eventDate = event.date;
-      const today = new Date();
-      const diffInTime = eventDate.getTime() - today.getTime();
-      const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24));
-
-      return (
-        <div key={index} className="p-4 bg-white rounded-lg mt-4 shadow-lg">
-          <p>Esemény típusa: {event.name}</p>
-          <p>Dátum: {eventDate.toLocaleDateString("hu-HU")}</p>
-          <p>{diffInDays} nap múlva lesz.</p>
-        </div>
-      );
-    })}
-  </div>
-)}
-
-
-
-
 
         </>
         )}
