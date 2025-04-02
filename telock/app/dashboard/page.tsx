@@ -130,18 +130,20 @@ export default function Page() {
             </div>
           </div>
         </div>
-        {yearSchedule && yearSchedule.length > 0 ? (
-  yearSchedule.map((item: { type: string, date: string }, index: number) => (
-    <tr key={index}>
-      <td className="border p-2">{item.type}</td>
-      <td className="border p-2">{item.date}</td>
+        <tbody>
+  {Array.isArray(yearSchedule) && yearSchedule.length > 0 ? (
+    yearSchedule.map((item: { type: string; date: string }, index: number) => (
+      <tr key={index}>
+        <td className="border p-2">{item.type || "Ismeretlen típus"}</td>
+        <td className="border p-2">{item.date || "Ismeretlen dátum"}</td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan={2} className="border p-2 text-center">Nincs adat</td>
     </tr>
-  ))
-) : (
-  <tr>
-    <td colSpan={2} className="border p-2 text-center">Nincs adat</td>
-  </tr>
-)}
+  )}
+</tbody>
 
 
 {students.length}
