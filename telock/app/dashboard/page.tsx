@@ -130,24 +130,19 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <div className="overflow-x-auto">
-      <table className="min-w-full border-collapse border border-gray-300">
-        <thead>
-          <tr>
-            <th className="border p-2">Típus</th>
-            <th className="border p-2">Dátum</th>
-          </tr>
-        </thead>
-        <tbody>
-          {yearSchedule.map((item: { type: string, date: string }, index: number) => (
-            <tr key={index}>
-              <td className="border p-2">{item.type}</td>
-              <td className="border p-2">{item.date}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+        {yearSchedule && yearSchedule.length > 0 ? (
+  yearSchedule.map((item: { type: string, date: string }, index: number) => (
+    <tr key={index}>
+      <td className="border p-2">{item.type}</td>
+      <td className="border p-2">{item.date}</td>
+    </tr>
+  ))
+) : (
+  <tr>
+    <td colSpan={2} className="border p-2 text-center">Nincs adat</td>
+  </tr>
+)}
+
 
 {students.length}
 {studentsInStatusBe}
