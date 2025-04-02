@@ -67,11 +67,11 @@ export default function Page() {
       today.setHours(0, 0, 0, 0);
       
       const allDates = [
-        ...scheduleData.plusDates.map((date: string) => ({date, type: 'plus', label: 'Pótnap'})),
-        ...scheduleData.breakDates.map((date: string) => ({date, type: 'break', label: 'Szünet'})),
-        ...scheduleData.noSchool.map((date: string) => ({date, type: 'noSchool', label: 'Tanítás nélküli nap'})),
-        {date: scheduleData.schoolStart, type: 'start', label: 'Tanév kezdete'},
-        {date: scheduleData.schoolEnd, type: 'end', label: 'Tanév vége'}
+        ...scheduleData.plusDates.map((date: string) => ({date, type: 'plusznap', label: 'Pótnap'})),
+        ...scheduleData.breakDates.map((date: string) => ({date, type: 'szunet', label: 'Szünet'})),
+        ...scheduleData.noSchool.map((date: string) => ({date, type: 'tanitasnelkul', label: 'Tanítás nélküli nap'})),
+        {date: scheduleData.schoolStart, type: 'kezd', label: 'Tanév kezdete'},
+        {date: scheduleData.schoolEnd, type: 'veg', label: 'Tanév vége'}
       ].filter(item => item.date);
   
       // Convert to Date objects and filter future dates
