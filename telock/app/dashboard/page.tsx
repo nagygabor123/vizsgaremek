@@ -169,7 +169,7 @@ export default function Page() {
 
       return (
         <div key={index} className="p-4 bg-white rounded-lg mt-4 shadow-lg">
-          <p>Esemény: {event.name}</p>
+          <p>Esemény: {event.type}</p>
           <p>Dátum: {eventDate.toLocaleDateString("hu-HU")}</p>
           <p>{diffInDays} nap múlva lesz.</p>
         </div>
