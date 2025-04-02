@@ -66,7 +66,7 @@ export default function Page() {
       // Szűrés: Csak a jövőbeli dátumokat tartjuk meg
       const futureDates = allDates
         .filter((item) => new Date(item.date) >= new Date())
-        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()); // Rendezés dátum szerint növekvő sorrendben
   
       // Az első két legközelebbi dátumot kiválasztjuk
       const nextDates = futureDates.slice(0, 2);
@@ -88,6 +88,7 @@ export default function Page() {
       setLoading(false);
     }
   };
+  
   
   
   useEffect(() => {
@@ -178,6 +179,7 @@ export default function Page() {
     })}
   </div>
 )}
+
 
 
 
