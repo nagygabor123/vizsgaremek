@@ -20,6 +20,12 @@ import {
 
 import { Megaphone } from "lucide-react";
 
+type DateItem = {
+  date: string;
+  name: string;
+};
+
+
 export default function Page() {
   const { data: session } = useSession();
 
@@ -55,54 +61,37 @@ export default function Page() {
       const schoolEnd = await endRes.json();
       const noSchool = await noschoolRes.json();
   
-      // Az összes dátumot egy közös formátumba hozzuk
-      const allDates = [
-        ...(plusDates.plusDates_alap || []).map((item: any) => ({
-          date: item.which_day,
-          name: item.nev,
-          type: 'plusznap'
-        })),
-        ...(breakDates.breakDates_alap || []).map((item: any) => ({
-          date: item.which_day,
-          name: item.nev,
-          type: 'szunet'
-        })),
-        ...(noSchool.tanitasnelkul_alap || []).map((item: any) => ({
-          date: item.which_day,
-          name: item.nev,
-          type: 'tanitasnelkul'
-        })),
-        {
-          date: schoolStart.schoolYearStart?.start || schoolStart.schoolYearStart?.which_day,
-          name: "Tanév kezdete",
-          type: 'kezd'
-        },
-        {
-          date: schoolEnd.schoolYearEnd?.end || schoolEnd.schoolYearEnd?.which_day,
-          name: "Tanév vége",
-          type: 'veg'
-        }
-      ].filter(item => item.date); // Szűrjük ki az üres dátumokat
-  
-      // Szűrés: Csak a jövőbeli dátumokat tartjuk meg (vagy a mai napot is)
-      const futureDates = allDates
-        .filter((item) => new Date(item.date) >= new Date(new Date().setHours(0, 0, 0, 0)))
-        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+      const allDates: DateItem[] = [
+        ...plusDates.plusDates_alap,
+        ...breakDates.breakDates_alap,
+        ...noSchool.tanitasnelkul_alap,
+        { date: schoolStart.schoolYearStart.start, name: "Tanév kezdete" },
+        { date: schoolEnd.schoolYearEnd.end, name: "Tanév vége" }
+      ];
+      
+
+// Szűrés: Csak a jövőbeli dátumokat tartjuk meg
+// Szűrés: Csak a jövőbeli dátumokat tartjuk meg
+const futureDates = allDates
+  .filter((item: DateItem) => new Date(item.date) >= new Date())  // Az item.date stringet Date objektummá alakítjuk
+  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());  // Helyes időrendi rendezés
+
+
   
       // Az első két legközelebbi dátumot kiválasztjuk
       const nextDates = futureDates.slice(0, 2);
   
       setYearSchedule({
-        plusDates: plusDates.plusDates_alap || [],
-        breakDates: breakDates.breakDates_alap || [],
-        noSchool: noSchool.tanitasnelkul_alap || [],
-        schoolStart: schoolStart.schoolYearStart?.start || schoolStart.schoolYearStart?.which_day,
-        schoolEnd: schoolEnd.schoolYearEnd?.end || schoolEnd.schoolYearEnd?.which_day,
-        nextDates: nextDates,
+        plusDates: plusDates.plusDates_alap,
+        breakDates: breakDates.breakDates_alap,
+        noSchool: noSchool.tanitasnelkul_alap,
+        schoolStart: schoolStart.schoolYearStart.start,
+        schoolEnd: schoolEnd.schoolYearEnd.end,
+        nextDates: nextDates,  // Az első két legközelebbi dátum tárolása
       });
   
-      setSchoolStartEdit(schoolStart.schoolYearStart?.start || schoolStart.schoolYearStart?.which_day);
-      setSchoolEndEdit(schoolEnd.schoolYearEnd?.end || schoolEnd.schoolYearEnd?.which_day);
+      setSchoolStartEdit(schoolStart.schoolYearStart.start);
+      setSchoolEndEdit(schoolEnd.schoolYearEnd.end);
     } catch (error) {
       console.error('Error fetching year schedule:', error);
     } finally {
