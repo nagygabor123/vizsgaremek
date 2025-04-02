@@ -5,7 +5,7 @@ import { Session } from "next-auth";
 
 interface ProvidersProps {
   children: React.ReactNode;
-  session: Session | null;
+  session?: Session | null;  // Fontos: Itt legyen opcionális a session prop!
 }
 
 export default function Providers({ children, session }: ProvidersProps) {
