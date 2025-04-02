@@ -68,8 +68,8 @@ export default function Page() {
         .filter((item) => new Date(item.date) >= new Date())
         .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   
-      // A legközelebbi dátumot kiválasztjuk
-      const nextDate = futureDates.length > 0 ? futureDates[0] : null;
+      // Az első két legközelebbi dátumot kiválasztjuk
+      const nextDates = futureDates.slice(0, 2);
   
       setYearSchedule({
         plusDates: plusDates.plusDates_alap,
@@ -77,7 +77,7 @@ export default function Page() {
         noSchool: noSchool.tanitasnelkul_alap,
         schoolStart: schoolStart.schoolYearStart.start,
         schoolEnd: schoolEnd.schoolYearEnd.end,
-        nextDate: nextDate,  // Új adat a legközelebbi dátum tárolására
+        nextDates: nextDates,  // Az első két legközelebbi dátum tárolása
       });
   
       setSchoolStartEdit(schoolStart.schoolYearStart.start);
@@ -88,6 +88,7 @@ export default function Page() {
       setLoading(false);
     }
   };
+  
   
   
   const fetchStudents = async () => {
@@ -112,6 +113,7 @@ export default function Page() {
   useEffect(() => {
     if (session?.user?.school_id) {
       fetchStudents();
+      fetchYearSchedule();
     }
   }, [session?.user?.school_id]);
 
@@ -152,12 +154,26 @@ export default function Page() {
             </div>
           </div>
         </div>
-        {yearSchedule.nextDate && (
+
+        {yearSchedule.nextDates && yearSchedule.nextDates.length > 0 && (
   <div>
-    <p>Legközelebbi esemény: {yearSchedule.nextDate.name}</p>
-    <p>Dátum: {new Date(yearSchedule.nextDate.date).toLocaleDateString("hu-HU")}</p>
+    {yearSchedule.nextDates.map((event: any, index: number) => {
+      const eventDate = new Date(event.date);
+      const today = new Date();
+      const diffInTime = eventDate.getTime() - today.getTime();
+      const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24));
+
+      return (
+        <div key={index} className="p-4 bg-white rounded-lg mt-4 shadow-lg">
+          <p>Esemény: {event.name}</p>
+          <p>Dátum: {eventDate.toLocaleDateString("hu-HU")}</p>
+          <p>{diffInDays} nap múlva lesz.</p>
+        </div>
+      );
+    })}
   </div>
 )}
+
 
 
 {students.length}
