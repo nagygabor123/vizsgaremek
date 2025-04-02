@@ -56,19 +56,22 @@ export default function Page() {
       const schoolEnd = await endRes.json();
   
       const allDates = [
-        ...plusDates.plusDates_alap.map((item: any) => ({ date: item.which_day, name: item.type })),
-        ...breakDates.breakDates_alap.map((item: any) => ({ date: item.which_day, name: item.type })),
-        ...noSchool.tanitasnelkul_alap.map((item: any) => ({ date: item.which_day, name: item.type })),
-        { date: schoolStart.schoolYearStart.start, name: "kezd" },
-        { date: schoolEnd.schoolYearEnd.end, name: "veg" }
+        ...plusDates.plusDates_alap.map((item: any) => ({ date: new Date(item.which_day), name: item.type })),
+        ...breakDates.breakDates_alap.map((item: any) => ({ date: new Date(item.which_day), name: item.type })),
+        ...noSchool.tanitasnelkul_alap.map((item: any) => ({ date: new Date(item.which_day), name: item.type })),
+        { date: new Date(schoolStart.schoolYearStart.start), name: "kezd" },
+        { date: new Date(schoolEnd.schoolYearEnd.end), name: "veg" }
       ];
   
-      // Szűrés: Csak a jövőbeli dátumokat tartjuk meg
-      const futureDates = allDates
-        .filter((item) => new Date(item.date) >= new Date())
-        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()); // Rendezés dátum szerint növekvő sorrendben
+      // Csak a jövőbeli dátumok megtartása (a mai napot is beleszámítjuk)
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
   
-      // Az első két legközelebbi dátumot kiválasztjuk
+      const futureDates = allDates
+        .filter(item => item.date >= today)
+        .sort((a, b) => a.date.getTime() - b.date.getTime()); // Rendezés növekvő sorrendben
+  
+      // Az első két legközelebbi dátum kiválasztása
       const nextDates = futureDates.slice(0, 2);
   
       setYearSchedule({
@@ -77,7 +80,7 @@ export default function Page() {
         noSchool: noSchool.tanitasnelkul_alap,
         schoolStart: schoolStart.schoolYearStart.start,
         schoolEnd: schoolEnd.schoolYearEnd.end,
-        nextDates: nextDates,  // Az első két legközelebbi dátum tárolása
+        nextDates: nextDates
       });
   
       setSchoolStartEdit(schoolStart.schoolYearStart.start);
@@ -88,6 +91,7 @@ export default function Page() {
       setLoading(false);
     }
   };
+  
   
   
   
@@ -164,7 +168,7 @@ export default function Page() {
 {yearSchedule.nextDates && yearSchedule.nextDates.length > 0 && (
   <div>
     {yearSchedule.nextDates.map((event: any, index: number) => {
-      const eventDate = new Date(event.date);
+      const eventDate = event.date;
       const today = new Date();
       const diffInTime = eventDate.getTime() - today.getTime();
       const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24));
@@ -179,6 +183,7 @@ export default function Page() {
     })}
   </div>
 )}
+
 
 
 
