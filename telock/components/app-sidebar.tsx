@@ -157,7 +157,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       setHasStudents(data.length > 0);
     } catch (error) {
       console.error("Error fetching students", error);
-    } 
+    }
     // finally {
     //   setLoading(false);
     // }
@@ -197,141 +197,143 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   return (
     <Sidebar {...props}>
-   <div>
-    {loading ? (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-100 border-t-blue-600"></div>
-      </div>
-    ) : (
-      <>
-   
-      <SidebarHeader>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            >
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="text-s break-words">{schoolName}</span>
-              </div>
-
-              <Avatar className="h-10 w-10 rounded-full">
-                <AvatarFallback className="bg-blue-100 font-semibold text-blue-600 text-[0.625rem]">
-                  {session?.user?.short_name}
-                </AvatarFallback>
-              </Avatar>
-              <ChevronDown className="ml-auto size-4" />
-            </SidebarMenuButton>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-            side={isMobile ? "bottom" : "right"}
-            align="start"
-            sideOffset={4}
-          >
-            <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-10 w-10 rounded-full">
-                  <AvatarFallback className="bg-blue-100 font-semibold text-blue-600 text-[0.625rem]">
-                    {session?.user?.short_name}
-                  </AvatarFallback>
-                </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">{session?.user?.full_name}</span>
-                  <span className="truncate text-xs">{session?.user?.position}</span>
-                </div>
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-              <Link href="/change-password">
-                <LockKeyhole className="text-gray-800" />
-                Jelszó módosítása
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <LogOut className="text-gray-800" />
-              <span
-                onClick={() => {
-                  signOut();
-                }}
-              >
-                Kijelentkezés
-              </span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-        <Separator />
-      </SidebarHeader>
-
-      <SidebarContent>
-        {sidebarConfig.map((group: SidebarGroupConfig, groupIndex: number) => {
-          const hasVisibleItems = group.items.some((item) => {
-            if (group.groupLabel === "Osztályom") {
-              return session?.user?.osztalyfonok !== "nincs";
-            }
-
-            return item.allowedPositions.includes(session?.user?.position || "");
-          });
-
-          if (!hasVisibleItems) return null;
-
-          return (
-            <SidebarGroup key={groupIndex}>
-              {group.groupLabel && <SidebarGroupLabel>{group.groupLabel}</SidebarGroupLabel>}
-              <SidebarMenu>
-                {group.items.map((item: SidebarItem) => {
-                  if (group.groupLabel === "Osztályom") {
-                    if (session?.user?.osztalyfonok !== "nincs") {
-                      return (
-                        <SidebarMenuItem key={item.path}>
-                          <SidebarMenuButton asChild isActive={isActive(item.path)}>
-                            <Link href={item.path}>
-                              <>
-                                <item.icon />
-                                <span>{item.label}</span>
-                              </>
-                            </Link>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                      );
-                    }
-                  } else {
-                    if (item.allowedPositions.includes(session?.user?.position || "")) {
-                      return (
-                        <SidebarMenuItem key={item.path}>
-                          <SidebarMenuButton asChild isActive={isActive(item.path)}>
-                            <Link href={item.path}>
-                              <>
-                                <item.icon />
-                                <span>{item.label}</span>
-                              </>
-                            </Link>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                      );
-                    }
-                  }
-                  return null;
-                })}
-              </SidebarMenu>
-            </SidebarGroup>
-          );
-        })}
-      </SidebarContent>
-    
-    
-    </>
-            )}
+      <div className="flex flex-col h-full"> {/* Teljes magasságú flexbox */}
+        {loading ? (
+          <div className="flex items-center justify-center min-h-screen">
+            <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-100 border-t-blue-600"></div>
           </div>
-          <SidebarFooter>
+        ) : (
+          <>
+
+            <SidebarHeader>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <SidebarMenuButton
+                    size="lg"
+                    className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                  >
+                    <div className="grid flex-1 text-left text-sm leading-tight">
+                      <span className="text-s break-words">{schoolName}</span>
+                    </div>
+
+                    <Avatar className="h-10 w-10 rounded-full">
+                      <AvatarFallback className="bg-blue-100 font-semibold text-blue-600 text-[0.625rem]">
+                        {session?.user?.short_name}
+                      </AvatarFallback>
+                    </Avatar>
+                    <ChevronDown className="ml-auto size-4" />
+                  </SidebarMenuButton>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+                  side={isMobile ? "bottom" : "right"}
+                  align="start"
+                  sideOffset={4}
+                >
+                  <DropdownMenuLabel className="p-0 font-normal">
+                    <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                      <Avatar className="h-10 w-10 rounded-full">
+                        <AvatarFallback className="bg-blue-100 font-semibold text-blue-600 text-[0.625rem]">
+                          {session?.user?.short_name}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div className="grid flex-1 text-left text-sm leading-tight">
+                        <span className="truncate font-semibold">{session?.user?.full_name}</span>
+                        <span className="truncate text-xs">{session?.user?.position}</span>
+                      </div>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link href="/change-password">
+                      <LockKeyhole className="text-gray-800" />
+                      Jelszó módosítása
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <LogOut className="text-gray-800" />
+                    <span
+                      onClick={() => {
+                        signOut();
+                      }}
+                    >
+                      Kijelentkezés
+                    </span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              <Separator />
+            </SidebarHeader>
+
+            <SidebarContent className="flex-grow"> {/* Flex-grow, hogy kitöltse a fennmaradó teret */}
+              {sidebarConfig.map((group: SidebarGroupConfig, groupIndex: number) => {
+                const hasVisibleItems = group.items.some((item) => {
+                  if (group.groupLabel === "Osztályom") {
+                    return session?.user?.osztalyfonok !== "nincs";
+                  }
+
+                  return item.allowedPositions.includes(session?.user?.position || "");
+                });
+
+                if (!hasVisibleItems) return null;
+
+                return (
+                  <SidebarGroup key={groupIndex}>
+                    {group.groupLabel && <SidebarGroupLabel>{group.groupLabel}</SidebarGroupLabel>}
+                    <SidebarMenu>
+                      {group.items.map((item: SidebarItem) => {
+                        if (group.groupLabel === "Osztályom") {
+                          if (session?.user?.osztalyfonok !== "nincs") {
+                            return (
+                              <SidebarMenuItem key={item.path}>
+                                <SidebarMenuButton asChild isActive={isActive(item.path)}>
+                                  <Link href={item.path}>
+                                    <>
+                                      <item.icon />
+                                      <span>{item.label}</span>
+                                    </>
+                                  </Link>
+                                </SidebarMenuButton>
+                              </SidebarMenuItem>
+                            );
+                          }
+                        } else {
+                          if (item.allowedPositions.includes(session?.user?.position || "")) {
+                            return (
+                              <SidebarMenuItem key={item.path}>
+                                <SidebarMenuButton asChild isActive={isActive(item.path)}>
+                                  <Link href={item.path}>
+                                    <>
+                                      <item.icon />
+                                      <span>{item.label}</span>
+                                    </>
+                                  </Link>
+                                </SidebarMenuButton>
+                              </SidebarMenuItem>
+                            );
+                          }
+                        }
+                        return null;
+                      })}
+                    </SidebarMenu>
+                  </SidebarGroup>
+                );
+              })}
+            </SidebarContent>
+
+
+
+            <SidebarFooter>
 
 <Link href="/" className="text-xs text-center">
   © {new Date().getFullYear()} telock
 </Link>
 
 </SidebarFooter>
-          </Sidebar>
+          </>
+        )}
+      </div>
+
+    </Sidebar>
   );
 }
