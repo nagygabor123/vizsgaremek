@@ -1158,9 +1158,7 @@ const Calendar: React.FC = () => {
         </div>
 
         </div>
-{/* 
-      </SidebarInset>
-    </SidebarProvider> */}
+
   );
 };
 
