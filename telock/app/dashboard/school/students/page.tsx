@@ -288,36 +288,34 @@ export default function Home() {
 
 
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b">
-          <div className="flex flex-1 items-center gap-2 px-3">
-            <SidebarTrigger />
-            <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink asChild>
-                    <Link href="/dashboard">Kezdőlap</Link>
-                  </BreadcrumbLink>
+ <div>
+         <header className="flex h-16 shrink-0 items-center gap-2 border-b">
+           <div className="flex flex-1 items-center gap-2 px-3">
+             <SidebarTrigger />
+           <Separator orientation="vertical" className="mr-2 h-4" />
+             <Breadcrumb>
+               <BreadcrumbList>
+                 <BreadcrumbItem>
+                   <BreadcrumbLink asChild>
+                     <Link href="/dashboard">Kezdőlap</Link>
+                   </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
-                  <Slash />
-                </BreadcrumbSeparator>
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Iskolai nyilvántartás</BreadcrumbPage>
+                <Slash />
+               </BreadcrumbSeparator>
+               <BreadcrumbItem>
+                   <BreadcrumbPage>Iskolai nyilvántartás</BreadcrumbPage>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator>
-                  <Slash />
+               <BreadcrumbSeparator>
+                 <Slash />
                 </BreadcrumbSeparator>
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Tanulók</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-          </div>
-        </header>
+               <BreadcrumbItem>
+                   <BreadcrumbPage>Tanulók</BreadcrumbPage>
+               </BreadcrumbItem>
+               </BreadcrumbList>
+             </Breadcrumb>
+           </div>
+         </header>
 
         <div className="overflow-x-auto">
           <div>
@@ -568,7 +566,6 @@ export default function Home() {
 
         </div>
 
-      </SidebarInset>
-    </SidebarProvider>
+        </div>
   );
 }

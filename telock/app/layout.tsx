@@ -7,6 +7,14 @@ import "./globals.css";
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 
+import { AppSidebar } from "@/components/app-sidebar"
+
+import {
+  SidebarTrigger,
+  SidebarInset,
+  SidebarProvider,
+} from "@/components/ui/sidebar"
+
 export const metadata: Metadata = {
   title: "telock: Biztonságos és kényelmes telefontárolos iskoláknak",
   description: "telock: Biztonságos és kényelmes telefontárolos iskoláknak",
@@ -23,11 +31,18 @@ export default async function RootLayout({
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} >
       <body>
         <Providers session={session}>
-          <div>
+        <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset>
+       {/* Ez nem fog újratöltődni az oldalak közötti navigáláskor */}
+          <main style={{ flexGrow: 1 }}>
             {children}
-          </div>
+          </main>
+          </SidebarInset>
+          </SidebarProvider>
         </Providers>
       </body>
+
     </html>
   );
 }
