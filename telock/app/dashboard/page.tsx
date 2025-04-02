@@ -15,10 +15,9 @@ import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar"
-import { Megaphone, Phone, Users, Clock, AlertCircle, HardDrive, Download, HelpCircle, BookOpen, Mail, Video } from "lucide-react";
+import { Megaphone, Phone, Users, HardDrive, HelpCircle, BookOpen, Mail, Video, Calendar } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-// import { Progress } from "@/components/ui/progress"
 
 export default function Page() {
   const { data: session } = useSession();
@@ -27,9 +26,7 @@ export default function Page() {
   const [hasStudents, setHasStudents] = useState(false);
   const [studentsInStatusBe, setStudentsInStatusBe] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [lastBackup, setLastBackup] = useState("2025.04.03 14:30");
-  const [softwareVersion, setSoftwareVersion] = useState("v2.1.4");
-  const [updateAvailable, setUpdateAvailable] = useState(false);
+  const [lastBackup, setLastBackup] = useState("Ma, 14:30");
 
   const API_BASE_URL = window.location.origin;
   
@@ -56,11 +53,6 @@ export default function Page() {
       fetchStudents();
     }
   }, [session?.user?.school_id]);
-
-  const backupStatusColor = () => {
-    // Logic to determine backup status
-    return "bg-green-500"; // Default to green for demo
-  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -94,7 +86,7 @@ export default function Page() {
             </div>
 
             {/* Stats Cards */}
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-2">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
@@ -105,7 +97,7 @@ export default function Page() {
                 <CardContent>
                   <div className="text-2xl font-bold">{students.length}</div>
                   <p className="text-xs text-muted-foreground">
-                    Az iskolában regisztrált tanulók száma
+                    Az iskolában regisztrált tanulók
                   </p>
                 </CardContent>
               </Card>
@@ -124,121 +116,81 @@ export default function Page() {
                   </p>
                 </CardContent>
               </Card>
-
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    Visszavételre vár
-                  </CardTitle>
-                  <Clock className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">5</div>
-                  <p className="text-xs text-muted-foreground">
-                    Közelgő határidős eszközök
-                  </p>
-                </CardContent>
-              </Card>
             </div>
 
-            {/* System Information Section */}
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {/* Backup Status */}
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    Utolsó mentés
-                  </CardTitle>
-                  <HardDrive className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center justify-between">
-                    <div className="text-lg font-medium">{lastBackup}</div>
-                    <div className={`h-2 w-2 rounded-full ${backupStatusColor()}`}></div>
-                  </div>
-                  <div className="mt-4">
-                    <Button variant="outline" size="sm" className="w-full">
-                      <Download className="h-4 w-4 mr-2" />
-                      Kényszerített mentés
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Software Version */}
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    Szoftver verzió
-                  </CardTitle>
-                  <AlertCircle className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-lg font-medium">{softwareVersion}</div>
-                  {updateAvailable ? (
-                    <Button variant="default" size="sm" className="w-full mt-4">
-                      Frissítés telepítése
-                    </Button>
-                  ) : (
-                    <p className="text-xs text-muted-foreground mt-4">
-                      Legfrissebb verzió van telepítve
-                    </p>
-                  )}
-                </CardContent>
-              </Card>
-
-              {/* Help Section */}
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    Segítség
-                  </CardTitle>
-                  <HelpCircle className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    <Button variant="ghost" className="w-full justify-start">
-                      <BookOpen className="h-4 w-4 mr-2" />
-                      Gyors útmutató
-                    </Button>
-                    <Button variant="ghost" className="w-full justify-start">
-                      <HelpCircle className="h-4 w-4 mr-2" />
-                      Gyakori kérdések
-                    </Button>
-                    <Button variant="ghost" className="w-full justify-start">
-                      <Mail className="h-4 w-4 mr-2" />
-                      Kapcsolatfelvétel
-                    </Button>
-                    <Button variant="ghost" className="w-full justify-start">
-                      <Video className="h-4 w-4 mr-2" />
-                      Oktatóvideók
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Recent Activity */}
+            {/* System Information */}
             <Card>
               <CardHeader>
-                <CardTitle>Legutóbbi aktivitás</CardTitle>
+                <CardTitle>Rendszer információk</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  <div className="flex items-center">
-                    <div className="h-2 w-2 rounded-full bg-blue-500 mr-2"></div>
-                    <div className="flex-1">
-                      <p className="text-sm font-medium">Kovács János</p>
-                      <p className="text-sm text-muted-foreground">Telefon leadva - 2025.04.03 14:25</p>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="flex items-center space-x-4 rounded-md border p-4">
+                    <HardDrive className="h-5 w-5" />
+                    <div className="flex-1 space-y-1">
+                      <p className="text-sm font-medium">Utolsó mentés</p>
+                      <p className="text-sm text-muted-foreground">
+                        {lastBackup}
+                      </p>
+                    </div>
+                    <Button variant="outline" size="sm">
+                      Mentés most
+                    </Button>
+                  </div>
+                  
+                  <div className="flex items-center space-x-4 rounded-md border p-4">
+                    <Calendar className="h-5 w-5" />
+                    <div className="flex-1 space-y-1">
+                      <p className="text-sm font-medium">Mai nap</p>
+                      <p className="text-sm text-muted-foreground">
+                        {new Date().toLocaleDateString('hu-HU', {
+                          weekday: 'long',
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })}
+                      </p>
                     </div>
                   </div>
-                  <div className="flex items-center">
-                    <div className="h-2 w-2 rounded-full bg-green-500 mr-2"></div>
-                    <div className="flex-1">
-                      <p className="text-sm font-medium">Nagy Anna</p>
-                      <p className="text-sm text-muted-foreground">Telefon visszaadva - 2025.04.03 13:40</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Help Section */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Segítség és támogatás</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  <Button variant="outline" className="h-16 justify-start">
+                    <BookOpen className="h-4 w-4 mr-2" />
+                    <div className="text-left">
+                      <p className="font-medium">Használati útmutató</p>
+                      <p className="text-xs text-muted-foreground">PDF dokumentáció</p>
                     </div>
-                  </div>
+                  </Button>
+                  <Button variant="outline" className="h-16 justify-start">
+                    <HelpCircle className="h-4 w-4 mr-2" />
+                    <div className="text-left">
+                      <p className="font-medium">GYIK</p>
+                      <p className="text-xs text-muted-foreground">Gyakori kérdések</p>
+                    </div>
+                  </Button>
+                  <Button variant="outline" className="h-16 justify-start">
+                    <Mail className="h-4 w-4 mr-2" />
+                    <div className="text-left">
+                      <p className="font-medium">Kapcsolat</p>
+                      <p className="text-xs text-muted-foreground">tamogatas@iskola.hu</p>
+                    </div>
+                  </Button>
+                  <Button variant="outline" className="h-16 justify-start">
+                    <Video className="h-4 w-4 mr-2" />
+                    <div className="text-left">
+                      <p className="font-medium">Oktatóvideók</p>
+                      <p className="text-xs text-muted-foreground">Bemutató videók</p>
+                    </div>
+                  </Button>
                 </div>
               </CardContent>
             </Card>
