@@ -23,9 +23,10 @@ export default function Page() {
   const { data: session } = useSession();
 
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
+    // <SidebarProvider>
+    //   <AppSidebar />
+    //   <SidebarInset>
+    <div>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b bg-white/50 backdrop-blur-md">
           <div className="flex flex-1 items-center gap-2 px-3">
             <SidebarTrigger />
@@ -59,8 +60,8 @@ export default function Page() {
           </div>
           <div className="min-h-[100vh] flex-1 rounded-xl bg-blue-50 md:min-h-min" />
         </div>
-      </SidebarInset>
-    </SidebarProvider>
-
+      {/* </SidebarInset>
+    </SidebarProvider> */}
+  </div>
   )
 }
