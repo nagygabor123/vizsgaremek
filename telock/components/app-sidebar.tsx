@@ -139,18 +139,7 @@ const sidebarConfig: SidebarGroupConfig[] = [
   },
 ];
 
-interface AppSidebarProps {
-  schoolName?: string;
-  className?: string;
-  // egyéb props-ok amiket használsz
-}
-
-export function AppSidebar({ 
-  schoolName = '', 
-  className = '',
-  ...props 
-}: AppSidebarProps) {
-  // A komponens többi része változatlan marad
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
   const { data: session } = useSession();
   const isActive = (path: string) => pathname === path;
@@ -158,7 +147,7 @@ export function AppSidebar({
   const { isMobile } = useSidebar();
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
   const [hasStudents, setHasStudents] = useState<boolean | null>(null);
-  //const [schoolName, setSchoolName] = useState("");
+  const [schoolName, setSchoolName] = useState("");
   const [loading, setLoading] = useState(true);
 
   const fetchStudents = async () => {
@@ -174,40 +163,40 @@ export function AppSidebar({
     // }
   };
 
-  // const fetchSchool = async () => {
-  //   try {
-  //     const response = await fetch(`/api/system/getSchool?school_id=${session?.user?.school_id}`);
-  //     const data = await response.json();
+  const fetchSchool = async () => {
+    try {
+      const response = await fetch(`/api/system/getSchool?school_id=${session?.user?.school_id}`);
+      const data = await response.json();
 
-  //     if (data.school_name) {
-  //       setSchoolName(data.school_name);
-  //     } else {
-  //       console.error("Iskola neve nem található");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching school", error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  //};
+      if (data.school_name) {
+        setSchoolName(data.school_name);
+      } else {
+        console.error("Iskola neve nem található");
+      }
+    } catch (error) {
+      console.error("Error fetching school", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
-  // useEffect(() => {
-  //   fetchStudents();
-  //   fetchSchool();
-  // }, []);
+  useEffect(() => {
+    fetchStudents();
+    fetchSchool();
+  }, []);
 
-  // useEffect(() => {
-  //   const hasClickedBefore = localStorage.getItem("hasClickedOverlayButton");
-  //   setButtonVisible(hasClickedBefore !== "true");
-  // }, []);
+  useEffect(() => {
+    const hasClickedBefore = localStorage.getItem("hasClickedOverlayButton");
+    setButtonVisible(hasClickedBefore !== "true");
+  }, []);
 
-  // if (isButtonVisible === null) {
-  //   return null;
-  // }
+  if (isButtonVisible === null) {
+    return null;
+  }
 
   return (
-    <Sidebar className={className} {...props}>
+    <Sidebar {...props}>
       <div className="flex flex-col h-full">
         {loading ? (
           <div className="flex items-center justify-center min-h-screen">
