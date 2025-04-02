@@ -51,16 +51,16 @@ export default function Page() {
   
       const plusDates = await plusRes.json();
       const breakDates = await szunetRes.json();
+      const noSchool = await noschoolRes.json();
       const schoolStart = await startRes.json();
       const schoolEnd = await endRes.json();
-      const noSchool = await noschoolRes.json();
   
       const allDates = [
-        ...plusDates.plusDates_alap,
-        ...breakDates.breakDates_alap,
-        ...noSchool.tanitasnelkul_alap,
-        { date: schoolStart.schoolYearStart.start, name: "Tanév kezdete" },
-        { date: schoolEnd.schoolYearEnd.end, name: "Tanév vége" }
+        ...plusDates.plusDates_alap.map((item: any) => ({ date: item.which_day, name: item.type })),
+        ...breakDates.breakDates_alap.map((item: any) => ({ date: item.which_day, name: item.type })),
+        ...noSchool.tanitasnelkul_alap.map((item: any) => ({ date: item.which_day, name: item.type })),
+        { date: schoolStart.schoolYearStart.start, name: "kezd" },
+        { date: schoolEnd.schoolYearEnd.end, name: "veg" }
       ];
   
       // Szűrés: Csak a jövőbeli dátumokat tartjuk meg
@@ -88,6 +88,7 @@ export default function Page() {
       setLoading(false);
     }
   };
+  
   
   useEffect(() => {
     fetchYearSchedule();
@@ -169,7 +170,7 @@ export default function Page() {
 
       return (
         <div key={index} className="p-4 bg-white rounded-lg mt-4 shadow-lg">
-          <p>Esemény: {event.type}</p>
+          <p>Esemény típusa: {event.name}</p>
           <p>Dátum: {eventDate.toLocaleDateString("hu-HU")}</p>
           <p>{diffInDays} nap múlva lesz.</p>
         </div>
@@ -177,6 +178,7 @@ export default function Page() {
     })}
   </div>
 )}
+
 
 
         </>
