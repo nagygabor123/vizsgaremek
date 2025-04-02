@@ -648,9 +648,6 @@ const Calendar: React.FC = () => {
 
 
   return (
-    // <SidebarProvider>
-    //   <AppSidebar />
-    //   <SidebarInset>
     <div>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b">
           <div className="flex flex-1 items-center gap-2 px-3">
@@ -812,9 +809,6 @@ const Calendar: React.FC = () => {
 
                                           <div>
                                             <div>
-                                              {/* <button onClick={() => searchGroupStudent(lesson.class)}>
-                                          felold
-                                        </button> */}
                                               <Button variant="outline" onClick={() => searchGroupStudent(lesson.class)} >
                                                 <LockOpen /> Összes feloldás
                                               </Button>
@@ -968,9 +962,9 @@ const Calendar: React.FC = () => {
 
                                             <div>
                                               <div>
-                                                <button onClick={() => searchGroupStudent(lesson.class)}>
-                                                  felold
-                                                </button>
+                                              <Button variant="outline" onClick={() => searchGroupStudent(lesson.class)} >
+                                                <LockOpen /> Összes feloldás
+                                              </Button>
                                               </div>
                                               <div className="rounded-md border mt-5">
                                                 <table className="w-full">

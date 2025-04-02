@@ -274,154 +274,151 @@ export default function AddEmployeePage() {
   }
 
   return (
-    // <SidebarProvider>
-    //   <AppSidebar />
-    //   <SidebarInset>
     <div>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b">
-          <div className="flex flex-1 items-center gap-2 px-3">
-            <SidebarTrigger />
-            <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink asChild>
-                    <Link href="/dashboard">Kezdőlap</Link>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator>
-                  <Slash />
-                </BreadcrumbSeparator>
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Iskolai nyilvántartás</BreadcrumbPage>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator>
-                  <Slash />
-                </BreadcrumbSeparator>
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Munkatársak</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-          </div>
-        </header>
-        <div className="overflow-x-auto">
+      <header className="flex h-16 shrink-0 items-center gap-2 border-b">
+        <div className="flex flex-1 items-center gap-2 px-3">
+          <SidebarTrigger />
+          <Separator orientation="vertical" className="mr-2 h-4" />
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href="/dashboard">Kezdőlap</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator>
+                <Slash />
+              </BreadcrumbSeparator>
+              <BreadcrumbItem>
+                <BreadcrumbPage>Iskolai nyilvántartás</BreadcrumbPage>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator>
+                <Slash />
+              </BreadcrumbSeparator>
+              <BreadcrumbItem>
+                <BreadcrumbPage>Munkatársak</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
+      </header>
+      <div className="overflow-x-auto">
 
-          <div>
-            {loading2 ? (
-              <div className="flex items-center justify-center min-h-screen">
-                <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-100 border-t-blue-600"></div>
-              </div>
-            ) : (
-              <>
-                {!hasStudents && <AppKonfig />}
-                <div className="p-4">
+        <div>
+          {loading2 ? (
+            <div className="flex items-center justify-center min-h-screen">
+              <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-100 border-t-blue-600"></div>
+            </div>
+          ) : (
+            <>
+              {!hasStudents && <AppKonfig />}
+              <div className="p-4">
 
-                  <div className="flex flex-col gap-2 md:flex-row mb-4">
-                    <div className="flex flex-col gap-2 md:flex-row">
-                      <Input
-                        type="text"
-                        placeholder="Keresés név szerint..."
-                        className="border p-2 rounded-md"
-                        value={searchName}
-                        onChange={(e) => setSearchName(e.target.value)}
-                      />
+                <div className="flex flex-col gap-2 md:flex-row mb-4">
+                  <div className="flex flex-col gap-2 md:flex-row">
+                    <Input
+                      type="text"
+                      placeholder="Keresés név szerint..."
+                      className="border p-2 rounded-md"
+                      value={searchName}
+                      onChange={(e) => setSearchName(e.target.value)}
+                    />
 
-                      <Input
-                        type="text"
-                        placeholder="Keresés pozíció szerint..."
-                        className="border p-2 rounded-md"
-                        value={searchPosition}
-                        onChange={(e) => setSearchPosition(e.target.value)}
-                      />
+                    <Input
+                      type="text"
+                      placeholder="Keresés pozíció szerint..."
+                      className="border p-2 rounded-md"
+                      value={searchPosition}
+                      onChange={(e) => setSearchPosition(e.target.value)}
+                    />
 
-                      <Select
-                        value={searchOsztalyfonok}
-                        onValueChange={setSearchOsztalyfonok}
-                      >
-                        <SelectTrigger className="col-span-3" id="searchOsztalyfonok">
-                          <SelectValue placeholder="Keresés osztály szerint..." />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {osztalyfonokOptions.map((osztalyfonok) => (
-                            <SelectItem key={osztalyfonok} value={osztalyfonok}>
-                              {osztalyfonok}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                    <Select
+                      value={searchOsztalyfonok}
+                      onValueChange={setSearchOsztalyfonok}
+                    >
+                      <SelectTrigger className="col-span-3" id="searchOsztalyfonok">
+                        <SelectValue placeholder="Keresés osztály szerint..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {osztalyfonokOptions.map((osztalyfonok) => (
+                          <SelectItem key={osztalyfonok} value={osztalyfonok}>
+                            {osztalyfonok}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
 
-                    </div>
+                  </div>
 
-                    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                      <DialogTrigger asChild>
-                        <Button variant="outline" className="ml-auto" ><CirclePlus /> Új alkalmazott hozzáadás</Button>
-                      </DialogTrigger>
-                      <DialogContent className="sm:max-w-[425px]">
-                        <DialogHeader>
-                          <DialogTitle>Alkalmazott hozzáadása</DialogTitle>
-                          <DialogDescription></DialogDescription>
-                        </DialogHeader>
+                  <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                    <DialogTrigger asChild>
+                      <Button variant="outline" className="ml-auto" ><CirclePlus /> Új alkalmazott hozzáadás</Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[425px]">
+                      <DialogHeader>
+                        <DialogTitle>Alkalmazott hozzáadása</DialogTitle>
+                        <DialogDescription></DialogDescription>
+                      </DialogHeader>
 
-                        <form onSubmit={handleSubmit} className="grid items-start gap-4">
+                      <form onSubmit={handleSubmit} className="grid items-start gap-4">
 
-                          <div className="grid gap-2">
-                            <Label htmlFor="fullName">Teljes név</Label>
-                            <Input
-                              className="col-span-3"
-                              id="fullName"
-                              name="full_name"
-                              type="text"
-                              placeholder="Teszt Elek"
-                              value={fullName}
-                              onChange={(e) => setFullName(e.target.value)}
-                            />
-                          </div>
+                        <div className="grid gap-2">
+                          <Label htmlFor="fullName">Teljes név</Label>
+                          <Input
+                            className="col-span-3"
+                            id="fullName"
+                            name="full_name"
+                            type="text"
+                            placeholder="Teszt Elek"
+                            value={fullName}
+                            onChange={(e) => setFullName(e.target.value)}
+                          />
+                        </div>
 
-                          <div className="grid gap-2">
-                            <Label htmlFor="shortName">Rövidített név (felhasználónév)</Label>
-                            <Input
-                              className="col-span-3"
-                              id="shortName"
-                              name="short_name"
-                              type="text"
-                              placeholder="TeEl"
-                              value={shortname}
-                              onChange={(e) => setShortName(e.target.value)}
-                            />
-                          </div>
+                        <div className="grid gap-2">
+                          <Label htmlFor="shortName">Rövidített név (felhasználónév)</Label>
+                          <Input
+                            className="col-span-3"
+                            id="shortName"
+                            name="short_name"
+                            type="text"
+                            placeholder="TeEl"
+                            value={shortname}
+                            onChange={(e) => setShortName(e.target.value)}
+                          />
+                        </div>
 
-                          <div className="grid gap-2">
-                            <Label htmlFor="jelszo">Ideiglenes jelszó</Label>
-                            <Input
-                              disabled
-                              className="col-span-3"
-                              id="jelszo"
-                              type="text"
-                              placeholder={`${shortname}123`} />
-                          </div>
+                        <div className="grid gap-2">
+                          <Label htmlFor="jelszo">Ideiglenes jelszó</Label>
+                          <Input
+                            disabled
+                            className="col-span-3"
+                            id="jelszo"
+                            type="text"
+                            placeholder={`${shortname}123`} />
+                        </div>
 
-                          <div className="grid gap-2 w-full">
-                            <Label htmlFor="position">Pozíció</Label>
-                            <Select value={position} onValueChange={setPosition}>
-                              <SelectTrigger
-                                data-testid="position-select"
-                                className="col-span-3 w-full"
-                              >
-                                <SelectValue placeholder="Válasszon..." />
-                              </SelectTrigger>
-                              <SelectContent>
-                                {positions.map((pos) => (
-                                  <SelectItem key={pos.value} value={pos.value}>
-                                    {pos.label}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                          </div>
+                        <div className="grid gap-2 w-full">
+                          <Label htmlFor="position">Pozíció</Label>
+                          <Select value={position} onValueChange={setPosition}>
+                            <SelectTrigger
+                              data-testid="position-select"
+                              className="col-span-3 w-full"
+                            >
+                              <SelectValue placeholder="Válasszon..." />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {positions.map((pos) => (
+                                <SelectItem key={pos.value} value={pos.value}>
+                                  {pos.label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
 
-                          {/*{["tanar", "igazgato"].includes(position) && (*/}
-                          {/*   <div className="grid gap-2">
+                        {/*{["tanar", "igazgato"].includes(position) && (*/}
+                        {/*   <div className="grid gap-2">
           <Label htmlFor="osztaly">Van osztálya?</Label>
           <Select value={osztaly} onValueChange={setOsztaly}>
             <SelectTrigger className="col-span-3 w-full">
@@ -436,86 +433,86 @@ export default function AddEmployeePage() {
             </SelectContent>
           </Select>
         </div>*/}
-                          {/*)}*/}
+                        {/*)}*/}
 
-                          <Button type="submit">Mentés</Button>
-                        </form>
-                      </DialogContent>
-                    </Dialog>
-                  </div>
+                        <Button type="submit">Mentés</Button>
+                      </form>
+                    </DialogContent>
+                  </Dialog>
+                </div>
 
-                  <div className="rounded-md border mt-5">
-                    <table className="w-full">
-                      <thead className="text-center text-sm text-muted-foreground">
+                <div className="rounded-md border mt-5">
+                  <table className="w-full">
+                    <thead className="text-center text-sm text-muted-foreground">
+                      <tr>
+                        <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Teljes név <ArrowUpDown className="w-4 h-4 inline-block" /></th>
+                        <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("position")}>Pozíció  <ArrowUpDown className="w-4 h-4 inline-block" /></th>
+                        <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("osztalyfonok")}>Osztály <ArrowUpDown className="w-4 h-4 inline-block" /></th>
+                        <th className="p-2 cursor-pointer font-normal">Műveletek</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {employees.length === 0 ? (
                         <tr>
-                          <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Teljes név <ArrowUpDown className="w-4 h-4 inline-block" /></th>
-                          <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("position")}>Pozíció  <ArrowUpDown className="w-4 h-4 inline-block" /></th>
-                          <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("osztalyfonok")}>Osztály <ArrowUpDown className="w-4 h-4 inline-block" /></th>
-                          <th className="p-2 cursor-pointer font-normal">Műveletek</th>
+                          <td colSpan={5} className="text-center p-6 h-dvh text-base text-muted-foreground">
+                            Nem szerepel alkalmazott a rendszerben
+                          </td>
                         </tr>
-                      </thead>
-                      <tbody>
-                        {employees.length === 0 ? (
-                          <tr>
-                            <td colSpan={5} className="text-center p-6 h-dvh text-base text-muted-foreground">
-                              Nem szerepel alkalmazott a rendszerben
+                      ) : (
+
+                        paginatedEmployees.map((employee) => (
+                          <tr key={employee.admin_id} className="text-center border-t">
+                            <td className="p-1">{employee.full_name} ({employee.short_name})</td>
+                            <td className="p-1">
+                              {positions.find((pos) => pos.value === employee.position)?.label || employee.position}
                             </td>
-                          </tr>
-                        ) : (
+                            <td className="p-1">{employee.osztalyfonok}</td>
+                            <td className="p-1">
 
-                          paginatedEmployees.map((employee) => (
-                            <tr key={employee.admin_id} className="text-center border-t">
-                              <td className="p-1">{employee.full_name} ({employee.short_name})</td>
-                              <td className="p-1">
-                                {positions.find((pos) => pos.value === employee.position)?.label || employee.position}
-                              </td>
-                              <td className="p-1">{employee.osztalyfonok}</td>
-                              <td className="p-1">
+                              <Dialog open={open} onOpenChange={setOpen}>
+                                <DialogTrigger asChild>
+                                  <Button variant="ghost" onClick={() => handleEdit(employee)} data-testid="edit-button" >
+                                    <Pen />
+                                  </Button>
+                                </DialogTrigger>
+                                <DialogContent className="sm:max-w-[425px]">
+                                  <DialogHeader>
+                                    <DialogTitle>Alkalmazott szerkesztése</DialogTitle>
+                                    <DialogDescription></DialogDescription>
+                                  </DialogHeader>
 
-                                <Dialog open={open} onOpenChange={setOpen}>
-                                  <DialogTrigger asChild>
-                                    <Button variant="ghost" onClick={() => handleEdit(employee)} data-testid="edit-button" >
-                                      <Pen />
-                                    </Button>
-                                  </DialogTrigger>
-                                  <DialogContent className="sm:max-w-[425px]">
-                                    <DialogHeader>
-                                      <DialogTitle>Alkalmazott szerkesztése</DialogTitle>
-                                      <DialogDescription></DialogDescription>
-                                    </DialogHeader>
+                                  <div className="grid items-start gap-4">
 
-                                    <div className="grid items-start gap-4">
+                                    <div className="grid gap-2">
+                                      <Label htmlFor="fullName">Teljes név</Label>
+                                      <Input
+                                        className="col-span-3"
+                                        id="fullName"
+                                        name="full_name"
+                                        type="text"
+                                        placeholder=""
+                                        value={editName}
+                                        onChange={(e) => setEditName(e.target.value)}
+                                      />
+                                    </div>
 
-                                      <div className="grid gap-2">
-                                        <Label htmlFor="fullName">Teljes név</Label>
-                                        <Input
-                                          className="col-span-3"
-                                          id="fullName"
-                                          name="full_name"
-                                          type="text"
-                                          placeholder=""
-                                          value={editName}
-                                          onChange={(e) => setEditName(e.target.value)}
-                                        />
-                                      </div>
+                                    <div className="grid gap-2">
+                                      <Label htmlFor="position">Pozíció</Label>
+                                      <Select onValueChange={setEditPosition}>
+                                        <SelectTrigger className="col-span-3 w-full">
+                                          <SelectValue placeholder="Válasszon..." />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                          {positions.map((pos) => (
+                                            <SelectItem key={pos.value} value={pos.value}>
+                                              {pos.label}
+                                            </SelectItem>
+                                          ))}
+                                        </SelectContent>
+                                      </Select>
+                                    </div>
 
-                                      <div className="grid gap-2">
-                                        <Label htmlFor="position">Pozíció</Label>
-                                        <Select onValueChange={setEditPosition}>
-                                          <SelectTrigger className="col-span-3 w-full">
-                                            <SelectValue placeholder="Válasszon..." />
-                                          </SelectTrigger>
-                                          <SelectContent>
-                                            {positions.map((pos) => (
-                                              <SelectItem key={pos.value} value={pos.value}>
-                                                {pos.label}
-                                              </SelectItem>
-                                            ))}
-                                          </SelectContent>
-                                        </Select>
-                                      </div>
-
-                                      {/*  <div className="grid gap-2">
+                                    {/*  <div className="grid gap-2">
                       <Label htmlFor="position">Van osztálya?</Label>
                       <Select value={editOsztaly} onValueChange={setEditOsztaly}>
                         <SelectTrigger className="col-span-3 w-full">
@@ -531,51 +528,47 @@ export default function AddEmployeePage() {
                       </Select>
                     </div>*/}
 
-                                      <Button onClick={handleUpdate} >Mentés</Button>
-                                    </div>
-                                  </DialogContent>
-                                </Dialog>
+                                    <Button onClick={handleUpdate} >Mentés</Button>
+                                  </div>
+                                </DialogContent>
+                              </Dialog>
 
-                                <AlertDialog>
-                                  <AlertDialogTrigger disabled={employee.position === 'Tanár' || employee.position === "igazgato" || employee.position === "igazgatohelyettes"} >
-                                    <Button disabled={employee.position === 'Tanár' || employee.position === "igazgato" || employee.position === "igazgatohelyettes"} variant="ghost"><Trash2 className="w-4 h-4 inline-block" data-testid="delete-button" /></Button>
-                                  </AlertDialogTrigger>
-                                  <AlertDialogContent>
-                                    <AlertDialogHeader>
-                                      <AlertDialogTitle>Biztosan törölni szeretné az alkalmazottat?</AlertDialogTitle>
-                                      <AlertDialogDescription>
-                                        Ez a művelet nem vonható vissza. Az alkalmazott véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
-                                      </AlertDialogDescription>
-                                    </AlertDialogHeader>
-                                    <AlertDialogFooter>
-                                      <AlertDialogCancel>Mégse</AlertDialogCancel>
-                                      <AlertDialogAction onClick={() => handleDelete(employee.admin_id)}>Véglegesítés</AlertDialogAction>
-                                    </AlertDialogFooter>
-                                  </AlertDialogContent>
-                                </AlertDialog>
-                              </td>
-                            </tr>
-                          ))
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-
-                  <div className="flex justify-between items-center p-2 ">
-                    <Button variant="ghost" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}> <ChevronLeft /> Előző</Button>
-                    <span> {currentPage} / {totalPages}</span>
-                    <Button variant="ghost" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>Következő  <ChevronRight /></Button>
-                  </div>
-
+                              <AlertDialog>
+                                <AlertDialogTrigger disabled={employee.position === 'Tanár' || employee.position === "igazgato" || employee.position === "igazgatohelyettes"} >
+                                  <Button disabled={employee.position === 'Tanár' || employee.position === "igazgato" || employee.position === "igazgatohelyettes"} variant="ghost"><Trash2 className="w-4 h-4 inline-block" data-testid="delete-button" /></Button>
+                                </AlertDialogTrigger>
+                                <AlertDialogContent>
+                                  <AlertDialogHeader>
+                                    <AlertDialogTitle>Biztosan törölni szeretné az alkalmazottat?</AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                      Ez a művelet nem vonható vissza. Az alkalmazott véglegesen törlésre kerül, és az adatai eltávolításra kerülnek a rendszerből.
+                                    </AlertDialogDescription>
+                                  </AlertDialogHeader>
+                                  <AlertDialogFooter>
+                                    <AlertDialogCancel>Mégse</AlertDialogCancel>
+                                    <AlertDialogAction onClick={() => handleDelete(employee.admin_id)}>Véglegesítés</AlertDialogAction>
+                                  </AlertDialogFooter>
+                                </AlertDialogContent>
+                              </AlertDialog>
+                            </td>
+                          </tr>
+                        ))
+                      )}
+                    </tbody>
+                  </table>
                 </div>
-              </>
-            )}
-          </div>
 
+                <div className="flex justify-between items-center p-2 ">
+                  <Button variant="ghost" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}> <ChevronLeft /> Előző</Button>
+                  <span> {currentPage} / {totalPages}</span>
+                  <Button variant="ghost" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>Következő  <ChevronRight /></Button>
+                </div>
 
+              </div>
+            </>
+          )}
         </div>
-      {/* </SidebarInset>
-    </SidebarProvider> */}
-   </div>
+      </div>
+    </div>
   );
 }

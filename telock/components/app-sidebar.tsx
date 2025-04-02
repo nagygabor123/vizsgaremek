@@ -197,7 +197,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   return (
     <Sidebar {...props}>
-      <div className="flex flex-col h-full"> {/* Teljes magasságú flexbox */}
+      <div className="flex flex-col h-full">
         {loading ? (
           <div className="flex items-center justify-center min-h-screen">
             <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-100 border-t-blue-600"></div>
@@ -265,7 +265,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <Separator />
             </SidebarHeader>
 
-            <SidebarContent className="flex-grow"> {/* Flex-grow, hogy kitöltse a fennmaradó teret */}
+            <SidebarContent className="flex-grow">
               {sidebarConfig.map((group: SidebarGroupConfig, groupIndex: number) => {
                 const hasVisibleItems = group.items.some((item) => {
                   if (group.groupLabel === "Osztályom") {
@@ -321,15 +321,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               })}
             </SidebarContent>
 
-
-
             <SidebarFooter>
 
-<Link href="/" className="text-xs text-center">
-  © {new Date().getFullYear()} telock
-</Link>
+              <Link href="/" className="text-xs text-center">
+                © {new Date().getFullYear()} telock
+              </Link>
 
-</SidebarFooter>
+            </SidebarFooter>
           </>
         )}
       </div>

@@ -23,9 +23,6 @@ export default function Page() {
   const { data: session } = useSession();
 
   return (
-    // <SidebarProvider>
-    //   <AppSidebar />
-    //   <SidebarInset>
     <div>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b bg-white/50 backdrop-blur-md">
           <div className="flex flex-1 items-center gap-2 px-3">
@@ -46,7 +43,7 @@ export default function Page() {
             <div className="min-h-[60px] rounded-xl bg-blue-50 flex items-center px-4 w-full box-border overflow-hidden">
               <Megaphone className="text-blue-600" />
               <p className="text-sm truncate ml-3 text-blue-600">
-                Üdvözöljük a telock vezérlőpultján, {session?.user?.full_name}!
+                Üdvözöljük, {session?.user?.full_name}!
               </p>
             </div>
           </div>
@@ -60,8 +57,6 @@ export default function Page() {
           </div>
           <div className="min-h-[100vh] flex-1 rounded-xl bg-blue-50 md:min-h-min" />
         </div>
-      {/* </SidebarInset>
-    </SidebarProvider> */}
   </div>
   )
 }
