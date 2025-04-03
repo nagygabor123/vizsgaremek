@@ -55,7 +55,7 @@ export default function Page() {
   }, [session?.user?.school_id]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <header className="flex h-16 shrink-0 items-center gap-2 border-b bg-white/50 backdrop-blur-md">
         <div className="flex flex-1 items-center gap-2 px-3">
           <SidebarTrigger />
