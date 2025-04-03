@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Iskolai nyilvántartás - Munkatársak', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto('/login');
-        await page.fill('input[name="short_name"]', 'AdAd');
+        await page.fill('input[name="short_name"]', 'AdPg');
         await page.fill('input[name="password"]', 'admin');
         await page.click('button[type="submit"]');
         await page.waitForURL('/dashboard');

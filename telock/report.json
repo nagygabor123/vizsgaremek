@@ -90,12 +90,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 4692,
+                      "duration": 4817,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-29T08:40:09.082Z",
+                      "startTime": "2025-04-03T18:25:32.112Z",
                       "attachments": []
                     }
                   ],
@@ -109,7 +109,7 @@
             },
             {
               "title": "Új tanuló hozzáadás",
-              "ok": true,
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -122,17 +122,33 @@
                     {
                       "workerIndex": 0,
                       "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 7029,
-                      "errors": [],
+                      "status": "timedOut",
+                      "duration": 30022,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests/students.spec.ts",
+                            "column": 16,
+                            "line": 34
+                          },
+                          "message": "Error: page.waitForResponse: Test timeout of 30000ms exceeded.\n\n\u001b[0m \u001b[90m 32 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByPlaceholder(\u001b[32m'Keresés név szerint...'\u001b[39m)\u001b[33m.\u001b[39mfill(\u001b[32m\"Teszt Elek\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 33 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 34 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForResponse(response \u001b[33m=>\u001b[39m\n \u001b[90m    |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 35 |\u001b[39m       response\u001b[33m.\u001b[39murl()\u001b[33m.\u001b[39mincludes(\u001b[32m'/api/students'\u001b[39m) \u001b[33m&&\u001b[39m\n \u001b[90m 36 |\u001b[39m       response\u001b[33m.\u001b[39mstatus() \u001b[33m===\u001b[39m \u001b[35m200\u001b[39m\n \u001b[90m 37 |\u001b[39m     )\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests/students.spec.ts:34:16\u001b[22m"
+                        }
+                      ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-29T08:40:13.882Z",
+                      "startTime": "2025-04-03T18:25:37.034Z",
                       "attachments": []
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
               "id": "070ffa9c3689b3a10912-afb9c832c7a1de392605",
@@ -153,15 +169,15 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": 0,
+                      "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 6127,
+                      "duration": 4801,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-29T08:40:20.914Z",
+                      "startTime": "2025-04-03T18:26:07.461Z",
                       "attachments": []
                     }
                   ],
@@ -186,15 +202,15 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": 0,
+                      "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 8204,
+                      "duration": 6976,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-29T08:40:27.044Z",
+                      "startTime": "2025-04-03T18:26:12.378Z",
                       "attachments": []
                     }
                   ],
@@ -203,7 +219,7 @@
               ],
               "id": "070ffa9c3689b3a10912-a3fc15357be58b2baee5",
               "file": "students.spec.ts",
-              "line": 59,
+              "line": 60,
               "column": 7
             },
             {
@@ -219,15 +235,15 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": 0,
+                      "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 7330,
+                      "duration": 6917,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-29T08:40:35.252Z",
+                      "startTime": "2025-04-03T18:26:19.358Z",
                       "attachments": []
                     }
                   ],
@@ -236,7 +252,7 @@
               ],
               "id": "070ffa9c3689b3a10912-850d6e2a2a7767bfc19f",
               "file": "students.spec.ts",
-              "line": 85,
+              "line": 86,
               "column": 7
             },
             {
@@ -252,15 +268,15 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": 0,
+                      "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 4267,
+                      "duration": 4650,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-29T08:40:42.587Z",
+                      "startTime": "2025-04-03T18:26:26.280Z",
                       "attachments": []
                     }
                   ],
@@ -269,7 +285,7 @@
               ],
               "id": "070ffa9c3689b3a10912-43d38c8a08b1a2055d0e",
               "file": "students.spec.ts",
-              "line": 105,
+              "line": 106,
               "column": 7
             },
             {
@@ -285,15 +301,15 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": 0,
+                      "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 4247,
+                      "duration": 4710,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-29T08:40:46.857Z",
+                      "startTime": "2025-04-03T18:26:30.934Z",
                       "attachments": []
                     }
                   ],
@@ -302,7 +318,7 @@
               ],
               "id": "070ffa9c3689b3a10912-8e92b8827673e2b5b121",
               "file": "students.spec.ts",
-              "line": 112,
+              "line": 113,
               "column": 7
             },
             {
@@ -318,15 +334,15 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": 0,
+                      "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 4713,
+                      "duration": 4561,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-29T08:40:51.107Z",
+                      "startTime": "2025-04-03T18:26:35.646Z",
                       "attachments": []
                     }
                   ],
@@ -335,7 +351,7 @@
               ],
               "id": "070ffa9c3689b3a10912-807de15d452c343e5353",
               "file": "students.spec.ts",
-              "line": 119,
+              "line": 120,
               "column": 7
             }
           ]
@@ -343,7 +359,7 @@
         {
           "title": "Osztályom - Tanulók",
           "file": "students.spec.ts",
-          "line": 131,
+          "line": 127,
           "column": 6,
           "specs": [
             {
@@ -359,15 +375,15 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": 0,
+                      "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 4609,
+                      "duration": 4709,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-29T08:40:55.822Z",
+                      "startTime": "2025-04-03T18:26:40.209Z",
                       "attachments": []
                     }
                   ],
@@ -376,7 +392,7 @@
               ],
               "id": "070ffa9c3689b3a10912-d6966e73dfebbce72941",
               "file": "students.spec.ts",
-              "line": 143,
+              "line": 139,
               "column": 7
             },
             {
@@ -392,15 +408,15 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": 0,
+                      "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 5253,
+                      "duration": 4706,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-29T08:41:00.435Z",
+                      "startTime": "2025-04-03T18:26:44.922Z",
                       "attachments": []
                     }
                   ],
@@ -409,7 +425,62 @@
               ],
               "id": "070ffa9c3689b3a10912-1aca5ae5133f4f1c76c2",
               "file": "students.spec.ts",
-              "line": 147,
+              "line": 143,
+              "column": 7
+            },
+            {
+              "title": "Tanuló nyitás engedélyezés",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 30024,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests/students.spec.ts",
+                            "column": 22,
+                            "line": 156
+                          },
+                          "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('tr').filter({ hasText: 'Balázs Áron Botond' }).locator('[data-testid=\"unlock-button\"]')\u001b[22m\n\n\n\u001b[0m \u001b[90m 154 |\u001b[39m\n \u001b[90m 155 |\u001b[39m     \u001b[36mconst\u001b[39m editButton \u001b[33m=\u001b[39m studentRow\u001b[33m.\u001b[39mlocator(\u001b[32m'[data-testid=\"unlock-button\"]'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 156 |\u001b[39m     \u001b[36mawait\u001b[39m editButton\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 157 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 158 |\u001b[39m\n \u001b[90m 159 |\u001b[39m   test(\u001b[32m'Rendezés'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at /Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests/students.spec.ts:156:22\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-04-03T18:26:49.631Z",
+                      "attachments": [
+                        {
+                          "name": "_prompt-1",
+                          "contentType": "text/markdown",
+                          "body": "IyBJbnN0cnVjdGlvbnMKCi0gRm9sbG93aW5nIFBsYXl3cmlnaHQgdGVzdCBmYWlsZWQuCi0gRXhwbGFpbiB3aHksIGJlIGNvbmNpc2UsIHJlc3BlY3QgUGxheXdyaWdodCBiZXN0IHByYWN0aWNlcy4KLSBQcm92aWRlIGEgc25pcHBldCBvZiBjb2RlIHdpdGggdGhlIGZpeCwgaWYgcG9zc2libGUuCgojIFRlc3QgaW5mbwoKLSBOYW1lOiBPc3p0w6FseW9tIC0gVGFudWzDs2sgPj4gVGFudWzDsyBueWl0w6FzIGVuZ2Vkw6lseWV6w6lzCi0gTG9jYXRpb246IC9Vc2Vycy9zemFsa2FpYWRhYW0vRG9jdW1lbnRzL0dpdEh1Yi92aXpzZ2FyZW1lay90ZWxvY2svdGVzdHMvc3R1ZGVudHMuc3BlYy50czoxNDg6NwoKIyBFcnJvciBkZXRhaWxzCgpgYGAKRXJyb3I6IGxvY2F0b3IuY2xpY2s6IFRlc3QgdGltZW91dCBvZiAzMDAwMG1zIGV4Y2VlZGVkLgpDYWxsIGxvZzoKICAtIHdhaXRpbmcgZm9yIGxvY2F0b3IoJ3RyJykuZmlsdGVyKHsgaGFzVGV4dDogJ0JhbMOhenMgw4Fyb24gQm90b25kJyB9KS5sb2NhdG9yKCdbZGF0YS10ZXN0aWQ9InVubG9jay1idXR0b24iXScpCgogICAgYXQgL1VzZXJzL3N6YWxrYWlhZGFhbS9Eb2N1bWVudHMvR2l0SHViL3ZpenNnYXJlbWVrL3RlbG9jay90ZXN0cy9zdHVkZW50cy5zcGVjLnRzOjE1NjoyMgpgYGAKCiMgUGFnZSBzbmFwc2hvdAoKYGBgeWFtbAotIGJ1dHRvbiAiS2lza3VuZsOpbGVneWjDoXppIFN6ZW50IEJlbmVkZWsgUEcgS8O2esOpcGlza29sYSBCZU1vIjoKICAtIHRleHQ6IEtpc2t1bmbDqWxlZ3low6F6aSBTemVudCBCZW5lZGVrIFBHIEvDtnrDqXBpc2tvbGEgQmVNbwogIC0gaW1nCi0gbGlzdDoKICAtIGxpc3RpdGVtOgogICAgLSBsaW5rICJLZXpkxZFsYXAiOgogICAgICAtIGltZwogICAgICAtIHRleHQ6IEtlemTFkWxhcAogIC0gbGlzdGl0ZW06CiAgICAtIGxpbmsgIlNhasOhdCDDs3LDoWsiOgogICAgICAtIGltZwogICAgICAtIHRleHQ6IFNhasOhdCDDs3LDoWsKLSB0ZXh0OiBPc3p0w6FseW9tCi0gbGlzdDoKICAtIGxpc3RpdGVtOgogICAgLSBsaW5rICLDk3JhcmVuZCI6CiAgICAgIC0gaW1nCiAgICAgIC0gdGV4dDogw5NyYXJlbmQKICAtIGxpc3RpdGVtOgogICAgLSBsaW5rICJUYW51bMOzayI6CiAgICAgIC0gaW1nCiAgICAgIC0gdGV4dDogVGFudWzDs2sKLSBsaW5rICLCqSAyMDI1IHRlbG9jayIKLSBtYWluOgogIC0gYnV0dG9uICJUb2dnbGUgU2lkZWJhciI6CiAgICAtIGltZwogICAgLSB0ZXh0OiBUb2dnbGUgU2lkZWJhcgogIC0gbmF2aWdhdGlvbiAiYnJlYWRjcnVtYiI6CiAgICAtIGxpc3Q6CiAgICAgIC0gbGlzdGl0ZW06CiAgICAgICAgLSBsaW5rICJLZXpkxZFsYXAiCiAgICAgIC0gbGlzdGl0ZW06CiAgICAgICAgLSBsaW5rICJPc3p0w6FseW9tIiBbZGlzYWJsZWRdCiAgICAgIC0gbGlzdGl0ZW06CiAgICAgICAgLSBsaW5rICJUYW51bMOzayIgW2Rpc2FibGVkXQogIC0gdGV4dGJveCAiS2VyZXPDqXMgbsOpdiBzemVyaW50Li4uIjogQmFsw6F6cyDDgXJvbiBCb3RvbmQKICAtIHRhYmxlOgogICAgLSByb3dncm91cDoKICAgICAgLSByb3cgIlRlbGplcyBuw6l2IE9zenTDoWx5IMOpcyBjc29wb3J0b2sgU3TDoXR1c3ogTcWxdmVsZXRlayI6CiAgICAgICAgLSBjZWxsICJUZWxqZXMgbsOpdiI6CiAgICAgICAgICAtIHRleHQ6IFRlbGplcyBuw6l2CiAgICAgICAgICAtIGltZwogICAgICAgIC0gY2VsbCAiT3N6dMOhbHkgw6lzIGNzb3BvcnRvayI6CiAgICAgICAgICAtIHRleHQ6IE9zenTDoWx5IMOpcyBjc29wb3J0b2sKICAgICAgICAgIC0gaW1nCiAgICAgICAgLSBjZWxsICJTdMOhdHVzeiIKICAgICAgICAtIGNlbGwgIk3FsXZlbGV0ZWsiCiAgICAtIHJvd2dyb3VwOgogICAgICAtIHJvdyAiQmFsw6F6cyDDgXJvbiBCb3RvbmQgMTMuSSwxMy5JLVMiOgogICAgICAgIC0gY2VsbCAiQmFsw6F6cyDDgXJvbiBCb3RvbmQiCiAgICAgICAgLSBjZWxsICIxMy5JLDEzLkktUyIKICAgICAgICAtIGNlbGw6CiAgICAgICAgICAtIGltZwogICAgICAgIC0gY2VsbDoKICAgICAgICAgIC0gYnV0dG9uOgogICAgICAgICAgICAtIGltZwogIC0gYnV0dG9uICJFbMWResWRIiBbZGlzYWJsZWRdOgogICAgLSBpbWcKICAgIC0gdGV4dDogRWzFkXrFkQogIC0gdGV4dDogMSAvIDEKICAtIGJ1dHRvbiAiS8O2dmV0a2V6xZEiIFtkaXNhYmxlZF06CiAgICAtIHRleHQ6IEvDtnZldGtlesWRCiAgICAtIGltZwotIGFsZXJ0CmBgYAoKIyBUZXN0IHNvdXJjZQoKYGBgdHMKICAgNTYgfCAgICAgYXdhaXQgZXhwZWN0KHBhZ2UuZ2V0QnlUZXh0KCc5LkknKSkudG9CZVZpc2libGUoKTsKICAgNTcgfCAgIH0pOwogICA1OCB8CiAgIDU5IHwKICAgNjAgfCAgIHRlc3QoJ1RhbnVsw7Mgc3plcmtlc3p0w6lzJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDYxIHwKICAgNjIgfCAgICAgYXdhaXQgcGFnZS5nZXRCeVBsYWNlaG9sZGVyKCdLZXJlc8OpcyBuw6l2IHN6ZXJpbnQuLi4nKS5maWxsKCdUZXN6dCBFbGVrJyk7CiAgIDYzIHwKICAgNjQgfCAgICAgY29uc3Qgc3R1ZGVudFJvdyA9IGF3YWl0IHBhZ2UubG9jYXRvcigndHInLCB7IGhhc1RleHQ6ICdUZXN6dCBFbGVrJyB9KTsKICAgNjUgfAogICA2NiB8ICAgICBhd2FpdCBleHBlY3Qoc3R1ZGVudFJvdykudG9CZVZpc2libGUoKTsKICAgNjcgfAogICA2OCB8ICAgICBjb25zdCBlZGl0QnV0dG9uID0gc3R1ZGVudFJvdy5sb2NhdG9yKCdbZGF0YS10ZXN0aWQ9ImVkaXQtYnV0dG9uIl0nKTsKICAgNjkgfCAgICAgYXdhaXQgZWRpdEJ1dHRvbi5jbGljaygpOwogICA3MCB8CiAgIDcxIHwgICAgIGNvbnN0IGRpYWxvZyA9IHBhZ2UubG9jYXRvcignW3JvbGU9ImRpYWxvZyJdJyk7CiAgIDcyIHwgICAgIGF3YWl0IGV4cGVjdChkaWFsb2cpLnRvQmVWaXNpYmxlKCk7CiAgIDczIHwgICAgIGF3YWl0IGV4cGVjdChkaWFsb2cpLnRvQ29udGFpblRleHQoJ1RhbnVsw7Mgc3plcmtlc3p0w6lzZScpOwogICA3NCB8CiAgIDc1IHwgICAgIGNvbnN0IGZ1bGxOYW1lSW5wdXQgPSBwYWdlLmxvY2F0b3IoJ2lucHV0W25hbWU9ImZ1bGxfbmFtZSJdJyk7CiAgIDc2IHwKICAgNzcgfCAgICAgYXdhaXQgZnVsbE5hbWVJbnB1dC5maWxsKGBUZXN6dCBFbGVrIE3Ds2Rvc8OtdG90dGApOwogICA3OCB8CiAgIDc5IHwgICAgIGF3YWl0IGRpYWxvZy5sb2NhdG9yKCdidXR0b24nLCB7IGhhc1RleHQ6ICdNZW50w6lzJyB9KS5jbGljaygpOwogICA4MCB8CiAgIDgxIHwgICAgIGF3YWl0IGV4cGVjdChkaWFsb2cpLm5vdC50b0JlVmlzaWJsZSgpOwogICA4MiB8CiAgIDgzIHwgICB9KTsKICAgODQgfAogICA4NSB8CiAgIDg2IHwgICB0ZXN0KCdUYW51bMOzIHTDtnJsw6lzJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDg3IHwKICAgODggfCAgICAgYXdhaXQgcGFnZS5nZXRCeVBsYWNlaG9sZGVyKCdLZXJlc8OpcyBuw6l2IHN6ZXJpbnQuLi4nKS5maWxsKCdUZXN6dCBFbGVrIE3Ds2Rvc8OtdG90dCcpOwogICA4OSB8CiAgIDkwIHwgICAgIGNvbnN0IHN0dWRlbnRSb3cgPSBhd2FpdCBwYWdlLmxvY2F0b3IoJ3RyJywgeyBoYXNUZXh0OiAnVGVzenQgRWxlayBNw7Nkb3PDrXRvdHQnIH0pOwogICA5MSB8CiAgIDkyIHwgICAgIGNvbnN0IGVkaXRCdXR0b24gPSBzdHVkZW50Um93LmxvY2F0b3IoJ1tkYXRhLXRlc3RpZD0iZGVsZXRlLWJ1dHRvbiJdJyk7CiAgIDkzIHwgICAgIGF3YWl0IGVkaXRCdXR0b24uY2xpY2soKTsKICAgOTQgfAogICA5NSB8ICAgICBjb25zdCBkaWFsb2dUaXRsZSA9IHBhZ2UubG9jYXRvcigndGV4dD1CaXp0b3NhbiB0w7Zyw7Zsbmkgc3plcmV0bsOpIGEgdGFudWzDs3Q/Jyk7CiAgIDk2IHwgICAgIGF3YWl0IGV4cGVjdChkaWFsb2dUaXRsZSkudG9CZVZpc2libGUoKTsKICAgOTcgfAogICA5OCB8ICAgICBjb25zdCBjb25maXJtQnV0dG9uID0gcGFnZS5sb2NhdG9yKCdidXR0b246aGFzLXRleHQoIlbDqWdsZWdlc8OtdMOpcyIpJyk7CiAgIDk5IHwgICAgIGF3YWl0IGNvbmZpcm1CdXR0b24uY2xpY2soKTsKICAxMDAgfAogIDEwMSB8ICAgICAvLyAgYXdhaXQgcGFnZS5nZXRCeVBsYWNlaG9sZGVyKCdLZXJlc8OpcyBuw6l2IHN6ZXJpbnQuLi4nKS5maWxsKCdUZXN6dCBFbGVrJyk7CiAgMTAyIHwKICAxMDMgfCAgICAgYXdhaXQgZXhwZWN0KHN0dWRlbnRSb3cpLm5vdC50b0JlVmlzaWJsZSgpOwogIDEwNCB8ICAgfSk7CiAgMTA1IHwKICAxMDYgfCAgIHRlc3QoJ1JlbmRlesOpcycsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDEwNyB8ICAgICBhd2FpdCBwYWdlLmxvY2F0b3IoJ3RoJywgeyBoYXNUZXh0OiAnVGVsamVzIG7DqXYnIH0pLmNsaWNrKCk7CiAgMTA4IHwKICAxMDkgfCAgICAgYXdhaXQgcGFnZS5sb2NhdG9yKCd0aCcsIHsgaGFzVGV4dDogJ09zenTDoWx5IMOpcyBjc29wb3J0b2snIH0pLmNsaWNrKCk7CiAgMTEwIHwKICAxMTEgfCAgIH0pOwogIDExMiB8CiAgMTEzIHwgICB0ZXN0KCdMYXBvesOhcycsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDExNCB8ICAgICBpZiAoYXdhaXQgcGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogJ0vDtnZldGtlesWRJyB9KS5pc0VuYWJsZWQoKSkgewogIDExNSB8ICAgICAgIGF3YWl0IHBhZ2UuZ2V0QnlSb2xlKCdidXR0b24nLCB7IG5hbWU6ICdLw7Z2ZXRrZXrFkScgfSkuY2xpY2soKTsKICAxMTYgfCAgICAgICBhd2FpdCBwYWdlLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAnRWzFkXrFkScgfSkuY2xpY2soKTsKICAxMTcgfCAgICAgfQogIDExOCB8ICAgfSk7CiAgMTE5IHwKICAxMjAgfCAgIHRlc3QoJ1rDoXJvbMOhcy9mZWxvbGTDoXMgZ29tYicsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDEyMSB8ICAgICBjb25zdCBsb2NrQnV0dG9uID0gcGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogL8OWc3N6ZXMgKHrDoXJvbMOhc3xmZWxvbGTDoXMpLyB9KTsKICAxMjIgfCAgICAgYXdhaXQgbG9ja0J1dHRvbi5jbGljaygpOwogIDEyMyB8ICAgICAvLyBhd2FpdCBsb2NrQnV0dG9uLmNsaWNrKCk7CiAgMTI0IHwgICB9KTsKICAxMjUgfCB9KTsKICAxMjYgfAogIDEyNyB8IHRlc3QuZGVzY3JpYmUoJ09zenTDoWx5b20gLSBUYW51bMOzaycsICgpID0+IHsKICAxMjggfCAgIHRlc3QuYmVmb3JlRWFjaChhc3luYyAoeyBwYWdlIH0pID0+IHsKICAxMjkgfCAgICAgYXdhaXQgcGFnZS5nb3RvKCcvbG9naW4nKTsKICAxMzAgfCAgICAgYXdhaXQgcGFnZS5maWxsKCdpbnB1dFtuYW1lPSJzaG9ydF9uYW1lIl0nLCAnQmVNbycpOwogIDEzMSB8ICAgICBhd2FpdCBwYWdlLmZpbGwoJ2lucHV0W25hbWU9InBhc3N3b3JkIl0nLCAnQmVNbzEyMycpOwogIDEzMiB8ICAgICBhd2FpdCBwYWdlLmNsaWNrKCdidXR0b25bdHlwZT0ic3VibWl0Il0nKTsKICAxMzMgfCAgICAgYXdhaXQgcGFnZS53YWl0Rm9yVVJMKCcvZGFzaGJvYXJkJyk7CiAgMTM0IHwKICAxMzUgfCAgICAgYXdhaXQgcGFnZS5nb3RvKCcvZGFzaGJvYXJkL2NsYXNzL3N0dWRlbnRzJyk7CiAgMTM2IHwgICAgIGF3YWl0IHBhZ2Uud2FpdEZvclNlbGVjdG9yKCd0YWJsZScpOwogIDEzNyB8ICAgfSk7CiAgMTM4IHwKICAxMzkgfCAgIHRlc3QoJ09sZGFsYmV0w7ZsdMOpcycsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDE0MCB8ICAgICBhd2FpdCBleHBlY3QocGFnZS5nZXRCeVBsYWNlaG9sZGVyKCdLZXJlc8OpcyBuw6l2IHN6ZXJpbnQuLi4nKSkudG9CZVZpc2libGUoKTsKICAxNDEgfCAgIH0pOwogIDE0MiB8ICAgCiAgMTQzIHwgICB0ZXN0KCdUYW51bMOzIGtlcmVzw6lzJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgMTQ0IHwgICAgIGF3YWl0IHBhZ2UuZ2V0QnlQbGFjZWhvbGRlcignS2VyZXPDqXMgbsOpdiBzemVyaW50Li4uJykuZmlsbCgnYmFsw6F6cyDDoXInKTsKICAxNDUgfCAgICAgYXdhaXQgZXhwZWN0KHBhZ2UuZ2V0QnlUZXh0KCdCYWzDoXpzIMOBcm9uIEJvdG9uZCcpKS50b0JlVmlzaWJsZSgpOwogIDE0NiB8ICAgfSk7CiAgMTQ3IHwKICAxNDggfCAgIHRlc3QoJ1RhbnVsw7MgbnlpdMOhcyBlbmdlZMOpbHllesOpcycsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDE0OSB8ICAgICBhd2FpdCBwYWdlLmdldEJ5UGxhY2Vob2xkZXIoJ0tlcmVzw6lzIG7DqXYgc3plcmludC4uLicpLmZpbGwoJ0JhbMOhenMgw4Fyb24gQm90b25kJyk7CiAgMTUwIHwKICAxNTEgfCAgICAgY29uc3Qgc3R1ZGVudFJvdyA9IGF3YWl0IHBhZ2UubG9jYXRvcigndHInLCB7IGhhc1RleHQ6ICdCYWzDoXpzIMOBcm9uIEJvdG9uZCcgfSk7CiAgMTUyIHwKICAxNTMgfCAgICAgYXdhaXQgZXhwZWN0KHN0dWRlbnRSb3cpLnRvQmVWaXNpYmxlKCk7CiAgMTU0IHwKICAxNTUgfCAgICAgY29uc3QgZWRpdEJ1dHRvbiA9IHN0dWRlbnRSb3cubG9jYXRvcignW2RhdGEtdGVzdGlkPSJ1bmxvY2stYnV0dG9uIl0nKTsKPiAxNTYgfCAgICAgYXdhaXQgZWRpdEJ1dHRvbi5jbGljaygpOwogICAgICB8ICAgICAgICAgICAgICAgICAgICAgIF4gRXJyb3I6IGxvY2F0b3IuY2xpY2s6IFRlc3QgdGltZW91dCBvZiAzMDAwMG1zIGV4Y2VlZGVkLgogIDE1NyB8ICAgfSk7CiAgMTU4IHwKICAxNTkgfCAgIHRlc3QoJ1JlbmRlesOpcycsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDE2MCB8ICAgICBhd2FpdCBwYWdlLmxvY2F0b3IoJ3RoJywgeyBoYXNUZXh0OiAnVGVsamVzIG7DqXYnIH0pLmNsaWNrKCk7CiAgMTYxIHwKICAxNjIgfCAgICAgYXdhaXQgcGFnZS5sb2NhdG9yKCd0aCcsIHsgaGFzVGV4dDogJ09zenTDoWx5IMOpcyBjc29wb3J0b2snIH0pLmNsaWNrKCk7CiAgMTYzIHwKICAxNjQgfCAgIH0pOwogIDE2NSB8CiAgMTY2IHwgICB0ZXN0KCdMYXBvesOhcycsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDE2NyB8ICAgICBpZiAoYXdhaXQgcGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogJ0vDtnZldGtlesWRJyB9KS5pc0VuYWJsZWQoKSkgewogIDE2OCB8ICAgICAgIGF3YWl0IHBhZ2UuZ2V0QnlSb2xlKCdidXR0b24nLCB7IG5hbWU6ICdLw7Z2ZXRrZXrFkScgfSkuY2xpY2soKTsKICAxNjkgfCAgICAgICBhd2FpdCBwYWdlLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAnRWzFkXrFkScgfSkuY2xpY2soKTsKICAxNzAgfCAgICAgfQogIDE3MSB8ICAgfSk7CiAgMTcyIHwKICAxNzMgfCB9KTsKYGBg"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "070ffa9c3689b3a10912-acbba5b206471787bc63",
+              "file": "students.spec.ts",
+              "line": 148,
               "column": 7
             },
             {
@@ -425,15 +496,15 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": 0,
+                      "workerIndex": 2,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 4109,
+                      "duration": 4545,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-29T08:41:05.691Z",
+                      "startTime": "2025-04-03T18:27:20.022Z",
                       "attachments": []
                     }
                   ],
@@ -442,7 +513,7 @@
               ],
               "id": "070ffa9c3689b3a10912-66405bb68c720962a2a9",
               "file": "students.spec.ts",
-              "line": 152,
+              "line": 159,
               "column": 7
             },
             {
@@ -458,15 +529,15 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": 0,
+                      "workerIndex": 2,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 4216,
+                      "duration": 4498,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-03-29T08:41:09.804Z",
+                      "startTime": "2025-04-03T18:27:24.677Z",
                       "attachments": []
                     }
                   ],
@@ -475,7 +546,7 @@
               ],
               "id": "070ffa9c3689b3a10912-979fac3f6f5bb14f2b85",
               "file": "students.spec.ts",
-              "line": 159,
+              "line": 166,
               "column": 7
             }
           ]
@@ -485,11 +556,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-03-29T08:40:08.670Z",
-    "duration": 65378.130000000005,
-    "expected": 12,
+    "startTime": "2025-04-03T18:25:31.722Z",
+    "duration": 117481.661,
+    "expected": 11,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 2,
     "flaky": 0
   }
 }

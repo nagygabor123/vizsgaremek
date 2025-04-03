@@ -18,7 +18,7 @@ test.describe("Bejelentkezés", () => {
   test("Sikeres bejelentkezés", async ({ page }) => {
     await page.goto("/login");
 
-    await page.fill('input[name="short_name"]', "AdAd");
+    await page.fill('input[name="short_name"]', "AdPg");
     await page.fill('input[name="password"]', "admin");
     await page.click('button[type="submit"]');
 

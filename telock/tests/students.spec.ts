@@ -5,7 +5,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Iskolai nyilvántartás - Tanulók', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/login');
-    await page.fill('input[name="short_name"]', 'AdAd');
+    await page.fill('input[name="short_name"]', 'AdPg');
     await page.fill('input[name="password"]', 'admin');
     await page.click('button[type="submit"]');
     await page.waitForURL('/dashboard');
@@ -54,6 +54,17 @@ test.describe('Iskolai nyilvántartás - Tanulók', () => {
 
     await page.getByPlaceholder('Keresés osztály szerint...').fill('9.I');
     await expect(page.getByText('9.I')).toBeVisible();
+  });
+
+  test('Tanuló nyitás engedélyezés', async ({ page }) => {
+    await page.getByPlaceholder('Keresés név szerint...').fill('teszt');
+
+    const studentRow = await page.locator('tr', { hasText: 'Teszt Elek' });
+
+    await expect(studentRow).toBeVisible();
+
+    const editButton = studentRow.locator('[data-testid="unlock-button"]');
+    await editButton.click();
   });
 
   test('Tanuló szerkesztés', async ({ page }) => {
@@ -119,14 +130,9 @@ test.describe('Iskolai nyilvántartás - Tanulók', () => {
   test('Zárolás/feloldás gomb', async ({ page }) => {
     const lockButton = page.getByRole('button', { name: /Összes (zárolás|feloldás)/ });
     await lockButton.click();
-    
+    await lockButton.click();
   });
 });
-
-
-
-
-
 
 test.describe('Osztályom - Tanulók', () => {
   test.beforeEach(async ({ page }) => {
@@ -145,8 +151,19 @@ test.describe('Osztályom - Tanulók', () => {
   });
   
   test('Tanuló keresés', async ({ page }) => {
-    await page.getByPlaceholder('Keresés név szerint...').fill('papp');
-    await expect(page.getByText('Papp Henrietta')).toBeVisible();
+    await page.getByPlaceholder('Keresés név szerint...').fill('balázs ár');
+    await expect(page.getByText('Balázs Áron Botond')).toBeVisible();
+  });
+
+  test('Tanuló nyitás engedélyezés', async ({ page }) => {
+    await page.getByPlaceholder('Keresés név szerint...').fill('Balázs Áron Botond');
+
+    const studentRow = await page.locator('tr', { hasText: 'Balázs Áron Botond' });
+
+    await expect(studentRow).toBeVisible();
+
+    const editButton = studentRow.locator('[data-testid="unlock-button"]');
+    await editButton.click();
   });
 
   test('Rendezés', async ({ page }) => {
