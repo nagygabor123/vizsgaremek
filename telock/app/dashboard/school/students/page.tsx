@@ -317,7 +317,7 @@ export default function Home() {
         </div>
       </header>
 
-      <div className="overflow-x-auto bg-gray-50">
+      <div className="overflow-x-auto">
         <div>
           {loading ? (
             <div className="flex items-center justify-center min-h-screen">
