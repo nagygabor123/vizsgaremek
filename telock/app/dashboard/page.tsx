@@ -155,7 +155,7 @@ export default function Page() {
         <h3 className="text-xl font-bold">
           {systemStatus === "nyithato" ? "Nyitható" : "Zárva"}
         </h3>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-sm text-muted-foreground">
           {systemStatus === "nyithato"
             ? "A tárolók jelenleg nyithatók."
             : "A tárolók jelenleg nem nyithatók."}
@@ -176,8 +176,8 @@ export default function Page() {
                   <GraduationCap className="h-5 w-5 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{students.length}</div>
-                  <p className="text-xs text-muted-foreground">
+                  <div className="text-xl font-bold">{students.length}</div>
+                  <p className="text-sm text-muted-foreground">
                     Az iskola rendszerében lévő tanulók
                   </p>
                 </CardContent>
@@ -191,8 +191,8 @@ export default function Page() {
                   <TabletSmartphone className="h-5 w-5 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{studentsInStatusBe}</div>
-                  <p className="text-xs text-muted-foreground">
+                  <div className="text-xl font-bold">{studentsInStatusBe}</div>
+                  <p className="text-sm text-muted-foreground">
                     Jelenleg tárolt telefonok
                   </p>
                 </CardContent>
@@ -223,7 +223,7 @@ export default function Page() {
                     <Mail className="h-4 w-4 mr-2" />
                     <div className="text-left">
                       <p className="font-medium">Kapcsolat</p>
-                      <p className="text-xs text-muted-foreground">nagy.gabor@diak.szbi-pg.hu, <br/>szalkai-szabo.adsm@diak.szbi-pg.hu</p>
+                      <p className="text-xs text-muted-foreground">nagy.gabor@diak.szbi-pg.hu, szalkai-szabo.adsm@diak.szbi-pg.hu</p>
                     </div>
                   </Button>
                   <Button variant="outline" className="h-16 justify-start">
