@@ -150,13 +150,44 @@ export default function Page() {
               </CardContent>
             </Card>
 
+            <Card className="border-0 shadow-sm">
+    <CardHeader className="pb-2">
+      <CardTitle className="text-sm font-medium text-muted-foreground">
+        Telefontároló állapota
+      </CardTitle>
+    </CardHeader>
+    <CardContent className="flex items-center gap-4">
+      <div className={`rounded-full p-3 ${
+        systemStatus === "nyithato" 
+          ? "bg-green-100 text-green-600" 
+          : "bg-red-100 text-red-600"
+      }`}>
+        {systemStatus === "nyithato" ? (
+          <Unlock className="h-6 w-6" />
+        ) : (
+          <Lock className="h-6 w-6" />
+        )}
+      </div>
+      <div>
+        <h3 className="text-lg font-semibold">
+          {systemStatus === "nyithato" ? "Nyitva" : "Zárva"}
+        </h3>
+        <p className="text-sm text-muted-foreground">
+          {systemStatus === "nyithato"
+            ? "Fogadunk telefonokat"
+            : "Jelenleg nem fogadunk"}
+        </p>
+      </div>
+    </CardContent>
+  </Card>
+
             <div className="grid gap-4 md:grid-cols-2">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
                     Tanulók száma
                   </CardTitle>
-                  <GraduationCap className="h-4 w-4 text-muted-foreground" />
+                  <GraduationCap className="h-5 w-5 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">{students.length}</div>
@@ -171,7 +202,7 @@ export default function Page() {
                   <CardTitle className="text-sm font-medium">
                     Tárolt eszközök
                   </CardTitle>
-                  <TabletSmartphone className="h-4 w-4 text-muted-foreground" />
+                  <TabletSmartphone className="h-5 w-5 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">{studentsInStatusBe}</div>
