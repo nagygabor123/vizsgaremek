@@ -102,17 +102,21 @@ export default function Page() {
 
             </div>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Általános információk</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="flex items-start gap-4">
-                    <Calendar className="h-5 w-5 mt-0.5 text-muted-foreground" />
-                    <div>
-                      <h4 className="font-medium">Mai dátum</h4>
-                      <p className="text-sm text-muted-foreground">
+          
+            <div className="grid gap-4 md:grid-cols-2">
+
+            <Card className="border-0 shadow-sm">
+    <CardHeader className="pb-2">
+      <CardTitle className="text-sm font-medium">
+      Mai dátum
+      </CardTitle>
+    </CardHeader>
+    <CardContent className="flex items-center gap-4">
+      <div>
+        <h3 className="text-lg font-semibold">
+          Mai dátum
+        </h3>
+        <p className="text-sm text-muted-foreground">
                         {new Date().toLocaleDateString('hu-HU', {
                           weekday: 'long',
                           year: 'numeric',
@@ -120,39 +124,13 @@ export default function Page() {
                           day: 'numeric'
                         })}
                       </p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-4">
-  {systemStatus === "nyithato" ? (
-    <Unlock className="h-5 w-5 mt-0.5 text-green-500" />
-  ) : (
-    <Lock className="h-5 w-5 mt-0.5 text-red-500" />
-  )}
-  <div>
-    <h4 className="font-medium">Telefontároló állapota</h4>
-    <div className="flex items-center gap-2">
-      <Badge 
-        variant={systemStatus === "nyithato" ? "default" : "destructive"}
-        className="text-xs"
-      >
-        {systemStatus === "nyithato" ? "Nyitható" : "Zárva"}
-      </Badge>
-      <p className="text-sm text-muted-foreground">
-        {systemStatus === "nyithato" 
-          ? "Telefonok fogadása aktív" 
-          : "Jelenleg nem fogadunk eszközöket"}
-      </p>
-    </div>
-  </div>
-</div>
-                </div>
-              </CardContent>
-            </Card>
+      </div>
+    </CardContent>
+  </Card>
 
             <Card className="border-0 shadow-sm">
     <CardHeader className="pb-2">
-      <CardTitle className="text-sm font-medium text-muted-foreground">
+      <CardTitle className="text-sm font-medium">
         Telefontároló állapota
       </CardTitle>
     </CardHeader>
@@ -180,6 +158,9 @@ export default function Page() {
       </div>
     </CardContent>
   </Card>
+
+
+  </div>
 
             <div className="grid gap-4 md:grid-cols-2">
               <Card>
