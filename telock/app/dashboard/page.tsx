@@ -105,16 +105,22 @@ export default function Page() {
           
             <div className="grid gap-4 md:grid-cols-2">
 
-            <Card className="border-0 shadow-sm">
+            <Card className="">
     <CardHeader className="pb-2">
       <CardTitle className="text-sm font-medium">
       Mai dátum
       </CardTitle>
+      <Calendar className="h-5 w-5 text-muted-foreground" />
     </CardHeader>
     <CardContent className="flex items-center gap-4">
       <div>
         <h3 className="text-lg font-semibold">
-          Mai dátum
+        {new Date().toLocaleDateString('hu-HU', {
+                          weekday: 'long',
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })}
         </h3>
         <p className="text-sm text-muted-foreground">
                         {new Date().toLocaleDateString('hu-HU', {
@@ -128,11 +134,12 @@ export default function Page() {
     </CardContent>
   </Card>
 
-            <Card className="border-0 shadow-sm">
+            <Card className="">
     <CardHeader className="pb-2">
       <CardTitle className="text-sm font-medium">
         Telefontároló állapota
       </CardTitle>
+      <Server className="h-5 w-5 text-muted-foreground" />
     </CardHeader>
     <CardContent className="flex items-center gap-4">
       <div className={`rounded-full p-3 ${
@@ -148,12 +155,12 @@ export default function Page() {
       </div>
       <div>
         <h3 className="text-lg font-semibold">
-          {systemStatus === "nyithato" ? "Nyitva" : "Zárva"}
+          {systemStatus === "nyithato" ? "Nyitható" : "Zárva"}
         </h3>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-xs text-muted-foreground">
           {systemStatus === "nyithato"
-            ? "Fogadunk telefonokat"
-            : "Jelenleg nem fogadunk"}
+            ? "A tárolók jelenleg nyithatók."
+            : "A tárolók jelenleg nem nyithatók."}
         </p>
       </div>
     </CardContent>
@@ -172,9 +179,9 @@ export default function Page() {
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">{students.length}</div>
-                  <p className="text-xs text-muted-foreground">
+                  {/* <p className="text-xs text-muted-foreground">
                     Az iskola rendszerében lévő tanulók
-                  </p>
+                  </p> */}
                 </CardContent>
               </Card>
 
@@ -187,9 +194,9 @@ export default function Page() {
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">{studentsInStatusBe}</div>
-                  <p className="text-xs text-muted-foreground">
+                  {/* <p className="text-xs text-muted-foreground">
                     Jelenleg tárolt telefonok
-                  </p>
+                  </p> */}
                 </CardContent>
               </Card>
             </div>
