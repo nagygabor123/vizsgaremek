@@ -110,7 +110,7 @@ export default function Page() {
       <CardTitle className="text-sm font-medium">
       Mai dátum
       </CardTitle>
-      <Calendar className="h-5 w-5 text-muted-foreground" />
+      <Calendar className="h-4 w-4 text-muted-foreground" />
     </CardHeader>
     <CardContent className="flex items-center gap-4">
       <div>
@@ -137,7 +137,7 @@ export default function Page() {
       <CardTitle className="text-sm font-medium">
         Telefontároló állapota
       </CardTitle>
-      <Server className="h-5 w-5 text-muted-foreground" />
+      <Server className="h-4 w-4 text-muted-foreground" />
     </CardHeader>
     <CardContent className="flex items-center gap-4">
       <div className={`rounded-full p-3 ${
@@ -173,7 +173,7 @@ export default function Page() {
                   <CardTitle className="text-sm font-medium">
                     Tanulók száma
                   </CardTitle>
-                  <GraduationCap className="h-5 w-5 text-muted-foreground" />
+                  <GraduationCap className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-xl font-bold">{students.length}</div>
@@ -188,7 +188,7 @@ export default function Page() {
                   <CardTitle className="text-sm font-medium">
                     Tárolt eszközök
                   </CardTitle>
-                  <TabletSmartphone className="h-5 w-5 text-muted-foreground" />
+                  <TabletSmartphone className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-xl font-bold">{studentsInStatusBe}</div>
