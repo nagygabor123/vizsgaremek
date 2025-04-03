@@ -15,7 +15,7 @@ import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar"
-import { Megaphone, Phone, Users, HardDrive, HelpCircle, BookOpen, Mail, Video, Calendar } from "lucide-react";
+import { Megaphone, Phone, Users, Calendar, BookOpen, HelpCircle, Mail, Video } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
@@ -23,10 +23,8 @@ export default function Page() {
   const { data: session } = useSession();
 
   const [students, setStudents] = useState([]);
-  const [hasStudents, setHasStudents] = useState(false);
   const [studentsInStatusBe, setStudentsInStatusBe] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [lastBackup, setLastBackup] = useState("Ma, 14:30");
 
   const API_BASE_URL = window.location.origin;
   
@@ -37,10 +35,8 @@ export default function Page() {
       );
       const data = await response.json();
       setStudents(data);
-
       const beCount = data.filter((student: any) => student.status === "be").length;
       setStudentsInStatusBe(beCount);
-      
     } catch (error) {
       console.error("Error fetching students", error);
     } finally {
@@ -55,7 +51,7 @@ export default function Page() {
   }, [session?.user?.school_id]);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50">
       <header className="flex h-16 shrink-0 items-center gap-2 border-b bg-white/50 backdrop-blur-md">
         <div className="flex flex-1 items-center gap-2 px-3">
           <SidebarTrigger />
@@ -77,20 +73,25 @@ export default function Page() {
           </div>
         ) : (
           <div className="space-y-6">
-            {/* Welcome Banner */}
-            <div className="rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 p-4 flex items-center">
-              <Megaphone className="text-blue-600 h-5 w-5" />
-              <p className="text-sm ml-3 text-blue-600">
-                Üdvözöljük, <span className="font-medium">{session?.user?.full_name}</span>!
+            {/* Üdvözlő üzenet */}
+            <div className="rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 p-4">
+              <div className="flex items-center">
+                <Megaphone className="text-blue-600 h-5 w-5" />
+                <p className="text-sm ml-3 text-blue-600">
+                  Üdvözöljük, <span className="font-medium">{session?.user?.full_name}</span>!
+                </p>
+              </div>
+              <p className="text-sm mt-2 text-blue-600">
+                Jelenleg <span className="font-bold">{studentsInStatusBe} telefon</span> van tárolva a rendszerben.
               </p>
             </div>
 
-            {/* Stats Cards */}
+            {/* Gyors statisztikák */}
             <div className="grid gap-4 md:grid-cols-2">
-              <Card>
+              <Card className="hover:shadow-md transition-shadow">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    Összes tanuló
+                    Tanulók száma
                   </CardTitle>
                   <Users className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
@@ -102,46 +103,33 @@ export default function Page() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="hover:shadow-md transition-shadow">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    Tárolt telefonok
+                    Tárolt eszközök
                   </CardTitle>
                   <Phone className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">{studentsInStatusBe}</div>
                   <p className="text-xs text-muted-foreground">
-                    Jelenleg tárolt eszközök
+                    Jelenleg tárolt telefonok
                   </p>
                 </CardContent>
               </Card>
             </div>
 
-            {/* System Information */}
-            {/* <Card>
+            {/* Általános információk */}
+            <Card>
               <CardHeader>
-                <CardTitle>Rendszer információk</CardTitle>
+                <CardTitle>Általános információk</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div className="flex items-center space-x-4 rounded-md border p-4">
-                    <HardDrive className="h-5 w-5" />
-                    <div className="flex-1 space-y-1">
-                      <p className="text-sm font-medium">Utolsó mentés</p>
-                      <p className="text-sm text-muted-foreground">
-                        {lastBackup}
-                      </p>
-                    </div>
-                    <Button variant="outline" size="sm">
-                      Mentés most
-                    </Button>
-                  </div>
-                  
-                  <div className="flex items-center space-x-4 rounded-md border p-4">
-                    <Calendar className="h-5 w-5" />
-                    <div className="flex-1 space-y-1">
-                      <p className="text-sm font-medium">Mai nap</p>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="flex items-start gap-4">
+                    <Calendar className="h-5 w-5 mt-0.5 text-muted-foreground" />
+                    <div>
+                      <h4 className="font-medium">Mai dátum</h4>
                       <p className="text-sm text-muted-foreground">
                         {new Date().toLocaleDateString('hu-HU', {
                           weekday: 'long',
@@ -152,67 +140,42 @@ export default function Page() {
                       </p>
                     </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card> */}
-                    <Card>
-              <CardHeader>
-                <CardTitle>Legutóbbi aktivitás</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex items-center">
-                    <div className="h-2 w-2 rounded-full bg-blue-500 mr-2"></div>
-                    <div className="flex-1">
-                      <p className="text-sm font-medium">Kovács János</p>
-                      <p className="text-sm text-muted-foreground">Telefon leadva - 2025.04.03 14:25</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="h-2 w-2 rounded-full bg-green-500 mr-2"></div>
-                    <div className="flex-1">
-                      <p className="text-sm font-medium">Nagy Anna</p>
-                      <p className="text-sm text-muted-foreground">Telefon visszaadva - 2025.04.03 13:40</p>
+                  
+                  <div className="flex items-start gap-4">
+                    <Phone className="h-5 w-5 mt-0.5 text-muted-foreground" />
+                    <div>
+                      <h4 className="font-medium">Telefontároló nyitva</h4>
+                      <p className="text-sm text-muted-foreground">
+                        7:30 - 16:00 között
+                      </p>
                     </div>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Help Section */}
+            {/* Gyors hozzáférés */}
             <Card>
               <CardHeader>
-                <CardTitle>Segítség és támogatás</CardTitle>
+                <CardTitle>Gyors hozzáférés</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-2 sm:grid-cols-2">
-                  <Button variant="outline" className="h-16 justify-start">
-                    <BookOpen className="h-4 w-4 mr-2" />
-                    <div className="text-left">
-                      <p className="font-medium">Használati útmutató</p>
-                      <p className="text-xs text-muted-foreground">PDF dokumentáció</p>
-                    </div>
+                  <Button variant="outline" className="h-14 justify-start gap-3">
+                    <BookOpen className="h-4 w-4" />
+                    <span>Útmutató</span>
                   </Button>
-                  <Button variant="outline" className="h-16 justify-start">
-                    <HelpCircle className="h-4 w-4 mr-2" />
-                    <div className="text-left">
-                      <p className="font-medium">GYIK</p>
-                      <p className="text-xs text-muted-foreground">Gyakori kérdések</p>
-                    </div>
+                  <Button variant="outline" className="h-14 justify-start gap-3">
+                    <HelpCircle className="h-4 w-4" />
+                    <span>GYIK</span>
                   </Button>
-                  <Button variant="outline" className="h-16 justify-start">
-                    <Mail className="h-4 w-4 mr-2" />
-                    <div className="text-left">
-                      <p className="font-medium">Kapcsolat</p>
-                      <p className="text-xs text-muted-foreground">tamogatas@iskola.hu</p>
-                    </div>
+                  <Button variant="outline" className="h-14 justify-start gap-3">
+                    <Mail className="h-4 w-4" />
+                    <span>Kapcsolat</span>
                   </Button>
-                  <Button variant="outline" className="h-16 justify-start">
-                    <Video className="h-4 w-4 mr-2" />
-                    <div className="text-left">
-                      <p className="font-medium">Oktatóvideók</p>
-                      <p className="text-xs text-muted-foreground">Bemutató videók</p>
-                    </div>
+                  <Button variant="outline" className="h-14 justify-start gap-3">
+                    <Video className="h-4 w-4" />
+                    <span>Videók</span>
                   </Button>
                 </div>
               </CardContent>
