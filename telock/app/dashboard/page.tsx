@@ -114,16 +114,19 @@ export default function Page() {
     </CardHeader>
     <CardContent className="flex items-center gap-4">
       <div>
-        <h3 className="text-2xl font-bold">
+        <h3 className="text-xl font-bold">
         {new Date().toLocaleDateString('hu-HU', {
-                          weekday: 'long',
+                    
                           year: 'numeric',
                           month: 'long',
                           day: 'numeric'
                         })}
         </h3>
         <p className="text-sm text-muted-foreground">
-                        
+        {new Date().toLocaleDateString('hu-HU', {
+                          weekday: 'long',
+                     
+                        })}       
                       </p>
       </div>
     </CardContent>
@@ -149,7 +152,7 @@ export default function Page() {
         )}
       </div>
       <div>
-        <h3 className="text-2xl font-bold">
+        <h3 className="text-xl font-bold">
           {systemStatus === "nyithato" ? "Nyitható" : "Zárva"}
         </h3>
         <p className="text-xs text-muted-foreground">
@@ -220,7 +223,7 @@ export default function Page() {
                     <Mail className="h-4 w-4 mr-2" />
                     <div className="text-left">
                       <p className="font-medium">Kapcsolat</p>
-                      <p className="text-xs text-muted-foreground">nagy.gabor@diak.szbi-pg.hu, szalkai-szabo.adsm@diak.szbi-pg.hu</p>
+                      <p className="text-xs text-muted-foreground">nagy.gabor@diak.szbi-pg.hu, <br/>szalkai-szabo.adsm@diak.szbi-pg.hu</p>
                     </div>
                   </Button>
                   <Button variant="outline" className="h-16 justify-start">
