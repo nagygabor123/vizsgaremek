@@ -475,7 +475,7 @@ export default function Home() {
 
                                 <Dialog open={open} onOpenChange={setOpen}>
                                   <DialogTrigger asChild>
-                                    <Button variant="ghost" onClick={() => handleEdit(student)} data-testid="edit-button"><Pen /></Button>
+                                    <Button variant="ghost" size="icon" onClick={() => handleEdit(student)} data-testid="edit-button"><Pen /></Button>
                                   </DialogTrigger>
                                   <DialogContent className="sm:max-w-[425px]">
                                     <DialogHeader>
@@ -527,7 +527,7 @@ export default function Home() {
 
                                 <AlertDialog>
                                   <AlertDialogTrigger>
-                                    <Button variant="ghost" data-testid="delete-button" ><Trash2 /> </Button>
+                                    <Button variant="ghost" size="icon" data-testid="delete-button" ><Trash2 /> </Button>
                                   </AlertDialogTrigger>
                                   <AlertDialogContent>
                                     <AlertDialogHeader>
