@@ -389,7 +389,7 @@
   
   /* Destructive Colors */
   --destructive: oklch(0.577 0.245 27.325); /* Red */
-  --destructive-foreground: oklch(0.577 0.245 27.325); /* White */
+  --destructive-foreground: oklch(0.98 0.00 248); /* White */
   
   /* Borders & Inputs */
   --border: oklch(0.93 0.01 256); /* Light gray-blue (similar to gray-200) */
