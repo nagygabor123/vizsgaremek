@@ -319,11 +319,28 @@ export default function Page() {
 
   const isYearOver = now > end;
 
-  const handleYearChange = () => {
-    if (!isYearOver) return;
-    alert('Tanév váltása megtörtént (csak példa).');
-    // Ide jönne az új tanév beállító logika pl. új API hívás
+  const handleYearChange = async () => {
+  
+    try {
+      const response = await fetch(`/api/deleteSchoolData?school_id=${session?.user?.school_id}`, {
+        method: 'DELETE',
+      });
+  
+      const result = await response.json();
+  
+      if (response.ok) {
+        console.log('Törlés és új tanév beállítása sikeres:', result);
+        alert('Tanév váltása megtörtént!');
+      } else {
+        console.error('Hiba a törlés során:', result);
+        alert(`Hiba a tanév váltáskor: ${result.error}`);
+      }
+    } catch (error) {
+      console.error('API hívási hiba:', error);
+      alert('Hiba történt az API hívás során.');
+    }
   };
+  
 
   return (
 <div>
