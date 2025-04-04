@@ -29,9 +29,7 @@ export default async function handler(req, res) {
       );
 
       await sql('DELETE FROM timetables WHERE school_id = $1', [school_id]);
-
       await sql('DELETE FROM csoportok WHERE school_id = $1', [school_id]);
-
       await sql('DELETE FROM students WHERE school_id = $1', [school_id]);
 
       await sql(
@@ -52,24 +50,21 @@ export default async function handler(req, res) {
 
       await sql('COMMIT');
 
+      // Lekérjük a kezd és veg időpontokat
       const result = await sql(
-        "SELECT type, date FROM year_schedule WHERE school_id = $1 AND type IN ('kezd', 'veg')",
+        "SELECT type, which_day FROM year_schedule WHERE school_id = $1 AND type IN ('kezd', 'veg')",
         [school_id]
       );
 
-      let startDate = null;
-      let endDate = null;
+      for (const row of result) {
+        const newDate = new Date(row.which_day);
+        newDate.setFullYear(newDate.getFullYear() + 1);
 
-      result.forEach(row => {
-        if (row.type === 'kezd') startDate = new Date(row.date);
-        if (row.type === 'veg') endDate = new Date(row.date);
-      });
-
-      if (startDate && endDate) {
-        await callSetYearStartEnd(school_id, startDate, endDate);
+        await callSetYearStartEnd(school_id, row.type, newDate);
       }
 
       return res.status(200).json({ message: 'Sikeres törlés és év újraindítás', schoolId: school_id });
+
     } catch (error) {
       console.error('Adatbázis hiba:', error);
       await sql('ROLLBACK').catch(e => console.error('Rollback failed:', e));
@@ -83,12 +78,7 @@ export default async function handler(req, res) {
   }
 }
 
-async function callSetYearStartEnd(school_id, startDate, endDate) {
-  const newStart = new Date(startDate);
-  const newEnd = new Date(endDate);
-  newStart.setFullYear(newStart.getFullYear() + 1);
-  newEnd.setFullYear(newEnd.getFullYear() + 1);
-
+async function callSetYearStartEnd(school_id, type, date) {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/setYearStartEnd`, {
     method: 'POST',
     headers: {
@@ -96,8 +86,8 @@ async function callSetYearStartEnd(school_id, startDate, endDate) {
     },
     body: JSON.stringify({
       school_id,
-      kezd: newStart.toISOString(),
-      veg: newEnd.toISOString()
+      type,
+      date: date.toISOString()
     })
   });
 
