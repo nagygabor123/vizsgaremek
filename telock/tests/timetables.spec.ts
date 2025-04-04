@@ -23,7 +23,7 @@ test.describe('Tanári Órarend Komponens', () => {
 
   test('Heti nézet megjelenítése', async ({ page }) => {
     // Ellenőrizzük, hogy a hét napjai megjelennek-e
-    const days = ['Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek'];
+    const days = ['Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat', 'Vasárnap'];
     for (const day of days) {
       await expect(page.getByText(new RegExp(day, 'i'))).toBeVisible();
     }

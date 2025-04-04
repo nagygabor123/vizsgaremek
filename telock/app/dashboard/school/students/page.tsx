@@ -22,7 +22,7 @@ import {
 import { Label } from "@/components/ui/label"
 import Link from "next/link";
 
-import { Pen, Trash2, ArrowUpDown, CirclePlus, CircleCheck, LockOpen, CircleAlert, CircleMinus, Lock, ChevronRight, ChevronLeft, Slash, School, } from "lucide-react"
+import { Pen, Trash2, ArrowUpDown, CirclePlus, CircleCheck, LockOpen, DoorOpen, CircleAlert, CircleMinus, Lock, ChevronRight, ChevronLeft, Slash, School, } from "lucide-react"
 
 import {
   Dialog,
@@ -469,7 +469,7 @@ export default function Home() {
                                   disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}
                                   data-testid="unlock-button"
                                 >
-                                  <LockOpen className="w-4 h-4 inline-block" />
+                                  <DoorOpen className="w-4 h-4 inline-block" />
                                 </Button>
 
                                 <Dialog open={open} onOpenChange={setOpen}>
