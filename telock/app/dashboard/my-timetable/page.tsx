@@ -663,9 +663,7 @@ const Calendar: React.FC = () => {
                     <Link href="/dashboard">Kezdőlap</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator>
-                  <Slash />
-                </BreadcrumbSeparator>
+                <BreadcrumbSeparator/>
                 <BreadcrumbItem>
                   <BreadcrumbPage>Saját órák</BreadcrumbPage>
                 </BreadcrumbItem>
@@ -686,7 +684,8 @@ const Calendar: React.FC = () => {
             </div>
           ) : (
             <>
-              <div className="calendar-container">
+            <div className="p-6">
+                            <div className="calendar-container">
                 {/* <span>{tanevkezdes}</span>
   <span>{tanevvege}</span> */}
                 <div className="calendar-header">
@@ -1046,6 +1045,7 @@ const Calendar: React.FC = () => {
                   )}
                 </div>
 
+              </div>
               </div>
             </>
           )}

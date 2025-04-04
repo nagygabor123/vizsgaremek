@@ -558,15 +558,11 @@ const Calendar: React.FC = () => {
                   <Link href="/dashboard">Kezdőlap</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
-              <BreadcrumbSeparator>
-                <Slash />
-              </BreadcrumbSeparator>
+              <BreadcrumbSeparator/>
               <BreadcrumbItem>
                 <BreadcrumbPage>Iskolai nyilvántartás</BreadcrumbPage>
               </BreadcrumbItem>
-              <BreadcrumbSeparator>
-                <Slash />
-              </BreadcrumbSeparator>
+              <BreadcrumbSeparator/>
               <BreadcrumbItem>
                 <BreadcrumbPage>Órarendek</BreadcrumbPage>
               </BreadcrumbItem>
@@ -582,6 +578,7 @@ const Calendar: React.FC = () => {
           </div>
         ) : (
           <>
+          <div className="p-6">
             {!hasStudents && <AppKonfig />}
             <div className="calendar-container">
               <div className="calendar-header">
@@ -922,6 +919,7 @@ const Calendar: React.FC = () => {
                 )}
               </div>
 
+            </div>
             </div>
           </>
         )}

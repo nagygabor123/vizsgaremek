@@ -528,15 +528,11 @@ const Calendar: React.FC = () => {
                   <Link href="/dashboard">Kezdőlap</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
-              <BreadcrumbSeparator>
-                <Slash />
-              </BreadcrumbSeparator>
+              <BreadcrumbSeparator/>
               <BreadcrumbItem>
                 <BreadcrumbPage>Osztályom</BreadcrumbPage>
               </BreadcrumbItem>
-              <BreadcrumbSeparator>
-                <Slash />
-              </BreadcrumbSeparator>
+              <BreadcrumbSeparator/>
               <BreadcrumbItem>
                 <BreadcrumbPage>Órarend</BreadcrumbPage>
               </BreadcrumbItem>
@@ -552,6 +548,7 @@ const Calendar: React.FC = () => {
           </div>
         ) : (
           <>
+            <div className="p-6">
             <div className="calendar-container">
               <div className="calendar-header">
                 <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
@@ -880,6 +877,7 @@ const Calendar: React.FC = () => {
                   </>
                 )}
               </div>
+            </div>
             </div>
           </>
         )}

@@ -300,15 +300,11 @@ export default function Home() {
                   <Link href="/dashboard">Kezdőlap</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
-              <BreadcrumbSeparator>
-                <Slash />
-              </BreadcrumbSeparator>
+              <BreadcrumbSeparator/>
               <BreadcrumbItem>
                 <BreadcrumbPage>Iskolai nyilvántartás</BreadcrumbPage>
               </BreadcrumbItem>
-              <BreadcrumbSeparator>
-                <Slash />
-              </BreadcrumbSeparator>
+              <BreadcrumbSeparator/>
               <BreadcrumbItem>
                 <BreadcrumbPage>Tanulók</BreadcrumbPage>
               </BreadcrumbItem>
@@ -325,9 +321,9 @@ export default function Home() {
             </div>
           ) : (
             <>
+              
+              <div className="p-6">
               {!hasStudents && <AppKonfig />}
-              <div className="p-4">
-
                 <div className="flex flex-col gap-2 md:flex-row mb-4">
                   <div className="flex flex-col gap-2 md:flex-row">
                     <Input

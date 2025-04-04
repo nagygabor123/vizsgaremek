@@ -85,14 +85,15 @@ export default function Page() {
         </div>
       </header>
 
-      <div className="p-6">
+      
         {loading ? (
           <div className="flex items-center justify-center min-h-screen">
             <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-100 border-t-blue-600"></div>
           </div>
         ) : (
+          <div className="p-6">
           <div className="space-y-6">
-            <div className="rounded-xl bg-gradient-to-r from-blue-100 to-indigo-50 p-4">
+            <div className="rounded-xl bg-gradient-to-r from-blue-100 to-indigo-50">
               <div className="flex items-center">
                 <Megaphone className="text-blue-600" />
                 <p className="text-sm ml-3 text-blue-600">
@@ -135,7 +136,7 @@ export default function Page() {
             <Card className="">
     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
       <CardTitle className="text-sm font-medium">
-        Telefontárolás
+        Telefontárolók
       </CardTitle>
       <Server className="h-4 w-4 text-muted-foreground" />
     </CardHeader>
@@ -237,8 +238,9 @@ export default function Page() {
               </CardContent>
             </Card>
           </div>
+          </div>
         )}
-      </div>
+     
     </div>
   )
 }
