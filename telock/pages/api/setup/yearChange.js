@@ -9,37 +9,38 @@ export default async function handler(req, res) {
     }
 
     const sql = neon(`${process.env.DATABASE_URL}`);
+    
+    // Convert to individual SQL statements with parameters
     const cleanupSQL = `
-      DO $$
-      DECLARE
-        target_school_id INT := $1; 
-      BEGIN
-        DELETE FROM locker_relationships 
-        WHERE rfid_tag IN (SELECT rfid_tag FROM students WHERE school_id = target_school_id);
-        
-        DELETE FROM student_groups 
-        WHERE student_id IN (SELECT student_id FROM students WHERE school_id = target_school_id);
-        
-        DELETE FROM group_relations 
-        WHERE timetable_id IN (SELECT timetable_id FROM timetables WHERE school_id = target_school_id);
-        
-        DELETE FROM timetables WHERE school_id = target_school_id;
-        
-        DELETE FROM csoportok WHERE school_id = target_school_id;
-        
-        DELETE FROM students WHERE school_id = target_school_id;
-        
-        DELETE FROM admins 
-        WHERE school_id = target_school_id AND position != 'rendszergazda';
-        
-        DELETE FROM year_schedule 
-        WHERE school_id = target_school_id AND type NOT IN ('kezd', 'veg');
-        
-        DELETE FROM ring_times WHERE school_id = target_school_id;
-        
-        DELETE FROM lockers 
-        WHERE locker_id NOT IN (SELECT locker_id FROM locker_relationships);
-      END $$;
+      BEGIN;
+      
+      DELETE FROM locker_relationships 
+      WHERE rfid_tag IN (SELECT rfid_tag FROM students WHERE school_id = $1);
+      
+      DELETE FROM student_groups 
+      WHERE student_id IN (SELECT student_id FROM students WHERE school_id = $1);
+      
+      DELETE FROM group_relations 
+      WHERE timetable_id IN (SELECT timetable_id FROM timetables WHERE school_id = $1);
+      
+      DELETE FROM timetables WHERE school_id = $1;
+      
+      DELETE FROM csoportok WHERE school_id = $1;
+      
+      DELETE FROM students WHERE school_id = $1;
+      
+      DELETE FROM admins 
+      WHERE school_id = $1 AND position != 'rendszergazda';
+      
+      DELETE FROM year_schedule 
+      WHERE school_id = $1 AND type NOT IN ('kezd', 'veg');
+      
+      DELETE FROM ring_times WHERE school_id = $1;
+      
+      DELETE FROM lockers 
+      WHERE locker_id NOT IN (SELECT locker_id FROM locker_relationships);
+      
+      COMMIT;
     `;
 
     try {
@@ -47,7 +48,11 @@ export default async function handler(req, res) {
       return res.status(200).json({ message: 'Sikeres törlés', schoolId: school_id });
     } catch (error) {
       console.error('Adatbázis hiba:', error);
-      return res.status(500).json({ error: 'Hiba a törlés során' });
+      await sql('ROLLBACK;').catch(e => console.error('Rollback failed:', e));
+      return res.status(500).json({ 
+        error: 'Hiba a törlés során',
+        details: error.message 
+      });
     }
   } else {
     return res.status(405).json({ error: 'A HTTP metódus nem engedélyezett' });
