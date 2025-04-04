@@ -92,7 +92,7 @@ export default function Form() {
                   <Alert variant="destructive">
                     <AlertCircle className="h-4 w-4" />
                     <AlertTitle>Sikeretlen bejelentkezés</AlertTitle>
-                    <AlertDescription>
+                    <AlertDescription className="text-red-600">
                       {error}
                     </AlertDescription>
                   </Alert>}

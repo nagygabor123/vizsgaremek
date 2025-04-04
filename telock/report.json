@@ -1,7 +1,7 @@
 {
   "config": {
-    "configFile": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/playwright.config.ts",
-    "rootDir": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests",
+    "configFile": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\playwright.config.ts",
+    "rootDir": "C:/Users/Szalkai-SzaboAdam/Documents/GitHub/vizsgaremek/telock/tests",
     "forbidOnly": false,
     "fullyParallel": false,
     "globalSetup": null,
@@ -37,7 +37,7 @@
     "quiet": false,
     "projects": [
       {
-        "outputDir": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/test-results",
+        "outputDir": "C:/Users/Szalkai-SzaboAdam/Documents/GitHub/vizsgaremek/telock/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -45,7 +45,7 @@
         },
         "id": "",
         "name": "",
-        "testDir": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests",
+        "testDir": "C:/Users/Szalkai-SzaboAdam/Documents/GitHub/vizsgaremek/telock/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -57,58 +57,25 @@
     "updateSnapshots": "missing",
     "updateSourceMethod": "patch",
     "version": "1.51.1",
-    "workers": 4,
+    "workers": 8,
     "webServer": null
   },
   "suites": [
     {
-      "title": "students.spec.ts",
-      "file": "students.spec.ts",
+      "title": "timetables.spec.ts",
+      "file": "timetables.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Iskolai nyilvántartás - Tanulók",
-          "file": "students.spec.ts",
-          "line": 5,
+          "title": "Tanári Órarend Komponens",
+          "file": "timetables.spec.ts",
+          "line": 3,
           "column": 6,
           "specs": [
             {
-              "title": "Oldalbetöltés",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 4817,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-04-03T18:25:32.112Z",
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "070ffa9c3689b3a10912-2adeba050a4aab7bb46c",
-              "file": "students.spec.ts",
-              "line": 17,
-              "column": 7
-            },
-            {
-              "title": "Új tanuló hozzáadás",
+              "title": "Oldal betöltése és alapvető elemek megjelenítése",
               "ok": false,
               "tags": [],
               "tests": [
@@ -123,369 +90,135 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "timedOut",
-                      "duration": 30022,
+                      "duration": 30029,
                       "error": {
-                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
-                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:4:8",
+                        "location": {
+                          "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                          "column": 8,
+                          "line": 4
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 2 |\u001b[39m\n \u001b[90m 3 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(\u001b[32m'Tanári Órarend Komponens'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 4 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m   |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 5 |\u001b[39m     \u001b[90m// Bejelentkezés a rendszerbe (ha szükséges)\u001b[39m\n \u001b[90m 6 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/login'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 7 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'input[name=\"short_name\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'KiGI'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
                       },
                       "errors": [
                         {
-                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                          "location": {
+                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                            "column": 8,
+                            "line": 4
+                          },
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n\n\u001b[0m \u001b[90m 2 |\u001b[39m\n \u001b[90m 3 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(\u001b[32m'Tanári Órarend Komponens'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 4 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m   |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 5 |\u001b[39m     \u001b[90m// Bejelentkezés a rendszerbe (ha szükséges)\u001b[39m\n \u001b[90m 6 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/login'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 7 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'input[name=\"short_name\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'KiGI'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:4:8\u001b[22m"
                         },
                         {
                           "location": {
-                            "file": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests/students.spec.ts",
+                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
                             "column": 16,
-                            "line": 34
+                            "line": 13
                           },
-                          "message": "Error: page.waitForResponse: Test timeout of 30000ms exceeded.\n\n\u001b[0m \u001b[90m 32 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByPlaceholder(\u001b[32m'Keresés név szerint...'\u001b[39m)\u001b[33m.\u001b[39mfill(\u001b[32m\"Teszt Elek\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 33 |\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 34 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForResponse(response \u001b[33m=>\u001b[39m\n \u001b[90m    |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 35 |\u001b[39m       response\u001b[33m.\u001b[39murl()\u001b[33m.\u001b[39mincludes(\u001b[32m'/api/students'\u001b[39m) \u001b[33m&&\u001b[39m\n \u001b[90m 36 |\u001b[39m       response\u001b[33m.\u001b[39mstatus() \u001b[33m===\u001b[39m \u001b[35m200\u001b[39m\n \u001b[90m 37 |\u001b[39m     )\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests/students.spec.ts:34:16\u001b[22m"
+                          "message": "Error: page.waitForSelector: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.calendar-container') to be visible\u001b[22m\n\n\n\u001b[0m \u001b[90m 11 |\u001b[39m     \u001b[90m// Navigálás az órarend oldalra\u001b[39m\n \u001b[90m 12 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/dashboard/my-timetable'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 13 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForSelector(\u001b[32m'.calendar-container'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 14 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 15 |\u001b[39m\n \u001b[90m 16 |\u001b[39m   test(\u001b[32m'Oldal betöltése és alapvető elemek megjelenítése'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:13:16\u001b[22m"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-04-03T18:25:37.034Z",
-                      "attachments": []
-                    }
-                  ],
-                  "status": "unexpected"
-                }
-              ],
-              "id": "070ffa9c3689b3a10912-afb9c832c7a1de392605",
-              "file": "students.spec.ts",
-              "line": 23,
-              "column": 7
-            },
-            {
-              "title": "Tanuló keresés",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 4801,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-04-03T18:26:07.461Z",
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "070ffa9c3689b3a10912-925686238b7cb5cec2eb",
-              "file": "students.spec.ts",
-              "line": 49,
-              "column": 7
-            },
-            {
-              "title": "Tanuló szerkesztés",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 6976,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-04-03T18:26:12.378Z",
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "070ffa9c3689b3a10912-a3fc15357be58b2baee5",
-              "file": "students.spec.ts",
-              "line": 60,
-              "column": 7
-            },
-            {
-              "title": "Tanuló törlés",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 6917,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-04-03T18:26:19.358Z",
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "070ffa9c3689b3a10912-850d6e2a2a7767bfc19f",
-              "file": "students.spec.ts",
-              "line": 86,
-              "column": 7
-            },
-            {
-              "title": "Rendezés",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 4650,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-04-03T18:26:26.280Z",
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "070ffa9c3689b3a10912-43d38c8a08b1a2055d0e",
-              "file": "students.spec.ts",
-              "line": 106,
-              "column": 7
-            },
-            {
-              "title": "Lapozás",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 4710,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-04-03T18:26:30.934Z",
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "070ffa9c3689b3a10912-8e92b8827673e2b5b121",
-              "file": "students.spec.ts",
-              "line": 113,
-              "column": 7
-            },
-            {
-              "title": "Zárolás/feloldás gomb",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 4561,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-04-03T18:26:35.646Z",
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "070ffa9c3689b3a10912-807de15d452c343e5353",
-              "file": "students.spec.ts",
-              "line": 120,
-              "column": 7
-            }
-          ]
-        },
-        {
-          "title": "Osztályom - Tanulók",
-          "file": "students.spec.ts",
-          "line": 127,
-          "column": 6,
-          "specs": [
-            {
-              "title": "Oldalbetöltés",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 4709,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-04-03T18:26:40.209Z",
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "070ffa9c3689b3a10912-d6966e73dfebbce72941",
-              "file": "students.spec.ts",
-              "line": 139,
-              "column": 7
-            },
-            {
-              "title": "Tanuló keresés",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 4706,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-04-03T18:26:44.922Z",
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "070ffa9c3689b3a10912-1aca5ae5133f4f1c76c2",
-              "file": "students.spec.ts",
-              "line": 143,
-              "column": 7
-            },
-            {
-              "title": "Tanuló nyitás engedélyezés",
-              "ok": false,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 0,
-                      "status": "timedOut",
-                      "duration": 30024,
-                      "error": {
-                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
-                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
-                      },
-                      "errors": [
-                        {
-                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
-                        },
-                        {
-                          "location": {
-                            "file": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests/students.spec.ts",
-                            "column": 22,
-                            "line": 156
-                          },
-                          "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('tr').filter({ hasText: 'Balázs Áron Botond' }).locator('[data-testid=\"unlock-button\"]')\u001b[22m\n\n\n\u001b[0m \u001b[90m 154 |\u001b[39m\n \u001b[90m 155 |\u001b[39m     \u001b[36mconst\u001b[39m editButton \u001b[33m=\u001b[39m studentRow\u001b[33m.\u001b[39mlocator(\u001b[32m'[data-testid=\"unlock-button\"]'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 156 |\u001b[39m     \u001b[36mawait\u001b[39m editButton\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 157 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 158 |\u001b[39m\n \u001b[90m 159 |\u001b[39m   test(\u001b[32m'Rendezés'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at /Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests/students.spec.ts:156:22\u001b[22m"
-                        }
-                      ],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2025-04-03T18:26:49.631Z",
+                      "startTime": "2025-04-04T08:46:10.166Z",
                       "attachments": [
                         {
                           "name": "_prompt-1",
                           "contentType": "text/markdown",
-                          "body": "IyBJbnN0cnVjdGlvbnMKCi0gRm9sbG93aW5nIFBsYXl3cmlnaHQgdGVzdCBmYWlsZWQuCi0gRXhwbGFpbiB3aHksIGJlIGNvbmNpc2UsIHJlc3BlY3QgUGxheXdyaWdodCBiZXN0IHByYWN0aWNlcy4KLSBQcm92aWRlIGEgc25pcHBldCBvZiBjb2RlIHdpdGggdGhlIGZpeCwgaWYgcG9zc2libGUuCgojIFRlc3QgaW5mbwoKLSBOYW1lOiBPc3p0w6FseW9tIC0gVGFudWzDs2sgPj4gVGFudWzDsyBueWl0w6FzIGVuZ2Vkw6lseWV6w6lzCi0gTG9jYXRpb246IC9Vc2Vycy9zemFsa2FpYWRhYW0vRG9jdW1lbnRzL0dpdEh1Yi92aXpzZ2FyZW1lay90ZWxvY2svdGVzdHMvc3R1ZGVudHMuc3BlYy50czoxNDg6NwoKIyBFcnJvciBkZXRhaWxzCgpgYGAKRXJyb3I6IGxvY2F0b3IuY2xpY2s6IFRlc3QgdGltZW91dCBvZiAzMDAwMG1zIGV4Y2VlZGVkLgpDYWxsIGxvZzoKICAtIHdhaXRpbmcgZm9yIGxvY2F0b3IoJ3RyJykuZmlsdGVyKHsgaGFzVGV4dDogJ0JhbMOhenMgw4Fyb24gQm90b25kJyB9KS5sb2NhdG9yKCdbZGF0YS10ZXN0aWQ9InVubG9jay1idXR0b24iXScpCgogICAgYXQgL1VzZXJzL3N6YWxrYWlhZGFhbS9Eb2N1bWVudHMvR2l0SHViL3ZpenNnYXJlbWVrL3RlbG9jay90ZXN0cy9zdHVkZW50cy5zcGVjLnRzOjE1NjoyMgpgYGAKCiMgUGFnZSBzbmFwc2hvdAoKYGBgeWFtbAotIGJ1dHRvbiAiS2lza3VuZsOpbGVneWjDoXppIFN6ZW50IEJlbmVkZWsgUEcgS8O2esOpcGlza29sYSBCZU1vIjoKICAtIHRleHQ6IEtpc2t1bmbDqWxlZ3low6F6aSBTemVudCBCZW5lZGVrIFBHIEvDtnrDqXBpc2tvbGEgQmVNbwogIC0gaW1nCi0gbGlzdDoKICAtIGxpc3RpdGVtOgogICAgLSBsaW5rICJLZXpkxZFsYXAiOgogICAgICAtIGltZwogICAgICAtIHRleHQ6IEtlemTFkWxhcAogIC0gbGlzdGl0ZW06CiAgICAtIGxpbmsgIlNhasOhdCDDs3LDoWsiOgogICAgICAtIGltZwogICAgICAtIHRleHQ6IFNhasOhdCDDs3LDoWsKLSB0ZXh0OiBPc3p0w6FseW9tCi0gbGlzdDoKICAtIGxpc3RpdGVtOgogICAgLSBsaW5rICLDk3JhcmVuZCI6CiAgICAgIC0gaW1nCiAgICAgIC0gdGV4dDogw5NyYXJlbmQKICAtIGxpc3RpdGVtOgogICAgLSBsaW5rICJUYW51bMOzayI6CiAgICAgIC0gaW1nCiAgICAgIC0gdGV4dDogVGFudWzDs2sKLSBsaW5rICLCqSAyMDI1IHRlbG9jayIKLSBtYWluOgogIC0gYnV0dG9uICJUb2dnbGUgU2lkZWJhciI6CiAgICAtIGltZwogICAgLSB0ZXh0OiBUb2dnbGUgU2lkZWJhcgogIC0gbmF2aWdhdGlvbiAiYnJlYWRjcnVtYiI6CiAgICAtIGxpc3Q6CiAgICAgIC0gbGlzdGl0ZW06CiAgICAgICAgLSBsaW5rICJLZXpkxZFsYXAiCiAgICAgIC0gbGlzdGl0ZW06CiAgICAgICAgLSBsaW5rICJPc3p0w6FseW9tIiBbZGlzYWJsZWRdCiAgICAgIC0gbGlzdGl0ZW06CiAgICAgICAgLSBsaW5rICJUYW51bMOzayIgW2Rpc2FibGVkXQogIC0gdGV4dGJveCAiS2VyZXPDqXMgbsOpdiBzemVyaW50Li4uIjogQmFsw6F6cyDDgXJvbiBCb3RvbmQKICAtIHRhYmxlOgogICAgLSByb3dncm91cDoKICAgICAgLSByb3cgIlRlbGplcyBuw6l2IE9zenTDoWx5IMOpcyBjc29wb3J0b2sgU3TDoXR1c3ogTcWxdmVsZXRlayI6CiAgICAgICAgLSBjZWxsICJUZWxqZXMgbsOpdiI6CiAgICAgICAgICAtIHRleHQ6IFRlbGplcyBuw6l2CiAgICAgICAgICAtIGltZwogICAgICAgIC0gY2VsbCAiT3N6dMOhbHkgw6lzIGNzb3BvcnRvayI6CiAgICAgICAgICAtIHRleHQ6IE9zenTDoWx5IMOpcyBjc29wb3J0b2sKICAgICAgICAgIC0gaW1nCiAgICAgICAgLSBjZWxsICJTdMOhdHVzeiIKICAgICAgICAtIGNlbGwgIk3FsXZlbGV0ZWsiCiAgICAtIHJvd2dyb3VwOgogICAgICAtIHJvdyAiQmFsw6F6cyDDgXJvbiBCb3RvbmQgMTMuSSwxMy5JLVMiOgogICAgICAgIC0gY2VsbCAiQmFsw6F6cyDDgXJvbiBCb3RvbmQiCiAgICAgICAgLSBjZWxsICIxMy5JLDEzLkktUyIKICAgICAgICAtIGNlbGw6CiAgICAgICAgICAtIGltZwogICAgICAgIC0gY2VsbDoKICAgICAgICAgIC0gYnV0dG9uOgogICAgICAgICAgICAtIGltZwogIC0gYnV0dG9uICJFbMWResWRIiBbZGlzYWJsZWRdOgogICAgLSBpbWcKICAgIC0gdGV4dDogRWzFkXrFkQogIC0gdGV4dDogMSAvIDEKICAtIGJ1dHRvbiAiS8O2dmV0a2V6xZEiIFtkaXNhYmxlZF06CiAgICAtIHRleHQ6IEvDtnZldGtlesWRCiAgICAtIGltZwotIGFsZXJ0CmBgYAoKIyBUZXN0IHNvdXJjZQoKYGBgdHMKICAgNTYgfCAgICAgYXdhaXQgZXhwZWN0KHBhZ2UuZ2V0QnlUZXh0KCc5LkknKSkudG9CZVZpc2libGUoKTsKICAgNTcgfCAgIH0pOwogICA1OCB8CiAgIDU5IHwKICAgNjAgfCAgIHRlc3QoJ1RhbnVsw7Mgc3plcmtlc3p0w6lzJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDYxIHwKICAgNjIgfCAgICAgYXdhaXQgcGFnZS5nZXRCeVBsYWNlaG9sZGVyKCdLZXJlc8OpcyBuw6l2IHN6ZXJpbnQuLi4nKS5maWxsKCdUZXN6dCBFbGVrJyk7CiAgIDYzIHwKICAgNjQgfCAgICAgY29uc3Qgc3R1ZGVudFJvdyA9IGF3YWl0IHBhZ2UubG9jYXRvcigndHInLCB7IGhhc1RleHQ6ICdUZXN6dCBFbGVrJyB9KTsKICAgNjUgfAogICA2NiB8ICAgICBhd2FpdCBleHBlY3Qoc3R1ZGVudFJvdykudG9CZVZpc2libGUoKTsKICAgNjcgfAogICA2OCB8ICAgICBjb25zdCBlZGl0QnV0dG9uID0gc3R1ZGVudFJvdy5sb2NhdG9yKCdbZGF0YS10ZXN0aWQ9ImVkaXQtYnV0dG9uIl0nKTsKICAgNjkgfCAgICAgYXdhaXQgZWRpdEJ1dHRvbi5jbGljaygpOwogICA3MCB8CiAgIDcxIHwgICAgIGNvbnN0IGRpYWxvZyA9IHBhZ2UubG9jYXRvcignW3JvbGU9ImRpYWxvZyJdJyk7CiAgIDcyIHwgICAgIGF3YWl0IGV4cGVjdChkaWFsb2cpLnRvQmVWaXNpYmxlKCk7CiAgIDczIHwgICAgIGF3YWl0IGV4cGVjdChkaWFsb2cpLnRvQ29udGFpblRleHQoJ1RhbnVsw7Mgc3plcmtlc3p0w6lzZScpOwogICA3NCB8CiAgIDc1IHwgICAgIGNvbnN0IGZ1bGxOYW1lSW5wdXQgPSBwYWdlLmxvY2F0b3IoJ2lucHV0W25hbWU9ImZ1bGxfbmFtZSJdJyk7CiAgIDc2IHwKICAgNzcgfCAgICAgYXdhaXQgZnVsbE5hbWVJbnB1dC5maWxsKGBUZXN6dCBFbGVrIE3Ds2Rvc8OtdG90dGApOwogICA3OCB8CiAgIDc5IHwgICAgIGF3YWl0IGRpYWxvZy5sb2NhdG9yKCdidXR0b24nLCB7IGhhc1RleHQ6ICdNZW50w6lzJyB9KS5jbGljaygpOwogICA4MCB8CiAgIDgxIHwgICAgIGF3YWl0IGV4cGVjdChkaWFsb2cpLm5vdC50b0JlVmlzaWJsZSgpOwogICA4MiB8CiAgIDgzIHwgICB9KTsKICAgODQgfAogICA4NSB8CiAgIDg2IHwgICB0ZXN0KCdUYW51bMOzIHTDtnJsw6lzJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDg3IHwKICAgODggfCAgICAgYXdhaXQgcGFnZS5nZXRCeVBsYWNlaG9sZGVyKCdLZXJlc8OpcyBuw6l2IHN6ZXJpbnQuLi4nKS5maWxsKCdUZXN6dCBFbGVrIE3Ds2Rvc8OtdG90dCcpOwogICA4OSB8CiAgIDkwIHwgICAgIGNvbnN0IHN0dWRlbnRSb3cgPSBhd2FpdCBwYWdlLmxvY2F0b3IoJ3RyJywgeyBoYXNUZXh0OiAnVGVzenQgRWxlayBNw7Nkb3PDrXRvdHQnIH0pOwogICA5MSB8CiAgIDkyIHwgICAgIGNvbnN0IGVkaXRCdXR0b24gPSBzdHVkZW50Um93LmxvY2F0b3IoJ1tkYXRhLXRlc3RpZD0iZGVsZXRlLWJ1dHRvbiJdJyk7CiAgIDkzIHwgICAgIGF3YWl0IGVkaXRCdXR0b24uY2xpY2soKTsKICAgOTQgfAogICA5NSB8ICAgICBjb25zdCBkaWFsb2dUaXRsZSA9IHBhZ2UubG9jYXRvcigndGV4dD1CaXp0b3NhbiB0w7Zyw7Zsbmkgc3plcmV0bsOpIGEgdGFudWzDs3Q/Jyk7CiAgIDk2IHwgICAgIGF3YWl0IGV4cGVjdChkaWFsb2dUaXRsZSkudG9CZVZpc2libGUoKTsKICAgOTcgfAogICA5OCB8ICAgICBjb25zdCBjb25maXJtQnV0dG9uID0gcGFnZS5sb2NhdG9yKCdidXR0b246aGFzLXRleHQoIlbDqWdsZWdlc8OtdMOpcyIpJyk7CiAgIDk5IHwgICAgIGF3YWl0IGNvbmZpcm1CdXR0b24uY2xpY2soKTsKICAxMDAgfAogIDEwMSB8ICAgICAvLyAgYXdhaXQgcGFnZS5nZXRCeVBsYWNlaG9sZGVyKCdLZXJlc8OpcyBuw6l2IHN6ZXJpbnQuLi4nKS5maWxsKCdUZXN6dCBFbGVrJyk7CiAgMTAyIHwKICAxMDMgfCAgICAgYXdhaXQgZXhwZWN0KHN0dWRlbnRSb3cpLm5vdC50b0JlVmlzaWJsZSgpOwogIDEwNCB8ICAgfSk7CiAgMTA1IHwKICAxMDYgfCAgIHRlc3QoJ1JlbmRlesOpcycsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDEwNyB8ICAgICBhd2FpdCBwYWdlLmxvY2F0b3IoJ3RoJywgeyBoYXNUZXh0OiAnVGVsamVzIG7DqXYnIH0pLmNsaWNrKCk7CiAgMTA4IHwKICAxMDkgfCAgICAgYXdhaXQgcGFnZS5sb2NhdG9yKCd0aCcsIHsgaGFzVGV4dDogJ09zenTDoWx5IMOpcyBjc29wb3J0b2snIH0pLmNsaWNrKCk7CiAgMTEwIHwKICAxMTEgfCAgIH0pOwogIDExMiB8CiAgMTEzIHwgICB0ZXN0KCdMYXBvesOhcycsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDExNCB8ICAgICBpZiAoYXdhaXQgcGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogJ0vDtnZldGtlesWRJyB9KS5pc0VuYWJsZWQoKSkgewogIDExNSB8ICAgICAgIGF3YWl0IHBhZ2UuZ2V0QnlSb2xlKCdidXR0b24nLCB7IG5hbWU6ICdLw7Z2ZXRrZXrFkScgfSkuY2xpY2soKTsKICAxMTYgfCAgICAgICBhd2FpdCBwYWdlLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAnRWzFkXrFkScgfSkuY2xpY2soKTsKICAxMTcgfCAgICAgfQogIDExOCB8ICAgfSk7CiAgMTE5IHwKICAxMjAgfCAgIHRlc3QoJ1rDoXJvbMOhcy9mZWxvbGTDoXMgZ29tYicsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDEyMSB8ICAgICBjb25zdCBsb2NrQnV0dG9uID0gcGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogL8OWc3N6ZXMgKHrDoXJvbMOhc3xmZWxvbGTDoXMpLyB9KTsKICAxMjIgfCAgICAgYXdhaXQgbG9ja0J1dHRvbi5jbGljaygpOwogIDEyMyB8ICAgICAvLyBhd2FpdCBsb2NrQnV0dG9uLmNsaWNrKCk7CiAgMTI0IHwgICB9KTsKICAxMjUgfCB9KTsKICAxMjYgfAogIDEyNyB8IHRlc3QuZGVzY3JpYmUoJ09zenTDoWx5b20gLSBUYW51bMOzaycsICgpID0+IHsKICAxMjggfCAgIHRlc3QuYmVmb3JlRWFjaChhc3luYyAoeyBwYWdlIH0pID0+IHsKICAxMjkgfCAgICAgYXdhaXQgcGFnZS5nb3RvKCcvbG9naW4nKTsKICAxMzAgfCAgICAgYXdhaXQgcGFnZS5maWxsKCdpbnB1dFtuYW1lPSJzaG9ydF9uYW1lIl0nLCAnQmVNbycpOwogIDEzMSB8ICAgICBhd2FpdCBwYWdlLmZpbGwoJ2lucHV0W25hbWU9InBhc3N3b3JkIl0nLCAnQmVNbzEyMycpOwogIDEzMiB8ICAgICBhd2FpdCBwYWdlLmNsaWNrKCdidXR0b25bdHlwZT0ic3VibWl0Il0nKTsKICAxMzMgfCAgICAgYXdhaXQgcGFnZS53YWl0Rm9yVVJMKCcvZGFzaGJvYXJkJyk7CiAgMTM0IHwKICAxMzUgfCAgICAgYXdhaXQgcGFnZS5nb3RvKCcvZGFzaGJvYXJkL2NsYXNzL3N0dWRlbnRzJyk7CiAgMTM2IHwgICAgIGF3YWl0IHBhZ2Uud2FpdEZvclNlbGVjdG9yKCd0YWJsZScpOwogIDEzNyB8ICAgfSk7CiAgMTM4IHwKICAxMzkgfCAgIHRlc3QoJ09sZGFsYmV0w7ZsdMOpcycsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDE0MCB8ICAgICBhd2FpdCBleHBlY3QocGFnZS5nZXRCeVBsYWNlaG9sZGVyKCdLZXJlc8OpcyBuw6l2IHN6ZXJpbnQuLi4nKSkudG9CZVZpc2libGUoKTsKICAxNDEgfCAgIH0pOwogIDE0MiB8ICAgCiAgMTQzIHwgICB0ZXN0KCdUYW51bMOzIGtlcmVzw6lzJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgMTQ0IHwgICAgIGF3YWl0IHBhZ2UuZ2V0QnlQbGFjZWhvbGRlcignS2VyZXPDqXMgbsOpdiBzemVyaW50Li4uJykuZmlsbCgnYmFsw6F6cyDDoXInKTsKICAxNDUgfCAgICAgYXdhaXQgZXhwZWN0KHBhZ2UuZ2V0QnlUZXh0KCdCYWzDoXpzIMOBcm9uIEJvdG9uZCcpKS50b0JlVmlzaWJsZSgpOwogIDE0NiB8ICAgfSk7CiAgMTQ3IHwKICAxNDggfCAgIHRlc3QoJ1RhbnVsw7MgbnlpdMOhcyBlbmdlZMOpbHllesOpcycsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDE0OSB8ICAgICBhd2FpdCBwYWdlLmdldEJ5UGxhY2Vob2xkZXIoJ0tlcmVzw6lzIG7DqXYgc3plcmludC4uLicpLmZpbGwoJ0JhbMOhenMgw4Fyb24gQm90b25kJyk7CiAgMTUwIHwKICAxNTEgfCAgICAgY29uc3Qgc3R1ZGVudFJvdyA9IGF3YWl0IHBhZ2UubG9jYXRvcigndHInLCB7IGhhc1RleHQ6ICdCYWzDoXpzIMOBcm9uIEJvdG9uZCcgfSk7CiAgMTUyIHwKICAxNTMgfCAgICAgYXdhaXQgZXhwZWN0KHN0dWRlbnRSb3cpLnRvQmVWaXNpYmxlKCk7CiAgMTU0IHwKICAxNTUgfCAgICAgY29uc3QgZWRpdEJ1dHRvbiA9IHN0dWRlbnRSb3cubG9jYXRvcignW2RhdGEtdGVzdGlkPSJ1bmxvY2stYnV0dG9uIl0nKTsKPiAxNTYgfCAgICAgYXdhaXQgZWRpdEJ1dHRvbi5jbGljaygpOwogICAgICB8ICAgICAgICAgICAgICAgICAgICAgIF4gRXJyb3I6IGxvY2F0b3IuY2xpY2s6IFRlc3QgdGltZW91dCBvZiAzMDAwMG1zIGV4Y2VlZGVkLgogIDE1NyB8ICAgfSk7CiAgMTU4IHwKICAxNTkgfCAgIHRlc3QoJ1JlbmRlesOpcycsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDE2MCB8ICAgICBhd2FpdCBwYWdlLmxvY2F0b3IoJ3RoJywgeyBoYXNUZXh0OiAnVGVsamVzIG7DqXYnIH0pLmNsaWNrKCk7CiAgMTYxIHwKICAxNjIgfCAgICAgYXdhaXQgcGFnZS5sb2NhdG9yKCd0aCcsIHsgaGFzVGV4dDogJ09zenTDoWx5IMOpcyBjc29wb3J0b2snIH0pLmNsaWNrKCk7CiAgMTYzIHwKICAxNjQgfCAgIH0pOwogIDE2NSB8CiAgMTY2IHwgICB0ZXN0KCdMYXBvesOhcycsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogIDE2NyB8ICAgICBpZiAoYXdhaXQgcGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogJ0vDtnZldGtlesWRJyB9KS5pc0VuYWJsZWQoKSkgewogIDE2OCB8ICAgICAgIGF3YWl0IHBhZ2UuZ2V0QnlSb2xlKCdidXR0b24nLCB7IG5hbWU6ICdLw7Z2ZXRrZXrFkScgfSkuY2xpY2soKTsKICAxNjkgfCAgICAgICBhd2FpdCBwYWdlLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAnRWzFkXrFkScgfSkuY2xpY2soKTsKICAxNzAgfCAgICAgfQogIDE3MSB8ICAgfSk7CiAgMTcyIHwKICAxNzMgfCB9KTsKYGBg"
+                          "body": "IyBJbnN0cnVjdGlvbnMKCi0gRm9sbG93aW5nIFBsYXl3cmlnaHQgdGVzdCBmYWlsZWQuCi0gRXhwbGFpbiB3aHksIGJlIGNvbmNpc2UsIHJlc3BlY3QgUGxheXdyaWdodCBiZXN0IHByYWN0aWNlcy4KLSBQcm92aWRlIGEgc25pcHBldCBvZiBjb2RlIHdpdGggdGhlIGZpeCwgaWYgcG9zc2libGUuCgojIFRlc3QgaW5mbwoKLSBOYW1lOiBUYW7DoXJpIMOTcmFyZW5kIEtvbXBvbmVucyA+PiBPbGRhbCBiZXTDtmx0w6lzZSDDqXMgYWxhcHZldMWRIGVsZW1layBtZWdqZWxlbsOtdMOpc2UKLSBMb2NhdGlvbjogQzpcVXNlcnNcU3phbGthaS1TemFib0FkYW1cRG9jdW1lbnRzXEdpdEh1Ylx2aXpzZ2FyZW1la1x0ZWxvY2tcdGVzdHNcdGltZXRhYmxlcy5zcGVjLnRzOjE2OjcKCiMgRXJyb3IgZGV0YWlscwoKYGBgCkVycm9yOiBwYWdlLndhaXRGb3JTZWxlY3RvcjogVGVzdCB0aW1lb3V0IG9mIDMwMDAwbXMgZXhjZWVkZWQuCkNhbGwgbG9nOgogIC0gd2FpdGluZyBmb3IgbG9jYXRvcignLmNhbGVuZGFyLWNvbnRhaW5lcicpIHRvIGJlIHZpc2libGUKCiAgICBhdCBDOlxVc2Vyc1xTemFsa2FpLVN6YWJvQWRhbVxEb2N1bWVudHNcR2l0SHViXHZpenNnYXJlbWVrXHRlbG9ja1x0ZXN0c1x0aW1ldGFibGVzLnNwZWMudHM6MTM6MTYKYGBgCgojIFBhZ2Ugc25hcHNob3QKCmBgYHlhbWwKLSBsaW5rICJ0ZWxvY2siCi0gbGluayAiVmlzc3phIjoKICAtIGltZwogIC0gdGV4dDogVmlzc3phCi0gdGV4dDogQmVqZWxlbnRrZXrDqXMgw5xkdsO2esO2bGrDvGshIEvDqXJqw7xrLCBhZGphIG1lZyBiZWplbGVudGtlesOpc2kgYWRhdGFpdCBhIGZvbHl0YXTDoXNob3ouIEZlbGhhc3puw6Fsw7Nuw6l2Ci0gdGV4dGJveAotIHRleHQ6IEplbHN6w7MKLSB0ZXh0Ym94Ci0gYnV0dG9uICJCZWplbGVudGtlesOpcyIKLSB0ZXh0OiBBeiBhZGF0YWl0IGJpenRvbnPDoWdiYW4gdGFydGp1ay4gU29oYSBuZSBvc3N6YSBtZWcgamVsc3phdsOhdCBtw6Fzb2trYWwhCi0gYWxlcnQKYGBgCgojIFRlc3Qgc291cmNlCgpgYGB0cwogICAxIHwgaW1wb3J0IHsgdGVzdCwgZXhwZWN0IH0gZnJvbSAnQHBsYXl3cmlnaHQvdGVzdCc7CiAgIDIgfAogICAzIHwgdGVzdC5kZXNjcmliZSgnVGFuw6FyaSDDk3JhcmVuZCBLb21wb25lbnMnLCAoKSA9PiB7CiAgIDQgfCAgIHRlc3QuYmVmb3JlRWFjaChhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgNSB8ICAgICAvLyBCZWplbGVudGtlesOpcyBhIHJlbmRzemVyYmUgKGhhIHN6w7xrc8OpZ2VzKQogICA2IHwgICAgIGF3YWl0IHBhZ2UuZ290bygnL2xvZ2luJyk7CiAgIDcgfCAgICAgYXdhaXQgcGFnZS5maWxsKCdpbnB1dFtuYW1lPSJzaG9ydF9uYW1lIl0nLCAnS2lHSScpOwogICA4IHwgICAgIGF3YWl0IHBhZ2UuZmlsbCgnaW5wdXRbbmFtZT0icGFzc3dvcmQiXScsICdLaUdJMTIzJyk7CiAgIDkgfCAgICAgYXdhaXQgcGFnZS5jbGljaygnYnV0dG9uW3R5cGU9InN1Ym1pdCJdJyk7CiAgIDEwIHwgICAgIAogICAxMSB8ICAgICAvLyBOYXZpZ8OhbMOhcyBheiDDs3JhcmVuZCBvbGRhbHJhCiAgIDEyIHwgICAgIGF3YWl0IHBhZ2UuZ290bygnL2Rhc2hib2FyZC9teS10aW1ldGFibGUnKTsKPiAgMTMgfCAgICAgYXdhaXQgcGFnZS53YWl0Rm9yU2VsZWN0b3IoJy5jYWxlbmRhci1jb250YWluZXInKTsKICAgICAgfCAgICAgICAgICAgICAgICBeIEVycm9yOiBwYWdlLndhaXRGb3JTZWxlY3RvcjogVGVzdCB0aW1lb3V0IG9mIDMwMDAwbXMgZXhjZWVkZWQuCiAgIDE0IHwgICB9KTsKICAgMTUgfAogICAxNiB8ICAgdGVzdCgnT2xkYWwgYmV0w7ZsdMOpc2Ugw6lzIGFsYXB2ZXTFkSBlbGVtZWsgbWVnamVsZW7DrXTDqXNlJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDE3IHwgICAgIC8vIEVsbGVuxZFyaXp6w7xrLCBob2d5IGEgZsWRIGVsZW1layBtZWdqZWxlbm5lay1lCiAgIDE4IHwgICAgIGF3YWl0IGV4cGVjdChwYWdlLmxvY2F0b3IoJy5jYWxlbmRhci1oZWFkZXIgaDInKSkudG9CZVZpc2libGUoKTsKICAgMTkgfCAgICAgYXdhaXQgZXhwZWN0KHBhZ2UuZ2V0QnlUZXh0KCdNYWkgbmFwJykpLnRvQmVWaXNpYmxlKCk7CiAgIDIwIHwgICAgIGF3YWl0IGV4cGVjdChwYWdlLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAvY2hldnJvbi1sZWZ0L2kgfSkpLnRvQmVWaXNpYmxlKCk7CiAgIDIxIHwgICAgIGF3YWl0IGV4cGVjdChwYWdlLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAvY2hldnJvbi1yaWdodC9pIH0pKS50b0JlVmlzaWJsZSgpOwogICAyMiB8ICAgfSk7CiAgIDIzIHwKICAgMjQgfCAgIHRlc3QoJ0hldGkgbsOpemV0IG1lZ2plbGVuw610w6lzZScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICAyNSB8ICAgICAvLyBFbGxlbsWRcml6esO8aywgaG9neSBhIGjDqXQgbmFwamFpIG1lZ2plbGVubmVrLWUKICAgMjYgfCAgICAgY29uc3QgZGF5cyA9IFsnSMOpdGbFkScsICdLZWRkJywgJ1N6ZXJkYScsICdDc8O8dMO2cnTDtmsnLCAnUMOpbnRlayddOwogICAyNyB8ICAgICBmb3IgKGNvbnN0IGRheSBvZiBkYXlzKSB7CiAgIDI4IHwgICAgICAgYXdhaXQgZXhwZWN0KHBhZ2UuZ2V0QnlUZXh0KG5ldyBSZWdFeHAoZGF5LCAnaScpKSkudG9CZVZpc2libGUoKTsKICAgMjkgfCAgICAgfQogICAzMCB8ICAgfSk7CiAgIDMxIHwKICAgMzIgfCAgIHRlc3QoJ8OTcsOhayBtZWdqZWxlbsOtdMOpc2UnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgMzMgfCAgICAgLy8gVsOhcmp1ayBtZWcsIGhvZ3kgYXogw7Nyw6FrIGJldMO2bHTFkWRqZW5lawogICAzNCB8ICAgICBhd2FpdCBwYWdlLndhaXRGb3JTZWxlY3RvcignLmxlc3Nvbi1jYXJkJyk7CiAgIDM1IHwgICAgIAogICAzNiB8ICAgICAvLyBFbGxlbsWRcml6esO8aywgaG9neSB2YW4tZSBsZWdhbMOhYmIgZWd5IMOzcmEgbWVnamVsZW7DrXR2ZQogICAzNyB8ICAgICBjb25zdCBsZXNzb25zID0gYXdhaXQgcGFnZS5sb2NhdG9yKCcubGVzc29uLWNhcmQnKS5jb3VudCgpOwogICAzOCB8ICAgICBleHBlY3QobGVzc29ucykudG9CZUdyZWF0ZXJUaGFuKDApOwogICAzOSB8ICAgfSk7CiAgIDQwIHwKICAgNDEgfCAgIHRlc3QoJ0plbGVubGVnaSDDs3JhIGtpamVsw7Zsw6lzZScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICA0MiB8ICAgICAvLyBLZXJlc3PDvGsgbWVnIGEgamVsZW5sZWdpIMOzcsOhdCAoaGEgdmFuKQogICA0MyB8ICAgICBjb25zdCBjdXJyZW50TGVzc29uID0gcGFnZS5sb2NhdG9yKCcuY3VycmVudC1sZXNzb24nKS5maXJzdCgpOwogICA0NCB8ICAgICAKICAgNDUgfCAgICAgaWYgKGF3YWl0IGN1cnJlbnRMZXNzb24uY291bnQoKSA+IDApIHsKICAgNDYgfCAgICAgICBhd2FpdCBleHBlY3QoY3VycmVudExlc3NvbikudG9IYXZlQ2xhc3MoL2N1cnJlbnQtbGVzc29uLyk7CiAgIDQ3IHwgICAgIH0gZWxzZSB7CiAgIDQ4IHwgICAgICAgY29uc29sZS5sb2coJ05pbmNzIGFrdHXDoWxpcyDDs3JhIGplbGVubGVnJyk7CiAgIDQ5IHwgICAgIH0KICAgNTAgfCAgIH0pOwogICA1MSB8CiAgIDUyIHwgICB0ZXN0KCdEacOha29rIGZlbG9sZMOhc2EgZGlhbMOzZ3VzIG1lZ255aXTDoXNhJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDUzIHwgICAgIC8vIEtlcmVzc8O8ayBtZWcgYSBqZWxlbmxlZ2kgw7Nyw6F0IChoYSB2YW4pCiAgIDU0IHwgICAgIGNvbnN0IGN1cnJlbnRMZXNzb24gPSBwYWdlLmxvY2F0b3IoJy5jdXJyZW50LWxlc3NvbicpLmZpcnN0KCk7CiAgIDU1IHwgICAgIAogICA1NiB8ICAgICBpZiAoYXdhaXQgY3VycmVudExlc3Nvbi5jb3VudCgpID4gMCkgewogICA1NyB8ICAgICAgIC8vIEthdHRpbnRzdW5rIGEgamVsZW5sZWdpIMOzcsOhcmEKICAgNTggfCAgICAgICBhd2FpdCBjdXJyZW50TGVzc29uLmNsaWNrKCk7CiAgIDU5IHwgICAgICAgCiAgIDYwIHwgICAgICAgLy8gRWxsZW7FkXJpenrDvGssIGhvZ3kgbWVnbnnDrWx0LWUgYSBkaWFsw7NndXMKICAgNjEgfCAgICAgICBhd2FpdCBleHBlY3QocGFnZS5sb2NhdG9yKCdbcm9sZT0iZGlhbG9nIl0nKSkudG9CZVZpc2libGUoKTsKICAgNjIgfCAgICAgICBhd2FpdCBleHBlY3QocGFnZS5nZXRCeVRleHQoJ8OWc3N6ZXMgZmVsb2xkw6FzJykpLnRvQmVWaXNpYmxlKCk7CiAgIDYzIHwgICAgICAgCiAgIDY0IHwgICAgICAgLy8gRWxsZW7FkXJpenrDvGssIGhvZ3kgbWVnamVsZW5uZWstZSBhIGRpw6Frb2sKICAgNjUgfCAgICAgICBhd2FpdCBleHBlY3QocGFnZS5sb2NhdG9yKCd0YWJsZSB0Ym9keSB0cicpLmZpcnN0KCkpLnRvQmVWaXNpYmxlKCk7CiAgIDY2IHwgICAgIH0gZWxzZSB7CiAgIDY3IHwgICAgICAgY29uc29sZS5sb2coJ05pbmNzIGFrdHXDoWxpcyDDs3JhIGplbGVubGVnLCBhIHRlc3p0IGtpaGFneXZhJyk7CiAgIDY4IHwgICAgIH0KICAgNjkgfCAgIH0pOwogICA3MCB8CiAgIDcxIHwgICB0ZXN0KCdEacOhayBmZWxvbGTDoXNhJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDcyIHwgICAgIC8vIEtlcmVzc8O8ayBtZWcgYSBqZWxlbmxlZ2kgw7Nyw6F0IChoYSB2YW4pCiAgIDczIHwgICAgIGNvbnN0IGN1cnJlbnRMZXNzb24gPSBwYWdlLmxvY2F0b3IoJy5jdXJyZW50LWxlc3NvbicpLmZpcnN0KCk7CiAgIDc0IHwgICAgIAogICA3NSB8ICAgICBpZiAoYXdhaXQgY3VycmVudExlc3Nvbi5jb3VudCgpID4gMCkgewogICA3NiB8ICAgICAgIC8vIEthdHRpbnRzdW5rIGEgamVsZW5sZWdpIMOzcsOhcmEKICAgNzcgfCAgICAgICBhd2FpdCBjdXJyZW50TGVzc29uLmNsaWNrKCk7CiAgIDc4IHwgICAgICAgCiAgIDc5IHwgICAgICAgLy8gVsOhcmp1ayBtZWcgYSBkaWFsw7NndXMgbWVnbnlpdMOhc8OhdAogICA4MCB8ICAgICAgIGF3YWl0IHBhZ2Uud2FpdEZvclNlbGVjdG9yKCdbcm9sZT0iZGlhbG9nIl0nKTsKICAgODEgfCAgICAgICAKICAgODIgfCAgICAgICAvLyBBeiBlbHPFkSBkacOhayBmZWxvbGTDoXNhIGdvbWJqw6FuYWsgbWVna2VyZXPDqXNlCiAgIDgzIHwgICAgICAgY29uc3QgdW5sb2NrQnV0dG9uID0gcGFnZS5sb2NhdG9yKCd0YWJsZSB0Ym9keSB0cicpLmZpcnN0KCkuZ2V0QnlSb2xlKCdidXR0b24nLCB7IG5hbWU6IC9sb2NrLW9wZW4vaSB9KTsKICAgODQgfCAgICAgICAKICAgODUgfCAgICAgICBpZiAoYXdhaXQgdW5sb2NrQnV0dG9uLmNvdW50KCkgPiAwICYmICEoYXdhaXQgdW5sb2NrQnV0dG9uLmlzRGlzYWJsZWQoKSkpIHsKICAgODYgfCAgICAgICAgIGF3YWl0IHVubG9ja0J1dHRvbi5jbGljaygpOwogICA4NyB8ICAgICAgICAgCiAgIDg4IHwgICAgICAgICAvLyBJdHQgZWxsZW7FkXJpemhldG7DqW5rLCBob2d5IHNpa2VyZXMgdm9sdC1lIGEgbcWxdmVsZXQsCiAgIDg5IHwgICAgICAgICAvLyBkZSBleiBmw7xnZyBhIGJhY2tlbmQgdsOhbGFzesOhdMOzbCDDqXMgYSBVSSBmcmlzc8OtdMOpc8OpdMWRbAogICA5MCB8ICAgICAgIH0gZWxzZSB7CiAgIDkxIHwgICAgICAgICBjb25zb2xlLmxvZygnQXogZWxzxZEgZGnDoWsgbcOhciBmZWwgdmFuIG9sZHZhIHZhZ3kgbmVtIGxlaGV0IGZlbG9sZGFuaScpOwogICA5MiB8ICAgICAgIH0KICAgOTMgfCAgICAgfSBlbHNlIHsKICAgOTQgfCAgICAgICBjb25zb2xlLmxvZygnTmluY3MgYWt0dcOhbGlzIMOzcmEgamVsZW5sZWcsIGEgdGVzenQga2loYWd5dmEnKTsKICAgOTUgfCAgICAgfQogICA5NiB8ICAgfSk7CiAgIDk3IHwKICAgOTggfCAgIHRlc3QoJ0Nzb3BvcnRvcyBmZWxvbGTDoXMnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgOTkgfCAgICAgLy8gS2VyZXNzw7xrIG1lZyBhIGplbGVubGVnaSDDs3LDoXQgKGhhIHZhbikKICAxMDAgfCAgICAgY29uc3QgY3VycmVudExlc3NvbiA9IHBhZ2UubG9jYXRvcignLmN1cnJlbnQtbGVzc29uJykuZmlyc3QoKTsKICAxMDEgfCAgICAgCiAgMTAyIHwgICAgIGlmIChhd2FpdCBjdXJyZW50TGVzc29uLmNvdW50KCkgPiAwKSB7CiAgMTAzIHwgICAgICAgLy8gS2F0dGludHN1bmsgYSBqZWxlbmxlZ2kgw7Nyw6FyYQogIDEwNCB8ICAgICAgIGF3YWl0IGN1cnJlbnRMZXNzb24uY2xpY2soKTsKICAxMDUgfCAgICAgICAKICAxMDYgfCAgICAgICAvLyBWw6FyanVrIG1lZyBhIGRpYWzDs2d1cyBtZWdueWl0w6Fzw6F0CiAgMTA3IHwgICAgICAgYXdhaXQgcGFnZS53YWl0Rm9yU2VsZWN0b3IoJ1tyb2xlPSJkaWFsb2ciXScpOwogIDEwOCB8ICAgICAgIAogIDEwOSB8ICAgICAgIC8vIEthdHRpbnRzdW5rIGEgIsOWc3N6ZXMgZmVsb2xkw6FzIiBnb21icmEKICAxMTAgfCAgICAgICBjb25zdCBncm91cFVubG9ja0J1dHRvbiA9IHBhZ2UuZ2V0QnlSb2xlKCdidXR0b24nLCB7IG5hbWU6IC/DlnNzemVzIGZlbG9sZMOhcy9pIH0pOwogIDExMSB8ICAgICAgIGF3YWl0IGdyb3VwVW5sb2NrQnV0dG9uLmNsaWNrKCk7CiAgMTEyIHwgICAgICAgCiAgMTEzIHwgICAgICAgLy8gSXR0IGVsbGVuxZFyaXpoZXRuw6luaywgaG9neSBzaWtlcmVzIHZvbHQtZSBhIG3FsXZlbGV0CmBgYA=="
                         }
-                      ]
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                        "column": 8,
+                        "line": 4
+                      }
                     }
                   ],
                   "status": "unexpected"
                 }
               ],
-              "id": "070ffa9c3689b3a10912-acbba5b206471787bc63",
-              "file": "students.spec.ts",
-              "line": 148,
+              "id": "52676e6f4b59e1b621f0-3f513a9a1f7832c72095",
+              "file": "timetables.spec.ts",
+              "line": 16,
               "column": 7
             },
             {
-              "title": "Rendezés",
-              "ok": true,
+              "title": "Heti nézet megjelenítése",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 30025,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:4:8",
+                        "location": {
+                          "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                          "column": 8,
+                          "line": 4
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 2 |\u001b[39m\n \u001b[90m 3 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(\u001b[32m'Tanári Órarend Komponens'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 4 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m   |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 5 |\u001b[39m     \u001b[90m// Bejelentkezés a rendszerbe (ha szükséges)\u001b[39m\n \u001b[90m 6 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/login'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 7 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'input[name=\"short_name\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'KiGI'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                            "column": 8,
+                            "line": 4
+                          },
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n\n\u001b[0m \u001b[90m 2 |\u001b[39m\n \u001b[90m 3 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(\u001b[32m'Tanári Órarend Komponens'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 4 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m   |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 5 |\u001b[39m     \u001b[90m// Bejelentkezés a rendszerbe (ha szükséges)\u001b[39m\n \u001b[90m 6 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/login'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 7 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'input[name=\"short_name\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'KiGI'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:4:8\u001b[22m"
+                        },
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                            "column": 16,
+                            "line": 13
+                          },
+                          "message": "Error: page.waitForSelector: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.calendar-container') to be visible\u001b[22m\n\n\n\u001b[0m \u001b[90m 11 |\u001b[39m     \u001b[90m// Navigálás az órarend oldalra\u001b[39m\n \u001b[90m 12 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/dashboard/my-timetable'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 13 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForSelector(\u001b[32m'.calendar-container'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 14 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 15 |\u001b[39m\n \u001b[90m 16 |\u001b[39m   test(\u001b[32m'Oldal betöltése és alapvető elemek megjelenítése'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:13:16\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-04-04T08:46:42.871Z",
+                      "attachments": [
+                        {
+                          "name": "_prompt-1",
+                          "contentType": "text/markdown",
+                          "body": "IyBJbnN0cnVjdGlvbnMKCi0gRm9sbG93aW5nIFBsYXl3cmlnaHQgdGVzdCBmYWlsZWQuCi0gRXhwbGFpbiB3aHksIGJlIGNvbmNpc2UsIHJlc3BlY3QgUGxheXdyaWdodCBiZXN0IHByYWN0aWNlcy4KLSBQcm92aWRlIGEgc25pcHBldCBvZiBjb2RlIHdpdGggdGhlIGZpeCwgaWYgcG9zc2libGUuCgojIFRlc3QgaW5mbwoKLSBOYW1lOiBUYW7DoXJpIMOTcmFyZW5kIEtvbXBvbmVucyA+PiBIZXRpIG7DqXpldCBtZWdqZWxlbsOtdMOpc2UKLSBMb2NhdGlvbjogQzpcVXNlcnNcU3phbGthaS1TemFib0FkYW1cRG9jdW1lbnRzXEdpdEh1Ylx2aXpzZ2FyZW1la1x0ZWxvY2tcdGVzdHNcdGltZXRhYmxlcy5zcGVjLnRzOjI0OjcKCiMgRXJyb3IgZGV0YWlscwoKYGBgCkVycm9yOiBwYWdlLndhaXRGb3JTZWxlY3RvcjogVGVzdCB0aW1lb3V0IG9mIDMwMDAwbXMgZXhjZWVkZWQuCkNhbGwgbG9nOgogIC0gd2FpdGluZyBmb3IgbG9jYXRvcignLmNhbGVuZGFyLWNvbnRhaW5lcicpIHRvIGJlIHZpc2libGUKCiAgICBhdCBDOlxVc2Vyc1xTemFsa2FpLVN6YWJvQWRhbVxEb2N1bWVudHNcR2l0SHViXHZpenNnYXJlbWVrXHRlbG9ja1x0ZXN0c1x0aW1ldGFibGVzLnNwZWMudHM6MTM6MTYKYGBgCgojIFBhZ2Ugc25hcHNob3QKCmBgYHlhbWwKLSBsaW5rICJ0ZWxvY2siCi0gbGluayAiVmlzc3phIjoKICAtIGltZwogIC0gdGV4dDogVmlzc3phCi0gdGV4dDogQmVqZWxlbnRrZXrDqXMgw5xkdsO2esO2bGrDvGshIEvDqXJqw7xrLCBhZGphIG1lZyBiZWplbGVudGtlesOpc2kgYWRhdGFpdCBhIGZvbHl0YXTDoXNob3ouIEZlbGhhc3puw6Fsw7Nuw6l2Ci0gdGV4dGJveAotIHRleHQ6IEplbHN6w7MKLSB0ZXh0Ym94Ci0gYnV0dG9uICJCZWplbGVudGtlesOpcyIKLSB0ZXh0OiBBeiBhZGF0YWl0IGJpenRvbnPDoWdiYW4gdGFydGp1ay4gU29oYSBuZSBvc3N6YSBtZWcgamVsc3phdsOhdCBtw6Fzb2trYWwhCi0gYWxlcnQKYGBgCgojIFRlc3Qgc291cmNlCgpgYGB0cwogICAxIHwgaW1wb3J0IHsgdGVzdCwgZXhwZWN0IH0gZnJvbSAnQHBsYXl3cmlnaHQvdGVzdCc7CiAgIDIgfAogICAzIHwgdGVzdC5kZXNjcmliZSgnVGFuw6FyaSDDk3JhcmVuZCBLb21wb25lbnMnLCAoKSA9PiB7CiAgIDQgfCAgIHRlc3QuYmVmb3JlRWFjaChhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgNSB8ICAgICAvLyBCZWplbGVudGtlesOpcyBhIHJlbmRzemVyYmUgKGhhIHN6w7xrc8OpZ2VzKQogICA2IHwgICAgIGF3YWl0IHBhZ2UuZ290bygnL2xvZ2luJyk7CiAgIDcgfCAgICAgYXdhaXQgcGFnZS5maWxsKCdpbnB1dFtuYW1lPSJzaG9ydF9uYW1lIl0nLCAnS2lHSScpOwogICA4IHwgICAgIGF3YWl0IHBhZ2UuZmlsbCgnaW5wdXRbbmFtZT0icGFzc3dvcmQiXScsICdLaUdJMTIzJyk7CiAgIDkgfCAgICAgYXdhaXQgcGFnZS5jbGljaygnYnV0dG9uW3R5cGU9InN1Ym1pdCJdJyk7CiAgIDEwIHwgICAgIAogICAxMSB8ICAgICAvLyBOYXZpZ8OhbMOhcyBheiDDs3JhcmVuZCBvbGRhbHJhCiAgIDEyIHwgICAgIGF3YWl0IHBhZ2UuZ290bygnL2Rhc2hib2FyZC9teS10aW1ldGFibGUnKTsKPiAgMTMgfCAgICAgYXdhaXQgcGFnZS53YWl0Rm9yU2VsZWN0b3IoJy5jYWxlbmRhci1jb250YWluZXInKTsKICAgICAgfCAgICAgICAgICAgICAgICBeIEVycm9yOiBwYWdlLndhaXRGb3JTZWxlY3RvcjogVGVzdCB0aW1lb3V0IG9mIDMwMDAwbXMgZXhjZWVkZWQuCiAgIDE0IHwgICB9KTsKICAgMTUgfAogICAxNiB8ICAgdGVzdCgnT2xkYWwgYmV0w7ZsdMOpc2Ugw6lzIGFsYXB2ZXTFkSBlbGVtZWsgbWVnamVsZW7DrXTDqXNlJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDE3IHwgICAgIC8vIEVsbGVuxZFyaXp6w7xrLCBob2d5IGEgZsWRIGVsZW1layBtZWdqZWxlbm5lay1lCiAgIDE4IHwgICAgIGF3YWl0IGV4cGVjdChwYWdlLmxvY2F0b3IoJy5jYWxlbmRhci1oZWFkZXIgaDInKSkudG9CZVZpc2libGUoKTsKICAgMTkgfCAgICAgYXdhaXQgZXhwZWN0KHBhZ2UuZ2V0QnlUZXh0KCdNYWkgbmFwJykpLnRvQmVWaXNpYmxlKCk7CiAgIDIwIHwgICAgIGF3YWl0IGV4cGVjdChwYWdlLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAvY2hldnJvbi1sZWZ0L2kgfSkpLnRvQmVWaXNpYmxlKCk7CiAgIDIxIHwgICAgIGF3YWl0IGV4cGVjdChwYWdlLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAvY2hldnJvbi1yaWdodC9pIH0pKS50b0JlVmlzaWJsZSgpOwogICAyMiB8ICAgfSk7CiAgIDIzIHwKICAgMjQgfCAgIHRlc3QoJ0hldGkgbsOpemV0IG1lZ2plbGVuw610w6lzZScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICAyNSB8ICAgICAvLyBFbGxlbsWRcml6esO8aywgaG9neSBhIGjDqXQgbmFwamFpIG1lZ2plbGVubmVrLWUKICAgMjYgfCAgICAgY29uc3QgZGF5cyA9IFsnSMOpdGbFkScsICdLZWRkJywgJ1N6ZXJkYScsICdDc8O8dMO2cnTDtmsnLCAnUMOpbnRlayddOwogICAyNyB8ICAgICBmb3IgKGNvbnN0IGRheSBvZiBkYXlzKSB7CiAgIDI4IHwgICAgICAgYXdhaXQgZXhwZWN0KHBhZ2UuZ2V0QnlUZXh0KG5ldyBSZWdFeHAoZGF5LCAnaScpKSkudG9CZVZpc2libGUoKTsKICAgMjkgfCAgICAgfQogICAzMCB8ICAgfSk7CiAgIDMxIHwKICAgMzIgfCAgIHRlc3QoJ8OTcsOhayBtZWdqZWxlbsOtdMOpc2UnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgMzMgfCAgICAgLy8gVsOhcmp1ayBtZWcsIGhvZ3kgYXogw7Nyw6FrIGJldMO2bHTFkWRqZW5lawogICAzNCB8ICAgICBhd2FpdCBwYWdlLndhaXRGb3JTZWxlY3RvcignLmxlc3Nvbi1jYXJkJyk7CiAgIDM1IHwgICAgIAogICAzNiB8ICAgICAvLyBFbGxlbsWRcml6esO8aywgaG9neSB2YW4tZSBsZWdhbMOhYmIgZWd5IMOzcmEgbWVnamVsZW7DrXR2ZQogICAzNyB8ICAgICBjb25zdCBsZXNzb25zID0gYXdhaXQgcGFnZS5sb2NhdG9yKCcubGVzc29uLWNhcmQnKS5jb3VudCgpOwogICAzOCB8ICAgICBleHBlY3QobGVzc29ucykudG9CZUdyZWF0ZXJUaGFuKDApOwogICAzOSB8ICAgfSk7CiAgIDQwIHwKICAgNDEgfCAgIHRlc3QoJ0plbGVubGVnaSDDs3JhIGtpamVsw7Zsw6lzZScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICA0MiB8ICAgICAvLyBLZXJlc3PDvGsgbWVnIGEgamVsZW5sZWdpIMOzcsOhdCAoaGEgdmFuKQogICA0MyB8ICAgICBjb25zdCBjdXJyZW50TGVzc29uID0gcGFnZS5sb2NhdG9yKCcuY3VycmVudC1sZXNzb24nKS5maXJzdCgpOwogICA0NCB8ICAgICAKICAgNDUgfCAgICAgaWYgKGF3YWl0IGN1cnJlbnRMZXNzb24uY291bnQoKSA+IDApIHsKICAgNDYgfCAgICAgICBhd2FpdCBleHBlY3QoY3VycmVudExlc3NvbikudG9IYXZlQ2xhc3MoL2N1cnJlbnQtbGVzc29uLyk7CiAgIDQ3IHwgICAgIH0gZWxzZSB7CiAgIDQ4IHwgICAgICAgY29uc29sZS5sb2coJ05pbmNzIGFrdHXDoWxpcyDDs3JhIGplbGVubGVnJyk7CiAgIDQ5IHwgICAgIH0KICAgNTAgfCAgIH0pOwogICA1MSB8CiAgIDUyIHwgICB0ZXN0KCdEacOha29rIGZlbG9sZMOhc2EgZGlhbMOzZ3VzIG1lZ255aXTDoXNhJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDUzIHwgICAgIC8vIEtlcmVzc8O8ayBtZWcgYSBqZWxlbmxlZ2kgw7Nyw6F0IChoYSB2YW4pCiAgIDU0IHwgICAgIGNvbnN0IGN1cnJlbnRMZXNzb24gPSBwYWdlLmxvY2F0b3IoJy5jdXJyZW50LWxlc3NvbicpLmZpcnN0KCk7CiAgIDU1IHwgICAgIAogICA1NiB8ICAgICBpZiAoYXdhaXQgY3VycmVudExlc3Nvbi5jb3VudCgpID4gMCkgewogICA1NyB8ICAgICAgIC8vIEthdHRpbnRzdW5rIGEgamVsZW5sZWdpIMOzcsOhcmEKICAgNTggfCAgICAgICBhd2FpdCBjdXJyZW50TGVzc29uLmNsaWNrKCk7CiAgIDU5IHwgICAgICAgCiAgIDYwIHwgICAgICAgLy8gRWxsZW7FkXJpenrDvGssIGhvZ3kgbWVnbnnDrWx0LWUgYSBkaWFsw7NndXMKICAgNjEgfCAgICAgICBhd2FpdCBleHBlY3QocGFnZS5sb2NhdG9yKCdbcm9sZT0iZGlhbG9nIl0nKSkudG9CZVZpc2libGUoKTsKICAgNjIgfCAgICAgICBhd2FpdCBleHBlY3QocGFnZS5nZXRCeVRleHQoJ8OWc3N6ZXMgZmVsb2xkw6FzJykpLnRvQmVWaXNpYmxlKCk7CiAgIDYzIHwgICAgICAgCiAgIDY0IHwgICAgICAgLy8gRWxsZW7FkXJpenrDvGssIGhvZ3kgbWVnamVsZW5uZWstZSBhIGRpw6Frb2sKICAgNjUgfCAgICAgICBhd2FpdCBleHBlY3QocGFnZS5sb2NhdG9yKCd0YWJsZSB0Ym9keSB0cicpLmZpcnN0KCkpLnRvQmVWaXNpYmxlKCk7CiAgIDY2IHwgICAgIH0gZWxzZSB7CiAgIDY3IHwgICAgICAgY29uc29sZS5sb2coJ05pbmNzIGFrdHXDoWxpcyDDs3JhIGplbGVubGVnLCBhIHRlc3p0IGtpaGFneXZhJyk7CiAgIDY4IHwgICAgIH0KICAgNjkgfCAgIH0pOwogICA3MCB8CiAgIDcxIHwgICB0ZXN0KCdEacOhayBmZWxvbGTDoXNhJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDcyIHwgICAgIC8vIEtlcmVzc8O8ayBtZWcgYSBqZWxlbmxlZ2kgw7Nyw6F0IChoYSB2YW4pCiAgIDczIHwgICAgIGNvbnN0IGN1cnJlbnRMZXNzb24gPSBwYWdlLmxvY2F0b3IoJy5jdXJyZW50LWxlc3NvbicpLmZpcnN0KCk7CiAgIDc0IHwgICAgIAogICA3NSB8ICAgICBpZiAoYXdhaXQgY3VycmVudExlc3Nvbi5jb3VudCgpID4gMCkgewogICA3NiB8ICAgICAgIC8vIEthdHRpbnRzdW5rIGEgamVsZW5sZWdpIMOzcsOhcmEKICAgNzcgfCAgICAgICBhd2FpdCBjdXJyZW50TGVzc29uLmNsaWNrKCk7CiAgIDc4IHwgICAgICAgCiAgIDc5IHwgICAgICAgLy8gVsOhcmp1ayBtZWcgYSBkaWFsw7NndXMgbWVnbnlpdMOhc8OhdAogICA4MCB8ICAgICAgIGF3YWl0IHBhZ2Uud2FpdEZvclNlbGVjdG9yKCdbcm9sZT0iZGlhbG9nIl0nKTsKICAgODEgfCAgICAgICAKICAgODIgfCAgICAgICAvLyBBeiBlbHPFkSBkacOhayBmZWxvbGTDoXNhIGdvbWJqw6FuYWsgbWVna2VyZXPDqXNlCiAgIDgzIHwgICAgICAgY29uc3QgdW5sb2NrQnV0dG9uID0gcGFnZS5sb2NhdG9yKCd0YWJsZSB0Ym9keSB0cicpLmZpcnN0KCkuZ2V0QnlSb2xlKCdidXR0b24nLCB7IG5hbWU6IC9sb2NrLW9wZW4vaSB9KTsKICAgODQgfCAgICAgICAKICAgODUgfCAgICAgICBpZiAoYXdhaXQgdW5sb2NrQnV0dG9uLmNvdW50KCkgPiAwICYmICEoYXdhaXQgdW5sb2NrQnV0dG9uLmlzRGlzYWJsZWQoKSkpIHsKICAgODYgfCAgICAgICAgIGF3YWl0IHVubG9ja0J1dHRvbi5jbGljaygpOwogICA4NyB8ICAgICAgICAgCiAgIDg4IHwgICAgICAgICAvLyBJdHQgZWxsZW7FkXJpemhldG7DqW5rLCBob2d5IHNpa2VyZXMgdm9sdC1lIGEgbcWxdmVsZXQsCiAgIDg5IHwgICAgICAgICAvLyBkZSBleiBmw7xnZyBhIGJhY2tlbmQgdsOhbGFzesOhdMOzbCDDqXMgYSBVSSBmcmlzc8OtdMOpc8OpdMWRbAogICA5MCB8ICAgICAgIH0gZWxzZSB7CiAgIDkxIHwgICAgICAgICBjb25zb2xlLmxvZygnQXogZWxzxZEgZGnDoWsgbcOhciBmZWwgdmFuIG9sZHZhIHZhZ3kgbmVtIGxlaGV0IGZlbG9sZGFuaScpOwogICA5MiB8ICAgICAgIH0KICAgOTMgfCAgICAgfSBlbHNlIHsKICAgOTQgfCAgICAgICBjb25zb2xlLmxvZygnTmluY3MgYWt0dcOhbGlzIMOzcmEgamVsZW5sZWcsIGEgdGVzenQga2loYWd5dmEnKTsKICAgOTUgfCAgICAgfQogICA5NiB8ICAgfSk7CiAgIDk3IHwKICAgOTggfCAgIHRlc3QoJ0Nzb3BvcnRvcyBmZWxvbGTDoXMnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgOTkgfCAgICAgLy8gS2VyZXNzw7xrIG1lZyBhIGplbGVubGVnaSDDs3LDoXQgKGhhIHZhbikKICAxMDAgfCAgICAgY29uc3QgY3VycmVudExlc3NvbiA9IHBhZ2UubG9jYXRvcignLmN1cnJlbnQtbGVzc29uJykuZmlyc3QoKTsKICAxMDEgfCAgICAgCiAgMTAyIHwgICAgIGlmIChhd2FpdCBjdXJyZW50TGVzc29uLmNvdW50KCkgPiAwKSB7CiAgMTAzIHwgICAgICAgLy8gS2F0dGludHN1bmsgYSBqZWxlbmxlZ2kgw7Nyw6FyYQogIDEwNCB8ICAgICAgIGF3YWl0IGN1cnJlbnRMZXNzb24uY2xpY2soKTsKICAxMDUgfCAgICAgICAKICAxMDYgfCAgICAgICAvLyBWw6FyanVrIG1lZyBhIGRpYWzDs2d1cyBtZWdueWl0w6Fzw6F0CiAgMTA3IHwgICAgICAgYXdhaXQgcGFnZS53YWl0Rm9yU2VsZWN0b3IoJ1tyb2xlPSJkaWFsb2ciXScpOwogIDEwOCB8ICAgICAgIAogIDEwOSB8ICAgICAgIC8vIEthdHRpbnRzdW5rIGEgIsOWc3N6ZXMgZmVsb2xkw6FzIiBnb21icmEKICAxMTAgfCAgICAgICBjb25zdCBncm91cFVubG9ja0J1dHRvbiA9IHBhZ2UuZ2V0QnlSb2xlKCdidXR0b24nLCB7IG5hbWU6IC/DlnNzemVzIGZlbG9sZMOhcy9pIH0pOwogIDExMSB8ICAgICAgIGF3YWl0IGdyb3VwVW5sb2NrQnV0dG9uLmNsaWNrKCk7CiAgMTEyIHwgICAgICAgCiAgMTEzIHwgICAgICAgLy8gSXR0IGVsbGVuxZFyaXpoZXRuw6luaywgaG9neSBzaWtlcmVzIHZvbHQtZSBhIG3FsXZlbGV0CmBgYA=="
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                        "column": 8,
+                        "line": 4
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "52676e6f4b59e1b621f0-8eb85c0fcd169a5e3899",
+              "file": "timetables.spec.ts",
+              "line": 24,
+              "column": 7
+            },
+            {
+              "title": "Órák megjelenítése",
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -498,27 +231,65 @@
                     {
                       "workerIndex": 2,
                       "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 4545,
-                      "errors": [],
+                      "status": "timedOut",
+                      "duration": 30034,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:4:8",
+                        "location": {
+                          "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                          "column": 8,
+                          "line": 4
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 2 |\u001b[39m\n \u001b[90m 3 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(\u001b[32m'Tanári Órarend Komponens'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 4 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m   |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 5 |\u001b[39m     \u001b[90m// Bejelentkezés a rendszerbe (ha szükséges)\u001b[39m\n \u001b[90m 6 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/login'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 7 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'input[name=\"short_name\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'KiGI'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                            "column": 8,
+                            "line": 4
+                          },
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n\n\u001b[0m \u001b[90m 2 |\u001b[39m\n \u001b[90m 3 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(\u001b[32m'Tanári Órarend Komponens'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 4 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m   |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 5 |\u001b[39m     \u001b[90m// Bejelentkezés a rendszerbe (ha szükséges)\u001b[39m\n \u001b[90m 6 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/login'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 7 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'input[name=\"short_name\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'KiGI'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:4:8\u001b[22m"
+                        },
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                            "column": 16,
+                            "line": 13
+                          },
+                          "message": "Error: page.waitForSelector: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.calendar-container') to be visible\u001b[22m\n\n\n\u001b[0m \u001b[90m 11 |\u001b[39m     \u001b[90m// Navigálás az órarend oldalra\u001b[39m\n \u001b[90m 12 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/dashboard/my-timetable'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 13 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForSelector(\u001b[32m'.calendar-container'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 14 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 15 |\u001b[39m\n \u001b[90m 16 |\u001b[39m   test(\u001b[32m'Oldal betöltése és alapvető elemek megjelenítése'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:13:16\u001b[22m"
+                        }
+                      ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-04-03T18:27:20.022Z",
-                      "attachments": []
+                      "startTime": "2025-04-04T08:47:13.510Z",
+                      "attachments": [
+                        {
+                          "name": "_prompt-1",
+                          "contentType": "text/markdown",
+                          "body": "IyBJbnN0cnVjdGlvbnMKCi0gRm9sbG93aW5nIFBsYXl3cmlnaHQgdGVzdCBmYWlsZWQuCi0gRXhwbGFpbiB3aHksIGJlIGNvbmNpc2UsIHJlc3BlY3QgUGxheXdyaWdodCBiZXN0IHByYWN0aWNlcy4KLSBQcm92aWRlIGEgc25pcHBldCBvZiBjb2RlIHdpdGggdGhlIGZpeCwgaWYgcG9zc2libGUuCgojIFRlc3QgaW5mbwoKLSBOYW1lOiBUYW7DoXJpIMOTcmFyZW5kIEtvbXBvbmVucyA+PiDDk3LDoWsgbWVnamVsZW7DrXTDqXNlCi0gTG9jYXRpb246IEM6XFVzZXJzXFN6YWxrYWktU3phYm9BZGFtXERvY3VtZW50c1xHaXRIdWJcdml6c2dhcmVtZWtcdGVsb2NrXHRlc3RzXHRpbWV0YWJsZXMuc3BlYy50czozMjo3CgojIEVycm9yIGRldGFpbHMKCmBgYApFcnJvcjogcGFnZS53YWl0Rm9yU2VsZWN0b3I6IFRlc3QgdGltZW91dCBvZiAzMDAwMG1zIGV4Y2VlZGVkLgpDYWxsIGxvZzoKICAtIHdhaXRpbmcgZm9yIGxvY2F0b3IoJy5jYWxlbmRhci1jb250YWluZXInKSB0byBiZSB2aXNpYmxlCgogICAgYXQgQzpcVXNlcnNcU3phbGthaS1TemFib0FkYW1cRG9jdW1lbnRzXEdpdEh1Ylx2aXpzZ2FyZW1la1x0ZWxvY2tcdGVzdHNcdGltZXRhYmxlcy5zcGVjLnRzOjEzOjE2CmBgYAoKIyBQYWdlIHNuYXBzaG90CgpgYGB5YW1sCi0gbGluayAidGVsb2NrIgotIGxpbmsgIlZpc3N6YSI6CiAgLSBpbWcKICAtIHRleHQ6IFZpc3N6YQotIHRleHQ6IEJlamVsZW50a2V6w6lzIMOcZHbDtnrDtmxqw7xrISBLw6lyasO8aywgYWRqYSBtZWcgYmVqZWxlbnRrZXrDqXNpIGFkYXRhaXQgYSBmb2x5dGF0w6FzaG96LiBGZWxoYXN6bsOhbMOzbsOpdgotIHRleHRib3gKLSB0ZXh0OiBKZWxzesOzCi0gdGV4dGJveAotIGJ1dHRvbiAiQmVqZWxlbnRrZXrDqXMiCi0gdGV4dDogQXogYWRhdGFpdCBiaXp0b25zw6FnYmFuIHRhcnRqdWsuIFNvaGEgbmUgb3NzemEgbWVnIGplbHN6YXbDoXQgbcOhc29ra2FsIQotIGFsZXJ0CmBgYAoKIyBUZXN0IHNvdXJjZQoKYGBgdHMKICAgMSB8IGltcG9ydCB7IHRlc3QsIGV4cGVjdCB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwogICAyIHwKICAgMyB8IHRlc3QuZGVzY3JpYmUoJ1RhbsOhcmkgw5NyYXJlbmQgS29tcG9uZW5zJywgKCkgPT4gewogICA0IHwgICB0ZXN0LmJlZm9yZUVhY2goYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDUgfCAgICAgLy8gQmVqZWxlbnRrZXrDqXMgYSByZW5kc3plcmJlIChoYSBzesO8a3PDqWdlcykKICAgNiB8ICAgICBhd2FpdCBwYWdlLmdvdG8oJy9sb2dpbicpOwogICA3IHwgICAgIGF3YWl0IHBhZ2UuZmlsbCgnaW5wdXRbbmFtZT0ic2hvcnRfbmFtZSJdJywgJ0tpR0knKTsKICAgOCB8ICAgICBhd2FpdCBwYWdlLmZpbGwoJ2lucHV0W25hbWU9InBhc3N3b3JkIl0nLCAnS2lHSTEyMycpOwogICA5IHwgICAgIGF3YWl0IHBhZ2UuY2xpY2soJ2J1dHRvblt0eXBlPSJzdWJtaXQiXScpOwogICAxMCB8ICAgICAKICAgMTEgfCAgICAgLy8gTmF2aWfDoWzDoXMgYXogw7NyYXJlbmQgb2xkYWxyYQogICAxMiB8ICAgICBhd2FpdCBwYWdlLmdvdG8oJy9kYXNoYm9hcmQvbXktdGltZXRhYmxlJyk7Cj4gIDEzIHwgICAgIGF3YWl0IHBhZ2Uud2FpdEZvclNlbGVjdG9yKCcuY2FsZW5kYXItY29udGFpbmVyJyk7CiAgICAgIHwgICAgICAgICAgICAgICAgXiBFcnJvcjogcGFnZS53YWl0Rm9yU2VsZWN0b3I6IFRlc3QgdGltZW91dCBvZiAzMDAwMG1zIGV4Y2VlZGVkLgogICAxNCB8ICAgfSk7CiAgIDE1IHwKICAgMTYgfCAgIHRlc3QoJ09sZGFsIGJldMO2bHTDqXNlIMOpcyBhbGFwdmV0xZEgZWxlbWVrIG1lZ2plbGVuw610w6lzZScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICAxNyB8ICAgICAvLyBFbGxlbsWRcml6esO8aywgaG9neSBhIGbFkSBlbGVtZWsgbWVnamVsZW5uZWstZQogICAxOCB8ICAgICBhd2FpdCBleHBlY3QocGFnZS5sb2NhdG9yKCcuY2FsZW5kYXItaGVhZGVyIGgyJykpLnRvQmVWaXNpYmxlKCk7CiAgIDE5IHwgICAgIGF3YWl0IGV4cGVjdChwYWdlLmdldEJ5VGV4dCgnTWFpIG5hcCcpKS50b0JlVmlzaWJsZSgpOwogICAyMCB8ICAgICBhd2FpdCBleHBlY3QocGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogL2NoZXZyb24tbGVmdC9pIH0pKS50b0JlVmlzaWJsZSgpOwogICAyMSB8ICAgICBhd2FpdCBleHBlY3QocGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogL2NoZXZyb24tcmlnaHQvaSB9KSkudG9CZVZpc2libGUoKTsKICAgMjIgfCAgIH0pOwogICAyMyB8CiAgIDI0IHwgICB0ZXN0KCdIZXRpIG7DqXpldCBtZWdqZWxlbsOtdMOpc2UnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgMjUgfCAgICAgLy8gRWxsZW7FkXJpenrDvGssIGhvZ3kgYSBow6l0IG5hcGphaSBtZWdqZWxlbm5lay1lCiAgIDI2IHwgICAgIGNvbnN0IGRheXMgPSBbJ0jDqXRmxZEnLCAnS2VkZCcsICdTemVyZGEnLCAnQ3PDvHTDtnJ0w7ZrJywgJ1DDqW50ZWsnXTsKICAgMjcgfCAgICAgZm9yIChjb25zdCBkYXkgb2YgZGF5cykgewogICAyOCB8ICAgICAgIGF3YWl0IGV4cGVjdChwYWdlLmdldEJ5VGV4dChuZXcgUmVnRXhwKGRheSwgJ2knKSkpLnRvQmVWaXNpYmxlKCk7CiAgIDI5IHwgICAgIH0KICAgMzAgfCAgIH0pOwogICAzMSB8CiAgIDMyIHwgICB0ZXN0KCfDk3LDoWsgbWVnamVsZW7DrXTDqXNlJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDMzIHwgICAgIC8vIFbDoXJqdWsgbWVnLCBob2d5IGF6IMOzcsOhayBiZXTDtmx0xZFkamVuZWsKICAgMzQgfCAgICAgYXdhaXQgcGFnZS53YWl0Rm9yU2VsZWN0b3IoJy5sZXNzb24tY2FyZCcpOwogICAzNSB8ICAgICAKICAgMzYgfCAgICAgLy8gRWxsZW7FkXJpenrDvGssIGhvZ3kgdmFuLWUgbGVnYWzDoWJiIGVneSDDs3JhIG1lZ2plbGVuw610dmUKICAgMzcgfCAgICAgY29uc3QgbGVzc29ucyA9IGF3YWl0IHBhZ2UubG9jYXRvcignLmxlc3Nvbi1jYXJkJykuY291bnQoKTsKICAgMzggfCAgICAgZXhwZWN0KGxlc3NvbnMpLnRvQmVHcmVhdGVyVGhhbigwKTsKICAgMzkgfCAgIH0pOwogICA0MCB8CiAgIDQxIHwgICB0ZXN0KCdKZWxlbmxlZ2kgw7NyYSBraWplbMO2bMOpc2UnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgNDIgfCAgICAgLy8gS2VyZXNzw7xrIG1lZyBhIGplbGVubGVnaSDDs3LDoXQgKGhhIHZhbikKICAgNDMgfCAgICAgY29uc3QgY3VycmVudExlc3NvbiA9IHBhZ2UubG9jYXRvcignLmN1cnJlbnQtbGVzc29uJykuZmlyc3QoKTsKICAgNDQgfCAgICAgCiAgIDQ1IHwgICAgIGlmIChhd2FpdCBjdXJyZW50TGVzc29uLmNvdW50KCkgPiAwKSB7CiAgIDQ2IHwgICAgICAgYXdhaXQgZXhwZWN0KGN1cnJlbnRMZXNzb24pLnRvSGF2ZUNsYXNzKC9jdXJyZW50LWxlc3Nvbi8pOwogICA0NyB8ICAgICB9IGVsc2UgewogICA0OCB8ICAgICAgIGNvbnNvbGUubG9nKCdOaW5jcyBha3R1w6FsaXMgw7NyYSBqZWxlbmxlZycpOwogICA0OSB8ICAgICB9CiAgIDUwIHwgICB9KTsKICAgNTEgfAogICA1MiB8ICAgdGVzdCgnRGnDoWtvayBmZWxvbGTDoXNhIGRpYWzDs2d1cyBtZWdueWl0w6FzYScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICA1MyB8ICAgICAvLyBLZXJlc3PDvGsgbWVnIGEgamVsZW5sZWdpIMOzcsOhdCAoaGEgdmFuKQogICA1NCB8ICAgICBjb25zdCBjdXJyZW50TGVzc29uID0gcGFnZS5sb2NhdG9yKCcuY3VycmVudC1sZXNzb24nKS5maXJzdCgpOwogICA1NSB8ICAgICAKICAgNTYgfCAgICAgaWYgKGF3YWl0IGN1cnJlbnRMZXNzb24uY291bnQoKSA+IDApIHsKICAgNTcgfCAgICAgICAvLyBLYXR0aW50c3VuayBhIGplbGVubGVnaSDDs3LDoXJhCiAgIDU4IHwgICAgICAgYXdhaXQgY3VycmVudExlc3Nvbi5jbGljaygpOwogICA1OSB8ICAgICAgIAogICA2MCB8ICAgICAgIC8vIEVsbGVuxZFyaXp6w7xrLCBob2d5IG1lZ255w61sdC1lIGEgZGlhbMOzZ3VzCiAgIDYxIHwgICAgICAgYXdhaXQgZXhwZWN0KHBhZ2UubG9jYXRvcignW3JvbGU9ImRpYWxvZyJdJykpLnRvQmVWaXNpYmxlKCk7CiAgIDYyIHwgICAgICAgYXdhaXQgZXhwZWN0KHBhZ2UuZ2V0QnlUZXh0KCfDlnNzemVzIGZlbG9sZMOhcycpKS50b0JlVmlzaWJsZSgpOwogICA2MyB8ICAgICAgIAogICA2NCB8ICAgICAgIC8vIEVsbGVuxZFyaXp6w7xrLCBob2d5IG1lZ2plbGVubmVrLWUgYSBkacOha29rCiAgIDY1IHwgICAgICAgYXdhaXQgZXhwZWN0KHBhZ2UubG9jYXRvcigndGFibGUgdGJvZHkgdHInKS5maXJzdCgpKS50b0JlVmlzaWJsZSgpOwogICA2NiB8ICAgICB9IGVsc2UgewogICA2NyB8ICAgICAgIGNvbnNvbGUubG9nKCdOaW5jcyBha3R1w6FsaXMgw7NyYSBqZWxlbmxlZywgYSB0ZXN6dCBraWhhZ3l2YScpOwogICA2OCB8ICAgICB9CiAgIDY5IHwgICB9KTsKICAgNzAgfAogICA3MSB8ICAgdGVzdCgnRGnDoWsgZmVsb2xkw6FzYScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICA3MiB8ICAgICAvLyBLZXJlc3PDvGsgbWVnIGEgamVsZW5sZWdpIMOzcsOhdCAoaGEgdmFuKQogICA3MyB8ICAgICBjb25zdCBjdXJyZW50TGVzc29uID0gcGFnZS5sb2NhdG9yKCcuY3VycmVudC1sZXNzb24nKS5maXJzdCgpOwogICA3NCB8ICAgICAKICAgNzUgfCAgICAgaWYgKGF3YWl0IGN1cnJlbnRMZXNzb24uY291bnQoKSA+IDApIHsKICAgNzYgfCAgICAgICAvLyBLYXR0aW50c3VuayBhIGplbGVubGVnaSDDs3LDoXJhCiAgIDc3IHwgICAgICAgYXdhaXQgY3VycmVudExlc3Nvbi5jbGljaygpOwogICA3OCB8ICAgICAgIAogICA3OSB8ICAgICAgIC8vIFbDoXJqdWsgbWVnIGEgZGlhbMOzZ3VzIG1lZ255aXTDoXPDoXQKICAgODAgfCAgICAgICBhd2FpdCBwYWdlLndhaXRGb3JTZWxlY3RvcignW3JvbGU9ImRpYWxvZyJdJyk7CiAgIDgxIHwgICAgICAgCiAgIDgyIHwgICAgICAgLy8gQXogZWxzxZEgZGnDoWsgZmVsb2xkw6FzYSBnb21iasOhbmFrIG1lZ2tlcmVzw6lzZQogICA4MyB8ICAgICAgIGNvbnN0IHVubG9ja0J1dHRvbiA9IHBhZ2UubG9jYXRvcigndGFibGUgdGJvZHkgdHInKS5maXJzdCgpLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAvbG9jay1vcGVuL2kgfSk7CiAgIDg0IHwgICAgICAgCiAgIDg1IHwgICAgICAgaWYgKGF3YWl0IHVubG9ja0J1dHRvbi5jb3VudCgpID4gMCAmJiAhKGF3YWl0IHVubG9ja0J1dHRvbi5pc0Rpc2FibGVkKCkpKSB7CiAgIDg2IHwgICAgICAgICBhd2FpdCB1bmxvY2tCdXR0b24uY2xpY2soKTsKICAgODcgfCAgICAgICAgIAogICA4OCB8ICAgICAgICAgLy8gSXR0IGVsbGVuxZFyaXpoZXRuw6luaywgaG9neSBzaWtlcmVzIHZvbHQtZSBhIG3FsXZlbGV0LAogICA4OSB8ICAgICAgICAgLy8gZGUgZXogZsO8Z2cgYSBiYWNrZW5kIHbDoWxhc3rDoXTDs2wgw6lzIGEgVUkgZnJpc3PDrXTDqXPDqXTFkWwKICAgOTAgfCAgICAgICB9IGVsc2UgewogICA5MSB8ICAgICAgICAgY29uc29sZS5sb2coJ0F6IGVsc8WRIGRpw6FrIG3DoXIgZmVsIHZhbiBvbGR2YSB2YWd5IG5lbSBsZWhldCBmZWxvbGRhbmknKTsKICAgOTIgfCAgICAgICB9CiAgIDkzIHwgICAgIH0gZWxzZSB7CiAgIDk0IHwgICAgICAgY29uc29sZS5sb2coJ05pbmNzIGFrdHXDoWxpcyDDs3JhIGplbGVubGVnLCBhIHRlc3p0IGtpaGFneXZhJyk7CiAgIDk1IHwgICAgIH0KICAgOTYgfCAgIH0pOwogICA5NyB8CiAgIDk4IHwgICB0ZXN0KCdDc29wb3J0b3MgZmVsb2xkw6FzJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDk5IHwgICAgIC8vIEtlcmVzc8O8ayBtZWcgYSBqZWxlbmxlZ2kgw7Nyw6F0IChoYSB2YW4pCiAgMTAwIHwgICAgIGNvbnN0IGN1cnJlbnRMZXNzb24gPSBwYWdlLmxvY2F0b3IoJy5jdXJyZW50LWxlc3NvbicpLmZpcnN0KCk7CiAgMTAxIHwgICAgIAogIDEwMiB8ICAgICBpZiAoYXdhaXQgY3VycmVudExlc3Nvbi5jb3VudCgpID4gMCkgewogIDEwMyB8ICAgICAgIC8vIEthdHRpbnRzdW5rIGEgamVsZW5sZWdpIMOzcsOhcmEKICAxMDQgfCAgICAgICBhd2FpdCBjdXJyZW50TGVzc29uLmNsaWNrKCk7CiAgMTA1IHwgICAgICAgCiAgMTA2IHwgICAgICAgLy8gVsOhcmp1ayBtZWcgYSBkaWFsw7NndXMgbWVnbnlpdMOhc8OhdAogIDEwNyB8ICAgICAgIGF3YWl0IHBhZ2Uud2FpdEZvclNlbGVjdG9yKCdbcm9sZT0iZGlhbG9nIl0nKTsKICAxMDggfCAgICAgICAKICAxMDkgfCAgICAgICAvLyBLYXR0aW50c3VuayBhICLDlnNzemVzIGZlbG9sZMOhcyIgZ29tYnJhCiAgMTEwIHwgICAgICAgY29uc3QgZ3JvdXBVbmxvY2tCdXR0b24gPSBwYWdlLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAvw5Zzc3plcyBmZWxvbGTDoXMvaSB9KTsKICAxMTEgfCAgICAgICBhd2FpdCBncm91cFVubG9ja0J1dHRvbi5jbGljaygpOwogIDExMiB8ICAgICAgIAogIDExMyB8ICAgICAgIC8vIEl0dCBlbGxlbsWRcml6aGV0bsOpbmssIGhvZ3kgc2lrZXJlcyB2b2x0LWUgYSBtxbF2ZWxldApgYGA="
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                        "column": 8,
+                        "line": 4
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
-              "id": "070ffa9c3689b3a10912-66405bb68c720962a2a9",
-              "file": "students.spec.ts",
-              "line": 159,
+              "id": "52676e6f4b59e1b621f0-ef77a654e90edea8791e",
+              "file": "timetables.spec.ts",
+              "line": 32,
               "column": 7
             },
             {
-              "title": "Lapozás",
-              "ok": true,
+              "title": "Jelenlegi óra kijelölése",
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -529,24 +300,346 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": 2,
+                      "workerIndex": 3,
                       "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 4498,
-                      "errors": [],
+                      "status": "timedOut",
+                      "duration": 30026,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:4:8",
+                        "location": {
+                          "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                          "column": 8,
+                          "line": 4
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 2 |\u001b[39m\n \u001b[90m 3 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(\u001b[32m'Tanári Órarend Komponens'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 4 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m   |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 5 |\u001b[39m     \u001b[90m// Bejelentkezés a rendszerbe (ha szükséges)\u001b[39m\n \u001b[90m 6 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/login'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 7 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'input[name=\"short_name\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'KiGI'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                            "column": 8,
+                            "line": 4
+                          },
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n\n\u001b[0m \u001b[90m 2 |\u001b[39m\n \u001b[90m 3 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(\u001b[32m'Tanári Órarend Komponens'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 4 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m   |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 5 |\u001b[39m     \u001b[90m// Bejelentkezés a rendszerbe (ha szükséges)\u001b[39m\n \u001b[90m 6 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/login'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 7 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'input[name=\"short_name\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'KiGI'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:4:8\u001b[22m"
+                        },
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                            "column": 16,
+                            "line": 13
+                          },
+                          "message": "Error: page.waitForSelector: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.calendar-container') to be visible\u001b[22m\n\n\n\u001b[0m \u001b[90m 11 |\u001b[39m     \u001b[90m// Navigálás az órarend oldalra\u001b[39m\n \u001b[90m 12 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/dashboard/my-timetable'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 13 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForSelector(\u001b[32m'.calendar-container'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 14 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 15 |\u001b[39m\n \u001b[90m 16 |\u001b[39m   test(\u001b[32m'Oldal betöltése és alapvető elemek megjelenítése'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:13:16\u001b[22m"
+                        }
+                      ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-04-03T18:27:24.677Z",
-                      "attachments": []
+                      "startTime": "2025-04-04T08:47:44.143Z",
+                      "attachments": [
+                        {
+                          "name": "_prompt-1",
+                          "contentType": "text/markdown",
+                          "body": "IyBJbnN0cnVjdGlvbnMKCi0gRm9sbG93aW5nIFBsYXl3cmlnaHQgdGVzdCBmYWlsZWQuCi0gRXhwbGFpbiB3aHksIGJlIGNvbmNpc2UsIHJlc3BlY3QgUGxheXdyaWdodCBiZXN0IHByYWN0aWNlcy4KLSBQcm92aWRlIGEgc25pcHBldCBvZiBjb2RlIHdpdGggdGhlIGZpeCwgaWYgcG9zc2libGUuCgojIFRlc3QgaW5mbwoKLSBOYW1lOiBUYW7DoXJpIMOTcmFyZW5kIEtvbXBvbmVucyA+PiBKZWxlbmxlZ2kgw7NyYSBraWplbMO2bMOpc2UKLSBMb2NhdGlvbjogQzpcVXNlcnNcU3phbGthaS1TemFib0FkYW1cRG9jdW1lbnRzXEdpdEh1Ylx2aXpzZ2FyZW1la1x0ZWxvY2tcdGVzdHNcdGltZXRhYmxlcy5zcGVjLnRzOjQxOjcKCiMgRXJyb3IgZGV0YWlscwoKYGBgCkVycm9yOiBwYWdlLndhaXRGb3JTZWxlY3RvcjogVGVzdCB0aW1lb3V0IG9mIDMwMDAwbXMgZXhjZWVkZWQuCkNhbGwgbG9nOgogIC0gd2FpdGluZyBmb3IgbG9jYXRvcignLmNhbGVuZGFyLWNvbnRhaW5lcicpIHRvIGJlIHZpc2libGUKCiAgICBhdCBDOlxVc2Vyc1xTemFsa2FpLVN6YWJvQWRhbVxEb2N1bWVudHNcR2l0SHViXHZpenNnYXJlbWVrXHRlbG9ja1x0ZXN0c1x0aW1ldGFibGVzLnNwZWMudHM6MTM6MTYKYGBgCgojIFBhZ2Ugc25hcHNob3QKCmBgYHlhbWwKLSBsaW5rICJ0ZWxvY2siCi0gbGluayAiVmlzc3phIjoKICAtIGltZwogIC0gdGV4dDogVmlzc3phCi0gdGV4dDogQmVqZWxlbnRrZXrDqXMgw5xkdsO2esO2bGrDvGshIEvDqXJqw7xrLCBhZGphIG1lZyBiZWplbGVudGtlesOpc2kgYWRhdGFpdCBhIGZvbHl0YXTDoXNob3ouIEZlbGhhc3puw6Fsw7Nuw6l2Ci0gdGV4dGJveAotIHRleHQ6IEplbHN6w7MKLSB0ZXh0Ym94Ci0gYnV0dG9uICJCZWplbGVudGtlesOpcyIKLSB0ZXh0OiBBeiBhZGF0YWl0IGJpenRvbnPDoWdiYW4gdGFydGp1ay4gU29oYSBuZSBvc3N6YSBtZWcgamVsc3phdsOhdCBtw6Fzb2trYWwhCi0gYWxlcnQKYGBgCgojIFRlc3Qgc291cmNlCgpgYGB0cwogICAxIHwgaW1wb3J0IHsgdGVzdCwgZXhwZWN0IH0gZnJvbSAnQHBsYXl3cmlnaHQvdGVzdCc7CiAgIDIgfAogICAzIHwgdGVzdC5kZXNjcmliZSgnVGFuw6FyaSDDk3JhcmVuZCBLb21wb25lbnMnLCAoKSA9PiB7CiAgIDQgfCAgIHRlc3QuYmVmb3JlRWFjaChhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgNSB8ICAgICAvLyBCZWplbGVudGtlesOpcyBhIHJlbmRzemVyYmUgKGhhIHN6w7xrc8OpZ2VzKQogICA2IHwgICAgIGF3YWl0IHBhZ2UuZ290bygnL2xvZ2luJyk7CiAgIDcgfCAgICAgYXdhaXQgcGFnZS5maWxsKCdpbnB1dFtuYW1lPSJzaG9ydF9uYW1lIl0nLCAnS2lHSScpOwogICA4IHwgICAgIGF3YWl0IHBhZ2UuZmlsbCgnaW5wdXRbbmFtZT0icGFzc3dvcmQiXScsICdLaUdJMTIzJyk7CiAgIDkgfCAgICAgYXdhaXQgcGFnZS5jbGljaygnYnV0dG9uW3R5cGU9InN1Ym1pdCJdJyk7CiAgIDEwIHwgICAgIAogICAxMSB8ICAgICAvLyBOYXZpZ8OhbMOhcyBheiDDs3JhcmVuZCBvbGRhbHJhCiAgIDEyIHwgICAgIGF3YWl0IHBhZ2UuZ290bygnL2Rhc2hib2FyZC9teS10aW1ldGFibGUnKTsKPiAgMTMgfCAgICAgYXdhaXQgcGFnZS53YWl0Rm9yU2VsZWN0b3IoJy5jYWxlbmRhci1jb250YWluZXInKTsKICAgICAgfCAgICAgICAgICAgICAgICBeIEVycm9yOiBwYWdlLndhaXRGb3JTZWxlY3RvcjogVGVzdCB0aW1lb3V0IG9mIDMwMDAwbXMgZXhjZWVkZWQuCiAgIDE0IHwgICB9KTsKICAgMTUgfAogICAxNiB8ICAgdGVzdCgnT2xkYWwgYmV0w7ZsdMOpc2Ugw6lzIGFsYXB2ZXTFkSBlbGVtZWsgbWVnamVsZW7DrXTDqXNlJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDE3IHwgICAgIC8vIEVsbGVuxZFyaXp6w7xrLCBob2d5IGEgZsWRIGVsZW1layBtZWdqZWxlbm5lay1lCiAgIDE4IHwgICAgIGF3YWl0IGV4cGVjdChwYWdlLmxvY2F0b3IoJy5jYWxlbmRhci1oZWFkZXIgaDInKSkudG9CZVZpc2libGUoKTsKICAgMTkgfCAgICAgYXdhaXQgZXhwZWN0KHBhZ2UuZ2V0QnlUZXh0KCdNYWkgbmFwJykpLnRvQmVWaXNpYmxlKCk7CiAgIDIwIHwgICAgIGF3YWl0IGV4cGVjdChwYWdlLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAvY2hldnJvbi1sZWZ0L2kgfSkpLnRvQmVWaXNpYmxlKCk7CiAgIDIxIHwgICAgIGF3YWl0IGV4cGVjdChwYWdlLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAvY2hldnJvbi1yaWdodC9pIH0pKS50b0JlVmlzaWJsZSgpOwogICAyMiB8ICAgfSk7CiAgIDIzIHwKICAgMjQgfCAgIHRlc3QoJ0hldGkgbsOpemV0IG1lZ2plbGVuw610w6lzZScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICAyNSB8ICAgICAvLyBFbGxlbsWRcml6esO8aywgaG9neSBhIGjDqXQgbmFwamFpIG1lZ2plbGVubmVrLWUKICAgMjYgfCAgICAgY29uc3QgZGF5cyA9IFsnSMOpdGbFkScsICdLZWRkJywgJ1N6ZXJkYScsICdDc8O8dMO2cnTDtmsnLCAnUMOpbnRlayddOwogICAyNyB8ICAgICBmb3IgKGNvbnN0IGRheSBvZiBkYXlzKSB7CiAgIDI4IHwgICAgICAgYXdhaXQgZXhwZWN0KHBhZ2UuZ2V0QnlUZXh0KG5ldyBSZWdFeHAoZGF5LCAnaScpKSkudG9CZVZpc2libGUoKTsKICAgMjkgfCAgICAgfQogICAzMCB8ICAgfSk7CiAgIDMxIHwKICAgMzIgfCAgIHRlc3QoJ8OTcsOhayBtZWdqZWxlbsOtdMOpc2UnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgMzMgfCAgICAgLy8gVsOhcmp1ayBtZWcsIGhvZ3kgYXogw7Nyw6FrIGJldMO2bHTFkWRqZW5lawogICAzNCB8ICAgICBhd2FpdCBwYWdlLndhaXRGb3JTZWxlY3RvcignLmxlc3Nvbi1jYXJkJyk7CiAgIDM1IHwgICAgIAogICAzNiB8ICAgICAvLyBFbGxlbsWRcml6esO8aywgaG9neSB2YW4tZSBsZWdhbMOhYmIgZWd5IMOzcmEgbWVnamVsZW7DrXR2ZQogICAzNyB8ICAgICBjb25zdCBsZXNzb25zID0gYXdhaXQgcGFnZS5sb2NhdG9yKCcubGVzc29uLWNhcmQnKS5jb3VudCgpOwogICAzOCB8ICAgICBleHBlY3QobGVzc29ucykudG9CZUdyZWF0ZXJUaGFuKDApOwogICAzOSB8ICAgfSk7CiAgIDQwIHwKICAgNDEgfCAgIHRlc3QoJ0plbGVubGVnaSDDs3JhIGtpamVsw7Zsw6lzZScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICA0MiB8ICAgICAvLyBLZXJlc3PDvGsgbWVnIGEgamVsZW5sZWdpIMOzcsOhdCAoaGEgdmFuKQogICA0MyB8ICAgICBjb25zdCBjdXJyZW50TGVzc29uID0gcGFnZS5sb2NhdG9yKCcuY3VycmVudC1sZXNzb24nKS5maXJzdCgpOwogICA0NCB8ICAgICAKICAgNDUgfCAgICAgaWYgKGF3YWl0IGN1cnJlbnRMZXNzb24uY291bnQoKSA+IDApIHsKICAgNDYgfCAgICAgICBhd2FpdCBleHBlY3QoY3VycmVudExlc3NvbikudG9IYXZlQ2xhc3MoL2N1cnJlbnQtbGVzc29uLyk7CiAgIDQ3IHwgICAgIH0gZWxzZSB7CiAgIDQ4IHwgICAgICAgY29uc29sZS5sb2coJ05pbmNzIGFrdHXDoWxpcyDDs3JhIGplbGVubGVnJyk7CiAgIDQ5IHwgICAgIH0KICAgNTAgfCAgIH0pOwogICA1MSB8CiAgIDUyIHwgICB0ZXN0KCdEacOha29rIGZlbG9sZMOhc2EgZGlhbMOzZ3VzIG1lZ255aXTDoXNhJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDUzIHwgICAgIC8vIEtlcmVzc8O8ayBtZWcgYSBqZWxlbmxlZ2kgw7Nyw6F0IChoYSB2YW4pCiAgIDU0IHwgICAgIGNvbnN0IGN1cnJlbnRMZXNzb24gPSBwYWdlLmxvY2F0b3IoJy5jdXJyZW50LWxlc3NvbicpLmZpcnN0KCk7CiAgIDU1IHwgICAgIAogICA1NiB8ICAgICBpZiAoYXdhaXQgY3VycmVudExlc3Nvbi5jb3VudCgpID4gMCkgewogICA1NyB8ICAgICAgIC8vIEthdHRpbnRzdW5rIGEgamVsZW5sZWdpIMOzcsOhcmEKICAgNTggfCAgICAgICBhd2FpdCBjdXJyZW50TGVzc29uLmNsaWNrKCk7CiAgIDU5IHwgICAgICAgCiAgIDYwIHwgICAgICAgLy8gRWxsZW7FkXJpenrDvGssIGhvZ3kgbWVnbnnDrWx0LWUgYSBkaWFsw7NndXMKICAgNjEgfCAgICAgICBhd2FpdCBleHBlY3QocGFnZS5sb2NhdG9yKCdbcm9sZT0iZGlhbG9nIl0nKSkudG9CZVZpc2libGUoKTsKICAgNjIgfCAgICAgICBhd2FpdCBleHBlY3QocGFnZS5nZXRCeVRleHQoJ8OWc3N6ZXMgZmVsb2xkw6FzJykpLnRvQmVWaXNpYmxlKCk7CiAgIDYzIHwgICAgICAgCiAgIDY0IHwgICAgICAgLy8gRWxsZW7FkXJpenrDvGssIGhvZ3kgbWVnamVsZW5uZWstZSBhIGRpw6Frb2sKICAgNjUgfCAgICAgICBhd2FpdCBleHBlY3QocGFnZS5sb2NhdG9yKCd0YWJsZSB0Ym9keSB0cicpLmZpcnN0KCkpLnRvQmVWaXNpYmxlKCk7CiAgIDY2IHwgICAgIH0gZWxzZSB7CiAgIDY3IHwgICAgICAgY29uc29sZS5sb2coJ05pbmNzIGFrdHXDoWxpcyDDs3JhIGplbGVubGVnLCBhIHRlc3p0IGtpaGFneXZhJyk7CiAgIDY4IHwgICAgIH0KICAgNjkgfCAgIH0pOwogICA3MCB8CiAgIDcxIHwgICB0ZXN0KCdEacOhayBmZWxvbGTDoXNhJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDcyIHwgICAgIC8vIEtlcmVzc8O8ayBtZWcgYSBqZWxlbmxlZ2kgw7Nyw6F0IChoYSB2YW4pCiAgIDczIHwgICAgIGNvbnN0IGN1cnJlbnRMZXNzb24gPSBwYWdlLmxvY2F0b3IoJy5jdXJyZW50LWxlc3NvbicpLmZpcnN0KCk7CiAgIDc0IHwgICAgIAogICA3NSB8ICAgICBpZiAoYXdhaXQgY3VycmVudExlc3Nvbi5jb3VudCgpID4gMCkgewogICA3NiB8ICAgICAgIC8vIEthdHRpbnRzdW5rIGEgamVsZW5sZWdpIMOzcsOhcmEKICAgNzcgfCAgICAgICBhd2FpdCBjdXJyZW50TGVzc29uLmNsaWNrKCk7CiAgIDc4IHwgICAgICAgCiAgIDc5IHwgICAgICAgLy8gVsOhcmp1ayBtZWcgYSBkaWFsw7NndXMgbWVnbnlpdMOhc8OhdAogICA4MCB8ICAgICAgIGF3YWl0IHBhZ2Uud2FpdEZvclNlbGVjdG9yKCdbcm9sZT0iZGlhbG9nIl0nKTsKICAgODEgfCAgICAgICAKICAgODIgfCAgICAgICAvLyBBeiBlbHPFkSBkacOhayBmZWxvbGTDoXNhIGdvbWJqw6FuYWsgbWVna2VyZXPDqXNlCiAgIDgzIHwgICAgICAgY29uc3QgdW5sb2NrQnV0dG9uID0gcGFnZS5sb2NhdG9yKCd0YWJsZSB0Ym9keSB0cicpLmZpcnN0KCkuZ2V0QnlSb2xlKCdidXR0b24nLCB7IG5hbWU6IC9sb2NrLW9wZW4vaSB9KTsKICAgODQgfCAgICAgICAKICAgODUgfCAgICAgICBpZiAoYXdhaXQgdW5sb2NrQnV0dG9uLmNvdW50KCkgPiAwICYmICEoYXdhaXQgdW5sb2NrQnV0dG9uLmlzRGlzYWJsZWQoKSkpIHsKICAgODYgfCAgICAgICAgIGF3YWl0IHVubG9ja0J1dHRvbi5jbGljaygpOwogICA4NyB8ICAgICAgICAgCiAgIDg4IHwgICAgICAgICAvLyBJdHQgZWxsZW7FkXJpemhldG7DqW5rLCBob2d5IHNpa2VyZXMgdm9sdC1lIGEgbcWxdmVsZXQsCiAgIDg5IHwgICAgICAgICAvLyBkZSBleiBmw7xnZyBhIGJhY2tlbmQgdsOhbGFzesOhdMOzbCDDqXMgYSBVSSBmcmlzc8OtdMOpc8OpdMWRbAogICA5MCB8ICAgICAgIH0gZWxzZSB7CiAgIDkxIHwgICAgICAgICBjb25zb2xlLmxvZygnQXogZWxzxZEgZGnDoWsgbcOhciBmZWwgdmFuIG9sZHZhIHZhZ3kgbmVtIGxlaGV0IGZlbG9sZGFuaScpOwogICA5MiB8ICAgICAgIH0KICAgOTMgfCAgICAgfSBlbHNlIHsKICAgOTQgfCAgICAgICBjb25zb2xlLmxvZygnTmluY3MgYWt0dcOhbGlzIMOzcmEgamVsZW5sZWcsIGEgdGVzenQga2loYWd5dmEnKTsKICAgOTUgfCAgICAgfQogICA5NiB8ICAgfSk7CiAgIDk3IHwKICAgOTggfCAgIHRlc3QoJ0Nzb3BvcnRvcyBmZWxvbGTDoXMnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgOTkgfCAgICAgLy8gS2VyZXNzw7xrIG1lZyBhIGplbGVubGVnaSDDs3LDoXQgKGhhIHZhbikKICAxMDAgfCAgICAgY29uc3QgY3VycmVudExlc3NvbiA9IHBhZ2UubG9jYXRvcignLmN1cnJlbnQtbGVzc29uJykuZmlyc3QoKTsKICAxMDEgfCAgICAgCiAgMTAyIHwgICAgIGlmIChhd2FpdCBjdXJyZW50TGVzc29uLmNvdW50KCkgPiAwKSB7CiAgMTAzIHwgICAgICAgLy8gS2F0dGludHN1bmsgYSBqZWxlbmxlZ2kgw7Nyw6FyYQogIDEwNCB8ICAgICAgIGF3YWl0IGN1cnJlbnRMZXNzb24uY2xpY2soKTsKICAxMDUgfCAgICAgICAKICAxMDYgfCAgICAgICAvLyBWw6FyanVrIG1lZyBhIGRpYWzDs2d1cyBtZWdueWl0w6Fzw6F0CiAgMTA3IHwgICAgICAgYXdhaXQgcGFnZS53YWl0Rm9yU2VsZWN0b3IoJ1tyb2xlPSJkaWFsb2ciXScpOwogIDEwOCB8ICAgICAgIAogIDEwOSB8ICAgICAgIC8vIEthdHRpbnRzdW5rIGEgIsOWc3N6ZXMgZmVsb2xkw6FzIiBnb21icmEKICAxMTAgfCAgICAgICBjb25zdCBncm91cFVubG9ja0J1dHRvbiA9IHBhZ2UuZ2V0QnlSb2xlKCdidXR0b24nLCB7IG5hbWU6IC/DlnNzemVzIGZlbG9sZMOhcy9pIH0pOwogIDExMSB8ICAgICAgIGF3YWl0IGdyb3VwVW5sb2NrQnV0dG9uLmNsaWNrKCk7CiAgMTEyIHwgICAgICAgCiAgMTEzIHwgICAgICAgLy8gSXR0IGVsbGVuxZFyaXpoZXRuw6luaywgaG9neSBzaWtlcmVzIHZvbHQtZSBhIG3FsXZlbGV0CmBgYA=="
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                        "column": 8,
+                        "line": 4
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
-              "id": "070ffa9c3689b3a10912-979fac3f6f5bb14f2b85",
-              "file": "students.spec.ts",
-              "line": 166,
+              "id": "52676e6f4b59e1b621f0-d7b3f31a0d7d56a019b6",
+              "file": "timetables.spec.ts",
+              "line": 41,
+              "column": 7
+            },
+            {
+              "title": "Diákok feloldása dialógus megnyitása",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 30018,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:4:8",
+                        "location": {
+                          "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                          "column": 8,
+                          "line": 4
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 2 |\u001b[39m\n \u001b[90m 3 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(\u001b[32m'Tanári Órarend Komponens'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 4 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m   |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 5 |\u001b[39m     \u001b[90m// Bejelentkezés a rendszerbe (ha szükséges)\u001b[39m\n \u001b[90m 6 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/login'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 7 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'input[name=\"short_name\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'KiGI'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                            "column": 8,
+                            "line": 4
+                          },
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n\n\u001b[0m \u001b[90m 2 |\u001b[39m\n \u001b[90m 3 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(\u001b[32m'Tanári Órarend Komponens'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 4 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m   |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 5 |\u001b[39m     \u001b[90m// Bejelentkezés a rendszerbe (ha szükséges)\u001b[39m\n \u001b[90m 6 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/login'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 7 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'input[name=\"short_name\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'KiGI'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:4:8\u001b[22m"
+                        },
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                            "column": 16,
+                            "line": 13
+                          },
+                          "message": "Error: page.waitForSelector: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.calendar-container') to be visible\u001b[22m\n\n\n\u001b[0m \u001b[90m 11 |\u001b[39m     \u001b[90m// Navigálás az órarend oldalra\u001b[39m\n \u001b[90m 12 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/dashboard/my-timetable'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 13 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForSelector(\u001b[32m'.calendar-container'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 14 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 15 |\u001b[39m\n \u001b[90m 16 |\u001b[39m   test(\u001b[32m'Oldal betöltése és alapvető elemek megjelenítése'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:13:16\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-04-04T08:48:14.809Z",
+                      "attachments": [
+                        {
+                          "name": "_prompt-1",
+                          "contentType": "text/markdown",
+                          "body": "IyBJbnN0cnVjdGlvbnMKCi0gRm9sbG93aW5nIFBsYXl3cmlnaHQgdGVzdCBmYWlsZWQuCi0gRXhwbGFpbiB3aHksIGJlIGNvbmNpc2UsIHJlc3BlY3QgUGxheXdyaWdodCBiZXN0IHByYWN0aWNlcy4KLSBQcm92aWRlIGEgc25pcHBldCBvZiBjb2RlIHdpdGggdGhlIGZpeCwgaWYgcG9zc2libGUuCgojIFRlc3QgaW5mbwoKLSBOYW1lOiBUYW7DoXJpIMOTcmFyZW5kIEtvbXBvbmVucyA+PiBEacOha29rIGZlbG9sZMOhc2EgZGlhbMOzZ3VzIG1lZ255aXTDoXNhCi0gTG9jYXRpb246IEM6XFVzZXJzXFN6YWxrYWktU3phYm9BZGFtXERvY3VtZW50c1xHaXRIdWJcdml6c2dhcmVtZWtcdGVsb2NrXHRlc3RzXHRpbWV0YWJsZXMuc3BlYy50czo1Mjo3CgojIEVycm9yIGRldGFpbHMKCmBgYApFcnJvcjogcGFnZS53YWl0Rm9yU2VsZWN0b3I6IFRlc3QgdGltZW91dCBvZiAzMDAwMG1zIGV4Y2VlZGVkLgpDYWxsIGxvZzoKICAtIHdhaXRpbmcgZm9yIGxvY2F0b3IoJy5jYWxlbmRhci1jb250YWluZXInKSB0byBiZSB2aXNpYmxlCgogICAgYXQgQzpcVXNlcnNcU3phbGthaS1TemFib0FkYW1cRG9jdW1lbnRzXEdpdEh1Ylx2aXpzZ2FyZW1la1x0ZWxvY2tcdGVzdHNcdGltZXRhYmxlcy5zcGVjLnRzOjEzOjE2CmBgYAoKIyBQYWdlIHNuYXBzaG90CgpgYGB5YW1sCi0gbGluayAidGVsb2NrIgotIGxpbmsgIlZpc3N6YSI6CiAgLSBpbWcKICAtIHRleHQ6IFZpc3N6YQotIHRleHQ6IEJlamVsZW50a2V6w6lzIMOcZHbDtnrDtmxqw7xrISBLw6lyasO8aywgYWRqYSBtZWcgYmVqZWxlbnRrZXrDqXNpIGFkYXRhaXQgYSBmb2x5dGF0w6FzaG96LiBGZWxoYXN6bsOhbMOzbsOpdgotIHRleHRib3gKLSB0ZXh0OiBKZWxzesOzCi0gdGV4dGJveAotIGJ1dHRvbiAiQmVqZWxlbnRrZXrDqXMiCi0gdGV4dDogQXogYWRhdGFpdCBiaXp0b25zw6FnYmFuIHRhcnRqdWsuIFNvaGEgbmUgb3NzemEgbWVnIGplbHN6YXbDoXQgbcOhc29ra2FsIQotIGFsZXJ0CmBgYAoKIyBUZXN0IHNvdXJjZQoKYGBgdHMKICAgMSB8IGltcG9ydCB7IHRlc3QsIGV4cGVjdCB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwogICAyIHwKICAgMyB8IHRlc3QuZGVzY3JpYmUoJ1RhbsOhcmkgw5NyYXJlbmQgS29tcG9uZW5zJywgKCkgPT4gewogICA0IHwgICB0ZXN0LmJlZm9yZUVhY2goYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDUgfCAgICAgLy8gQmVqZWxlbnRrZXrDqXMgYSByZW5kc3plcmJlIChoYSBzesO8a3PDqWdlcykKICAgNiB8ICAgICBhd2FpdCBwYWdlLmdvdG8oJy9sb2dpbicpOwogICA3IHwgICAgIGF3YWl0IHBhZ2UuZmlsbCgnaW5wdXRbbmFtZT0ic2hvcnRfbmFtZSJdJywgJ0tpR0knKTsKICAgOCB8ICAgICBhd2FpdCBwYWdlLmZpbGwoJ2lucHV0W25hbWU9InBhc3N3b3JkIl0nLCAnS2lHSTEyMycpOwogICA5IHwgICAgIGF3YWl0IHBhZ2UuY2xpY2soJ2J1dHRvblt0eXBlPSJzdWJtaXQiXScpOwogICAxMCB8ICAgICAKICAgMTEgfCAgICAgLy8gTmF2aWfDoWzDoXMgYXogw7NyYXJlbmQgb2xkYWxyYQogICAxMiB8ICAgICBhd2FpdCBwYWdlLmdvdG8oJy9kYXNoYm9hcmQvbXktdGltZXRhYmxlJyk7Cj4gIDEzIHwgICAgIGF3YWl0IHBhZ2Uud2FpdEZvclNlbGVjdG9yKCcuY2FsZW5kYXItY29udGFpbmVyJyk7CiAgICAgIHwgICAgICAgICAgICAgICAgXiBFcnJvcjogcGFnZS53YWl0Rm9yU2VsZWN0b3I6IFRlc3QgdGltZW91dCBvZiAzMDAwMG1zIGV4Y2VlZGVkLgogICAxNCB8ICAgfSk7CiAgIDE1IHwKICAgMTYgfCAgIHRlc3QoJ09sZGFsIGJldMO2bHTDqXNlIMOpcyBhbGFwdmV0xZEgZWxlbWVrIG1lZ2plbGVuw610w6lzZScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICAxNyB8ICAgICAvLyBFbGxlbsWRcml6esO8aywgaG9neSBhIGbFkSBlbGVtZWsgbWVnamVsZW5uZWstZQogICAxOCB8ICAgICBhd2FpdCBleHBlY3QocGFnZS5sb2NhdG9yKCcuY2FsZW5kYXItaGVhZGVyIGgyJykpLnRvQmVWaXNpYmxlKCk7CiAgIDE5IHwgICAgIGF3YWl0IGV4cGVjdChwYWdlLmdldEJ5VGV4dCgnTWFpIG5hcCcpKS50b0JlVmlzaWJsZSgpOwogICAyMCB8ICAgICBhd2FpdCBleHBlY3QocGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogL2NoZXZyb24tbGVmdC9pIH0pKS50b0JlVmlzaWJsZSgpOwogICAyMSB8ICAgICBhd2FpdCBleHBlY3QocGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogL2NoZXZyb24tcmlnaHQvaSB9KSkudG9CZVZpc2libGUoKTsKICAgMjIgfCAgIH0pOwogICAyMyB8CiAgIDI0IHwgICB0ZXN0KCdIZXRpIG7DqXpldCBtZWdqZWxlbsOtdMOpc2UnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgMjUgfCAgICAgLy8gRWxsZW7FkXJpenrDvGssIGhvZ3kgYSBow6l0IG5hcGphaSBtZWdqZWxlbm5lay1lCiAgIDI2IHwgICAgIGNvbnN0IGRheXMgPSBbJ0jDqXRmxZEnLCAnS2VkZCcsICdTemVyZGEnLCAnQ3PDvHTDtnJ0w7ZrJywgJ1DDqW50ZWsnXTsKICAgMjcgfCAgICAgZm9yIChjb25zdCBkYXkgb2YgZGF5cykgewogICAyOCB8ICAgICAgIGF3YWl0IGV4cGVjdChwYWdlLmdldEJ5VGV4dChuZXcgUmVnRXhwKGRheSwgJ2knKSkpLnRvQmVWaXNpYmxlKCk7CiAgIDI5IHwgICAgIH0KICAgMzAgfCAgIH0pOwogICAzMSB8CiAgIDMyIHwgICB0ZXN0KCfDk3LDoWsgbWVnamVsZW7DrXTDqXNlJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDMzIHwgICAgIC8vIFbDoXJqdWsgbWVnLCBob2d5IGF6IMOzcsOhayBiZXTDtmx0xZFkamVuZWsKICAgMzQgfCAgICAgYXdhaXQgcGFnZS53YWl0Rm9yU2VsZWN0b3IoJy5sZXNzb24tY2FyZCcpOwogICAzNSB8ICAgICAKICAgMzYgfCAgICAgLy8gRWxsZW7FkXJpenrDvGssIGhvZ3kgdmFuLWUgbGVnYWzDoWJiIGVneSDDs3JhIG1lZ2plbGVuw610dmUKICAgMzcgfCAgICAgY29uc3QgbGVzc29ucyA9IGF3YWl0IHBhZ2UubG9jYXRvcignLmxlc3Nvbi1jYXJkJykuY291bnQoKTsKICAgMzggfCAgICAgZXhwZWN0KGxlc3NvbnMpLnRvQmVHcmVhdGVyVGhhbigwKTsKICAgMzkgfCAgIH0pOwogICA0MCB8CiAgIDQxIHwgICB0ZXN0KCdKZWxlbmxlZ2kgw7NyYSBraWplbMO2bMOpc2UnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgNDIgfCAgICAgLy8gS2VyZXNzw7xrIG1lZyBhIGplbGVubGVnaSDDs3LDoXQgKGhhIHZhbikKICAgNDMgfCAgICAgY29uc3QgY3VycmVudExlc3NvbiA9IHBhZ2UubG9jYXRvcignLmN1cnJlbnQtbGVzc29uJykuZmlyc3QoKTsKICAgNDQgfCAgICAgCiAgIDQ1IHwgICAgIGlmIChhd2FpdCBjdXJyZW50TGVzc29uLmNvdW50KCkgPiAwKSB7CiAgIDQ2IHwgICAgICAgYXdhaXQgZXhwZWN0KGN1cnJlbnRMZXNzb24pLnRvSGF2ZUNsYXNzKC9jdXJyZW50LWxlc3Nvbi8pOwogICA0NyB8ICAgICB9IGVsc2UgewogICA0OCB8ICAgICAgIGNvbnNvbGUubG9nKCdOaW5jcyBha3R1w6FsaXMgw7NyYSBqZWxlbmxlZycpOwogICA0OSB8ICAgICB9CiAgIDUwIHwgICB9KTsKICAgNTEgfAogICA1MiB8ICAgdGVzdCgnRGnDoWtvayBmZWxvbGTDoXNhIGRpYWzDs2d1cyBtZWdueWl0w6FzYScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICA1MyB8ICAgICAvLyBLZXJlc3PDvGsgbWVnIGEgamVsZW5sZWdpIMOzcsOhdCAoaGEgdmFuKQogICA1NCB8ICAgICBjb25zdCBjdXJyZW50TGVzc29uID0gcGFnZS5sb2NhdG9yKCcuY3VycmVudC1sZXNzb24nKS5maXJzdCgpOwogICA1NSB8ICAgICAKICAgNTYgfCAgICAgaWYgKGF3YWl0IGN1cnJlbnRMZXNzb24uY291bnQoKSA+IDApIHsKICAgNTcgfCAgICAgICAvLyBLYXR0aW50c3VuayBhIGplbGVubGVnaSDDs3LDoXJhCiAgIDU4IHwgICAgICAgYXdhaXQgY3VycmVudExlc3Nvbi5jbGljaygpOwogICA1OSB8ICAgICAgIAogICA2MCB8ICAgICAgIC8vIEVsbGVuxZFyaXp6w7xrLCBob2d5IG1lZ255w61sdC1lIGEgZGlhbMOzZ3VzCiAgIDYxIHwgICAgICAgYXdhaXQgZXhwZWN0KHBhZ2UubG9jYXRvcignW3JvbGU9ImRpYWxvZyJdJykpLnRvQmVWaXNpYmxlKCk7CiAgIDYyIHwgICAgICAgYXdhaXQgZXhwZWN0KHBhZ2UuZ2V0QnlUZXh0KCfDlnNzemVzIGZlbG9sZMOhcycpKS50b0JlVmlzaWJsZSgpOwogICA2MyB8ICAgICAgIAogICA2NCB8ICAgICAgIC8vIEVsbGVuxZFyaXp6w7xrLCBob2d5IG1lZ2plbGVubmVrLWUgYSBkacOha29rCiAgIDY1IHwgICAgICAgYXdhaXQgZXhwZWN0KHBhZ2UubG9jYXRvcigndGFibGUgdGJvZHkgdHInKS5maXJzdCgpKS50b0JlVmlzaWJsZSgpOwogICA2NiB8ICAgICB9IGVsc2UgewogICA2NyB8ICAgICAgIGNvbnNvbGUubG9nKCdOaW5jcyBha3R1w6FsaXMgw7NyYSBqZWxlbmxlZywgYSB0ZXN6dCBraWhhZ3l2YScpOwogICA2OCB8ICAgICB9CiAgIDY5IHwgICB9KTsKICAgNzAgfAogICA3MSB8ICAgdGVzdCgnRGnDoWsgZmVsb2xkw6FzYScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICA3MiB8ICAgICAvLyBLZXJlc3PDvGsgbWVnIGEgamVsZW5sZWdpIMOzcsOhdCAoaGEgdmFuKQogICA3MyB8ICAgICBjb25zdCBjdXJyZW50TGVzc29uID0gcGFnZS5sb2NhdG9yKCcuY3VycmVudC1sZXNzb24nKS5maXJzdCgpOwogICA3NCB8ICAgICAKICAgNzUgfCAgICAgaWYgKGF3YWl0IGN1cnJlbnRMZXNzb24uY291bnQoKSA+IDApIHsKICAgNzYgfCAgICAgICAvLyBLYXR0aW50c3VuayBhIGplbGVubGVnaSDDs3LDoXJhCiAgIDc3IHwgICAgICAgYXdhaXQgY3VycmVudExlc3Nvbi5jbGljaygpOwogICA3OCB8ICAgICAgIAogICA3OSB8ICAgICAgIC8vIFbDoXJqdWsgbWVnIGEgZGlhbMOzZ3VzIG1lZ255aXTDoXPDoXQKICAgODAgfCAgICAgICBhd2FpdCBwYWdlLndhaXRGb3JTZWxlY3RvcignW3JvbGU9ImRpYWxvZyJdJyk7CiAgIDgxIHwgICAgICAgCiAgIDgyIHwgICAgICAgLy8gQXogZWxzxZEgZGnDoWsgZmVsb2xkw6FzYSBnb21iasOhbmFrIG1lZ2tlcmVzw6lzZQogICA4MyB8ICAgICAgIGNvbnN0IHVubG9ja0J1dHRvbiA9IHBhZ2UubG9jYXRvcigndGFibGUgdGJvZHkgdHInKS5maXJzdCgpLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAvbG9jay1vcGVuL2kgfSk7CiAgIDg0IHwgICAgICAgCiAgIDg1IHwgICAgICAgaWYgKGF3YWl0IHVubG9ja0J1dHRvbi5jb3VudCgpID4gMCAmJiAhKGF3YWl0IHVubG9ja0J1dHRvbi5pc0Rpc2FibGVkKCkpKSB7CiAgIDg2IHwgICAgICAgICBhd2FpdCB1bmxvY2tCdXR0b24uY2xpY2soKTsKICAgODcgfCAgICAgICAgIAogICA4OCB8ICAgICAgICAgLy8gSXR0IGVsbGVuxZFyaXpoZXRuw6luaywgaG9neSBzaWtlcmVzIHZvbHQtZSBhIG3FsXZlbGV0LAogICA4OSB8ICAgICAgICAgLy8gZGUgZXogZsO8Z2cgYSBiYWNrZW5kIHbDoWxhc3rDoXTDs2wgw6lzIGEgVUkgZnJpc3PDrXTDqXPDqXTFkWwKICAgOTAgfCAgICAgICB9IGVsc2UgewogICA5MSB8ICAgICAgICAgY29uc29sZS5sb2coJ0F6IGVsc8WRIGRpw6FrIG3DoXIgZmVsIHZhbiBvbGR2YSB2YWd5IG5lbSBsZWhldCBmZWxvbGRhbmknKTsKICAgOTIgfCAgICAgICB9CiAgIDkzIHwgICAgIH0gZWxzZSB7CiAgIDk0IHwgICAgICAgY29uc29sZS5sb2coJ05pbmNzIGFrdHXDoWxpcyDDs3JhIGplbGVubGVnLCBhIHRlc3p0IGtpaGFneXZhJyk7CiAgIDk1IHwgICAgIH0KICAgOTYgfCAgIH0pOwogICA5NyB8CiAgIDk4IHwgICB0ZXN0KCdDc29wb3J0b3MgZmVsb2xkw6FzJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDk5IHwgICAgIC8vIEtlcmVzc8O8ayBtZWcgYSBqZWxlbmxlZ2kgw7Nyw6F0IChoYSB2YW4pCiAgMTAwIHwgICAgIGNvbnN0IGN1cnJlbnRMZXNzb24gPSBwYWdlLmxvY2F0b3IoJy5jdXJyZW50LWxlc3NvbicpLmZpcnN0KCk7CiAgMTAxIHwgICAgIAogIDEwMiB8ICAgICBpZiAoYXdhaXQgY3VycmVudExlc3Nvbi5jb3VudCgpID4gMCkgewogIDEwMyB8ICAgICAgIC8vIEthdHRpbnRzdW5rIGEgamVsZW5sZWdpIMOzcsOhcmEKICAxMDQgfCAgICAgICBhd2FpdCBjdXJyZW50TGVzc29uLmNsaWNrKCk7CiAgMTA1IHwgICAgICAgCiAgMTA2IHwgICAgICAgLy8gVsOhcmp1ayBtZWcgYSBkaWFsw7NndXMgbWVnbnlpdMOhc8OhdAogIDEwNyB8ICAgICAgIGF3YWl0IHBhZ2Uud2FpdEZvclNlbGVjdG9yKCdbcm9sZT0iZGlhbG9nIl0nKTsKICAxMDggfCAgICAgICAKICAxMDkgfCAgICAgICAvLyBLYXR0aW50c3VuayBhICLDlnNzemVzIGZlbG9sZMOhcyIgZ29tYnJhCiAgMTEwIHwgICAgICAgY29uc3QgZ3JvdXBVbmxvY2tCdXR0b24gPSBwYWdlLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAvw5Zzc3plcyBmZWxvbGTDoXMvaSB9KTsKICAxMTEgfCAgICAgICBhd2FpdCBncm91cFVubG9ja0J1dHRvbi5jbGljaygpOwogIDExMiB8ICAgICAgIAogIDExMyB8ICAgICAgIC8vIEl0dCBlbGxlbsWRcml6aGV0bsOpbmssIGhvZ3kgc2lrZXJlcyB2b2x0LWUgYSBtxbF2ZWxldApgYGA="
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                        "column": 8,
+                        "line": 4
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "52676e6f4b59e1b621f0-60d5ffbd4639837ae900",
+              "file": "timetables.spec.ts",
+              "line": 52,
+              "column": 7
+            },
+            {
+              "title": "Diák feloldása",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 30032,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:4:8",
+                        "location": {
+                          "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                          "column": 8,
+                          "line": 4
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 2 |\u001b[39m\n \u001b[90m 3 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(\u001b[32m'Tanári Órarend Komponens'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 4 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m   |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 5 |\u001b[39m     \u001b[90m// Bejelentkezés a rendszerbe (ha szükséges)\u001b[39m\n \u001b[90m 6 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/login'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 7 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'input[name=\"short_name\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'KiGI'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                            "column": 8,
+                            "line": 4
+                          },
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n\n\u001b[0m \u001b[90m 2 |\u001b[39m\n \u001b[90m 3 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(\u001b[32m'Tanári Órarend Komponens'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 4 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m   |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 5 |\u001b[39m     \u001b[90m// Bejelentkezés a rendszerbe (ha szükséges)\u001b[39m\n \u001b[90m 6 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/login'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 7 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'input[name=\"short_name\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'KiGI'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:4:8\u001b[22m"
+                        },
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                            "column": 16,
+                            "line": 13
+                          },
+                          "message": "Error: page.waitForSelector: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.calendar-container') to be visible\u001b[22m\n\n\n\u001b[0m \u001b[90m 11 |\u001b[39m     \u001b[90m// Navigálás az órarend oldalra\u001b[39m\n \u001b[90m 12 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/dashboard/my-timetable'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 13 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForSelector(\u001b[32m'.calendar-container'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 14 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 15 |\u001b[39m\n \u001b[90m 16 |\u001b[39m   test(\u001b[32m'Oldal betöltése és alapvető elemek megjelenítése'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:13:16\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-04-04T08:48:45.422Z",
+                      "attachments": [
+                        {
+                          "name": "_prompt-1",
+                          "contentType": "text/markdown",
+                          "body": "IyBJbnN0cnVjdGlvbnMKCi0gRm9sbG93aW5nIFBsYXl3cmlnaHQgdGVzdCBmYWlsZWQuCi0gRXhwbGFpbiB3aHksIGJlIGNvbmNpc2UsIHJlc3BlY3QgUGxheXdyaWdodCBiZXN0IHByYWN0aWNlcy4KLSBQcm92aWRlIGEgc25pcHBldCBvZiBjb2RlIHdpdGggdGhlIGZpeCwgaWYgcG9zc2libGUuCgojIFRlc3QgaW5mbwoKLSBOYW1lOiBUYW7DoXJpIMOTcmFyZW5kIEtvbXBvbmVucyA+PiBEacOhayBmZWxvbGTDoXNhCi0gTG9jYXRpb246IEM6XFVzZXJzXFN6YWxrYWktU3phYm9BZGFtXERvY3VtZW50c1xHaXRIdWJcdml6c2dhcmVtZWtcdGVsb2NrXHRlc3RzXHRpbWV0YWJsZXMuc3BlYy50czo3MTo3CgojIEVycm9yIGRldGFpbHMKCmBgYApFcnJvcjogcGFnZS53YWl0Rm9yU2VsZWN0b3I6IFRlc3QgdGltZW91dCBvZiAzMDAwMG1zIGV4Y2VlZGVkLgpDYWxsIGxvZzoKICAtIHdhaXRpbmcgZm9yIGxvY2F0b3IoJy5jYWxlbmRhci1jb250YWluZXInKSB0byBiZSB2aXNpYmxlCgogICAgYXQgQzpcVXNlcnNcU3phbGthaS1TemFib0FkYW1cRG9jdW1lbnRzXEdpdEh1Ylx2aXpzZ2FyZW1la1x0ZWxvY2tcdGVzdHNcdGltZXRhYmxlcy5zcGVjLnRzOjEzOjE2CmBgYAoKIyBQYWdlIHNuYXBzaG90CgpgYGB5YW1sCi0gbGluayAidGVsb2NrIgotIGxpbmsgIlZpc3N6YSI6CiAgLSBpbWcKICAtIHRleHQ6IFZpc3N6YQotIHRleHQ6IEJlamVsZW50a2V6w6lzIMOcZHbDtnrDtmxqw7xrISBLw6lyasO8aywgYWRqYSBtZWcgYmVqZWxlbnRrZXrDqXNpIGFkYXRhaXQgYSBmb2x5dGF0w6FzaG96LiBGZWxoYXN6bsOhbMOzbsOpdgotIHRleHRib3gKLSB0ZXh0OiBKZWxzesOzCi0gdGV4dGJveAotIGJ1dHRvbiAiQmVqZWxlbnRrZXrDqXMiCi0gdGV4dDogQXogYWRhdGFpdCBiaXp0b25zw6FnYmFuIHRhcnRqdWsuIFNvaGEgbmUgb3NzemEgbWVnIGplbHN6YXbDoXQgbcOhc29ra2FsIQotIGFsZXJ0CmBgYAoKIyBUZXN0IHNvdXJjZQoKYGBgdHMKICAgMSB8IGltcG9ydCB7IHRlc3QsIGV4cGVjdCB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwogICAyIHwKICAgMyB8IHRlc3QuZGVzY3JpYmUoJ1RhbsOhcmkgw5NyYXJlbmQgS29tcG9uZW5zJywgKCkgPT4gewogICA0IHwgICB0ZXN0LmJlZm9yZUVhY2goYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDUgfCAgICAgLy8gQmVqZWxlbnRrZXrDqXMgYSByZW5kc3plcmJlIChoYSBzesO8a3PDqWdlcykKICAgNiB8ICAgICBhd2FpdCBwYWdlLmdvdG8oJy9sb2dpbicpOwogICA3IHwgICAgIGF3YWl0IHBhZ2UuZmlsbCgnaW5wdXRbbmFtZT0ic2hvcnRfbmFtZSJdJywgJ0tpR0knKTsKICAgOCB8ICAgICBhd2FpdCBwYWdlLmZpbGwoJ2lucHV0W25hbWU9InBhc3N3b3JkIl0nLCAnS2lHSTEyMycpOwogICA5IHwgICAgIGF3YWl0IHBhZ2UuY2xpY2soJ2J1dHRvblt0eXBlPSJzdWJtaXQiXScpOwogICAxMCB8ICAgICAKICAgMTEgfCAgICAgLy8gTmF2aWfDoWzDoXMgYXogw7NyYXJlbmQgb2xkYWxyYQogICAxMiB8ICAgICBhd2FpdCBwYWdlLmdvdG8oJy9kYXNoYm9hcmQvbXktdGltZXRhYmxlJyk7Cj4gIDEzIHwgICAgIGF3YWl0IHBhZ2Uud2FpdEZvclNlbGVjdG9yKCcuY2FsZW5kYXItY29udGFpbmVyJyk7CiAgICAgIHwgICAgICAgICAgICAgICAgXiBFcnJvcjogcGFnZS53YWl0Rm9yU2VsZWN0b3I6IFRlc3QgdGltZW91dCBvZiAzMDAwMG1zIGV4Y2VlZGVkLgogICAxNCB8ICAgfSk7CiAgIDE1IHwKICAgMTYgfCAgIHRlc3QoJ09sZGFsIGJldMO2bHTDqXNlIMOpcyBhbGFwdmV0xZEgZWxlbWVrIG1lZ2plbGVuw610w6lzZScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICAxNyB8ICAgICAvLyBFbGxlbsWRcml6esO8aywgaG9neSBhIGbFkSBlbGVtZWsgbWVnamVsZW5uZWstZQogICAxOCB8ICAgICBhd2FpdCBleHBlY3QocGFnZS5sb2NhdG9yKCcuY2FsZW5kYXItaGVhZGVyIGgyJykpLnRvQmVWaXNpYmxlKCk7CiAgIDE5IHwgICAgIGF3YWl0IGV4cGVjdChwYWdlLmdldEJ5VGV4dCgnTWFpIG5hcCcpKS50b0JlVmlzaWJsZSgpOwogICAyMCB8ICAgICBhd2FpdCBleHBlY3QocGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogL2NoZXZyb24tbGVmdC9pIH0pKS50b0JlVmlzaWJsZSgpOwogICAyMSB8ICAgICBhd2FpdCBleHBlY3QocGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogL2NoZXZyb24tcmlnaHQvaSB9KSkudG9CZVZpc2libGUoKTsKICAgMjIgfCAgIH0pOwogICAyMyB8CiAgIDI0IHwgICB0ZXN0KCdIZXRpIG7DqXpldCBtZWdqZWxlbsOtdMOpc2UnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgMjUgfCAgICAgLy8gRWxsZW7FkXJpenrDvGssIGhvZ3kgYSBow6l0IG5hcGphaSBtZWdqZWxlbm5lay1lCiAgIDI2IHwgICAgIGNvbnN0IGRheXMgPSBbJ0jDqXRmxZEnLCAnS2VkZCcsICdTemVyZGEnLCAnQ3PDvHTDtnJ0w7ZrJywgJ1DDqW50ZWsnXTsKICAgMjcgfCAgICAgZm9yIChjb25zdCBkYXkgb2YgZGF5cykgewogICAyOCB8ICAgICAgIGF3YWl0IGV4cGVjdChwYWdlLmdldEJ5VGV4dChuZXcgUmVnRXhwKGRheSwgJ2knKSkpLnRvQmVWaXNpYmxlKCk7CiAgIDI5IHwgICAgIH0KICAgMzAgfCAgIH0pOwogICAzMSB8CiAgIDMyIHwgICB0ZXN0KCfDk3LDoWsgbWVnamVsZW7DrXTDqXNlJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDMzIHwgICAgIC8vIFbDoXJqdWsgbWVnLCBob2d5IGF6IMOzcsOhayBiZXTDtmx0xZFkamVuZWsKICAgMzQgfCAgICAgYXdhaXQgcGFnZS53YWl0Rm9yU2VsZWN0b3IoJy5sZXNzb24tY2FyZCcpOwogICAzNSB8ICAgICAKICAgMzYgfCAgICAgLy8gRWxsZW7FkXJpenrDvGssIGhvZ3kgdmFuLWUgbGVnYWzDoWJiIGVneSDDs3JhIG1lZ2plbGVuw610dmUKICAgMzcgfCAgICAgY29uc3QgbGVzc29ucyA9IGF3YWl0IHBhZ2UubG9jYXRvcignLmxlc3Nvbi1jYXJkJykuY291bnQoKTsKICAgMzggfCAgICAgZXhwZWN0KGxlc3NvbnMpLnRvQmVHcmVhdGVyVGhhbigwKTsKICAgMzkgfCAgIH0pOwogICA0MCB8CiAgIDQxIHwgICB0ZXN0KCdKZWxlbmxlZ2kgw7NyYSBraWplbMO2bMOpc2UnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgNDIgfCAgICAgLy8gS2VyZXNzw7xrIG1lZyBhIGplbGVubGVnaSDDs3LDoXQgKGhhIHZhbikKICAgNDMgfCAgICAgY29uc3QgY3VycmVudExlc3NvbiA9IHBhZ2UubG9jYXRvcignLmN1cnJlbnQtbGVzc29uJykuZmlyc3QoKTsKICAgNDQgfCAgICAgCiAgIDQ1IHwgICAgIGlmIChhd2FpdCBjdXJyZW50TGVzc29uLmNvdW50KCkgPiAwKSB7CiAgIDQ2IHwgICAgICAgYXdhaXQgZXhwZWN0KGN1cnJlbnRMZXNzb24pLnRvSGF2ZUNsYXNzKC9jdXJyZW50LWxlc3Nvbi8pOwogICA0NyB8ICAgICB9IGVsc2UgewogICA0OCB8ICAgICAgIGNvbnNvbGUubG9nKCdOaW5jcyBha3R1w6FsaXMgw7NyYSBqZWxlbmxlZycpOwogICA0OSB8ICAgICB9CiAgIDUwIHwgICB9KTsKICAgNTEgfAogICA1MiB8ICAgdGVzdCgnRGnDoWtvayBmZWxvbGTDoXNhIGRpYWzDs2d1cyBtZWdueWl0w6FzYScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICA1MyB8ICAgICAvLyBLZXJlc3PDvGsgbWVnIGEgamVsZW5sZWdpIMOzcsOhdCAoaGEgdmFuKQogICA1NCB8ICAgICBjb25zdCBjdXJyZW50TGVzc29uID0gcGFnZS5sb2NhdG9yKCcuY3VycmVudC1sZXNzb24nKS5maXJzdCgpOwogICA1NSB8ICAgICAKICAgNTYgfCAgICAgaWYgKGF3YWl0IGN1cnJlbnRMZXNzb24uY291bnQoKSA+IDApIHsKICAgNTcgfCAgICAgICAvLyBLYXR0aW50c3VuayBhIGplbGVubGVnaSDDs3LDoXJhCiAgIDU4IHwgICAgICAgYXdhaXQgY3VycmVudExlc3Nvbi5jbGljaygpOwogICA1OSB8ICAgICAgIAogICA2MCB8ICAgICAgIC8vIEVsbGVuxZFyaXp6w7xrLCBob2d5IG1lZ255w61sdC1lIGEgZGlhbMOzZ3VzCiAgIDYxIHwgICAgICAgYXdhaXQgZXhwZWN0KHBhZ2UubG9jYXRvcignW3JvbGU9ImRpYWxvZyJdJykpLnRvQmVWaXNpYmxlKCk7CiAgIDYyIHwgICAgICAgYXdhaXQgZXhwZWN0KHBhZ2UuZ2V0QnlUZXh0KCfDlnNzemVzIGZlbG9sZMOhcycpKS50b0JlVmlzaWJsZSgpOwogICA2MyB8ICAgICAgIAogICA2NCB8ICAgICAgIC8vIEVsbGVuxZFyaXp6w7xrLCBob2d5IG1lZ2plbGVubmVrLWUgYSBkacOha29rCiAgIDY1IHwgICAgICAgYXdhaXQgZXhwZWN0KHBhZ2UubG9jYXRvcigndGFibGUgdGJvZHkgdHInKS5maXJzdCgpKS50b0JlVmlzaWJsZSgpOwogICA2NiB8ICAgICB9IGVsc2UgewogICA2NyB8ICAgICAgIGNvbnNvbGUubG9nKCdOaW5jcyBha3R1w6FsaXMgw7NyYSBqZWxlbmxlZywgYSB0ZXN6dCBraWhhZ3l2YScpOwogICA2OCB8ICAgICB9CiAgIDY5IHwgICB9KTsKICAgNzAgfAogICA3MSB8ICAgdGVzdCgnRGnDoWsgZmVsb2xkw6FzYScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICA3MiB8ICAgICAvLyBLZXJlc3PDvGsgbWVnIGEgamVsZW5sZWdpIMOzcsOhdCAoaGEgdmFuKQogICA3MyB8ICAgICBjb25zdCBjdXJyZW50TGVzc29uID0gcGFnZS5sb2NhdG9yKCcuY3VycmVudC1sZXNzb24nKS5maXJzdCgpOwogICA3NCB8ICAgICAKICAgNzUgfCAgICAgaWYgKGF3YWl0IGN1cnJlbnRMZXNzb24uY291bnQoKSA+IDApIHsKICAgNzYgfCAgICAgICAvLyBLYXR0aW50c3VuayBhIGplbGVubGVnaSDDs3LDoXJhCiAgIDc3IHwgICAgICAgYXdhaXQgY3VycmVudExlc3Nvbi5jbGljaygpOwogICA3OCB8ICAgICAgIAogICA3OSB8ICAgICAgIC8vIFbDoXJqdWsgbWVnIGEgZGlhbMOzZ3VzIG1lZ255aXTDoXPDoXQKICAgODAgfCAgICAgICBhd2FpdCBwYWdlLndhaXRGb3JTZWxlY3RvcignW3JvbGU9ImRpYWxvZyJdJyk7CiAgIDgxIHwgICAgICAgCiAgIDgyIHwgICAgICAgLy8gQXogZWxzxZEgZGnDoWsgZmVsb2xkw6FzYSBnb21iasOhbmFrIG1lZ2tlcmVzw6lzZQogICA4MyB8ICAgICAgIGNvbnN0IHVubG9ja0J1dHRvbiA9IHBhZ2UubG9jYXRvcigndGFibGUgdGJvZHkgdHInKS5maXJzdCgpLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAvbG9jay1vcGVuL2kgfSk7CiAgIDg0IHwgICAgICAgCiAgIDg1IHwgICAgICAgaWYgKGF3YWl0IHVubG9ja0J1dHRvbi5jb3VudCgpID4gMCAmJiAhKGF3YWl0IHVubG9ja0J1dHRvbi5pc0Rpc2FibGVkKCkpKSB7CiAgIDg2IHwgICAgICAgICBhd2FpdCB1bmxvY2tCdXR0b24uY2xpY2soKTsKICAgODcgfCAgICAgICAgIAogICA4OCB8ICAgICAgICAgLy8gSXR0IGVsbGVuxZFyaXpoZXRuw6luaywgaG9neSBzaWtlcmVzIHZvbHQtZSBhIG3FsXZlbGV0LAogICA4OSB8ICAgICAgICAgLy8gZGUgZXogZsO8Z2cgYSBiYWNrZW5kIHbDoWxhc3rDoXTDs2wgw6lzIGEgVUkgZnJpc3PDrXTDqXPDqXTFkWwKICAgOTAgfCAgICAgICB9IGVsc2UgewogICA5MSB8ICAgICAgICAgY29uc29sZS5sb2coJ0F6IGVsc8WRIGRpw6FrIG3DoXIgZmVsIHZhbiBvbGR2YSB2YWd5IG5lbSBsZWhldCBmZWxvbGRhbmknKTsKICAgOTIgfCAgICAgICB9CiAgIDkzIHwgICAgIH0gZWxzZSB7CiAgIDk0IHwgICAgICAgY29uc29sZS5sb2coJ05pbmNzIGFrdHXDoWxpcyDDs3JhIGplbGVubGVnLCBhIHRlc3p0IGtpaGFneXZhJyk7CiAgIDk1IHwgICAgIH0KICAgOTYgfCAgIH0pOwogICA5NyB8CiAgIDk4IHwgICB0ZXN0KCdDc29wb3J0b3MgZmVsb2xkw6FzJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDk5IHwgICAgIC8vIEtlcmVzc8O8ayBtZWcgYSBqZWxlbmxlZ2kgw7Nyw6F0IChoYSB2YW4pCiAgMTAwIHwgICAgIGNvbnN0IGN1cnJlbnRMZXNzb24gPSBwYWdlLmxvY2F0b3IoJy5jdXJyZW50LWxlc3NvbicpLmZpcnN0KCk7CiAgMTAxIHwgICAgIAogIDEwMiB8ICAgICBpZiAoYXdhaXQgY3VycmVudExlc3Nvbi5jb3VudCgpID4gMCkgewogIDEwMyB8ICAgICAgIC8vIEthdHRpbnRzdW5rIGEgamVsZW5sZWdpIMOzcsOhcmEKICAxMDQgfCAgICAgICBhd2FpdCBjdXJyZW50TGVzc29uLmNsaWNrKCk7CiAgMTA1IHwgICAgICAgCiAgMTA2IHwgICAgICAgLy8gVsOhcmp1ayBtZWcgYSBkaWFsw7NndXMgbWVnbnlpdMOhc8OhdAogIDEwNyB8ICAgICAgIGF3YWl0IHBhZ2Uud2FpdEZvclNlbGVjdG9yKCdbcm9sZT0iZGlhbG9nIl0nKTsKICAxMDggfCAgICAgICAKICAxMDkgfCAgICAgICAvLyBLYXR0aW50c3VuayBhICLDlnNzemVzIGZlbG9sZMOhcyIgZ29tYnJhCiAgMTEwIHwgICAgICAgY29uc3QgZ3JvdXBVbmxvY2tCdXR0b24gPSBwYWdlLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAvw5Zzc3plcyBmZWxvbGTDoXMvaSB9KTsKICAxMTEgfCAgICAgICBhd2FpdCBncm91cFVubG9ja0J1dHRvbi5jbGljaygpOwogIDExMiB8ICAgICAgIAogIDExMyB8ICAgICAgIC8vIEl0dCBlbGxlbsWRcml6aGV0bsOpbmssIGhvZ3kgc2lrZXJlcyB2b2x0LWUgYSBtxbF2ZWxldApgYGA="
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                        "column": 8,
+                        "line": 4
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "52676e6f4b59e1b621f0-a610f31d50548530fd62",
+              "file": "timetables.spec.ts",
+              "line": 71,
+              "column": 7
+            },
+            {
+              "title": "Csoportos feloldás",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 30026,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:4:8",
+                        "location": {
+                          "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                          "column": 8,
+                          "line": 4
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 2 |\u001b[39m\n \u001b[90m 3 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(\u001b[32m'Tanári Órarend Komponens'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 4 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m   |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 5 |\u001b[39m     \u001b[90m// Bejelentkezés a rendszerbe (ha szükséges)\u001b[39m\n \u001b[90m 6 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/login'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 7 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'input[name=\"short_name\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'KiGI'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                            "column": 8,
+                            "line": 4
+                          },
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n\n\u001b[0m \u001b[90m 2 |\u001b[39m\n \u001b[90m 3 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(\u001b[32m'Tanári Órarend Komponens'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 4 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m   |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 5 |\u001b[39m     \u001b[90m// Bejelentkezés a rendszerbe (ha szükséges)\u001b[39m\n \u001b[90m 6 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/login'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 7 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'input[name=\"short_name\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'KiGI'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:4:8\u001b[22m"
+                        },
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                            "column": 16,
+                            "line": 13
+                          },
+                          "message": "Error: page.waitForSelector: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.calendar-container') to be visible\u001b[22m\n\n\n\u001b[0m \u001b[90m 11 |\u001b[39m     \u001b[90m// Navigálás az órarend oldalra\u001b[39m\n \u001b[90m 12 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/dashboard/my-timetable'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 13 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForSelector(\u001b[32m'.calendar-container'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 14 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 15 |\u001b[39m\n \u001b[90m 16 |\u001b[39m   test(\u001b[32m'Oldal betöltése és alapvető elemek megjelenítése'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:13:16\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-04-04T08:49:16.163Z",
+                      "attachments": [
+                        {
+                          "name": "_prompt-1",
+                          "contentType": "text/markdown",
+                          "body": "IyBJbnN0cnVjdGlvbnMKCi0gRm9sbG93aW5nIFBsYXl3cmlnaHQgdGVzdCBmYWlsZWQuCi0gRXhwbGFpbiB3aHksIGJlIGNvbmNpc2UsIHJlc3BlY3QgUGxheXdyaWdodCBiZXN0IHByYWN0aWNlcy4KLSBQcm92aWRlIGEgc25pcHBldCBvZiBjb2RlIHdpdGggdGhlIGZpeCwgaWYgcG9zc2libGUuCgojIFRlc3QgaW5mbwoKLSBOYW1lOiBUYW7DoXJpIMOTcmFyZW5kIEtvbXBvbmVucyA+PiBDc29wb3J0b3MgZmVsb2xkw6FzCi0gTG9jYXRpb246IEM6XFVzZXJzXFN6YWxrYWktU3phYm9BZGFtXERvY3VtZW50c1xHaXRIdWJcdml6c2dhcmVtZWtcdGVsb2NrXHRlc3RzXHRpbWV0YWJsZXMuc3BlYy50czo5ODo3CgojIEVycm9yIGRldGFpbHMKCmBgYApFcnJvcjogcGFnZS53YWl0Rm9yU2VsZWN0b3I6IFRlc3QgdGltZW91dCBvZiAzMDAwMG1zIGV4Y2VlZGVkLgpDYWxsIGxvZzoKICAtIHdhaXRpbmcgZm9yIGxvY2F0b3IoJy5jYWxlbmRhci1jb250YWluZXInKSB0byBiZSB2aXNpYmxlCgogICAgYXQgQzpcVXNlcnNcU3phbGthaS1TemFib0FkYW1cRG9jdW1lbnRzXEdpdEh1Ylx2aXpzZ2FyZW1la1x0ZWxvY2tcdGVzdHNcdGltZXRhYmxlcy5zcGVjLnRzOjEzOjE2CmBgYAoKIyBQYWdlIHNuYXBzaG90CgpgYGB5YW1sCi0gbGluayAidGVsb2NrIgotIGxpbmsgIlZpc3N6YSI6CiAgLSBpbWcKICAtIHRleHQ6IFZpc3N6YQotIHRleHQ6IEJlamVsZW50a2V6w6lzIMOcZHbDtnrDtmxqw7xrISBLw6lyasO8aywgYWRqYSBtZWcgYmVqZWxlbnRrZXrDqXNpIGFkYXRhaXQgYSBmb2x5dGF0w6FzaG96LiBGZWxoYXN6bsOhbMOzbsOpdgotIHRleHRib3gKLSB0ZXh0OiBKZWxzesOzCi0gdGV4dGJveAotIGJ1dHRvbiAiQmVqZWxlbnRrZXrDqXMiCi0gdGV4dDogQXogYWRhdGFpdCBiaXp0b25zw6FnYmFuIHRhcnRqdWsuIFNvaGEgbmUgb3NzemEgbWVnIGplbHN6YXbDoXQgbcOhc29ra2FsIQotIGFsZXJ0CmBgYAoKIyBUZXN0IHNvdXJjZQoKYGBgdHMKICAgMSB8IGltcG9ydCB7IHRlc3QsIGV4cGVjdCB9IGZyb20gJ0BwbGF5d3JpZ2h0L3Rlc3QnOwogICAyIHwKICAgMyB8IHRlc3QuZGVzY3JpYmUoJ1RhbsOhcmkgw5NyYXJlbmQgS29tcG9uZW5zJywgKCkgPT4gewogICA0IHwgICB0ZXN0LmJlZm9yZUVhY2goYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDUgfCAgICAgLy8gQmVqZWxlbnRrZXrDqXMgYSByZW5kc3plcmJlIChoYSBzesO8a3PDqWdlcykKICAgNiB8ICAgICBhd2FpdCBwYWdlLmdvdG8oJy9sb2dpbicpOwogICA3IHwgICAgIGF3YWl0IHBhZ2UuZmlsbCgnaW5wdXRbbmFtZT0ic2hvcnRfbmFtZSJdJywgJ0tpR0knKTsKICAgOCB8ICAgICBhd2FpdCBwYWdlLmZpbGwoJ2lucHV0W25hbWU9InBhc3N3b3JkIl0nLCAnS2lHSTEyMycpOwogICA5IHwgICAgIGF3YWl0IHBhZ2UuY2xpY2soJ2J1dHRvblt0eXBlPSJzdWJtaXQiXScpOwogICAxMCB8ICAgICAKICAgMTEgfCAgICAgLy8gTmF2aWfDoWzDoXMgYXogw7NyYXJlbmQgb2xkYWxyYQogICAxMiB8ICAgICBhd2FpdCBwYWdlLmdvdG8oJy9kYXNoYm9hcmQvbXktdGltZXRhYmxlJyk7Cj4gIDEzIHwgICAgIGF3YWl0IHBhZ2Uud2FpdEZvclNlbGVjdG9yKCcuY2FsZW5kYXItY29udGFpbmVyJyk7CiAgICAgIHwgICAgICAgICAgICAgICAgXiBFcnJvcjogcGFnZS53YWl0Rm9yU2VsZWN0b3I6IFRlc3QgdGltZW91dCBvZiAzMDAwMG1zIGV4Y2VlZGVkLgogICAxNCB8ICAgfSk7CiAgIDE1IHwKICAgMTYgfCAgIHRlc3QoJ09sZGFsIGJldMO2bHTDqXNlIMOpcyBhbGFwdmV0xZEgZWxlbWVrIG1lZ2plbGVuw610w6lzZScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICAxNyB8ICAgICAvLyBFbGxlbsWRcml6esO8aywgaG9neSBhIGbFkSBlbGVtZWsgbWVnamVsZW5uZWstZQogICAxOCB8ICAgICBhd2FpdCBleHBlY3QocGFnZS5sb2NhdG9yKCcuY2FsZW5kYXItaGVhZGVyIGgyJykpLnRvQmVWaXNpYmxlKCk7CiAgIDE5IHwgICAgIGF3YWl0IGV4cGVjdChwYWdlLmdldEJ5VGV4dCgnTWFpIG5hcCcpKS50b0JlVmlzaWJsZSgpOwogICAyMCB8ICAgICBhd2FpdCBleHBlY3QocGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogL2NoZXZyb24tbGVmdC9pIH0pKS50b0JlVmlzaWJsZSgpOwogICAyMSB8ICAgICBhd2FpdCBleHBlY3QocGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogL2NoZXZyb24tcmlnaHQvaSB9KSkudG9CZVZpc2libGUoKTsKICAgMjIgfCAgIH0pOwogICAyMyB8CiAgIDI0IHwgICB0ZXN0KCdIZXRpIG7DqXpldCBtZWdqZWxlbsOtdMOpc2UnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgMjUgfCAgICAgLy8gRWxsZW7FkXJpenrDvGssIGhvZ3kgYSBow6l0IG5hcGphaSBtZWdqZWxlbm5lay1lCiAgIDI2IHwgICAgIGNvbnN0IGRheXMgPSBbJ0jDqXRmxZEnLCAnS2VkZCcsICdTemVyZGEnLCAnQ3PDvHTDtnJ0w7ZrJywgJ1DDqW50ZWsnXTsKICAgMjcgfCAgICAgZm9yIChjb25zdCBkYXkgb2YgZGF5cykgewogICAyOCB8ICAgICAgIGF3YWl0IGV4cGVjdChwYWdlLmdldEJ5VGV4dChuZXcgUmVnRXhwKGRheSwgJ2knKSkpLnRvQmVWaXNpYmxlKCk7CiAgIDI5IHwgICAgIH0KICAgMzAgfCAgIH0pOwogICAzMSB8CiAgIDMyIHwgICB0ZXN0KCfDk3LDoWsgbWVnamVsZW7DrXTDqXNlJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDMzIHwgICAgIC8vIFbDoXJqdWsgbWVnLCBob2d5IGF6IMOzcsOhayBiZXTDtmx0xZFkamVuZWsKICAgMzQgfCAgICAgYXdhaXQgcGFnZS53YWl0Rm9yU2VsZWN0b3IoJy5sZXNzb24tY2FyZCcpOwogICAzNSB8ICAgICAKICAgMzYgfCAgICAgLy8gRWxsZW7FkXJpenrDvGssIGhvZ3kgdmFuLWUgbGVnYWzDoWJiIGVneSDDs3JhIG1lZ2plbGVuw610dmUKICAgMzcgfCAgICAgY29uc3QgbGVzc29ucyA9IGF3YWl0IHBhZ2UubG9jYXRvcignLmxlc3Nvbi1jYXJkJykuY291bnQoKTsKICAgMzggfCAgICAgZXhwZWN0KGxlc3NvbnMpLnRvQmVHcmVhdGVyVGhhbigwKTsKICAgMzkgfCAgIH0pOwogICA0MCB8CiAgIDQxIHwgICB0ZXN0KCdKZWxlbmxlZ2kgw7NyYSBraWplbMO2bMOpc2UnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgNDIgfCAgICAgLy8gS2VyZXNzw7xrIG1lZyBhIGplbGVubGVnaSDDs3LDoXQgKGhhIHZhbikKICAgNDMgfCAgICAgY29uc3QgY3VycmVudExlc3NvbiA9IHBhZ2UubG9jYXRvcignLmN1cnJlbnQtbGVzc29uJykuZmlyc3QoKTsKICAgNDQgfCAgICAgCiAgIDQ1IHwgICAgIGlmIChhd2FpdCBjdXJyZW50TGVzc29uLmNvdW50KCkgPiAwKSB7CiAgIDQ2IHwgICAgICAgYXdhaXQgZXhwZWN0KGN1cnJlbnRMZXNzb24pLnRvSGF2ZUNsYXNzKC9jdXJyZW50LWxlc3Nvbi8pOwogICA0NyB8ICAgICB9IGVsc2UgewogICA0OCB8ICAgICAgIGNvbnNvbGUubG9nKCdOaW5jcyBha3R1w6FsaXMgw7NyYSBqZWxlbmxlZycpOwogICA0OSB8ICAgICB9CiAgIDUwIHwgICB9KTsKICAgNTEgfAogICA1MiB8ICAgdGVzdCgnRGnDoWtvayBmZWxvbGTDoXNhIGRpYWzDs2d1cyBtZWdueWl0w6FzYScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICA1MyB8ICAgICAvLyBLZXJlc3PDvGsgbWVnIGEgamVsZW5sZWdpIMOzcsOhdCAoaGEgdmFuKQogICA1NCB8ICAgICBjb25zdCBjdXJyZW50TGVzc29uID0gcGFnZS5sb2NhdG9yKCcuY3VycmVudC1sZXNzb24nKS5maXJzdCgpOwogICA1NSB8ICAgICAKICAgNTYgfCAgICAgaWYgKGF3YWl0IGN1cnJlbnRMZXNzb24uY291bnQoKSA+IDApIHsKICAgNTcgfCAgICAgICAvLyBLYXR0aW50c3VuayBhIGplbGVubGVnaSDDs3LDoXJhCiAgIDU4IHwgICAgICAgYXdhaXQgY3VycmVudExlc3Nvbi5jbGljaygpOwogICA1OSB8ICAgICAgIAogICA2MCB8ICAgICAgIC8vIEVsbGVuxZFyaXp6w7xrLCBob2d5IG1lZ255w61sdC1lIGEgZGlhbMOzZ3VzCiAgIDYxIHwgICAgICAgYXdhaXQgZXhwZWN0KHBhZ2UubG9jYXRvcignW3JvbGU9ImRpYWxvZyJdJykpLnRvQmVWaXNpYmxlKCk7CiAgIDYyIHwgICAgICAgYXdhaXQgZXhwZWN0KHBhZ2UuZ2V0QnlUZXh0KCfDlnNzemVzIGZlbG9sZMOhcycpKS50b0JlVmlzaWJsZSgpOwogICA2MyB8ICAgICAgIAogICA2NCB8ICAgICAgIC8vIEVsbGVuxZFyaXp6w7xrLCBob2d5IG1lZ2plbGVubmVrLWUgYSBkacOha29rCiAgIDY1IHwgICAgICAgYXdhaXQgZXhwZWN0KHBhZ2UubG9jYXRvcigndGFibGUgdGJvZHkgdHInKS5maXJzdCgpKS50b0JlVmlzaWJsZSgpOwogICA2NiB8ICAgICB9IGVsc2UgewogICA2NyB8ICAgICAgIGNvbnNvbGUubG9nKCdOaW5jcyBha3R1w6FsaXMgw7NyYSBqZWxlbmxlZywgYSB0ZXN6dCBraWhhZ3l2YScpOwogICA2OCB8ICAgICB9CiAgIDY5IHwgICB9KTsKICAgNzAgfAogICA3MSB8ICAgdGVzdCgnRGnDoWsgZmVsb2xkw6FzYScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICA3MiB8ICAgICAvLyBLZXJlc3PDvGsgbWVnIGEgamVsZW5sZWdpIMOzcsOhdCAoaGEgdmFuKQogICA3MyB8ICAgICBjb25zdCBjdXJyZW50TGVzc29uID0gcGFnZS5sb2NhdG9yKCcuY3VycmVudC1sZXNzb24nKS5maXJzdCgpOwogICA3NCB8ICAgICAKICAgNzUgfCAgICAgaWYgKGF3YWl0IGN1cnJlbnRMZXNzb24uY291bnQoKSA+IDApIHsKICAgNzYgfCAgICAgICAvLyBLYXR0aW50c3VuayBhIGplbGVubGVnaSDDs3LDoXJhCiAgIDc3IHwgICAgICAgYXdhaXQgY3VycmVudExlc3Nvbi5jbGljaygpOwogICA3OCB8ICAgICAgIAogICA3OSB8ICAgICAgIC8vIFbDoXJqdWsgbWVnIGEgZGlhbMOzZ3VzIG1lZ255aXTDoXPDoXQKICAgODAgfCAgICAgICBhd2FpdCBwYWdlLndhaXRGb3JTZWxlY3RvcignW3JvbGU9ImRpYWxvZyJdJyk7CiAgIDgxIHwgICAgICAgCiAgIDgyIHwgICAgICAgLy8gQXogZWxzxZEgZGnDoWsgZmVsb2xkw6FzYSBnb21iasOhbmFrIG1lZ2tlcmVzw6lzZQogICA4MyB8ICAgICAgIGNvbnN0IHVubG9ja0J1dHRvbiA9IHBhZ2UubG9jYXRvcigndGFibGUgdGJvZHkgdHInKS5maXJzdCgpLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAvbG9jay1vcGVuL2kgfSk7CiAgIDg0IHwgICAgICAgCiAgIDg1IHwgICAgICAgaWYgKGF3YWl0IHVubG9ja0J1dHRvbi5jb3VudCgpID4gMCAmJiAhKGF3YWl0IHVubG9ja0J1dHRvbi5pc0Rpc2FibGVkKCkpKSB7CiAgIDg2IHwgICAgICAgICBhd2FpdCB1bmxvY2tCdXR0b24uY2xpY2soKTsKICAgODcgfCAgICAgICAgIAogICA4OCB8ICAgICAgICAgLy8gSXR0IGVsbGVuxZFyaXpoZXRuw6luaywgaG9neSBzaWtlcmVzIHZvbHQtZSBhIG3FsXZlbGV0LAogICA4OSB8ICAgICAgICAgLy8gZGUgZXogZsO8Z2cgYSBiYWNrZW5kIHbDoWxhc3rDoXTDs2wgw6lzIGEgVUkgZnJpc3PDrXTDqXPDqXTFkWwKICAgOTAgfCAgICAgICB9IGVsc2UgewogICA5MSB8ICAgICAgICAgY29uc29sZS5sb2coJ0F6IGVsc8WRIGRpw6FrIG3DoXIgZmVsIHZhbiBvbGR2YSB2YWd5IG5lbSBsZWhldCBmZWxvbGRhbmknKTsKICAgOTIgfCAgICAgICB9CiAgIDkzIHwgICAgIH0gZWxzZSB7CiAgIDk0IHwgICAgICAgY29uc29sZS5sb2coJ05pbmNzIGFrdHXDoWxpcyDDs3JhIGplbGVubGVnLCBhIHRlc3p0IGtpaGFneXZhJyk7CiAgIDk1IHwgICAgIH0KICAgOTYgfCAgIH0pOwogICA5NyB8CiAgIDk4IHwgICB0ZXN0KCdDc29wb3J0b3MgZmVsb2xkw6FzJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDk5IHwgICAgIC8vIEtlcmVzc8O8ayBtZWcgYSBqZWxlbmxlZ2kgw7Nyw6F0IChoYSB2YW4pCiAgMTAwIHwgICAgIGNvbnN0IGN1cnJlbnRMZXNzb24gPSBwYWdlLmxvY2F0b3IoJy5jdXJyZW50LWxlc3NvbicpLmZpcnN0KCk7CiAgMTAxIHwgICAgIAogIDEwMiB8ICAgICBpZiAoYXdhaXQgY3VycmVudExlc3Nvbi5jb3VudCgpID4gMCkgewogIDEwMyB8ICAgICAgIC8vIEthdHRpbnRzdW5rIGEgamVsZW5sZWdpIMOzcsOhcmEKICAxMDQgfCAgICAgICBhd2FpdCBjdXJyZW50TGVzc29uLmNsaWNrKCk7CiAgMTA1IHwgICAgICAgCiAgMTA2IHwgICAgICAgLy8gVsOhcmp1ayBtZWcgYSBkaWFsw7NndXMgbWVnbnlpdMOhc8OhdAogIDEwNyB8ICAgICAgIGF3YWl0IHBhZ2Uud2FpdEZvclNlbGVjdG9yKCdbcm9sZT0iZGlhbG9nIl0nKTsKICAxMDggfCAgICAgICAKICAxMDkgfCAgICAgICAvLyBLYXR0aW50c3VuayBhICLDlnNzemVzIGZlbG9sZMOhcyIgZ29tYnJhCiAgMTEwIHwgICAgICAgY29uc3QgZ3JvdXBVbmxvY2tCdXR0b24gPSBwYWdlLmdldEJ5Um9sZSgnYnV0dG9uJywgeyBuYW1lOiAvw5Zzc3plcyBmZWxvbGTDoXMvaSB9KTsKICAxMTEgfCAgICAgICBhd2FpdCBncm91cFVubG9ja0J1dHRvbi5jbGljaygpOwogIDExMiB8ICAgICAgIAogIDExMyB8ICAgICAgIC8vIEl0dCBlbGxlbsWRcml6aGV0bsOpbmssIGhvZ3kgc2lrZXJlcyB2b2x0LWUgYSBtxbF2ZWxldApgYGA="
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                        "column": 8,
+                        "line": 4
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "52676e6f4b59e1b621f0-2d0f95154359dafb76dc",
+              "file": "timetables.spec.ts",
+              "line": 98,
+              "column": 7
+            },
+            {
+              "title": "Lapozás a diákok listájában",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 30026,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:4:8",
+                        "location": {
+                          "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                          "column": 8,
+                          "line": 4
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 2 |\u001b[39m\n \u001b[90m 3 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(\u001b[32m'Tanári Órarend Komponens'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 4 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m   |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 5 |\u001b[39m     \u001b[90m// Bejelentkezés a rendszerbe (ha szükséges)\u001b[39m\n \u001b[90m 6 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/login'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 7 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'input[name=\"short_name\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'KiGI'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                            "column": 8,
+                            "line": 4
+                          },
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n\n\u001b[0m \u001b[90m 2 |\u001b[39m\n \u001b[90m 3 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(\u001b[32m'Tanári Órarend Komponens'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 4 |\u001b[39m   test\u001b[33m.\u001b[39mbeforeEach(\u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m   |\u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 5 |\u001b[39m     \u001b[90m// Bejelentkezés a rendszerbe (ha szükséges)\u001b[39m\n \u001b[90m 6 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/login'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 7 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mfill(\u001b[32m'input[name=\"short_name\"]'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'KiGI'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:4:8\u001b[22m"
+                        },
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                            "column": 16,
+                            "line": 13
+                          },
+                          "message": "Error: page.waitForSelector: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.calendar-container') to be visible\u001b[22m\n\n\n\u001b[0m \u001b[90m 11 |\u001b[39m     \u001b[90m// Navigálás az órarend oldalra\u001b[39m\n \u001b[90m 12 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'/dashboard/my-timetable'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 13 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForSelector(\u001b[32m'.calendar-container'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 14 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 15 |\u001b[39m\n \u001b[90m 16 |\u001b[39m   test(\u001b[32m'Oldal betöltése és alapvető elemek megjelenítése'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts:13:16\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-04-04T08:49:46.795Z",
+                      "attachments": [
+                        {
+                          "name": "_prompt-1",
+                          "contentType": "text/markdown",
+                          "body": "IyBJbnN0cnVjdGlvbnMKCi0gRm9sbG93aW5nIFBsYXl3cmlnaHQgdGVzdCBmYWlsZWQuCi0gRXhwbGFpbiB3aHksIGJlIGNvbmNpc2UsIHJlc3BlY3QgUGxheXdyaWdodCBiZXN0IHByYWN0aWNlcy4KLSBQcm92aWRlIGEgc25pcHBldCBvZiBjb2RlIHdpdGggdGhlIGZpeCwgaWYgcG9zc2libGUuCgojIFRlc3QgaW5mbwoKLSBOYW1lOiBUYW7DoXJpIMOTcmFyZW5kIEtvbXBvbmVucyA+PiBMYXBvesOhcyBhIGRpw6Frb2sgbGlzdMOhasOhYmFuCi0gTG9jYXRpb246IEM6XFVzZXJzXFN6YWxrYWktU3phYm9BZGFtXERvY3VtZW50c1xHaXRIdWJcdml6c2dhcmVtZWtcdGVsb2NrXHRlc3RzXHRpbWV0YWJsZXMuc3BlYy50czoxMTk6NwoKIyBFcnJvciBkZXRhaWxzCgpgYGAKRXJyb3I6IHBhZ2Uud2FpdEZvclNlbGVjdG9yOiBUZXN0IHRpbWVvdXQgb2YgMzAwMDBtcyBleGNlZWRlZC4KQ2FsbCBsb2c6CiAgLSB3YWl0aW5nIGZvciBsb2NhdG9yKCcuY2FsZW5kYXItY29udGFpbmVyJykgdG8gYmUgdmlzaWJsZQoKICAgIGF0IEM6XFVzZXJzXFN6YWxrYWktU3phYm9BZGFtXERvY3VtZW50c1xHaXRIdWJcdml6c2dhcmVtZWtcdGVsb2NrXHRlc3RzXHRpbWV0YWJsZXMuc3BlYy50czoxMzoxNgpgYGAKCiMgUGFnZSBzbmFwc2hvdAoKYGBgeWFtbAotIGxpbmsgInRlbG9jayIKLSBsaW5rICJWaXNzemEiOgogIC0gaW1nCiAgLSB0ZXh0OiBWaXNzemEKLSB0ZXh0OiBCZWplbGVudGtlesOpcyDDnGR2w7Z6w7ZsasO8ayEgS8OpcmrDvGssIGFkamEgbWVnIGJlamVsZW50a2V6w6lzaSBhZGF0YWl0IGEgZm9seXRhdMOhc2hvei4gRmVsaGFzem7DoWzDs27DqXYKLSB0ZXh0Ym94Ci0gdGV4dDogSmVsc3rDswotIHRleHRib3gKLSBidXR0b24gIkJlamVsZW50a2V6w6lzIgotIHRleHQ6IEF6IGFkYXRhaXQgYml6dG9uc8OhZ2JhbiB0YXJ0anVrLiBTb2hhIG5lIG9zc3phIG1lZyBqZWxzemF2w6F0IG3DoXNva2thbCEKLSBhbGVydApgYGAKCiMgVGVzdCBzb3VyY2UKCmBgYHRzCiAgIDEgfCBpbXBvcnQgeyB0ZXN0LCBleHBlY3QgfSBmcm9tICdAcGxheXdyaWdodC90ZXN0JzsKICAgMiB8CiAgIDMgfCB0ZXN0LmRlc2NyaWJlKCdUYW7DoXJpIMOTcmFyZW5kIEtvbXBvbmVucycsICgpID0+IHsKICAgNCB8ICAgdGVzdC5iZWZvcmVFYWNoKGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICA1IHwgICAgIC8vIEJlamVsZW50a2V6w6lzIGEgcmVuZHN6ZXJiZSAoaGEgc3rDvGtzw6lnZXMpCiAgIDYgfCAgICAgYXdhaXQgcGFnZS5nb3RvKCcvbG9naW4nKTsKICAgNyB8ICAgICBhd2FpdCBwYWdlLmZpbGwoJ2lucHV0W25hbWU9InNob3J0X25hbWUiXScsICdLaUdJJyk7CiAgIDggfCAgICAgYXdhaXQgcGFnZS5maWxsKCdpbnB1dFtuYW1lPSJwYXNzd29yZCJdJywgJ0tpR0kxMjMnKTsKICAgOSB8ICAgICBhd2FpdCBwYWdlLmNsaWNrKCdidXR0b25bdHlwZT0ic3VibWl0Il0nKTsKICAgMTAgfCAgICAgCiAgIDExIHwgICAgIC8vIE5hdmlnw6Fsw6FzIGF6IMOzcmFyZW5kIG9sZGFscmEKICAgMTIgfCAgICAgYXdhaXQgcGFnZS5nb3RvKCcvZGFzaGJvYXJkL215LXRpbWV0YWJsZScpOwo+ICAxMyB8ICAgICBhd2FpdCBwYWdlLndhaXRGb3JTZWxlY3RvcignLmNhbGVuZGFyLWNvbnRhaW5lcicpOwogICAgICB8ICAgICAgICAgICAgICAgIF4gRXJyb3I6IHBhZ2Uud2FpdEZvclNlbGVjdG9yOiBUZXN0IHRpbWVvdXQgb2YgMzAwMDBtcyBleGNlZWRlZC4KICAgMTQgfCAgIH0pOwogICAxNSB8CiAgIDE2IHwgICB0ZXN0KCdPbGRhbCBiZXTDtmx0w6lzZSDDqXMgYWxhcHZldMWRIGVsZW1layBtZWdqZWxlbsOtdMOpc2UnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgMTcgfCAgICAgLy8gRWxsZW7FkXJpenrDvGssIGhvZ3kgYSBmxZEgZWxlbWVrIG1lZ2plbGVubmVrLWUKICAgMTggfCAgICAgYXdhaXQgZXhwZWN0KHBhZ2UubG9jYXRvcignLmNhbGVuZGFyLWhlYWRlciBoMicpKS50b0JlVmlzaWJsZSgpOwogICAxOSB8ICAgICBhd2FpdCBleHBlY3QocGFnZS5nZXRCeVRleHQoJ01haSBuYXAnKSkudG9CZVZpc2libGUoKTsKICAgMjAgfCAgICAgYXdhaXQgZXhwZWN0KHBhZ2UuZ2V0QnlSb2xlKCdidXR0b24nLCB7IG5hbWU6IC9jaGV2cm9uLWxlZnQvaSB9KSkudG9CZVZpc2libGUoKTsKICAgMjEgfCAgICAgYXdhaXQgZXhwZWN0KHBhZ2UuZ2V0QnlSb2xlKCdidXR0b24nLCB7IG5hbWU6IC9jaGV2cm9uLXJpZ2h0L2kgfSkpLnRvQmVWaXNpYmxlKCk7CiAgIDIyIHwgICB9KTsKICAgMjMgfAogICAyNCB8ICAgdGVzdCgnSGV0aSBuw6l6ZXQgbWVnamVsZW7DrXTDqXNlJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDI1IHwgICAgIC8vIEVsbGVuxZFyaXp6w7xrLCBob2d5IGEgaMOpdCBuYXBqYWkgbWVnamVsZW5uZWstZQogICAyNiB8ICAgICBjb25zdCBkYXlzID0gWydIw6l0ZsWRJywgJ0tlZGQnLCAnU3plcmRhJywgJ0Nzw7x0w7ZydMO2aycsICdQw6ludGVrJ107CiAgIDI3IHwgICAgIGZvciAoY29uc3QgZGF5IG9mIGRheXMpIHsKICAgMjggfCAgICAgICBhd2FpdCBleHBlY3QocGFnZS5nZXRCeVRleHQobmV3IFJlZ0V4cChkYXksICdpJykpKS50b0JlVmlzaWJsZSgpOwogICAyOSB8ICAgICB9CiAgIDMwIHwgICB9KTsKICAgMzEgfAogICAzMiB8ICAgdGVzdCgnw5Nyw6FrIG1lZ2plbGVuw610w6lzZScsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICAzMyB8ICAgICAvLyBWw6FyanVrIG1lZywgaG9neSBheiDDs3LDoWsgYmV0w7ZsdMWRZGplbmVrCiAgIDM0IHwgICAgIGF3YWl0IHBhZ2Uud2FpdEZvclNlbGVjdG9yKCcubGVzc29uLWNhcmQnKTsKICAgMzUgfCAgICAgCiAgIDM2IHwgICAgIC8vIEVsbGVuxZFyaXp6w7xrLCBob2d5IHZhbi1lIGxlZ2Fsw6FiYiBlZ3kgw7NyYSBtZWdqZWxlbsOtdHZlCiAgIDM3IHwgICAgIGNvbnN0IGxlc3NvbnMgPSBhd2FpdCBwYWdlLmxvY2F0b3IoJy5sZXNzb24tY2FyZCcpLmNvdW50KCk7CiAgIDM4IHwgICAgIGV4cGVjdChsZXNzb25zKS50b0JlR3JlYXRlclRoYW4oMCk7CiAgIDM5IHwgICB9KTsKICAgNDAgfAogICA0MSB8ICAgdGVzdCgnSmVsZW5sZWdpIMOzcmEga2lqZWzDtmzDqXNlJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDQyIHwgICAgIC8vIEtlcmVzc8O8ayBtZWcgYSBqZWxlbmxlZ2kgw7Nyw6F0IChoYSB2YW4pCiAgIDQzIHwgICAgIGNvbnN0IGN1cnJlbnRMZXNzb24gPSBwYWdlLmxvY2F0b3IoJy5jdXJyZW50LWxlc3NvbicpLmZpcnN0KCk7CiAgIDQ0IHwgICAgIAogICA0NSB8ICAgICBpZiAoYXdhaXQgY3VycmVudExlc3Nvbi5jb3VudCgpID4gMCkgewogICA0NiB8ICAgICAgIGF3YWl0IGV4cGVjdChjdXJyZW50TGVzc29uKS50b0hhdmVDbGFzcygvY3VycmVudC1sZXNzb24vKTsKICAgNDcgfCAgICAgfSBlbHNlIHsKICAgNDggfCAgICAgICBjb25zb2xlLmxvZygnTmluY3MgYWt0dcOhbGlzIMOzcmEgamVsZW5sZWcnKTsKICAgNDkgfCAgICAgfQogICA1MCB8ICAgfSk7CiAgIDUxIHwKICAgNTIgfCAgIHRlc3QoJ0Rpw6Frb2sgZmVsb2xkw6FzYSBkaWFsw7NndXMgbWVnbnlpdMOhc2EnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgNTMgfCAgICAgLy8gS2VyZXNzw7xrIG1lZyBhIGplbGVubGVnaSDDs3LDoXQgKGhhIHZhbikKICAgNTQgfCAgICAgY29uc3QgY3VycmVudExlc3NvbiA9IHBhZ2UubG9jYXRvcignLmN1cnJlbnQtbGVzc29uJykuZmlyc3QoKTsKICAgNTUgfCAgICAgCiAgIDU2IHwgICAgIGlmIChhd2FpdCBjdXJyZW50TGVzc29uLmNvdW50KCkgPiAwKSB7CiAgIDU3IHwgICAgICAgLy8gS2F0dGludHN1bmsgYSBqZWxlbmxlZ2kgw7Nyw6FyYQogICA1OCB8ICAgICAgIGF3YWl0IGN1cnJlbnRMZXNzb24uY2xpY2soKTsKICAgNTkgfCAgICAgICAKICAgNjAgfCAgICAgICAvLyBFbGxlbsWRcml6esO8aywgaG9neSBtZWduecOtbHQtZSBhIGRpYWzDs2d1cwogICA2MSB8ICAgICAgIGF3YWl0IGV4cGVjdChwYWdlLmxvY2F0b3IoJ1tyb2xlPSJkaWFsb2ciXScpKS50b0JlVmlzaWJsZSgpOwogICA2MiB8ICAgICAgIGF3YWl0IGV4cGVjdChwYWdlLmdldEJ5VGV4dCgnw5Zzc3plcyBmZWxvbGTDoXMnKSkudG9CZVZpc2libGUoKTsKICAgNjMgfCAgICAgICAKICAgNjQgfCAgICAgICAvLyBFbGxlbsWRcml6esO8aywgaG9neSBtZWdqZWxlbm5lay1lIGEgZGnDoWtvawogICA2NSB8ICAgICAgIGF3YWl0IGV4cGVjdChwYWdlLmxvY2F0b3IoJ3RhYmxlIHRib2R5IHRyJykuZmlyc3QoKSkudG9CZVZpc2libGUoKTsKICAgNjYgfCAgICAgfSBlbHNlIHsKICAgNjcgfCAgICAgICBjb25zb2xlLmxvZygnTmluY3MgYWt0dcOhbGlzIMOzcmEgamVsZW5sZWcsIGEgdGVzenQga2loYWd5dmEnKTsKICAgNjggfCAgICAgfQogICA2OSB8ICAgfSk7CiAgIDcwIHwKICAgNzEgfCAgIHRlc3QoJ0Rpw6FrIGZlbG9sZMOhc2EnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgNzIgfCAgICAgLy8gS2VyZXNzw7xrIG1lZyBhIGplbGVubGVnaSDDs3LDoXQgKGhhIHZhbikKICAgNzMgfCAgICAgY29uc3QgY3VycmVudExlc3NvbiA9IHBhZ2UubG9jYXRvcignLmN1cnJlbnQtbGVzc29uJykuZmlyc3QoKTsKICAgNzQgfCAgICAgCiAgIDc1IHwgICAgIGlmIChhd2FpdCBjdXJyZW50TGVzc29uLmNvdW50KCkgPiAwKSB7CiAgIDc2IHwgICAgICAgLy8gS2F0dGludHN1bmsgYSBqZWxlbmxlZ2kgw7Nyw6FyYQogICA3NyB8ICAgICAgIGF3YWl0IGN1cnJlbnRMZXNzb24uY2xpY2soKTsKICAgNzggfCAgICAgICAKICAgNzkgfCAgICAgICAvLyBWw6FyanVrIG1lZyBhIGRpYWzDs2d1cyBtZWdueWl0w6Fzw6F0CiAgIDgwIHwgICAgICAgYXdhaXQgcGFnZS53YWl0Rm9yU2VsZWN0b3IoJ1tyb2xlPSJkaWFsb2ciXScpOwogICA4MSB8ICAgICAgIAogICA4MiB8ICAgICAgIC8vIEF6IGVsc8WRIGRpw6FrIGZlbG9sZMOhc2EgZ29tYmrDoW5hayBtZWdrZXJlc8Opc2UKICAgODMgfCAgICAgICBjb25zdCB1bmxvY2tCdXR0b24gPSBwYWdlLmxvY2F0b3IoJ3RhYmxlIHRib2R5IHRyJykuZmlyc3QoKS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogL2xvY2stb3Blbi9pIH0pOwogICA4NCB8ICAgICAgIAogICA4NSB8ICAgICAgIGlmIChhd2FpdCB1bmxvY2tCdXR0b24uY291bnQoKSA+IDAgJiYgIShhd2FpdCB1bmxvY2tCdXR0b24uaXNEaXNhYmxlZCgpKSkgewogICA4NiB8ICAgICAgICAgYXdhaXQgdW5sb2NrQnV0dG9uLmNsaWNrKCk7CiAgIDg3IHwgICAgICAgICAKICAgODggfCAgICAgICAgIC8vIEl0dCBlbGxlbsWRcml6aGV0bsOpbmssIGhvZ3kgc2lrZXJlcyB2b2x0LWUgYSBtxbF2ZWxldCwKICAgODkgfCAgICAgICAgIC8vIGRlIGV6IGbDvGdnIGEgYmFja2VuZCB2w6FsYXN6w6F0w7NsIMOpcyBhIFVJIGZyaXNzw610w6lzw6l0xZFsCiAgIDkwIHwgICAgICAgfSBlbHNlIHsKICAgOTEgfCAgICAgICAgIGNvbnNvbGUubG9nKCdBeiBlbHPFkSBkacOhayBtw6FyIGZlbCB2YW4gb2xkdmEgdmFneSBuZW0gbGVoZXQgZmVsb2xkYW5pJyk7CiAgIDkyIHwgICAgICAgfQogICA5MyB8ICAgICB9IGVsc2UgewogICA5NCB8ICAgICAgIGNvbnNvbGUubG9nKCdOaW5jcyBha3R1w6FsaXMgw7NyYSBqZWxlbmxlZywgYSB0ZXN6dCBraWhhZ3l2YScpOwogICA5NSB8ICAgICB9CiAgIDk2IHwgICB9KTsKICAgOTcgfAogICA5OCB8ICAgdGVzdCgnQ3NvcG9ydG9zIGZlbG9sZMOhcycsIGFzeW5jICh7IHBhZ2UgfSkgPT4gewogICA5OSB8ICAgICAvLyBLZXJlc3PDvGsgbWVnIGEgamVsZW5sZWdpIMOzcsOhdCAoaGEgdmFuKQogIDEwMCB8ICAgICBjb25zdCBjdXJyZW50TGVzc29uID0gcGFnZS5sb2NhdG9yKCcuY3VycmVudC1sZXNzb24nKS5maXJzdCgpOwogIDEwMSB8ICAgICAKICAxMDIgfCAgICAgaWYgKGF3YWl0IGN1cnJlbnRMZXNzb24uY291bnQoKSA+IDApIHsKICAxMDMgfCAgICAgICAvLyBLYXR0aW50c3VuayBhIGplbGVubGVnaSDDs3LDoXJhCiAgMTA0IHwgICAgICAgYXdhaXQgY3VycmVudExlc3Nvbi5jbGljaygpOwogIDEwNSB8ICAgICAgIAogIDEwNiB8ICAgICAgIC8vIFbDoXJqdWsgbWVnIGEgZGlhbMOzZ3VzIG1lZ255aXTDoXPDoXQKICAxMDcgfCAgICAgICBhd2FpdCBwYWdlLndhaXRGb3JTZWxlY3RvcignW3JvbGU9ImRpYWxvZyJdJyk7CiAgMTA4IHwgICAgICAgCiAgMTA5IHwgICAgICAgLy8gS2F0dGludHN1bmsgYSAiw5Zzc3plcyBmZWxvbGTDoXMiIGdvbWJyYQogIDExMCB8ICAgICAgIGNvbnN0IGdyb3VwVW5sb2NrQnV0dG9uID0gcGFnZS5nZXRCeVJvbGUoJ2J1dHRvbicsIHsgbmFtZTogL8OWc3N6ZXMgZmVsb2xkw6FzL2kgfSk7CiAgMTExIHwgICAgICAgYXdhaXQgZ3JvdXBVbmxvY2tCdXR0b24uY2xpY2soKTsKICAxMTIgfCAgICAgICAKICAxMTMgfCAgICAgICAvLyBJdHQgZWxsZW7FkXJpemhldG7DqW5rLCBob2d5IHNpa2VyZXMgdm9sdC1lIGEgbcWxdmVsZXQKYGBg"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\Szalkai-SzaboAdam\\Documents\\GitHub\\vizsgaremek\\telock\\tests\\timetables.spec.ts",
+                        "column": 8,
+                        "line": 4
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "52676e6f4b59e1b621f0-cacbb3b6cb2b8b3d9b04",
+              "file": "timetables.spec.ts",
+              "line": 119,
               "column": 7
             }
           ]
@@ -556,11 +649,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-04-03T18:25:31.722Z",
-    "duration": 117481.661,
-    "expected": 11,
+    "startTime": "2025-04-04T08:46:09.579Z",
+    "duration": 247461.463,
+    "expected": 0,
     "skipped": 0,
-    "unexpected": 2,
+    "unexpected": 8,
     "flaky": 0
   }
 }

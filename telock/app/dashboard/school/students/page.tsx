@@ -342,8 +342,8 @@ export default function Home() {
                     />
 
                     <Button variant="outline" onClick={handleSystemClose} > {/*className="ml-auto" */}
-                      {systemClose ? <LockOpen /> : <Lock />} {/*   Keyhole  */}
-                      {systemClose ? 'Összes feloldás' : 'Összes zárolás'}
+                   {/*    {systemClose ? <LockOpen /> : <Lock />}   */}
+                      {systemClose ? 'Rendszer inkativálás' : 'Rendszer aktiválás'}
 
                     </Button>
                   </div>

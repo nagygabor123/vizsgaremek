@@ -330,14 +330,12 @@ export default function Page() {
   
       if (response.ok) {
         console.log('Törlés és új tanév beállítása sikeres:', result);
-        alert('Tanév váltása megtörtént!');
+        window.location.reload();
       } else {
         console.error('Hiba a törlés során:', result);
-        alert(`Hiba a tanév váltáskor: ${result.error}`);
       }
     } catch (error) {
       console.error('API hívási hiba:', error);
-      alert('Hiba történt az API hívás során.');
     }
   };
   
