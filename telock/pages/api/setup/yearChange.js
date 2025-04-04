@@ -111,7 +111,7 @@ async function callSetYearStartEnd(school_id, type, date) {
     },
     body: JSON.stringify({
       type,
-      date: date.toISOString()
+      which_day: date.toISOString()
     })
   });
 
