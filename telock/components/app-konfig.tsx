@@ -163,6 +163,7 @@ const SheetComponent: React.FC = () => {
 
       if (response.ok) {
         setCsvMessage('File uploaded successfully!');
+        localStorage.removeItem("currentStep");
       } else {
         setCsvMessage('Error occurred during file upload.');
       }
