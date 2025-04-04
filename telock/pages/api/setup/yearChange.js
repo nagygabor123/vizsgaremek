@@ -79,7 +79,7 @@ export default async function handler(req, res) {
 }
 
 async function callSetYearStartEnd(school_id, type, date) {
-  const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/setYearStartEnd`, {
+  const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/config/setYearStartEnd`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
