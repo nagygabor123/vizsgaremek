@@ -212,15 +212,11 @@ export default function Home() {
                     <Link href="/dashboard">Kezdőlap</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator>
-                  <Slash />
-                </BreadcrumbSeparator>
+                <BreadcrumbSeparator/>
                 <BreadcrumbItem>
                   <BreadcrumbPage>Osztályom</BreadcrumbPage>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator>
-                  <Slash />
-                </BreadcrumbSeparator>
+                <BreadcrumbSeparator/>
                 <BreadcrumbItem>
                   <BreadcrumbPage>Tanulók</BreadcrumbPage>
                 </BreadcrumbItem>

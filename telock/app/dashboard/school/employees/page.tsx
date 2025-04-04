@@ -286,15 +286,11 @@ export default function AddEmployeePage() {
                   <Link href="/dashboard">Kezdőlap</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
-              <BreadcrumbSeparator>
-                <Slash />
-              </BreadcrumbSeparator>
+              <BreadcrumbSeparator/>
               <BreadcrumbItem>
                 <BreadcrumbPage>Iskolai nyilvántartás</BreadcrumbPage>
               </BreadcrumbItem>
-              <BreadcrumbSeparator>
-                <Slash />
-              </BreadcrumbSeparator>
+              <BreadcrumbSeparator/>
               <BreadcrumbItem>
                 <BreadcrumbPage>Munkatársak</BreadcrumbPage>
               </BreadcrumbItem>

@@ -663,9 +663,7 @@ const Calendar: React.FC = () => {
                     <Link href="/dashboard">Kezdőlap</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator>
-                  <Slash />
-                </BreadcrumbSeparator>
+                <BreadcrumbSeparator/>
                 <BreadcrumbItem>
                   <BreadcrumbPage>Saját órák</BreadcrumbPage>
                 </BreadcrumbItem>
