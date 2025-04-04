@@ -360,7 +360,7 @@ export default function Page() {
           <>
 <div className="p-6">
 
-<div className="flex flex-col gap-4 overflow-x-hidden w-full">
+<div className="flex flex-col gap-4 overflow-x-hidden w-full pb-6">
           <div className="grid auto-rows-min gap-4 w-full">
               <div className="min-h-[60px] rounded-xl bg-blue-100 flex items-center px-4 w-full box-border overflow-hidden">
                 <School className="text-blue-600 hidden sm:block" />

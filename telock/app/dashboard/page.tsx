@@ -92,8 +92,23 @@ export default function Page() {
           </div>
         ) : (
           <div className="p-6">
+
+
+<div className="flex flex-col gap-4 overflow-x-hidden w-full pb-6">
+          <div className="grid auto-rows-min gap-4 w-full">
+              <div className="min-h-[60px] rounded-xl bg-blue-100 flex items-center px-4 w-full box-border overflow-hidden">
+                <Megaphone className="text-blue-600 hidden sm:block" />
+                <p className="text-sm truncate ml-3 text-blue-600">
+                Üdvözöljük, <span className="font-medium">{session?.user?.full_name}</span>!
+                </p>
+              </div>
+          
+          </div>
+        </div>
+
+
           <div className="space-y-6">
-            <div className="rounded-xl bg-gradient-to-r from-blue-100 to-indigo-50">
+{/*            <div className="rounded-xl bg-gradient-to-r from-blue-100 to-indigo-50">
               <div className="flex items-center">
                 <Megaphone className="text-blue-600" />
                 <p className="text-sm ml-3 text-blue-600">
@@ -101,7 +116,7 @@ export default function Page() {
                 </p>
               </div>
 
-            </div>
+            </div>*/}
 
           
             <div className="grid gap-4 md:grid-cols-2">
