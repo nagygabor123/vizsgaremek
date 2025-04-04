@@ -51,17 +51,57 @@ export default async function handler(req, res) {
       );
 
       await sql('COMMIT');
-      
-      return res.status(200).json({ message: 'Sikeres törlés', schoolId: school_id });
+
+      const result = await sql(
+        "SELECT type, date FROM year_schedule WHERE school_id = $1 AND type IN ('kezd', 'veg')",
+        [school_id]
+      );
+
+      let startDate = null;
+      let endDate = null;
+
+      result.forEach(row => {
+        if (row.type === 'kezd') startDate = new Date(row.date);
+        if (row.type === 'veg') endDate = new Date(row.date);
+      });
+
+      if (startDate && endDate) {
+        await callSetYearStartEnd(school_id, startDate, endDate);
+      }
+
+      return res.status(200).json({ message: 'Sikeres törlés és év újraindítás', schoolId: school_id });
     } catch (error) {
       console.error('Adatbázis hiba:', error);
       await sql('ROLLBACK').catch(e => console.error('Rollback failed:', e));
-      return res.status(500).json({ 
+      return res.status(500).json({
         error: 'Hiba a törlés során',
-        details: error.message 
+        details: error.message
       });
     }
   } else {
     return res.status(405).json({ error: 'A HTTP metódus nem engedélyezett' });
+  }
+}
+
+async function callSetYearStartEnd(school_id, startDate, endDate) {
+  const newStart = new Date(startDate);
+  const newEnd = new Date(endDate);
+  newStart.setFullYear(newStart.getFullYear() + 1);
+  newEnd.setFullYear(newEnd.getFullYear() + 1);
+
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/setYearStartEnd`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      school_id,
+      kezd: newStart.toISOString(),
+      veg: newEnd.toISOString()
+    })
+  });
+
+  if (!response.ok) {
+    throw new Error(`setYearStartEnd hívás sikertelen: ${response.statusText}`);
   }
 }
