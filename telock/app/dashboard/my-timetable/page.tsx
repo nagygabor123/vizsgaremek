@@ -993,7 +993,7 @@ const Calendar: React.FC = () => {
 
                                                           </td>
                                                           <td className="p-1">
-                                                            <Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>
+                                                            <Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}>
 
                                                               <LockOpen className="w-4 h-4 inline-block" />
                                                             </Button>

@@ -342,7 +342,7 @@ export default function Home() {
                     />
 
                     <Button variant="outline" onClick={handleSystemClose} > {/*className="ml-auto" */}
-                       {systemClose ? <DoorOpen /> : <DoorClosed />}  
+                       {systemClose ? <LockOpen /> : <Lock />}  
                       {systemClose ? 'Feloldás' : 'Korlátozás'}
 
                     </Button>
@@ -463,14 +463,14 @@ export default function Home() {
                               <td className="p-1">
 
                                 <Button
-                                
+                                size="icon" 
                                   variant="ghost"
                                   onClick={() => handleStudentOpen(student.student_id)}
                                   disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}
                                   data-testid="unlock-button"
                                 >
-                                  {/* <DoorOpen className="w-4 h-4 inline-block" /> */}
-                                  Nyitás engedélyezése
+                                   <DoorOpen className="w-4 h-4 inline-block" /> 
+                                  
                                 </Button>
 
                                 <Dialog open={open} onOpenChange={setOpen}>

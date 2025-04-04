@@ -15,7 +15,7 @@ import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar"
-import { Megaphone, TabletSmartphone, GraduationCap, Server, Lock, Unlock, DoorOpen, DoorClosed, Calendar, BookOpen, HelpCircle, Mail, Video } from "lucide-react";
+import { Megaphone, TabletSmartphone, GraduationCap, Server, Lock, Unlock, DoorOpen, DoorClosed, Calendar, BookOpen, HelpCircle, Mail, Video, LockOpen } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -162,9 +162,9 @@ export default function Page() {
           : "bg-red-100 text-red-600"
       }`}>
         {systemStatus === "nyithato" ? (
-          <DoorOpen className="h-6 w-6" />
+          <LockOpen className="h-6 w-6" />
         ) : (
-          <DoorClosed className="h-6 w-6" />
+          <Lock className="h-6 w-6" />
         )}
       </div>
       <div>

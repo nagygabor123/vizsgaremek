@@ -2,7 +2,7 @@
 
 import { AppSidebar } from "@/components/app-sidebar"
 import { useSession } from "next-auth/react";
-import { ChevronRight, ChevronLeft, Slash, LockOpen, CircleMinus, CircleCheck, CircleAlert } from "lucide-react"
+import { ChevronRight, ChevronLeft, Slash, DoorOpen, CircleMinus, CircleCheck, CircleAlert } from "lucide-react"
 
 import {
   Breadcrumb,
@@ -687,8 +687,8 @@ const Calendar: React.FC = () => {
                                         <div>
                                           <div>
 
-                                            <Button variant="outline" onClick={() => searchGroupStudent(lesson.class)} >
-                                              <LockOpen /> Összes feloldás
+                                            <Button variant="outline" className="ml-auto" onClick={() => searchGroupStudent(lesson.class)} >
+                                              <DoorOpen /> Nyitás engedélyezése
                                             </Button>
 
                                           </div>
@@ -717,9 +717,9 @@ const Calendar: React.FC = () => {
 
                                                       </td>
                                                       <td className="p-1">
-                                                        <Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent}>
+                                                        <Button variant="ghost" onClick={() => handleStudentOpen(student.student_id)} disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}>
 
-                                                          <LockOpen className="w-4 h-4 inline-block" />
+                                                          <DoorOpen className="w-4 h-4 inline-block" />
                                                         </Button>
                                                       </td>
                                                     </tr>
@@ -838,8 +838,8 @@ const Calendar: React.FC = () => {
                                           <DialogDescription>{modalInfo?.className}</DialogDescription>
                                           <div>
                                             <div>
-                                              <Button variant="outline" onClick={() => searchGroupStudent(lesson.class)} >
-                                                <LockOpen /> Összes feloldás
+                                              <Button variant="outline" className="ml-auto" onClick={() => searchGroupStudent(lesson.class)} >
+                                                <DoorOpen /> Nyitás engedélyezése
                                               </Button>
                                             </div>
                                             <div className="rounded-md border mt-5">
@@ -870,7 +870,7 @@ const Calendar: React.FC = () => {
                                                             onClick={() => handleStudentOpen(student.student_id)}
                                                             disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}
                                                           >
-                                                            <LockOpen className="w-4 h-4 inline-block" />
+                                                            <DoorOpen className="w-4 h-4 inline-block" />
                                                           </Button>
                                                         </td>
                                                       </tr>
