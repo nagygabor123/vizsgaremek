@@ -21,7 +21,7 @@ import {
 
 import Link from "next/link";
 
-import { ArrowUpDown, CircleCheck, LockOpen, CircleAlert, CircleMinus, ChevronRight, ChevronLeft, Slash, } from "lucide-react"
+import { ArrowUpDown, CircleCheck, DoorOpen, CircleAlert, CircleMinus, ChevronRight, ChevronLeft, Slash, } from "lucide-react"
 
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
@@ -295,7 +295,7 @@ export default function Home() {
                                     disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}
                                     data-testid="unlock-button"
                                   >
-                                    <LockOpen className="w-4 h-4 inline-block" />
+                                    <DoorOpen className="w-4 h-4 inline-block" />
                                   </Button>
                                 </td>
                               </tr>

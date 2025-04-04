@@ -62,20 +62,20 @@
   },
   "suites": [
     {
-      "title": "config.spec.ts",
-      "file": "config.spec.ts",
+      "title": "students.spec.ts",
+      "file": "students.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Konfiguráció",
-          "file": "config.spec.ts",
-          "line": 3,
+          "title": "Iskolai nyilvántartás - Tanulók",
+          "file": "students.spec.ts",
+          "line": 5,
           "column": 6,
           "specs": [
             {
-              "title": "Felület betöltése és alapvető elemek megjelenítése",
+              "title": "Oldal betöltése és alapvető elemek megjelenítése",
               "ok": true,
               "tags": [],
               "tests": [
@@ -90,25 +90,25 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 5336,
+                      "duration": 4751,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-04-04T15:06:15.923Z",
+                      "startTime": "2025-04-04T15:32:51.059Z",
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "9196cb1f5e62547dc5c9-27cadee3a50e755bec5e",
-              "file": "config.spec.ts",
-              "line": 14,
+              "id": "070ffa9c3689b3a10912-aac276eb11c2e2b93527",
+              "file": "students.spec.ts",
+              "line": 17,
               "column": 7
             },
             {
-              "title": "Sikeretlen feltöltés, nincs kiválaszott fájl",
+              "title": "Új tanuló hozzáadása",
               "ok": true,
               "tags": [],
               "tests": [
@@ -123,25 +123,25 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 5427,
+                      "duration": 7856,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-04-04T15:06:21.465Z",
+                      "startTime": "2025-04-04T15:32:56.008Z",
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "9196cb1f5e62547dc5c9-83da63720a538bfd7006",
-              "file": "config.spec.ts",
-              "line": 34,
+              "id": "070ffa9c3689b3a10912-050c6dd181625b387680",
+              "file": "students.spec.ts",
+              "line": 23,
               "column": 7
             },
             {
-              "title": "Sikeres XML és CSV fájl feltöltés",
+              "title": "Tanuló keresése",
               "ok": true,
               "tags": [],
               "tests": [
@@ -156,25 +156,62 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 17163,
+                      "duration": 4706,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-04-04T15:06:26.895Z",
+                      "startTime": "2025-04-04T15:33:03.868Z",
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "9196cb1f5e62547dc5c9-052e90e00056004471ab",
-              "file": "config.spec.ts",
-              "line": 55,
+              "id": "070ffa9c3689b3a10912-0028024f7642e1c132fd",
+              "file": "students.spec.ts",
+              "line": 49,
               "column": 7
             },
             {
-              "title": "Feltöltött XML fájl adataink ellenőrzése",
+              "title": "Tanuló nyitás engedélyezése",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "skip"
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 4898,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-04-04T15:33:08.577Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "070ffa9c3689b3a10912-5095bcbf88cb61331194",
+              "file": "students.spec.ts",
+              "line": 59,
+              "column": 7
+            },
+            {
+              "title": "Tanuló szerkesztése",
               "ok": true,
               "tags": [],
               "tests": [
@@ -189,26 +226,26 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 4230,
+                      "duration": 6896,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-04-04T15:06:44.062Z",
+                      "startTime": "2025-04-04T15:33:13.478Z",
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "9196cb1f5e62547dc5c9-59bfd9fdd934f3c05a6b",
-              "file": "config.spec.ts",
-              "line": 86,
+              "id": "070ffa9c3689b3a10912-80b48456220baf12a8ec",
+              "file": "students.spec.ts",
+              "line": 76,
               "column": 7
             },
             {
-              "title": "Feltöltött CSV fájl adataink ellenőrzése",
-              "ok": false,
+              "title": "Tanuló törlése",
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -221,64 +258,294 @@
                     {
                       "workerIndex": 0,
                       "parallelIndex": 0,
-                      "status": "failed",
-                      "duration": 9589,
-                      "error": {
-                        "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: getByText('Nagy Bence')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Nagy Bence')\u001b[22m\n",
-                        "stack": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: getByText('Nagy Bence')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Nagy Bence')\u001b[22m\n\n    at /Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests/config.spec.ts:101:48",
-                        "matcherResult": {
-                          "message": "\u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: getByText('Nagy Bence')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Nagy Bence')\u001b[22m\n",
-                          "pass": false,
-                          "actual": "<element(s) not found>",
-                          "name": "toBeVisible",
-                          "expected": "visible",
-                          "log": [
-                            "  - expect.toBeVisible with timeout 5000ms",
-                            "  - waiting for getByText('Nagy Bence')"
-                          ],
-                          "timeout": 5000
-                        },
-                        "location": {
-                          "file": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests/config.spec.ts",
-                          "column": 48,
-                          "line": 101
-                        },
-                        "snippet": "\u001b[0m \u001b[90m  99 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByPlaceholder(\u001b[32m'Keresés név szerint...'\u001b[39m)\u001b[33m.\u001b[39mfill(\u001b[32m'Nagy'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 100 |\u001b[39m   \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 101 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByText(\u001b[32m'Nagy Bence'\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 102 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 103 |\u001b[39m })\u001b[33m;\u001b[39m\u001b[0m"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests/config.spec.ts",
-                            "column": 48,
-                            "line": 101
-                          },
-                          "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: getByText('Nagy Bence')\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - expect.toBeVisible with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Nagy Bence')\u001b[22m\n\n\n\u001b[0m \u001b[90m  99 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgetByPlaceholder(\u001b[32m'Keresés név szerint...'\u001b[39m)\u001b[33m.\u001b[39mfill(\u001b[32m'Nagy'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 100 |\u001b[39m   \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 101 |\u001b[39m     \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByText(\u001b[32m'Nagy Bence'\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 102 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 103 |\u001b[39m })\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests/config.spec.ts:101:48\u001b[22m"
-                        }
-                      ],
+                      "status": "passed",
+                      "duration": 7105,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-04-04T15:06:48.295Z",
-                      "attachments": [
-                        {
-                          "name": "_prompt-0",
-                          "contentType": "text/markdown",
-                          "body": "IyBJbnN0cnVjdGlvbnMKCi0gRm9sbG93aW5nIFBsYXl3cmlnaHQgdGVzdCBmYWlsZWQuCi0gRXhwbGFpbiB3aHksIGJlIGNvbmNpc2UsIHJlc3BlY3QgUGxheXdyaWdodCBiZXN0IHByYWN0aWNlcy4KLSBQcm92aWRlIGEgc25pcHBldCBvZiBjb2RlIHdpdGggdGhlIGZpeCwgaWYgcG9zc2libGUuCgojIFRlc3QgaW5mbwoKLSBOYW1lOiBLb25maWd1csOhY2nDsyA+PiBGZWx0w7ZsdMO2dHQgQ1NWIGbDoWpsIGFkYXRhaW5rIGVsbGVuxZFyesOpc2UKLSBMb2NhdGlvbjogL1VzZXJzL3N6YWxrYWlhZGFhbS9Eb2N1bWVudHMvR2l0SHViL3ZpenNnYXJlbWVrL3RlbG9jay90ZXN0cy9jb25maWcuc3BlYy50czo5NDo3CgojIEVycm9yIGRldGFpbHMKCmBgYApFcnJvcjogVGltZWQgb3V0IDUwMDBtcyB3YWl0aW5nIGZvciBleHBlY3QobG9jYXRvcikudG9CZVZpc2libGUoKQoKTG9jYXRvcjogZ2V0QnlUZXh0KCdOYWd5IEJlbmNlJykKRXhwZWN0ZWQ6IHZpc2libGUKUmVjZWl2ZWQ6IDxlbGVtZW50KHMpIG5vdCBmb3VuZD4KQ2FsbCBsb2c6CiAgLSBleHBlY3QudG9CZVZpc2libGUgd2l0aCB0aW1lb3V0IDUwMDBtcwogIC0gd2FpdGluZyBmb3IgZ2V0QnlUZXh0KCdOYWd5IEJlbmNlJykKCiAgICBhdCAvVXNlcnMvc3phbGthaWFkYWFtL0RvY3VtZW50cy9HaXRIdWIvdml6c2dhcmVtZWsvdGVsb2NrL3Rlc3RzL2NvbmZpZy5zcGVjLnRzOjEwMTo0OApgYGAKCiMgUGFnZSBzbmFwc2hvdAoKYGBgeWFtbAotIGJ1dHRvbiAiS2lza3VuZsOpbGVneWjDoXppIFN6ZW50IEJlbmVkZWsgUEcgS8O2esOpcGlza29sYSBBZFBnIjoKICAtIHRleHQ6IEtpc2t1bmbDqWxlZ3low6F6aSBTemVudCBCZW5lZGVrIFBHIEvDtnrDqXBpc2tvbGEgQWRQZwogIC0gaW1nCi0gbGlzdDoKICAtIGxpc3RpdGVtOgogICAgLSBsaW5rICJLZXpkxZFsYXAiOgogICAgICAtIGltZwogICAgICAtIHRleHQ6IEtlemTFkWxhcAotIHRleHQ6IElza29sYWkgbnlpbHbDoW50YXJ0w6FzCi0gbGlzdDoKICAtIGxpc3RpdGVtOgogICAgLSBsaW5rICLDk3JhcmVuZGVrIjoKICAgICAgLSBpbWcKICAgICAgLSB0ZXh0OiDDk3JhcmVuZGVrCiAgLSBsaXN0aXRlbToKICAgIC0gbGluayAiVGFudWzDs2siOgogICAgICAtIGltZwogICAgICAtIHRleHQ6IFRhbnVsw7NrCiAgLSBsaXN0aXRlbToKICAgIC0gbGluayAiTXVua2F0w6Fyc2FrIjoKICAgICAgLSBpbWcKICAgICAgLSB0ZXh0OiBNdW5rYXTDoXJzYWsKLSB0ZXh0OiBCZcOhbGzDrXTDoXNvayDDqXMgbmFwbMOzesOhcwotIGxpc3Q6CiAgLSBsaXN0aXRlbToKICAgIC0gbGluayAiVGFuw6l2IGJlw6FsbMOtdMOhc2FpIjoKICAgICAgLSBpbWcKICAgICAgLSB0ZXh0OiBUYW7DqXYgYmXDoWxsw610w6FzYWkKLSBsaW5rICLCqSAyMDI1IHRlbG9jayIKLSBtYWluOgogIC0gYnV0dG9uICJUb2dnbGUgU2lkZWJhciI6CiAgICAtIGltZwogICAgLSB0ZXh0OiBUb2dnbGUgU2lkZWJhcgogIC0gbmF2aWdhdGlvbiAiYnJlYWRjcnVtYiI6CiAgICAtIGxpc3Q6CiAgICAgIC0gbGlzdGl0ZW06CiAgICAgICAgLSBsaW5rICJLZXpkxZFsYXAiCiAgICAgIC0gbGlzdGl0ZW06CiAgICAgICAgLSBsaW5rICJJc2tvbGFpIG55aWx2w6FudGFydMOhcyIgW2Rpc2FibGVkXQogICAgICAtIGxpc3RpdGVtOgogICAgICAgIC0gbGluayAiVGFudWzDs2siIFtkaXNhYmxlZF0KICAtIGltZwogIC0gcGFyYWdyYXBoOiBBIHJlbmRzemVyIG5pbmNzIGJlw6FsbMOtdHZhLiBLw6lyasO8aywgdsOpZ2V6emUgZWwgYSBzesO8a3PDqWdlcyBrb25maWd1csOhY2nDs3QhCiAgLSBidXR0b24gIktvbmZpZ3Vyw6Fsw6FzIG1vc3QiCiAgLSB0ZXh0Ym94ICJLZXJlc8OpcyBuw6l2IHN6ZXJpbnQuLi4iOiBOYWd5CiAgLSB0ZXh0Ym94ICJLZXJlc8OpcyBvc3p0w6FseSBzemVyaW50Li4uIjogMTAuSQogIC0gYnV0dG9uICJGZWxvbGTDoXMiOgogICAgLSBpbWcKICAgIC0gdGV4dDogRmVsb2xkw6FzCiAgLSBidXR0b24gIsOaaiB0YW51bMOzIGhvenrDoWFkw6FzIjoKICAgIC0gaW1nCiAgICAtIHRleHQ6IMOaaiB0YW51bMOzIGhvenrDoWFkw6FzCiAgLSB0YWJsZToKICAgIC0gcm93Z3JvdXA6CiAgICAgIC0gcm93ICJUZWxqZXMgbsOpdiBPc3p0w6FseSDDqXMgY3NvcG9ydG9rIFN0w6F0dXN6IE3FsXZlbGV0ZWsiOgogICAgICAgIC0gY2VsbCAiVGVsamVzIG7DqXYiOgogICAgICAgICAgLSB0ZXh0OiBUZWxqZXMgbsOpdgogICAgICAgICAgLSBpbWcKICAgICAgICAtIGNlbGwgIk9zenTDoWx5IMOpcyBjc29wb3J0b2siOgogICAgICAgICAgLSB0ZXh0OiBPc3p0w6FseSDDqXMgY3NvcG9ydG9rCiAgICAgICAgICAtIGltZwogICAgICAgIC0gY2VsbCAiU3TDoXR1c3oiCiAgICAgICAgLSBjZWxsICJNxbF2ZWxldGVrIgogICAgLSByb3dncm91cDoKICAgICAgLSByb3cgIk5lbSBzemVyZXBlbCB0YW51bMOzIGEgcmVuZHN6ZXJiZW4iOgogICAgICAgIC0gY2VsbCAiTmVtIHN6ZXJlcGVsIHRhbnVsw7MgYSByZW5kc3plcmJlbiIKICAtIGJ1dHRvbiAiRWzFkXrFkSIgW2Rpc2FibGVkXToKICAgIC0gaW1nCiAgICAtIHRleHQ6IEVsxZF6xZEKICAtIHRleHQ6IDEgLyAwCiAgLSBidXR0b24gIkvDtnZldGtlesWRIjoKICAgIC0gdGV4dDogS8O2dmV0a2V6xZEKICAgIC0gaW1nCi0gYWxlcnQKYGBgCgojIFRlc3Qgc291cmNlCgpgYGB0cwogICAxIHwgaW1wb3J0IHsgdGVzdCwgZXhwZWN0IH0gZnJvbSAnQHBsYXl3cmlnaHQvdGVzdCc7CiAgIDIgfAogICAzIHwgdGVzdC5kZXNjcmliZSgnS29uZmlndXLDoWNpw7MnLCAoKSA9PiB7CiAgIDQgfCAgIHRlc3QuYmVmb3JlRWFjaChhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgNSB8ICAgICBhd2FpdCBwYWdlLmdvdG8oJy9sb2dpbicpOwogICA2IHwgICAgIGF3YWl0IHBhZ2UuZmlsbCgnaW5wdXRbbmFtZT0ic2hvcnRfbmFtZSJdJywgJ0FkUGcnKTsKICAgNyB8ICAgICBhd2FpdCBwYWdlLmZpbGwoJ2lucHV0W25hbWU9InBhc3N3b3JkIl0nLCAnYWRtaW4nKTsKICAgOCB8ICAgICBhd2FpdCBwYWdlLmNsaWNrKCdidXR0b25bdHlwZT0ic3VibWl0Il0nKTsKICAgOSB8ICAgICBhd2FpdCBwYWdlLndhaXRGb3JVUkwoJy9kYXNoYm9hcmQnKTsKICAgMTAgfCAgICAKICAgMTEgfCAgICAgYXdhaXQgcGFnZS5nb3RvKCcvZGFzaGJvYXJkL3NjaG9vbC9lbXBsb3llZXMnKTsgCiAgIDEyIHwgICB9KTsKICAgMTMgfAogICAxNCB8ICAgdGVzdCgnRmVsw7xsZXQgYmV0w7ZsdMOpc2Ugw6lzIGFsYXB2ZXTFkSBlbGVtZWsgbWVnamVsZW7DrXTDqXNlJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDE1IHwgICAgIGF3YWl0IHBhZ2UuZ290bygnL2Rhc2hib2FyZC9zY2hvb2wvc3R1ZGVudHMnKTsKICAgMTYgfCAgICAgYXdhaXQgcGFnZS53YWl0Rm9yU2VsZWN0b3IoJ3RhYmxlJyk7CiAgIDE3IHwgICAgIAogICAxOCB8ICAgICBjb25zdCBub1N0dWRlbnRzTWVzc2FnZSA9IGF3YWl0IHBhZ2UuZ2V0QnlUZXh0KCdOZW0gc3plcmVwZWwgdGFudWzDsyBhIHJlbmRzemVyYmVuJyk7CiAgIDE5IHwgICAgIGNvbnN0IHNob3VsZFVwbG9hZCA9IGF3YWl0IG5vU3R1ZGVudHNNZXNzYWdlLmlzVmlzaWJsZSgpOwogICAyMCB8ICAgICAKICAgMjEgfCAgICAgaWYgKCFzaG91bGRVcGxvYWQpIHsKICAgMjIgfCAgICAgICB0ZXN0LnNraXAoKTsKICAgMjMgfCAgICAgICByZXR1cm47CiAgIDI0IHwgICAgIH0KICAgMjUgfCAgICAgYXdhaXQgcGFnZS5nb3RvKCcvZGFzaGJvYXJkL3NjaG9vbC9lbXBsb3llZXMnKTsKICAgMjYgfCAgICAgY29uc3QgY29uZmlndXJlQnV0dG9uID0gYXdhaXQgcGFnZS5sb2NhdG9yKCdbZGF0YS10ZXN0aWQ9ImNvbmZpZ3VyZS1idXR0b24iXScpOwogICAyNyB8ICAgICBhd2FpdCBleHBlY3QoY29uZmlndXJlQnV0dG9uKS50b0JlVmlzaWJsZSgpOwogICAyOCB8ICAgICBhd2FpdCBjb25maWd1cmVCdXR0b24uY2xpY2soKTsKICAgMjkgfAogICAzMCB8ICAgICBjb25zdCBzaGVldFRpdGxlID0gYXdhaXQgcGFnZS5sb2NhdG9yKCd0ZXh0PUJlw6FsbMOtdMOhc2kgZm9seWFtYXQnKTsKICAgMzEgfCAgICAgYXdhaXQgZXhwZWN0KHNoZWV0VGl0bGUpLnRvQmVWaXNpYmxlKCk7CiAgIDMyIHwgICB9KTsKICAgMzMgfAogICAzNCB8ICAgdGVzdCgnU2lrZXJldGxlbiBmZWx0w7ZsdMOpcywgbmluY3Mga2l2w6FsYXN6b3R0IGbDoWpsJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDM1IHwgICAgIGF3YWl0IHBhZ2UuZ290bygnL2Rhc2hib2FyZC9zY2hvb2wvc3R1ZGVudHMnKTsKICAgMzYgfCAgICAgYXdhaXQgcGFnZS53YWl0Rm9yU2VsZWN0b3IoJ3RhYmxlJyk7CiAgIDM3IHwgICAgIAogICAzOCB8ICAgICBjb25zdCBub1N0dWRlbnRzTWVzc2FnZSA9IGF3YWl0IHBhZ2UuZ2V0QnlUZXh0KCdOZW0gc3plcmVwZWwgdGFudWzDsyBhIHJlbmRzemVyYmVuJyk7CiAgIDM5IHwgICAgIGNvbnN0IHNob3VsZFVwbG9hZCA9IGF3YWl0IG5vU3R1ZGVudHNNZXNzYWdlLmlzVmlzaWJsZSgpOwogICA0MCB8ICAgICAKICAgNDEgfCAgICAgaWYgKCFzaG91bGRVcGxvYWQpIHsKICAgNDIgfCAgICAgICB0ZXN0LnNraXAoKTsKICAgNDMgfCAgICAgICByZXR1cm47CiAgIDQ0IHwgICAgIH0KICAgNDUgfAogICA0NiB8ICAgICBhd2FpdCBwYWdlLmxvY2F0b3IoJ1tkYXRhLXRlc3RpZD0iY29uZmlndXJlLWJ1dHRvbiJdJykuY2xpY2soKTsgCiAgIDQ3IHwKICAgNDggfCAgICAgY29uc3QgbmV4dEJ1dHRvbiA9IHBhZ2UubG9jYXRvcignYnV0dG9uOmhhcy10ZXh0KCJNZW50w6lzICYgVG92w6FiYiIpJyk7CiAgIDQ5IHwgICAgIGF3YWl0IG5leHRCdXR0b24uY2xpY2soKTsgCiAgIDUwIHwKICAgNTEgfCAgICAgY29uc3QgZXJyb3JNZXNzYWdlID0gYXdhaXQgcGFnZS5sb2NhdG9yKCd0ZXh0PU5pbmNzIGbDoWpsIGtpdsOhbGFzenR2YScpOwogICA1MiB8ICAgICBhd2FpdCBleHBlY3QoZXJyb3JNZXNzYWdlKS50b0JlVmlzaWJsZSgpOwogICA1MyB8ICAgfSk7CiAgIDU0IHwKICAgNTUgfCAgIHRlc3QoJ1Npa2VyZXMgWE1MIMOpcyBDU1YgZsOhamwgZmVsdMO2bHTDqXMnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgNTYgfCAgICAgYXdhaXQgcGFnZS5nb3RvKCcvZGFzaGJvYXJkL3NjaG9vbC9zdHVkZW50cycpOwogICA1NyB8ICAgICBhd2FpdCBwYWdlLndhaXRGb3JTZWxlY3RvcigndGFibGUnKTsKICAgNTggfCAgICAgCiAgIDU5IHwgICAgIGNvbnN0IG5vU3R1ZGVudHNNZXNzYWdlID0gYXdhaXQgcGFnZS5nZXRCeVRleHQoJ05lbSBzemVyZXBlbCB0YW51bMOzIGEgcmVuZHN6ZXJiZW4nKTsKICAgNjAgfCAgICAgY29uc3Qgc2hvdWxkVXBsb2FkID0gYXdhaXQgbm9TdHVkZW50c01lc3NhZ2UuaXNWaXNpYmxlKCk7CiAgIDYxIHwgICAgIAogICA2MiB8ICAgICBpZiAoIXNob3VsZFVwbG9hZCkgewogICA2MyB8ICAgICAgIHRlc3Quc2tpcCgpOwogICA2NCB8ICAgICAgIHJldHVybjsKICAgNjUgfCAgICAgfQogICA2NiB8CiAgIDY3IHwgICAgIGF3YWl0IHBhZ2UuZ290bygnL2Rhc2hib2FyZC9zY2hvb2wvZW1wbG95ZWVzJyk7CiAgIDY4IHwgICAgIGF3YWl0IHBhZ2UubG9jYXRvcignW2RhdGEtdGVzdGlkPSJjb25maWd1cmUtYnV0dG9uIl0nKS5jbGljaygpOwogICA2OSB8CiAgIDcwIHwgICAgIGNvbnN0IGZpbGVJbnB1dCA9IGF3YWl0IHBhZ2UubG9jYXRvcignW2RhdGEtdGVzdGlkPSJmaWxlLWlucHV0Il0nKTsKICAgNzEgfCAgICAgY29uc3QgZmlsZVBhdGggPSAndGVzdC1kYXRhL29yYXJlbmQueG1sJzsgCiAgIDcyIHwgICAgIGF3YWl0IGZpbGVJbnB1dC5zZXRJbnB1dEZpbGVzKGZpbGVQYXRoKTsKICAgNzMgfCAgICAgY29uc3QgZmlsZU5hbWUgPSBhd2FpdCBwYWdlLmxvY2F0b3IoJ3RleHQ9b3JhcmVuZC54bWwnKTsgCiAgIDc0IHwgICAgIGF3YWl0IGV4cGVjdChmaWxlTmFtZSkudG9CZVZpc2libGUoKTsKICAgNzUgfCAgICAgY29uc3QgbmV4dEJ1dHRvbiA9IHBhZ2UubG9jYXRvcignYnV0dG9uOmhhcy10ZXh0KCJNZW50w6lzICYgVG92w6FiYiIpJyk7CiAgIDc2IHwgICAgIGF3YWl0IG5leHRCdXR0b24uY2xpY2soKTsKICAgNzcgfAogICA3OCB8ICAgICBjb25zdCBjc3ZGaWxlSW5wdXQgPSBhd2FpdCBwYWdlLmxvY2F0b3IoJ1tkYXRhLXRlc3RpZD0iY3N2LWlucHV0Il0nKTsKICAgNzkgfCAgICAgY29uc3QgY3N2RmlsZVBhdGggPSAndGVzdC1kYXRhL3RhbnVsb2suY3N2JzsgCiAgIDgwIHwgICAgIGF3YWl0IGNzdkZpbGVJbnB1dC5zZXRJbnB1dEZpbGVzKGNzdkZpbGVQYXRoKTsKICAgODEgfAogICA4MiB8ICAgICBjb25zdCBjb25maXJtQnV0dG9uID0gcGFnZS5sb2NhdG9yKCdidXR0b246aGFzLXRleHQoIk1lbnTDqXMgJiBNZWdlcsWRc8OtdMOpcyIpJyk7CiAgIDgzIHwgICAgIGF3YWl0IGNvbmZpcm1CdXR0b24uY2xpY2soKTsgCiAgIDg0IHwgICB9KTsKICAgODUgfAogICA4NiB8ICAgdGVzdCgnRmVsdMO2bHTDtnR0IFhNTCBmw6FqbCBhZGF0YWluayBlbGxlbsWRcnrDqXNlJywgYXN5bmMgKHsgcGFnZSB9KSA9PiB7CiAgIDg3IHwgICAgIGF3YWl0IHBhZ2UuZ290bygnL2Rhc2hib2FyZC9zY2hvb2wvZW1wbG95ZWVzJyk7CiAgIDg4IHwgICAgIGF3YWl0IHBhZ2Uud2FpdEZvclNlbGVjdG9yKCd0YWJsZScpOwogICA4OSB8CiAgIDkwIHwgICAgIGF3YWl0IHBhZ2UuZ2V0QnlQbGFjZWhvbGRlcignS2VyZXPDqXMgbsOpdiBzemVyaW50Li4uJykuZmlsbCgnS2lzcyBHJyk7CiAgIDkxIHwgICAgIGF3YWl0IGV4cGVjdChwYWdlLmdldEJ5VGV4dCgnS2lzcyBHw6Fib3IgSXN0dsOhbiAoS2lHSSknKSkudG9CZVZpc2libGUoKTsKICAgOTIgfCAgIH0pOwogICA5MyB8CiAgIDk0IHwgICB0ZXN0KCdGZWx0w7ZsdMO2dHQgQ1NWIGbDoWpsIGFkYXRhaW5rIGVsbGVuxZFyesOpc2UnLCBhc3luYyAoeyBwYWdlIH0pID0+IHsKICAgOTUgfCAgICAgYXdhaXQgcGFnZS5nb3RvKCcvZGFzaGJvYXJkL3NjaG9vbC9zdHVkZW50cycpOwogICA5NiB8ICAgICBhd2FpdCBwYWdlLndhaXRGb3JTZWxlY3RvcigndGFibGUnKTsKICAgOTcgfAogICA5OCB8ICAgICBhd2FpdCBwYWdlLmdldEJ5UGxhY2Vob2xkZXIoJ0tlcmVzw6lzIG9zenTDoWx5IHN6ZXJpbnQuLi4nKS5maWxsKCcxMC5JJyk7IAogICA5OSB8ICAgICBhd2FpdCBwYWdlLmdldEJ5UGxhY2Vob2xkZXIoJ0tlcmVzw6lzIG7DqXYgc3plcmludC4uLicpLmZpbGwoJ05hZ3knKTsKICAxMDAgfCAgIAo+IDEwMSB8ICAgICBhd2FpdCBleHBlY3QocGFnZS5nZXRCeVRleHQoJ05hZ3kgQmVuY2UnKSkudG9CZVZpc2libGUoKTsKICAgICAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4gRXJyb3I6IFRpbWVkIG91dCA1MDAwbXMgd2FpdGluZyBmb3IgZXhwZWN0KGxvY2F0b3IpLnRvQmVWaXNpYmxlKCkKICAxMDIgfCAgIH0pOwogIDEwMyB8IH0pOwpgYGA="
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "/Users/szalkaiadaam/Documents/GitHub/vizsgaremek/telock/tests/config.spec.ts",
-                        "column": 48,
-                        "line": 101
-                      }
+                      "startTime": "2025-04-04T15:33:20.378Z",
+                      "attachments": []
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
-              "id": "9196cb1f5e62547dc5c9-05e148810a211718b9cb",
-              "file": "config.spec.ts",
-              "line": 94,
+              "id": "070ffa9c3689b3a10912-d74b1f778022ae434bd0",
+              "file": "students.spec.ts",
+              "line": 102,
+              "column": 7
+            },
+            {
+              "title": "Rendezés",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4754,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-04-04T15:33:27.489Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "070ffa9c3689b3a10912-43d38c8a08b1a2055d0e",
+              "file": "students.spec.ts",
+              "line": 122,
+              "column": 7
+            },
+            {
+              "title": "Lapozás",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5053,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-04-04T15:33:32.246Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "070ffa9c3689b3a10912-8e92b8827673e2b5b121",
+              "file": "students.spec.ts",
+              "line": 129,
+              "column": 7
+            },
+            {
+              "title": "Feloldás/korlátozás gomb",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4706,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-04-04T15:33:37.301Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "070ffa9c3689b3a10912-599e80d116376a9ae67e",
+              "file": "students.spec.ts",
+              "line": 136,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Osztályom - Tanulók",
+          "file": "students.spec.ts",
+          "line": 143,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Oldal betöltése és alapvető elemek megjelenítése",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4506,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-04-04T15:33:42.010Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "070ffa9c3689b3a10912-d367685f0eefea538974",
+              "file": "students.spec.ts",
+              "line": 155,
+              "column": 7
+            },
+            {
+              "title": "Tanuló keresése",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4527,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-04-04T15:33:46.518Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "070ffa9c3689b3a10912-218c2fbefc76e8b36115",
+              "file": "students.spec.ts",
+              "line": 159,
+              "column": 7
+            },
+            {
+              "title": "Tanuló nyitás engedélyezése",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4510,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-04-04T15:33:51.048Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "070ffa9c3689b3a10912-256af5605faf69b47f1b",
+              "file": "students.spec.ts",
+              "line": 164,
+              "column": 7
+            },
+            {
+              "title": "Rendezés",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4675,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-04-04T15:33:55.560Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "070ffa9c3689b3a10912-66405bb68c720962a2a9",
+              "file": "students.spec.ts",
+              "line": 181,
+              "column": 7
+            },
+            {
+              "title": "Lapozás",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4578,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-04-04T15:34:00.237Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "070ffa9c3689b3a10912-979fac3f6f5bb14f2b85",
+              "file": "students.spec.ts",
+              "line": 188,
               "column": 7
             }
           ]
@@ -288,11 +555,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-04-04T15:06:15.567Z",
-    "duration": 42359.896,
-    "expected": 4,
-    "skipped": 0,
-    "unexpected": 1,
+    "startTime": "2025-04-04T15:32:50.663Z",
+    "duration": 74183.891,
+    "expected": 13,
+    "skipped": 1,
+    "unexpected": 0,
     "flaky": 0
   }
 }

@@ -56,9 +56,10 @@ export default function Page() {
       }
     } catch (error) {
       console.error("Error fetching system status", error);
-    } finally {
-      setLoading(false);
-    }
+    } 
+    // finally {
+    //   setLoading(false);
+    // }
   };
 
 

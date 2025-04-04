@@ -32,19 +32,21 @@ test.describe('Jelszó módosítása', () => {
         await page.fill('input[name="old_password"]', "admin");
         await page.fill('input[name="new_password"]', "admin");
         await page.click('button[type="submit"]');
-    
-        const successAlert = page.locator('div[role="alert"]:has-text("Sikeres jelszóváltoztatás")');
-        await expect(successAlert).toBeVisible();
+
+        // const successAlert = page.locator('div[role="alert"]:has-text("Sikeres jelszóváltoztatás")');
+        // await expect(successAlert).toBeVisible();
+
+        await page.waitForURL('/login');
     });
 
     test('Sikeretlen jelszóváltoztatás', async ({ page }) => {
-       
+
         await page.goto('/change-password');
 
         await page.fill('input[name="old_password"]', "rossz_jelszo");
         await page.fill('input[name="new_password"]', "admin123");
         await page.click('button[type="submit"]');
-    
+
         const errorAlert = page.locator('div[role="alert"]:has-text("Sikeretlen jelszóváltoztatás")');
         await expect(errorAlert).toBeVisible();
 
