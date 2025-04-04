@@ -171,7 +171,7 @@ export default function Page() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ type, which_day: date }),
+        body: JSON.stringify({school_id:session?.user?.school_id, type, which_day: date }),
       });
 
       //const responseData = await response.json();
