@@ -36,15 +36,12 @@ test.describe('Tanév beállításai', () => {
         await page.goto('/dashboard/school/settings');
     });
 
-    test('Oldalbetöltés', async ({ page }) => {
+    test('Oldal betöltése és alapvető elemek megjelenítése', async ({ page }) => {
         await expect(page.getByText('Tanítási év első napja')).toBeVisible();
         await expect(page.getByText('Tanítási év utolsó napja')).toBeVisible();
-
-        await expect(page.getByText('2024. szeptember 2.')).toBeVisible();
-        await expect(page.getByText('2025. június 13.')).toBeVisible();
     });
 
-    test('Tanítási év első napja módosítás', async ({ page }) => {
+    test('Tanítási év első napjának módosítása', async ({ page }) => {
         const startDateButton = page.locator('button').filter({ hasText: '2024. szeptember 2.' }).first();
         await startDateButton.click();
 
@@ -66,7 +63,7 @@ test.describe('Tanév beállításai', () => {
 
     });
 
-    test('Tanítási év utolsó napja módosítás', async ({ page }) => {
+    test('Tanítási év utolsó napjának módosítása', async ({ page }) => {
         const endDateButton = page.locator('button').filter({ hasText: '2025. június 13.' }).first();
         await endDateButton.click();
 
@@ -89,7 +86,7 @@ test.describe('Tanév beállításai', () => {
 
     });
 
-    test('Tanítás nélküli munkanap hozzáadás', async ({ page }) => {
+    test('Tanítás nélküli munkanap hozzáadása', async ({ page }) => {
         await page.getByRole('button', { name: 'Új nap hozzáadás' }).first().click();
 
         await page.getByRole('button', { name: /2025\. május 20\./ }).click();
@@ -113,7 +110,7 @@ test.describe('Tanév beállításai', () => {
 
     });
 
-    test('Szombati tanítási nap hozzáadás', async ({ page }) => {
+    test('Szombati tanítási nap hozzáadása', async ({ page }) => {
         await page.getByRole('button', { name: 'Új nap hozzáadás' }).nth(1).click();
 
         await page.getByRole('button', { name: /2025\. április 14\./ }).click();
@@ -144,7 +141,7 @@ test.describe('Tanév beállításai', () => {
 
     });
 
-    test('Tanítási szünet hozzáadás', async ({ page }) => {
+    test('Tanítási szünet hozzáadása', async ({ page }) => {
         await page.getByRole('button', { name: 'Új szünet hozzáadás' }).first().click();
 
         await page.getByPlaceholder('Tavaszi szünet').fill("Teszt szünet");
@@ -179,7 +176,7 @@ test.describe('Tanév beállításai', () => {
             await endDateCells[1].click();
         } else if (endDateCells.length === 1) {
             await endDateCells[0].click();
-        } 
+        }
 
         try {
             await page.keyboard.press('Escape');
@@ -190,52 +187,52 @@ test.describe('Tanév beállításai', () => {
         await expect(page.getByText(`2024. 12. 20. - 2025. 01. 07.`)).toBeVisible();
     });
 
-    test('Tanítás nélküli munkanap törlés', async ({ page }) => {
-    
+    test('Tanítás nélküli munkanap törlése', async ({ page }) => {
+
         const studentRow = await page.locator('tr', { hasText: '2024. 12. 13.' });
-    
+
         const editButton = studentRow.locator('[data-testid="delete-button"]');
         await editButton.click();
-    
+
         const dialogTitle = page.locator('text=Biztosan törölni szeretné ezt a napot?');
         await expect(dialogTitle).toBeVisible();
-    
+
         const confirmButton = page.locator('button:has-text("Véglegesítés")');
         await confirmButton.click();
-    
-        await expect(studentRow).not.toBeVisible();
-      });
 
-      test('Szombati tanítási nap törlés', async ({ page }) => {
-    
+        await expect(studentRow).not.toBeVisible();
+    });
+
+    test('Szombati tanítási nap törlése', async ({ page }) => {
+
         const studentRow = await page.locator('tr', { hasText: '2025. 02. 08.' });
-    
+
         const editButton = studentRow.locator('[data-testid="delete-button"]');
         await editButton.click();
-    
+
         const dialogTitle = page.locator('text=Biztosan törölni szeretné ezt a napot?');
         await expect(dialogTitle).toBeVisible();
-    
+
         const confirmButton = page.locator('button:has-text("Véglegesítés")');
         await confirmButton.click();
-    
-        await expect(studentRow).not.toBeVisible();
-      });
 
-      test('Tanítási szünet törlés', async ({ page }) => {
-    
+        await expect(studentRow).not.toBeVisible();
+    });
+
+    test('Tanítási szünet törlés', async ({ page }) => {
+
         const studentRow = await page.locator('tr', { hasText: '2024. 12. 20. - 2025. 01. 07.' });
-    
+
         const editButton = studentRow.locator('[data-testid="delete-button"]');
         await editButton.click();
-    
+
         const dialogTitle = page.locator('text=Biztosan törölni szeretné ezt a szünetet?');
         await expect(dialogTitle).toBeVisible();
-    
+
         const confirmButton = page.locator('button:has-text("Véglegesítés")');
         await confirmButton.click();
-    
+
         await expect(studentRow).not.toBeVisible();
-      });
-  
+    });
+
 });

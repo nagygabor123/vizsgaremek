@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe("Bejelentkezés", () => {
 
-  test('Oldalbetöltés', async ({ page }) => {
+  test('Oldal betöltése és alapvető elemek megjelenítése', async ({ page }) => {
     await page.goto('/login');
     await expect(page.getByRole('button', { name: 'Bejelentkezés' })).toBeVisible();
 
@@ -33,7 +33,6 @@ test.describe("Bejelentkezés", () => {
     await page.fill('input[name="password"]', "rossz_jelszo");
     await page.click('button[type="submit"]');
 
-    //await expect(page.locator("text=Hibás felhasználónév vagy jelszó!")).toBeVisible();
     const errorAlert = page.locator('div[role="alert"]:has-text("Sikeretlen bejelentkezés")');
     await expect(errorAlert).toBeVisible();
   });

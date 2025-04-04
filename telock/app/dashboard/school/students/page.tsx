@@ -275,17 +275,6 @@ export default function Home() {
     currentPage * PAGE_SIZE
   );
 
-  // const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
-
-  // useEffect(() => {
-  //   const hasClickedBefore = localStorage.getItem("hasClickedOverlayButton");
-  //   setButtonVisible(hasClickedBefore !== "true");
-  // }, []);
-
-  // if (isButtonVisible === null) {
-  //   return null;
-  // }
-
 
   return (
  <div>
@@ -341,7 +330,7 @@ export default function Home() {
                       onChange={(e) => setSearchClass(e.target.value)}
                     />
 
-                    <Button variant="outline" onClick={handleSystemClose} > {/*className="ml-auto" */}
+                    <Button variant="outline" onClick={handleSystemClose} >
                        {systemClose ? <LockOpen /> : <Lock />}  
                       {systemClose ? 'Feloldás' : 'Korlátozás'}
 

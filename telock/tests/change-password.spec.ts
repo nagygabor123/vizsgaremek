@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Jelszó módosítás', () => {
+test.describe('Jelszó módosítása', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto('/login');
         await page.fill('input[name="short_name"]', 'AdPg');
@@ -10,7 +10,7 @@ test.describe('Jelszó módosítás', () => {
 
     });
 
-    test('Oldalbetöltés', async ({ page }) => {
+    test('Oldal betöltése és alapvető elemek megjelenítése', async ({ page }) => {
 
         await page.goto('/change-password');
         await expect(page.getByRole('button', { name: 'Jelszó módosítása' })).toBeVisible();

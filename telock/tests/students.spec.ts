@@ -14,13 +14,13 @@ test.describe('Iskolai nyilvántartás - Tanulók', () => {
     await page.waitForSelector('table');
   });
 
-  test('Oldalbetöltés', async ({ page }) => {
+  test('Oldal betöltése és alapvető elemek megjelenítése', async ({ page }) => {
     await expect(page.getByRole('button', { name: 'Új tanuló hozzáadás' })).toBeVisible();
     await expect(page.getByPlaceholder('Keresés név szerint...')).toBeVisible();
     await expect(page.getByPlaceholder('Keresés osztály szerint...')).toBeVisible();
   });
   
-  test('Új tanuló hozzáadás', async ({ page }) => {
+  test('Új tanuló hozzáadása', async ({ page }) => {
 
     await page.getByRole('button', { name: 'Új tanuló hozzáadás' }).click();
     await page.locator('input[name="student_id"]').fill('OM1234567');
@@ -46,7 +46,7 @@ test.describe('Iskolai nyilvántartás - Tanulók', () => {
     await expect(studentRow).toContainText("9.I");
   });
 
-  test('Tanuló keresés', async ({ page }) => {
+  test('Tanuló keresése', async ({ page }) => {
   
     await page.getByPlaceholder('Keresés név szerint...').fill('teszt');
     await expect(page.getByText('Teszt Elek')).toBeVisible();
@@ -56,7 +56,7 @@ test.describe('Iskolai nyilvántartás - Tanulók', () => {
     await expect(page.getByText('9.I')).toBeVisible();
   });
 
-  test('Tanuló nyitás engedélyezés', async ({ page }) => {
+  test('Tanuló nyitás engedélyezése', async ({ page }) => {
     await page.getByPlaceholder('Keresés név szerint...').fill('teszt');
 
     const studentRow = await page.locator('tr', { hasText: 'Teszt Elek' });
@@ -67,7 +67,7 @@ test.describe('Iskolai nyilvántartás - Tanulók', () => {
     await editButton.click();
   });
 
-  test('Tanuló szerkesztés', async ({ page }) => {
+  test('Tanuló szerkesztése', async ({ page }) => {
 
     await page.getByPlaceholder('Keresés név szerint...').fill('Teszt Elek');
 
@@ -93,7 +93,7 @@ test.describe('Iskolai nyilvántartás - Tanulók', () => {
   });
 
 
-  test('Tanuló törlés', async ({ page }) => {
+  test('Tanuló törlése', async ({ page }) => {
 
     await page.getByPlaceholder('Keresés név szerint...').fill('Teszt Elek Módosított');
 
@@ -127,8 +127,8 @@ test.describe('Iskolai nyilvántartás - Tanulók', () => {
     }
   });
 
-  test('Zárolás/feloldás gomb', async ({ page }) => {
-    const lockButton = page.getByRole('button', { name: /Összes (zárolás|feloldás)/ });
+  test('Feloldás/korlátozás gomb', async ({ page }) => {
+    const lockButton = page.getByRole('button', { name: /(Feloldás|Korlátozás)/ });
     await lockButton.click();
     await lockButton.click();
   });
@@ -146,16 +146,16 @@ test.describe('Osztályom - Tanulók', () => {
     await page.waitForSelector('table');
   });
 
-  test('Oldalbetöltés', async ({ page }) => {
+  test('Oldal betöltése és alapvető elemek megjelenítése', async ({ page }) => {
     await expect(page.getByPlaceholder('Keresés név szerint...')).toBeVisible();
   });
   
-  test('Tanuló keresés', async ({ page }) => {
+  test('Tanuló keresése', async ({ page }) => {
     await page.getByPlaceholder('Keresés név szerint...').fill('balázs ár');
     await expect(page.getByText('Balázs Áron Botond')).toBeVisible();
   });
 
-  test('Tanuló nyitás engedélyezés', async ({ page }) => {
+  test('Tanuló nyitás engedélyezése', async ({ page }) => {
     await page.getByPlaceholder('Keresés név szerint...').fill('Balázs Áron Botond');
 
     const studentRow = await page.locator('tr', { hasText: 'Balázs Áron Botond' });

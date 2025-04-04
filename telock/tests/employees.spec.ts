@@ -12,16 +12,14 @@ test.describe('Iskolai nyilvántartás - Munkatársak', () => {
         await page.waitForSelector('table');
     });
 
-    test('Oldalbetöltés', async ({ page }) => {
+    test('Oldal betöltése és alapvető elemek megjelenítése', async ({ page }) => {
         await expect(page.getByRole('button', { name: 'Új alkalmazott hozzáadás' })).toBeVisible();
         await expect(page.getByPlaceholder('Keresés név szerint...')).toBeVisible();
         await expect(page.getByPlaceholder('Keresés pozíció szerint...')).toBeVisible();
         await expect(page.locator('#searchOsztalyfonok')).toBeVisible();
     });
 
-    test('Új alkalmazott hozzáadás ', async ({ page }) => {
-        //await page.goto('/dashboard/school/employees');
-
+    test('Új alkalmazott hozzáadása', async ({ page }) => {
         await page.getByRole('button', { name: 'Új alkalmazott hozzáadás' }).click();
         await expect(page.getByRole('dialog', { name: 'Alkalmazott hozzáadása' })).toBeVisible();
         await page.getByLabel('Teljes név').fill('Teszt Alkalmazott');
@@ -40,7 +38,7 @@ test.describe('Iskolai nyilvántartás - Munkatársak', () => {
     });
 
 
-    test('Alkalamzott keresés', async ({ page }) => {
+    test('Alkalamzott keresése', async ({ page }) => {
 
         await page.getByPlaceholder('Keresés név szerint...').fill('teszt');
         await expect(page.getByText('Teszt Alkalmazott (TeAl)')).toBeVisible();
@@ -51,7 +49,7 @@ test.describe('Iskolai nyilvántartás - Munkatársak', () => {
     });
 
 
-    test('Alkalmazott szerkesztés', async ({ page }) => {
+    test('Alkalmazott szerkesztése', async ({ page }) => {
 
         await page.getByPlaceholder('Keresés név szerint...').fill('Teszt Alkalmazott');
 
@@ -76,7 +74,7 @@ test.describe('Iskolai nyilvántartás - Munkatársak', () => {
 
     });
 
-    test('Alkalamzott törlés', async ({ page }) => {
+    test('Alkalamzott törlése', async ({ page }) => {
 
         await page.getByPlaceholder('Keresés név szerint...').fill('Teszt Alkalmazott Módosított');
 

@@ -197,9 +197,6 @@ export default function Home() {
   }
 
   return (
-    // <SidebarProvider>
-    //   <AppSidebar />
-    //   <SidebarInset>
 <div>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b">
           <div className="flex flex-1 items-center gap-2 px-3">
@@ -247,16 +244,6 @@ export default function Home() {
                       />
                     </div>
 
-                    {/*   
-    <Button variant="outline" onClick={() => updateGroupAccess()}>
-      <LockOpen /> Összes feloldás 
-    </Button>
-  */}
-                    {/*  
-    onClick={handleSystemClose}
-    {systemClose ? <LockOpen /> : <Lock />}
-    {systemClose ? 'Összes feloldás' : 'Összes zárolás'}
-  */}
 
                   </div>
 
@@ -267,7 +254,6 @@ export default function Home() {
                           <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Teljes név <ArrowUpDown className="w-4 h-4 inline-block" /></th>
                           <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("class")}>Osztály és csoportok<ArrowUpDown className="w-4 h-4 inline-block" /></th>
                           <th className="p-2 font-normal">Státusz</th>
-                          {/* <th className="p-2 font-normal">RFID azonosító</th> */}
                           <th className="p-2 font-normal">Műveletek</th>
                         </tr>
                       </thead>
@@ -301,7 +287,6 @@ export default function Home() {
                                 <td className="p-1">
                                   {student.status === "ki" ? <span className="text-gray-500"><CircleMinus className="w-4 h-4 inline-block" /></span> : student.status === "be" ? <span className="text-green-500"><CircleCheck className="w-4 h-4 inline-block" /></span> : <span className="text-red-500"><CircleAlert className="w-4 h-4 inline-block" /></span>}
                                 </td>
-                                {/* <td className="p-1">{student.rfid_tag}</td> */}
                                 <td className="p-1">
                                   <Button
                             
@@ -334,8 +319,7 @@ export default function Home() {
 
         </div>
         
-        {/* </SidebarInset>
-        </SidebarProvider> */}
+
         </div>
   );
 }

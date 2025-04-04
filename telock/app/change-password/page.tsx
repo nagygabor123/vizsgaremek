@@ -91,7 +91,7 @@ export default function ChangePassword() {
           </Button>
           <Card>
             <CardHeader className="text-center">
-              <CardTitle className="text-xl">Jelszó módosíts</CardTitle>
+              <CardTitle className="text-xl">Jelszó módosítása</CardTitle>
               <CardDescription>
                 Kérjük, adja meg jelenlegi jelszavát, majd állítson be egy újat.
               </CardDescription>
