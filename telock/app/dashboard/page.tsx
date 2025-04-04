@@ -151,7 +151,7 @@ export default function Page() {
             <Card className="">
     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
       <CardTitle className="text-sm font-medium">
-        Telefontárolók
+        Telefontároló rendszer állapota
       </CardTitle>
       <Server className="h-4 w-4 text-muted-foreground" />
     </CardHeader>
@@ -169,12 +169,12 @@ export default function Page() {
       </div>
       <div>
         <h3 className="text-xl font-bold">
-          {systemStatus === "nyithato" ? "Inaktív" : "Aktív"}
+          {systemStatus === "nyithato" ? "Feloldott" : "Korlátozott"}
         </h3>
         <p className="text-sm text-muted-foreground">
           {systemStatus === "nyithato"
             ? "Nyitható az összes tároló."
-            : "A tárolók csak a rendszer szerint nyithatók."}
+            : "Órarend szerint nyithatóak a tárolók."}
         </p>
       </div>
     </CardContent>

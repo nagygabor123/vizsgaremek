@@ -22,7 +22,7 @@ import {
 import { Label } from "@/components/ui/label"
 import Link from "next/link";
 
-import { Pen, Trash2, ArrowUpDown, CirclePlus, CircleCheck, LockOpen, DoorOpen, CircleAlert, CircleMinus, Lock, ChevronRight, ChevronLeft, Slash, School, } from "lucide-react"
+import { Pen, Trash2, ArrowUpDown, CirclePlus, CircleCheck, LockOpen, DoorClosed, DoorOpen, CircleAlert, CircleMinus, Lock, ChevronRight, ChevronLeft, Slash, School, } from "lucide-react"
 
 import {
   Dialog,
@@ -342,8 +342,8 @@ export default function Home() {
                     />
 
                     <Button variant="outline" onClick={handleSystemClose} > {/*className="ml-auto" */}
-                   {/*    {systemClose ? <LockOpen /> : <Lock />}   */}
-                      {systemClose ? 'Rendszer inkativálás' : 'Rendszer aktiválás'}
+                       {systemClose ? <DoorOpen /> : <DoorClosed />}  
+                      {systemClose ? 'Feloldás' : 'Korlátozás'}
 
                     </Button>
                   </div>
@@ -469,7 +469,8 @@ export default function Home() {
                                   disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}
                                   data-testid="unlock-button"
                                 >
-                                  <DoorOpen className="w-4 h-4 inline-block" />
+                                  {/* <DoorOpen className="w-4 h-4 inline-block" /> */}
+                                  Nyitás engedélyezése
                                 </Button>
 
                                 <Dialog open={open} onOpenChange={setOpen}>
