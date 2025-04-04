@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { AppSidebar } from "@/components/app-sidebar"
-import { ChevronRight, ChevronLeft, Slash, LockOpen, CircleMinus, CircleCheck, CircleAlert } from "lucide-react"
+import { ChevronRight, ChevronLeft, Slash, DoorOpen, CircleMinus, CircleCheck, CircleAlert } from "lucide-react"
 
 import {
   Breadcrumb,
@@ -563,8 +563,8 @@ const Calendar: React.FC = () => {
                     </SelectTrigger>
                   </Select>
                   <Button onClick={goToToday} variant="outline">Mai nap</Button>
-                  <Button variant="ghost" onClick={goToPrevious}><ChevronLeft /></Button>
-                  <Button variant="ghost" onClick={goToNext}><ChevronRight /></Button>
+                  <Button variant="ghost" onClick={goToPrevious} data-testid="prev-button"><ChevronLeft /></Button>
+                  <Button variant="ghost" onClick={goToNext} data-testid="next-button"><ChevronRight /></Button>
                 </div>
               </div>
 
@@ -638,7 +638,7 @@ const Calendar: React.FC = () => {
                                         <div>
                                           <div>
                                             <Button variant="outline" onClick={() => searchGroupStudent(lesson.class)} >
-                                              <LockOpen /> Összes feloldás
+                                              <DoorOpen /> Nyitás engedélyezése
                                             </Button>
                                           </div>
 
@@ -678,8 +678,9 @@ const Calendar: React.FC = () => {
                                                           variant="ghost"
                                                           onClick={() => handleStudentOpen(student.student_id)}
                                                           disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}
+                                                          data-testid="unlock-button"
                                                         >
-                                                          <LockOpen className="w-4 h-4 inline-block" />
+                                                          <DoorOpen className="w-4 h-4 inline-block" />
                                                         </Button>
                                                       </td>
                                                     </tr>
@@ -799,7 +800,7 @@ const Calendar: React.FC = () => {
                                           <div>
                                             <div>
                                               <Button variant="outline" onClick={() => searchGroupStudent(lesson.class)} >
-                                                <LockOpen /> Összes feloldás
+                                                <DoorOpen /> Nyitás engedélyezése
                                               </Button>
                                             </div>
                                             <div className="rounded-md border mt-5">
@@ -831,8 +832,9 @@ const Calendar: React.FC = () => {
                                                             variant="ghost"
                                                             onClick={() => handleStudentOpen(student.student_id)}
                                                             disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}
+                                                            data-testid="unlock-button"
                                                           >
-                                                            <LockOpen className="w-4 h-4 inline-block" />
+                                                            <DoorOpen className="w-4 h-4 inline-block" />
                                                           </Button>
                                                         </td>
                                                       </tr>
