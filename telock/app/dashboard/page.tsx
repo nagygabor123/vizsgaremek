@@ -15,7 +15,7 @@ import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar"
-import { Megaphone, TabletSmartphone, GraduationCap, Server, Lock, Unlock, Calendar, BookOpen, HelpCircle, Mail, Video } from "lucide-react";
+import { Megaphone, TabletSmartphone, GraduationCap, Server, Lock, Unlock, DoorOpen, DoorClosed, Calendar, BookOpen, HelpCircle, Mail, Video } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -135,7 +135,7 @@ export default function Page() {
             <Card className="">
     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
       <CardTitle className="text-sm font-medium">
-        Telefontároló állapota
+        Telefontárolás
       </CardTitle>
       <Server className="h-4 w-4 text-muted-foreground" />
     </CardHeader>
@@ -146,19 +146,19 @@ export default function Page() {
           : "bg-red-100 text-red-600"
       }`}>
         {systemStatus === "nyithato" ? (
-          <Unlock className="h-6 w-6" />
+          <DoorOpen className="h-6 w-6" />
         ) : (
-          <Lock className="h-6 w-6" />
+          <DoorClosed className="h-6 w-6" />
         )}
       </div>
       <div>
         <h3 className="text-xl font-bold">
-          {systemStatus === "nyithato" ? "Nyitható" : "Zárva"}
+          {systemStatus === "nyithato" ? "Inaktív" : "Aktív"}
         </h3>
         <p className="text-sm text-muted-foreground">
           {systemStatus === "nyithato"
-            ? "A tárolók jelenleg nyithatók."
-            : "A tárolók jelenleg nem nyithatók."}
+            ? "Nyitható az összes tároló."
+            : "A tárolók csak a rendszer szerint nyithatók."}
         </p>
       </div>
     </CardContent>
