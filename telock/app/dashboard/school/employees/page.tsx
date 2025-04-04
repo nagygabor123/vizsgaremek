@@ -530,8 +530,8 @@ export default function AddEmployeePage() {
                               </Dialog>
 
                               <AlertDialog>
-                                <AlertDialogTrigger disabled={employee.position === 'Tanár' || employee.position === "igazgato" || employee.position === "igazgatohelyettes"} >
-                                  <Button disabled={employee.position === 'Tanár' || employee.position === "igazgato" || employee.position === "igazgatohelyettes"} variant="ghost"><Trash2 className="w-4 h-4 inline-block" data-testid="delete-button" /></Button>
+                                <AlertDialogTrigger disabled={employee.position === 'Tanár' || employee.position === "igazgato" || employee.position === "igazgatohelyettes" || employee.position === "rendszergazda"} >
+                                  <Button disabled={employee.position === 'Tanár' || employee.position === "igazgato" || employee.position === "igazgatohelyettes" || employee.position === "rendszergazda"} variant="ghost"><Trash2 className="w-4 h-4 inline-block" data-testid="delete-button" /></Button>
                                 </AlertDialogTrigger>
                                 <AlertDialogContent>
                                   <AlertDialogHeader>
