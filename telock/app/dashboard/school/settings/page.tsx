@@ -277,10 +277,10 @@ const handleYearChange = () => {
 
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Header */}
       <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div className="px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <Link href="/dashboard" className="flex items-center">
               <School className="h-6 w-6 text-indigo-600" />
@@ -299,10 +299,10 @@ const handleYearChange = () => {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+      <main className="w-full">
         {/* Current School Year Card */}
-        <div className="mb-8">
-          <Card className="border-indigo-100 bg-indigo-50">
+        <div className="mb-6">
+          <Card className="border-0 rounded-none shadow-none bg-indigo-50">
             <CardHeader className="pb-4">
               <div className="flex justify-between items-center">
                 <div>
@@ -331,8 +331,8 @@ const handleYearChange = () => {
         </div>
 
         {/* School Year Range */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <Card>
+        <div className="flex">
+          <Card className="flex-1 border-0 rounded-none shadow-none border-r border-gray-200">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
                 <Sun className="h-5 w-5 text-yellow-500" />
@@ -392,7 +392,7 @@ const handleYearChange = () => {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="flex-1 border-0 rounded-none shadow-none">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
                 <Moon className="h-5 w-5 text-blue-500" />
@@ -454,7 +454,7 @@ const handleYearChange = () => {
         </div>
 
         {/* No School Days */}
-        <Card className="mb-8">
+        <Card className="border-0 rounded-none shadow-none border-t border-gray-200">
           <CardHeader>
             <div className="flex justify-between items-center">
               <div>
@@ -590,7 +590,7 @@ const handleYearChange = () => {
         </Card>
 
         {/* Saturday School Days */}
-        <Card className="mb-8">
+        <Card className="border-0 rounded-none shadow-none border-t border-gray-200">
           <CardHeader>
             <div className="flex justify-between items-center">
               <div>
@@ -740,7 +740,7 @@ const handleYearChange = () => {
         </Card>
 
         {/* School Breaks */}
-        <Card>
+        <Card className="border-0 rounded-none shadow-none border-t border-gray-200">
           <CardHeader>
             <div className="flex justify-between items-center">
               <div>
