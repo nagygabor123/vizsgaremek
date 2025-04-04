@@ -1,8 +1,7 @@
 'use client';
 
 import { useSession } from "next-auth/react";
-import { AppSidebar } from "@/components/app-sidebar"
-import { ChevronRight, ChevronLeft, Slash, DoorOpen, CircleMinus, CircleCheck, CircleAlert } from "lucide-react"
+import { ChevronRight, ChevronLeft, DoorOpen, CircleMinus, CircleCheck, CircleAlert } from "lucide-react"
 
 import {
   Breadcrumb,
@@ -15,24 +14,9 @@ import {
 import { Separator } from "@/components/ui/separator"
 import {
   SidebarTrigger,
-  SidebarInset,
-
-  SidebarProvider,
-
 } from "@/components/ui/sidebar"
 
 import Link from "next/link";
-
-
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 
 import React, { useState, useEffect, useMemo } from 'react';
 import {
@@ -49,10 +33,6 @@ import {
 import { hu } from 'date-fns/locale';
 import '../../globals.css';
 
-import AppKonfig from '@/components/app-konfig';
-
-
-
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -63,15 +43,15 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 
-interface TimetableEntry {
-  day: string;
-  subject: string;
-  start: string;
-  end: string;
-  class: string;
-  group: string;
-  teacher: string;
-}
+// interface TimetableEntry {
+//   day: string;
+//   subject: string;
+//   start: string;
+//   end: string;
+//   class: string;
+//   group: string;
+//   teacher: string;
+// }
 
 interface Student {
   student_id: string;
@@ -107,7 +87,7 @@ interface lessonTimes {
 
 const getWeekStartAndEnd = (date: Date) => {
   const startOfWeek2 = new Date(date);
-  startOfWeek2.setDate(date.getDate() - date.getDay() + (date.getDay() === 0 ? -6 : 1)); // Hétfővel kezdjük a hetet
+  startOfWeek2.setDate(date.getDate() - date.getDay() + (date.getDay() === 0 ? -6 : 1)); 
   const endOfWeek = new Date(startOfWeek2);
   endOfWeek.setDate(startOfWeek2.getDate() + 6);
 
@@ -120,7 +100,6 @@ const Calendar: React.FC = () => {
   const [systemClose, setSystemClose] = useState<boolean>(false);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isMobileView, setIsMobileView] = useState(false);
-  //const [schedule, setSchedule] = useState<TimetableEntry[]>([]);
   const [students, setStudents] = useState<Student[]>([]);
   const [modalInfo, setModalInfo] = useState<{ lesson: string; time: string; className: string } | null>(null);
   const [studentTimetable, setStudentTimetable] = useState<Timetable[]>([]);
@@ -130,25 +109,14 @@ const Calendar: React.FC = () => {
   const [tanevvege, setEndYear] = useState<string | null>(null);
   const [lessonTimes, setLessonTimes] = useState<lessonTimes[]>([]);
   const [unlockedStudents, setUnlockedStudents] = useState(new Set());
-
-  const API_BASE_URL = window.location.origin;
-
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5; // Oldalanként megjelenítendő diákok száma
-
-
-
+  const itemsPerPage = 5;
   const [hasStudents, setHasStudents] = useState<boolean | null>(null);
-
-
-  const [loading, setLoading] = useState(true); // Betöltési állapot
-
-
+  const [loading, setLoading] = useState(true); 
   const [tanevkezdesDate, setTanevkezdesDate] = useState<Date | null>(null);
   const [tanevvegeDate, setTanevvegeDate] = useState<Date | null>(null);
 
-
-
+  const API_BASE_URL = window.location.origin;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -157,7 +125,6 @@ const Calendar: React.FC = () => {
 
     return () => clearInterval(interval);
   }, []);
-
 
   useEffect(() => {
     const updateView = () => {
@@ -186,18 +153,17 @@ const Calendar: React.FC = () => {
     fetchLessonTimes();
   }, []);
 
-
   useEffect(() => {
     const fetchTimetables = async () => {
       try {
-        // Fetch all students' timetable data at once from the new API endpoint
+  
         const response = await fetch(`${API_BASE_URL}/api/timetable/allScheduleStart?school_id=${session?.user?.school_id}`);
         if (!response.ok) {
           throw new Error('Nem sikerült lekérni az összes diák órarendjét.');
         }
 
         const data = await response.json();
-        // Map the response to match the structure of your state
+       
         const timetables = data.students.map((student: any) => ({
           student_id: student.student_id,
           first_class_start: student.first_class_start,
@@ -215,12 +181,6 @@ const Calendar: React.FC = () => {
     }
   }, [students]);
 
-  //${API_BASE_URL}/api/timetable/getClassTimetable?className=13.I
-  //${API_BASE_URL}/api/timetable/getTeacherTimetable?teacherName=${teacher}
-
-  //PaZo ${session?.user?.short_name}
-
-  //const teacher = 'PaZo';
   useEffect(() => {
     async function fetchSchedule() {
       try {
@@ -229,7 +189,7 @@ const Calendar: React.FC = () => {
         const data = await response.json();
         const formattedData = data.map((lesson: any) => ({
           day: lesson.day_of_week,
-          start: lesson.start_time.slice(0, 5), // "07:15:00" -> "07:15"
+          start: lesson.start_time.slice(0, 5), 
           end: lesson.end_time.slice(0, 5),
           subject: lesson.group_name,
           teacher: lesson.teacher_name,
@@ -244,18 +204,9 @@ const Calendar: React.FC = () => {
     fetchSchedule();
   }, []);
 
-
-
-
   const [employees, setEmployees] = useState<any[]>([]);
-  //const [selectedClass, setSelectedClass] = useState<string>('');
-  // const [selectedTeacher, setSelectedTeacher] = useState<string>('');
-
-  const [selectedValue, setSelectedValue] = useState<string>('');
-
   const [schedule, setSchedule] = useState<any[]>([]);
 
-  // Dolgozók (tanárok és osztályfőnökök) lekérése
   const fetchEmployees = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/config/getEmployees?school_id=${session?.user?.school_id}`);
@@ -273,82 +224,6 @@ const Calendar: React.FC = () => {
   useEffect(() => {
     fetchEmployees();
   }, []);
-
-
-
-
-  // Osztályok kinyerése
-  const classOptions = useMemo(() => {
-    return Array.from(new Set(employees.map((employee) => employee.osztalyfonok)));
-  }, [employees]);
-
-  // Tanárok kinyerése
-  const teacherOptions = useMemo(() => {
-    return Array.from(new Set(employees.map((employee) => employee.short_name)));
-  }, [employees]);
-
-
-
-  {/*
-  useEffect(() => {
-    if (selectedValue) {
-      if (classOptions.includes(selectedValue)) {
-        // Ha az osztályok között van a kiválasztott érték
-        fetchClassTimetable(selectedValue);
-      } else if (teacherOptions.includes(selectedValue)) {
-        // Ha a tanárok között van a kiválasztott érték
-        fetchTeacherTimetable(selectedValue);
-      }
-    }
-  }, [selectedValue]);
-
-  // Osztály órarendjének lekérése
-  const fetchClassTimetable = async (className: string) => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/api/timetable/getClassTimetable?className=${className}`);
-      const data = await response.json();
-      const formattedData = data.map((lesson: any) => ({
-        day: lesson.day_of_week,
-        start: lesson.start_time.slice(0, 5),
-        end: lesson.end_time.slice(0, 5),
-        subject: lesson.group_name,
-        teacher: lesson.teacher_name,
-        class: lesson.class
-      }));
-      setSchedule(formattedData);
-    } catch (error) {
-      console.error('Error fetching class timetable:', error);
-    }
-  };
-
-  // Tanár órarendjének lekérése
-  const fetchTeacherTimetable = async (teacherName: string) => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/api/timetable/getTeacherTimetable?teacherName=${teacherName}`);
-      const data = await response.json();
-      const formattedData = data.map((lesson: any) => ({
-        day: lesson.day_of_week,
-        start: lesson.start_time.slice(0, 5),
-        end: lesson.end_time.slice(0, 5),
-        subject: lesson.group_name,
-        teacher: lesson.teacher_name,
-        class: lesson.class
-      }));
-      setSchedule(formattedData);
-    } catch (error) {
-      console.error('Error fetching teacher timetable:', error);
-    }
-  };
-
-
-
-*/}
-
-
-
-
-
-
 
   useEffect(() => {
     const fetchAdditionalData = async () => {
@@ -377,16 +252,13 @@ const Calendar: React.FC = () => {
     fetchAdditionalData();
   }, []);
 
-  console.log('Schedule:', schedule);
-  console.log('Student:', students);
-  console.log('System:', systemClose);
-  console.log('Break:', breakdate);
-  console.log('Plusdate:', plusdate);
-  console.log('Tanévkezdes:', tanevkezdes);
-  console.log('Tanevvege:', tanevvege);
-
-
-
+  // console.log('Schedule:', schedule);
+  // console.log('Student:', students);
+  // console.log('System:', systemClose);
+  // console.log('Break:', breakdate);
+  // console.log('Plusdate:', plusdate);
+  // console.log('Tanévkezdes:', tanevkezdes);
+  // console.log('Tanevvege:', tanevvege);
 
   useEffect(() => {
     if (tanevkezdes && tanevvege) {
@@ -398,59 +270,28 @@ const Calendar: React.FC = () => {
 
       setTanevkezdesDate(kezdes);
       setTanevvegeDate(vege);
-      setLoading(false); // Ha az adatok beálltak, kikapcsoljuk a betöltést
+      setLoading(false); 
     }
-  }, [tanevkezdes, tanevvege]); // Figyeljük a változásukat
-
-
+  }, [tanevkezdes, tanevvege]); 
 
   const getDayName = (date: Date): string => {
     const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     return dayNames[getDay(date)];
   };
-  // const isBreakDay = (date: Date) => {
-  //   if (!breakdate || breakdate.length === 0) return false;
-
-  //   const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-  //   return breakdate.some(({ start, end }) => {
-  //     const startDate = new Date(start);
-  //     const endDate = new Date(end);
-  //     return targetDate >= startDate && targetDate <= endDate;
-  //   });
-  // };
-
-  // const parseDate = (dateString: string) => {
-  //   const [year, month, day] = dateString.split("-").map(Number);
-  //   return new Date(year, month - 1, day); // hónapokat 0-indexelten tárolja a JS
-  // };
-
-  // const isBreakDay = (date: Date) => {
-  //   if (!breakdate || breakdate.length === 0) return false;
-
-  //   const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-
-  //   return breakdate.some(({ start, end }) => {
-  //     const startDate = parseDate(start);
-  //     const endDate = parseDate(end);
-
-  //     return targetDate >= startDate && targetDate <= endDate;
-  //   });
-  // };
 
   const parseDate = (dateString: string) => {
-    return new Date(dateString); // ISO 8601 formátumot automatikusan kezeli
+    return new Date(dateString); 
   };
 
   const isBreakDay = (date: Date) => {
     if (!breakdate || breakdate.length === 0) return false;
 
-    const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()); // Idő rész nélkül
+    const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()); 
 
     return breakdate.some(({ start, end }) => {
       const startDate = parseDate(start);
       const endDate = parseDate(end);
 
-      // Dátumok összehasonlítása idő rész nélkül
       const startDateOnly = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
       const endDateOnly = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
 
@@ -458,27 +299,12 @@ const Calendar: React.FC = () => {
     });
   };
 
-
-  // const fetchStudentTimetable = async (student_id: string) => {
-  //   const response = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${student_id}`);
-  //   const data = await response.json();
-  //   return data;
-  // };
-
-  // const getReplacedDayName = (date: Date): string => {
-  //   const formattedDate = format(date, 'yyyy-MM-dd');
-  //   // const replacement = plusdate.find((entry) => entry.date === formattedDate);
-  //   const replacement = (plusdate || []).find((entry) => entry.date === formattedDate);
-
-  //   return replacement ? replacement.replaceDay : getDayName(date);
-  // };
-
   const getReplacedDayName = (date: Date): string => {
-    const formattedDate = format(date, 'yyyy-MM-dd'); // Például: "2024-12-21"
+    const formattedDate = format(date, 'yyyy-MM-dd'); 
 
-    // Az ISO dátumot (pl. "2024-12-21T00:00:00.000Z") alakítsuk át "YYYY-MM-DD" formátumra
+    
     const replacement = (plusdate || []).find((entry) => {
-      const entryDateFormatted = format(new Date(entry.date), 'yyyy-MM-dd'); // ISO dátum átalakítása
+      const entryDateFormatted = format(new Date(entry.date), 'yyyy-MM-dd'); 
       return entryDateFormatted === formattedDate;
     });
 
@@ -512,10 +338,6 @@ const Calendar: React.FC = () => {
     setModalInfo({ lesson, time, className });
   };
 
-  // const closeModal = () => {
-  //   setModalInfo(null);
-  // };
-
   const getStudentsByClass = (className: string) => {
     return students.filter((student) => {
       const studentClasses = student.class.split(',').map((item) => item.trim());
@@ -527,8 +349,6 @@ const Calendar: React.FC = () => {
       return studentClasses.some((cls) => classNames.includes(cls));
     });
   };
-
-
 
   const weekStart = startOfWeek(currentDate, { weekStartsOn: 1 });
   const daysOfWeek = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
@@ -549,7 +369,7 @@ const Calendar: React.FC = () => {
       } else {
         const data = await response.json();
         console.log(data.message);
-        setUnlockedStudents(prev => new Set(prev).add(student_id)); // Ne engedje újra megnyomni
+        setUnlockedStudents(prev => new Set(prev).add(student_id)); 
       }
     } catch (error) {
       console.error('Hiba történt a kérés során:', error);
@@ -567,11 +387,9 @@ const Calendar: React.FC = () => {
     } 
   };
 
-
   useEffect(() => {
     fetchStudents();
   }, []);
-
 
   const fetchSystemStatus = async () => {
     const response = await fetch(`${API_BASE_URL}/api/system/status?school_id=${session?.user?.school_id}`);
@@ -593,11 +411,6 @@ const Calendar: React.FC = () => {
   }
 
   const { startOfWeek2, endOfWeek } = getWeekStartAndEnd(currentDate);
-
-
-
-
-
 
   const getPaginatedStudents = (className: string, page: number) => {
     const allStudents = getStudentsByClass(className);
@@ -646,11 +459,7 @@ const Calendar: React.FC = () => {
     }
   }
 
-
   return (
-    // <SidebarProvider>
-    // <AppSidebar />
-    // <SidebarInset>
       <div>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b">
           <div className="flex flex-1 items-center gap-2 px-3">
@@ -673,10 +482,6 @@ const Calendar: React.FC = () => {
 
         </header>
 
-
-
-
-
         <div>
           {loading ? (
             <div className="flex items-center justify-center min-h-screen">
@@ -686,8 +491,7 @@ const Calendar: React.FC = () => {
             <>
             <div className="p-6">
                             <div className="calendar-container">
-                {/* <span>{tanevkezdes}</span>
-  <span>{tanevvege}</span> */}
+    
                 <div className="calendar-header">
                   <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
                     <span>
@@ -695,46 +499,6 @@ const Calendar: React.FC = () => {
                     </span>
                   </h2>
                   <div className="calendar-controls">
-
-
-
-
-                    {/*<Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Válasszon..." />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Osztályok</SelectLabel>
-                    <SelectItem value="13i">13.I</SelectItem>
-                    <SelectLabel>Tanárok</SelectLabel>
-                    <SelectItem value="kisPista">Kis Pista</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>*/}
-                    {/* <Select value={selectedValue} onValueChange={setSelectedValue}>
-          <SelectTrigger>
-            <SelectValue placeholder="Válasszon..." />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>Osztályok</SelectLabel>
-              {classOptions.map((className, index) => (
-                <SelectItem key={index} value={className}>
-                  {className}
-                </SelectItem>
-              ))}
-              <SelectLabel>Tanárok</SelectLabel>
-              {teacherOptions.map((teacherName, index) => (
-                <SelectItem key={index} value={teacherName}>
-                  {teacherName}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-*/}
-
 
                     <Button onClick={goToToday} variant="outline">Mai nap</Button>
                     <Button variant="ghost" onClick={goToPrevious} data-testid="prev-button"><ChevronLeft /></Button>
@@ -771,7 +535,7 @@ const Calendar: React.FC = () => {
                                 return (
                                   <Dialog onOpenChange={(isOpen) => {
                                     if (!isOpen) {
-                                      setCurrentPage(1); // Alaphelyzetbe állítjuk a lapszámot, ha a dialógus bezárul
+                                      setCurrentPage(1);
                                     }
                                   }}
                                     key={`${index}`}>

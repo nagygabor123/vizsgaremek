@@ -6,12 +6,9 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import * as React from "react";
 import {
-  TriangleAlert,
-  Settings,
   SlidersHorizontal,
   ChevronDown,
   GraduationCap,
-  FileClock,
   BriefcaseBusiness,
   LogOut,
   CalendarHeart,
@@ -42,19 +39,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
-
 
 interface SidebarItem {
   label: string;
@@ -67,7 +51,6 @@ interface SidebarGroupConfig {
   groupLabel?: string;
   items: SidebarItem[];
 }
-
 
 const sidebarConfig: SidebarGroupConfig[] = [
   {

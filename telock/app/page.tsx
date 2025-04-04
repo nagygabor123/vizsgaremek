@@ -1,10 +1,9 @@
 import Image from "next/image";
 import Link from "next/link"
-import { FileClock, Zap, ChartColumnBig, ShieldCheck, RefreshCw, Server, Instagram, Cpu, ArrowRight, BatteryCharging, Youtube, TrendingUp, CheckCircle, Lock  } from "lucide-react";
+import { FileClock, Zap, ChartColumnBig, ShieldCheck, RefreshCw, Server, Instagram, Cpu, ArrowRight, BatteryCharging, Youtube, TrendingUp, CheckCircle } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { Button } from "@/components/ui/button"
 import localFont from "next/font/local";
-import { Input } from "@/components/ui/input"
 
 const ZenDots = localFont({
   src: "./fonts/ZenDots-Regular.ttf",
