@@ -76,7 +76,7 @@ const SheetComponent: React.FC = () => {
 
       if (droppedFile.type !== "text/xml" && !droppedFile.name.endsWith(".xml")) {
         setMessage(
-          <div className="text-red-500 text-sm">
+          <div className="text-red-600 text-sm">
             A feltöltött fájl nem .xml formátumú
           </div>
         );
@@ -178,7 +178,7 @@ const SheetComponent: React.FC = () => {
   const handleUpload = async () => {
     if (!file) {
       setMessage(
-        <div className="text-red-500 text-sm">Nincs fájl kiválasztva</div>
+        <div className="text-red-600 text-sm">Nincs fájl kiválasztva</div>
       );
       return;
     }

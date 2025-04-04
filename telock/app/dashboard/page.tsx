@@ -92,7 +92,7 @@ export default function Page() {
           </div>
         ) : (
           <div className="space-y-6">
-            <div className="rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 p-4">
+            <div className="rounded-xl bg-gradient-to-r from-blue-100 to-indigo-50 p-4">
               <div className="flex items-center">
                 <Megaphone className="text-blue-600 h-5 w-5" />
                 <p className="text-sm ml-3 text-blue-600">

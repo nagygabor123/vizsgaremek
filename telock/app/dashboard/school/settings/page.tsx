@@ -362,9 +362,10 @@ const handleYearChange = () => {
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button
+                      
                         variant="outline"
                         className={cn(
-                          "w-full justify-start text-left font-normal",
+                          "w-full justify-start text-left font-normal w-[280px]",
                           !startDate && "text-muted-foreground"
                         )}
                       >
@@ -424,7 +425,7 @@ const handleYearChange = () => {
                       <Button
                         variant="outline"
                         className={cn(
-                          "w-full justify-start text-left font-normal",
+                          "w-full justify-start text-left font-normal w-[280px]",
                           !endDate && "text-muted-foreground"
                         )}
                       >
