@@ -359,31 +359,31 @@ export default function Page() {
           </div>
         ) : (
           <>
+
+
+<div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
+          <div className="grid auto-rows-min gap-4 w-full">
+              <div className="min-h-[60px] rounded-xl bg-blue-100 flex items-center px-4 w-full box-border overflow-hidden">
+                <School className="text-blue-600 hidden sm:block" />
+                <p className="text-sm truncate ml-3 text-blue-600">
+                Jelenlegi tanév: <span className="font-medium">{schoolYear}</span>
+                {isYearOver && <span className="text-blue-500">(Lejárt)</span>}
+                </p>
+                <Button
+      onClick={handleYearChange}
+      disabled={!isYearOver}
+      className="ml-auto"
+    >
+      Tanév váltása
+    </Button>
+              </div>
+          
+          </div>
+        </div>
+
             <div className="p-4">
 
       
-            <div className="rounded-xl bg-gradient-to-r from-blue-100 to-indigo-50 p-4">
-  <div className="flex items-center justify-between">
-    <div className="flex items-center">
-      <School className="text-blue-600 h-5 w-5" />
-      <p className="text-sm ml-3 text-blue-600">
-        Jelenlegi tanév: <span className="font-medium">{schoolYear}</span>
-        {isYearOver && <span className="ml-2 text-red-500">(Lejárt)</span>}
-      </p>
-    </div>
-    <button
-      onClick={handleYearChange}
-      disabled={!isYearOver}
-      className={`px-4 py-2 rounded-lg text-white transition ${
-        isYearOver
-          ? 'bg-green-600 hover:bg-green-700 shadow-md'
-          : 'bg-gray-300 cursor-not-allowed'
-      }`}
-    >
-      Tanév váltása
-    </button>
-  </div>
-</div>
 
 
               <div className="mb-5 flex flex-col sm:flex-row items-start">
