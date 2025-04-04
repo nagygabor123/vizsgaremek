@@ -321,9 +321,9 @@ export default function Home() {
             </div>
           ) : (
             <>
-              {!hasStudents && <AppKonfig />}
+              
               <div className="p-6">
-
+              {!hasStudents && <AppKonfig />}
                 <div className="flex flex-col gap-2 md:flex-row mb-4">
                   <div className="flex flex-col gap-2 md:flex-row">
                     <Input

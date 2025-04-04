@@ -307,9 +307,9 @@ export default function AddEmployeePage() {
             </div>
           ) : (
             <>
+              
+              <div className="p-6">
               {!hasStudents && <AppKonfig />}
-              <div className="p-4">
-
                 <div className="flex flex-col gap-2 md:flex-row mb-4">
                   <div className="flex flex-col gap-2 md:flex-row">
                     <Input
