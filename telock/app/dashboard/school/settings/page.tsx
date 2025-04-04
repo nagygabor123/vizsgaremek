@@ -21,7 +21,20 @@ import {
   Sun,
   Moon
 } from "lucide-react";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbList,
+  BreadcrumbPage,
+} from "@/components/ui/breadcrumb";
 
+import {
+  SidebarTrigger,
+  SidebarInset,
+  SidebarProvider,
+} from "@/components/ui/sidebar";
 import { DateRange } from "react-day-picker";
 // UI Components (keep your existing imports)
 import { Button } from "@/components/ui/button";
@@ -279,37 +292,41 @@ const handleYearChange = () => {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <Link href="/dashboard" className="flex items-center">
-              <School className="h-6 w-6 text-indigo-600" />
-              <span className="ml-2 text-xl font-semibold text-gray-900">Iskolai Rendszer</span>
-            </Link>
-            <ChevronRight className="h-4 w-4 text-gray-400" />
-            <nav className="flex space-x-4">
-              <Link href="/dashboard/settings" className="text-sm font-medium text-gray-500 hover:text-gray-700">
-                Beállítások
-              </Link>
-              <ChevronRight className="h-4 w-4 text-gray-400" />
-              <span className="text-sm font-medium text-indigo-600">Tanév beállításai</span>
-            </nav>
-          </div>
+      <header className="flex h-16 shrink-0 items-center gap-2 border-b">
+        <div className="flex flex-1 items-center gap-2 px-3">
+          <SidebarTrigger />
+          <Separator orientation="vertical" className="mr-2 h-4" />
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href="/dashboard">Kezdőlap</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>Beállítások és naplózás</BreadcrumbPage>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>tanév beállításai</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
         </div>
       </header>
-
       {/* Main Content */}
-      <main className="w-full">
+      <main className="w-full mx-auto px-4 py-6 sm:px-6 lg:px-8">
         {/* Current School Year Card */}
-        <div className="mb-6">
-          <Card className="border-0 rounded-none shadow-none bg-indigo-50">
+        <div className="mb-8">
+          <Card className="border-blue-100 bg-blue-50">
             <CardHeader className="pb-4">
               <div className="flex justify-between items-center">
                 <div>
-                  <CardTitle className="text-lg font-semibold text-indigo-800">
+                  <CardTitle className="text-lg font-semibold text-blue-800">
                     Jelenlegi tanév
                   </CardTitle>
-                  <CardDescription className="text-indigo-600">
+                  <CardDescription className="text-blue-600">
                     {schoolYear} {isYearOver && <Badge variant="destructive" className="ml-2">Lejárt</Badge>}
                   </CardDescription>
                 </div>
@@ -331,11 +348,11 @@ const handleYearChange = () => {
         </div>
 
         {/* School Year Range */}
-        <div className="flex">
-          <Card className="flex-1 border-0 rounded-none shadow-none border-r border-gray-200">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <Card>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <Sun className="h-5 w-5 text-yellow-500" />
+               
                 <span>Tanév kezdete</span>
               </CardTitle>
             </CardHeader>
@@ -380,7 +397,7 @@ const handleYearChange = () => {
                     disabled={!startDate}
                     variant="default"
                     size="icon"
-                    className="bg-indigo-600 hover:bg-indigo-700"
+                    className="bg-blue-600 hover:bg-blue-700"
                   >
                     <SaveAll className="h-4 w-4" />
                   </Button>
@@ -392,10 +409,10 @@ const handleYearChange = () => {
             </CardContent>
           </Card>
 
-          <Card className="flex-1 border-0 rounded-none shadow-none">
+          <Card>
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <Moon className="h-5 w-5 text-blue-500" />
+               
                 <span>Tanév vége</span>
               </CardTitle>
             </CardHeader>
@@ -440,7 +457,7 @@ const handleYearChange = () => {
                     disabled={!endDate}
                     variant="default"
                     size="icon"
-                    className="bg-indigo-600 hover:bg-indigo-700"
+                    className="bg-blue-600 hover:bg-blue-700"
                   >
                     <SaveAll className="h-4 w-4" />
                   </Button>
@@ -454,12 +471,12 @@ const handleYearChange = () => {
         </div>
 
         {/* No School Days */}
-        <Card className="border-0 rounded-none shadow-none border-t border-gray-200">
+        <Card className="mb-8">
           <CardHeader>
             <div className="flex justify-between items-center">
               <div>
                 <CardTitle className="flex items-center space-x-2">
-                  <Clock className="h-5 w-5 text-orange-500" />
+                
                   <span>Tanítás nélküli munkanapok</span>
                 </CardTitle>
                 <CardDescription>
@@ -474,7 +491,7 @@ const handleYearChange = () => {
                 }}
               >
                 <DialogTrigger asChild>
-                  <Button variant="default" className="bg-indigo-600 hover:bg-indigo-700">
+                  <Button variant="default" className="bg-blue-600 hover:bg-blue-700">
                     <CalendarPlus className="mr-2 h-4 w-4" />
                     Új nap
                   </Button>
@@ -522,7 +539,7 @@ const handleYearChange = () => {
                     </div>
                   </div>
                   <DialogFooter>
-                    <Button onClick={handleAddNoSchool} className="w-full bg-indigo-600 hover:bg-indigo-700">
+                    <Button onClick={handleAddNoSchool} className="w-full bg-blue-600 hover:bg-blue-700">
                       Mentés
                     </Button>
                   </DialogFooter>
@@ -553,7 +570,7 @@ const handleYearChange = () => {
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm">
                           <AlertDialog>
                             <AlertDialogTrigger asChild>
-                              <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-900">
+                              <Button variant="ghost" size="sm" className=" hover:text-red-900">
                                 <Trash2 className="h-4 w-4" />
                               </Button>
                             </AlertDialogTrigger>
@@ -590,12 +607,12 @@ const handleYearChange = () => {
         </Card>
 
         {/* Saturday School Days */}
-        <Card className="border-0 rounded-none shadow-none border-t border-gray-200">
+        <Card className="mb-8">
           <CardHeader>
             <div className="flex justify-between items-center">
               <div>
                 <CardTitle className="flex items-center space-x-2">
-                  <BookOpen className="h-5 w-5 text-purple-500" />
+                 
                   <span>Szombati tanítási napok</span>
                 </CardTitle>
                 <CardDescription>
@@ -604,7 +621,7 @@ const handleYearChange = () => {
               </div>
               <Dialog open={isDialogOpen2} onOpenChange={setIsDialogOpen2}>
                 <DialogTrigger asChild>
-                  <Button variant="default" className="bg-indigo-600 hover:bg-indigo-700">
+                  <Button variant="default" className="bg-blue-600 hover:bg-blue-700">
                     <CalendarPlus className="mr-2 h-4 w-4" />
                     Új nap
                   </Button>
@@ -666,7 +683,7 @@ const handleYearChange = () => {
                     </div>
                   </div>
                   <DialogFooter>
-                    <Button onClick={handleAddPlusDate} className="w-full bg-indigo-600 hover:bg-indigo-700">
+                    <Button onClick={handleAddPlusDate} className="w-full bg-blue-600 hover:bg-blue-700">
                       Mentés
                     </Button>
                   </DialogFooter>
@@ -703,7 +720,7 @@ const handleYearChange = () => {
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm">
                           <AlertDialog>
                             <AlertDialogTrigger asChild>
-                              <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-900">
+                              <Button variant="ghost" size="sm" className=" hover:text-red-900">
                                 <Trash2 className="h-4 w-4" />
                               </Button>
                             </AlertDialogTrigger>
@@ -740,12 +757,12 @@ const handleYearChange = () => {
         </Card>
 
         {/* School Breaks */}
-        <Card className="border-0 rounded-none shadow-none border-t border-gray-200">
+        <Card>
           <CardHeader>
             <div className="flex justify-between items-center">
               <div>
                 <CardTitle className="flex items-center space-x-2">
-                  <Clock className="h-5 w-5 text-blue-500" />
+                 
                   <span>Tanítási szünetek</span>
                 </CardTitle>
                 <CardDescription>
@@ -754,7 +771,7 @@ const handleYearChange = () => {
               </div>
               <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogTrigger asChild>
-                  <Button variant="default" className="bg-indigo-600 hover:bg-indigo-700">
+                  <Button variant="default" className="bg-blue-600 hover:bg-blue-700">
                     <CalendarPlus className="mr-2 h-4 w-4" />
                     Új szünet
                   </Button>
@@ -826,7 +843,7 @@ const handleYearChange = () => {
                     </div>
                   </div>
                   <DialogFooter>
-                    <Button onClick={handleAddBreak} className="w-full bg-indigo-600 hover:bg-indigo-700">
+                    <Button onClick={handleAddBreak} className="w-full bg-blue-600 hover:bg-blue-700">
                       Mentés
                     </Button>
                   </DialogFooter>
@@ -866,7 +883,7 @@ const handleYearChange = () => {
                           <td className="px-6 py-4 whitespace-nowrap text-right text-sm">
                             <AlertDialog>
                               <AlertDialogTrigger asChild>
-                                <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-900">
+                                <Button variant="ghost" size="sm" className=" hover:text-red-900">
                                   <Trash2 className="h-4 w-4" />
                                 </Button>
                               </AlertDialogTrigger>
