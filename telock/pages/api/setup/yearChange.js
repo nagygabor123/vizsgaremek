@@ -110,6 +110,7 @@ async function callSetYearStartEnd(school_id, type, date) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
+      school_id,
       type,
       which_day: date.toISOString()
     })
