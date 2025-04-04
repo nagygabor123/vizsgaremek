@@ -322,7 +322,7 @@ export default function Page() {
   const handleYearChange = async () => {
   
     try {
-      const response = await fetch(`/api/deleteSchoolData?school_id=${session?.user?.school_id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/setup/yearChange?school_id=${session?.user?.school_id}`, {
         method: 'DELETE',
       });
   
