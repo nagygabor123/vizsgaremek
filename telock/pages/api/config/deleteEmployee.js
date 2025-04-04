@@ -8,7 +8,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Hiányzó ID paraméter.' });
     }
 
-    if (position === 'rendszergazda' ) { //|| admin_id === '2'
+    if (position === 'rendszergazda' ) { 
       return res.status(400).json({ error: 'A rendszergazdát nem lehet kitörölni!' });
     }
 
