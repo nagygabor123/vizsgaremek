@@ -10,3 +10,4 @@ DROP TABLE IF EXISTS students;
 DROP TABLE IF EXISTS admins;
 DROP TABLE IF EXISTS csoportok;
 DROP TABLE IF EXISTS group_relations;
+DROP TABLE IF EXISTS schools;

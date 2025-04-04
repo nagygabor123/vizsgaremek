@@ -157,9 +157,9 @@ export default function AddEmployeePage() {
     }
   };
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: number,type:string) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/config/deleteEmployee?admin_id=${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/config/deleteEmployee?admin_id=${id}&position=${type}`, {
         method: 'DELETE',
       });
       if (response.ok) {
@@ -546,7 +546,7 @@ export default function AddEmployeePage() {
                                   </AlertDialogHeader>
                                   <AlertDialogFooter>
                                     <AlertDialogCancel>Mégse</AlertDialogCancel>
-                                    <AlertDialogAction onClick={() => handleDelete(employee.admin_id)}>Véglegesítés</AlertDialogAction>
+                                    <AlertDialogAction onClick={() => handleDelete(employee.admin_id,employee.position,)}>Véglegesítés</AlertDialogAction>
                                   </AlertDialogFooter>
                                 </AlertDialogContent>
                               </AlertDialog>

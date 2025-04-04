@@ -2,14 +2,14 @@ import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'DELETE') {
-    const { admin_id } = req.query;
+    const { admin_id,position } = req.query;
 
     if (!admin_id) {
       return res.status(400).json({ error: 'Hiányzó ID paraméter.' });
     }
 
-    if (admin_id === '1' ) { //|| admin_id === '2'
-      return res.status(400).json({ error: 'Az ID értéke nem lehet 1.' });
+    if (position === 'rendszergazda' ) { //|| admin_id === '2'
+      return res.status(400).json({ error: 'A rendszergazdát nem lehet kitörölni!' });
     }
 
     const sql = neon(`${process.env.DATABASE_URL}`);
