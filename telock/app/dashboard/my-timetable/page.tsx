@@ -684,7 +684,8 @@ const Calendar: React.FC = () => {
             </div>
           ) : (
             <>
-              <div className="calendar-container">
+            <div className="p-6">
+                            <div className="calendar-container">
                 {/* <span>{tanevkezdes}</span>
   <span>{tanevvege}</span> */}
                 <div className="calendar-header">
@@ -1044,6 +1045,7 @@ const Calendar: React.FC = () => {
                   )}
                 </div>
 
+              </div>
               </div>
             </>
           )}

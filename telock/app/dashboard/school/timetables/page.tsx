@@ -578,6 +578,7 @@ const Calendar: React.FC = () => {
           </div>
         ) : (
           <>
+          <div className="p-6">
             {!hasStudents && <AppKonfig />}
             <div className="calendar-container">
               <div className="calendar-header">
@@ -918,6 +919,7 @@ const Calendar: React.FC = () => {
                 )}
               </div>
 
+            </div>
             </div>
           </>
         )}
