@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { AppSidebar } from "@/components/app-sidebar";
 import { useSession } from "next-auth/react";
 import {
   Breadcrumb,
@@ -13,27 +12,13 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import {
-  Sidebar,
   SidebarTrigger,
-  SidebarInset,
-  SidebarProvider,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
-import { Trash2, CalendarPlus, CalendarIcon, SaveAll, Slash, School } from "lucide-react";
+import { Trash2, CalendarPlus, CalendarIcon, SaveAll, School } from "lucide-react";
 import Link from "next/link";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
-
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -45,11 +30,9 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-
 import * as React from "react"
 import { format } from "date-fns"
 import { hu } from "date-fns/locale";
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -58,19 +41,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-
-
 import { cn } from "@/lib/utils"
-
 import { Calendar } from "@/components/ui/calendar"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-
 import { DateRange } from 'react-day-picker';
-
 import {
   Select,
   SelectContent,
@@ -78,7 +56,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-
 import {
   Dialog,
   DialogContent,
@@ -118,7 +95,6 @@ export default function Page() {
       setSelectedDate(null);
     }
   }, [isDialogOpen3]);
-
 
   const days = [
     { label: 'Hétfő', value: 'monday' },
@@ -171,7 +147,7 @@ export default function Page() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({school_id:session?.user?.school_id, type, which_day: date }),
+        body: JSON.stringify({ school_id: session?.user?.school_id, type, which_day: date }),
       });
 
       //const responseData = await response.json();
@@ -227,11 +203,6 @@ export default function Page() {
         body: JSON.stringify({ type: 'tanitasnelkul', ...newNo })
       });
       if (response.ok) {
-        {/*setYearSchedule((prev: typeof yearSchedule) => ({
-          ...prev,
-          noSchool: [...prev.noSchool, newNo]
-        }));*/}
-
         setYearSchedule((prev: typeof yearSchedule) => ({
           ...prev,
           noSchool: Array.isArray(prev.noSchool) ? [...prev.noSchool, newNo] : [newNo]
@@ -295,7 +266,6 @@ export default function Page() {
     }
   };
 
-
   const [startDate, setStartDate] = React.useState<Date | undefined>();
   const [endDate, setEndDate] = React.useState<Date | undefined>();
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
@@ -320,16 +290,16 @@ export default function Page() {
   const isYearOver = now > end;
 
   const handleYearChange = async () => {
-  
+
     try {
       const response = await fetch(`${API_BASE_URL}/api/setup/yearChange?school_id=${session?.user?.school_id}`, {
         method: 'DELETE',
       });
-  
+
       const result = await response.json();
-  
+
       if (response.ok) {
-        console.log('Törlés és új tanév beállítása sikeres:', result);
+        // console.log('Törlés és új tanév beállítása sikeres:', result);
         window.location.reload();
       } else {
         console.error('Hiba a törlés során:', result);
@@ -338,10 +308,9 @@ export default function Page() {
       console.error('API hívási hiba:', error);
     }
   };
-  
 
   return (
-<div>
+    <div>
       <header className="flex h-16 shrink-0 items-center gap-2 border-b">
         <div className="flex flex-1 items-center gap-2 px-3">
           <SidebarTrigger />
@@ -373,37 +342,29 @@ export default function Page() {
           </div>
         ) : (
           <>
-<div className="p-6">
+            <div className="p-6">
 
-<div className="flex flex-col gap-4 overflow-x-hidden w-full pb-6">
-          <div className="grid auto-rows-min gap-4 w-full">
-              <div className="min-h-[60px] rounded-xl bg-blue-100 flex items-center px-4 w-full box-border overflow-hidden">
-                <School className="text-blue-600 hidden sm:block" />
-                <p className="text-sm truncate ml-3 text-blue-600">
-                Jelenlegi tanév: <span className="font-medium">{schoolYear}</span>
-                {isYearOver && <span className="text-blue-500">(Lejárt)</span>}
-                </p>
-                <Button
-      onClick={handleYearChange}
-      disabled={!isYearOver}
-      className="ml-auto"
-    >
-      Tanév váltása
-    </Button>
+              <div className="flex flex-col gap-4 overflow-x-hidden w-full pb-6">
+                <div className="grid auto-rows-min gap-4 w-full">
+                  <div className="min-h-[60px] rounded-xl bg-blue-100 flex items-center px-4 w-full box-border overflow-hidden">
+                    <School className="text-blue-600 hidden sm:block" />
+                    <p className="text-sm truncate ml-3 text-blue-600">
+                      Jelenlegi tanév: <span className="font-medium">{schoolYear}</span>
+                      {isYearOver && <span className="text-blue-500">(Lejárt)</span>}
+                    </p>
+                    <Button
+                      onClick={handleYearChange}
+                      disabled={!isYearOver}
+                      className="ml-auto"
+                    >
+                      Tanév váltása
+                    </Button>
+                  </div>
+
+                </div>
               </div>
-          
-          </div>
-        </div>
-
-            
-
-      
-
 
               <div className="mb-5 flex flex-col sm:flex-row items-start">
-
-    
-
 
                 <div className="sm:w-1/2 w-full">
                   <h2 className="text-lg font-semibold mb-2">Tanítási év első napja</h2>
@@ -942,7 +903,7 @@ export default function Page() {
           </>
         )}
       </div>
-      </div>
+    </div>
   );
 }
 

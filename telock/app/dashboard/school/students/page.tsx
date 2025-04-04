@@ -1,6 +1,5 @@
 "use client";
 
-import { AppSidebar } from "@/components/app-sidebar";
 import { useSession } from "next-auth/react";
 import {
   Breadcrumb,
@@ -10,20 +9,13 @@ import {
   BreadcrumbSeparator,
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb";
-
 import { Separator } from "@/components/ui/separator";
-
 import {
   SidebarTrigger,
-  SidebarInset,
-  SidebarProvider,
 } from "@/components/ui/sidebar";
-
 import { Label } from "@/components/ui/label"
 import Link from "next/link";
-
-import { Pen, Trash2, ArrowUpDown, CirclePlus, CircleCheck, LockOpen, DoorClosed, DoorOpen, CircleAlert, CircleMinus, Lock, ChevronRight, ChevronLeft, Slash, School, } from "lucide-react"
-
+import { Pen, Trash2, ArrowUpDown, CirclePlus, CircleCheck, LockOpen, DoorOpen, CircleAlert, CircleMinus, Lock, ChevronRight, ChevronLeft } from "lucide-react"
 import {
   Dialog,
   DialogContent,
@@ -32,14 +24,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import '../../../globals.css';
-
 import AppKonfig from '@/components/app-konfig';
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -80,14 +69,11 @@ export default function Home() {
     status: '',
   });
   const [editing, setEditing] = useState<boolean>(false);
-  const [, setEditStudentId] = useState<string | null>(null); //editStudentId,
+  const [editStudentId, setEditStudentId] = useState<string | null>(null);
   const [systemClose, setSystemClose] = useState<boolean>(false);
   const [unlockedStudents, setUnlockedStudents] = useState(new Set());
   const [hasStudents, setHasStudents] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(true);
-
-
-
 
   const API_BASE_URL = window.location.origin;
 
@@ -112,12 +98,6 @@ export default function Home() {
       setSystemClose(data.status === "nyithato" ? false : true);
     }
   };
-
-  //   const fetchStudentTimetable = async (student_id: string) => {
-  //     const response = await fetch(`http://localhost:3000/api/timetable/scheduleStart?student=${student_id}`);
-  //     const data = await response.json();
-  //     return data;
-  //   };
 
   useEffect(() => {
     fetchStudents();
@@ -150,14 +130,6 @@ export default function Home() {
       fetchTimetables();
     }
   }, [students]);
-
-  //   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //     const { name, value } = e.target;
-  //     setFormData({
-  //       ...formData,
-  //       [name]: value,
-  //     });
-  //   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -230,8 +202,8 @@ export default function Home() {
       if (!response.ok) {
         console.error('Hiba történt a zárolás feloldásakor:', await response.text());
       } else {
-        const data = await response.json();
-        console.log(data.message);
+        // const data = await response.json();
+        // console.log(data.message);
         setUnlockedStudents(prev => new Set(prev).add(student_id));
       }
     } catch (error) {
@@ -275,9 +247,8 @@ export default function Home() {
     currentPage * PAGE_SIZE
   );
 
-
   return (
- <div>
+    <div>
       <header className="flex h-16 shrink-0 items-center gap-2 border-b">
         <div className="flex flex-1 items-center gap-2 px-3">
           <SidebarTrigger />
@@ -289,11 +260,11 @@ export default function Home() {
                   <Link href="/dashboard">Kezdőlap</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
-              <BreadcrumbSeparator/>
+              <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbPage>Iskolai nyilvántartás</BreadcrumbPage>
               </BreadcrumbItem>
-              <BreadcrumbSeparator/>
+              <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbPage>Tanulók</BreadcrumbPage>
               </BreadcrumbItem>
@@ -310,9 +281,9 @@ export default function Home() {
             </div>
           ) : (
             <>
-              
+
               <div className="p-6">
-              {!hasStudents && <AppKonfig />}
+                {!hasStudents && <AppKonfig />}
                 <div className="flex flex-col gap-2 md:flex-row mb-4">
                   <div className="flex flex-col gap-2 md:flex-row">
                     <Input
@@ -331,7 +302,7 @@ export default function Home() {
                     />
 
                     <Button variant="outline" onClick={handleSystemClose} >
-                       {systemClose ? <LockOpen /> : <Lock />}  
+                      {systemClose ? <LockOpen /> : <Lock />}
                       {systemClose ? 'Feloldás' : 'Korlátozás'}
 
                     </Button>
@@ -357,7 +328,6 @@ export default function Home() {
                             type="text"
                             placeholder="OM1234567"
                             name="student_id"
-                            // value={formData.student_id}
                             onChange={e => setFormData({ ...formData, student_id: e.target.value })}
                           />
                         </div>
@@ -369,7 +339,6 @@ export default function Home() {
                             type="text"
                             name="full_name"
                             placeholder="Teszt Elek"
-                            // value={formData.full_name}
                             onChange={e => setFormData({ ...formData, full_name: e.target.value })}
                           />
                         </div>
@@ -381,7 +350,6 @@ export default function Home() {
                             type="text"
                             name="class"
                             placeholder="9.I,9.I-A2"
-                            // value={formData.class}
                             onChange={e => setFormData({ ...formData, class: e.target.value })}
                           />
                         </div>
@@ -394,7 +362,6 @@ export default function Home() {
                             type="text"
                             name="rfid_tag"
                             placeholder="R6HF6K86"
-                            //  value={formData.rfid_tag}
                             onChange={e => setFormData({ ...formData, rfid_tag: e.target.value })}
                           />
                         </div>
@@ -404,7 +371,6 @@ export default function Home() {
 
                     </DialogContent>
                   </Dialog>
-
                 </div>
 
                 <div className="rounded-md border mt-5">
@@ -414,7 +380,6 @@ export default function Home() {
                         <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("full_name")}>Teljes név <ArrowUpDown className="w-4 h-4 inline-block" /></th>
                         <th className="p-2 cursor-pointer font-normal" onClick={() => toggleSort("class")}>Osztály és csoportok<ArrowUpDown className="w-4 h-4 inline-block" /></th>
                         <th className="p-2 font-normal">Státusz</th>
-                        {/* <th className="p-2 font-normal">RFID azonosító</th> */}
                         <th className="p-2 font-normal">Műveletek</th>
                       </tr>
                     </thead>
@@ -448,18 +413,17 @@ export default function Home() {
                               <td className="p-1">
                                 {student.status === "ki" ? <Button disabled size="icon" variant="ghost"><CircleMinus className="w-4 h-4 inline-block" /></Button> : student.status === "be" ? <span className="text-green-500"><CircleCheck className="w-4 h-4 inline-block" /></span> : <span className="text-red-500"><CircleAlert className="w-4 h-4 inline-block" /></span>}
                               </td>
-                              {/* <td className="p-1">{student.rfid_tag}</td> */}
                               <td className="p-1">
 
                                 <Button
-                                size="icon" 
+                                  size="icon"
                                   variant="ghost"
                                   onClick={() => handleStudentOpen(student.student_id)}
                                   disabled={!canUnlockStudent || unlockedStudents.has(student.student_id)}
                                   data-testid="unlock-button"
                                 >
-                                   <DoorOpen className="w-4 h-4 inline-block" /> 
-                                  
+                                  <DoorOpen className="w-4 h-4 inline-block" />
+
                                 </Button>
 
                                 <Dialog open={open} onOpenChange={setOpen}>
@@ -551,6 +515,6 @@ export default function Home() {
           )}
         </div>
       </div>
-      </div>
+    </div>
   );
 }

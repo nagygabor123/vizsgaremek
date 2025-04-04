@@ -1,9 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { AppSidebar } from "@/components/app-sidebar";
 import { useSession } from "next-auth/react";
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -14,15 +12,11 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import {
-  //Sidebar,
   SidebarTrigger,
-  SidebarInset,
-  SidebarProvider,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Pen, Trash2, ArrowUpDown, CirclePlus, ChevronLeft, ChevronRight, Slash } from "lucide-react"
-
+import { Pen, Trash2, ArrowUpDown, CirclePlus, ChevronLeft, ChevronRight } from "lucide-react"
 import { Input } from "@/components/ui/input";
 import {
   Dialog,
@@ -31,7 +25,6 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  //DialogFooter
 } from "@/components/ui/dialog"
 import {
   Select,
@@ -39,8 +32,6 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-  // SelectGroup,
-  // SelectLabel
 } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 import AppKonfig from '@/components/app-konfig';
@@ -56,8 +47,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-
-
 
 export default function AddEmployeePage() {
   const { data: session } = useSession();
@@ -98,7 +87,7 @@ export default function AddEmployeePage() {
     { label: 'Igazgató', value: 'igazgato' },
     { label: 'Igazgatóhelyettes', value: 'igazgatohelyettes' },
     { label: 'Portás', value: 'portas' },
-   // { label: 'Rendszergazda', value: 'rendszergazda' },
+    // { label: 'Rendszergazda', value: 'rendszergazda' },
   ];
 
   const osztalyfonokOptions = useMemo(() => {
@@ -157,7 +146,7 @@ export default function AddEmployeePage() {
     }
   };
 
-  const handleDelete = async (id: number,type:string) => {
+  const handleDelete = async (id: number, type: string) => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/config/deleteEmployee?admin_id=${id}&position=${type}`, {
         method: 'DELETE',
@@ -209,7 +198,6 @@ export default function AddEmployeePage() {
     }
   };
 
-
   const [sortField, setSortField] = useState<"full_name" | "position" | "osztalyfonok" | null>(null);
   const [sortOrder, setSortOrder] = useState("asc");
   const [searchName, setSearchName] = useState("");
@@ -224,11 +212,6 @@ export default function AddEmployeePage() {
     return sortOrder === "asc" ? fieldA.localeCompare(fieldB, "hu") : fieldB.localeCompare(fieldA, "hu");
   });
 
-  /*const filteredEmployees = sortedEmployees.filter(student =>
-    student.full_name.toLowerCase().includes(searchName.toLowerCase()) &&
-    student.position.toLowerCase().includes(searchPosition.toLowerCase()) &&
-    student.osztalyfonok.toLowerCase().includes(searchOsztalyfonok.toLowerCase())
-  );*/
   const filteredEmployees = sortedEmployees.filter(employee => {
     const positionLabel = positions.find(pos => pos.value === employee.position)?.label || employee.position;
 
@@ -248,11 +231,6 @@ export default function AddEmployeePage() {
     }
   };
 
-  /*
-    const filteredOsztalyfonok = osztalyfonokOptions.filter((osztalyfonok) =>
-      osztalyfonok.toLowerCase().includes(searchOsztalyfonok.toLowerCase())
-    );
-  */
 
   const PAGE_SIZE = 14;
   const [currentPage, setCurrentPage] = useState(1);
@@ -274,7 +252,7 @@ export default function AddEmployeePage() {
   }
 
   return (
-   <div>
+    <div>
       <header className="flex h-16 shrink-0 items-center gap-2 border-b">
         <div className="flex flex-1 items-center gap-2 px-3">
           <SidebarTrigger />
@@ -286,11 +264,11 @@ export default function AddEmployeePage() {
                   <Link href="/dashboard">Kezdőlap</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
-              <BreadcrumbSeparator/>
+              <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbPage>Iskolai nyilvántartás</BreadcrumbPage>
               </BreadcrumbItem>
-              <BreadcrumbSeparator/>
+              <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbPage>Munkatársak</BreadcrumbPage>
               </BreadcrumbItem>
@@ -307,9 +285,9 @@ export default function AddEmployeePage() {
             </div>
           ) : (
             <>
-              
+
               <div className="p-6">
-              {!hasStudents && <AppKonfig />}
+                {!hasStudents && <AppKonfig />}
                 <div className="flex flex-col gap-2 md:flex-row mb-4">
                   <div className="flex flex-col gap-2 md:flex-row">
                     <Input
@@ -413,24 +391,6 @@ export default function AddEmployeePage() {
                           </Select>
                         </div>
 
-                        {/*{["tanar", "igazgato"].includes(position) && (*/}
-                        {/*   <div className="grid gap-2">
-          <Label htmlFor="osztaly">Van osztálya?</Label>
-          <Select value={osztaly} onValueChange={setOsztaly}>
-            <SelectTrigger className="col-span-3 w-full">
-              <SelectValue placeholder="Válasszon..." />
-            </SelectTrigger>
-            <SelectContent>
-              {osztalyfonokOptions.map((osztalyfonok) => (
-                <SelectItem key={osztalyfonok} value={osztalyfonok}>
-                  {osztalyfonok}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>*/}
-                        {/*)}*/}
-
                         <Button type="submit">Mentés</Button>
                       </form>
                     </DialogContent>
@@ -508,22 +468,6 @@ export default function AddEmployeePage() {
                                       </Select>
                                     </div>
 
-                                    {/*  <div className="grid gap-2">
-                      <Label htmlFor="position">Van osztálya?</Label>
-                      <Select value={editOsztaly} onValueChange={setEditOsztaly}>
-                        <SelectTrigger className="col-span-3 w-full">
-                          <SelectValue placeholder="" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {osztalyfonokOptions.map((osztalyfonok) => (
-                            <SelectItem key={osztalyfonok} value={osztalyfonok}>
-                              {osztalyfonok}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>*/}
-
                                     <Button onClick={handleUpdate} >Mentés</Button>
                                   </div>
                                 </DialogContent>
@@ -542,7 +486,7 @@ export default function AddEmployeePage() {
                                   </AlertDialogHeader>
                                   <AlertDialogFooter>
                                     <AlertDialogCancel>Mégse</AlertDialogCancel>
-                                    <AlertDialogAction onClick={() => handleDelete(employee.admin_id,employee.position,)}>Véglegesítés</AlertDialogAction>
+                                    <AlertDialogAction onClick={() => handleDelete(employee.admin_id, employee.position,)}>Véglegesítés</AlertDialogAction>
                                   </AlertDialogFooter>
                                 </AlertDialogContent>
                               </AlertDialog>
@@ -565,6 +509,6 @@ export default function AddEmployeePage() {
           )}
         </div>
       </div>
-   </div>
+    </div>
   );
 }

@@ -3,22 +3,13 @@
 import { FormEvent, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import localFont from "next/font/local";
-
-const ZenDots = localFont({
-  src: "../fonts/ZenDots-Regular.ttf",
-  variable: "--font-zen-dots",
-  weight: "100 900",
-});
-
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, AlertCircle, CircleCheck } from "lucide-react";
-
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-
 import {
   Card,
   CardContent,
@@ -26,6 +17,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+
+const ZenDots = localFont({
+  src: "../fonts/ZenDots-Regular.ttf",
+  variable: "--font-zen-dots",
+  weight: "100 900",
+});
 
 export default function ChangePassword() {
   const { data: session } = useSession();

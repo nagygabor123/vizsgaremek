@@ -43,16 +43,6 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 
-// interface TimetableEntry {
-//   day: string;
-//   subject: string;
-//   start: string;
-//   end: string;
-//   class: string;
-//   group: string;
-//   teacher: string;
-// }
-
 interface Student {
   student_id: string;
   full_name: string;
@@ -87,7 +77,7 @@ interface lessonTimes {
 
 const getWeekStartAndEnd = (date: Date) => {
   const startOfWeek2 = new Date(date);
-  startOfWeek2.setDate(date.getDate() - date.getDay() + (date.getDay() === 0 ? -6 : 1)); 
+  startOfWeek2.setDate(date.getDate() - date.getDay() + (date.getDay() === 0 ? -6 : 1));
   const endOfWeek = new Date(startOfWeek2);
   endOfWeek.setDate(startOfWeek2.getDate() + 6);
 
@@ -112,7 +102,7 @@ const Calendar: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const [hasStudents, setHasStudents] = useState<boolean | null>(null);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const [tanevkezdesDate, setTanevkezdesDate] = useState<Date | null>(null);
   const [tanevvegeDate, setTanevvegeDate] = useState<Date | null>(null);
 
@@ -139,7 +129,7 @@ const Calendar: React.FC = () => {
   useEffect(() => {
     const fetchLessonTimes = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/config/getRinging?school_id=${session?.user?.school_id}`);  
+        const response = await fetch(`${API_BASE_URL}/api/config/getRinging?school_id=${session?.user?.school_id}`);
         if (!response.ok) {
           throw new Error('Nem sikerült lekérni a csengetési rendet.');
         }
@@ -156,14 +146,14 @@ const Calendar: React.FC = () => {
   useEffect(() => {
     const fetchTimetables = async () => {
       try {
-  
+
         const response = await fetch(`${API_BASE_URL}/api/timetable/allScheduleStart?school_id=${session?.user?.school_id}`);
         if (!response.ok) {
           throw new Error('Nem sikerült lekérni az összes diák órarendjét.');
         }
 
         const data = await response.json();
-       
+
         const timetables = data.students.map((student: any) => ({
           student_id: student.student_id,
           first_class_start: student.first_class_start,
@@ -189,7 +179,7 @@ const Calendar: React.FC = () => {
         const data = await response.json();
         const formattedData = data.map((lesson: any) => ({
           day: lesson.day_of_week,
-          start: lesson.start_time.slice(0, 5), 
+          start: lesson.start_time.slice(0, 5),
           end: lesson.end_time.slice(0, 5),
           subject: lesson.group_name,
           teacher: lesson.teacher_name,
@@ -270,9 +260,9 @@ const Calendar: React.FC = () => {
 
       setTanevkezdesDate(kezdes);
       setTanevvegeDate(vege);
-      setLoading(false); 
+      setLoading(false);
     }
-  }, [tanevkezdes, tanevvege]); 
+  }, [tanevkezdes, tanevvege]);
 
   const getDayName = (date: Date): string => {
     const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
@@ -280,13 +270,13 @@ const Calendar: React.FC = () => {
   };
 
   const parseDate = (dateString: string) => {
-    return new Date(dateString); 
+    return new Date(dateString);
   };
 
   const isBreakDay = (date: Date) => {
     if (!breakdate || breakdate.length === 0) return false;
 
-    const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()); 
+    const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
     return breakdate.some(({ start, end }) => {
       const startDate = parseDate(start);
@@ -300,11 +290,11 @@ const Calendar: React.FC = () => {
   };
 
   const getReplacedDayName = (date: Date): string => {
-    const formattedDate = format(date, 'yyyy-MM-dd'); 
+    const formattedDate = format(date, 'yyyy-MM-dd');
 
-    
+
     const replacement = (plusdate || []).find((entry) => {
-      const entryDateFormatted = format(new Date(entry.date), 'yyyy-MM-dd'); 
+      const entryDateFormatted = format(new Date(entry.date), 'yyyy-MM-dd');
       return entryDateFormatted === formattedDate;
     });
 
@@ -368,8 +358,8 @@ const Calendar: React.FC = () => {
         console.error('Hiba történt a zárolás feloldásakor:', await response.text());
       } else {
         const data = await response.json();
-        console.log(data.message);
-        setUnlockedStudents(prev => new Set(prev).add(student_id)); 
+        // console.log(data.message);
+        setUnlockedStudents(prev => new Set(prev).add(student_id));
       }
     } catch (error) {
       console.error('Hiba történt a kérés során:', error);
@@ -381,10 +371,10 @@ const Calendar: React.FC = () => {
       const response = await fetch(`${API_BASE_URL}/api/students/read?school_id=${session?.user?.school_id}`);
       const data = await response.json();
       setStudents(data);
-      setHasStudents(data.length > 0); 
+      setHasStudents(data.length > 0);
     } catch (error) {
       console.error('Error fetching students', error);
-    } 
+    }
   };
 
   useEffect(() => {
@@ -398,7 +388,7 @@ const Calendar: React.FC = () => {
       setSystemClose(data.status === "nyithato" ? false : true);
     }
   };
-  
+
   const [isButtonVisible, setButtonVisible] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -420,7 +410,7 @@ const Calendar: React.FC = () => {
   };
 
   async function searchGroupStudent(group: string) {
-    console.log("kapott csoport:", group);
+    // console.log("kapott csoport:", group);
     const groupArray = group.split(',').map(g => g.trim());
 
     const studentsInGroup = students
@@ -432,10 +422,10 @@ const Calendar: React.FC = () => {
     setGroupStudents(studentsInGroup);
 
     if (group.length === 0) {
-      console.log("Nincs megfelelő diák a keresési feltétel alapján.");
+      // console.log("Nincs megfelelő diák a keresési feltétel alapján.");
       return;
     }
-    console.log("Csoportba tartozó diákok:", studentsInGroup);
+    // console.log("Csoportba tartozó diákok:", studentsInGroup);
 
     try {
       const response = await fetch(`${API_BASE_URL}/api/system/groupAccess`, {
@@ -453,45 +443,45 @@ const Calendar: React.FC = () => {
       }
 
       const responseData = await response.json();
-      console.log("Sikeres válasz a szervertől:", responseData);
+      // console.log("Sikeres válasz a szervertől:", responseData);
     } catch (error) {
       console.error("Hiba a végpont elérésekor:", error);
     }
   }
 
   return (
+    <div>
+      <header className="flex h-16 shrink-0 items-center gap-2 border-b">
+        <div className="flex flex-1 items-center gap-2 px-3">
+          <SidebarTrigger />
+          <Separator orientation="vertical" className="mr-2 h-4" />
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href="/dashboard">Kezdőlap</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>Saját órák</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
+
+      </header>
+
       <div>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b">
-          <div className="flex flex-1 items-center gap-2 px-3">
-            <SidebarTrigger />
-            <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink asChild>
-                    <Link href="/dashboard">Kezdőlap</Link>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator/>
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Saját órák</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
+        {loading ? (
+          <div className="flex items-center justify-center min-h-screen">
+            <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-100 border-t-blue-600"></div>
           </div>
-
-        </header>
-
-        <div>
-          {loading ? (
-            <div className="flex items-center justify-center min-h-screen">
-              <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-100 border-t-blue-600"></div>
-            </div>
-          ) : (
-            <>
+        ) : (
+          <>
             <div className="p-6">
-                            <div className="calendar-container">
-    
+              <div className="calendar-container">
+
                 <div className="calendar-header">
                   <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
                     <span>
@@ -689,7 +679,7 @@ const Calendar: React.FC = () => {
                                   return (
                                     <Dialog onOpenChange={(isOpen) => {
                                       if (!isOpen) {
-                                        setCurrentPage(1); // Alaphelyzetbe állítjuk a lapszámot, ha a dialógus bezárul
+                                        setCurrentPage(1);
                                       }
                                     }}
                                       key={`${lessonIndex}-${dayIndex}-${index}`}>
@@ -729,9 +719,9 @@ const Calendar: React.FC = () => {
 
                                             <div>
                                               <div>
-                                              <Button variant="outline" onClick={() => searchGroupStudent(lesson.class)} >
-                                                <DoorOpen /> Nyitás engedélyezése
-                                              </Button>
+                                                <Button variant="outline" onClick={() => searchGroupStudent(lesson.class)} >
+                                                  <DoorOpen /> Nyitás engedélyezése
+                                                </Button>
                                               </div>
                                               <div className="rounded-md border mt-5">
                                                 <table className="w-full">
@@ -796,7 +786,6 @@ const Calendar: React.FC = () => {
                         </React.Fragment>
                       ))}
 
-                      {/* Ellenőrizzük, hogy van-e bármilyen óra a héten */}
                       {daysOfWeek.every(day => {
                         const dayName = getReplacedDayName(day);
                         const dailyLessons = schedule.filter((lesson) => lesson.day === dayName);
@@ -811,14 +800,12 @@ const Calendar: React.FC = () => {
                 </div>
 
               </div>
-              </div>
-            </>
-          )}
-        </div>
-        
-        {/* </SidebarInset>
-      </SidebarProvider> */}
+            </div>
+          </>
+        )}
       </div>
+
+    </div>
   );
 };
 
