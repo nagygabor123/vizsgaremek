@@ -309,6 +309,22 @@ export default function Page() {
     return null;
   }
 
+  const start = new Date(yearSchedule.schoolStart);
+  const end = new Date(yearSchedule.schoolEnd);
+  const now = new Date();
+
+  const startYear = start.getFullYear();
+  const endYear = end.getFullYear();
+  const schoolYear = `${startYear}/${endYear}`;
+
+  const isYearOver = now > end;
+
+  const handleYearChange = () => {
+    if (!isYearOver) return;
+    alert('Tanév váltása megtörtént (csak példa).');
+    // Ide jönne az új tanév beállító logika pl. új API hívás
+  };
+
   return (
 <div>
       <header className="flex h-16 shrink-0 items-center gap-2 border-b">
@@ -348,7 +364,22 @@ export default function Page() {
           <>
             <div className="p-4">
 
+
               <div className="mb-5 flex flex-col sm:flex-row items-start">
+
+              <h2 className="text-lg font-semibold mb-2">Jelenlegi tanév: {schoolYear}</h2>
+              <button
+        onClick={handleYearChange}
+        disabled={!isYearOver}
+        className={`px-4 py-2 rounded-xl text-white transition ${
+          isYearOver
+            ? 'bg-green-600 hover:bg-green-700'
+            : 'bg-gray-400 cursor-not-allowed'
+        }`}
+      >
+        Tanév váltása
+      </button>
+
 
                 <div className="sm:w-1/2 w-full">
                   <h2 className="text-lg font-semibold mb-2">Tanítási év első napja</h2>

@@ -98,7 +98,7 @@ export default function AddEmployeePage() {
     { label: 'Igazgató', value: 'igazgato' },
     { label: 'Igazgatóhelyettes', value: 'igazgatohelyettes' },
     { label: 'Portás', value: 'portas' },
-    { label: 'Rendszergazda', value: 'rendszergazda' },
+   // { label: 'Rendszergazda', value: 'rendszergazda' },
   ];
 
   const osztalyfonokOptions = useMemo(() => {
