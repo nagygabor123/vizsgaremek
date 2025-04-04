@@ -2,14 +2,14 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Tanári Órarend Komponens', () => {
   test.beforeEach(async ({ page }) => {
-    // Bejelentkezés a rendszerbe (ha szükséges)
     await page.goto('/login');
     await page.fill('input[name="short_name"]', 'KiGI');
     await page.fill('input[name="password"]', 'KiGI123');
     await page.click('button[type="submit"]');
-    
-    // Navigálás az órarend oldalra
+    await page.waitForURL('/dashboard');
+
     await page.goto('/dashboard/my-timetable');
+  //  await page.waitForSelector('table');
     await page.waitForSelector('.calendar-container');
   });
 
