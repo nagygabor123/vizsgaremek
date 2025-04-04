@@ -214,7 +214,7 @@ const SheetComponent: React.FC = () => {
   return (
     <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
       <SheetTrigger data-testid="configure-button" asChild>
-        <div className="flex flex-col gap-4 p-4 overflow-x-hidden w-full">
+        <div className="flex flex-col gap-4 p-6 overflow-x-hidden w-full">
           <div className="grid auto-rows-min gap-4 w-full">
             {isButtonVisible && (
               <div className="min-h-[60px] rounded-xl bg-red-100 flex items-center px-4 w-full box-border overflow-hidden">
