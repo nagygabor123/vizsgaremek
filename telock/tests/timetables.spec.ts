@@ -3,8 +3,8 @@ import { test, expect } from '@playwright/test';
 test.describe('Tanári Órarend Komponens', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/login');
-    await page.fill('input[name="short_name"]', 'KiGI');
-    await page.fill('input[name="password"]', 'KiGI123');
+    await page.fill('input[name="short_name"]', 'SiTa');
+    await page.fill('input[name="password"]', 'SiTa123');
     await page.click('button[type="submit"]');
     await page.waitForURL('/dashboard');
 
@@ -15,10 +15,10 @@ test.describe('Tanári Órarend Komponens', () => {
 
   test('Oldal betöltése és alapvető elemek megjelenítése', async ({ page }) => {
     // Ellenőrizzük, hogy a fő elemek megjelennek-e
-    await expect(page.locator('.calendar-header h2')).toBeVisible();
+    await expect(page.locator('.calendar-header')).toBeVisible();
     await expect(page.getByText('Mai nap')).toBeVisible();
-    await expect(page.getByRole('button', { name: /chevron-left/i })).toBeVisible();
-    await expect(page.getByRole('button', { name: /chevron-right/i })).toBeVisible();
+    await expect(page.getByTestId('prev-button')).toBeVisible();
+    await expect(page.getByTestId('next-button')).toBeVisible();
   });
 
   test('Heti nézet megjelenítése', async ({ page }) => {
@@ -53,7 +53,6 @@ test.describe('Tanári Órarend Komponens', () => {
     // Keressük meg a jelenlegi órát (ha van)
     const currentLesson = page.locator('.current-lesson').first();
     
-    if (await currentLesson.count() > 0) {
       // Kattintsunk a jelenlegi órára
       await currentLesson.click();
       
@@ -63,16 +62,13 @@ test.describe('Tanári Órarend Komponens', () => {
       
       // Ellenőrizzük, hogy megjelennek-e a diákok
       await expect(page.locator('table tbody tr').first()).toBeVisible();
-    } else {
-      console.log('Nincs aktuális óra jelenleg, a teszt kihagyva');
-    }
+    
   });
 
   test('Diák feloldása', async ({ page }) => {
     // Keressük meg a jelenlegi órát (ha van)
     const currentLesson = page.locator('.current-lesson').first();
-    
-    if (await currentLesson.count() > 0) {
+   
       // Kattintsunk a jelenlegi órára
       await currentLesson.click();
       
@@ -80,19 +76,15 @@ test.describe('Tanári Órarend Komponens', () => {
       await page.waitForSelector('[role="dialog"]');
       
       // Az első diák feloldása gombjának megkeresése
-      const unlockButton = page.locator('table tbody tr').first().getByRole('button', { name: /lock-open/i });
+     
+      const unlockButton = page.locator('table tbody tr').first().getByTestId('unlock-button');
       
-      if (await unlockButton.count() > 0 && !(await unlockButton.isDisabled())) {
+ 
         await unlockButton.click();
         
         // Itt ellenőrizhetnénk, hogy sikeres volt-e a művelet,
         // de ez függ a backend válaszától és a UI frissítésétől
-      } else {
-        console.log('Az első diák már fel van oldva vagy nem lehet feloldani');
-      }
-    } else {
-      console.log('Nincs aktuális óra jelenleg, a teszt kihagyva');
-    }
+
   });
 
   test('Csoportos feloldás', async ({ page }) => {
