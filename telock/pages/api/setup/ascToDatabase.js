@@ -136,7 +136,11 @@ function extractTeachers(parsedXml) {
 }
 
 function extractGroups(parsedXml) {
-  if (!parsedXml.timetable || !parsedXml.timetable.classes || !parsedXml.timetable.classes[0].class || !parsedXml.timetable.groups || !parsedXml.timetable.groups[0].group) {
+  if (!parsedXml.timetable || 
+      !parsedXml.timetable.classes || 
+      !parsedXml.timetable.classes[0].class || 
+      !parsedXml.timetable.groups || 
+      !parsedXml.timetable.groups[0].group) {
     return [];
   }
 
@@ -166,7 +170,7 @@ function extractSchedule(parsedXml) {
     ])
   );
 
-  // 2. Napok dekódolása (`daysdef` alapján)
+  // 2. Napok dekódolása 
   const dayCodes = ["Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek"];
   const daysMap = Object.fromEntries(
     parsedXml.timetable.daysdefs[0].daysdef.map(d => {
