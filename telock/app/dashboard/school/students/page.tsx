@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Label } from "@/components/ui/label"
 import Link from "next/link";
-import { Pen, Trash2, ArrowUpDown, CirclePlus, CircleCheck, LockOpen, DoorOpen, CircleAlert, CircleMinus, Lock, ChevronRight, ChevronLeft, DoorClosed } from "lucide-react"
+import { Pen, Trash2, ArrowUpDown, CirclePlus, CircleCheck, LockOpen, DoorOpen, CircleAlert, CircleMinus, Lock, ChevronRight, ChevronLeft } from "lucide-react"
 import {
   Dialog,
   DialogContent,
@@ -302,8 +302,8 @@ export default function Home() {
                     />
 
                     <Button variant="outline" onClick={handleSystemClose} >
-                      {systemClose ? <DoorOpen /> : <DoorClosed />}
-                      {systemClose ? 'Nyitás engedélyezése' : 'Korlátozás'}
+                      {systemClose ? <LockOpen /> : <Lock />}
+                      {systemClose ? 'Feloldás' : 'Korlátozás'}
 
                     </Button>
                   </div>
