@@ -264,7 +264,7 @@ export default async function Home() {
               <input
                 className="flex-1 rounded-lg border border-blue-400 bg-blue-500/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
                 type="email"
-                placeholder=""
+                placeholder="pelda@iskola.hu"
               />
               <Button variant="secondary" className="">
                 Információt kérek
