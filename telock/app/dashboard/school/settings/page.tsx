@@ -350,7 +350,7 @@ export default function Page() {
                     <School className="text-blue-600 hidden sm:block" />
                     <p className="text-sm truncate ml-3 text-blue-600">
                       Jelenlegi tanév: <span className="font-medium">{schoolYear}</span>
-                      {isYearOver && <span className="text-blue-500">(Lejárt)</span>}
+                      {isYearOver && <span className="text-blue-500">(Vége)</span>}
                     </p>
                     <Button
                       onClick={handleYearChange}

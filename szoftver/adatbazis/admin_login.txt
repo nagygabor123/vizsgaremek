@@ -1,4 +1,5 @@
-felhasználónév: AdAd
-jelszó: admin 
+felhasználónév: AdPg
+jelszó: AdPg123
 
-$2b$10$O5qBB4FhkxxTT9LBvuopzuA9y2L5.qrQxYjLOsLyYY8ofYCCJW1HW
+$2b$10$O5qBB4FhkxxTT9LBvuopzuA9y2L5.qrQxYjLOsLyYY8ofYCCJW1HW admin
+$2b$10$J1PxYeg5TgGiNiW8ktiIG.deNCMVUaKQBt72.JEPjRABoJ1QSMZa. AdPg123

@@ -99,9 +99,9 @@ INSERT INTO schools (school_name,status) VALUES
 
 
 INSERT INTO admins (full_name, password, position, osztalyfonok, short_name, school_id) VALUES
-('Admin Pg', '$2b$10$O5qBB4FhkxxTT9LBvuopzuA9y2L5.qrQxYjLOsLyYY8ofYCCJW1HW', 'rendszergazda', 'nincs', 'AdPg', 1),
-('Admin Consti', '$2b$10$O5qBB4FhkxxTT9LBvuopzuA9y2L5.qrQxYjLOsLyYY8ofYCCJW1HW', 'rendszergazda', 'nincs', 'AdCo', 2),
-('Admin Mora', '$2b$10$O5qBB4FhkxxTT9LBvuopzuA9y2L5.qrQxYjLOsLyYY8ofYCCJW1HW', 'rendszergazda', 'nincs', 'AdMo', 3);
+('Admin Pg', '$2b$10$J1PxYeg5TgGiNiW8ktiIG.deNCMVUaKQBt72.JEPjRABoJ1QSMZa.', 'rendszergazda', 'nincs', 'AdPg', 1),
+('Admin Consti', '$2b$10$J1PxYeg5TgGiNiW8ktiIG.deNCMVUaKQBt72.JEPjRABoJ1QSMZa.', 'rendszergazda', 'nincs', 'AdCo', 2),
+('Admin Mora', '$2b$10$J1PxYeg5TgGiNiW8ktiIG.deNCMVUaKQBt72.JEPjRABoJ1QSMZa.', 'rendszergazda', 'nincs', 'AdMo', 3);
 
 
 INSERT INTO year_schedule (type, nev, which_day, replace_day, school_id) VALUES
