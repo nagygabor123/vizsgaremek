@@ -30,7 +30,7 @@ export default function Page() {
   const fetchStudents = async () => {
     try {
       const response = await fetch(
-        `${API_BASE_URL}/api/students/read?school_id=${session?.user?.school_id}`
+        `${process.env.NEXTAUTH_URL}/api/students/read?school_id=${session?.user?.school_id}`
       );
       const data = await response.json();
       setStudents(data);
@@ -45,7 +45,7 @@ export default function Page() {
 
   const fetchSystemStatus = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/system/status?school_id=${session?.user?.school_id}`);
+      const response = await fetch(`${process.env.NEXTAUTH_URL}/api/system/status?school_id=${session?.user?.school_id}`);
       if (response.ok) {
         const data = await response.json();
         setSystemStatus(data.status);
