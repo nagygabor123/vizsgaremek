@@ -1,0 +1,84 @@
+eszköz -> arduino
+
+LCD:
+ GND -> GND
+ VCC -> 5V
+ SDA -> A4
+ SCL -> A5
+ 
+ROUND DISPLAY (+ ethernet SHILD):
+3.3V -> 3.3V
+GND -> GND
+SCL -> PIN 13
+SDA -> PIN 11
+DC -> PIN 9 (bármely szabad láb)
+CS -> PIN 8 (bármely szabad láb)
+RST -> PIN 7 (bármely szabad láb)
+
+LED-ek:
+ ELSO -> PIN 2
+ MASODIK -> PIN 6
+ HARMADIK -> PIN 7
+ GND -> GND
+
+RFID (RC522)
+ SDA -> PIN 4
+ SCK -> PIN 13
+ MOSI -> PIN 11
+ MISO -> PIN 12
+ GND -> GND
+ RST -> PIN 9
+ 3.3V -> 3.3V
+
+
+DE/MULTIPLEXER: (https://www.youtube.com/watch?v=Dco6jo9xgAo)
+ SIG -> PIN 9
+ S0 -> PIN 3
+ S1 -> PIN 4
+ S2 -> PIN 5
+ S3 -> PIN 6
+ EN -> GND
+ VCC -> 5V
+ GND -> GND
+
+ cimzes: (1 is HIGH, 0 is LOW)
+    0000 - 0
+    1000 - 1
+    0100 - 2
+    1100 - 3
+    0010 - 4
+    1010 - 5
+    0110 - 6
+    1110 - 7
+    0001 - 8
+    1001 - 9
+    0101 - 10
+    1101 - 11
+    0011 - 12
+    1011 - 13
+    0111 - 14
+    1111 - 15
+
+--------------------------------------------------------------------------------------------------------------------
+
+https://youtu.be/aW7bewAq9Ak?si=SeaCrasKt7lwEy96&t=30 - LCD bekötése
+
+https://youtu.be/h68RFw49ja8?si=i7i1jzGm6pssChMb&t=30 - RFID modul bekötése
+
+https://www.youtube.com/watch?v=e1FVSpkw6q4 - LED bekötése
+
+https://maker.wiznet.io/josephsr/projects/access-to-mysql-database-with-arduino-ethernet-shield-rfid/ - arduino ethernet
+
+https://www.slideshare.net/slideshow/arduino-interface-with-mysql-for-storing-rfid-access-details/70398528#3 -||-
+
+https://www.hackster.io/deligence-technologies/arduino-interface-with-mysql-for-storing-rfid-access-details-a5b337 -||-
+
+https://github.com/fhmunna/arduino_rfid_ethernet_mysql -||-
+
+https://forum.arduino.cc/t/how-to-send-data-rfid-from-arduino-to-database-mysql-server/609306/11 -||-
+
+https://www.youtube.com/watch?v=4uKT-VDvr4g -||-
+
+https://www.youtube.com/watch?v=4R2ohWrXhMA -||-
+
+https://github.com/sergiomajluf/node-session -||-
