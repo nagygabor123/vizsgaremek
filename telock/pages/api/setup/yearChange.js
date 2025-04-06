@@ -1,5 +1,8 @@
 import { neon } from '@neondatabase/serverless';
 
+const API_BASE_URL = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
+
+
 export default async function handler(req, res) {
   if (req.method === 'DELETE') {
     const { school_id } = req.query;
@@ -8,6 +11,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Hiányzó school_id paraméter.' });
     }
 
+    
     const sql = neon(`${process.env.DATABASE_URL}`);
 
     try {
@@ -104,7 +108,7 @@ export default async function handler(req, res) {
 
 async function callSetYearStartEnd(school_id, type, date) {
   console.log(`API hívás indul: ${type} - ${date.toISOString()}`);
-  const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/config/setYearStartEnd`, {
+  const response = await fetch(`${API_BASE_URL}/api/config/setYearStartEnd`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
