@@ -9,8 +9,6 @@ export const config = {
   },
 };
 
-
-
 export default function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'A metódus nem követhető' });
@@ -254,10 +252,8 @@ function extractSchedule(parsedXml) {
 }
 
 async function sendRingingData(ringing, school_id) {
-  const API_BASE_URL = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
-
   try {
-    const response = await fetch(`${API_BASE_URL}/api/upload/uploadRinging?school_id=${school_id}`, {
+    const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/upload/uploadRinging?school_id=${school_id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -276,10 +272,8 @@ async function sendRingingData(ringing, school_id) {
 }
 
 async function sendEmployeesData(employees, school_id) {
-  const API_BASE_URL = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
-
   try {
-    const response = await fetch(`${API_BASE_URL}/api/upload/uploadEmployees?school_id=${school_id}`, {
+    const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/upload/uploadEmployees?school_id=${school_id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -299,7 +293,7 @@ async function sendEmployeesData(employees, school_id) {
 
 async function sendGroupsData(groups, school_id) {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/upload/uploadGroups?school_id=${school_id}`, {
+    const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/upload/uploadGroups?school_id=${school_id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -318,10 +312,8 @@ async function sendGroupsData(groups, school_id) {
 }
 
 async function sendScheduleData(schedule, school_id) {
-  const API_BASE_URL = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
-
   try {
-    const response = await fetch(`${API_BASE_URL}/api/upload/uploadTimetables?school_id=${school_id}`, {
+    const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/upload/uploadTimetables?school_id=${school_id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

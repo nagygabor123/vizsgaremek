@@ -9,7 +9,6 @@ export const config = {
   },
 };
 
-
 const RESERVED_IDS = new Set(["OM11111", "OM22222", "OM33333", "OM44444"]);
 let baseID = 7000;
 const sql = neon(`${process.env.DATABASE_URL}`);
@@ -139,11 +138,8 @@ async function checkStudentsInserted(students,school_id) {
 }
 
 async function UploadStudentGroups(school_id) {
-  const API_BASE_URL = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
-
-
   try {
-    const response = await fetch(`${API_BASE_URL}/api/upload/uploadStudentGroups?school_id=${school_id}`, {
+    const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/upload/uploadStudentGroups?school_id=${school_id}`, {
       method: 'POST',
     });
     if (!response.ok) {
@@ -155,10 +151,8 @@ async function UploadStudentGroups(school_id) {
 }
 
 async function uploadLockerRelations() {
-  const API_BASE_URL = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
-
   try {
-    const response = await fetch(`${API_BASE_URL}/api/upload/uploadStudLockRelations`, {
+    const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/upload/uploadStudLockRelations', {
       method: 'POST',
     });
     if (!response.ok) {
