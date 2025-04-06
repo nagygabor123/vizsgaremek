@@ -154,7 +154,7 @@ async function UploadStudentGroups(school_id) {
 
 async function uploadLockerRelations() {
   try {
-    const response = await fetch('${API_BASE_URL}/api/upload/uploadStudLockRelations', {
+    const response = await fetch(`${API_BASE_URL}/api/upload/uploadStudLockRelations`, {
       method: 'POST',
     });
     if (!response.ok) {
