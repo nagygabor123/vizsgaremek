@@ -1,5 +1,4 @@
 import { neon } from '@neondatabase/serverless';
-const API_BASE_URL = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
 
 
 export default async function handler(req, res) {
@@ -12,6 +11,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'RFID szükséges' });
   }
 
+  const API_BASE_URL = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
 
   const sql = neon(process.env.DATABASE_URL);
 

@@ -9,7 +9,6 @@ export const config = {
   },
 };
 
-const API_BASE_URL = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
 
 const RESERVED_IDS = new Set(["OM11111", "OM22222", "OM33333", "OM44444"]);
 let baseID = 7000;
@@ -140,6 +139,9 @@ async function checkStudentsInserted(students,school_id) {
 }
 
 async function UploadStudentGroups(school_id) {
+  const API_BASE_URL = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
+
+
   try {
     const response = await fetch(`${API_BASE_URL}/api/upload/uploadStudentGroups?school_id=${school_id}`, {
       method: 'POST',
@@ -153,6 +155,8 @@ async function UploadStudentGroups(school_id) {
 }
 
 async function uploadLockerRelations() {
+  const API_BASE_URL = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
+
   try {
     const response = await fetch(`${API_BASE_URL}/api/upload/uploadStudLockRelations`, {
       method: 'POST',

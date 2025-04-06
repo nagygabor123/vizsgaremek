@@ -9,7 +9,6 @@ export const config = {
   },
 };
 
-const API_BASE_URL = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
 
 
 export default function handler(req, res) {
@@ -255,6 +254,8 @@ function extractSchedule(parsedXml) {
 }
 
 async function sendRingingData(ringing, school_id) {
+  const API_BASE_URL = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
+
   try {
     const response = await fetch(`${API_BASE_URL}/api/upload/uploadRinging?school_id=${school_id}`, {
       method: 'POST',
@@ -275,6 +276,8 @@ async function sendRingingData(ringing, school_id) {
 }
 
 async function sendEmployeesData(employees, school_id) {
+  const API_BASE_URL = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
+
   try {
     const response = await fetch(`${API_BASE_URL}/api/upload/uploadEmployees?school_id=${school_id}`, {
       method: 'POST',
@@ -315,6 +318,8 @@ async function sendGroupsData(groups, school_id) {
 }
 
 async function sendScheduleData(schedule, school_id) {
+  const API_BASE_URL = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
+
   try {
     const response = await fetch(`${API_BASE_URL}/api/upload/uploadTimetables?school_id=${school_id}`, {
       method: 'POST',

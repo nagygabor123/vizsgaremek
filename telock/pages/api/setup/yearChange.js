@@ -1,6 +1,5 @@
 import { neon } from '@neondatabase/serverless';
 
-const API_BASE_URL = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
 
 
 export default async function handler(req, res) {
@@ -107,6 +106,8 @@ export default async function handler(req, res) {
 }
 
 async function callSetYearStartEnd(school_id, type, date) {
+  const API_BASE_URL = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
+
   console.log(`API hívás indul: ${type} - ${date.toISOString()}`);
   const response = await fetch(`${API_BASE_URL}/api/config/setYearStartEnd`, {
     method: 'POST',
