@@ -253,7 +253,7 @@ function extractSchedule(parsedXml) {
 
 async function sendRingingData(ringing, school_id) {
   try {
-    const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/upload/uploadRinging?school_id=${school_id}`, {
+    const response = await fetch(`https://telock.vercel.app/api/upload/uploadRinging?school_id=${school_id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -273,7 +273,7 @@ async function sendRingingData(ringing, school_id) {
 
 async function sendEmployeesData(employees, school_id) {
   try {
-    const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/upload/uploadEmployees?school_id=${school_id}`, {
+    const response = await fetch(`https://telock.vercel.app/api/upload/uploadEmployees?school_id=${school_id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -293,7 +293,7 @@ async function sendEmployeesData(employees, school_id) {
 
 async function sendGroupsData(groups, school_id) {
   try {
-    const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/upload/uploadGroups?school_id=${school_id}`, {
+    const response = await fetch(`https://telock.vercel.app/api/upload/uploadGroups?school_id=${school_id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -313,7 +313,7 @@ async function sendGroupsData(groups, school_id) {
 
 async function sendScheduleData(schedule, school_id) {
   try {
-    const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/upload/uploadTimetables?school_id=${school_id}`, {
+    const response = await fetch(`https://telock.vercel.app/api/upload/uploadTimetables?school_id=${school_id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

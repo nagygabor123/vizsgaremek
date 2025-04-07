@@ -84,7 +84,7 @@ async function dataCheck(sql, rfid_tag, student_id) {
 }
 
 async function deleteStudent(student_id) {
-  const deleteResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/students/delete`, {
+  const deleteResponse = await fetch(`https://telock.vercel.app/api/students/delete`, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ student_id }),
@@ -95,7 +95,7 @@ async function deleteStudent(student_id) {
 }
 
 async function setStudentGroups(student_id) {
-  const url = `https://vizsgaremek-mocha.vercel.app/api/students/setStudentGroups?student_id=${student_id}`;
+  const url = `https://telock.vercel.app/api/students/setStudentGroups?student_id=${student_id}`;
 
   try {
     const response = await fetch(url, {

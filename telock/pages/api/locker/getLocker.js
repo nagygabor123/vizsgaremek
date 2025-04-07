@@ -27,7 +27,7 @@ export default async function handler(req, res) {
     console.log(`Aktuális id: ${studentid}`);
     console.log(`Aktuális access: ${studentaccess}`);
 
-    const scheduleResponse = await fetch(`https://vizsgaremek-mocha.vercel.app/api/timetable/scheduleStart?student=${studentid}`);
+    const scheduleResponse = await fetch(`https://telock.vercel.app/api/timetable/scheduleStart?student=${studentid}`);
     if (!scheduleResponse.ok) {
       return res.status(500).json({ error: 'Nem sikerült lekérni a diák órarendjét.' });
     }

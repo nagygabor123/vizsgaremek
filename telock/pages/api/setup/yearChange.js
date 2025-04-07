@@ -104,7 +104,7 @@ export default async function handler(req, res) {
 
 async function callSetYearStartEnd(school_id, type, date) {
   console.log(`API hívás indul: ${type} - ${date.toISOString()}`);
-  const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/config/setYearStartEnd`, {
+  const response = await fetch(`https://telock.vercel.app/api/config/setYearStartEnd`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

@@ -139,7 +139,7 @@ async function checkStudentsInserted(students,school_id) {
 
 async function UploadStudentGroups(school_id) {
   try {
-    const response = await fetch(`https://vizsgaremek-mocha.vercel.app/api/upload/uploadStudentGroups?school_id=${school_id}`, {
+    const response = await fetch(`https://telock.vercel.app/api/upload/uploadStudentGroups?school_id=${school_id}`, {
       method: 'POST',
     });
     if (!response.ok) {
@@ -152,7 +152,7 @@ async function UploadStudentGroups(school_id) {
 
 async function uploadLockerRelations() {
   try {
-    const response = await fetch('https://vizsgaremek-mocha.vercel.app/api/upload/uploadStudLockRelations', {
+    const response = await fetch('https://telock.vercel.app/api/upload/uploadStudLockRelations', {
       method: 'POST',
     });
     if (!response.ok) {

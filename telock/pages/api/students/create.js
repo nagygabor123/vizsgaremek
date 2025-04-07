@@ -40,7 +40,7 @@ export default async function handler(req, res) {
 
 
 async function setStudentGroups(student_id) {
-  const url = `https://vizsgaremek-mocha.vercel.app/api/students/setStudentGroups?student_id=${student_id}`;
+  const url = `https://telock.vercel.app/api/students/setStudentGroups?student_id=${student_id}`;
 
   try {
     const response = await fetch(url, {
