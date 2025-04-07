@@ -2,6 +2,7 @@ import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
+    
     try {
       const { school_id } = req.query;
       console.log(school_id);

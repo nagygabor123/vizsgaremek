@@ -14,6 +14,7 @@ export default async function handler(req, res) {
   const sql = neon(process.env.DATABASE_URL);
 
   try {
+    
     await sql(
       `UPDATE students 
        SET access = 'nyithato' 

@@ -1,13 +1,15 @@
 export default async function handler(req, res) {
   if (req.method === 'PUT') {  // <-- itt PUT legyen
+
     const { id } = req.query;
     const lockerId = parseInt(id);
 
-    if (isNaN(lockerId) || lockerId < 1 || lockerId > 99) {
-      return res.status(400).json({ message: 'Érvénytelen locker_id' });
+    if (!id) {
+      return res.status(400).json({ error: 'locker_id szükséges' });
     }
 
     try {
+      
       const rows = await sql('SELECT status FROM lockers WHERE locker_id = $1', [lockerId]);
 
       if (rows.length === 0) {
