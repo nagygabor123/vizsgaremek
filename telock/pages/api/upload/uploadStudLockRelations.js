@@ -5,7 +5,13 @@ export default async function handler(req, res) {
     const sql = neon(`${process.env.DATABASE_URL}`);
 
     try {
-      const students = await sql('SELECT rfid_tag FROM students WHERE rfid_tag IS NOT NULL');
+      const students = await sql(`
+        SELECT rfid_tag 
+        FROM students 
+        WHERE rfid_tag IS NOT NULL 
+        AND rfid_tag NOT IN (SELECT rfid_tag FROM locker_relationships)
+      `);
+            
       const studentCount = students.length;
 
       if (studentCount === 0) {
