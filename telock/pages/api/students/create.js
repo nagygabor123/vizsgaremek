@@ -11,6 +11,7 @@ export default async function handler(req, res) {
     }
 
     try {
+      
       await sql(
         'INSERT INTO students (student_id, full_name, class, rfid_tag, access, school_id) VALUES ($1, $2, $3, $4, $5, $6);',
         [student_id, full_name, studentClass, rfid_tag, 'zarva', school_id]
@@ -22,6 +23,9 @@ export default async function handler(req, res) {
 
       await sql('INSERT INTO lockers (locker_id, status) VALUES ($1, $2);', [nextLockerId, 'ki']);
       await sql('INSERT INTO locker_relationships (rfid_tag, locker_id) VALUES ($1, $2);', [rfid_tag, nextLockerId]);
+
+
+
       const result = await setStudentGroups(student_id);
       console.log('Tanuló csoportok: ', result);
       res.status(201).json({ message: 'Sikeresen létrehozott diák, szekrény:', locker_id: nextLockerId });
