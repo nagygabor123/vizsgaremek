@@ -2,7 +2,7 @@ import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   use: {
-    baseURL: 'https://vizsgaremek-mocha.vercel.app', //
+    baseURL: 'https://telock.vercel.app', //
     browserName: 'chromium', 
     headless: true, 
   },
