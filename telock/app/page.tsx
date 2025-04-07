@@ -262,7 +262,7 @@ export default async function Home() {
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <input
-                className="flex-1 rounded-lg border border-blue-400 bg-blue-500/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                className="flex-1 p-2 rounded-lg border border-blue-400 bg-blue-500/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
                 type="email"
                 placeholder="pelda@iskola.hu"
               />
