@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 import Link from "next/link";
 
 const ZenDots = localFont({
-  src: "./fonts/ZenDots-Regular.ttf",
+  src: "../fonts/ZenDots-Regular.ttf",
   variable: "--font-zen-dots",
   weight: "100 900",
 });
