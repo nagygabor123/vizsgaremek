@@ -9,6 +9,7 @@ export default async function handler(req, res) {
 
     const sql = neon(`${process.env.DATABASE_URL}`);
     try {
+      
       const student = await sql('SELECT student_id, class, school_id FROM students WHERE student_id = $1', [student_id]);
       if (student.length === 0) {
         return res.status(404).json({ message: 'A diák nem található' });
