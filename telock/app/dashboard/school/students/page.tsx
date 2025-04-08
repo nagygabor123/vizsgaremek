@@ -430,7 +430,13 @@ export default function Home() {
                                   <DialogTrigger asChild>
                                     <Button variant="ghost" size="icon" onClick={() => handleEdit(student)} data-testid="edit-button"><Pen /></Button>
                                   </DialogTrigger>
-                                  <DialogContent className="sm:max-w-[425px]">
+                                  <DialogContent
+  onOpenAutoFocus={(e) => {
+    // ne autofókuszozzon, ha nem kell
+    e.preventDefault();
+  }} className="sm:max-w-[425px]"
+>
+                               
                                     <DialogHeader>
                                       <DialogTitle>Tanuló szerkesztése</DialogTitle>
                                       <DialogDescription></DialogDescription>

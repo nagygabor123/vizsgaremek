@@ -5,7 +5,6 @@ const port = 3000;
 
 app.use(express.json());
 
-// Proxy 1: getLocker kérés továbbítása
 app.get('/proxy1', async (req, res) => {
   const rfid = req.query.rfid;
   if (!rfid) {
@@ -13,7 +12,7 @@ app.get('/proxy1', async (req, res) => {
   }
 
   try {
-    const response = await axios.get(`https://vizsgaremek-mocha.vercel.app/api/locker/checkLocker?rfid=${rfid}`);
+    const response = await axios.get(`https://telock.vercel.app/api/locker/checkLocker?rfid=${rfid}`);
     res.json(response.data);
   } catch (error) {
     console.error(error.message);
@@ -21,7 +20,6 @@ app.get('/proxy1', async (req, res) => {
   }
 });
 
-// Proxy 2: setLockerStatus kérés továbbítása
 app.patch('/proxy2', async (req, res) => {
   const id = req.query.id;
   if (!id) {
@@ -29,7 +27,7 @@ app.patch('/proxy2', async (req, res) => {
   }
 
   try {
-    const response = await axios.put(`https://vizsgaremek-mocha.vercel.app/api/locker/setLockerStatus?id=${id}`, req.body, {
+    const response = await axios.put(`https://telock.vercel.app/api/locker/setLockerStatus?id=${id}`, req.body, {
       headers: {
         'Content-Type': 'application/json'
       }

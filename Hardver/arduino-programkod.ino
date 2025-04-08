@@ -3,29 +3,27 @@
 #include <Ethernet.h>
 #include <EthernetClient.h>
 
-byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; // Ethernet MAC-cím
-IPAddress server(172,16,13,9); // A localhost IP-címe
+byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; 
+IPAddress server(172,16,13,9); 
 EthernetClient client;
 
-// RFID beállítások
-#define RST_PIN 9 // Reset pin az RFID-hoz
-#define SS_PIN 4  // Slave Select pin az RFID-hoz
-MFRC522 rfid(SS_PIN, RST_PIN); // RFID olvasó példányosítása
+#define RST_PIN 9 
+#define SS_PIN 4 
+MFRC522 rfid(SS_PIN, RST_PIN); 
 
-unsigned long lastTime = 0; // Az időzítő segítváltozó
+unsigned long lastTime = 0;
 
 int lockerId = 0;
-bool previousLockState = true; // Az előző zárállapot
-bool lockerStatusUpdated = false; // Változó a státusz frissítésének ellenőrzésére
+bool previousLockState = true; 
+bool lockerStatusUpdated = false; 
 
-// Hexadecimális kód alakítása stringgé
 String toHexString(byte value) {
   String hexString = String(value, HEX);
   if (hexString.length() < 2) {
-    hexString = "0" + hexString; // Kiegészítjük 0-val, ha szükséges
+    hexString = "0" + hexString; 
   }
   hexString.toUpperCase();
-  return hexString; // Visszaadjuk a hexadecimális kódot
+  return hexString; 
 }
 
 bool isValidLockerId(String response) {
@@ -64,11 +62,11 @@ void bounce(unsigned long waitTime) {
 }
 
 void updateLockerStatus(int lockerId) {
-  if (lockerId == 0) return; // Ha a lockerId 0, nem küldünk semmit
+  if (lockerId == 0) return; 
 
   if (client.connect(server, 3000)) {
     Serial.println("Connected to proxy server for status update.");
-    String url = "/proxy2?id=" + String(lockerId); // Az URL-t a proxy szerverre irányítjuk
+    String url = "/proxy2?id=" + String(lockerId); 
     client.println("PUT " + url + " HTTP/1.1");
     client.println("Host: 172.16.13.9");
     client.println("Connection: close");
@@ -84,7 +82,7 @@ void updateLockerStatus(int lockerId) {
     Serial.println("Disconnected from proxy server after status update.");
   } else {
     Serial.print("Failed to connect to proxy server. Error code: ");
-    Serial.println(client.status()); // Kiírja a kapcsolat hiba kódját
+    Serial.println(client.status()); 
   }
 }
 
@@ -98,7 +96,7 @@ bool areAllLocksClosed(int lockerId) {
     lockerStatusUpdated = false; 
   }
 
-  previousLockState = currentLockState; // Frissítjük az előző állapotot
+  previousLockState = currentLockState; 
   return currentLockState;
 }
 
@@ -118,7 +116,6 @@ void setup() {
   pinMode(7, OUTPUT);
   digitalWrite(7, LOW);
 
-  // Ethernet inicializálás
   if (Ethernet.begin(mac) == 0) {
     Serial.println("Ethernet initialization failed.");
     while (true);
@@ -131,11 +128,10 @@ void setup() {
 void loop() {
   if (!areAllLocksClosed(lockerId)) {
     Serial.println("Zárak vissza a szekrényt");
-    bounce(2000); // Várás 2 másodpercig
-    return; // Ha valamelyik zár nyitva van, ne folytassa az RFID olvasást
+    bounce(2000); 
+    return; 
   }
 
-  // RFID kártya olvasása
   if (!rfid.PICC_IsNewCardPresent() || !rfid.PICC_ReadCardSerial()) {
     return;
   }
@@ -146,9 +142,9 @@ void loop() {
   }
   Serial.println("RFID Tag read: " + rfidTag);
 
-  if (client.connect(server, 3000)) { // Kapcsolódás a proxy szerverhez
+  if (client.connect(server, 3000)) { 
     Serial.println("Connected to proxy server.");
-    String url = "/proxy1?rfid=" + rfidTag; // A getLocker endpointot kérjük le
+    String url = "/proxy1?rfid=" + rfidTag; 
     client.println("GET " + url + " HTTP/1.1");
     client.println("Host: 172.16.13.9");
     client.println("Connection: close");
@@ -177,9 +173,9 @@ void loop() {
     digitalWrite(lockerId, LOW);
     Serial.println("Disconnected from proxy server.");
   } else {
-    // Ha nem sikerült csatlakozni a proxy szerverhez, kiírjuk a hibakódot
+
     Serial.print("Failed to connect to proxy server. Error code: ");
-    Serial.println(client.status()); // Kiírja a kapcsolat hiba kódját
+    Serial.println(client.status()); 
   }
 
   rfid.PCD_Init();
