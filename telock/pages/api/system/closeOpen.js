@@ -2,7 +2,8 @@ import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { action,school_id } = req.body;  
+    const { action, school_id } = req.body;
+    console.log(req.body);
 
     if (action !== 'close' && action !== 'open') {
       return res.status(400).json({ message: "Érvénytelen 'action'. Az 'action' csak 'close' vagy 'open' értéket fogadhat el." });

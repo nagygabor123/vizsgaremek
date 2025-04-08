@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  if (req.method === 'PUT') {  // <-- itt PUT legyen
+  if (req.method === 'PUT') {
 
     const { id } = req.query;
     const lockerId = parseInt(id);
@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     }
 
     try {
-      
+
       const rows = await sql('SELECT status FROM lockers WHERE locker_id = $1', [lockerId]);
 
       if (rows.length === 0) {

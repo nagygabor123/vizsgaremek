@@ -15,8 +15,8 @@ export default async function handler(req, res) {
     const sql = neon(process.env.DATABASE_URL);
 
     try {
-      const insertPromises = groups.map(group => 
-        sql('INSERT INTO csoportok (group_name,school_id) VALUES ($1,$2)', [group.name,school_id])
+      const insertPromises = groups.map(group =>
+        sql('INSERT INTO csoportok (group_name,school_id) VALUES ($1,$2)', [group.name, school_id])
       );
 
       await Promise.all(insertPromises);

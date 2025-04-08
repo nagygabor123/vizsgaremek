@@ -12,12 +12,12 @@ export default async function handler(req, res) {
     try {
       await sql(
         'UPDATE admins SET full_name = $1, position = $2, osztalyfonok = $3 WHERE admin_id = $4',
-        [full_name, position, osztalyfonok, admin_id] 
+        [full_name, position, osztalyfonok, admin_id]
       );
       res.status(200).json({ message: 'Sikeres frissítés' });
     } catch (error) {
       res.status(500).json({ message: 'Hiba a frissítés során', error: error.message });
-    } 
+    }
   } else {
     res.status(405).json({ message: 'A HTTP metódus nem engedélyezett' });
   }

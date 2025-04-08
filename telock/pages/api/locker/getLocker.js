@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   if (!rfid) {
     return res.status(400).json({ error: 'RFID szükséges' });
   }
-  
+
   const sql = neon(process.env.DATABASE_URL);
 
   try {

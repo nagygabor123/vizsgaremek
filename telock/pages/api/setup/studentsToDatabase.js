@@ -5,7 +5,7 @@ import crypto from 'crypto';
 
 export const config = {
   api: {
-    bodyParser: false, 
+    bodyParser: false,
   },
 };
 
@@ -51,7 +51,7 @@ export default async function handler(req, res) {
       rows.forEach((row) => {
         const values = row.split(';').map(v => v.trim());
         const rowData = header.reduce((acc, key, index) => {
-          acc[key] = values[index] || ''; 
+          acc[key] = values[index] || '';
           return acc;
         }, {});
 
@@ -60,7 +60,7 @@ export default async function handler(req, res) {
 
         if (!fullName || !studentClass) {
           console.warn('Hiányzó adatok egy sorban:', rowData);
-          return; 
+          return;
         }
 
         students.push([
@@ -82,7 +82,7 @@ export default async function handler(req, res) {
           .join(', ');
 
         const insertQuery = `INSERT INTO students (student_id, full_name, class, rfid_tag, access, school_id) VALUES ${placeholders}`;
-        
+
         await sql(insertQuery, values);
       }
 
@@ -114,11 +114,11 @@ function generateRFID() {
   return crypto.randomBytes(4).toString('hex').toUpperCase();
 }
 
-async function checkStudentsInserted(students,school_id) {
+async function checkStudentsInserted(students, school_id) {
   try {
     const studentsInDb = await sql(`SELECT student_id FROM students WHERE school_id = ${school_id}`);
-    
-    console.log('Visszakapott adatok:', studentsInDb); // Logolás
+
+    console.log('Visszakapott adatok:', studentsInDb);
 
     if (!Array.isArray(studentsInDb)) {
       throw new Error('Az adatbázisból visszakapott eredmény nem egy tömb');

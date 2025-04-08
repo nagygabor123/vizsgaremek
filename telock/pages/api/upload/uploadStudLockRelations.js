@@ -11,7 +11,7 @@ export default async function handler(req, res) {
         WHERE rfid_tag IS NOT NULL 
         AND rfid_tag NOT IN (SELECT rfid_tag FROM locker_relationships)
       `);
-            
+
       const studentCount = students.length;
 
       if (studentCount === 0) {
@@ -32,8 +32,8 @@ export default async function handler(req, res) {
         [relationshipValues.map(rv => rv[0]), relationshipValues.map(rv => rv[1])]
       );
 
-      res.status(201).json({ 
-        message: 'Diák-szekrény kapcsolatok sikeresen feltöltve', 
+      res.status(201).json({
+        message: 'Diák-szekrény kapcsolatok sikeresen feltöltve',
         lockersInserted: studentCount,
         relationshipsInserted: studentCount
       });

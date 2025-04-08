@@ -37,25 +37,25 @@ export default async function handler(req, res) {
       if (rows.length > 0) {
         if (type === 'plusznap') {
           const plusDates_alap = rows.map(row => ({
-            id: row.year_schedule_id, 
-            name: row.nev,  
+            id: row.year_schedule_id,
+            name: row.nev,
             date: row.which_day,
             replaceDay: row.replace_day
           }));
           return res.status(200).json({ plusDates_alap });
         } else if (type === 'szunet') {
           const breakDates_alap = rows.map(row => ({
-            id: row.year_schedule_id, 
+            id: row.year_schedule_id,
             type: row.type,
-            name: row.nev,  
+            name: row.nev,
             start: row.start,
             end: row.end
           }));
           return res.status(200).json({ breakDates_alap });
         } else if (type === 'tanitasnelkul') {
           const tanitasnelkul_alap = rows.map(row => ({
-            id: row.year_schedule_id, 
-            name: row.nev,  
+            id: row.year_schedule_id,
+            name: row.nev,
             start: row.start,
             end: row.end
           }));

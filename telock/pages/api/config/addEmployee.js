@@ -3,7 +3,7 @@ import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
 
-  console.log("Received body:", req.body);
+  console.log(req.body);
 
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'A HTTP metódus nem engedélyezett' });

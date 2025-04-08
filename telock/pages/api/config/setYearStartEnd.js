@@ -2,7 +2,7 @@ import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const {school_id, type, which_day } = req.body;
+    const { school_id, type, which_day } = req.body;
 
     if (!type || !which_day) {
       return res.status(400).json({ error: 'Type és date paraméter szükséges' });

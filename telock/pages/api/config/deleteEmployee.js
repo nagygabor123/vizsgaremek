@@ -2,20 +2,20 @@ import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'DELETE') {
-    const { admin_id,position } = req.query;
+    const { admin_id, position } = req.query;
 
     if (!admin_id) {
       return res.status(400).json({ error: 'Hiányzó ID paraméter.' });
     }
 
-    if (position === 'rendszergazda' ) { 
+    if (position === 'rendszergazda') {
       return res.status(400).json({ error: 'A rendszergazdát nem lehet kitörölni!' });
     }
 
     const sql = neon(`${process.env.DATABASE_URL}`);
     try {
       const record = await sql('SELECT * FROM admins WHERE admin_id = $1', [admin_id]);
-      
+
       if (record.length === 0) {
         return res.status(404).json({ error: 'Nem található adminisztrátor ezzel az ID-val.' });
       }
@@ -25,7 +25,7 @@ export default async function handler(req, res) {
     } catch (error) {
       console.error('Adatbázis hiba:', error);
       return res.status(500).json({ error: 'Hiba a törlés során' });
-    } 
+    }
   } else {
     return res.status(405).json({ error: 'A HTTP metódus nem engedélyezett' });
   }

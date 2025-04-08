@@ -136,11 +136,11 @@ function extractTeachers(parsedXml) {
 }
 
 function extractGroups(parsedXml) {
-  if (!parsedXml.timetable || 
-      !parsedXml.timetable.classes || 
-      !parsedXml.timetable.classes[0].class || 
-      !parsedXml.timetable.groups || 
-      !parsedXml.timetable.groups[0].group) {
+  if (!parsedXml.timetable ||
+    !parsedXml.timetable.classes ||
+    !parsedXml.timetable.classes[0].class ||
+    !parsedXml.timetable.groups ||
+    !parsedXml.timetable.groups[0].group) {
     return [];
   }
 

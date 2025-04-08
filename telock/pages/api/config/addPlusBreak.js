@@ -2,9 +2,9 @@ import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { type, nev, which_day, replace_day,school_id } = req.body;
+    const { type, nev, which_day, replace_day, school_id } = req.body;
 
-    if (!type || !nev || !which_day || !replace_day || !school_id) {  
+    if (!type || !nev || !which_day || !replace_day || !school_id) {
       return res.status(400).json({ error: 'Hiányzó paraméterek.' });
     }
 
@@ -16,7 +16,7 @@ export default async function handler(req, res) {
 
     try {
       const query = 'INSERT INTO year_schedule (type, nev, which_day, replace_day, school_id) VALUES ($1, $2, $3, $4, $5);';
-      const values = [type, nev, which_day, replace_day,school_id];
+      const values = [type, nev, which_day, replace_day, school_id];
       await sql(query, values);
       return res.status(200).json({ message: 'Sikeres frissítés', updatedType: type, updatedDate: which_day });
     } catch (error) {

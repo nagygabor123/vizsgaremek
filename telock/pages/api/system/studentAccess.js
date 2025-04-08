@@ -21,8 +21,8 @@ export default async function handler(req, res) {
       ['nyithato', student]
     );
 
-    return res.status(200).json({ 
-      message: `${student} diák 'access' frissítve nyithato-ra` 
+    return res.status(200).json({
+      message: `${student} diák 'access' frissítve nyithato-ra`
     });
   } catch (error) {
     console.error("Hiba az adatok feltöltésekor:", error);

@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 
     const sql = neon(`${process.env.DATABASE_URL}`);
     try {
-      
+
       const student = await sql('SELECT student_id, class, school_id FROM students WHERE student_id = $1', [student_id]);
       if (student.length === 0) {
         return res.status(404).json({ message: 'A diák nem található' });
@@ -23,7 +23,7 @@ export default async function handler(req, res) {
       console.log('Csoportok:', groups);
       const insertValues = [];
       const studentClasses = student[0].class ? student[0].class.split(',').map(c => c.trim()) : [];
-      
+
       studentClasses.forEach(className => {
         const group = groups.find(g => g.group_name === className);
         console.log(`ClassName ellenőrzés: ${className}, Talált csoport:`, group);

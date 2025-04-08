@@ -40,9 +40,9 @@ export default async function handler(req, res) {
             END,
             t.start_time,
             a.short_name ASC;`,
-        [`${className}%`] 
+        [`${className}%`]
       );
-      
+
       console.log('Válasz:', results);
       return res.status(200).json(results);
     } catch (error) {

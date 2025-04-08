@@ -21,11 +21,11 @@ export default async function handler(req, res) {
     try {
       const lastAdmin = await sql`SELECT MAX(admin_id) AS max_admin_id FROM admins`;
       let nextAdminId = (lastAdmin[0]?.max_admin_id || 0) + 1;
-      
+
       const insertValues = await Promise.all(employees.map(async (employee) => {
         const password = employee.short_name + "123";
         const hashedPassword = await hash(password, 10);
-      
+
         return [
           nextAdminId++,
           employee.full_name,
@@ -33,16 +33,16 @@ export default async function handler(req, res) {
           employee.position,
           employee.osztalyfonok || 'nincs',
           employee.short_name || null,
-          school_id  
+          school_id
         ];
       }));
 
       const query = `
         INSERT INTO admins 
           (admin_id, full_name, password, position, osztalyfonok, short_name, school_id)
-        VALUES ${insertValues.map((_, i) => 
-          `($${i*7+1}, $${i*7+2}, $${i*7+3}, $${i*7+4}, $${i*7+5}, $${i*7+6}, $${i*7+7})`
-        ).join(', ')}
+        VALUES ${insertValues.map((_, i) =>
+        `($${i * 7 + 1}, $${i * 7 + 2}, $${i * 7 + 3}, $${i * 7 + 4}, $${i * 7 + 5}, $${i * 7 + 6}, $${i * 7 + 7})`
+      ).join(', ')}
       `;
 
       const params = insertValues.flat();
@@ -52,9 +52,9 @@ export default async function handler(req, res) {
       res.status(201).json({ message: 'Tanárok sikeresen feltöltve' });
     } catch (error) {
       console.error('Hiba az adatok feltöltésekor:', error);
-      res.status(500).json({ 
-        message: 'Hiba az adatok feltöltésekor', 
-        error: error.message 
+      res.status(500).json({
+        message: 'Hiba az adatok feltöltésekor',
+        error: error.message
       });
     }
   } else {

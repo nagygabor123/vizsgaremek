@@ -3,9 +3,9 @@ import { neon } from '@neondatabase/serverless';
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     const { school_id } = req.query;
-    
+
     if (!school_id) {
-      return res.status(400).json({ message: 'school_id hiányzik' }); 
+      return res.status(400).json({ message: 'school_id hiányzik' });
     }
 
     const sql = neon(process.env.DATABASE_URL);

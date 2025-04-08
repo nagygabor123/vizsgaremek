@@ -80,7 +80,7 @@ async function dataCheck(sql, rfid_tag, student_id) {
     return { message: 'Ismétlődő RFID azonosító' };
   }
 
-  return null;  
+  return null;
 }
 
 async function deleteStudent(student_id) {
@@ -99,9 +99,9 @@ async function setStudentGroups(student_id) {
 
   try {
     const response = await fetch(url, {
-      method: 'POST', 
+      method: 'POST',
       headers: {
-        'Content-Type': 'application/json', 
+        'Content-Type': 'application/json',
       },
     });
 
@@ -109,11 +109,11 @@ async function setStudentGroups(student_id) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data = await response.json(); 
+    const data = await response.json();
     console.log('Válasz:', data);
-    return data; 
+    return data;
   } catch (error) {
     console.error('Hiba az "api/students/setStudentGroups" végpont meghívása során:', error);
-    throw error; 
+    throw error;
   }
 }

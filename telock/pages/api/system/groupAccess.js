@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   const sql = neon(process.env.DATABASE_URL);
 
   try {
-    
+
     await sql(
       `UPDATE students 
        SET access = 'nyithato' 
@@ -22,8 +22,8 @@ export default async function handler(req, res) {
       [students]
     );
 
-    return res.status(200).json({ 
-      message: `A megadott ${students.length} diákok 'access' frissítve 'nyitható'-ra` 
+    return res.status(200).json({
+      message: `A megadott ${students.length} diákok 'access' frissítve 'nyitható'-ra`
     });
   } catch (error) {
     console.error("Hiba az adatok frissítésekor:", error);

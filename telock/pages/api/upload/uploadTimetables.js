@@ -57,7 +57,7 @@ export default async function handler(req, res) {
 
       timetableInsertValues.push([
         teacherId,
-        entry.group_name, 
+        entry.group_name,
         dayMapping[entry.day] || 'monday',
         entry.start_time,
         entry.end_time,
@@ -83,7 +83,7 @@ export default async function handler(req, res) {
 
       const timetableParams = timetableInsertValues.flat();
       const timetableResult = await sql(timetableQuery, timetableParams);
-      timetableIds = timetableResult.map(row => row.timetable_id); 
+      timetableIds = timetableResult.map(row => row.timetable_id);
     }
 
     if (timetableIds.length !== groupRelationsInsertValues.length) {
