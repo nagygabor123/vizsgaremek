@@ -154,8 +154,8 @@ export default function Home() {
       
       fetchStudents();
       //setIsModalOpen(false);
-      //setOpen(false);
-      //setIsDialogOpen(false);
+      setOpen(false);
+      setIsDialogOpen(false);
     }
   };
 
@@ -175,7 +175,7 @@ export default function Home() {
     setFormData(student);
     setEditing(true);
     setEditStudentId(student.student_id);
-    //setOpen(false);
+    setOpen(true);
     //setIsModalOpen(true);
   };
 
