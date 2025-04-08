@@ -175,7 +175,7 @@ export default function Home() {
     setFormData(student);
     setEditing(true);
     setEditStudentId(student.student_id);
-    setOpen(true);
+    setOpen(false);
     //setIsModalOpen(true);
   };
 
