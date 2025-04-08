@@ -3,6 +3,7 @@ export default async function handler(req, res) {
 
     const { id } = req.query;
     const lockerId = parseInt(id);
+    const sql = neon(process.env.DATABASE_URL);
 
     if (!id) {
       return res.status(400).json({ error: 'locker_id szükséges' });

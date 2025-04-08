@@ -12,7 +12,7 @@ app.get('/proxy1', async (req, res) => {
   }
 
   try {
-    const response = await axios.get(`https://telock.vercel.app/api/locker/checkLocker?rfid=${rfid}`);
+    const response = await axios.get(`https://telock.vercel.app/api/locker/getLocker?rfid=${rfid}`);
     res.json(response.data);
   } catch (error) {
     console.error(error.message);
@@ -20,7 +20,7 @@ app.get('/proxy1', async (req, res) => {
   }
 });
 
-app.patch('/proxy2', async (req, res) => {
+app.put('/proxy2', async (req, res) => {
   const id = req.query.id;
   if (!id) {
     return res.status(400).send('Locker ID hiányzik.');
