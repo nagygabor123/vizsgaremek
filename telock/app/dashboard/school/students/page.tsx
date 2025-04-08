@@ -155,7 +155,7 @@ export default function Home() {
       fetchStudents();
       //setIsModalOpen(false);
       //setOpen(false);
-      setIsDialogOpen(false);
+      //setIsDialogOpen(false);
     }
   };
 
