@@ -87,7 +87,7 @@ void updateLockerStatus(int lockerId) {
 }
 
 bool areAllLocksClosed(int lockerId) {
-  bool currentLockState = (digitalRead(8) == LOW);
+bool currentLockState = (digitalRead(8) == LOW || digitalRead(2) == LOW);
 
   if (currentLockState && !previousLockState) {
     updateLockerStatus(lockerId);
@@ -108,13 +108,10 @@ void setup() {
   Serial.println("RFID olvasó inicializálva.");
   pinMode(8, INPUT_PULLUP); 
   pinMode(2, INPUT_PULLUP); 
-  pinMode(3, INPUT_PULLUP);
   pinMode(5, OUTPUT);
   digitalWrite(5, LOW);
   pinMode(6, OUTPUT);
   digitalWrite(6, LOW);
-  pinMode(7, OUTPUT);
-  digitalWrite(7, LOW);
 
   if (Ethernet.begin(mac) == 0) {
     Serial.println("Ethernet initialization failed.");
