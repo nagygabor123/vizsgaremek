@@ -151,7 +151,6 @@ export default function Home() {
       setFormData({ student_id: '', full_name: '', class: '', rfid_tag: '', status: '' });
       setEditing(false);
       setEditStudentId(null);
-      
       fetchStudents();
       //setIsModalOpen(false);
       setOpen(false);
@@ -175,7 +174,6 @@ export default function Home() {
     setFormData(student);
     setEditing(true);
     setEditStudentId(student.student_id);
-    setOpen(true);
     //setIsModalOpen(true);
   };
 
