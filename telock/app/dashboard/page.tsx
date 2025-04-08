@@ -220,7 +220,7 @@ export default function Page() {
                     <Mail className="h-4 w-4 mr-2" />
                     <div className="text-left">
                       <p className="font-medium">Kapcsolat</p>
-                      <p className="text-xs text-muted-foreground">nagy.gabor@diak.szbi-pg.hu, szalkai-szabo.adsm@diak.szbi-pg.hu</p>
+                      <p className="text-xs text-muted-foreground">Szalkai-Szabó Ádám és Nagy Gábor</p>
                     </div>
                   </Button>
                   <Button variant="outline" className="h-16 justify-start">
