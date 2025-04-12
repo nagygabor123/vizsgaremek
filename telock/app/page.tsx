@@ -44,7 +44,7 @@ export default async function Home() {
               Biztonságos és kényelmes <br /> telefontárolos iskoláknak
             </h1>
             <p className="mt-6 text-xl text-blue-100 max-w-3xl mx-auto">
-              Innovatív rendszerünk segít az órai koncentráció növelésében, miközben biztosítja a diákok eszközeinek védelmét.
+              Innovatív rendszerünk segít az órai koncentráció növelésében, miközben biztosítja a tanulók eszközeinek védelmét.
             </p>
             <div className="mt-10 flex justify-center gap-4">
               <Button asChild>
@@ -151,7 +151,7 @@ export default async function Home() {
                 school: "Budapesti Széchenyi Gimnázium"
               },
               {
-                quote: "Végre egy olyan megoldás, ami valóban működik és nem bonyolítja a tanári munkát. A diákjaink is könnyen megtanulták használni.",
+                quote: "Végre egy olyan megoldás, ami valóban működik és nem bonyolítja a tanári munkát. A tanulóink is könnyen megtanulták használni.",
                 author: "Nagy Edit, iskolavezető",
                 school: "Debreceni Református Kollégium"
               },
@@ -199,7 +199,7 @@ export default async function Home() {
               },
               {
                 title: 'Automatikus töltés',
-                description: 'Beépített töltőállomások minden tárolóban, hogy a diákok feltöltött telefonnal távozhassanak',
+                description: 'Beépített töltőállomások minden tárolóban, hogy a tanulók feltöltött telefonnal távozhassanak',
                 icon: <BatteryCharging className="w-6 h-6 text-blue-600" />
               },
               {
@@ -209,7 +209,7 @@ export default async function Home() {
               },
               {
                 title: 'Skálázható rendszer',
-                description: 'Akár 1000+ diák számára is biztosítunk megbízható megoldást.',
+                description: 'Akár 1000+ tanuló számára is biztosítunk megbízható megoldást.',
                 icon: <Server className="w-6 h-6 text-blue-600" />
               },
               {

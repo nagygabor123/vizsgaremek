@@ -1,0 +1,134 @@
+type: collection.insomnia.rest/5.0
+name: telock
+meta:
+  id: wrk_d7631c0817554b5590f495a4827f46a1
+  created: 1743144075063
+  modified: 1743144075063
+collection:
+  - url: https://telock.vercel.app/api/setup/ascToDatabase?school_id=1
+    name: asc fájl feltöltés
+    meta:
+      id: req_b8ce1becc3484ec79e9b68f7a17056ab
+      created: 1744356204032
+      modified: 1744357150512
+      isPrivate: false
+      sortKey: -1744356204032
+    method: POST
+    body:
+      mimeType: multipart/form-data
+      params:
+        - id: pair_38926c4bea4c476da280a661d02dbd43
+          name: file
+          disabled: false
+          type: file
+          fileName: C:\Users\NagyGabor1\Documents\GitHub\vizsgaremek\Adatbazis\asc-orarend.xml
+    headers:
+      - name: Content-Type
+        value: multipart/form-data
+      - name: User-Agent
+        value: insomnia/11.0.1
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://telock.vercel.app/api/setup/studentsToDatabase?school_id=1
+    name: Diákok feltöltése
+    meta:
+      id: req_357de59214754350bfd31712564ce79b
+      created: 1744356593811
+      modified: 1744357217907
+      isPrivate: false
+      sortKey: -1744356593811
+    method: POST
+    body:
+      mimeType: multipart/form-data
+      params:
+        - id: pair_76834a727a6b464594fed6ef9fd798ec
+          name: file
+          disabled: false
+          type: file
+          fileName: C:\Users\NagyGabor1\Documents\GitHub\vizsgaremek\Adatbazis\tanulok.csv
+    headers:
+      - name: Content-Type
+        value: multipart/form-data
+      - name: User-Agent
+        value: insomnia/11.0.1
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_084e9bfac375c4561a06294a79abbb58e1158dae
+    created: 1743144075066
+    modified: 1744355596774
+  cookies:
+    - value: 2afb29290311cde991c97b7fbf75968a05c8a6bbf135af7598a2dcda7b3ca99d|317c19a3019447bfb2afa3873612df77eec886ad9ae6119543d3550dce6abd4b
+      creation: 2025-03-28T09:27:26.359Z
+      id: 4a8227df-6c85-4fad-b5ec-afbd804d83a1
+    - key: foo
+      value: bar
+      domain: domain.com
+      path: /
+      creation: 2025-04-11T07:13:16.767Z
+      id: 699b4278-72c1-489c-946a-30bd0e609c37
+    - key: __Host-next-auth.csrf-token
+      value: 3449805cc560c1908f6599de0a8997e099833af66279b7fa930c54becdbae9da%7Ce08f035853e907d28f57dc527a473d5afe393a643fa323b74d10e497483e2bba
+      domain: vizsgaremek-mocha.vercel.app
+      path: /
+      secure: true
+      httpOnly: true
+      hostOnly: true
+      creation: 2025-03-28T09:25:06.035Z
+      lastAccessed: 2025-03-28T09:25:06.035Z
+      sameSite: lax
+      id: 1bfc9436-9316-4902-8f8b-6f9cf7570049
+    - key: __Secure-next-auth.callback-url
+      value: https%3A%2F%2Fvizsgaremek-mocha.vercel.app
+      domain: vizsgaremek-mocha.vercel.app
+      path: /
+      secure: true
+      httpOnly: true
+      hostOnly: true
+      creation: 2025-03-28T09:25:06.036Z
+      lastAccessed: 2025-03-28T09:25:06.036Z
+      sameSite: lax
+      id: 140b7d4f-b6a1-4e5e-a8ab-5f120e6b4135
+    - key: __Host-next-auth.csrf-token
+      value: 30f6733ddbee6ed5f7f6fb2773185c1554919028452854072951db290fc54bcc%7C8623fc3fb86648cf7f00ba07093987056915ebc19991985d2227608d83209337
+      domain: telock.vercel.app
+      path: /
+      secure: true
+      httpOnly: true
+      hostOnly: true
+      creation: 2025-04-11T07:13:16.773Z
+      lastAccessed: 2025-04-11T07:13:16.773Z
+      sameSite: lax
+      id: 3eb458d8-4fe9-44d8-9988-4a2b95f3ed32
+    - key: __Secure-next-auth.callback-url
+      value: https%3A%2F%2Ftelock.vercel.app
+      domain: telock.vercel.app
+      path: /
+      secure: true
+      httpOnly: true
+      hostOnly: true
+      creation: 2025-04-11T07:13:16.774Z
+      lastAccessed: 2025-04-11T07:13:16.774Z
+      sameSite: lax
+      id: de7eb0bc-253e-4cc2-8493-e10670f20d9b
+environments:
+  name: Base Environment
+  meta:
+    id: env_084e9bfac375c4561a06294a79abbb58e1158dae
+    created: 1743144075065
+    modified: 1743144075065
+    isPrivate: false
