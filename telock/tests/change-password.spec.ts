@@ -4,7 +4,7 @@ test.describe('Jelszó módosítása', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto('/login');
         await page.fill('input[name="short_name"]', 'AdPg');
-        await page.fill('input[name="password"]', 'admin');
+        await page.fill('input[name="password"]', 'AdPg123');
         await page.click('button[type="submit"]');
         await page.waitForURL('/dashboard');
 
@@ -29,13 +29,13 @@ test.describe('Jelszó módosítása', () => {
 
         await page.goto('/change-password');
 
-        await page.fill('input[name="old_password"]', "admin");
-        await page.fill('input[name="new_password"]', "admin");
+        await page.fill('input[name="old_password"]', "AdPg123");
+        await page.fill('input[name="new_password"]', "AdPg123");
         await page.click('button[type="submit"]');
 
         // const successAlert = page.locator('div[role="alert"]:has-text("Sikeres jelszóváltoztatás")');
         // await expect(successAlert).toBeVisible();
-
+        await page.waitForTimeout(2000); 
         await page.waitForURL('/login');
     });
 

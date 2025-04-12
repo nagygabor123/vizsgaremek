@@ -19,7 +19,7 @@ test.describe("Bejelentkezés", () => {
     await page.goto("/login");
 
     await page.fill('input[name="short_name"]', "AdPg");
-    await page.fill('input[name="password"]', "admin");
+    await page.fill('input[name="password"]', "AdPg123");
     await page.click('button[type="submit"]');
 
     const successAlert = page.locator('div[role="alert"]:has-text("Sikeres bejelentkezés")');
