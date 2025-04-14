@@ -1,4 +1,4 @@
-#include <SPI.h>
+ #include <SPI.h>
 #include <MFRC522.h>
 #include <Ethernet.h>
 #include <EthernetClient.h>
@@ -87,7 +87,7 @@ void updateLockerStatus(int lockerId) {
 }
 
 bool areAllLocksClosed(int lockerId) {
-bool currentLockState = (digitalRead(8) == LOW || digitalRead(2) == LOW);
+bool currentLockState = (digitalRead(8) == LOW && digitalRead(2) == LOW);
 
   if (currentLockState && !previousLockState) {
     updateLockerStatus(lockerId);
