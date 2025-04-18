@@ -40,5 +40,5 @@ app.put('/proxy2', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Proxy szerver fut a http://172.16.13.9:${port} címen`);
+  console.log(`Proxy szerver fut`);
 });

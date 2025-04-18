@@ -4,7 +4,9 @@
 #include <EthernetClient.h>
 
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; 
-IPAddress server(172,16,13,9); 
+IPAddress server(192,168,1,114); 
+//172,16,13,9 Iskola
+//192.168.1.114 Adam
 EthernetClient client;
 
 #define RST_PIN 9 
