@@ -1,7 +1,17 @@
- #include <SPI.h>
+
 #include <MFRC522.h>
 #include <Ethernet.h>
 #include <EthernetClient.h>
+#include <Adafruit_GC9A01A.h>
+#include <Adafruit_GFX.h>
+#include <SPI.h>
+
+// SPI és vezérlő lábak
+#define TFT_CS   3
+#define TFT_DC    7
+#define TFT_RST   9
+
+Adafruit_GC9A01A tft(TFT_CS, TFT_DC, TFT_RST);
 
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; 
 IPAddress server(192,168,1,114); 
@@ -82,6 +92,11 @@ void updateLockerStatus(int lockerId) {
     }
     client.stop();
     Serial.println("Disconnected from proxy server after status update.");
+          tft.fillScreen(GC9A01A_BLACK);
+  tft.setTextColor(GC9A01A_WHITE);
+  tft.setTextSize(4);
+tft.setCursor(120 - 10, 120 - 8);
+  tft.print("Olvas");
   } else {
     Serial.print("Failed to connect to proxy server. Error code: ");
     Serial.println(client.status()); 
@@ -103,11 +118,18 @@ bool currentLockState = (digitalRead(8) == LOW && digitalRead(2) == LOW);
 }
 
 void setup() {
+    tft.begin();
+  tft.fillScreen(GC9A01A_BLACK);
+  tft.setTextColor(GC9A01A_WHITE);
+  tft.setTextSize(4);
+tft.setCursor(120 - 10, 120 - 8);
+  tft.print("Olvas");
+
   Serial.begin(9600);
   delay(1000); 
   SPI.begin(); 
   rfid.PCD_Init(); 
-  Serial.println("RFID olvasó inicializálva.");
+  //Serial.println("RFID olvasó inicializálva.");
   pinMode(8, INPUT_PULLUP); 
   pinMode(2, INPUT_PULLUP); 
   pinMode(5, OUTPUT);
@@ -126,7 +148,11 @@ void setup() {
 
 void loop() {
   if (!areAllLocksClosed(lockerId)) {
-    Serial.println("Zárak vissza a szekrényt");
+  tft.fillScreen(GC9A01A_BLACK);
+  tft.setTextColor(GC9A01A_RED);
+  tft.setTextSize(4);
+ tft.setCursor(120 - 10, 120 - 8);
+  tft.print("Zaras");
     bounce(2000); 
     return; 
   }
@@ -148,12 +174,20 @@ void loop() {
     client.println("Host: 172.16.13.9");
     client.println("Connection: close");
     client.println();
+  
 
     while (client.connected() || client.available()) {
       if (client.available()) {
         String response = client.readStringUntil('\n');
         if (isValidLockerId(response)) {
           Serial.println("Validated Locker ID: " + response);
+              tft.fillScreen(GC9A01A_BLACK);
+  tft.setTextColor(GC9A01A_GREEN);
+  tft.setTextSize(4);
+
+tft.setCursor(120 - 10, 120 - 8);
+
+  tft.print("Nyitas");
           lockerId = response.toInt();
           if (lockerId == 3 || lockerId == 6 || lockerId == 7 || lockerId == 5) {
             digitalWrite(lockerId, HIGH);
@@ -171,6 +205,7 @@ void loop() {
     client.stop();
     digitalWrite(lockerId, LOW);
     Serial.println("Disconnected from proxy server.");
+
   } else {
 
     Serial.print("Failed to connect to proxy server. Error code: ");
