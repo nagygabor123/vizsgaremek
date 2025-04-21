@@ -94,8 +94,9 @@ void updateLockerStatus(int lockerId) {
     Serial.println("Disconnected from proxy server after status update.");
           tft.fillScreen(GC9A01A_BLACK);
   tft.setTextColor(GC9A01A_WHITE);
-  tft.setTextSize(4);
-tft.setCursor(120 - 10, 120 - 8);
+  tft.setTextSize(5);
+  tft.setRotation(1);
+tft.setCursor(50, 120 - 8);
   tft.print("Olvas");
   } else {
     Serial.print("Failed to connect to proxy server. Error code: ");
@@ -121,8 +122,10 @@ void setup() {
     tft.begin();
   tft.fillScreen(GC9A01A_BLACK);
   tft.setTextColor(GC9A01A_WHITE);
-  tft.setTextSize(4);
-tft.setCursor(120 - 10, 120 - 8);
+  tft.setTextSize(5);
+  tft.setRotation(1);
+tft.setCursor(50, 120 - 8);
+
   tft.print("Olvas");
 
   Serial.begin(9600);
@@ -150,8 +153,9 @@ void loop() {
   if (!areAllLocksClosed(lockerId)) {
   tft.fillScreen(GC9A01A_BLACK);
   tft.setTextColor(GC9A01A_RED);
-  tft.setTextSize(4);
- tft.setCursor(120 - 10, 120 - 8);
+  tft.setTextSize(5);
+  tft.setRotation(1);
+tft.setCursor(50, 120 - 8);
   tft.print("Zaras");
     bounce(2000); 
     return; 
@@ -183,9 +187,9 @@ void loop() {
           Serial.println("Validated Locker ID: " + response);
               tft.fillScreen(GC9A01A_BLACK);
   tft.setTextColor(GC9A01A_GREEN);
-  tft.setTextSize(4);
-
-tft.setCursor(120 - 10, 120 - 8);
+  tft.setTextSize(5);
+tft.setRotation(1);
+tft.setCursor(40, 120 - 8);
 
   tft.print("Nyitas");
           lockerId = response.toInt();
