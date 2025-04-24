@@ -232,7 +232,7 @@ export default function AddEmployeePage() {
   };
 
 
-  const PAGE_SIZE = 14;
+  const PAGE_SIZE = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(filteredEmployees.length / PAGE_SIZE);
   const paginatedEmployees = filteredEmployees.slice(

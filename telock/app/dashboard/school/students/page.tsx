@@ -238,7 +238,7 @@ export default function Home() {
     }
   };
 
-  const PAGE_SIZE = 14;
+  const PAGE_SIZE = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(filteredStudents.length / PAGE_SIZE);
 
@@ -431,12 +431,12 @@ export default function Home() {
                                     <Button variant="ghost" size="icon" onClick={() => handleEdit(student)} data-testid="edit-button"><Pen /></Button>
                                   </DialogTrigger>
                                   <DialogContent
-  onOpenAutoFocus={(e) => {
-    // ne autofókuszozzon, ha nem kell
-    e.preventDefault();
-  }} className="sm:max-w-[425px]"
->
-                               
+                                    // onOpenAutoFocus={(e) => {
+                                      
+                                    //   e.preventDefault();
+                                    // }} className="sm:max-w-[425px]"
+                                  >
+
                                     <DialogHeader>
                                       <DialogTitle>Tanuló szerkesztése</DialogTitle>
                                       <DialogDescription></DialogDescription>

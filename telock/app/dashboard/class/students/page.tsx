@@ -144,7 +144,7 @@ export default function Home() {
     }
   };
 
-  const PAGE_SIZE = 14;
+  const PAGE_SIZE = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(filteredStudents.length / PAGE_SIZE);
   const paginatedStudents = filteredStudents.slice(
