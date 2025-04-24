@@ -6,7 +6,7 @@
 #include <Adafruit_GFX.h>
 #include <SPI.h>
 
-// SPI és vezérlő lábak
+
 #define TFT_CS   3
 #define TFT_DC    7
 #define TFT_RST   9
@@ -15,8 +15,7 @@ Adafruit_GC9A01A tft(TFT_CS, TFT_DC, TFT_RST);
 
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; 
 IPAddress server(192,168,1,114); 
-//172,16,13,9 Iskola
-//192.168.1.114 Adam
+
 EthernetClient client;
 
 #define RST_PIN 9 
@@ -132,7 +131,7 @@ tft.setCursor(50, 120 - 8);
   delay(1000); 
   SPI.begin(); 
   rfid.PCD_Init(); 
-  //Serial.println("RFID olvasó inicializálva.");
+
   pinMode(8, INPUT_PULLUP); 
   pinMode(2, INPUT_PULLUP); 
   pinMode(5, OUTPUT);

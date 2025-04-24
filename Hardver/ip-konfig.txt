@@ -1,0 +1,13 @@
+pg 13 terem arduinp ip - 172,16,13,17
+pg 13 terem számítógép ip - 172,16,13,9
+
+pg 27 terem arduinp ip - 172,16,27,1
+pg 27 terem számítógép ip - 172,16,27,2
+
+pg 6b terem arduinp ip - 172,16,6,11
+pg 6b terem számítógép ip - 172,16,6,12
+
+Gabor otthon arduino ip: 192, 168, 1, 141
+Gabor otthon pc ip: 192, 168, 1, 49
+
+Adam otthon: 192,168,1,114
