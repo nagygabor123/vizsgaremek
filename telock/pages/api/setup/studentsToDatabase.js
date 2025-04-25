@@ -9,10 +9,8 @@ export const config = {
   },
 };
 
-const RESERVED_IDS = new Set(["OM11111", "OM22222", "OM33333", "OM44444"]);
 let baseID = 7000;
 const sql = neon(`${process.env.DATABASE_URL}`);
-
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -48,30 +46,40 @@ export default async function handler(req, res) {
       const header = rows.shift().split(';').map(h => h.trim());
       const students = [];
 
-      rows.forEach((row) => {
+      rows.forEach((row, index) => {
         const values = row.split(';').map(v => v.trim());
-        const rowData = header.reduce((acc, key, index) => {
-          acc[key] = values[index] || '';
+        const rowData = header.reduce((acc, key, idx) => {
+          acc[key] = values[idx] || '';
           return acc;
         }, {});
-
+      
         const fullName = rowData['Nev'];
         const studentClass = rowData['Osztalyok'];
-
+      
         if (!fullName || !studentClass) {
           console.warn('Hiányzó adatok egy sorban:', rowData);
           return;
         }
-
+      
+        let rfid;
+        if (index === 0) {
+          rfid = 'F7F59C7A';
+        } else if (index === 1) {
+          rfid = 'DA6BD581';
+        } else {
+          rfid = generateRFID();
+        }
+      
         students.push([
           generateStudentID(),
           fullName,
           studentClass,
-          generateRFID(),
+          rfid,
           'zarva',
           school_id
         ]);
       });
+      
 
       console.log(`Összes diák: ${students.length}`);
 
@@ -99,13 +107,8 @@ export default async function handler(req, res) {
   });
 }
 
-
 function generateStudentID() {
-  while (RESERVED_IDS.has(`OM${baseID}`)) {
-    baseID++;
-  }
   const id = `OM${baseID}`;
-  RESERVED_IDS.add(id);
   baseID++;
   return id;
 }

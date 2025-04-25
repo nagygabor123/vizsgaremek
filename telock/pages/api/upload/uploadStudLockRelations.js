@@ -19,7 +19,7 @@ export default async function handler(req, res) {
       }
 
       const maxLocker = await sql('SELECT MAX(locker_id) AS max_id FROM lockers');
-      let nextLockerId = maxLocker[0]?.max_id ? maxLocker[0].max_id + 1 : 8;
+      let nextLockerId = maxLocker[0]?.max_id ? maxLocker[0].max_id + 1 : 5;
       const lockerValues = Array.from({ length: studentCount }, (_, i) => [nextLockerId + i, 'ki']);
       await sql(
         'INSERT INTO lockers (locker_id, status) SELECT * FROM UNNEST($1::int[], $2::text[])',
