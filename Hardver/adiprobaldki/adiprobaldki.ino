@@ -5,187 +5,168 @@
 #include <Adafruit_GFX.h>
 #include <SPI.h>
 
+// TFT kijelző lábak
 #define TFT_CS   3
-#define TFT_DC    7
-#define TFT_RST   9
+#define TFT_DC   7
+#define TFT_RST  9
 
 Adafruit_GC9A01A tft(TFT_CS, TFT_DC, TFT_RST);
 
-byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; 
-IPAddress server(192,168,1,114); 
+// Ethernet MAC cím és proxy szerver IP
+byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
+IPAddress server(192,168,1,114); // Proxy IP
+
 EthernetClient client;
 
-#define RST_PIN 9 
-#define SS_PIN 4 
-MFRC522 rfid(SS_PIN, RST_PIN); 
+// RFID olvasó lábak
+#define RST_PIN 9
+#define SS_PIN 4
+MFRC522 rfid(SS_PIN, RST_PIN);
 
-unsigned long lastTime = 0;
+// Állapot változók
 int lockerId = 0;
-bool previousLockState = true; 
-bool lockerStatusUpdated = false; 
+bool previousLockState = true;
+bool lockerStatusUpdated = false;
 
-// Új segédfüggvények
-void maintainEthernetConnection() {
-  if (Ethernet.linkStatus() == LinkOFF) {
-    Serial.println("Ethernet link down, attempting to reconnect...");
-    Ethernet.begin(mac);
-  }
-}
-
-void safeStop(EthernetClient &cli) {
-  if (cli.connected()) {
-    cli.flush();
-    cli.stop();
-    delay(100); // Rövid késleltetés a megbízható lezáráshoz
-  }
-}
-
-bool connectWithRetry(EthernetClient &cli, IPAddress srv, int port, int retries = 3) {
-  for (int i = 0; i < retries; i++) {
-    if (cli.connect(srv, port)) {
-      return true;
-    }
-    Serial.print("Connection attempt ");
-    Serial.print(i+1);
-    Serial.println(" failed");
-    delay(500 * (i + 1)); // Progresszív várakozás
-  }
-  return false;
-}
-
+// Függvény: HEX stringre konvertál egy byte-ot
 String toHexString(byte value) {
   String hexString = String(value, HEX);
   if (hexString.length() < 2) {
-    hexString = "0" + hexString; 
+    hexString = "0" + hexString;
   }
   hexString.toUpperCase();
-  return hexString; 
+  return hexString;
 }
 
+// Függvény: TFT kijelző üzenet kiírás
+void showMessage(String text, uint16_t color) {
+  tft.fillScreen(GC9A01A_BLACK);
+  tft.setTextColor(color);
+  tft.setTextSize(5);
+  tft.setRotation(1);
+  tft.setCursor(50, 112);
+  tft.print(text);
+}
+
+// Függvény: Időzített várakozás
+void bounce(unsigned long waitTime) {
+  unsigned long start = millis();
+  while (millis() - start < waitTime) {}
+}
+
+// Függvény: Proxy válaszok kezelése
+bool handleResponse(String response) {
+  response.trim();
+  if (response == "zarva") {
+    Serial.println("Rendszer ZÁRVA");
+    showMessage("Zarva", GC9A01A_RED);
+    bounce(2000);
+    showMessage("Olvas", GC9A01A_WHITE);
+    return false;
+  }
+  if (response == "nincs") {
+    Serial.println("TÉVES AZONOSÍTÓ");
+    showMessage("Hibas", GC9A01A_RED);
+    bounce(2000);
+    showMessage("Olvas", GC9A01A_WHITE);
+    return false;
+  }
+  return true;
+}
+
+// Függvény: Ellenőrzi, hogy érvényes locker ID-t kaptunk-e
 bool isValidLockerId(String response) {
   if (response.length() > 2) {
     handleResponse(response);
-    return false; 
+    return false;
   }
   for (int i = 0; i < response.length(); i++) {
     if (!isDigit(response[i])) {
       handleResponse(response);
-      return false; 
+      return false;
     }
   }
   return true;
 }
 
-bool handleResponse(String response) {
-  if (response == "zarva") {
-    Serial.println("Rendszer ZARVA");
-    bounce(2000); 
-    Serial.println("Olvasd be a kartyad");
-    return true;
-  }
-  if (response == "nincs") {
-    Serial.println("TEVES AZON");
-    bounce(2000); 
-    Serial.println("Olvasd be a kartyad");
-    return true;
-  }
-  return false;
-}
-
-void bounce(unsigned long waitTime) {
-  unsigned long start = millis();
-  while (millis() - start < waitTime) {
-    // Üres várakozás
-  }
-}
-
+// Függvény: Locker állapot frissítés a szerveren
 void updateLockerStatus(int lockerId) {
-  if (lockerId == 0) return; 
+  if (lockerId == 0) return;
 
-  if (connectWithRetry(client, server, 3000)) {
-    Serial.println("Connected to proxy server for status update.");
-    String url = "/proxy2?id=" + String(lockerId); 
+  if (client.connect(server, 3000)) {
+    Serial.println("Kapcsolódás proxy szerverhez (PUT).");
+    String url = "/proxy2?id=" + String(lockerId);
     client.println("PUT " + url + " HTTP/1.1");
-    client.println("Host: 172.16.13.9");
+    client.println("Host: 192.168.1.114");
+    client.println("Content-Type: application/json");
     client.println("Connection: close");
+    client.println("Content-Length: 2");
     client.println();
+    client.println("{}"); // Üres JSON body küldése
 
-    unsigned long timeout = millis();
-    while (client.connected() && (millis() - timeout < 5000)) { // 5 másodperc timeout
+    while (client.connected() || client.available()) {
       if (client.available()) {
         String response = client.readStringUntil('\n');
-        Serial.println("Server response: " + response);
+        Serial.println("Szerver válasz: " + response);
       }
     }
-    safeStop(client);
-    Serial.println("Disconnected from proxy server after status update.");
-    tft.fillScreen(GC9A01A_BLACK);
-    tft.setTextColor(GC9A01A_WHITE);
-    tft.setTextSize(5);
-    tft.setRotation(1);
-    tft.setCursor(50, 120 - 8);
-    tft.print("Olvas");
+    client.stop();
+    Serial.println("Proxy kapcsolat lezárva (PUT után).");
+    showMessage("Olvas", GC9A01A_WHITE);
   } else {
-    Serial.println("Failed to connect to proxy server for status update");
+    Serial.println("Proxy szerver kapcsolat HIBA (PUT).");
   }
 }
 
-bool areAllLocksClosed(int lockerId) {
+// Függvény: Ellenőrzi, hogy minden zár bezárva van-e
+bool areAllLocksClosed() {
   bool currentLockState = (digitalRead(8) == LOW && digitalRead(2) == LOW);
 
   if (currentLockState && !previousLockState) {
     updateLockerStatus(lockerId);
     lockerStatusUpdated = true;
   } else if (!currentLockState) {
-    lockerStatusUpdated = false; 
+    lockerStatusUpdated = false;
   }
 
-  previousLockState = currentLockState; 
+  previousLockState = currentLockState;
   return currentLockState;
 }
 
+// Setup
 void setup() {
   tft.begin();
-  tft.fillScreen(GC9A01A_BLACK);
-  tft.setTextColor(GC9A01A_WHITE);
-  tft.setTextSize(5);
-  tft.setRotation(1);
-  tft.setCursor(50, 120 - 8);
-  tft.print("Olvas");
+  showMessage("Olvas", GC9A01A_WHITE);
 
   Serial.begin(9600);
-  delay(1000); 
-  SPI.begin(); 
-  rfid.PCD_Init(); 
+  delay(1000);
+  SPI.begin();
+  rfid.PCD_Init();
 
-  pinMode(8, INPUT_PULLUP); 
-  pinMode(2, INPUT_PULLUP); 
+  pinMode(8, INPUT_PULLUP);
+  pinMode(2, INPUT_PULLUP);
   pinMode(5, OUTPUT);
   digitalWrite(5, LOW);
   pinMode(6, OUTPUT);
   digitalWrite(6, LOW);
 
   if (Ethernet.begin(mac) == 0) {
-    Serial.println("Ethernet initialization failed.");
-    while (true);
+    Serial.println("Ethernet inicializálás sikertelen. Újraindítás...");
+    delay(5000);
+    asm volatile ("jmp 0"); // AVR újraindítás
   }
-  Serial.println("Ethernet initialized.");
-  Serial.print("IP Address: ");
+
+  Serial.println("Ethernet sikeresen elindítva.");
+  Serial.print("IP cím: ");
   Serial.println(Ethernet.localIP());
 }
 
+// Fő loop
 void loop() {
-  maintainEthernetConnection();
-  
-  if (!areAllLocksClosed(lockerId)) {
-    tft.fillScreen(GC9A01A_BLACK);
-    tft.setTextColor(GC9A01A_RED);
-    tft.setTextSize(5);
-    tft.setRotation(1);
-    tft.setCursor(50, 120 - 8);
-    tft.print("Zaras");
-    bounce(2000); 
-    return; 
+  if (!areAllLocksClosed()) {
+    showMessage("Zaras", GC9A01A_RED);
+    bounce(2000);
+    return;
   }
 
   if (!rfid.PICC_IsNewCardPresent() || !rfid.PICC_ReadCardSerial()) {
@@ -196,53 +177,43 @@ void loop() {
   for (byte i = 0; i < rfid.uid.size; i++) {
     rfidTag += toHexString(rfid.uid.uidByte[i]);
   }
-  Serial.println("RFID Tag read: " + rfidTag);
+  Serial.println("RFID kártya olvasva: " + rfidTag);
 
-  if (connectWithRetry(client, server, 3000)) { 
-    Serial.println("Connected to proxy server.");
-    String url = "/proxy1?rfid=" + rfidTag; 
+  if (client.connect(server, 3000)) {
+    Serial.println("Kapcsolódás proxy szerverhez (GET).");
+    String url = "/proxy1?rfid=" + rfidTag;
     client.println("GET " + url + " HTTP/1.1");
-    client.println("Host: 172.16.13.9");
+    client.println("Host: 192.168.1.114");
     client.println("Connection: close");
     client.println();
 
-    unsigned long timeout = millis();
-    bool responseProcessed = false;
-    
-    while (client.connected() && (millis() - timeout < 5000) && !responseProcessed) {
+    while (client.connected() || client.available()) {
       if (client.available()) {
         String response = client.readStringUntil('\n');
+        response.trim();
         if (isValidLockerId(response)) {
-          Serial.println("Validated Locker ID: " + response);
-          tft.fillScreen(GC9A01A_BLACK);
-          tft.setTextColor(GC9A01A_GREEN);
-          tft.setTextSize(5);
-          tft.setRotation(1);
-          tft.setCursor(40, 120 - 8);
-          tft.print("Nyitas");
-          
           lockerId = response.toInt();
-          if (lockerId == 3 || lockerId == 6 || lockerId == 7 || lockerId == 5) {
+          Serial.println("Érvényes Locker ID: " + String(lockerId));
+          showMessage("Nyitas", GC9A01A_GREEN);
+
+          if (lockerId == 3 || lockerId == 5 || lockerId == 6 || lockerId == 7) {
             digitalWrite(lockerId, HIGH);
-            bounce(2000); 
-            Serial.println("Olvasd be a kartyad");
+            bounce(2000);
+            digitalWrite(lockerId, LOW);
+            showMessage("Olvas", GC9A01A_WHITE);
           } else {
-            Serial.println("Masik BOX");
-            bounce(2000); 
-            Serial.println("Olvasd be a kartyad");
+            Serial.println("Másik BOX. Nem nyitom.");
+            bounce(2000);
+            showMessage("Olvas", GC9A01A_WHITE);
           }
-          responseProcessed = true;
         }
       }
     }
-
-    safeStop(client);
-    digitalWrite(lockerId, LOW);
-    Serial.println("Disconnected from proxy server.");
+    client.stop();
+    Serial.println("Proxy kapcsolat lezárva (GET után).");
   } else {
-    Serial.println("Failed to connect to proxy server after retries");
+    Serial.println("Kapcsolódási hiba a proxy szerverhez (GET).");
   }
 
-  rfid.PICC_HaltA();
-  rfid.PCD_StopCrypto1();
+  rfid.PCD_Init();
 }

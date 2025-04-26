@@ -219,40 +219,7 @@
                 }
             }
         },
-        "/api/locker/checkLocker": {
-            "get": {
-                "summary": "RFID ellenőrzés a zárhoz",
-                "description": "Ez az API végpont lehetővé teszi a felhasználó számára, hogy ellenőrizze, hogy egy adott RFID címke hozzáféréssel rendelkezik-e. A végpont lekéri az adott RFID címkéhez tartozó adatokat az adatbázisból, és visszaadja, hogy a felhasználónak van-e engedélyezett hozzáférése. Ha a RFID címke nem található az adatbázisban, a rendszer egy hibát jelez. A végpont csak GET kéréseket fogad, és az RFID címkét a query paraméterben várja.",
-                "tags": [
-                    "Locker"
-                ],
-                "parameters": [
-                    {
-                        "name": "rfid",
-                        "in": "query",
-                        "required": true,
-                        "description": "Az RFID címke, amelyet ellenőrizni szeretnénk."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Sikeres lekérdezés"
-                    },
-                    "400": {
-                        "description": "RFID szükséges"
-                    },
-                    "404": {
-                        "description": "RFID nem található"
-                    },
-                    "405": {
-                        "description": "A HTTP metódus nem engedélyezett"
-                    },
-                    "500": {
-                        "description": "Hiba az adatok lekérdezésekor"
-                    }
-                }
-            }
-        },
+        
         "/api/locker/getLocker": {
             "get": {
                 "summary": "Szekrény nyitása RFID címkével",
@@ -288,7 +255,7 @@
             }
         },
         "/api/locker/setLockerStatus": {
-            "patch": {
+            "put": {
                 "summary": "Szekrény státuszának frissítése és diák hozzáférés módosítása",
                 "description": "Ez az API végpont lehetővé teszi a felhasználó számára, hogy frissítse egy adott szekrény státuszát (nyitva vagy zárva). Ha a szekrény státusza 'be', akkor a rendszer a státuszt 'ki'-ra változtatja, és fordítva. A végpont emellett frissíti a diák hozzáférését a szekrényhez (pl. 'zarva'). Ha a szekrényhez nincs társított diák, vagy ha a státusz frissítése nem sikerült, hibaüzenet kerül visszaküldésre. A végpont csak PATCH kéréseket fogad, és a szekrény azonosítóját (id) query paraméterként várja.",
                 "tags": [
