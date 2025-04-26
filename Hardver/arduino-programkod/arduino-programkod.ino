@@ -1,4 +1,3 @@
-
 #include <MFRC522.h>
 #include <Ethernet.h>
 #include <EthernetClient.h>
