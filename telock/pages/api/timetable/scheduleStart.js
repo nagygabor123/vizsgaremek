@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     JOIN group_relations gr ON c.group_id = gr.group_id 
     JOIN timetables t ON gr.timetable_id = t.timetable_id 
     WHERE s.student_id = $1
-      AND t.day_of_week = 'monday')
+      AND t.day_of_week = LOWER(TRIM(TO_CHAR(CURRENT_DATE, 'Day')))
     GROUP BY s.student_id, s.full_name;
   `;
 
