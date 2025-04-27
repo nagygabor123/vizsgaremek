@@ -366,7 +366,7 @@
         "/api/system/closeOpen": {
             "post": {
                 "summary": "Rendszer hozzáférési állapotának frissítése",
-                "description": "Ez az API végpont lehetővé teszi a felhasználó számára, hogy frissítse egy adott iskola rendszer hozzáférési állapotát (nyitott vagy zárt). A kérés body-jában két mezőt kell megadni:\n\n- **action**: 'close' vagy 'open'\n- **school_id**: Az iskola azonosítója (pl. 1, 2 vagy 3)\n\nHa az 'action' értéke 'close', akkor a rendszer státusza 'zarva' lesz, ha 'open', akkor 'nyithato'. Ha az 'action' értéke érvénytelen, hibaüzenet kerül visszaküldésre.",
+                "description": "Ez az API végpont lehetővé teszi a felhasználó számára, hogy frissítse a rendszer hozzáférési állapotát (nyitott vagy zárt). Ha az 'action' értéke 'close', akkor a rendszer státusza 'zarva' lesz, ha pedig 'open', akkor 'nyithato'. A 'school_id' az iskola azonosítója. A végpont a 'system_status' táblában található 'status' mezőt frissíti. Az 'action' és 'school_id' paraméterek a kérés body-jában kerülnek átadásra. Csak POST kérések engedélyezettek.",
                 "tags": [
                     "System"
                 ],
@@ -380,25 +380,36 @@
                                 "properties": {
                                     "action": {
                                         "type": "string",
-                                        "enum": [
-                                            "close",
-                                            "open"
-                                        ],
-                                        "description": "Az 'action' mező értéke 'close' vagy 'open' lehet. 'close' esetén a rendszer státusza 'zarva', 'open' esetén 'nyithato'."
+                                        "description": "Művelet típusa. Lehetséges értékek: 'close' vagy 'open'."
                                     },
                                     "school_id": {
                                         "type": "integer",
-                                        "enum": [
-                                            1,
-                                            2,
-                                            3
-                                        ],
-                                        "description": "Az iskola egyedi azonosítója. Választható értékek: 1, 2, 3."
+                                        "description": "Az iskola azonosítója."
                                     }
                                 },
-                                "example": {
-                                    "action": "close",
-                                    "school_id": 1
+                                "required": [
+                                    "action",
+                                    "school_id"
+                                ]
+                            },
+                            "examples": {
+                                "Zárás - School 1": {
+                                    "value": {
+                                        "action": "close",
+                                        "school_id": 1
+                                    }
+                                },
+                                "Nyitás - School 2": {
+                                    "value": {
+                                        "action": "open",
+                                        "school_id": 2
+                                    }
+                                },
+                                "Zárás - School 3": {
+                                    "value": {
+                                        "action": "close",
+                                        "school_id": 3
+                                    }
                                 }
                             }
                         }
@@ -406,10 +417,10 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Az összes diák 'access' mezője és a 'status' nyithato/zarva állapotra frissítve az adott iskolában."
+                        "description": "Az összes diák 'access' mezője és a 'status' mező sikeresen frissítve."
                     },
                     "400": {
-                        "description": "Érvénytelen 'action' vagy 'school_id' hiányzik/hibás."
+                        "description": "Érvénytelen 'action'. Az 'action' csak 'close' vagy 'open' lehet."
                     },
                     "405": {
                         "description": "A HTTP metódus nem engedélyezett. Csak POST kérés engedélyezett."
