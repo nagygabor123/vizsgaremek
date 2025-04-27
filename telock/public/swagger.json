@@ -873,14 +873,16 @@
                         "description": "Az iskola egyedi azonosítója"
                     }
                 ],
-                "200": {
-                    "description": "Sikeres lekérés"
-                },
-                "405": {
-                    "description": "A HTTP metódus nem engedélyezett"
-                },
-                "500": {
-                    "description": "Hiba az adatok lekérésénél"
+                "responses": {
+                    "200": {
+                        "description": "Sikeres lekérés"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett"
+                    },
+                    "500": {
+                        "description": "Hiba az adatok lekérésénél"
+                    }
                 }
             }
         },
