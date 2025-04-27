@@ -265,6 +265,14 @@
                         "name": "rfid",
                         "in": "query",
                         "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "F7F59C7A",
+                                "DA6BD581",
+                                "33333333"
+                            ]
+                        },
                         "description": "Az RFID címke, amelynek a szekrényét nyitni szeretnénk."
                     }
                 ],
@@ -299,6 +307,14 @@
                         "name": "id",
                         "in": "query",
                         "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "5",
+                                "6",
+                                "7"
+                            ]
+                        },
                         "description": "A szekrény azonosítója, amelynek a státuszát módosítani szeretnénk."
                     }
                 ],
@@ -482,6 +498,15 @@
                         "name": "student",
                         "in": "query",
                         "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "OM7000",
+                                "OM7001",
+                                "OM7002",
+                                "OM7003"
+                            ]
+                        },
                         "description": "A diák azonosítója, akinek az 'access' mezőjét frissíteni szeretnénk."
                     }
                 ],
@@ -566,7 +591,12 @@
                         "description": "Az osztály neve, amelynek az órarendjét le szeretnénk kérdezni. A keresés részleges egyezéssel történik.",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "enum": [
+                                "13.I",
+                                "12.D",
+                                "11.D"
+                            ]
                         }
                     }
                 ],
@@ -614,7 +644,12 @@
                         "description": "A tanár rövid neve, akinek az órarendjét le szeretnénk kérdezni.",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "enum": [
+                                "PaZo",
+                                "BeMo",
+                                "CzKa"
+                            ]
                         }
                     }
                 ],
@@ -655,29 +690,25 @@
                 "tags": [
                     "Timetable"
                 ],
+                "parameters": [
+                    {
+                        "name": "school_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "1",
+                                "2",
+                                "3"
+                            ]
+                        },
+                        "description": "Az iskola egyedi azonosítója"
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "Sikeres válasz, amely tartalmazza a diákok első és utolsó tanórájának kezdési és befejezési időpontját.",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "students": [
-                                        {
-                                            "student_id": 1,
-                                            "full_name": "Kovács Péter",
-                                            "first_class_start": "08:00:00",
-                                            "last_class_end": "14:30:00"
-                                        },
-                                        {
-                                            "student_id": 2,
-                                            "full_name": "Nagy Anna",
-                                            "first_class_start": "09:00:00",
-                                            "last_class_end": "15:15:00"
-                                        }
-                                    ]
-                                }
-                            }
-                        }
+                        "description": "Sikeres válasz, amely tartalmazza a diákok első és utolsó tanórájának kezdési és befejezési időpontját."
                     },
                     "404": {
                         "description": "Nincs tanóra a mai nap!"
@@ -702,27 +733,19 @@
                         "description": "A dátum, amelynek az órarendjét le szeretnénk kérdezni. Formátum: YYYY-MM-DD. Ha nincs megadva, akkor a mai napra vonatkozó adatokat adja vissza.",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "enum": [
+                                "OM7000",
+                                "OM7001",
+                                "OM7002",
+                                "OM7003"
+                            ]
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Sikeres válasz, amely tartalmazza a diákok első és utolsó tanórájának kezdési és befejezési időpontját.",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "students": [
-                                        {
-                                            "student_id": 1,
-                                            "full_name": "Kovács Péter",
-                                            "first_class_start": "08:00:00",
-                                            "last_class_end": "14:30:00"
-                                        }
-                                    ]
-                                }
-                            }
-                        }
+                        "description": "Sikeres válasz, amely tartalmazza a diákok első és utolsó tanórájának kezdési és befejezési időpontját."
                     },
                     "400": {
                         "description": "Hiányzó 'student_id'!"
@@ -739,7 +762,7 @@
         "/api/students/create": {
             "post": {
                 "summary": "Új diák létrehozása",
-                "description": "Ez az API végpont lehetővé teszi egy új diák hozzáadását a rendszerhez a megadott adatokkal. A diák regisztrálása során meg kell adni az egyedi azonosítóját (OM szám), teljes nevét, osztályát és RFID címkéjét. A sikeres regisztráció után a rendszer automatikusan létrehoz egy szekrényt a diáknak, és hozzárendeli azt az RFID címkéjéhez. Emellett a diák hozzáadódik a megfelelő csoportokhoz az API hívás révén. Amennyiben bármelyik kötelező mező hiányzik, a szerver hibát ad vissza. Ha a regisztráció sikeres, a válaszban visszaküldi a diák azonosítóját és a hozzá tartozó szekrény számát.",
+                "description": "Ez az API végpont lehetővé teszi egy új diák hozzáadását a rendszerhez a megadott adatokkal. A sikeres regisztráció után a rendszer automatikusan létrehoz egy szekrényt a diáknak és hozzárendeli az RFID címkéjéhez.",
                 "tags": [
                     "Students"
                 ],
@@ -752,19 +775,59 @@
                                 "properties": {
                                     "student_id": {
                                         "type": "string",
-                                        "example": "OM56555"
+                                        "description": "A diák egyedi OM azonosítója."
                                     },
                                     "full_name": {
                                         "type": "string",
-                                        "example": "Kiss Péter"
+                                        "description": "A diák teljes neve."
                                     },
                                     "class": {
                                         "type": "string",
-                                        "example": "12.A"
+                                        "description": "A diák osztálya."
                                     },
                                     "rfid_tag": {
                                         "type": "string",
-                                        "example": "58D90E3E"
+                                        "description": "A diákhoz tartozó RFID címke azonosítója."
+                                    },
+                                    "school_id": {
+                                        "type": "string",
+                                        "description": "A diákhoz tartozó iskola azonosító."
+                                    }
+                                },
+                                "required": [
+                                    "student_id",
+                                    "full_name",
+                                    "class",
+                                    "rfid_tag",
+                                    "school_id"
+                                ]
+                            },
+                            "examples": {
+                                "Első diák": {
+                                    "value": {
+                                        "student_id": "OM11111",
+                                        "full_name": "Kiss Péter",
+                                        "class": "13..A",
+                                        "rfid_tag": "11111111",
+                                        "school_id": "1"
+                                    }
+                                },
+                                "Második diák": {
+                                    "value": {
+                                        "student_id": "OM22222",
+                                        "full_name": "Nagy Anna",
+                                        "class": "13.I",
+                                        "rfid_tag": "22222222",
+                                        "school_id": "1"
+                                    }
+                                },
+                                "Harmadik diák": {
+                                    "value": {
+                                        "student_id": "OM33333",
+                                        "full_name": "Tóth Dávid",
+                                        "class": "13.I",
+                                        "rfid_tag": "33333333",
+                                        "school_id": "1"
                                     }
                                 }
                             }
@@ -773,16 +836,16 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Sikeresen létrehozott diák"
+                        "description": "Sikeresen létrehozott diák."
                     },
                     "400": {
-                        "description": "Hiányzó kötelező mezők"
+                        "description": "Hiányzó kötelező mezők."
                     },
                     "500": {
-                        "description": "Hiba a diák létrehozása során"
+                        "description": "Hiba a diák létrehozása során."
                     },
                     "405": {
-                        "description": "A HTTP metódus nem engedélyezett"
+                        "description": "A HTTP metódus nem engedélyezett."
                     }
                 }
             }
@@ -793,6 +856,22 @@
                 "description": "Ez az API végpont a diákok adatainak lekérésére szolgál. Az adatbázisból lekérdezi az összes diák adatait, beleértve az RFID címkéjüket és egyéb releváns információkat. Ha a diákhoz tartozik egy szekrénykapcsolat, akkor a rendszer csatolja hozzá a szekrény aktuális státuszát is. Az adatokat az `students` táblából nyeri ki, amelyet bal oldali csatlakozással (`LEFT JOIN`) összekapcsol a `locker_relationships` és `lockers` táblákkal. A válasz JSON formátumban tartalmazza a diákok listáját és esetlegesen a hozzárendelt szekrények állapotát.",
                 "tags": [
                     "Students"
+                ],
+                "parameters": [
+                    {
+                        "name": "school_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "1",
+                                "2",
+                                "3"
+                            ]
+                        },
+                        "description": "Az iskola egyedi azonosítója"
+                    }
                 ],
                 "200": {
                     "description": "Sikeres lekérés"
@@ -808,7 +887,7 @@
         "/api/students/update": {
             "put": {
                 "summary": "Diák adatainak frissítése",
-                "description": "Ez az API végpont a diákok adatainak frissítésére szolgál. A frissítés magában foglalja a diák nevének, osztályának és RFID címkéjének módosítását. Ha a diák RFID címkéje nem változik, csak a név és osztály kerül frissítésre. Ha az RFID címke változik, akkor a rendszer ellenőrzi, hogy az új RFID címke már nem tartozik más diákhoz. Amennyiben van már más diákhoz rendelt RFID, a rendszer egy új diákot hoz létre és az új RFID címkét az ő adatainál tárolja, miközben a régi diákot törli. Ha a diákhoz tartozó szekrény kapcsolatot is frissíteni kell, a rendszer a szekrény kapcsolatot is módosítja az új RFID címke szerint.",
+                "description": "Ez az API végpont a diákok adatainak frissítésére szolgál. A frissítés magában foglalja a diák nevének, osztályának és RFID címkéjének módosítását. Ha az RFID címke változik, a rendszer új diákot hoz létre és a szekrény kapcsolatot is frissíti.",
                 "tags": [
                     "Students"
                 ],
@@ -821,19 +900,55 @@
                                 "properties": {
                                     "student_id": {
                                         "type": "string",
-                                        "example": "OM44444"
+                                        "description": "A diák egyedi azonosítója."
                                     },
                                     "full_name": {
                                         "type": "string",
-                                        "example": "Pál Edvin"
+                                        "description": "A diák teljes neve."
                                     },
                                     "class": {
                                         "type": "string",
-                                        "example": "13.D"
+                                        "description": "A diák osztálya."
                                     },
                                     "rfid_tag": {
                                         "type": "string",
-                                        "example": "53D00E3E"
+                                        "description": "A diák RFID címkéje."
+                                    }
+                                },
+                                "required": [
+                                    "student_id",
+                                    "full_name",
+                                    "class",
+                                    "rfid_tag",
+                                    "school_id"
+                                ]
+                            },
+                            "examples": {
+                                "Első diák": {
+                                    "value": {
+                                        "student_id": "OM11111",
+                                        "full_name": "Kiss Péter Sándor",
+                                        "class": "13..A",
+                                        "rfid_tag": "11122211",
+                                        "school_id": "1"
+                                    }
+                                },
+                                "Második diák": {
+                                    "value": {
+                                        "student_id": "OM22222",
+                                        "full_name": "Nagy Anna Natasa",
+                                        "class": "13.I",
+                                        "rfid_tag": "22222222",
+                                        "school_id": "1"
+                                    }
+                                },
+                                "Harmadik diák": {
+                                    "value": {
+                                        "student_id": "OM33333",
+                                        "full_name": "Kis Pista Lukács János",
+                                        "class": "11.I",
+                                        "rfid_tag": "33333333",
+                                        "school_id": "1"
                                     }
                                 }
                             }
@@ -842,16 +957,16 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Sikeres frissítés VAGY Sikeres diák és szekrény kapcsolat frissítés"
+                        "description": "Sikeres frissítés vagy sikeres új diák és szekrény kapcsolat létrehozása."
                     },
                     "400": {
-                        "description": "Hiányzó vagy érvénytelen mezők"
+                        "description": "Hiányzó vagy érvénytelen mezők."
                     },
                     "404": {
-                        "description": "A diák nem található VAGY A diák és szekrény kapcsolat nem található"
+                        "description": "A diák nem található vagy szekrény kapcsolat nem található."
                     },
                     "500": {
-                        "description": "Hiba történt a diák adatainak frissítése során"
+                        "description": "Hiba történt a diák adatainak frissítése során."
                     }
                 }
             }
@@ -859,7 +974,7 @@
         "/api/students/delete": {
             "delete": {
                 "summary": "Diák törlése",
-                "description": "Ez az API végpont lehetővé teszi egy diák törlését az adatbázisból. A törlés folyamata először ellenőrzi, hogy a megadott `student_id` létezik-e az adatbázisban. Ha igen, a rendszer eltávolítja a diákhoz tartozó összes kapcsolódó információt, beleértve a locker kapcsolatokat is. A sikeres törlés után a diák rekordja teljesen eltávolításra kerül. Ha a diák nem található, a rendszer megfelelő hibaüzenetet küld vissza. A törléshez a HTTP DELETE metódus használata szükséges.",
+                "description": "Ez az API végpont lehetővé teszi egy diák törlését az adatbázisból. A törlés során a rendszer eltávolítja a diákhoz kapcsolódó összes adatot, beleértve a locker kapcsolatokat is. Ha a megadott `student_id` nem található, hibaüzenet kerül visszaküldésre. Csak HTTP DELETE kéréseket fogad.",
                 "tags": [
                     "Students"
                 ],
@@ -872,7 +987,27 @@
                                 "properties": {
                                     "student_id": {
                                         "type": "string",
-                                        "example": "OM56555"
+                                        "description": "A törlendő diák OM azonosítója."
+                                    }
+                                },
+                                "required": [
+                                    "student_id"
+                                ]
+                            },
+                            "examples": {
+                                "Első diák": {
+                                    "value": {
+                                        "student_id": "OM11111"
+                                    }
+                                },
+                                "Második diák": {
+                                    "value": {
+                                        "student_id": "OM22222"
+                                    }
+                                },
+                                "Harmadik diák": {
+                                    "value": {
+                                        "student_id": "OM33333"
                                     }
                                 }
                             }
@@ -914,7 +1049,27 @@
                                 "properties": {
                                     "student_id": {
                                         "type": "string",
-                                        "example": "OM56555"
+                                        "description": "A törlendő diák OM azonosítója."
+                                    }
+                                },
+                                "required": [
+                                    "student_id"
+                                ]
+                            },
+                            "examples": {
+                                "Első diák": {
+                                    "value": {
+                                        "student_id": "OM11111"
+                                    }
+                                },
+                                "Második diák": {
+                                    "value": {
+                                        "student_id": "OM22222"
+                                    }
+                                },
+                                "Harmadik diák": {
+                                    "value": {
+                                        "student_id": "OM33333"
                                     }
                                 }
                             }
@@ -950,29 +1105,25 @@
                 "tags": [
                     "Config"
                 ],
+                "parameters": [
+                    {
+                        "name": "school_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "1",
+                                "2",
+                                "3"
+                            ]
+                        },
+                        "description": "Az iskola egyedi azonosítója"
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "A csengetési rend sikeresen lekérdezve",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "start": {
-                                                "type": "string",
-                                                "example": "07:15"
-                                            },
-                                            "end": {
-                                                "type": "string",
-                                                "example": "08:00"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "description": "A csengetési rend sikeresen lekérdezve"
                     },
                     "500": {
                         "description": "Hiba a csengetési rend lekérdezésekor"
@@ -1016,20 +1167,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Jelszó sikeresen módosítva",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Jelszó sikeresen módosítva!"
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "description": "Jelszó sikeresen módosítva"
                     },
                     "400": {
                         "description": "Minden mezőt ki kell tölteni VAGY Hibás régi jelszó."
@@ -1053,41 +1191,25 @@
                 "tags": [
                     "Config"
                 ],
+                "parameters": [
+                    {
+                        "name": "school_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "1",
+                                "2",
+                                "3"
+                            ]
+                        },
+                        "description": "Az iskola egyedi azonosítója"
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "Sikeresen lekérdezett adminisztrátorok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "admin_id": {
-                                                "type": "string",
-                                                "example": "admin123"
-                                            },
-                                            "full_name": {
-                                                "type": "string",
-                                                "example": "Nagy János"
-                                            },
-                                            "short_name": {
-                                                "type": "string",
-                                                "example": "Jani"
-                                            },
-                                            "position": {
-                                                "type": "string",
-                                                "example": "Rendszergazda"
-                                            },
-                                            "osztalyfonok": {
-                                                "type": "string",
-                                                "example": "12.A"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "description": "Sikeresen lekérdezett adminisztrátorok"
                     },
                     "500": {
                         "description": "Hiba az adminisztrátorok lekérdezése során"
@@ -1101,7 +1223,7 @@
         "/api/config/addEmployee": {
             "post": {
                 "summary": "Új alkalmazott létrehozása",
-                "description": "Ez az API végpont lehetővé teszi egy új alkalmazott hozzáadását a rendszerhez a megadott adatokkal. Az alkalmazott regisztrálása során meg kell adni a teljes nevét, pozícióját, osztályfőnöki státuszát és rövid nevét. A sikeres regisztráció után a rendszer automatikusan generál egy jelszót az alkalmazott számára, amely a válaszban is visszaküldésre kerül. Ha bármelyik kötelező mező hiányzik, a szerver hibát ad vissza. Ha a regisztráció sikeres, a válaszban visszaküldi a sikeres hozzáadást és a generált jelszót.",
+                "description": "Ez az API végpont lehetővé teszi egy új alkalmazott hozzáadását a rendszerhez a megadott adatokkal. A sikeres regisztráció után a rendszer automatikusan generál egy jelszót, amelyet a válaszban visszaküld. Kötelező mezők: teljes név, pozíció, osztályfőnöki státusz, rövid név.",
                 "tags": [
                     "Config"
                 ],
@@ -1114,19 +1236,59 @@
                                 "properties": {
                                     "full_name": {
                                         "type": "string",
-                                        "example": "Kiss Péter"
+                                        "description": "Az alkalmazott teljes neve."
                                     },
                                     "position": {
                                         "type": "string",
-                                        "example": "Fejlesztő"
+                                        "description": "Az alkalmazott pozíciója."
                                     },
                                     "osztalyfonok": {
                                         "type": "string",
-                                        "example": "Nincs"
+                                        "description": "Az alkalmazott osztályfőnöki státusza (Igen/Nincs)."
                                     },
                                     "short_name": {
                                         "type": "string",
-                                        "example": "pppp"
+                                        "description": "Az alkalmazott rövidített neve."
+                                    },
+                                    "school_id": {
+                                        "type": "string",
+                                        "description": "Az iskola egyedi azonosítója."
+                                    }
+                                },
+                                "required": [
+                                    "full_name",
+                                    "position",
+                                    "osztalyfonok",
+                                    "short_name",
+                                    "school_id"
+                                ]
+                            },
+                            "examples": {
+                                "Fejlesztő alkalmazott": {
+                                    "value": {
+                                        "full_name": "Kiss Péter",
+                                        "position": "Fejlesztő",
+                                        "osztalyfonok": "Nincs",
+                                        "short_name": "KKKK",
+                                        "school_id": "1"
+                                    }
+                                },
+                                "Tanár alkalmazott": {
+                                    "value": {
+                                        "full_name": "Nagy Éva",
+                                        "position": "Tanár",
+                                        "osztalyfonok": "Nincs",
+                                        "short_name": "NNNN",
+                                        "school_id": "1"
+                                    }
+                                },
+                                "Adminisztrátor alkalmazott": {
+                                    "value": {
+                                        "full_name": "Szabó Gábor",
+                                        "position": "Portás",
+                                        "osztalyfonok": "Nincs",
+                                        "short_name": "SSSS",
+                                        "school_id": "1"
                                     }
                                 }
                             }
@@ -1135,24 +1297,7 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Sikeresen hozzáadott alkalmazott!",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Sikeresen hozzáadott alkalmazott!"
-                                        },
-                                        "password": {
-                                            "type": "string",
-                                            "example": "a1b2c3d4e5f6g7h8"
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "description": "Sikeresen hozzáadott alkalmazott!"
                     },
                     "400": {
                         "description": "Hiányzó kötelező mezők"
@@ -1182,47 +1327,68 @@
                                 "properties": {
                                     "admin_id": {
                                         "type": "string",
-                                        "example": "123"
+                                        "description": "Az adminisztrátor egyedi azonosítója."
                                     },
                                     "full_name": {
                                         "type": "string",
-                                        "example": "Kovács Gábor"
+                                        "description": "Az adminisztrátor teljes neve."
                                     },
                                     "position": {
                                         "type": "string",
-                                        "example": "Rendszergazda"
+                                        "description": "Az adminisztrátor beosztása."
                                     },
                                     "osztalyfonok": {
                                         "type": "string",
-                                        "example": "12.B"
+                                        "description": "Az admin által felügyelt osztály (ha van)."
+                                    },
+                                    "school_id": {
+                                        "type": "string",
+                                        "description": "Az iskola egyedi azonosítója."
                                     }
                                 },
                                 "required": [
                                     "admin_id",
                                     "full_name",
                                     "position",
-                                    "osztalyfonok"
+                                    "osztalyfonok",
+                                    "school_id"
                                 ]
+                            },
+                            "examples": {
+                                "Első alkalmazott": {
+                                    "value": {
+                                        "admin_id": "65",
+                                        "full_name": "Kovács Gábor",
+                                        "position": "Rendszergazda",
+                                        "osztalyfonok": "Nincs",
+                                        "school_id": "1"
+                                    }
+                                },
+                                "Második alkalmazott": {
+                                    "value": {
+                                        "admin_id": "66",
+                                        "full_name": "Szabó Anna",
+                                        "position": "Igazgató",
+                                        "osztalyfonok": "Nincs",
+                                        "school_id": "1"
+                                    }
+                                },
+                                "Harmadik alkalmazott": {
+                                    "value": {
+                                        "admin_id": "67",
+                                        "full_name": "Tóth László",
+                                        "position": "Tanár",
+                                        "osztalyfonok": "Nincs",
+                                        "school_id": "1"
+                                    }
+                                }
                             }
                         }
                     }
                 },
                 "responses": {
                     "200": {
-                        "description": "Sikeres frissítés",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Sikeres frissítés"
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "description": "Sikeres frissítés"
                     },
                     "400": {
                         "description": "Hiányzó kötelező mezők"
@@ -1251,7 +1417,11 @@
                         "description": "Az adminisztrátor egyedi azonosítója, amelyet törölni kívánunk.",
                         "schema": {
                             "type": "string",
-                            "example": "2"
+                            "enum": [
+                                "65",
+                                "66",
+                                "67"
+                            ]
                         }
                     }
                 ],
@@ -1300,71 +1470,39 @@
                 ],
                 "parameters": [
                     {
+                        "name": "school_id",
+                        "in": "query",
+                        "required": true,
+                        "description": "Az iskola egyedi azonosítója.",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "1",
+                                "2",
+                                "3"
+                            ]
+                        }
+                    },
+                    {
                         "name": "type",
                         "in": "query",
                         "required": true,
                         "description": "A lekérdezés típusa. Lehet: 'plusznap', 'szunet', 'tanitasnelkul', 'kezd', 'veg'.",
                         "schema": {
                             "type": "string",
-                            "example": "plusznap"
+                            "enum": [
+                                "plusznap",
+                                "szunet",
+                                "tanitasnelkul",
+                                "kezd",
+                                "veg"
+                            ]
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Sikeres lekérdezés",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "tanitasnelkul_alap": {
-                                            "type": "array",
-                                            "description": "A tanítás nélküli napok listája",
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "integer",
-                                                        "example": 3
-                                                    },
-                                                    "name": {
-                                                        "type": "string",
-                                                        "example": "Szünet"
-                                                    },
-                                                    "start": {
-                                                        "type": "string",
-                                                        "example": "2025-02-01"
-                                                    },
-                                                    "end": {
-                                                        "type": "string",
-                                                        "example": "2025-02-03"
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "schoolYearStart": {
-                                            "type": "object",
-                                            "properties": {
-                                                "start": {
-                                                    "type": "string",
-                                                    "example": "2024-09-01"
-                                                }
-                                            }
-                                        },
-                                        "schoolYearEnd": {
-                                            "type": "object",
-                                            "properties": {
-                                                "end": {
-                                                    "type": "string",
-                                                    "example": "2025-06-15"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "description": "Sikeres lekérdezés"
                     },
                     "400": {
                         "description": "Hiányzó kötelező paraméter"
