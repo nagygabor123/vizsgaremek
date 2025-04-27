@@ -334,7 +334,12 @@
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "enum": [
+                                "1",
+                                "2",
+                                "3"
+                            ]
                         },
                         "description": "Az iskola egyedi azonosítója"
                     }
@@ -361,7 +366,7 @@
         "/api/system/closeOpen": {
             "post": {
                 "summary": "Rendszer hozzáférési állapotának frissítése",
-                "description": "Ez az API végpont lehetővé teszi a felhasználó számára, hogy frissítse a rendszer hozzáférési állapotát (nyitott vagy zárt). Ha az 'action' értéke 'close', akkor a rendszer státusza 'zarva' (zárt) lesz, ha pedig 'open', akkor 'nyithato' (nyitható). A végpont a 'system_status' táblában található 'status' mezőt frissíti. Az 'action' paraméter a kérés body-jában kerül átadásra. Amennyiben az 'action' értéke nem 'close' vagy 'open', hibaüzenet kerül visszaküldésre. A végpont csak POST kéréseket fogad.",
+                "description": "Ez az API végpont lehetővé teszi a felhasználó számára, hogy frissítse egy adott iskola rendszer hozzáférési állapotát (nyitott vagy zárt). A kérés body-jában két mezőt kell megadni:\n\n- **action**: 'close' vagy 'open'\n- **school_id**: Az iskola azonosítója (pl. 1, 2 vagy 3)\n\nHa az 'action' értéke 'close', akkor a rendszer státusza 'zarva' lesz, ha 'open', akkor 'nyithato'. Ha az 'action' értéke érvénytelen, hibaüzenet kerül visszaküldésre.",
                 "tags": [
                     "System"
                 ],
@@ -380,10 +385,20 @@
                                             "open"
                                         ],
                                         "description": "Az 'action' mező értéke 'close' vagy 'open' lehet. 'close' esetén a rendszer státusza 'zarva', 'open' esetén 'nyithato'."
+                                    },
+                                    "school_id": {
+                                        "type": "integer",
+                                        "enum": [
+                                            1,
+                                            2,
+                                            3
+                                        ],
+                                        "description": "Az iskola egyedi azonosítója. Választható értékek: 1, 2, 3."
                                     }
                                 },
                                 "example": {
-                                    "action": "close"
+                                    "action": "close",
+                                    "school_id": 1
                                 }
                             }
                         }
@@ -391,16 +406,16 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Az összes diák 'access' mezője és a 'status' nyithato/zarva (-ra) frissítve"
+                        "description": "Az összes diák 'access' mezője és a 'status' nyithato/zarva állapotra frissítve az adott iskolában."
                     },
                     "400": {
-                        "description": "Érvénytelen 'action'. Az 'action' csak 'close' vagy 'open' értéket fogadhat el."
+                        "description": "Érvénytelen 'action' vagy 'school_id' hiányzik/hibás."
                     },
                     "405": {
                         "description": "A HTTP metódus nem engedélyezett. Csak POST kérés engedélyezett."
                     },
                     "500": {
-                        "description": "Nem sikerült frissíteni az 'access' és 'status' állapotot"
+                        "description": "Nem sikerült frissíteni az 'access' és 'status' állapotot."
                     }
                 }
             }
@@ -419,7 +434,11 @@
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "enum": ["1", "2", "3"]
+                            "enum": [
+                                "1",
+                                "2",
+                                "3"
+                            ]
                         },
                         "description": "Az iskola egyedi azonosítója"
                     }
