@@ -44,7 +44,7 @@
         "/api/setup/studentsToDatabase": {
             "post": {
                 "summary": "Diákok feltöltése az adatbázisba egy CSV fájlból",
-                "description": "Ez az `API` végpont lehetővé teszi diákok adatainak feltöltését egy CSV fájlból az adatbázisba. A fájl formátumának megfelelően kell tartalmaznia a diákok adatait, például:\n\n- **Név (Nev)**\n- **Osztály (csoportok ',' elválasztva)**\n\nA feltöltött adatok alapján minden diáknak generálódik egy egyedi OM azonosító és egy RFID tag. Az adatok az adatbázisba kerülnek mentésre.",
+"description": "Ez az API végpont lehetővé teszi diákok adatainak feltöltését egy CSV fájlból az adatbázisba. A fájl formátumának megfelelően kell tartalmaznia a diákok adatait, például:\n\n- **`Név`** (`Nev`)\n- **`Osztály`** (csoportok ',' elválasztva)\n\nA feltöltött adatok alapján minden diáknak generálódik egy egyedi OM azonosító és egy RFID tag. Az adatok az adatbázisba kerülnek mentésre.",
                 "tags": [
                     "Setup"
                 ],
@@ -101,22 +101,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Sikeres törlés és tanév dátumok frissítése",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "schoolId": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "description": "Sikeres törlés és tanév dátumok frissítése!"
                     },
                     "400": {
                         "description": "Hiányzó school_id paraméter."
