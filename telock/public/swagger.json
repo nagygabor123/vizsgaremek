@@ -81,8 +81,8 @@
                 }
             }
         },
-        "/api/setup/deleteSchoolData": {
-            "delete": {
+        "/api/setup/yearChange": {
+            "post": {
                 "summary": "Iskola összes adatának törlése és tanév dátumok frissítése",
                 "description": "Ez az API végpont lehetővé teszi egy adott iskola összes adatának törlését az adatbázisból a megadott **school_id** alapján,hogy az új tanévet lehessen beállítani. A törlés után a tanév kezdő és záró dátumai automatikusan egy évvel későbbre állítódnak. Az alábbi táblákból történik törlés:\n\n- **locker_relationships**\n- **student_groups**\n- **group_relations**\n- **timetables**\n- **csoportok**\n- **students**\n- **admins** (kivéve rendszergazda pozíció)\n- **year_schedule** (kivéve 'kezd' és 'veg' típusok)\n- **ring_times**\n- **lockers** (ha nincsen hozzá kapcsolt locker_relationship)\n\nA törlés tranzakcióban történik, hiba esetén visszagörgetés (rollback) történik.",
                 "tags": [
