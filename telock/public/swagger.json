@@ -44,7 +44,7 @@
         "/api/setup/studentsToDatabase": {
             "post": {
                 "summary": "Diákok feltöltése az adatbázisba egy CSV fájlból",
-                "description": "Ez az API végpont lehetővé teszi diákok adatainak feltöltését egy CSV fájlból az adatbázisba. A fájl formátumának megfelelően kell tartalmaznia a diákok adatait, például:\n\n- **Név (Nev)**\n- **Osztály (csoportok ',' elválasztva)**\n\nA feltöltött adatok alapján minden diáknak generálódik egy egyedi OM azonosító és egy RFID tag. Az adatok az adatbázisba kerülnek mentésre.",
+                "description": "Ez az `API` végpont lehetővé teszi diákok adatainak feltöltését egy CSV fájlból az adatbázisba. A fájl formátumának megfelelően kell tartalmaznia a diákok adatait, például:\n\n- **Név (Nev)**\n- **Osztály (csoportok ',' elválasztva)**\n\nA feltöltött adatok alapján minden diáknak generálódik egy egyedi OM azonosító és egy RFID tag. Az adatok az adatbázisba kerülnek mentésre.",
                 "tags": [
                     "Setup"
                 ],
