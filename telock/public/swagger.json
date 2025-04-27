@@ -341,20 +341,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Sikeres lekérdezés, az iskola neve visszatérve",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "school_name": {
-                                            "type": "string",
-                                            "description": "Az iskola neve"
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "description": "Sikeres lekérdezés, az iskola neve visszatérve"
                     },
                     "400": {
                         "description": "Hiányzó vagy érvénytelen school_id paraméter"
@@ -424,6 +411,17 @@
                 "description": "Ez az API végpont a rendszer aktuális státuszának lekérdezésére szolgál. A végpont egyetlen rekordot olvas ki a 'system_status' táblából, amely a rendszer állapotát tárolja. A lekérdezés az adott státuszt (például 'zarva' vagy 'nyithato') adja vissza. A lekérdezés sikeressége esetén a rendszer egy JSON választ küld, amely tartalmazza a státusz értékét. Ha az adatbázisban nincs elérhető státusz, akkor a végpont egy 404-es hibát küld vissza. Ha a lekérdezés során hiba történik (például adatbázis-kapcsolati probléma), akkor egy 500-as hibaüzenetet kap a kliens. A végpont kizárólag GET metódussal érhető el, más HTTP metódusok használata esetén 405-ös hibakódot ad vissza.",
                 "tags": [
                     "System"
+                ],
+                "parameters": [
+                    {
+                        "name": "school_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Az iskola egyedi azonosítója"
+                    }
                 ],
                 "responses": {
                     "201": {
