@@ -81,6 +81,55 @@
                 }
             }
         },
+        "/api/setup/deleteSchoolData": {
+            "delete": {
+                "summary": "Iskola összes adatának törlése és tanév dátumok frissítése",
+                "description": "Ez az API végpont lehetővé teszi egy adott iskola összes adatának törlését az adatbázisból a megadott **school_id** alapján,hogy az új tanévet lehessen beállítani. A törlés után a tanév kezdő és záró dátumai automatikusan egy évvel későbbre állítódnak. Az alábbi táblákból történik törlés:\n\n- **locker_relationships**\n- **student_groups**\n- **group_relations**\n- **timetables**\n- **csoportok**\n- **students**\n- **admins** (kivéve rendszergazda pozíció)\n- **year_schedule** (kivéve 'kezd' és 'veg' típusok)\n- **ring_times**\n- **lockers** (ha nincsen hozzá kapcsolt locker_relationship)\n\nA törlés tranzakcióban történik, hiba esetén visszagörgetés (rollback) történik.",
+                "tags": [
+                    "Setup"
+                ],
+                "parameters": [
+                    {
+                        "name": "school_id",
+                        "in": "query",
+                        "required": true,
+                        "description": "Az iskola egyedi azonosítója, amelynek az adatait törölni kell.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sikeres törlés és tanév dátumok frissítése",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "schoolId": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Hiányzó school_id paraméter."
+                    },
+                    "500": {
+                        "description": "Adatbázis hiba a törlés során, vagy hiba a tanév dátumok frissítése közben."
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett."
+                    }
+                }
+            }
+        },
         "/api/upload/uploadRinging": {
             "post": {
                 "summary": "Csengetési rend feltöltése",
@@ -219,7 +268,6 @@
                 }
             }
         },
-        
         "/api/locker/getLocker": {
             "get": {
                 "summary": "Szekrény nyitása RFID címkével",
