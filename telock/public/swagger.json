@@ -418,7 +418,8 @@
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "enum": ["1", "2", "3"]
                         },
                         "description": "Az iskola egyedi azonosítója"
                     }
