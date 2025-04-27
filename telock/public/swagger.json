@@ -321,7 +321,7 @@
                 }
             }
         },
-        "/api/school/getSchool": {
+        "/api/system/getSchool": {
             "get": {
                 "summary": "Iskola nevének lekérdezése azonosító alapján",
                 "description": "Ez az API végpont lehetővé teszi egy iskola nevének lekérdezését az iskola egyedi azonosítója (**school_id**) alapján.\n\nA kérés során az URL query paraméterében kell megadni a **school_id** értékét.",
