@@ -44,7 +44,7 @@
         "/api/setup/studentsToDatabase": {
             "post": {
                 "summary": "Diákok feltöltése az adatbázisba egy CSV fájlból",
-"description": "Ez az API végpont lehetővé teszi diákok adatainak feltöltését egy CSV fájlból az adatbázisba. A fájl formátumának megfelelően kell tartalmaznia a diákok adatait, például:\n\n- **`Név`** (`Nev`)\n- **`Osztály`** (csoportok ',' elválasztva)\n\nA feltöltött adatok alapján minden diáknak generálódik egy egyedi OM azonosító és egy RFID tag. Az adatok az adatbázisba kerülnek mentésre.",
+                "description": "Ez az API végpont lehetővé teszi diákok adatainak feltöltését egy CSV fájlból az adatbázisba. A fájl formátumának megfelelően kell tartalmaznia a diákok adatait, például:\n\n- **Név (Nev)**\n- **Osztály (csoportok ',' elválasztva)**\n\nA feltöltött adatok alapján minden diáknak generálódik egy egyedi OM azonosító és egy RFID tag. Az adatok az adatbázisba kerülnek mentésre.",
                 "tags": [
                     "Setup"
                 ],
@@ -84,7 +84,7 @@
         "/api/setup/yearChange": {
             "post": {
                 "summary": "Iskola összes adatának törlése és tanév dátumok frissítése",
-                "description": "Ez az API végpont lehetővé teszi egy adott iskola összes adatának törlését az adatbázisból a megadott **school_id** alapján,hogy az új tanévet lehessen beállítani. A törlés után a tanév kezdő és záró dátumai automatikusan egy évvel későbbre állítódnak. Az alábbi táblákból történik törlés:\n\n- **locker_relationships**\n- **student_groups**\n- **group_relations**\n- **timetables**\n- **csoportok**\n- **students**\n- **admins** (kivéve rendszergazda pozíció)\n- **year_schedule** (kivéve 'kezd' és 'veg' típusok)\n- **ring_times**\n- **lockers** (ha nincsen hozzá kapcsolt locker_relationship)\n\nA törlés tranzakcióban történik, hiba esetén visszagörgetés (rollback) történik.",
+                "description": "Ez az API végpont lehetővé teszi egy adott iskola összes adatának törlését az adatbázisból a megadott `school_id` alapján,hogy az új tanévet lehessen beállítani. A törlés után a tanév kezdő és záró dátumai automatikusan egy évvel későbbre állítódnak. Az alábbi táblákból történik törlés:\n\n- **locker_relationships**\n- **student_groups**\n- **group_relations**\n- **timetables**\n- **csoportok**\n- **students**\n- **admins** (kivéve rendszergazda pozíció)\n- **year_schedule** (kivéve 'kezd' és 'veg' típusok)\n- **ring_times**\n- **lockers** (ha nincsen hozzá kapcsolt locker_relationship)\n\nA törlés tranzakcióban történik, hiba esetén visszagörgetés (rollback) történik.",
                 "tags": [
                     "Setup"
                 ],
@@ -317,6 +317,56 @@
                     },
                     "500": {
                         "description": "Hiba az adatok feltöltésekor VAGY Sikertelen szekrény státusz frissítés VAGY Sikertelen diák access frissítés"
+                    }
+                }
+            }
+        },
+        "/api/school/getSchoolName": {
+            "get": {
+                "summary": "Iskola nevének lekérdezése azonosító alapján",
+                "description": "Ez az API végpont lehetővé teszi egy iskola nevének lekérdezését az iskola egyedi azonosítója (**school_id**) alapján.\n\nA kérés során az URL query paraméterében kell megadni a **school_id** értékét.",
+                "tags": [
+                    "System"
+                ],
+                "parameters": [
+                    {
+                        "name": "school_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Az iskola egyedi azonosítója"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sikeres lekérdezés, az iskola neve visszatérve",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "school_name": {
+                                            "type": "string",
+                                            "description": "Az iskola neve"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Hiányzó vagy érvénytelen school_id paraméter"
+                    },
+                    "404": {
+                        "description": "Iskola nem található a megadott azonosítóval"
+                    },
+                    "500": {
+                        "description": "Hiba az adatok lekérdezésekor az adatbázisból"
+                    },
+                    "405": {
+                        "description": "A HTTP metódus nem engedélyezett (csak GET kérés megengedett)"
                     }
                 }
             }
