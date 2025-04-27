@@ -1537,19 +1537,46 @@
                                 "properties": {
                                     "type": {
                                         "type": "string",
-                                        "example": "kezd",
-                                        "description": "A beosztás típusa (kezd vagy veg)"
+                                        "description": "A beosztás típusa ('kezd' vagy 'veg')."
                                     },
                                     "which_day": {
                                         "type": "string",
-                                        "example": "2025-03-01",
-                                        "description": "A frissített nap dátuma"
+                                        "format": "date",
+                                        "description": "A frissített nap dátuma (ÉÉÉÉ-HH-NN formátumban)."
+                                    },
+                                    "school_id": {
+                                        "type": "string",
+                                        "description": "Az iskola egyedi azonosítója."
                                     }
                                 },
                                 "required": [
                                     "type",
-                                    "which_day"
+                                    "which_day",
+                                    "school_id"
                                 ]
+                            },
+                            "examples": {
+                                "Első példa": {
+                                    "value": {
+                                        "type": "kezd",
+                                        "which_day": "2025-03-01",
+                                        "school_id": "1"
+                                    }
+                                },
+                                "Második példa": {
+                                    "value": {
+                                        "type": "veg",
+                                        "which_day": "2025-06-15",
+                                        "school_id": "2"
+                                    }
+                                },
+                                "Harmadik példa": {
+                                    "value": {
+                                        "type": "kezd",
+                                        "which_day": "2025-09-01",
+                                        "school_id": "3"
+                                    }
+                                }
                             }
                         }
                     }
@@ -1610,31 +1637,61 @@
                                 "properties": {
                                     "type": {
                                         "type": "string",
-                                        "description": "A bejegyzés típusa. Értékek: 'szunet', 'plusznap', 'tanitasnelkul'.",
-                                        "example": "szunet"
+                                        "description": "A bejegyzés típusa. Értékek: 'szunet', 'plusznap', 'tanitasnelkul'."
                                     },
                                     "nev": {
                                         "type": "string",
-                                        "description": "A bejegyzés neve vagy leírása (pl. 'Karácsonyi szünet').",
-                                        "example": "Karácsonyi szünet"
+                                        "description": "A bejegyzés neve vagy leírása (pl. 'Karácsonyi szünet')."
                                     },
                                     "which_day": {
                                         "type": "string",
-                                        "description": "A dátum, amely a bejegyzéshez kapcsolódik (pl. '2024-12-21').",
-                                        "example": "2024-12-21"
+                                        "description": "A dátum, amely a bejegyzéshez kapcsolódik (pl. '2024-12-21')."
                                     },
                                     "replace_day": {
                                         "type": "string",
-                                        "description": "Az a nap, amelyik a bejegyzést helyettesíti (pl. 'monday').",
-                                        "example": "monday"
+                                        "description": "Ha a típus 'plusznap', akkor adja meg, melyik napra cseréli (pl. 'monday')."
+                                    },
+                                    "school_id": {
+                                        "type": "string",
+                                        "description": "Az iskola egyedi azonosítója."
                                     }
                                 },
                                 "required": [
                                     "type",
                                     "nev",
                                     "which_day",
-                                    "replace_day"
+                                    "replace_day",
+                                    "school_id"
                                 ]
+                            },
+                            "examples": {
+                                "Karácsonyi szünet": {
+                                    "value": {
+                                        "type": "szunet",
+                                        "nev": "Karácsonyi szünet",
+                                        "which_day": "2024-12-24",
+                                        "replace_day": "",
+                                        "school_id": "1"
+                                    }
+                                },
+                                "Plusz nap tanítás": {
+                                    "value": {
+                                        "type": "plusznap",
+                                        "nev": "Pótnap tanítás",
+                                        "which_day": "2025-02-01",
+                                        "replace_day": "monday",
+                                        "school_id": "2"
+                                    }
+                                },
+                                "Tanítás nélküli nap": {
+                                    "value": {
+                                        "type": "tanitasnelkul",
+                                        "nev": "",
+                                        "which_day": "2025-03-15",
+                                        "replace_day": "2025-03-16",
+                                        "school_id": "3"
+                                    }
+                                }
                             }
                         }
                     }
@@ -1691,7 +1748,11 @@
                         "description": "Az évterv azonosítója, amelyet törölni szeretnénk.",
                         "schema": {
                             "type": "string",
-                            "example": "3"
+                            "enum": [
+                                "7",
+                                "8",
+                                "9"
+                            ]
                         }
                     }
                 ],
