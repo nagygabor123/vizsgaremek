@@ -393,19 +393,19 @@
                                 ]
                             },
                             "examples": {
-                                "Zárás - School 1": {
+                                "Első iskola": {
                                     "value": {
                                         "action": "close",
                                         "school_id": 1
                                     }
                                 },
-                                "Nyitás - School 2": {
+                                "Második iskola": {
                                     "value": {
                                         "action": "open",
                                         "school_id": 2
                                     }
                                 },
-                                "Zárás - School 3": {
+                                "Harmadik iskola": {
                                     "value": {
                                         "action": "close",
                                         "school_id": 3
