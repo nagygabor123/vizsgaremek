@@ -13,7 +13,7 @@
 Adafruit_GC9A01A tft(TFT_CS, TFT_DC, TFT_RST);
 
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; 
-IPAddress server(192,168,1,114); 
+IPAddress server(172,16,13,19); 
 
 EthernetClient client;
 
