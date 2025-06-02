@@ -11,6 +11,14 @@ const ZenDots = localFont({
   weight: "100 900",
 });
 
+export const generateMetadata = () => {
+  return {
+    title: "telock – Biztonságos telefontárolás iskoláknak",
+    description: "Innovatív rendszer, amely növeli az órai koncentrációt és biztosítja a tanulók eszközeinek védelmét.",
+  };
+};
+
+
 export default async function Home() {
   const session = await getServerSession();
   return (
