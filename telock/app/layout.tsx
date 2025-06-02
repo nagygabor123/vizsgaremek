@@ -9,7 +9,14 @@ import { GeistMono } from 'geist/font/mono';
 export const metadata: Metadata = {
   title: "telock: Biztonságos és kényelmes telefontárolos iskoláknak",
   description: "telock: Biztonságos és kényelmes telefontárolos iskoláknak",
+  other: {
+    'google-site-verification': 'Yal7LGVIVmZz225--Asf0AKhjToo6U8h8FY4b9m_vVM',
+  },
+
 };
+
+
+
 
 export default async function RootLayout({
   children,
